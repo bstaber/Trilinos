@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
     
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     
-    std::string path1 = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/long100_gamma3_delta010/";
+    std::string path1 = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/a100_gamma3_delta010/";
     parameters_file_1.open(path1+"w1.txt");
     parameters_file_2.open(path1+"w2.txt");
     parameters_file_3.open(path1+"w3.txt");
@@ -81,14 +81,16 @@ int main(int argc, char *argv[]){
         std::cout << "Couldn't open one of the parameters_file.\n";
     }
     
-    Epetra_Vector u(*interface->StandardMap);
+    Epetra_Vector x(*interface->StandardMap);
     std::ifstream displacement;
     std::string filename = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/a100_gamma3_delta010/disp_realization0.mtx";
     displacement.open(filename.c_str());
+    double input;
     if (displacement.is_open()){
-        for (unsigned int i=0; i<3*interface->Mesh->n_nodes; ++i){
-            if (interface->StandardMap->MyLID(i)){
-                displacement >> u[interface->StandardMap->LID(int(i))];
+        for (int i=0; i<3*interface->Mesh->n_nodes; ++i){
+            displacement >> input;
+            if (interface->StandardMap->MyGID(i)){
+                x[interface->StandardMap->LID(i)] = input;
             }
         }
     }
@@ -96,8 +98,20 @@ int main(int argc, char *argv[]){
         std::cout << "Couldn't open the displacement file.\n";
     }
     
-    std::string filename_out = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/boost_gmrf/vonmises/stress.mtx";
-    interface->compute_mean_cauchy_stress(u,filename_out);
+    std::string filename_out = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/boost_gmrf/vonmises/stress";
+    interface->compute_mean_cauchy_stress(x,filename_out);
+    
+    filename_out = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/boost_gmrf/vonmises/disp.mtx";
+    int NumTargetElements = 0;
+    if (Comm.MyPID()==0){
+        NumTargetElements = 3*interface->Mesh->n_nodes;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
+    Epetra_Export ExportOnRoot(*interface->StandardMap,MapOnRoot);
+    Epetra_MultiVector lhs_root(MapOnRoot,true);
+    lhs_root.Export(x,ExportOnRoot,Insert);
+    
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(filename_out.c_str(),lhs_root,0,0,false);
     
 #ifdef HAVE_MPI
     MPI_Finalize();

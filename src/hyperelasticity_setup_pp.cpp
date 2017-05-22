@@ -700,9 +700,8 @@ void hyperelasticity_setup::compute_mean_cauchy_stress(Epetra_Vector & x, std::s
                 dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
                 dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
             }
-            
+        
             deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
-            
             get_material_parameters(e_lid, gp);
             get_stress_for_recover(deformation_gradient, det, piola_stress);
             dg_times_ps.Multiply('N','N',1.0,deformation_gradient,piola_stress,0.0);
