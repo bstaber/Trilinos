@@ -69,7 +69,7 @@ int main(int argc, char *argv[]){
     Epetra_Vector u1(StandardMap);
     Epetra_Vector mu4(StandardMap);
     
-    std::string path = "/Users/Brian/Documents/Thesis/Trilinos/arteries/mesh/";
+    std::string path = "/Users/Brian/Documents/Thesis/Trilinos/arteries/mesh/connectivity_p1_media.txt";
     my_interface->get_media(n_cells_p1_med,n_nodes_p1_med,path);
     
     if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){

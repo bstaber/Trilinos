@@ -95,7 +95,7 @@ public:
     void get_media(unsigned int & n_cells, unsigned int & n_nodes, std::string & path){
         
         std::ifstream connectivity_file_med;
-        connectivity_file_med.open(path+"connectivity_p1_media.txt");
+        connectivity_file_med.open(path);
         
         w1_gmrf.Resize(n_nodes);
         w2_gmrf.Resize(n_nodes);
