@@ -1,0 +1,16 @@
+<ParameterList>
+
+    <ParameterList name="Shinozuka">
+        <Parameter name="mesh" type="string" value="/Users/Brian/Documents/Thesis/Trilinos/nrl/mesh/composite_hexa.msh"/>
+        <!--
+        <Parameter name="mesh" type="string" value="/Users/Brian/Documents/Thesis/Trilinos/arteries/mesh/media_flatboundaries.msh"/>
+        <Parameter name="mesh" type="string" value="block.msh"/>
+         -->
+        <Parameter name="order" type="int" value="30"/>
+        <Parameter name="lx" type="double" value="0.005"/>
+        <Parameter name="ly" type="double" value="0.005"/>
+        <Parameter name="lz" type="double" value="0.0002"/>
+    </ParameterList>
+    
+</ParameterList>
+

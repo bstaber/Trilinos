@@ -1,0 +1,11 @@
+<ParameterList>
+    
+    <ParameterList name="Shinozuka">
+        <Parameter name="order" type="int" value="20"/>
+        <Parameter name="lx" type="double" value="0.0004"/>
+        <Parameter name="ly" type="double" value="0.0004"/>
+        <Parameter name="lz" type="double" value="0.0004"/>
+    </ParameterList>
+    
+</ParameterList>
+
