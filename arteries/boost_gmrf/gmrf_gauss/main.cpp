@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     
-    std::string path1 = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/long100_gamma3_delta010/";
+    std::string path1 = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/a100_gamma3_delta010/";
     parameters_file_1.open(path1+"w1.txt");
     parameters_file_2.open(path1+"w2.txt");
     parameters_file_3.open(path1+"w3.txt");
