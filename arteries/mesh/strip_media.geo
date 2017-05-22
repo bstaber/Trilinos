@@ -1,6 +1,6 @@
 // Gmsh project created on Mon May 22 16:45:07 2017
 
-lc = 0.05;
+lc = 0.08;
 Point(0) = {0,0,0,lc};
 Point(1) = {3,0,0,lc};
 Point(2) = {3,10,0,lc};

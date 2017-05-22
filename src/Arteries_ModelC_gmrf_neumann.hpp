@@ -211,9 +211,7 @@ public:
         Epetra_SerialDenseMatrix eye(3,3);
         Epetra_SerialDenseMatrix M1(3,3), M2(3,3);
         Epetra_SerialDenseMatrix C(3,3), L(3,3);
-        Epetra_SerialDenseMatrix piola_ani1(3,3), piola_ani2(3,3); //, piola_stress(3,3), piola_stress_lb(3,3);
-        //Epetra_SerialDenseMatrix tau_stress(3,3);
-        //Epetra_SerialDenseMatrix dgtimesPS(3,3), QtimesTau(3,3);
+        Epetra_SerialDenseMatrix piola_ani1(3,3), piola_ani2(3,3);
         
         eye(0,0) = 1.0; eye(0,1) = 0.0; eye(0,2) = 0.0;
         eye(1,0) = 0.0; eye(1,1) = 1.0; eye(1,2) = 0.0;
@@ -262,22 +260,6 @@ public:
             piola_stress += piola_ani2;
         }
         
-        /*Epetra_SerialDenseMatrix Q(3,3);
-        Epetra_SerialDenseVector e1(3), e2(3), e3(3);
-        e1(0) = 1.0; e1(1) = 0.0; e1(2) = 0.0;
-        e2(0) = 0.0; e2(1) = 1.0; e2(2) = 0.0;
-        e3(0) = 0.0; e3(1) = 0.0; e3(2) = 1.0;
-        
-        Q(0,0) = e1.Dot(E1); Q(0,1) = e1.Dot(E2); Q(0,2) = e1.Dot(E3);
-        Q(1,0) = e2.Dot(E1); Q(1,1) = e2.Dot(E2); Q(1,2) = e2.Dot(E3);
-        Q(2,0) = e3.Dot(E1); Q(2,1) = e3.Dot(E2); Q(2,2) = e3.Dot(E3);
-        
-        dgtimesPS.Multiply('N','N',1.0,deformation_gradient,piola_stress,0.0);
-        tau_stress.Multiply('N','T',1.0,dgtimesPS,deformation_gradient,0.0);
-        
-        QtimesTau.Multiply('T','N',1.0,Q,tau_stress,0.0);
-        tau_stress_lb.Multiply('N','N',1.0,QtimesTau,Q,0.0);*/
-
     }
     
     void setup_clamp(){
