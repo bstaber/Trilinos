@@ -1,2 +1,3 @@
 
 *.o
+arteries/strip_dirichlet/trilinos_mpi
