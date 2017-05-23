@@ -57,7 +57,7 @@
         <Parameter name="success_parameter" type="double" value="2.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads" type="int" value="1"/>
-        <Parameter name="bc_disp" type="double" value="0.0005"/>
+        <Parameter name="bc_disp" type="double" value="0.001"/>
         <Parameter name="pressure_load" type="double" value="0.0"/>
     </ParameterList>
     
