@@ -3,7 +3,7 @@
     <ParameterList name="Mesh">
         <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/arteries/mesh/strip_media.msh"/>
         <!--Parameter name="boundary_file" type="string" value="/home/s/staber/Trilinos/arteries/mesh/nodes_to_boundaries_strip.txt"/-->
-        <Parameter name="path_to_gmrf" type="string" value="/home/s/staber/Trilinos_results/arteries/strip_dirichlet/b10_gamma1_delta010/"/>
+        <Parameter name="path_to_gmrf" type="string" value="/home/s/staber/Trilinos_results/arteries/strip_dirichlet/a10_gamma1_delta010/"/>
         <Parameter name="path_to_p1_connectivity" type="string" value="/home/s/staber/Trilinos/arteries/mesh/connectivity_p1_strip.txt"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
         <Parameter name="model" type="string" value="ModelC"/>
@@ -47,7 +47,7 @@
     </ParameterList>
     
     <ParameterList name="Newton">
-        <Parameter name="delta" type="double" value="0.025"/>
+        <Parameter name="delta" type="double" value="0.05"/>
         <Parameter name="iterMin" type="int" value="3"/>
         <Parameter name="iterMax" type="int" value="7"/>
         <Parameter name="nbBisMax" type="int" value="5"/>
@@ -57,7 +57,7 @@
         <Parameter name="success_parameter" type="double" value="2.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads" type="int" value="1"/>
-        <Parameter name="bc_disp" type="double" value="0.0015"/>
+        <Parameter name="bc_disp" type="double" value="0.0005"/>
         <Parameter name="pressure_load" type="double" value="0.0"/>
     </ParameterList>
     
