@@ -98,7 +98,7 @@ public:
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-        assemble_dirichlet_live_neumann_static_condensation(x,K,F);
+        assemble_dirichlet_static_condensation(x,K,F);
     }
     
     void setup_dirichlet_conditions(){
