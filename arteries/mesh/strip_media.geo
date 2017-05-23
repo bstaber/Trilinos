@@ -64,7 +64,7 @@ Volume(26) = {25};
 //+
 Physical Surface(27) = {20};
 //+
-Physical Surface(28) = {16};
+Physical Surface(1) = {16};
 //+
 Physical Surface(29) = {22};
 //+
