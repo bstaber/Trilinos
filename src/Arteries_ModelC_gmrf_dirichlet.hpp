@@ -18,7 +18,7 @@ public:
     Interface_arteries(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
+        //std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
         unsigned int number_physical_groups = Teuchos::getParameter<unsigned int>(Parameters.sublist("Mesh"), "nb_phys_groups");
         std::string select_model = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "model");
         
@@ -50,7 +50,7 @@ public:
         alpha6  = mean_mu4*deltaG4*deltaG4;
         
         Mesh = new mesh(comm, mesh_file);
-        Mesh->read_boundary_file(boundary_file,number_physical_groups);
+        //Mesh->read_boundary_file(boundary_file,number_physical_groups);
         Comm = Mesh->Comm;
         
         StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);

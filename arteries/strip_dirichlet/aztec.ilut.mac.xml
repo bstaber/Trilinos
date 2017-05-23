@@ -2,7 +2,7 @@
     
     <ParameterList name="Mesh">
         <Parameter name="mesh_file" type="string" value="/Users/Brian/Documents/Thesis/Trilinos/arteries/mesh/strip_media.msh"/>
-        <Parameter name="boundary_file" type="string" value="/Users/Brian/Documents/Thesis/Trilinos/arteries/mesh/nodes_to_boundaries_strip.txt"/>
+        <!--Parameter name="boundary_file" type="string" value="/Users/Brian/Documents/Thesis/Trilinos/arteries/mesh/nodes_to_boundaries_strip.txt"/-->
         <Parameter name="path_to_gmrf" type="string" value="/Users/Brian/Documents/Thesis/Trilinos_results/arteries/strip_dirichlet/b100_gamma3_delta010/"/>
         <Parameter name="path_to_p1_connectivity" type="string" value="/Users/Brian/Documents/Thesis/Trilinos/arteries/mesh/connectivity_p1_strip.txt"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
