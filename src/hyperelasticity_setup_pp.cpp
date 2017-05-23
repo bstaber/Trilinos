@@ -663,12 +663,12 @@ void hyperelasticity_setup::compute_mean_cauchy_stress(Epetra_Vector & x, std::s
     u.Import(x, *ImportToOverlapMap, Insert);
     
     Epetra_Map CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
-    Epetra_Vector sigma11(CellsMap);
-    Epetra_Vector sigma22(CellsMap);
-    Epetra_Vector sigma33(CellsMap);
-    Epetra_Vector sigma12(CellsMap);
-    Epetra_Vector sigma13(CellsMap);
-    Epetra_Vector sigma23(CellsMap);
+    Epetra_Vector sigma11(CellsMap); sigma11.PutScalar(0.0);
+    Epetra_Vector sigma22(CellsMap); sigma22.PutScalar(0.0);
+    Epetra_Vector sigma33(CellsMap); sigma33.PutScalar(0.0);
+    Epetra_Vector sigma12(CellsMap); sigma12.PutScalar(0.0);
+    Epetra_Vector sigma13(CellsMap); sigma13.PutScalar(0.0);
+    Epetra_Vector sigma23(CellsMap); sigma23.PutScalar(0.0);
     
     int node, e_gid;
     int n_gauss_points = Mesh->n_gauss_cells;

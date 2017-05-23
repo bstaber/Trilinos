@@ -54,7 +54,7 @@
         <Parameter name="NormFTol" type="double" value="1e-6"/>
         <Parameter name="NormFMax" type="double" value="1e7"/>
         <Parameter name="eps" type="double" value="1e-8"/>
-        <Parameter name="success_parameter" type="double" value="2.0"/>
+        <Parameter name="success_parameter" type="double" value="1.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads" type="int" value="1"/>
         <Parameter name="bc_disp" type="double" value="0.1"/>
