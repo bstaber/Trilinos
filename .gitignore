@@ -1,3 +1,6 @@
 
 *.o
+src/*.o
+arteries/strip_dirichlet/*.o
+arteries/gmrf_neumann/*.o
 arteries/strip_dirichlet/trilinos_mpi
