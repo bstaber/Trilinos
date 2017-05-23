@@ -74,13 +74,13 @@ int main(int argc, char *argv[]){
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
             Newton->setParameters(*paramList);
             Newton->Initialization();
-            /*error = Newton->Solve_with_Aztec();
+            error = Newton->Solve_with_Aztec();
             if (!error){
                 std::string filename1 = path + "disp_realization" + std::to_string(nmc) + ".mtx";
                 Newton->print_newton_solution(filename1);
                 std::string filename2 = path + "stress_realization" + std::to_string(nmc);
                 my_interface->compute_mean_cauchy_stress(*Newton->x,filename2);
-            }*/
+            }
         }
         Comm.Barrier();
         parameters_file_1.close();
