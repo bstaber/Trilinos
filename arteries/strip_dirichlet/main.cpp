@@ -56,8 +56,8 @@ int main(int argc, char *argv[]){
     parameters_file_3.open(path+"w3.txt");
     parameters_file_4.open(path+"w4.txt");
     
-    unsigned int n_cells_p1_med = 297828;
-    unsigned int n_nodes_p1_med = 58464;
+    unsigned int n_cells_p1_med = 68582;
+    unsigned int n_nodes_p1_med = 16737;
     
     int error;
     std::string path_p1 = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_p1_connectivity");
