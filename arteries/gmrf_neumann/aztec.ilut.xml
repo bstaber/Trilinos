@@ -58,7 +58,7 @@
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads" type="int" value="1"/>
         <Parameter name="bc_disp" type="double" value="0.0"/>
-        <Parameter name="pressure_load" type="double" value="36000.0"/>
+        <Parameter name="pressure_load" type="double" value="12000.0"/>
     </ParameterList>
     
     <ParameterList name="Krylov">
