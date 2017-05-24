@@ -3,7 +3,7 @@
     <ParameterList name="Mesh">
         <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/arteries/mesh/strip_media.msh"/>
         <!--Parameter name="boundary_file" type="string" value="/home/s/staber/Trilinos/arteries/mesh/nodes_to_boundaries_strip.txt"/-->
-        <Parameter name="path_to_gmrf" type="string" value="/home/s/staber/Trilinos_results/arteries/strip_dirichlet/ab10_gamma1/"/>
+        <Parameter name="path_to_gmrf" type="string" value="/home/s/staber/Trilinos_results/arteries/strip_dirichlet/ab10_gamma10/"/>
         <Parameter name="path_to_p1_connectivity" type="string" value="/home/s/staber/Trilinos/arteries/mesh/connectivity_p1_strip.txt"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
         <Parameter name="model" type="string" value="ModelC"/>
@@ -89,10 +89,10 @@
         <Parameter name="beta3" type="double" value="3.6537"/>
         <Parameter name="beta4" type="double" value="500.02"/>
         <Parameter name="theta" type="double" value="0.80764"/>
-        <Parameter name="deltaC1" type ="double" value="0.20"/>
-        <Parameter name="deltaC2" type ="double" value="0.20"/>
-        <Parameter name="deltaU1" type ="double" value="0.20"/>
-        <Parameter name="deltaG4" type ="double" value="0.20"/>
+        <Parameter name="deltaC1" type ="double" value="0.10"/>
+        <Parameter name="deltaC2" type ="double" value="0.10"/>
+        <Parameter name="deltaU1" type ="double" value="0.10"/>
+        <Parameter name="deltaG4" type ="double" value="0.10"/>
     </ParameterList>
 
 </ParameterList>
