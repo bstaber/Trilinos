@@ -89,10 +89,10 @@
         <Parameter name="beta3" type="double" value="3.6537"/>
         <Parameter name="beta4" type="double" value="500.02"/>
         <Parameter name="theta" type="double" value="0.80764"/>
-        <Parameter name="deltaC1" type ="double" value="0.10"/>
-        <Parameter name="deltaC2" type ="double" value="0.10"/>
-        <Parameter name="deltaU1" type ="double" value="0.10"/>
-        <Parameter name="deltaG4" type ="double" value="0.10"/>
+        <Parameter name="deltaC1" type ="double" value="0.20"/>
+        <Parameter name="deltaC2" type ="double" value="0.20"/>
+        <Parameter name="deltaU1" type ="double" value="0.20"/>
+        <Parameter name="deltaG4" type ="double" value="0.20"/>
     </ParameterList>
 
 </ParameterList>
