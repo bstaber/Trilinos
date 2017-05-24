@@ -4,3 +4,4 @@ src/*.o
 arteries/strip_dirichlet/*.o
 arteries/gmrf_neumann/*.o
 arteries/strip_dirichlet/trilinos_mpi
+arteries/gmrf_neumann/trilinos_mpi
