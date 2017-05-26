@@ -3,7 +3,7 @@
     <ParameterList name="Mesh">
         <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/arteries/mesh/media_flatboundaries.msh"/>
         <Parameter name="boundary_file" type="string" value="/home/s/staber/Trilinos/arteries/mesh/nodes_to_boundaries_media.txt"/>
-        <Parameter name="path_to_gmrf" type="string" value="/home/s/staber/Trilinos_results/arteries/gmrf_neumann/a10_gamma5/"/>
+        <Parameter name="path_to_gmrf" type="string" value="/home/s/staber/Trilinos_results/arteries/gmrf_neumann/ab10_gamma1/"/>
         <Parameter name="path_to_p1_connectivity" type="string" value="/home/s/staber/Trilinos/arteries/mesh/connectivity_p1_media.txt"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
         <Parameter name="model" type="string" value="ModelC"/>
@@ -58,7 +58,7 @@
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads" type="int" value="1"/>
         <Parameter name="bc_disp" type="double" value="0.0"/>
-        <Parameter name="pressure_load" type="double" value="12000.0"/>
+        <Parameter name="pressure_load" type="double" value="36000.0"/>
     </ParameterList>
     
     <ParameterList name="Krylov">
