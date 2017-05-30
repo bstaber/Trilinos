@@ -1,7 +1,14 @@
 
 *.o
+trilinos_mpi
 src/*.o
 arteries/strip_dirichlet/*.o
 arteries/gmrf_neumann/*.o
 arteries/strip_dirichlet/trilinos_mpi
 arteries/gmrf_neumann/trilinos_mpi
+nrl/deterministic/*.o
+nrl/deterministic/trilinos_mpi
+nrl/randomfield/*.o
+nrl/randomfield/trilinos_mpi
+nrl/objectivefun/*.o
+nrl/objectivefun/trilinos_mpi
