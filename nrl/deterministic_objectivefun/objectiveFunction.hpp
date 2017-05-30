@@ -147,7 +147,6 @@ public:
             
         npoints = data_xyz.size()/3;
         nloads  = data_exx.size()/npoints;
-        
         for (unsigned int p=0; p<npoints; ++p){
             testx = data_xyz[3*p+0]/1000.0;
             testy = data_xyz[3*p+1]/1000.0;
@@ -166,6 +165,7 @@ public:
                 }
                 if (result==1){
                     exp_cells.push_back(e_lid);
+                    //std::cout << e_gid << "\n";
                     residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
                     my_xi.push_back(xi);
                     my_eta.push_back(eta);
@@ -178,8 +178,7 @@ public:
             }
         }
         
-        std::cout << npoints << std::setw(30) << nloads << std::setw(30) << my_xi.size() << "\n";
-        
+        std::cout << npoints << std::setw(30) << nloads << std::setw(30) << exp_cells.size() << "\n";
     }
     
     double inverse_isoparametric_mapping(double & testx, double & testy, Epetra_SerialDenseVector & x, Epetra_SerialDenseVector & y, double & xi, double & eta){
@@ -248,36 +247,6 @@ public:
         }
 
         return rhs_inf;
-    }
-    
-    int pncell(Epetra_SerialDenseVector & p){
-        
-        int result, node, e_gid;
-        int nvert = interface->Mesh->face_type;
-        Epetra_SerialDenseVector x(nvert), y(nvert), z(nvert);
-        double testx = p(0);
-        double testy = p(1);
-        double testz = p(2);
-        
-        for (unsigned int e_lid=0; e_lid<interface->Mesh->n_local_faces; ++e_lid){
-            e_gid = interface->Mesh->local_faces[e_lid];
-            result = -1;
-            for (unsigned int inode=0; inode<nvert; ++inode){
-                node = interface->Mesh->faces_nodes[nvert*e_gid+inode];
-                x(inode) = interface->Mesh->nodes_coord[3*node+0];
-                y(inode) = interface->Mesh->nodes_coord[3*node+1];
-                z(inode) = interface->Mesh->nodes_coord[3*node+2];
-            }
-            if (z(0)==testz){
-                result = pnpoly(nvert,x,y,testx,testy);
-            }
-            if (result==1){
-                e_gid = interface->Mesh->local_faces[e_lid];
-                return e_gid;
-            }
-        }
-        
-        return -1;
     }
     
 };

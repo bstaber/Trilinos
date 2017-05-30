@@ -146,7 +146,9 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
             case 3:
                 for (unsigned int inode=0; inode<4; ++inode){
                     meshfile >> nodes_quad4[inode];
-                    quad4_nodes.push_back(nodes_quad4[inode]-1);
+                    if (tag1==92 || tag1==93){
+                        quad4_nodes.push_back(nodes_quad4[inode]-1);
+                    }
                 }
                 break;
             case 4:
@@ -397,7 +399,7 @@ void mesh::get_cells_and_ghosts(int & MyPID){
                     break;
                 }
             case 4:
-                if (mynpart[nodes[0]]==MyPID && mynpart[nodes[1]]==MyPID && mynpart[nodes[3]]==MyPID){
+                if (mynpart[nodes[0]]==MyPID && mynpart[nodes[1]]==MyPID && mynpart[nodes[2]]==MyPID && mynpart[nodes[3]]==MyPID){
                     local_faces.push_back(i);
                     break;
                 }
