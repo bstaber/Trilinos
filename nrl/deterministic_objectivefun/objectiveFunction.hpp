@@ -63,13 +63,15 @@ public:
         Teuchos::RCP<const std::vector<Real> > xp = getVector<XPrim>(x);
         uint n = xp->size();
         
-        double m1 = (*xp)[1];
-        double m2 = (*xp)[2];
-        double beta3 = (*xp)[3];
-        double beta4 = (*xp)[4];
-        double beta5 = (*xp)[5];
+        double m1 = (*xp)[0];
+        double m2 = (*xp)[1];
+        double beta3 = (*xp)[2];
+        double beta4 = (*xp)[3];
+        double beta5 = (*xp)[4];
         double plyagl = 45.0*2.0*M_PI/360.0;
-
+        
+        interface->set_parameters(m1,m2,beta3,beta4,beta5);
+        interface->set_plyagl(plyagl);
         newton->Initialization();
         int error = newton->Solve_with_Aztec();
         
@@ -165,7 +167,6 @@ public:
                 }
                 if (result==1){
                     exp_cells.push_back(e_lid);
-                    //std::cout << e_gid << "\n";
                     residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
                     my_xi.push_back(xi);
                     my_eta.push_back(eta);

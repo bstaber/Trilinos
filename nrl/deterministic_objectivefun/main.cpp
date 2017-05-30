@@ -46,6 +46,17 @@ int main(int argc, char *argv[]){
     
     Teuchos::RCP<objectiveFunction<double>> obj = Teuchos::rcp(new objectiveFunction<double>(Comm,*paramList));
     
+    Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
+    (*x_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
+    (*x_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");;
+    (*x_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
+    (*x_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
+    (*x_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
+    ROL::StdVector<double> x(x_rcp);
+    
+    double tol = 1e-6;
+    obj->value(x,tol);
+    
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
