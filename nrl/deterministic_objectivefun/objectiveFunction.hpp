@@ -34,6 +34,9 @@ private:
     std::vector<double> my_exx;
     std::vector<double> my_eyy;
     std::vector<double> my_exy;
+    Epetra_SerialDenseVector exx_comp;
+    Epetra_SerialDenseVector eyy_comp;
+    Epetra_SerialDenseVector exy_comp;
     
 public:
     
@@ -53,7 +56,9 @@ public:
             std::cout << "npoints" << std::setw(30) << "nloads" << std::setw(30) << "local_npoints\n";
         }
         retrieve_data(path_exp_points, path_exp_deform);
-
+        exx_comp.Resize(my_exx.size());
+        eyy_comp.Resize(my_eyy.size());
+        exy_comp.Resize(my_exy.size());
     }
     ~objectiveFunction(){
     }
@@ -74,8 +79,8 @@ public:
         interface->set_plyagl(plyagl);
         newton->Initialization();
         int error = newton->Solve_with_Aztec();
+        compute_green_lagrange(*(newton->x));
         
-        //compute deformation on the boundaries.
         Real val = 0.0;
         return val;
     }
@@ -248,6 +253,60 @@ public:
         }
 
         return rhs_inf;
+    }
+    
+    void compute_green_lagrange(Epetra_Vector & x){
+        
+        double e11, e22, e12;
+        
+        Epetra_Vector u(*(interface->OverlapMap));
+        u.Import(x, *(interface->ImportToOverlapMap), Insert);
+        
+        int e_gid, node;
+        double det_jac_tetra;
+        Epetra_SerialDenseMatrix matrix_X(2,interface->Mesh->face_type);
+        Epetra_SerialDenseMatrix matrix_x(2,interface->Mesh->face_type);
+        Epetra_SerialDenseMatrix D(interface->Mesh->face_type,2);
+        Epetra_SerialDenseMatrix dx_shape_functions(interface->Mesh->face_type,2);
+        Epetra_SerialDenseMatrix DX(interface->Mesh->face_type,2);
+        Epetra_SerialDenseMatrix deformation_gradient(2,2);
+        Epetra_SerialDenseMatrix JacobianMatrix(2,2);
+        Epetra_SerialDenseMatrix right_cauchy(2,2);
+        
+        for (unsigned e=0; e<exp_cells.size(); ++e){
+            e_gid = interface->Mesh->local_cells[exp_cells[e]];
+            
+            for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
+                node = interface->Mesh->cells_nodes[interface->Mesh->face_type*e_gid+inode];
+                matrix_X(0,inode) = interface->Mesh->nodes_coord[3*node+0];
+                matrix_X(1,inode) = interface->Mesh->nodes_coord[3*node+1];
+                matrix_x(0,inode) = u[interface->OverlapMap->LID(3*node+0)] + interface->Mesh->nodes_coord[3*node+0];
+                matrix_x(1,inode) = u[interface->OverlapMap->LID(3*node+1)] + interface->Mesh->nodes_coord[3*node+1];
+            }
+            
+            switch (interface->Mesh->face_type){
+                case 3:
+                    tri3::d_shape_functions(D, my_xi[e], my_eta[e]);
+                    break;
+                case 4:
+                    quad4::d_shape_functions(D, my_xi[e], my_eta[e]);
+                    break;
+                case 6:
+                    tri6::d_shape_functions(D, my_xi[e], my_eta[e]);
+                    break;
+            }
+            
+            jacobian_matrix(matrix_X,D,JacobianMatrix);
+            jacobian_det(JacobianMatrix,det_jac_tetra);
+            dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+            
+            deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
+            right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
+            
+            exx_comp(e) = (1.0/2.0)*(right_cauchy(0,0)-1.0);
+            eyy_comp(e) = (1.0/2.0)*(right_cauchy(1,1)-1.0);
+            exy_comp(e) = (1.0/2.0)*right_cauchy(0,1);
+        }
     }
     
 };
