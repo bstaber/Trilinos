@@ -46,6 +46,10 @@ MPI_Init(&argc, &argv);
     Epetra_SerialDenseVector corrlength(3); corrlength(0) = (50.0/1000.0)*0.50; corrlength(1) = (25.0/1000.0)*0.50; corrlength(2) = 4.2/2000.0;
     int order = 10;
     Teuchos::RCP<NRL_RandomFieldModel> interface = Teuchos::rcp(new NRL_RandomFieldModel(Comm,*paramList));
+    
+    double beta3 = -0.5; double beta4 = 2.495; double beta5 = 0.694; double plyagl = 0.26;
+    interface->set_exponents(beta3,beta4,beta4);
+    interface->set_plyagl(plyagl);
     interface->random_field_generator(seeds,mean,delta,corrlength,order);
     
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
