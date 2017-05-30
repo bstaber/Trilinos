@@ -1,9 +1,14 @@
 <ParameterList>
     
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/Users/Brian/Documents/Thesis/0-Trilinos/nrl/mesh/composite_hexa.msh"/>
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa.msh"/>
         <Parameter name="n_ply" type="int" value="8"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
+    </ParameterList>
+    
+    <ParameterList name="Data">
+        <Parameter name="path_to_pts" type="string" value="/home/s/staber/Trilinos/nrl/data/NRL_xyz.txt"/>
+        <Parameter name="path_to_def" type="string" value="/home/s/staber/Trilinos/nrl/data/NRL_def.txt"/>
     </ParameterList>
     
     <ParameterList name="Linear Solver Builder">

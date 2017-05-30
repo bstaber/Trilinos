@@ -40,16 +40,23 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<Interface_dirichlet> my_interface = Teuchos::rcp(new Interface_dirichlet(Comm,*paramList));
-    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
+    Teuchos::RCP<NRL_ModelF> interface = Teuchos::rcp(new NRL_ModelF(Comm,*paramList));
+    double m1     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
+    double m2     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
+    double beta3  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
+    double beta4  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
+    double beta5  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
+    double plyagl = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"angle");
+    interface->set_parameters(m1,m2,beta3,beta4,beta5);
+    interface->set_plyagl(plyagl);
+    
+    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     Newton->Initialization();
     
     int error = Newton->Solve_with_Aztec();
     std::string name = "Newton_solution.mtx";
     Newton->print_newton_solution(name);
     
-    /*double xi = 1.0/2.0;
-    my_interface->compute_green_lagrange(*Newton->x,xi,xi,xi);*/
     
 #ifdef HAVE_MPI
     MPI_Finalize();

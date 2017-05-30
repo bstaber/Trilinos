@@ -1,8 +1,8 @@
 <ParameterList>
     
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/Users/Brian/Documents/Thesis/0-Trilinos/nrl/mesh/composite_hexa.msh"/>
-        <Parameter name="n_ply" type="int" value="8"/>
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa.msh"/>
+        <Parameter name="n_ply" type="int" value="4"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
     </ParameterList>
     
@@ -44,7 +44,7 @@
     </ParameterList>
     
     <ParameterList name="Newton">
-        <Parameter name="delta" type="double" value="0.005"/>
+        <Parameter name="delta" type="double" value="0.2"/>
         <Parameter name="iterMin" type="int" value="2"/>
         <Parameter name="iterMax" type="int" value="10"/>
         <Parameter name="nbBisMax" type="int" value="5"/>
@@ -54,7 +54,7 @@
         <Parameter name="success_parameter" type="double" value="2.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads" type="int" value="1"/>
-        <Parameter name="bc_disp" type="double" value="0.5"/>
+        <Parameter name="bc_disp" type="double" value="0.010"/>
         <Parameter name="pressure_load" type="double" value="0.0"/>
     </ParameterList>
     
@@ -79,8 +79,8 @@
     </ParameterList>
     
     <ParameterList name="ModelF">
-        <Parameter name="m1" type="double" value="5.357"/>
-        <Parameter name="m2" type="double" value="7.923"/>
+        <Parameter name="m1" type="double" value="5357.0"/>
+        <Parameter name="m2" type="double" value="7923.0"/>
         <Parameter name="beta3" type="double" value="-0.5"/>
         <Parameter name="beta4" type="double" value="2.495"/>
         <Parameter name="beta5" type="double" value="0.694"/>

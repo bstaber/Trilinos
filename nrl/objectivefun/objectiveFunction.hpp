@@ -1,8 +1,7 @@
 #include "ROL_StdVector.hpp"
 #include "ROL_Objective.hpp"
-#include "NRL_ModelF.hpp"
+#include "NRL_RandomField.hpp"
 #include "Newton_Raphsonpp.hpp"
-#include "shinozukapp.hpp"
 #include "Epetra_SerialDenseSolver.h"
 #include  <math.h>
 
@@ -36,19 +35,20 @@ private:
     
 public:
     
-    Teuchos::RCP<Interface_dirichlet> interface;
-    //Teuchos::RCP<shinozuka> GaussianRandomField;
+    Teuchos::RCP<NRL_RandomFieldModel> interface;
     
     objectiveFunction(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
-        //GaussianRandomField = Teuchos::rcp(new shinozuka);
-        interface = Teuchos::rcp(new Interface_dirichlet(Comm,paramList));
+        
+        interface = Teuchos::rcp(new NRL_RandomFieldModel(Comm,paramList));
         newton = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         
-        std::string path = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/NRL/";
-        std::string filepoints = "NRL1_xyz.txt";
-        std::string filename = path + filepoints;
-        std::string filepref = path + "NRL1";
-        retrieve_data(filename, filepref);
+        std::string path_exp_points =
+        Teuchos::getParameter<std::string>(paramList.sublist("Data"),"path_to_pts");
+        std::string path_exp_deform =
+        Teuchos::getParameter<std::string>(paramList.sublist("Data"),"path_to_def");
+        
+        retrieve_data(path_exp_points, path_exp_deform);
+        
     }
     ~objectiveFunction(){
     }
@@ -58,15 +58,12 @@ public:
         Teuchos::RCP<const std::vector<Real> > xp = getVector<XPrim>(x);
         uint n = xp->size();
         
-        interface->m1 = (*xp)[1];
-        interface->m2 = (*xp)[2];
-        interface->beta3 = (*xp)[3];
-        interface->beta4 = (*xp)[4];
-        interface->beta5 = (*xp)[5];
-        interface->m = 2.0*(*xp)[1] + (*xp)[2];
-        interface->pmbeta4 = std::pow(interface->m,(*xp)[4]);
-        interface->pmbeta5 = std::pow(interface->m,(*xp)[5]);
-        interface->plyagl = 45.0*2*M_PI/360.0;
+        double m1 = (*xp)[1];
+        double m2 = (*xp)[2];
+        double beta3 = (*xp)[3];
+        double beta4 = (*xp)[4];
+        double beta5 = (*xp)[5];
+        double plyagl = 45.0*2.0*M_PI/360.0;
 
         newton->Initialization();
         int error = newton->Solve_with_Aztec();

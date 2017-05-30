@@ -4,25 +4,11 @@
 #include "tensor_calculus.hpp"
 #include "hyperelasticity_setup_pp.hpp"
 
-class Interface_dirichlet : public hyperelasticity_setup
+class NRL_ModelF : public hyperelasticity_setup
 {
 public:
     
-    Interface_dirichlet(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
-        
-        m1 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "m1");
-        m2 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "m2");
-        beta3 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "beta3");
-        beta4 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "beta4");
-        beta5 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "beta5");
-        
-        m = 2.0*m1 + m2;
-        pmbeta4 = std::pow(m,beta4);
-        pmbeta5 = std::pow(m,beta5);
-        
-        plyagl = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "angle");
-        cos_plyagl = cos(plyagl);
-        sin_plyagl = sin(plyagl);
+    NRL_ModelF(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
@@ -43,7 +29,21 @@ public:
         }
     }
     
-    ~Interface_dirichlet(){
+    ~NRL_ModelF(){
+    }
+    
+    void set_parameters(double & M1, double & M2, double & Beta3, double & Beta4, double & Beta5){
+        m1 = M1;
+        m2 = M2;
+        beta3 = Beta3;
+        beta4 = Beta4;
+        beta5 = Beta5;
+        m = 2.0*m1 + m2;
+        pmbeta4 = std::pow(m,beta4);
+        pmbeta5 = std::pow(m,beta5);
+    }
+    void set_plyagl(double & Plyagl){
+        plyagl = Plyagl;
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
@@ -58,10 +58,10 @@ public:
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             node = Mesh->local_nodes[i];
             coord = Mesh->nodes_coord[3*node+dof];
-            if(coord==0){
+            if(coord==0.0){
                 n_bc_dof+=3;
             }
-            if(coord==25){
+            if(coord==25.0/1000.0){
                 n_bc_dof+=1;
             }
         }
@@ -71,14 +71,16 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==0){
+            if (coord==0.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
-            if (coord==25){
-                dof_on_boundary[indbc] = 3*inode+dof;
+            if (coord==25.0/1000.0){
+                //dof_on_boundary[indbc+0] = 3*inode+0;
+                dof_on_boundary[indbc+0] = 3*inode+dof;
+                //dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=1;
             }
         }
@@ -96,7 +98,7 @@ public:
             for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
                 node = Mesh->local_nodes[inode];
                 coord = Mesh->nodes_coord[3*node+dof];
-                if (coord==25){
+                if (coord==25.0/1000.0){
                     v[0][StandardMap->LID(3*node+dof)] = displacement;
                 }
             }
@@ -108,13 +110,15 @@ public:
             for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
                 node = Mesh->local_nodes[inode];
                 coord = Mesh->nodes_coord[3*node+dof];
-                if (coord==0){
+                if (coord==0.0){
                     F[0][StandardMap->LID(3*node+0)] = 0.0;
                     F[0][StandardMap->LID(3*node+1)] = 0.0;
                     F[0][StandardMap->LID(3*node+2)] = 0.0;
                 }
-                if (coord==25){
+                if (coord==25.0/1000.0){
+                    //F[0][StandardMap->LID(3*node+0)]   = 0.0;
                     F[0][StandardMap->LID(3*node+dof)] = displacement;
+                    //F[0][StandardMap->LID(3*node+2)]   = 0.0;
                 }
             }
         //}
