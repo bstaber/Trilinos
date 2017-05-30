@@ -54,7 +54,7 @@ MPI_Init(&argc, &argv);
     Newton->Initialization();
     
     int error = Newton->Solve_with_Aztec();
-    std::string name = "Newton_solution.mtx";
+    std::string name = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/deterministic/Newton_solution.mtx";
     Newton->print_newton_solution(name);
     
     
