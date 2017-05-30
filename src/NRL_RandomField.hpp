@@ -11,16 +11,6 @@ public:
     
     NRL_RandomFieldModel(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
-        mean_m1 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "m1");
-        mean_m2 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "m2");
-        beta3 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "beta3");
-        beta4 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "beta4");
-        beta5 = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "beta5");
-        
-        plyagl = Teuchos::getParameter<double>(Parameters.sublist("ModelF"), "angle");
-        cos_plyagl = cos(plyagl);
-        sin_plyagl = sin(plyagl);
-        
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
         Mesh = new mesh(comm, mesh_file);
@@ -43,6 +33,17 @@ public:
     }
     
     ~NRL_RandomFieldModel(){
+    }
+    
+    void set_exponents(double & Beta3, double & Beta4, double & Beta5){
+        beta3 = Beta3;
+        beta4 = Beta4;
+        beta5 = Beta5;
+    }
+    void set_plyagl(double & Plyagl){
+        plyagl = Plyagl;
+        cos_plyagl = std::cos(plyagl);
+        sin_plyagl = std::sin(plyagl);
     }
     
     void get_material_parameters(unsigned int & e_lid, unsigned int & gp){
@@ -317,8 +318,8 @@ public:
     
     int n_ply;
     std::vector<int> phase;
-    double mean_m1, m1, deltaM1;
-    double mean_m2, m2, deltaM2;
+    double m1, deltaM1;
+    double m2, deltaM2;
     double beta3, beta4, beta5;
     double plyagl, cos_plyagl, sin_plyagl;
 
