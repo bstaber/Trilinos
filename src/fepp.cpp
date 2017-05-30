@@ -282,8 +282,7 @@ void gauss_points_tetra11(Epetra_SerialDenseVector & weight, Epetra_SerialDenseV
     weight(0) = -0.0789333333333333/6.0; weight(1) = 0.0457333333333333/6.0; weight(2) = 0.0457333333333333/6.0; weight(3) = 0.0457333333333333/6.0; weight(4) = 0.0457333333333333/6.0; weight(5) = 0.1493333333333333/6.0; weight(6) = 0.1493333333333333/6.0; weight(7) = 0.1493333333333333/6.0; weight(8) = 0.1493333333333333/6.0; weight(9) = 0.1493333333333333/6.0; weight(10) = 0.1493333333333333/6.0;
 }
 
-int pnpoly(int & nvert, Epetra_SerialDenseVector & vertx, Epetra_SerialDenseVector & verty, double & testx, double & testy)
-{
+int pnpoly(int & nvert, Epetra_SerialDenseVector & vertx, Epetra_SerialDenseVector & verty, double & testx, double & testy){
     int i, j, c = 0;
     double a, b;
     for (i = 0, j = nvert-1; i < nvert; j = i++) {
