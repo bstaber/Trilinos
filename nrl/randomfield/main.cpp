@@ -53,8 +53,8 @@ MPI_Init(&argc, &argv);
     Newton->setParameters(*paramList);
     
     int error = Newton->Solve_with_Aztec();
-    std::string filedisp   = "disp_realization3.mtx";
-    std::string filestress = "stress_realization0.mtx";
+    std::string filedisp   = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/randomfield/disp_realization3.mtx";
+    std::string filestress = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/randomfield/stress_realization0.mtx";
     Newton->print_newton_solution(filedisp);
     //interface->compute_mean_cauchy_stress(*Newton->x,filename2);
         
