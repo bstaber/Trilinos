@@ -1,6 +1,10 @@
 #include "ROL_StdVector.hpp"
 #include "ROL_Objective.hpp"
 #include "NRL_ModelF.hpp"
+#include "ROL_Algorithm.hpp"
+#include "ROL_BoundConstraint.hpp"
+#include "ROL_LineSearchStep.hpp"
+#include "ROL_StatusTest.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include "Epetra_SerialDenseSolver.h"
 #include  <math.h>
@@ -29,15 +33,12 @@ private:
     
     unsigned int npoints;
     unsigned int nloads;
-    std::vector<int> exp_cells;
+    std::vector<int>    exp_cells;
     std::vector<double> my_xi;
     std::vector<double> my_eta;
     std::vector<double> my_exx;
     std::vector<double> my_eyy;
     std::vector<double> my_exy;
-    Epetra_SerialDenseVector exx_comp;
-    Epetra_SerialDenseVector eyy_comp;
-    Epetra_SerialDenseVector exy_comp;
     
 public:
     
@@ -57,11 +58,8 @@ public:
             std::cout << "npoints" << std::setw(30) << "nloads" << std::setw(30) << "local_npoints\n";
         }
         retrieve_data(path_exp_points, path_exp_deform);
-        exx_comp.Resize(my_exx.size());
-        eyy_comp.Resize(my_eyy.size());
-        exy_comp.Resize(my_exy.size());
         
-        //_paramList =
+        _paramList = paramList;
     }
     ~objectiveFunction(){
     }
@@ -82,26 +80,34 @@ public:
         interface->set_plyagl(plyagl);
         
         std::vector<double> bcdisp(10);
-        bcdisp[0] = 0.00033234/1000.0;
-        bcdisp[1] = 0.018369/1000.0;
-        bcdisp[2] = 0.038198/1000.0;
-        bcdisp[3] = 0.060977/1000.0;
-        bcdisp[4] = 0.073356/1000.0;
-        bcdisp[5] = 0.092648/1000.0;
-        bcdisp[6] = 0.11062/1000.0;
-        bcdisp[7] = 0.12838/1000.0;
-        bcdisp[8] = 0.14934/1000.0;
-        bcdisp[9] = 0.15718/1000.0;
-        
-        newton->Initialization();
-        for (unsigned int i=0; i<bcdisp.size(); ++i){
-            newton->setParameters(paramList);
-            newton->bc_disp=bcdisp[i];
-            int error = newton->Solve_with_Aztec();
-            compute_green_lagrange(*(newton->x));
-        }
+        std::vector<int> load_index(10);
+        bcdisp[0] = 0.00033234/1000.0;  load_index[0] = 55-1;
+        bcdisp[1] = 0.018369/1000.0;    load_index[1] = 93-1;
+        bcdisp[2] = 0.038198/1000.0;    load_index[2] = 131-1;
+        bcdisp[3] = 0.060977/1000.0;    load_index[3] = 169-1;
+        bcdisp[4] = 0.073356/1000.0;    load_index[4] = 207-1;
+        bcdisp[5] = 0.092648/1000.0;    load_index[5] = 245-1;
+        bcdisp[6] = 0.11062/1000.0;     load_index[6] = 283-1;
+        bcdisp[7] = 0.12838/1000.0;     load_index[7] = 321-1;
+        bcdisp[8] = 0.14934/1000.0;     load_index[8] = 359-1;
+        bcdisp[9] = 0.15718/1000.0;     load_index[9] = 398-1;
         
         Real val = 0.0;
+        newton->Initialization();
+        for (unsigned int i=9; i<bcdisp.size(); ++i){
+            newton->setParameters(_paramList);
+            newton->bc_disp=bcdisp[i];
+            int error = newton->Solve_with_Aztec();
+            
+            Epetra_SerialDenseVector exx_comp(exp_cells.size());
+            Epetra_SerialDenseVector eyy_comp(exp_cells.size());
+            Epetra_SerialDenseVector exy_comp(exp_cells.size());
+            compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
+            
+            for (unsigned int j=0; j<exp_cells.size(); ++j){
+                val+= (exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()])*(exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()]) + (eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()])*(eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()]) + (exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()])*(exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()]);
+            }
+        }
         return val;
     }
     
@@ -275,7 +281,7 @@ public:
         return rhs_inf;
     }
     
-    void compute_green_lagrange(Epetra_Vector & x){
+    void compute_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseVector & exx_comp, Epetra_SerialDenseVector & eyy_comp, Epetra_SerialDenseVector & exy_comp){
         
         double e11, e22, e12;
         
@@ -283,7 +289,7 @@ public:
         u.Import(x, *(interface->ImportToOverlapMap), Insert);
         
         int e_gid, node;
-        double det_jac_tetra;
+        double det_jac;
         Epetra_SerialDenseMatrix matrix_X(2,interface->Mesh->face_type);
         Epetra_SerialDenseMatrix matrix_x(2,interface->Mesh->face_type);
         Epetra_SerialDenseMatrix D(interface->Mesh->face_type,2);
@@ -291,13 +297,14 @@ public:
         Epetra_SerialDenseMatrix DX(interface->Mesh->face_type,2);
         Epetra_SerialDenseMatrix deformation_gradient(2,2);
         Epetra_SerialDenseMatrix JacobianMatrix(2,2);
+        Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
         Epetra_SerialDenseMatrix right_cauchy(2,2);
         
         for (unsigned e=0; e<exp_cells.size(); ++e){
-            e_gid = interface->Mesh->local_cells[exp_cells[e]];
+            e_gid = interface->Mesh->local_faces[exp_cells[e]];
             
             for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
-                node = interface->Mesh->cells_nodes[interface->Mesh->face_type*e_gid+inode];
+                node = interface->Mesh->faces_nodes[interface->Mesh->face_type*e_gid+inode];
                 matrix_X(0,inode) = interface->Mesh->nodes_coord[3*node+0];
                 matrix_X(1,inode) = interface->Mesh->nodes_coord[3*node+1];
                 matrix_x(0,inode) = u[interface->OverlapMap->LID(3*node+0)] + interface->Mesh->nodes_coord[3*node+0];
@@ -317,8 +324,12 @@ public:
             }
             
             jacobian_matrix(matrix_X,D,JacobianMatrix);
-            jacobian_det(JacobianMatrix,det_jac_tetra);
-            dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+            det_jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
+            InverseJacobianMatrix(0,0) = (1.0/det_jac)*JacobianMatrix(1,1);
+            InverseJacobianMatrix(1,1) = (1.0/det_jac)*JacobianMatrix(0,0);
+            InverseJacobianMatrix(0,1) = -(1.0/det_jac)*JacobianMatrix(0,1);
+            InverseJacobianMatrix(1,0) = -(1.0/det_jac)*JacobianMatrix(1,0);
+            dx_shape_functions.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
             
             deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
             right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);

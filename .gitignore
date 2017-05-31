@@ -20,3 +20,4 @@ nrl/randomfield/main.o
 nrl/objectivefun/trilinos_mpi
 nrl/deterministic/trilinos_mpi
 nrl/deterministic/trilinos_mpi
+src/Newton_Raphsonpp.o
