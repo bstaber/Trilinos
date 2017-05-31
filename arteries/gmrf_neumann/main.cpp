@@ -71,6 +71,7 @@ int main(int argc, char *argv[]){
                 parameters_file_3 >> my_interface->w3_gmrf(i);
                 parameters_file_4 >> my_interface->w4_gmrf(i);
             }
+            if (nmc>23){
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
             Newton->setParameters(*paramList);
             Newton->Initialization();
@@ -80,6 +81,7 @@ int main(int argc, char *argv[]){
                 Newton->print_newton_solution(filename1);
                 std::string filename2 = path + "stress_realization" + std::to_string(nmc);
                 my_interface->compute_mean_cauchy_stress(*Newton->x,filename2);
+            }
             }
         }
         Comm.Barrier();
