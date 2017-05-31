@@ -283,8 +283,6 @@ public:
     
     void compute_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseVector & exx_comp, Epetra_SerialDenseVector & eyy_comp, Epetra_SerialDenseVector & exy_comp){
         
-        double e11, e22, e12;
-        
         Epetra_Vector u(*(interface->OverlapMap));
         u.Import(x, *(interface->ImportToOverlapMap), Insert);
         
