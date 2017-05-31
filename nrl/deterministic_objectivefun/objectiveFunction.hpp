@@ -29,7 +29,9 @@ private:
     }
     
     Teuchos::ParameterList _paramList;
+    Epetra_Comm * comm;
     Teuchos::RCP<Newton_Raphson> newton;
+    Teuchos::RCP<NRL_ModelF> interface;
     
     unsigned int npoints;
     unsigned int nloads;
@@ -41,11 +43,10 @@ private:
     std::vector<double> my_exy;
     
 public:
-    
-    Teuchos::RCP<NRL_ModelF> interface;
         
     objectiveFunction(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         
+        comm = &Comm;
         interface = Teuchos::rcp(new NRL_ModelF(Comm,paramList));
         newton = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         
@@ -69,14 +70,21 @@ public:
         Teuchos::RCP<const std::vector<Real> > xp = getVector<XPrim>(x);
         uint n = xp->size();
         
-        double m1 = (*xp)[0];
-        double m2 = (*xp)[1];
-        double beta3 = (*xp)[2];
-        double beta4 = (*xp)[3];
-        double beta5 = (*xp)[4];
+        double *MyVals = new double [5];
+        for (unsigned int i=0; i<5; ++i){
+            MyVals[i] = (*xp)[i];
+        }
+        
+        comm->Broadcast(MyVals,5,0);
+        
+        double m1 = MyVals[0];
+        double m2 = MyVals[1];
+        double beta3 = MyVals[2];
+        double beta4 = MyVals[3];
+        double beta5 = MyVals[4];
         double plyagl = 45.0*2.0*M_PI/360.0;
         
-        std::cout << m1 << std::setw(25) << m2 << std::setw(25) << beta3 << std::setw(25) << beta4 << std::setw(25) << beta5 << "\n";
+        std::cout << m1 << std::setw(20) << std::setw(20) << m2 << std::setw(20) << beta3 << std::setw(20) << beta4 << std::setw(20) << beta5 << "\n";
         
         interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);

@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
     
     Teuchos::RCP<objectiveFunction<double>> obj = Teuchos::rcp(new objectiveFunction<double>(Comm,*paramList));
     
-    /*Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
+    Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
     (*x_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
     (*x_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
     (*x_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
@@ -68,14 +68,14 @@ int main(int argc, char *argv[]){
     parlist->sublist("Step").sublist("Primal Dual Active Set").set("Iteration Limit", 1);
     parlist->sublist("Step").sublist("Primal Dual Active Set").set("Dual Scaling",(alpha>0.0)?alpha:1.e-4);
     // Status test parameters.
-    parlist->sublist("Status Test").set("Gradient Tolerance",1.e-12);
-    parlist->sublist("Status Test").set("Step Tolerance",1.e-14);
+    parlist->sublist("Status Test").set("Gradient Tolerance",1.e-8);
+    parlist->sublist("Status Test").set("Step Tolerance",1.e-8);
     parlist->sublist("Status Test").set("Iteration Limit",10000);
     
     Teuchos::RCP<ROL::Algorithm<double> > algo =
     Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,true));
     
-    algo->run(x, *obj, true, std::cout);*/
+    algo->run(x, *obj, true, std::cout);
     
     
 #ifdef HAVE_MPI
