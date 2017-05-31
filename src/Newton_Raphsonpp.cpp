@@ -266,14 +266,10 @@ int Newton_Raphson::Solve_with_Aztec(){
                     
                     if (MyPID==0){
                         if(iter>2){
-                            /*std::cout << std::setprecision(2);
-                            std::cout << std::scientific;*/
                             std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
                         }
                         else{
                             std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "pressure_load [kPa]" << "\n";
-                            /*std::cout << std::setprecision(2);
-                            std::cout << std::scientific;*/
                             std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
                         }
                     }

@@ -35,7 +35,7 @@ private:
     
     unsigned int npoints;
     unsigned int nloads;
-    std::vector<int>    exp_cells;
+    std::vector<int> exp_cells;
     std::vector<double> my_xi;
     std::vector<double> my_eta;
     std::vector<double> my_exx;
@@ -84,8 +84,6 @@ public:
         double beta5 = MyVals[4];
         double plyagl = 45.0*2.0*M_PI/360.0;
         
-        std::cout << m1 << std::setw(20) << std::setw(20) << m2 << std::setw(20) << beta3 << std::setw(20) << beta4 << std::setw(20) << beta5 << "\n";
-        
         interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);
         
@@ -115,9 +113,10 @@ public:
             compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
-                val+= (exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()])*(exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()]) + (eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()])*(eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()]) + (exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()])*(exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()]);
+                val += (exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()])*(exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()]) + (eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()])*(eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()]) + (exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()])*(exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()]);
             }
         }
+        
         return val;
     }
     
