@@ -12,3 +12,10 @@ nrl/randomfield/*.o
 nrl/randomfield/trilinos_mpi
 nrl/objectivefun/*.o
 nrl/objectivefun/trilinos_mpi
+*.vtk
+*.m
+src/fepp.o
+nrl/randomfield/trilinos_mpi
+nrl/randomfield/main.o
+nrl/objectivefun/trilinos_mpi
+nrl/deterministic/trilinos_mpi
