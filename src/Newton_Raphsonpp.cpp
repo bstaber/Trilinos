@@ -197,9 +197,7 @@ int Newton_Raphson::Solve_with_Aztec(){
     Epetra_FEVector rhs(*interface->StandardMap);
     Epetra_Vector lhs(*interface->StandardMap);
     Epetra_Vector y(*interface->StandardMap);
-    
-    //x->PutScalar(0.0);
-    
+     
     double Assemble_time;
     double displacement;
     double norm_inf_rhs;

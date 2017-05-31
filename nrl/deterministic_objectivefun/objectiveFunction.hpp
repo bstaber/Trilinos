@@ -24,6 +24,7 @@ private:
         return Teuchos::dyn_cast<VectorType>(x).getVector();
     }
     
+    Teuchos::ParameterList _paramList;
     Teuchos::RCP<Newton_Raphson> newton;
     
     unsigned int npoints;
@@ -59,6 +60,8 @@ public:
         exx_comp.Resize(my_exx.size());
         eyy_comp.Resize(my_eyy.size());
         exy_comp.Resize(my_exy.size());
+        
+        //_paramList =
     }
     ~objectiveFunction(){
     }
@@ -77,9 +80,26 @@ public:
         
         interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);
+        
+        std::vector<double> bcdisp(10);
+        bcdisp[0] = 0.00033234/1000.0;
+        bcdisp[1] = 0.018369/1000.0;
+        bcdisp[2] = 0.038198/1000.0;
+        bcdisp[3] = 0.060977/1000.0;
+        bcdisp[4] = 0.073356/1000.0;
+        bcdisp[5] = 0.092648/1000.0;
+        bcdisp[6] = 0.11062/1000.0;
+        bcdisp[7] = 0.12838/1000.0;
+        bcdisp[8] = 0.14934/1000.0;
+        bcdisp[9] = 0.15718/1000.0;
+        
         newton->Initialization();
-        int error = newton->Solve_with_Aztec();
-        compute_green_lagrange(*(newton->x));
+        for (unsigned int i=0; i<bcdisp.size(); ++i){
+            newton->setParameters(paramList);
+            newton->bc_disp=bcdisp[i];
+            int error = newton->Solve_with_Aztec();
+            compute_green_lagrange(*(newton->x));
+        }
         
         Real val = 0.0;
         return val;

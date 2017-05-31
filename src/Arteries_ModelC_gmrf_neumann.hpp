@@ -66,11 +66,11 @@ public:
         //Problem number one with aztec
         bc_indx[0] = 2; bc_indx[1] = 3;
         Laplace->solve_aztec(Parameters.sublist("Laplace"), matrix, phi, rhs, &bc_indx[0], &bc_val[0]);
-        //Laplace->print_solution(phi, "laplace_inlet_to_outlet_aztec.mtx");
+        Laplace->print_solution(phi, "laplace_inlet_to_outlet_aztec.mtx");
         //Problem number one with aztec
         bc_indx[0] = 0; bc_indx[1] = 1;
         Laplace->solve_aztec(Parameters.sublist("Laplace"), matrix, psi, rhs, &bc_indx[0], &bc_val[0]);
-        //Laplace->print_solution(psi, "laplace_inner_to_outer_aztec.mtx");
+        Laplace->print_solution(psi, "laplace_inner_to_outer_aztec.mtx");
         //Get local directions
         Laplace->compute_local_directions(phi, psi);
         //$$End

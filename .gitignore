@@ -19,3 +19,4 @@ nrl/randomfield/trilinos_mpi
 nrl/randomfield/main.o
 nrl/objectivefun/trilinos_mpi
 nrl/deterministic/trilinos_mpi
+nrl/deterministic/trilinos_mpi

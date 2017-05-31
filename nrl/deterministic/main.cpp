@@ -51,11 +51,27 @@ MPI_Init(&argc, &argv);
     interface->set_plyagl(plyagl);
     
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
-    Newton->Initialization();
     
-    int error = Newton->Solve_with_Aztec();
-    std::string name = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/deterministic/Newton_solution.mtx";
-    Newton->print_newton_solution(name);
+    std::vector<double> bcdisp(10);
+    bcdisp[0] = 0.00033234/1000.0;
+    bcdisp[1] = 0.018369/1000.0;
+    bcdisp[2] = 0.038198/1000.0;
+    bcdisp[3] = 0.060977/1000.0;
+    bcdisp[4] = 0.073356/1000.0;
+    bcdisp[5] = 0.092648/1000.0;
+    bcdisp[6] = 0.11062/1000.0;
+    bcdisp[7] = 0.12838/1000.0;
+    bcdisp[8] = 0.14934/1000.0;
+    bcdisp[9] = 0.15718/1000.0;
+    
+    Newton->Initialization();
+    for (unsigned int i=0; i<bcdisp.size(); ++i){
+        Newton->setParameters(*paramList);
+        Newton->bc_disp = bcdisp[i];
+        int error = Newton->Solve_with_Aztec();
+        //std::string name = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/deterministic/Newton_solution.mtx";
+        //Newton->print_newton_solution(name);
+    }
     
     
 #ifdef HAVE_MPI
