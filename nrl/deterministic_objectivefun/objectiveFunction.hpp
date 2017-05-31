@@ -43,7 +43,7 @@ private:
 public:
     
     Teuchos::RCP<NRL_ModelF> interface;
-    
+        
     objectiveFunction(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         
         interface = Teuchos::rcp(new NRL_ModelF(Comm,paramList));
@@ -75,6 +75,8 @@ public:
         double beta4 = (*xp)[3];
         double beta5 = (*xp)[4];
         double plyagl = 45.0*2.0*M_PI/360.0;
+        
+        std::cout << m1 << std::setw(25) << m2 << std::setw(25) << beta3 << std::setw(25) << beta4 << std::setw(25) << beta5 << "\n";
         
         interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);
