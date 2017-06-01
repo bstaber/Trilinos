@@ -82,7 +82,21 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<ROL::Algorithm<double> > algo =
     Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,printHeader));
     
-    algo->run(x, *obj, printHeader, std::cout);
+    Teuchos::RCP<std::vector<double>> l_rcp = Teuchos::rcp( new std::vector<double>(5) );
+    Teuchos::RCP<std::vector<double>> u_rcp = Teuchos::rcp( new std::vector<double>(5) );
+    
+    Teuchos::RCP<ROL::Vector<double>> lo = Teuchos::rcp( new ROL::StdVector<double>(l_rcp) );
+    Teuchos::RCP<ROL::Vector<double>> up = Teuchos::rcp( new ROL::StdVector<double>(u_rcp) );
+    
+    (*l_rcp)[0] = 1e-6; (*l_rcp)[1] = 1e-6; (*l_rcp)[2] = -1.0/2.0; (*l_rcp)[3] = 1e-6;
+    (*l_rcp)[4] = 1e-6;
+    
+    (*u_rcp)[0] = 1e5; (*u_rcp)[1] = 1e5; (*u_rcp)[2] = 10.0; (*u_rcp)[3] = 10.0;
+    (*u_rcp)[4] = 10.0;
+    
+    ROL::BoundConstraint<double> icon(lo,up);
+    
+    algo->run(x, *obj, icon, printHeader, std::cout);
     
     
 #ifdef HAVE_MPI

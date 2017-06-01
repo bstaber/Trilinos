@@ -100,7 +100,7 @@ public:
         bcdisp[8] = 0.14934/1000.0;     load_index[8] = 359-1;
         bcdisp[9] = 0.15718/1000.0;     load_index[9] = 398-1;
         
-
+        double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
         for (unsigned int i=9; i<bcdisp.size(); ++i){
@@ -114,11 +114,14 @@ public:
             compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
+                partialRef += my_exx[load_index[i]+j*nloads]*my_exx[load_index[i]+j*nloads] + my_eyy[load_index[i]+j*nloads]*my_eyy[load_index[i]+j*nloads] + my_exy[load_index[i]+j*nloads]*my_exy[load_index[i]+j*nloads];
                 partialVal += (exx_comp(j)-my_exx[load_index[i]+j*nloads])*(exx_comp(j)-my_exx[load_index[i]+j*nloads]) + (eyy_comp(j)-my_eyy[load_index[i]+j*nloads])*(eyy_comp(j)-my_eyy[load_index[i]+j*nloads]) + (exy_comp(j)-my_exy[load_index[i]+j*nloads])*(exy_comp(j)-my_exy[load_index[i]+j*nloads]);
             }
         }
-
+        
         Real val = 0.0;
+        Real ref = 0.0;
+        comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
         return val;
     }
