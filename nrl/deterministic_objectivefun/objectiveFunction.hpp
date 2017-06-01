@@ -100,12 +100,13 @@ public:
         bcdisp[8] = 0.14934/1000.0;     load_index[8] = 359-1;
         bcdisp[9] = 0.15718/1000.0;     load_index[9] = 398-1;
         
-        Real val = 0.0;
+
+        double partialVal = 0.0;
         newton->Initialization();
         for (unsigned int i=9; i<bcdisp.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=bcdisp[i];
-            int error = newton->Solve_with_Aztec();
+            int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
             Epetra_SerialDenseVector eyy_comp(exp_cells.size());
@@ -113,12 +114,12 @@ public:
             compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
-                val += (exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()])*(exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()]) + (eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()])*(eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()]) + (exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()])*(exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()]);
+                partialVal += (exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()])*(exx_comp(j)-my_exx[j+load_index[i]*exp_cells.size()]) + (eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()])*(eyy_comp(j)-my_eyy[j+load_index[i]*exp_cells.size()]) + (exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()])*(exy_comp(j)-my_exy[j+load_index[i]*exp_cells.size()]);
             }
         }
-        
-        //need parallel val then a gather all and broadcast
-        
+
+        Real val = 0.0;
+        comm->SumAll(&partialVal,&val,1);
         return val;
     }
     

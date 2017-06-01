@@ -186,7 +186,7 @@ int Newton_Raphson::Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> 
     return 0;
 }
 
-int Newton_Raphson::Solve_with_Aztec(){
+int Newton_Raphson::Solve_with_Aztec(bool print){
     
     Epetra_Time Time(*Comm);
     
@@ -264,7 +264,7 @@ int Newton_Raphson::Solve_with_Aztec(){
                     
                     rhs.NormInf(&norm_inf_rhs);
                     
-                    if (MyPID==0){
+                    if (MyPID==0 && print){
                         if(iter>2){
                             std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
                         }

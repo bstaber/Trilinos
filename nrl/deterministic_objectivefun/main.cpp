@@ -72,10 +72,17 @@ int main(int argc, char *argv[]){
     parlist->sublist("Status Test").set("Step Tolerance",1.e-8);
     parlist->sublist("Status Test").set("Iteration Limit",10000);
     
+    bool printHeader;
+    if (Comm.MyPID()==0){
+        printHeader = true;
+    }
+    else{
+        printHeader = false;
+    }
     Teuchos::RCP<ROL::Algorithm<double> > algo =
-    Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,true));
+    Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,printHeader));
     
-    algo->run(x, *obj, true, std::cout);
+    algo->run(x, *obj, printHeader, std::cout);
     
     
 #ifdef HAVE_MPI

@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
         if (nmc>0){
             Newton->setParameters(*paramList);
         }
-        int error = Newton->Solve_with_Aztec();
+        int error = Newton->Solve_with_Aztec(true);
         std::string name = "Newton_solution.mtx";
         Newton->print_newton_solution(name);
     }

@@ -22,7 +22,7 @@ public:
     Newton_Raphson(Finite_Element_Problem & Interface, Teuchos::ParameterList & Parameters);
     ~Newton_Raphson();
     
-    int Solve_with_Aztec();
+    int Solve_with_Aztec(bool print);
     int Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL);
     int print_newton_solution(std::string fileName);
     void Initialization();

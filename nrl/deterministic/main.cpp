@@ -68,7 +68,7 @@ MPI_Init(&argc, &argv);
     for (unsigned int i=0; i<bcdisp.size(); ++i){
         Newton->setParameters(*paramList);
         Newton->bc_disp = bcdisp[i];
-        int error = Newton->Solve_with_Aztec();
+        int error = Newton->Solve_with_Aztec(true);
         //std::string name = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/deterministic/Newton_solution.mtx";
         //Newton->print_newton_solution(name);
     }

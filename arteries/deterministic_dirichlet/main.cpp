@@ -81,7 +81,7 @@ int main(int argc, char *argv[]){
     Newton->Initialization();
     
     int throwint;
-    throwint = Newton->Solve_with_Aztec();
+    throwint = Newton->Solve_with_Aztec(true);
     
     my_interface->fixed = 3;
     my_interface->moved = 2;

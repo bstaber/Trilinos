@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
             Newton->setParameters(*paramList);
             Newton->Initialization();
-            error = Newton->Solve_with_Aztec();
+            error = Newton->Solve_with_Aztec(true);
             if (!error){
                 std::string filename1 = path + "disp_realization" + std::to_string(nmc) + ".mtx";
                 Newton->print_newton_solution(filename1);

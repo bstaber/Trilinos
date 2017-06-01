@@ -56,7 +56,7 @@ MPI_Init(&argc, &argv);
     Newton->Initialization();
     Newton->setParameters(*paramList);
     
-    int error = Newton->Solve_with_Aztec();
+    int error = Newton->Solve_with_Aztec(true);
     std::string filedisp   = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/randomfield/disp_realization3.mtx";
     std::string filestress = "/Users/Brian/Documents/Thesis/Trilinos_results/nrl/randomfield/stress_realization0.mtx";
     Newton->print_newton_solution(filedisp);

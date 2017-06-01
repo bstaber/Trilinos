@@ -66,7 +66,7 @@ public:
         double plyagl = 45.0*2.0*M_PI/360.0;
 
         newton->Initialization();
-        int error = newton->Solve_with_Aztec();
+        int error = newton->Solve_with_Aztec(false);
         
         //compute deformation on the boundaries.
         Real val = 0.0;
