@@ -117,6 +117,8 @@ public:
             }
         }
         
+        //need parallel val then a gather all and broadcast
+        
         return val;
     }
     
