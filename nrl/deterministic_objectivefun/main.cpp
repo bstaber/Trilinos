@@ -98,6 +98,12 @@ int main(int argc, char *argv[]){
     
     algo->run(x, *obj, icon, printHeader, std::cout);
     
+    std::cout << "\n";
+    std::cout << "Solution:\n";
+    for (unsigned int j=0; j<5; ++j){
+        std::cout << std::setw(20) << (*x_rcp)[j];
+    }
+    std::cout << "\n";
     
 #ifdef HAVE_MPI
     MPI_Finalize();
