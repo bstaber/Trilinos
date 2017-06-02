@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
         printHeader = false;
     }
     Teuchos::RCP<ROL::Algorithm<double> > algo =
-    Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,printHeader));
+    Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,false));
     
     Teuchos::RCP<std::vector<double>> l_rcp = Teuchos::rcp( new std::vector<double>(5) );
     Teuchos::RCP<std::vector<double>> u_rcp = Teuchos::rcp( new std::vector<double>(5) );
