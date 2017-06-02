@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
                 parameters_file_3 >> my_interface->w3_gmrf(i);
                 parameters_file_4 >> my_interface->w4_gmrf(i);
             }
-            if (nmc>77){
+            if (nmc>79){
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
             Newton->setParameters(*paramList);
             Newton->Initialization();
