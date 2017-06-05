@@ -26,9 +26,7 @@ public:
     void compute_B_matrices(Epetra_SerialDenseMatrix & F, Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B, Epetra_SerialDenseMatrix & BG);
     
     void compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta);
-    void compute_mean_von_mises_stress(Epetra_Vector & x, std::string & filename);
     void compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename);
-    void compute_cauchy_stress(Epetra_Vector & x, std::string & filename);
     
     virtual void get_material_parameters(unsigned int & e_lid, unsigned int & gp) = 0;
     virtual void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient, Epetra_SerialDenseVector & piola_stress, Epetra_SerialDenseMatrix & tangent_piola) = 0;
