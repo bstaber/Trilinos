@@ -658,6 +658,76 @@ void hyperelasticity_setup::compute_mean_cauchy_stress(Epetra_Vector & x, std::s
     int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);
 }
 
+void hyperelasticity_setup::compute_gauss_vonmises(Epetra_Vector & x, std::string & filename){
+    
+    Epetra_Vector u(*OverlapMap);
+    u.Import(x, *ImportToOverlapMap, Insert);
+    
+    int node, e_gid;
+    int n_gauss_points = Mesh->n_gauss_cells;
+    double det_jac_tetra, det, gauss_weight;
+    
+    Epetra_SerialDenseMatrix deformation_gradient(3,3);
+    Epetra_SerialDenseMatrix right_cauchy(3,3);
+    Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
+    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
+    Epetra_SerialDenseMatrix piola_stress(3,3);
+    Epetra_SerialDenseMatrix cauchy_stress(3,3);
+    Epetra_SerialDenseMatrix dg_times_ps(3,3);
+    
+    std::vector<int> local_gauss_points;
+    for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+        e_gid = Mesh->local_cells[e_lid];
+        for (unsigned int j=0; j<Mesh->n_gauss_cells; ++j){
+            local_gauss_points.push_back(Mesh->n_gauss_cells*e_gid+j);
+        }
+    }
+    Epetra_Map CellsMap(-1,Mesh->n_local_cells,&local_gauss_points[0],0,*Comm);
+    Epetra_Vector vonmises(CellsMap);
+    
+    for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+        e_gid = Mesh->local_cells[e_lid];
+        
+        for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+            node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+            matrix_x(0,inode) = u[OverlapMap->LID(3*node+0)] + Mesh->nodes_coord[3*node+0];
+            matrix_x(1,inode) = u[OverlapMap->LID(3*node+1)] + Mesh->nodes_coord[3*node+1];
+            matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
+        }
+        
+        for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+            gauss_weight = Mesh->gauss_weight_cells(gp);
+            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+            }
+            
+            deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
+            
+            get_material_parameters(e_lid, gp);
+            get_stress_for_recover(deformation_gradient, det, piola_stress);
+            dg_times_ps.Multiply('N','N',1.0,deformation_gradient,piola_stress,0.0);
+            cauchy_stress.Multiply('N','T',1.0,dg_times_ps,deformation_gradient,0.0);
+            
+            vonmises[Mesh->n_gauss_cells*e_lid+gp] = std::sqrt( (cauchy_stress(0,0)-cauchy_stress(1,1))*(cauchy_stress(0,0)-cauchy_stress(1,1)) + (cauchy_stress(1,1)-cauchy_stress(2,2))*(cauchy_stress(1,1)-cauchy_stress(2,2)) + (cauchy_stress(2,2)-cauchy_stress(0,0))*(cauchy_stress(2,2)-cauchy_stress(0,0)) + 6.0*(cauchy_stress(1,2)*cauchy_stress(1,2) + cauchy_stress(2,0)*cauchy_stress(2,0) + cauchy_stress(0,1)*cauchy_stress(0,1)) );
+        }
+    }
+    
+    int NumTargetElements = 0;
+    if (Comm->MyPID()==0){
+        NumTargetElements = Mesh->n_cells*Mesh->n_gauss_cells;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+    Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+    
+    Epetra_MultiVector lhs_root11(MapOnRoot,true);
+    lhs_root11.Export(vonmises,ExportOnRoot,Insert);
+    std::string file11 = filename + "_gauss_vonmises.mtx";
+    int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);
+    
+}
+
 void hyperelasticity_setup::compute_B_matrices(Epetra_SerialDenseMatrix & F, Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B, Epetra_SerialDenseMatrix & BG){
     
     for (unsigned inode=0; inode<Mesh->el_type; ++inode){

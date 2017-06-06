@@ -27,6 +27,7 @@ public:
     
     void compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta);
     void compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename);
+    void compute_gauss_vonmises(Epetra_Vector & x, std::string & filename);
     
     virtual void get_material_parameters(unsigned int & e_lid, unsigned int & gp) = 0;
     virtual void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient, Epetra_SerialDenseVector & piola_stress, Epetra_SerialDenseMatrix & tangent_piola) = 0;

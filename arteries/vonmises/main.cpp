@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
             int error = load_solution(filesolution,x);
             if (!error){
                 std::string filestress = path + "stress_realization" + std::to_string(nmc);
-                interface->compute_mean_cauchy_stress(*x,filestress);
+                interface->compute_gauss_vonmises(*x,filestress);
             }
             else{
                 if (Comm.MyPID()==0){

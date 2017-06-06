@@ -49,14 +49,14 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<Interface_arteries> my_interface = Teuchos::rcp(new Interface_arteries(Comm,*paramList));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
     
-    for (unsigned int nmc=0; nmc<10; ++nmc){
-        Newton->Initialization();
-        if (nmc>0){
-            Newton->setParameters(*paramList);
-        }
-        int error = Newton->Solve_with_Aztec(true);
-        std::string name = "Newton_solution.mtx";
-        Newton->print_newton_solution(name);
+    Newton->Initialization();
+    Newton->setParameters(*paramList);
+    int error = Newton->Solve_with_Aztec(true);
+    if (!error){
+        std::string filename1 = path + "disp_mean_model" + std::to_string(nmc) + ".mtx";
+        Newton->print_newton_solution(filename1);
+        std::string filename2 = path + "stress_mean_model" + std::to_string(nmc);
+        my_interface->compute_mean_cauchy_stress(*Newton->x,filename2);
     }
     
 #ifdef HAVE_MPI
