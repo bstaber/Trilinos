@@ -10,7 +10,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "Arteries_ModelC_gmrf_neumann.hpp"
+#include "Arteries_ModelC_deterministic_neumann.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
     
     Teuchos::RCP<Interface_arteries> interface = Teuchos::rcp(new Interface_arteries(Comm,*paramList));
     
-    std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
+    /*std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_gmrf");
     parameters_file_1.open(path+"w1.txt");
     parameters_file_2.open(path+"w2.txt");
@@ -63,35 +63,35 @@ int main(int argc, char *argv[]){
     
     int error;
     std::string path_p1 = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_p1_connectivity");
-    interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);
+    interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);*/
     
     Epetra_Vector * x = new Epetra_Vector(*interface->StandardMap);
     
-    if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
+    //if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
         
-        for (unsigned nmc=0; nmc<1; ++nmc){
+        /*for (unsigned nmc=0; nmc<1; ++nmc){
             for (int i=0; i<n_nodes_p1_med; ++i){
                 parameters_file_1 >> interface->w1_gmrf(i);
                 parameters_file_2 >> interface->w2_gmrf(i);
                 parameters_file_3 >> interface->w3_gmrf(i);
                 parameters_file_4 >> interface->w4_gmrf(i);
-            }
+            }*/
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
             Newton->setParameters(*paramList);
             
-            std::string filesolution = path + "disp_realization" + std::to_string(nmc) + ".mtx";
+            std::string filesolution = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/disp_mean_model.mtx";
             int error = load_solution(filesolution,x);
-            if (!error){
-                std::string filestress = path + "stress_realization" + std::to_string(nmc);
-                interface->compute_gauss_vonmises(*x,filestress);
+            std::string filestress = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/stress_mean_model";
+            interface->compute_mean_cauchy_stress(*x,filestress);
+            /*if (!error){
             }
             else{
                 if (Comm.MyPID()==0){
                     std::cout << "Error with EpetraExt::MatrixMarketFileToVector\n";
                 }
-            }
-        }
-        Comm.Barrier();
+            }*/
+        //}
+        /*Comm.Barrier();
         parameters_file_1.close();
         parameters_file_2.close();
         parameters_file_3.close();
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
     }
     else{
         std::cout << "Couldn't open one of the parameters_file.\n";
-    }
+    }*/
     
 #ifdef HAVE_MPI
     MPI_Finalize();

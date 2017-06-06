@@ -68,15 +68,15 @@ public:
     
     void setup_dirichlet_conditions(){
         //setup_clamp();
-        //setup_semislipbc();
-        setup_slipbc_and_clamp();
+        setup_semislipbc();
+        //setup_slipbc_and_clamp();
         //setup_slipbc();
     }
     
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
         //apply_clamp(K,F,displacement);
-        //apply_semiselipbc(K,F,displacement);
-        apply_slipbc_and_clamp(K,F,displacement);
+        apply_semiselipbc(K,F,displacement);
+        //apply_slipbc_and_clamp(K,F,displacement);
         //apply_slipbc(K,F,displacement);
     }
     
@@ -111,6 +111,63 @@ public:
     void get_material_parameters_for_recover(unsigned int & e_lid, double & xi, double & eta, double & zeta){
     }
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
+        
+        det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
+        
+        double alpha = std::pow(det,-2.0/3.0);
+        double beta = 1.0/(det*det);
+        Epetra_SerialDenseMatrix eye(3,3);
+        Epetra_SerialDenseMatrix M1(3,3), M2(3,3);
+        Epetra_SerialDenseMatrix C(3,3), L(3,3);
+        Epetra_SerialDenseMatrix piola_ani1(3,3), piola_ani2(3,3);
+        
+        eye(0,0) = 1.0; eye(0,1) = 0.0; eye(0,2) = 0.0;
+        eye(1,0) = 0.0; eye(1,1) = 1.0; eye(1,2) = 0.0;
+        eye(2,0) = 0.0; eye(2,1) = 0.0; eye(2,2) = 1.0;
+        
+        M1.Multiply('N','T',1.0,a,a,0.0);
+        M2.Multiply('N','T',1.0,b,b,0.0);
+        
+        C.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
+        
+        L(0,0) = (1.0/(det*det))*(C(1,1)*C(2,2)-C(1,2)*C(2,1));
+        L(1,1) = (1.0/(det*det))*(C(0,0)*C(2,2)-C(0,2)*C(2,0));
+        L(2,2) = (1.0/(det*det))*(C(0,0)*C(1,1)-C(0,1)*C(1,0));
+        L(1,2) = (1.0/(det*det))*(C(0,2)*C(1,0)-C(0,0)*C(1,2));
+        L(0,2) = (1.0/(det*det))*(C(0,1)*C(1,2)-C(0,2)*C(1,1));
+        L(0,1) = (1.0/(det*det))*(C(0,2)*C(2,1)-C(0,1)*C(2,2));
+        L(2,1) = L(1,2); L(2,0) = L(0,2); L(1,0) = L(0,1);
+        
+        double I1 = C(0,0) + C(1,1) + C(2,2);
+        double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
+        double I2 = (1.0/2.0)*(I1*I1-II1);
+        double I4_1 = C(0,0)*M1(0,0) + C(1,1)*M1(1,1) + C(2,2)*M1(2,2) + 2.0*C(0,1)*M1(0,1) + 2.0*C(0,2)*M1(0,2) + 2.0*C(1,2)*M1(1,2);
+        double I4_2 = C(0,0)*M2(0,0) + C(1,1)*M2(1,1) + C(2,2)*M2(2,2) + 2.0*C(0,1)*M2(0,1) + 2.0*C(0,2)*M2(0,2) + 2.0*C(1,2)*M2(1,2);
+        double pI2 = std::sqrt(I2);
+        
+        double S4_1 = (I4_1-1.0)*(I4_1-1.0);
+        double S4_2 = (I4_2-1.0)*(I4_2-1.0);
+        
+        double ptheta = std::pow(det,beta3);
+        double pressure = mu3*beta3*( (ptheta/det) - (1.0/(ptheta*det)) );
+        
+        for (unsigned int i=0; i<3; ++i){
+            for (unsigned int j=0; j<3; ++j){
+                piola_stress(i,j) = 2.0*mu1*alpha*(eye(i,j)-(1.0/3.0)*L(i,j))
+                + mu2*beta*( 3.0*pI2*(I1*eye(i,j)-C(i,j)) - 2.0*I2*pI2*L(i,j) )
+                + det*pressure*L(i,j);
+                piola_ani1(i,j) = 4.0*mu4*(I4_1-1.0)*exp(beta4*S4_1)*M1(i,j);
+                piola_ani2(i,j) = 4.0*mu4*(I4_2-1.0)*exp(beta4*S4_2)*M2(i,j);
+            }
+        }
+        
+        if (I4_1>1.0){
+            piola_stress += piola_ani1;
+        }
+        if (I4_2>1.0){
+            piola_stress += piola_ani2;
+        }
+        
     }
     
     void setup_clamp(){
