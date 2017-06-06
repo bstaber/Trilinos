@@ -53,6 +53,7 @@ int main(int argc, char *argv[]){
     Newton->setParameters(*paramList);
     int error = Newton->Solve_with_Aztec(true);
     if (!error){
+        std::string path = "/home/s/staber/Trilinos_results/arteries/gmrf_neumann/";
         std::string filename1 = path + "disp_mean_model" + std::to_string(nmc) + ".mtx";
         Newton->print_newton_solution(filename1);
         std::string filename2 = path + "stress_mean_model" + std::to_string(nmc);
