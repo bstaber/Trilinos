@@ -64,14 +64,14 @@ int main(int argc, char *argv[]){
     my_interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);
     if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
         
-        for (unsigned nmc=0; nmc<=300; ++nmc){
+        for (unsigned nmc=0; nmc<=250; ++nmc){
             for (int i=0; i<n_nodes_p1_med; ++i){
                 parameters_file_1 >> my_interface->w1_gmrf(i);
                 parameters_file_2 >> my_interface->w2_gmrf(i);
                 parameters_file_3 >> my_interface->w3_gmrf(i);
                 parameters_file_4 >> my_interface->w4_gmrf(i);
             }
-            if (nmc>269){
+            if (nmc>237){
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
             Newton->setParameters(*paramList);
             Newton->Initialization();
