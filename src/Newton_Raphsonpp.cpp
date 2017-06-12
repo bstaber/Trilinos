@@ -268,13 +268,13 @@ int Newton_Raphson::Solve_with_Aztec(bool print){
                     if (MyPID==0 && print){
                         if(iter>2){
                             //std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
-                            std::cout << std::setw(20) << iter << std::setw(20) << norm_inf_rhs << std::setw(20) << Krylov_its << std::setw(20) << Krylov_res << std::setw(20) << Assemble_time << std::setw(20) << Aztec_time << std::setw(20) << time*pressure_load/1000.0 << "\n";
+                            std::cout << std::setw(5) << iter << std::setw(20) << norm_inf_rhs << std::setw(20) << Krylov_its << std::setw(20) << Krylov_res << std::setw(20) << Assemble_time << std::setw(20) << Aztec_time << std::setw(20) << time*pressure_load/1000.0 << "\n";
                         }
                         else{
                             //std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "pressure_load [kPa]" << "\n";
                             //std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
-                            std::cout << std::setw(20) << "Time" << std::setw(20) << "Timestep" << std::setw(20) << "Iter" << std::setw(20) << "NormInf" << std::setw(20) << solver_its << std::setw(20) << solver_res << std::setw(20) << "assime_time" << std::setw(20) << "pressure_load [kPa]\n";
-                            std::cout << std::setw(20) << time << std::setw(20) << delta << std::setw(20) << iter << std::setw(20) << norm_inf_rhs << std::setw(20) << Krylov_its << std::setw(20) << Krylov_res << std::setw(20) << Assemble_time << std::setw(20) << Aztec_time << std::setw(20) << time*pressure_load/1000.0 << "\n";
+                            std::cout << std::setw(5) << "Time" << std::setw(20) << "Timestep" << std::setw(20) << "Iter" << std::setw(20) << "NormInf" << std::setw(20) << solver_its << std::setw(20) << solver_res << std::setw(20) << "assemble_time" << std::setw(20) << "aztec_time" << std::setw(20) << "pressure_load [kPa]\n";
+                            std::cout << std::setw(5) << time << std::setw(20) << delta << std::setw(20) << iter << std::setw(20) << norm_inf_rhs << std::setw(20) << Krylov_its << std::setw(20) << Krylov_res << std::setw(20) << Assemble_time << std::setw(20) << Aztec_time << std::setw(20) << time*pressure_load/1000.0 << "\n";
                         }
                     }
                     
