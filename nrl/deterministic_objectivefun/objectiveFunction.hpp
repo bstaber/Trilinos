@@ -62,6 +62,7 @@ public:
         
         _paramList = paramList;
     }
+    
     ~objectiveFunction(){
     }
     
@@ -123,6 +124,9 @@ public:
         Real ref = 0.0;
         comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
+        
+        delete [] MyVals;
+        
         return val;
     }
     
