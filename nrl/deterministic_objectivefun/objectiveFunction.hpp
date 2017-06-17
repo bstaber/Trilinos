@@ -104,10 +104,10 @@ public:
         double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
-        for (unsigned int i=9; i<10; ++i){
+        for (unsigned int i=0; i<bcdisp.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=bcdisp[i];
-            int error = newton->Solve_with_Aztec(false);
+            int error = newton->Solve_with_Aztec(true);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
             Epetra_SerialDenseVector eyy_comp(exp_cells.size());
