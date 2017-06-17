@@ -34,10 +34,10 @@ int main(int argc, char *argv[]){
 #endif
     
     Teuchos::RCP<Teuchos::ParameterList> paramList = Teuchos::rcp(new Teuchos::ParameterList);
-    if(xmlInFileName.length()) {
+    if(xmlInFileName.length()){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
-    if(xmlExtraFileName.length()) {
+    if(xmlExtraFileName.length()){
         Teuchos::updateParametersFromXmlFile(xmlExtraFileName, inoutArg(*paramList));
     }
     if (Comm.MyPID()==0){
