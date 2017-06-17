@@ -104,7 +104,7 @@ public:
         double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
-        for (unsigned int i=0; i<bcdisp.size(); ++i){
+        for (unsigned int i=9; i<10; ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=bcdisp[i];
             int error = newton->Solve_with_Aztec(false);
