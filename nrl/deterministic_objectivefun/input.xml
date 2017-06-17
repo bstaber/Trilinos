@@ -24,7 +24,7 @@
       <Parameter name="Type"               type="string" value="Conjugate Gradients" />
       <Parameter name="Absolute Tolerance" type="double" value="1.e-4"               />
       <Parameter name="Relative Tolerance" type="double" value="1.e-2"               />
-      <Parameter name="Iteration Limit"    type="int"    value="1000"                 />
+      <Parameter name="Iteration Limit"    type="int"    value="1000"                />
     </ParameterList>
   </ParameterList>
 
