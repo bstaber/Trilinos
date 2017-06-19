@@ -94,7 +94,7 @@ public:
         newton->Initialization();
         for (unsigned int i=9; i<10; ++i){
             newton->setParameters(_paramList);
-            newton->bc_disp=bcdisp[i];
+            newton->bc_disp=data_bc[i];
             int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
