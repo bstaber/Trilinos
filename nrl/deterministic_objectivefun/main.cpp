@@ -9,6 +9,9 @@
 #include "Newton_Raphsonpp.hpp"
 #include "objectiveFunction.hpp"
 
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real_distribution.hpp>
+
 int main(int argc, char *argv[]){
     
     std::string    xmlInFileName = "";
@@ -93,12 +96,17 @@ int main(int argc, char *argv[]){
      (*x_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
      (*x_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
     
-    std::mt19937 G;
-    std::uniform_real_distribution<double>  m1((*l_rcp)[0],(*u_rcp)[0]);
-    std::uniform_real_distribution<double>  m2((*l_rcp)[1],(*u_rcp)[1]);
-    std::uniform_real_distribution<double>  beta3((*l_rcp)[2],(*u_rcp)[2]);
-    std::uniform_real_distribution<double>  beta4((*l_rcp)[3],(*u_rcp)[3]);
-    std::uniform_real_distribution<double>  beta5((*l_rcp)[4],(*u_rcp)[4]);
+    boost::random::mt19937 rng;
+    boost::random::uniform_real_distribution<> m1((*l_rcp)[0],(*u_rcp)[0]);
+    boost::random::uniform_real_distribution<> m2((*l_rcp)[1],(*u_rcp)[1]);
+    boost::random::uniform_real_distribution<> beta3((*l_rcp)[2],(*u_rcp)[2]);
+    boost::random::uniform_real_distribution<> beta4((*l_rcp)[3],(*u_rcp)[3]);
+    boost::random::uniform_real_distribution<> beta5((*l_rcp)[4],(*u_rcp)[4]);
+    (*x_rcp)[0] = m1(rng);
+    (*x_rcp)[1] = m2(rng);
+    (*x_rcp)[2] = beta3(rng);
+    (*x_rcp)[3] = beta4(rng);
+    (*x_rcp)[4] = beta5(rng);
     ROL::StdVector<double> x(x_rcp);
 
     algo->run(x, *obj, icon, printHeader, std::cout);
