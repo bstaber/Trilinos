@@ -92,7 +92,7 @@ int main(int argc, char *argv[]){
     }
     
     boost::random::mt19937 rng;
-    for (unsigned int nmc=0; nmc<100; ++nmc){
+    for (unsigned int nmc=0; nmc<1000; ++nmc){
         
         Teuchos::RCP<ROL::Algorithm<double> > algo =
         Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,false));
