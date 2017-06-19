@@ -91,6 +91,7 @@ int main(int argc, char *argv[]){
         std::cout << std::setw(5) << "nmc" << std::setw(20) << "value" << std::setw(20) << "m1" << std::setw(20) << "m2" << std::setw(20) << "beta3" << std::setw(20) << "beta4" << std::setw(20) << "beta5" << "\n";
     }
     
+    boost::random::mt19937 rng;
     for (unsigned int nmc=0; nmc<100; ++nmc){
         
         Teuchos::RCP<ROL::Algorithm<double> > algo =
@@ -103,7 +104,6 @@ int main(int argc, char *argv[]){
      (*x_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
      (*x_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
     
-        boost::random::mt19937 rng;
         boost::random::uniform_real_distribution<> m1((*l_rcp)[0],(*u_rcp)[0]);
         boost::random::uniform_real_distribution<> m2((*l_rcp)[1],(*u_rcp)[1]);
         boost::random::uniform_real_distribution<> beta3((*l_rcp)[2],(*u_rcp)[2]);
