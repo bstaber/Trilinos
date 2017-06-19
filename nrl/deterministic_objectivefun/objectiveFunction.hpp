@@ -89,19 +89,6 @@ public:
         interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);
         
-        std::vector<double> bcdisp(10);
-        std::vector<int> load_index(10);
-        bcdisp[0] = 0.00033234/1000.0;  load_index[0] = 55-1;
-        bcdisp[1] = 0.018369/1000.0;    load_index[1] = 93-1;
-        bcdisp[2] = 0.038198/1000.0;    load_index[2] = 131-1;
-        bcdisp[3] = 0.060977/1000.0;    load_index[3] = 169-1;
-        bcdisp[4] = 0.073356/1000.0;    load_index[4] = 207-1;
-        bcdisp[5] = 0.092648/1000.0;    load_index[5] = 245-1;
-        bcdisp[6] = 0.11062/1000.0;     load_index[6] = 283-1;
-        bcdisp[7] = 0.12838/1000.0;     load_index[7] = 321-1;
-        bcdisp[8] = 0.14934/1000.0;     load_index[8] = 359-1;
-        bcdisp[9] = 0.15718/1000.0;     load_index[9] = 398-1;
-        
         double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
@@ -116,8 +103,8 @@ public:
             compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
-                partialVal += (exx_comp(j)-my_exx[load_index[i]+j*nloads])*(exx_comp(j)-my_exx[load_index[i]+j*nloads]) + (eyy_comp(j)-my_eyy[load_index[i]+j*nloads])*(eyy_comp(j)-my_eyy[load_index[i]+j*nloads]) + (exy_comp(j)-my_exy[load_index[i]+j*nloads])*(exy_comp(j)-my_exy[load_index[i]+j*nloads]);
-                partialRef += my_exx[load_index[i]+j*nloads]*my_exx[load_index[i]+j*nloads] + my_eyy[load_index[i]+j*nloads]*my_eyy[load_index[i]+j*nloads] + my_exy[load_index[i]+j*nloads]*my_exy[load_index[i]+j*nloads];
+                partialVal += (exx_comp(j)-my_exx[[i]+j*nloads])*(exx_comp(j)-my_exx[[i]+j*nloads]) + (eyy_comp(j)-my_eyy[[i]+j*nloads])*(eyy_comp(j)-my_eyy[[i]+j*nloads]) + (exy_comp(j)-my_exy[[i]+j*nloads])*(exy_comp(j)-my_exy[[i]+j*nloads]);
+                partialRef += my_exx[[i]+j*nloads]*my_exx[[i]+j*nloads] + my_eyy[[i]+j*nloads]*my_eyy[[i]+j*nloads] + my_exy[[i]+j*nloads]*my_exy[[i]+j*nloads];
             }
         }
         
