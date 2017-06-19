@@ -41,6 +41,7 @@ private:
     std::vector<double> my_exx;
     std::vector<double> my_eyy;
     std::vector<double> my_exy;
+    std::vector<double> data_bc;
     
 public:
         
@@ -153,13 +154,14 @@ public:
     void import_exp_def(std::string & filename, std::vector<double> & data_exx, std::vector<double> & data_eyy, std::vector<double> & data_exy){
         
         int ndata, nload;
-        double deformation;
-        std::ifstream file1, file2, file3;
+        double deformation, bc;
+        std::ifstream file1, file2, file3, file4;
         
         file1.open(filename+"_exx.txt");
         file2.open(filename+"_eyy.txt");
         file3.open(filename+"_exy.txt");
-        if (file1.is_open() && file2.is_open() && file3.is_open()){
+        file4.open(filename+"_bc.txt");
+        if (file1.is_open() && file2.is_open() && file3.is_open() && file4.is_open()){
             file1 >> ndata; file1 >> nload;
             file2 >> ndata; file2 >> nload;
             file3 >> ndata; file3 >> nload;
@@ -171,6 +173,8 @@ public:
                     data_eyy.push_back(deformation);
                     file3 >> deformation;
                     data_exy.push_back(deformation);
+                    file4 >> bc;
+                    data_bc.push_back(bc);
                 }
             }
             file1.close();
