@@ -81,7 +81,7 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<ROL::Vector<double>> up = Teuchos::rcp( new ROL::StdVector<double>(u_rcp) );
     
     (*l_rcp)[0] = 1.e-3; (*l_rcp)[1] = 1.e-3; (*l_rcp)[2] = -1.0/2.0; (*l_rcp)[3] = 1.e-3; (*l_rcp)[4] = 1.e-3;
-    (*u_rcp)[0] = 1.e4; (*u_rcp)[1] = 1.e4; (*u_rcp)[2] = 1.e1; (*u_rcp)[3] = 1.e1; (*u_rcp)[4] = 1.e1;
+    (*u_rcp)[0] = 1.e8; (*u_rcp)[1] = 1.e8; (*u_rcp)[2] = 1.e1; (*u_rcp)[3] = 1.e1; (*u_rcp)[4] = 1.e1;
     
     ROL::BoundConstraint<double> icon(lo,up);
     
