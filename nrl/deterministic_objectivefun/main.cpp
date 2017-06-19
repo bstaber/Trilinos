@@ -116,7 +116,8 @@ int main(int argc, char *argv[]){
         ROL::StdVector<double> x(x_rcp);
 
         //algo->run(x, *obj, icon, printHeader, std::cout);
-        obj->value(x,1e-6);
+        double tol = 1e-6;
+        obj->value(x,tol);
     
         if (Comm.MyPID()==0){
             std::cout << std::setw(5) << nmc << std::setw(20) << value;
