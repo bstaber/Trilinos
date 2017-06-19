@@ -98,7 +98,7 @@ int main(int argc, char *argv[]){
     std::uniform_real_distribution<double>  m2((*l_rcp)[1],(*u_rcp)[1]);
     std::uniform_real_distribution<double>  beta3((*l_rcp)[2],(*u_rcp)[2]);
     std::uniform_real_distribution<double>  beta4((*l_rcp)[3],(*u_rcp)[3]);
-    std::uniform_real_distribution<double>  beta4((*l_rcp)[4],(*u_rcp)[4]);
+    std::uniform_real_distribution<double>  beta5((*l_rcp)[4],(*u_rcp)[4]);
     ROL::StdVector<double> x(x_rcp);
 
     algo->run(x, *obj, icon, printHeader, std::cout);
