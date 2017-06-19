@@ -204,7 +204,7 @@ public:
                     y(inode) = interface->Mesh->nodes_coord[3*node+1];
                     z(inode) = interface->Mesh->nodes_coord[3*node+2];
                 }
-                if (z(0)==testz && testx>0.0 && testx<50.0/1000.0 && testy>0.0 && testy<25.0/1000.0){
+                if (z(0)==testz && testx>=0.0 && testx=<50.0/1000.0 && testy>=0.0 && testy=<25.0/1000.0){
                     result = pnpoly(nvert,x,y,testx,testy);
                 }
                 if (result==1){
