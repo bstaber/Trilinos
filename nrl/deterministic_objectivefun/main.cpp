@@ -117,7 +117,7 @@ int main(int argc, char *argv[]){
 
         //algo->run(x, *obj, icon, printHeader, std::cout);
         double tol = 1e-6;
-        obj->value(x,tol);
+        double value = obj->value(x,tol);
     
         if (Comm.MyPID()==0){
             std::cout << std::setw(5) << nmc << std::setw(20) << value;
