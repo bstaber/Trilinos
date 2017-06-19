@@ -74,9 +74,6 @@ int main(int argc, char *argv[]){
     else{
         printHeader = false;
     }
-    Teuchos::RCP<ROL::Algorithm<double> > algo =
-    Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,false));
-    
     Teuchos::RCP<std::vector<double>> l_rcp = Teuchos::rcp( new std::vector<double>(5) );
     Teuchos::RCP<std::vector<double>> u_rcp = Teuchos::rcp( new std::vector<double>(5) );
     
@@ -88,8 +85,10 @@ int main(int argc, char *argv[]){
     
     ROL::BoundConstraint<double> icon(lo,up);
     
-    Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
+    Teuchos::RCP<ROL::Algorithm<double> > algo =
+    Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,false));
     
+    Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
     /*(*x_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
      (*x_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
      (*x_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
