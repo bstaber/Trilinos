@@ -85,6 +85,7 @@ int main(int argc, char *argv[]){
     
     ROL::BoundConstraint<double> icon(lo,up);
     
+    Comm.Barrier();
     if (Comm.MyPID()==0){
         std::cout << "\n";
         std::cout << std::setw(5) << "nmc" << std::setw(20) << "value" << std::setw(20) << "m1" << std::setw(20) << "m2" << std::setw(20) << "beta3" << std::setw(20) << "beta4" << std::setw(20) << "beta5" << "\n";
