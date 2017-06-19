@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
     
     Teuchos::RCP<objectiveFunction<double>> obj = Teuchos::rcp(new objectiveFunction<double>(Comm,*paramList));
     
-    Teuchos::RCP<Teuchos::ParameterList> parlist = Teuchos::rcp( new Teuchos::ParameterList() );
+    /*Teuchos::RCP<Teuchos::ParameterList> parlist = Teuchos::rcp( new Teuchos::ParameterList() );
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*parlist));
     }
@@ -98,11 +98,11 @@ int main(int argc, char *argv[]){
         Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,false));
         
         Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
-    /*(*x_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
-     (*x_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
-     (*x_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
-     (*x_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
-     (*x_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
+     //(*x_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
+     //(*x_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
+     //(*x_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
+     //(*x_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
+     //(*x_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
     
         boost::random::uniform_real_distribution<> m1((*l_rcp)[0],(*u_rcp)[0]);
         boost::random::uniform_real_distribution<> m2((*l_rcp)[1],(*u_rcp)[1]);
@@ -127,7 +127,7 @@ int main(int argc, char *argv[]){
             }
             std::cout << "\n";
         }
-    }
+    }*/
     
 #ifdef HAVE_MPI
     MPI_Finalize();
