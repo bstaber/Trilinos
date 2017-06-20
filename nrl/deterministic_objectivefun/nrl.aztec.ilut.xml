@@ -8,7 +8,7 @@
     
     <ParameterList name="Data">
         <Parameter name="path_to_pts" type="string" value="/home/s/staber/Trilinos_results/nrl/data/xyz.txt"/>
-        <Parameter name="path_to_def" type="string" value="/home/s/staber/Trilinos/nrl/data/"/>
+        <Parameter name="path_to_def" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>
     </ParameterList>
     
     <ParameterList name="Linear Solver Builder">
