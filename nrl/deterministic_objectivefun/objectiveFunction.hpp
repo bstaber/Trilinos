@@ -92,10 +92,10 @@ public:
         double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
-        for (unsigned int i=data_bc.size(); i<=data_bc.size(); ++i){
+        for (unsigned int i=data_bc.size()-1; i<data_bc.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
-            std::cout << "size_bc = " << data_bc.size() << "--and-- bc_disp = " << newton->bc_disp << "\n";
+            std::cout << "data_bc.size() = " << data_bc.size() << "--and-- bc_disp = " << newton->bc_disp << "\n";
             int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
@@ -170,7 +170,6 @@ public:
                     data_exy.push_back(deformation);
                 }
                 file4 >> bc;
-                std::cout << bc << "\n";
                 data_bc.push_back(bc);
             }
             file1.close();
