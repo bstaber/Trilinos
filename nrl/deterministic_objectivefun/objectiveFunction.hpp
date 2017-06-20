@@ -97,10 +97,17 @@ public:
             newton->bc_disp=data_bc[i];
             int error = newton->Solve_with_Aztec(false);
             
-            Epetra_SerialDenseVector exx_comp(exp_cells.size());
-            Epetra_SerialDenseVector eyy_comp(exp_cells.size());
-            Epetra_SerialDenseVector exy_comp(exp_cells.size());
-            compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
+            if (!error){
+                Epetra_SerialDenseVector exx_comp(exp_cells.size());
+                Epetra_SerialDenseVector eyy_comp(exp_cells.size());
+                Epetra_SerialDenseVector exy_comp(exp_cells.size());
+                compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
+            }
+            else{
+                if (comm->MyPID()==0){
+                    std::cout << "Newton failed.\n";
+                }
+            }
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
                 partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]);
