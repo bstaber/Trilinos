@@ -167,9 +167,10 @@ public:
             file1.close();
             file2.close();
             file3.close();
+            file4.close();
         }
         else{
-            std::cout << "Couldn't open something\n";
+            std::cout << "Couldn't open something with path " << filename << "\n";
         }
         
     }
