@@ -122,7 +122,7 @@ public:
         comm->SumAll(&partialVal,&val,1);
         
         delete [] MyVals;
-        return val/ref;
+        return val; //ref;
     }
     
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
