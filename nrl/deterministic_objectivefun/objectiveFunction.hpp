@@ -122,7 +122,7 @@ public:
         comm->SumAll(&partialVal,&val,1);
         
         delete [] MyVals;
-        return val/double(exp_cells.size()); //ref;
+        return val/(double(exp_cells.size())*double(exp_cells.size())); //ref;
     }
     
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
