@@ -92,7 +92,7 @@ public:
         double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
-        for (unsigned int i=9; i<10; ++i){
+        for (unsigned int i=data_bc.size(); i<=data_bc.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
             int error = newton->Solve_with_Aztec(false);
