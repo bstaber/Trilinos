@@ -119,6 +119,7 @@ public:
         Real val = 0.0;
         //Real ref = 0.0;
         //comm->SumAll(&partialRef,&ref,1);
+        std::cout << "val = " << partialVal << "\n";
         comm->SumAll(&partialVal,&val,1);
         
         delete [] MyVals;
