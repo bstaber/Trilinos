@@ -121,7 +121,7 @@ int main(int argc, char *argv[]){
         double value = obj->value(x,tol);
     
         if (Comm.MyPID()==0){
-            std::cout << std::setw(5) << nmc << std::setw(20) << value;
+            std::cout << std::setw(5) << nmc << std::setw(20) << std::scientific << value;
             for (unsigned int j=0; j<5; ++j){
                 std::cout << std::setw(20) << (*x_rcp)[j];
             }
