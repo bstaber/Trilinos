@@ -111,7 +111,7 @@ public:
             }
             
             if (comm->MyPID()==0){
-                std::cout << "x[100] = " << *newton->x[100] << "\n";
+                std::cout << "x[100] = " << (*newton->x)[100] << "\n";
             }
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
