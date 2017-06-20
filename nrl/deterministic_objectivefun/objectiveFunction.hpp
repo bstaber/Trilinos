@@ -120,7 +120,7 @@ public:
         Real ref = 0.0;
         comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
-        val = val/ref;
+        //val = val/ref;
         
         delete [] MyVals;
         return val;
