@@ -95,7 +95,7 @@ public:
         for (unsigned int i=data_bc.size(); i<=data_bc.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
-            std::cout << "bc_disp = " << newton->bc_disp << "\n";
+            std::cout << "size_bc = " << data_bc.size() << "--and-- bc_disp = " << newton->bc_disp << "\n";
             int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
@@ -110,7 +110,7 @@ public:
                     std::cout << "Newton failed.\n";
                 }
             }
-                        
+            
             for (unsigned int j=0; j<exp_cells.size(); ++j){
                 partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]);
                 partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads];
