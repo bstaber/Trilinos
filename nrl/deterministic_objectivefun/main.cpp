@@ -80,8 +80,8 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<ROL::Vector<double>> lo = Teuchos::rcp( new ROL::StdVector<double>(l_rcp) );
     Teuchos::RCP<ROL::Vector<double>> up = Teuchos::rcp( new ROL::StdVector<double>(u_rcp) );
     
-    (*l_rcp)[0] = 1.e4; (*l_rcp)[1] = 1.e4; (*l_rcp)[2] = -1.0/2.0; (*l_rcp)[3] = 1.e-3; (*l_rcp)[4] = 1.e-3;
-    (*u_rcp)[0] = 1.e5; (*u_rcp)[1] = 1.e5; (*u_rcp)[2] = 1.e1; (*u_rcp)[3] = 1.e1; (*u_rcp)[4] = 1.e1;
+    (*l_rcp)[0] = 1.0e4; (*l_rcp)[1] = 1.0e4; (*l_rcp)[2] = -1.0/2.0; (*l_rcp)[3] = 1.0e-3; (*l_rcp)[4] = 1.0e-3;
+    (*u_rcp)[0] = 1.0e5; (*u_rcp)[1] = 1.0e5; (*u_rcp)[2] = 1.0e1; (*u_rcp)[3] = 1.0e1; (*u_rcp)[4] = 1.0e1;
     
     ROL::BoundConstraint<double> icon(lo,up);
     
@@ -92,11 +92,11 @@ int main(int argc, char *argv[]){
     }
     
     boost::random::mt19937 rng(1);
-    boost::random::uniform_real_distribution<> m1((*l_rcp)[0],(*u_rcp)[0]);
-    boost::random::uniform_real_distribution<> m2((*l_rcp)[1],(*u_rcp)[1]);
-    boost::random::uniform_real_distribution<> beta3((*l_rcp)[2],(*u_rcp)[2]);
-    boost::random::uniform_real_distribution<> beta4((*l_rcp)[3],(*u_rcp)[3]);
-    boost::random::uniform_real_distribution<> beta5((*l_rcp)[4],(*u_rcp)[4]);
+    boost::random::uniform_real_distribution<double> m1((*l_rcp)[0],(*u_rcp)[0]);
+    boost::random::uniform_real_distribution<double> m2((*l_rcp)[1],(*u_rcp)[1]);
+    boost::random::uniform_real_distribution<double> beta3((*l_rcp)[2],(*u_rcp)[2]);
+    boost::random::uniform_real_distribution<double> beta4((*l_rcp)[3],(*u_rcp)[3]);
+    boost::random::uniform_real_distribution<double> beta5((*l_rcp)[4],(*u_rcp)[4]);
     for (unsigned int nmc=0; nmc<1000; ++nmc){
         
         Teuchos::RCP<ROL::Algorithm<double> > algo =
