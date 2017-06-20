@@ -92,10 +92,9 @@ public:
         double partialVal = 0.0;
         newton->Initialization();
         int nconload = 0;
-        for (unsigned int i=0; i<data_bc.size(); i+50){
+        for (unsigned int i=0; i<data_bc.size(); i=i+50){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
-            std::cout << "i = " << i << "\n";
             int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
