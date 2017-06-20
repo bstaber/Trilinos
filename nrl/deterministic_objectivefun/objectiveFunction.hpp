@@ -170,6 +170,7 @@ public:
                     data_exy.push_back(deformation);
                 }
                 file4 >> bc;
+                std::cout << bc << "\n";
                 data_bc.push_back(bc);
             }
             file1.close();
