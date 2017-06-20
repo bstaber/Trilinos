@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
         std::cout << std::setw(5) << "nmc" << std::setw(20) << "value" << std::setw(20) << "m1" << std::setw(20) << "m2" << std::setw(20) << "beta3" << std::setw(20) << "beta4" << std::setw(20) << "beta5" << "\n";
     }
     
-    boost::random::mt19937 rng;
+    boost::random::mt19937 rng(std::time(0));
     for (unsigned int nmc=0; nmc<1000; ++nmc){
         
         Teuchos::RCP<ROL::Algorithm<double> > algo =
