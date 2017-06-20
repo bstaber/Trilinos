@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
         std::cout << std::setw(5) << "nmc" << std::setw(20) << "value" << std::setw(20) << "m1" << std::setw(20) << "m2" << std::setw(20) << "beta3" << std::setw(20) << "beta4" << std::setw(20) << "beta5" << "\n";
     }
     
-    if (comm->MyPID()==0){
+    if (Comm.MyPID()==0){
         std::cout << "std::time(0) = " << std::time(0) << "\n\n";
     }
     boost::random::mt19937 rng(std::time(0));
