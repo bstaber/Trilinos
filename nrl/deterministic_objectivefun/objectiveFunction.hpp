@@ -91,6 +91,7 @@ public:
         
         double partialVal = 0.0;
         newton->Initialization();
+        int nconload = 0;
         for (unsigned int i=0; i<data_bc.size(); i+10){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
@@ -113,13 +114,14 @@ public:
                 partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads])/(my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads]);
                 //partialRef += ( my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads] );
             }
+            nconload++;
         }
         
         Real val = 0.0;
         comm->SumAll(&partialVal,&val,1);
         
         delete [] MyVals;
-        return val/(double(npoints)*double(npoints)); //ref;
+        return val/(double(npoints)*double(npoints)*double(nconload)*double(nconload)); //ref;
     }
     
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
