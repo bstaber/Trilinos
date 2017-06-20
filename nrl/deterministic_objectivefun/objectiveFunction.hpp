@@ -95,7 +95,6 @@ public:
         for (unsigned int i=data_bc.size(); i<=data_bc.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
-            std::cout << data_bc[i] << "\n";
             int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
@@ -168,9 +167,9 @@ public:
                     data_eyy.push_back(deformation);
                     file3 >> deformation;
                     data_exy.push_back(deformation);
-                    file4 >> bc;
-                    data_bc.push_back(bc);
                 }
+                file4 >> bc;
+                data_bc.push_back(bc);
             }
             file1.close();
             file2.close();
