@@ -89,7 +89,6 @@ public:
         interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);
         
-        //double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
         for (unsigned int i=data_bc.size()-1; i<data_bc.size(); ++i){
@@ -117,13 +116,13 @@ public:
         }
         
         Real val = 0.0;
-        //Real ref = 0.0;
-        //comm->SumAll(&partialRef,&ref,1);
-        std::cout << "val = " << partialVal << "\n";
+        Real ref = 0.0;
+        Real partialRef = exp_cells.size();
+        comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
         
         delete [] MyVals;
-        return val/(double(exp_cells.size())*double(exp_cells.size())); //ref;
+        return val/(ref*ref); //ref;
     }
     
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
