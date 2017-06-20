@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
         std::cout << std::setw(5) << "nmc" << std::setw(20) << "value" << std::setw(20) << "m1" << std::setw(20) << "m2" << std::setw(20) << "beta3" << std::setw(20) << "beta4" << std::setw(20) << "beta5" << "\n";
     }
     
-    boost::random::mt19937 rng(1);
+    boost::random::mt19937 rng(0);
     boost::random::uniform_real_distribution<double> m1((*l_rcp)[0],(*u_rcp)[0]);
     boost::random::uniform_real_distribution<double> m2((*l_rcp)[1],(*u_rcp)[1]);
     boost::random::uniform_real_distribution<double> beta3((*l_rcp)[2],(*u_rcp)[2]);
