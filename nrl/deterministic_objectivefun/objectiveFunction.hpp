@@ -95,6 +95,7 @@ public:
         for (unsigned int i=data_bc.size(); i<=data_bc.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
+            std::cout << data_bc[i] << "\n";
             int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
@@ -120,8 +121,6 @@ public:
         Real ref = 0.0;
         comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
-        comm->Barrier();
-        std::cout << val << std::setw(20) << ref << "\n";
         val = val/ref;
         
         delete [] MyVals;
