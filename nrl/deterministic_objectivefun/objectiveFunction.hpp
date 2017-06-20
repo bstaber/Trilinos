@@ -95,7 +95,7 @@ public:
         for (unsigned int i=data_bc.size(); i<=data_bc.size(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
-            int error = newton->Solve_with_Aztec(false);
+            int error = newton->Solve_with_Aztec(true);
             
             Epetra_SerialDenseVector exx_comp(exp_cells.size());
             Epetra_SerialDenseVector eyy_comp(exp_cells.size());
