@@ -91,7 +91,7 @@ public:
         
         double partialVal = 0.0;
         newton->Initialization();
-        for (unsigned int i=data_bc.size()-1; i<data_bc.size(); ++i){
+        for (unsigned int i=0; i<data_bc.size(); i+10){
             newton->setParameters(_paramList);
             newton->bc_disp=data_bc[i];
             int error = newton->Solve_with_Aztec(false);
