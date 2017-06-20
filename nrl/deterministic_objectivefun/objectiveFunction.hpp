@@ -144,10 +144,10 @@ public:
         double deformation, bc;
         std::ifstream file1, file2, file3, file4;
         
-        file1.open(filename+"_exx.txt");
-        file2.open(filename+"_eyy.txt");
-        file3.open(filename+"_exy.txt");
-        file4.open(filename+"_bc.txt");
+        file1.open(filename+"exx_id1.txt");
+        file2.open(filename+"eyy_id1.txt");
+        file3.open(filename+"exy_id1.txt");
+        file4.open(filename+"bc_id1.txt");
         if (file1.is_open() && file2.is_open() && file3.is_open() && file4.is_open()){
             file1 >> ndata; file1 >> nload;
             file2 >> ndata; file2 >> nload;
