@@ -116,13 +116,10 @@ public:
         }
         
         Real val = 0.0;
-        Real ref = 0.0;
-        Real partialRef = exp_cells.size();
-        comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
         
         delete [] MyVals;
-        return val/(ref*ref); //ref;
+        return val/(double(npoints)*double(npoints)); //ref;
     }
     
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
