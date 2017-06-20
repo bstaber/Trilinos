@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
     
     Teuchos::RCP<objectiveFunction<double>> obj = Teuchos::rcp(new objectiveFunction<double>(Comm,*paramList));
     
-    /*Teuchos::RCP<Teuchos::ParameterList> parlist = Teuchos::rcp( new Teuchos::ParameterList() );
+    Teuchos::RCP<Teuchos::ParameterList> parlist = Teuchos::rcp( new Teuchos::ParameterList() );
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*parlist));
     }
@@ -127,7 +127,7 @@ int main(int argc, char *argv[]){
             }
             std::cout << "\n";
         }
-    }*/
+    }
     
 #ifdef HAVE_MPI
     MPI_Finalize();
