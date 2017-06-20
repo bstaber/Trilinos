@@ -97,10 +97,11 @@ public:
             newton->bc_disp=data_bc[i];
             int error = newton->Solve_with_Aztec(false);
             
+            Epetra_SerialDenseVector exx_comp(exp_cells.size());
+            Epetra_SerialDenseVector eyy_comp(exp_cells.size());
+            Epetra_SerialDenseVector exy_comp(exp_cells.size());
+            
             if (!error){
-                Epetra_SerialDenseVector exx_comp(exp_cells.size());
-                Epetra_SerialDenseVector eyy_comp(exp_cells.size());
-                Epetra_SerialDenseVector exy_comp(exp_cells.size());
                 compute_green_lagrange(*newton->x,exx_comp,eyy_comp,exy_comp);
             }
             else{
