@@ -89,6 +89,7 @@ public:
         interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);
         
+        double partialRef = 0.0;
         double partialVal = 0.0;
         newton->Initialization();
         for (unsigned int i=data_bc.size()-1; i<data_bc.size(); ++i){
@@ -110,15 +111,18 @@ public:
             }
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
-                partialVal += ( (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]) );
+                partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]);
+                partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads];
             }
         }
         
         Real val = 0.0;
+        Real ref = 0.0;
+        comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
         
         delete [] MyVals;
-        return val;
+        return val/ref;
     }
     
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
