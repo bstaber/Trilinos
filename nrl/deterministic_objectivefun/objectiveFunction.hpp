@@ -120,7 +120,8 @@ public:
         Real ref = 0.0;
         comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
-        
+        comm->Barrier();
+        std::cout << val << std::setw(20) << ref << "\n";
         val = val/ref;
         
         delete [] MyVals;
