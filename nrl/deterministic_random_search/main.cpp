@@ -17,6 +17,8 @@
 Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & x,
                                       boost::random::normal_distribution<double> & w,
                                       boost::random::mt19937 & rng);
+void printHeader(Epetra_Comm & Comm);
+void printStatus(int iter, double value, Epetra_SerialDenseVector & x);
 
 int main(int argc, char *argv[]){
     
@@ -77,6 +79,9 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseVector v(5);
     Epetra_SerialDenseVector x(5);
     
+    printHeader();
+    int iter = 1;
+    
     if (Comm.MyPID()==0){
         for (unsigned int j=0; j<5; ++j){
             u(j) = rand(rng);
@@ -88,25 +93,34 @@ int main(int argc, char *argv[]){
     double value = obj->value(x);
     
     while(value>1e-6){
-        if (Comm.MyPID()==0){
-            v = u;
-            int error = 1;
-            while (error){
-                error = 0;
-                u = randhypersph(v,randn,rng);
-                for (unsigned int j=0; j<5; ++j){
-                    x(j) = (ub(j)-lb(j))*u(j)+lb(j);
-                    if (x(j)<lb(j)||x(j)>ub(j)){
-                        error = 1;
-                        break;
+        printStatus(iter,value,x);
+        double svalue = value;
+        int flag = 1;
+        while(flag){
+            flag = 0;
+            if (Comm.MyPID()==0){
+                v = u;
+                int error = 1;
+                while (error){
+                    error = 0;
+                    u = randhypersph(v,randn,rng);
+                    for (unsigned int j=0; j<5; ++j){
+                        x(j) = (ub(j)-lb(j))*u(j)+lb(j);
+                        if (x(j)<lb(j)||x(j)>ub(j)){
+                            error = 1;
+                            break;
+                            }
                     }
                 }
             }
+            Comm.Broadcast(x.Values(),x.Length(),0);
+            value = obj->value(x);
         }
-        Comm.Broadcast(x.Values(),x.Length(),0);
-        value = obj->value(x);
+        if (value>svalue){
+            flag = 1;
+        }
     }
-    
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
@@ -135,4 +149,21 @@ Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & v,
     }
     
     return u;
+}
+
+void printHeader(Epetra_Comm & Comm){
+    if (Comm.MyPID()==0){
+        std::cout << "Direct Random Search Algorithm\n";
+        std::cout << std::setw(10) << "#eval" << std::setw(20) << "value" << std::setw(20) << "x(0)" << std::setw(20) << "x(1)" << std::setw(20) << "x(2)" << std::setw(20) << "x(3)" << std::setw(20) << "x(4)" << std::setw(20) << "x(5)" << "\n";
+    }
+}
+
+void printStatus(int iter, double value, Epetra_SerialDenseVector & x){
+    if (Comm.MyPID()==0){
+        std::cout << std::setw(10) << iter << std::setw(20) << std::scientific << value;
+        for (unsigned int j=0; j<x.Length(); ++j){
+            std::cout << std::setw(20) << x(j);
+        }
+        std::cout << "\n";
+    }
 }
