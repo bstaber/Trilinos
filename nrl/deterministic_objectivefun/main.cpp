@@ -80,8 +80,16 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<ROL::Vector<double>> lo = Teuchos::rcp( new ROL::StdVector<double>(l_rcp) );
     Teuchos::RCP<ROL::Vector<double>> up = Teuchos::rcp( new ROL::StdVector<double>(u_rcp) );
     
-    (*l_rcp)[0] = 1.0e2; (*l_rcp)[1] = 1.0e2; (*l_rcp)[2] = -1.0/2.0; (*l_rcp)[3] = 1.0e-3; (*l_rcp)[4] = 1.0e-3;
-    (*u_rcp)[0] = 1.0e3; (*u_rcp)[1] = 1.0e3; (*u_rcp)[2] = 5.0; (*u_rcp)[3] = 5.0; (*u_rcp)[4] = 5.0;
+    (*l_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_inf");
+    (*u_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_sup");
+    (*l_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_inf");
+    (*u_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_sup");
+    (*l_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_inf");
+    (*u_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_sup");
+    (*l_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_inf");
+    (*u_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_sup");
+    (*l_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_inf");
+    (*u_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_sup");
     
     ROL::BoundConstraint<double> icon(lo,up);
     
