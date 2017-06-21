@@ -65,7 +65,7 @@
         <Parameter name="precond" type="string" value="dom_decomp"/>
         <Parameter name="subdomain" type="string" value="icc"/>
         <Parameter name="overlap" type="int" value="0"/>
-        <!--Parameter name="type_overlap" type="string" value="symmetric"/-->
+        <Parameter name="type_overlap" type="string" value="symmetric"/>
         <!--Parameter name="pre_calc" type="string" value="recalc"/-->
         <!--Parameter name="ilut_fill" type="double" value="3.0"/>
         <Parameter name="athresh" type="double" value="0.0"/>
