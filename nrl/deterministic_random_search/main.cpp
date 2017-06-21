@@ -115,6 +115,7 @@ int main(int argc, char *argv[]){
             }
             Comm.Broadcast(x.Values(),x.Length(),0);
             value = obj->value(x);
+            iter++;
         }
         if (value>svalue){
             flag = 1;
@@ -155,7 +156,7 @@ void printHeader(Epetra_Comm & comm){
     comm.Barrier();
     if (comm.MyPID()==0){
         std::cout << "Direct Random Search Algorithm\n";
-        std::cout << std::setw(10) << "#eval" << std::setw(20) << "value" << std::setw(20) << "x(0)" << std::setw(20) << "x(1)" << std::setw(20) << "x(2)" << std::setw(20) << "x(3)" << std::setw(20) << "x(4)" << std::setw(20) << "x(5)" << "\n";
+        std::cout << std::setw(10) << "#eval" << std::setw(20) << "value" << std::setw(20) << "x(0)" << std::setw(20) << "x(1)" << std::setw(20) << "x(2)" << std::setw(20) << "x(3)" << std::setw(20) << "x(4)\n";
     }
 }
 
