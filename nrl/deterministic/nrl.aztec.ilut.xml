@@ -64,7 +64,7 @@
         <Parameter name="orthog" type="string" value="classical"/>
         <Parameter name="precond" type="string" value="dom_decomp"/>
         <Parameter name="subdomain" type="string" value="icc"/>
-        <Parameter name="overlap" type="int" value="2"/>
+        <!--Parameter name="overlap" type="int" value="2"/-->
         <!--Parameter name="type_overlap" type="string" value="symmetric"/-->
         <Parameter name="pre_calc" type="string" value="recalc"/>
         <Parameter name="ilut_fill" type="double" value="3.0"/>
