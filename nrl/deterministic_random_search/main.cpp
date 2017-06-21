@@ -91,9 +91,9 @@ int main(int argc, char *argv[]){
     
     Comm.Broadcast(x.Values(),x.Length(),0);
     double value = obj->value(x);
+    printStatus(Comm,iter,value,x);
     
     while(value>1e-6){
-        printStatus(Comm,iter,value,x);
         double svalue = value;
         int flag = 1;
         while(flag){
@@ -119,6 +119,9 @@ int main(int argc, char *argv[]){
         }
         if (value>svalue){
             flag = 1;
+        }
+        else{
+            printStatus(Comm,iter,value,x);
         }
     }
 
