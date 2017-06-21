@@ -94,7 +94,7 @@
         <Parameter name="m1_sup" type="double" value="1.0e4"/>
         <Parameter name="m2_inf" type="double" value="1.0e2"/>
         <Parameter name="m2_sup" type="double" value="1.0e4"/>
-        <Parameter name="beta3_inf" type="double" value="-1.0/2.0"/>
+        <Parameter name="beta3_inf" type="double" value="-0.5"/>
         <Parameter name="beta3_sup" type="double" value="4.0"/>
         <Parameter name="beta4_inf" type="double" value="1.0"/>
         <Parameter name="beta4_sup" type="double" value="3.0"/>
