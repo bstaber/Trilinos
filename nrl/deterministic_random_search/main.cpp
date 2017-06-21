@@ -17,8 +17,8 @@
 Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & x,
                                       boost::random::normal_distribution<double> & w,
                                       boost::random::mt19937 & rng);
-void printHeader(Epetra_Comm & Comm);
-void printStatus(int iter, double value, Epetra_SerialDenseVector & x);
+void printHeader(Epetra_Comm & comm);
+void printStatus(Epetra_Comm & comm, int iter, double value, Epetra_SerialDenseVector & x);
 
 int main(int argc, char *argv[]){
     
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseVector v(5);
     Epetra_SerialDenseVector x(5);
     
-    printHeader();
+    printHeader(Comm);
     int iter = 1;
     
     if (Comm.MyPID()==0){
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]){
     double value = obj->value(x);
     
     while(value>1e-6){
-        printStatus(iter,value,x);
+        printStatus(Comm,iter,value,x);
         double svalue = value;
         int flag = 1;
         while(flag){
@@ -151,15 +151,15 @@ Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & v,
     return u;
 }
 
-void printHeader(Epetra_Comm & Comm){
-    if (Comm.MyPID()==0){
+void printHeader(Epetra_Comm & comm){
+    if (comm.MyPID()==0){
         std::cout << "Direct Random Search Algorithm\n";
         std::cout << std::setw(10) << "#eval" << std::setw(20) << "value" << std::setw(20) << "x(0)" << std::setw(20) << "x(1)" << std::setw(20) << "x(2)" << std::setw(20) << "x(3)" << std::setw(20) << "x(4)" << std::setw(20) << "x(5)" << "\n";
     }
 }
 
-void printStatus(int iter, double value, Epetra_SerialDenseVector & x){
-    if (Comm.MyPID()==0){
+void printStatus(Epetra_Comm & comm, int iter, double value, Epetra_SerialDenseVector & x){
+    if (comm.MyPID()==0){
         std::cout << std::setw(10) << iter << std::setw(20) << std::scientific << value;
         for (unsigned int j=0; j<x.Length(); ++j){
             std::cout << std::setw(20) << x(j);
