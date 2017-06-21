@@ -62,7 +62,7 @@ MPI_Init(&argc, &argv);
     bcdisp[6] = 0.11062/1000.0;
     bcdisp[7] = 0.12838/1000.0;
     bcdisp[8] = 0.14934/1000.0;
-    bcdisp[9] = 0.0001571809118641;
+    bcdisp[9] = 2.0*0.0001571809118641;
     
     Newton->Initialization();
     for (unsigned int i=bcdisp.size()-1; i<bcdisp.size(); ++i){
