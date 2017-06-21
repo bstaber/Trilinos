@@ -85,8 +85,7 @@
         <Parameter name="AZ_output" type="string" value="summary"/>
         <Parameter name="AZ_diagnostics" type="int" value="0"/>
         <Parameter name="AZ_reorder" type="int" value="1"/>
-        <Parameter name="graph_fill" type="int" value="4"/>
-        <Parameter name="type_overlap" type="string" value="symmetric"/>
+        <Parameter name="graph_fill" type="int" value="3"/>
     </ParameterList>
     
     <ParameterList name="ModelF">
