@@ -152,6 +152,7 @@ Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & v,
 }
 
 void printHeader(Epetra_Comm & comm){
+    comm.Barrier();
     if (comm.MyPID()==0){
         std::cout << "Direct Random Search Algorithm\n";
         std::cout << std::setw(10) << "#eval" << std::setw(20) << "value" << std::setw(20) << "x(0)" << std::setw(20) << "x(1)" << std::setw(20) << "x(2)" << std::setw(20) << "x(3)" << std::setw(20) << "x(4)" << std::setw(20) << "x(5)" << "\n";
@@ -159,6 +160,7 @@ void printHeader(Epetra_Comm & comm){
 }
 
 void printStatus(Epetra_Comm & comm, int iter, double value, Epetra_SerialDenseVector & x){
+    comm.Barrier();
     if (comm.MyPID()==0){
         std::cout << std::setw(10) << iter << std::setw(20) << std::scientific << value;
         for (unsigned int j=0; j<x.Length(); ++j){
