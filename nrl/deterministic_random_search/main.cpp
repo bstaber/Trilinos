@@ -93,13 +93,16 @@ int main(int argc, char *argv[]){
     double value = obj->value(x);
     printStatus(Comm,iter,value,x);
     
+    double svalue = value;
     while(value>1e-6){
-        double svalue = value;
+        
         int flag = 1;
-        while(flag){
+        v = u;
+        
+        while(value>=svalue){
+            
             flag = 0;
             if (Comm.MyPID()==0){
-                v = u;
                 int error = 1;
                 while (error){
                     error = 0;
@@ -114,15 +117,15 @@ int main(int argc, char *argv[]){
                 }
             }
             Comm.Broadcast(x.Values(),x.Length(),0);
+            
             value = obj->value(x);
             iter++;
+        
         }
-        if (value>svalue){
-            flag = 1;
-        }
-        else{
-            printStatus(Comm,iter,value,x);
-        }
+        
+        printStatus(Comm,iter,value,x);
+        svalue = value;
+        
     }
 
 #ifdef HAVE_MPI
