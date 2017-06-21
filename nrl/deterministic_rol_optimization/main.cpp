@@ -93,11 +93,11 @@ int main(int argc, char *argv[]){
     
     ROL::BoundConstraint<double> icon(lo,up);
     
-    Comm.Barrier();
+    /*Comm.Barrier();
     if (Comm.MyPID()==0){
         std::cout << "\n";
         std::cout << std::setw(5) << "nmc" << std::setw(20) << "value" << std::setw(20) << "m1" << std::setw(20) << "m2" << std::setw(20) << "beta3" << std::setw(20) << "beta4" << std::setw(20) << "beta5" << "\n";
-    }
+    }*/
     
     boost::random::mt19937 rng(0);
     boost::random::uniform_real_distribution<double> m1((*l_rcp)[0],(*u_rcp)[0]);
@@ -105,37 +105,33 @@ int main(int argc, char *argv[]){
     boost::random::uniform_real_distribution<double> beta3((*l_rcp)[2],(*u_rcp)[2]);
     boost::random::uniform_real_distribution<double> beta4((*l_rcp)[3],(*u_rcp)[3]);
     boost::random::uniform_real_distribution<double> beta5((*l_rcp)[4],(*u_rcp)[4]);
-    for (unsigned int nmc=0; nmc<1000; ++nmc){
-        
-        Teuchos::RCP<ROL::Algorithm<double> > algo =
-        Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,false));
-        
-        Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
-     //(*x_rcp)[0] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
-     //(*x_rcp)[1] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
-     //(*x_rcp)[2] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
-     //(*x_rcp)[3] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
-     //(*x_rcp)[4] = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
     
-        (*x_rcp)[0] = m1(rng);
-        (*x_rcp)[1] = m2(rng);
-        (*x_rcp)[2] = beta3(rng);
-        (*x_rcp)[3] = beta4(rng);
-        (*x_rcp)[4] = beta5(rng);
-        ROL::StdVector<double> x(x_rcp);
+    //for (unsigned int nmc=0; nmc<1000; ++nmc){
+        
+    Teuchos::RCP<ROL::Algorithm<double> > algo =
+    Teuchos::rcp(new ROL::Algorithm<double>("Trust Region",*parlist,false));
+    Teuchos::RCP<std::vector<double> > x_rcp = Teuchos::rcp( new std::vector<double> (5, 0.0) );
+    
+    (*x_rcp)[0] = m1(rng);
+    (*x_rcp)[1] = m2(rng);
+    (*x_rcp)[2] = beta3(rng);
+    (*x_rcp)[3] = beta4(rng);
+    (*x_rcp)[4] = beta5(rng);
+    ROL::StdVector<double> x(x_rcp);
 
-        //algo->run(x, *obj, icon, printHeader, std::cout);
-        double tol = 1e-6;
-        double value = obj->value(x,tol);
+    algo->run(x, *obj, icon, printHeader, std::cout);
     
-        if (Comm.MyPID()==0){
+        //double tol = 1e-6;
+        //double value = obj->value(x,tol);
+    
+        /*if (Comm.MyPID()==0){
             std::cout << std::setw(5) << nmc << std::setw(20) << std::scientific << value;
             for (unsigned int j=0; j<5; ++j){
                 std::cout << std::setw(20) << (*x_rcp)[j];
             }
             std::cout << "\n";
         }
-    }
+    }*/
     
 #ifdef HAVE_MPI
     MPI_Finalize();
