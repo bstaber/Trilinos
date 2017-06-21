@@ -99,7 +99,6 @@ int main(int argc, char *argv[]){
         v = u;
         while(value>=svalue){
             
-            flag = 0;
             if (Comm.MyPID()==0){
                 int error = 1;
                 while (error){
