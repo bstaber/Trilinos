@@ -59,7 +59,7 @@
     </ParameterList>
     
     <ParameterList name="Krylov">
-        <!Parameter name="solver" type="string" value="gmres"/>
+        <Parameter name="solver" type="string" value="gmres"/>
         <Parameter name="kspace" type="int" value="100"/>
         <Parameter name="orthog" type="string" value="classical"/>
         <Parameter name="precond" type="string" value="dom_decomp"/>
