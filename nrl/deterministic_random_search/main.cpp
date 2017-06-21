@@ -81,16 +81,18 @@ int main(int argc, char *argv[]){
     
     printHeader(Comm);
     int iter = 1;
+    double value = 1.0;
     
-    if (Comm.MyPID()==0){
-        for (unsigned int j=0; j<5; ++j){
-            u(j) = rand(rng);
-            x(j) = (ub(j)-lb(j))*u(j)+lb(j);
+    while (value>1e-4){
+        if (Comm.MyPID()==0){
+            for (unsigned int j=0; j<5; ++j){
+                u(j) = rand(rng);
+                x(j) = (ub(j)-lb(j))*u(j)+lb(j);
+            }
         }
+        Comm.Broadcast(x.Values(),x.Length(),0);
+        value = obj->value(x);
     }
-    
-    Comm.Broadcast(x.Values(),x.Length(),0);
-    double value = obj->value(x);
     printStatus(Comm,iter,value,x);
     
     double svalue = value;
