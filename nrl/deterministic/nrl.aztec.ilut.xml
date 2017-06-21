@@ -2,8 +2,8 @@
     
     <ParameterList name="Mesh">
         <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh"/>
-        <Parameter name="n_ply" type="int" value="4"/>
-        <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
+        <Parameter name="n_ply" type="int" value="32"/>
+        <Parameter name="nb_phys_groups" type="unsigned int" value="32"/>
     </ParameterList>
     
     <ParameterList name="Linear Solver Builder">
