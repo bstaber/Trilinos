@@ -18,7 +18,7 @@ Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & x,
                                       boost::random::normal_distribution<double> & w,
                                       boost::random::mt19937 & rng);
 void printHeader(Epetra_Comm & comm);
-void printStatus(Epetra_Comm & comm, int iter, double value, Epetra_SerialDenseVector & x);
+void printStatus(Epetra_Comm & comm, int eval, double value, Epetra_SerialDenseVector & x);
 
 int main(int argc, char *argv[]){
     
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseVector x(5);
     
     printHeader(Comm);
-    int iter = 1;
+    int eval = 1;
     double value = 1.0;
     
     while (value>1e-4){
@@ -92,8 +92,9 @@ int main(int argc, char *argv[]){
         }
         Comm.Broadcast(x.Values(),x.Length(),0);
         value = obj->value(x);
+        eval++;
     }
-    printStatus(Comm,iter,value,x);
+    printStatus(Comm,eval,value,x);
     
     double svalue = value;
     while(value>1e-6){
@@ -120,11 +121,11 @@ int main(int argc, char *argv[]){
             }
             Comm.Broadcast(x.Values(),x.Length(),0);
             value = obj->value(x);
-            iter++;
+            eval++;
         
         }//endwhile
         
-        printStatus(Comm,iter,value,x);
+        printStatus(Comm,eval,value,x);
         svalue = value;
         
     }//endwhile
@@ -167,10 +168,10 @@ void printHeader(Epetra_Comm & comm){
     }
 }
 
-void printStatus(Epetra_Comm & comm, int iter, double value, Epetra_SerialDenseVector & x){
+void printStatus(Epetra_Comm & comm, int eval, double value, Epetra_SerialDenseVector & x){
     comm.Barrier();
     if (comm.MyPID()==0){
-        std::cout << std::setw(10) << iter << std::setw(20) << std::scientific << value;
+        std::cout << std::setw(10) << eval << std::setw(20) << std::scientific << value;
         for (unsigned int j=0; j<x.Length(); ++j){
             std::cout << std::setw(20) << x(j);
         }
