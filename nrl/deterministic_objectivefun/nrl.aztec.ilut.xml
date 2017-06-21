@@ -1,7 +1,7 @@
 <ParameterList>
     
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa.msh"/>
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh"/>
         <Parameter name="n_ply" type="int" value="8"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
     </ParameterList>
@@ -95,11 +95,11 @@
         <Parameter name="m2_inf" type="double" value="1.0e2"/>
         <Parameter name="m2_sup" type="double" value="1.0e4"/>
         <Parameter name="beta3_inf" type="double" value="-1.0/2.0"/>
-        <Parameter name="beta3_sup" type="double" value="20.0"/>
+        <Parameter name="beta3_sup" type="double" value="10.0"/>
         <Parameter name="beta4_inf" type="double" value="1.0"/>
-        <Parameter name="beta4_sup" type="double" value="20.0"/>
+        <Parameter name="beta4_sup" type="double" value="10.0"/>
         <Parameter name="beta5_inf" type="double" value="1.0"/>
-        <Parameter name="beta5_sup" type="double" value="20.0"/>
+        <Parameter name="beta5_sup" type="double" value="10.0"/>
     </ParameterList>
     
 </ParameterList>
