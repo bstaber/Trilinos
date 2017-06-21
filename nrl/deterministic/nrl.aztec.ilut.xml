@@ -79,12 +79,12 @@
     </ParameterList>
     
     <ParameterList name="ModelF">
-        <Parameter name="m1" type="double" value="53570.0"/>
-        <Parameter name="m2" type="double" value="79230.0"/>
-        <Parameter name="beta3" type="double" value="10.0"/>
-        <Parameter name="beta4" type="double" value="10.0"/>
-        <Parameter name="beta5" type="double" value="5.0"/>
-        <Parameter name="angle" type="double" value="0.26"/>
+        <Parameter name="m1" type="double" value="5357.0"/>
+        <Parameter name="m2" type="double" value="7923.0"/>
+        <Parameter name="beta3" type="double" value="2.0"/>
+        <Parameter name="beta4" type="double" value="2.0"/>
+        <Parameter name="beta5" type="double" value="2.0"/>
+        <Parameter name="angle" type="double" value="0.5236"/>
     </ParameterList>
     
 </ParameterList>
