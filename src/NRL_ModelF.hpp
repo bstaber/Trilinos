@@ -32,12 +32,14 @@ public:
     ~NRL_ModelF(){
     }
     
-    void set_parameters(double & M1, double & M2, double & Beta3, double & Beta4, double & Beta5){
-        m1 = M1;
-        m2 = M2;
-        beta3 = Beta3;
-        beta4 = Beta4;
-        beta5 = Beta5;
+    //void set_parameters(double & Pr, double & M1, double & M2, double & Beta3, double & Beta4, double & Beta5){
+    void set_parameters(Epetra_SerialDenseVector & x){
+        pr = x(0);
+        m1 = x(1);
+        m2 = x(2);
+        beta3 = x(3);
+        beta4 = x(4);
+        beta5 = x(5);
         m = 2.0*m1 + m2;
         pmbeta4 = std::pow(m,beta4);
         pmbeta5 = std::pow(m,beta5);
@@ -188,7 +190,7 @@ public:
         
         for (unsigned int i=0; i<6; ++i){
             dJ5(i) = J5*L(i) - I3*LML(i);
-            piola_stress(i) = (2.0/pmbeta4)*pI4*M(i) + (2.0/pmbeta5)*pJ5*dJ5(i) - 2.0*m*pI3*L(i);
+            piola_stress(i) = pr*( (2.0/pmbeta4)*pI4*M(i) + (2.0/pmbeta5)*pJ5*dJ5(i) - 2.0*m*pI3*L(i) );
         }
         
         double scalarAB = J5;
@@ -202,18 +204,18 @@ public:
         sym_tensor_product(scalarAB,L,LML,ddJ5,1.0);
         sym_tensor_product(scalarAB,LML,L,ddJ5,1.0);
         
-        scalarAB = 4.0*beta4*pI4/(I4*pmbeta4);
+        scalarAB = 4.0*pr*beta4*pI4/(I4*pmbeta4);
         tensor_product(scalarAB,M,M,tangent_piola,0.0);
         
-        scalarAB = 4.0*beta5*pJ5/(J5*pmbeta5);
+        scalarAB = 4.0*pr*beta5*pJ5/(J5*pmbeta5);
         tensor_product(scalarAB,dJ5,dJ5,tangent_piola,1.0);
         
-        scalarAB = 4.0*m*beta3*pI3;
+        scalarAB = 4.0*pr*m*beta3*pI3;
         tensor_product(scalarAB,L,L,tangent_piola,1.0);
-        scalarAB = 4.0*m*pI3;
+        scalarAB = 4.0*m*pr*pI3;
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
         
-        ddJ5.Scale(4.0*pJ5/pmbeta5);
+        ddJ5.Scale(4.0*pr*pJ5/pmbeta5);
         tangent_piola += ddJ5;
     }
     
@@ -230,6 +232,7 @@ public:
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
     
+    double pr;
     double m1;
     double m2;
     double m;

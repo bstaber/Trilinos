@@ -57,27 +57,30 @@ int main(int argc, char *argv[]){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*parlist));
     }
     
-    Epetra_SerialDenseVector lb(5);
-    Epetra_SerialDenseVector ub(5);
-    
-    lb(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_inf");
-    ub(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_sup");
-    lb(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_inf");
-    ub(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_sup");
-    lb(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_inf");
-    ub(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_sup");
-    lb(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_inf");
-    ub(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_sup");
-    lb(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_inf");
-    ub(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_sup");
+    int nparam = 6;
+    Epetra_SerialDenseVector lb(nparam);
+    Epetra_SerialDenseVector ub(nparam);
+
+    lb(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr_inf");
+    ub(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr_sup");
+    lb(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_inf");
+    ub(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_sup");
+    lb(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_inf");
+    ub(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_sup");
+    lb(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_inf");
+    ub(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_sup");
+    lb(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_inf");
+    ub(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_sup");
+    lb(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_inf");
+    ub(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_sup");
     
     boost::random::mt19937 rng(std::time(0));
     boost::random::normal_distribution<double> randn(0.0,1.0);
     boost::random::uniform_real_distribution<double> rand(0.0,1.0);
     
-    Epetra_SerialDenseVector u(5);
-    Epetra_SerialDenseVector v(5);
-    Epetra_SerialDenseVector x(5);
+    Epetra_SerialDenseVector u(nparam);
+    Epetra_SerialDenseVector v(nparam);
+    Epetra_SerialDenseVector x(nparam);
     
     printHeader(Comm);
     int eval = 1;
@@ -85,7 +88,7 @@ int main(int argc, char *argv[]){
     
     while (value>1e-4){
         if (Comm.MyPID()==0){
-            for (unsigned int j=0; j<5; ++j){
+            for (unsigned int j=0; j<nparam; ++j){
                 u(j) = rand(rng);
                 x(j) = (ub(j)-lb(j))*u(j)+lb(j);
             }
@@ -108,7 +111,7 @@ int main(int argc, char *argv[]){
                 
                     error = 0;
                     u = randhypersph(v,randn,rng);
-                    for (unsigned int j=0; j<5; ++j){
+                    for (unsigned int j=0; j<nparam; ++j){
                         x(j) = (ub(j)-lb(j))*u(j)+lb(j);
                         if (x(j)<lb(j)||x(j)>ub(j)){
                             error = 1;
