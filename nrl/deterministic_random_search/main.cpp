@@ -86,7 +86,7 @@ int main(int argc, char *argv[]){
     int eval = 1;
     double value = 1.0;
     
-    while (value>1e-4){
+    //while (value>1e-4){
         if (Comm.MyPID()==0){
             for (unsigned int j=0; j<nparam; ++j){
                 u(j) = rand(rng);
@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
         value = obj->value(x);
         printStatus(Comm,eval,value,x);
         eval++;
-    }
+    //}
     
     double svalue = value;
     while(value>1e-6){
