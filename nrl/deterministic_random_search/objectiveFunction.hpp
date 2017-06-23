@@ -54,15 +54,8 @@ public:
     
     double value(Epetra_SerialDenseVector & x){
         
-        /*double m1 = x(0);
-        double m2 = x(1);
-        double beta3 = x(2);
-        double beta4 = x(3);
-        double beta5 = x(4);
-        double plyagl = 30.0*2.0*M_PI/360.0;*/
-        
+        double plyagl = 30.0*2.0*M_PI/360.0;
         interface->set_parameters(x);
-        //interface->set_parameters(m1,m2,beta3,beta4,beta5);
         interface->set_plyagl(plyagl);
         
         double partialVal = 0.0;
