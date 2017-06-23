@@ -167,7 +167,11 @@ void printHeader(Epetra_Comm & comm){
     comm.Barrier();
     if (comm.MyPID()==0){
         std::cout << "Direct Random Search Algorithm\n";
-        std::cout << std::setw(10) << "#eval" << std::setw(20) << "value" << std::setw(20) << "x(0)" << std::setw(20) << "x(1)" << std::setw(20) << "x(2)" << std::setw(20) << "x(3)" << std::setw(20) << "x(4)\n";
+        std::cout << std::setw(10) << "#eval" << std::setw(20) << "value";
+        for (unsigned int i=0; i<6; ++i){
+            std::cout << std::setw(20) << "x(" << i << ")";
+        }
+        std::cout << "\n";
     }
 }
 
