@@ -87,8 +87,9 @@ public:
             nconload++;
         }
         
+        double ref = 0.0;
         double val = 0.0;
-        comm->SumAll(&partialRef,&val,1);
+        comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
         
         return val/ref;
