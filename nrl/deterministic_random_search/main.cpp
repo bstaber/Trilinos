@@ -176,9 +176,9 @@ void printHeader(Epetra_Comm & comm){
 void printStatus(Epetra_Comm & comm, int eval, double value, Epetra_SerialDenseVector & x){
     comm.Barrier();
     if (comm.MyPID()==0){
-        std::cout << std::setw(10) << eval << std::setw(25) << std::scientific << value;
+        std::cout << std::setw(10) << eval << std::setw(20) << std::scientific << value;
         for (unsigned int j=0; j<x.Length(); ++j){
-            std::cout << std::setw(25) << x(j);
+            std::cout << std::setw(20) << x(j);
         }
         std::cout << "\n";
     }
