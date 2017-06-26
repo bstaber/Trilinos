@@ -101,14 +101,13 @@ int main(int argc, char *argv[]){
     
     double svalue = value;
     while(value>1e-6){
-        
         v = u;
+        
         while(value>=svalue){
-            
             if (Comm.MyPID()==0){
                 int error = 1;
-                while (error){
                 
+                while (error){
                     error = 0;
                     u = randhypersph(v,randn,rng);
                     for (unsigned int j=0; j<nparam; ++j){
@@ -118,7 +117,6 @@ int main(int argc, char *argv[]){
                             break;
                             }
                     }
-                    
                 }//endwhile
                 
             }
