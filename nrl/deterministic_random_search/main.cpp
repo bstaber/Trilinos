@@ -87,16 +87,16 @@ int main(int argc, char *argv[]){
     double value = 1.0;
     
     //while (value>1e-4){
-        if (Comm.MyPID()==0){
-            for (unsigned int j=0; j<nparam; ++j){
-                u(j) = rand(rng);
-                x(j) = (ub(j)-lb(j))*u(j)+lb(j);
-            }
+    if (Comm.MyPID()==0){
+        for (unsigned int j=0; j<nparam; ++j){
+            u(j) = rand(rng);
+            x(j) = (ub(j)-lb(j))*u(j)+lb(j);
         }
-        Comm.Broadcast(x.Values(),x.Length(),0);
-        value = obj->value(x);
-        printStatus(Comm,eval,value,x);
-        eval++;
+    }
+    Comm.Broadcast(x.Values(),x.Length(),0);
+    value = obj->value(x);
+    printStatus(Comm,eval,value,x);
+    eval++;
     //}
     
     double svalue = value;
