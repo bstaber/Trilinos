@@ -81,7 +81,7 @@ public:
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
                 partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]);
-                partialRef += (my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads]);
+                partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads];
             }
         }
         
