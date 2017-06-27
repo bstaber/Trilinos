@@ -1,13 +1,13 @@
 #include "ROL_StdVector.hpp"
 #include "ROL_Objective.hpp"
-#include "NRL_ModelF.hpp"
 #include "ROL_Algorithm.hpp"
 #include "ROL_BoundConstraint.hpp"
 #include "ROL_LineSearchStep.hpp"
 #include "ROL_StatusTest.hpp"
-#include "Newton_Raphsonpp.hpp"
 #include "Epetra_SerialDenseSolver.h"
 #include  <math.h>
+#include "NRL_ModelF.hpp"
+#include "Newton_Raphsonpp.hpp"
 
 class objectiveFunction
 {
@@ -309,8 +309,8 @@ public:
             
             jacobian_matrix(matrix_X,D,JacobianMatrix);
             det_jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
-            InverseJacobianMatrix(0,0) = (1.0/det_jac)*JacobianMatrix(1,1);
-            InverseJacobianMatrix(1,1) = (1.0/det_jac)*JacobianMatrix(0,0);
+            InverseJacobianMatrix(0,0) =  (1.0/det_jac)*JacobianMatrix(1,1);
+            InverseJacobianMatrix(1,1) =  (1.0/det_jac)*JacobianMatrix(0,0);
             InverseJacobianMatrix(0,1) = -(1.0/det_jac)*JacobianMatrix(0,1);
             InverseJacobianMatrix(1,0) = -(1.0/det_jac)*JacobianMatrix(1,0);
             dx_shape_functions.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
