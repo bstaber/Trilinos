@@ -17,6 +17,10 @@
 Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & x,
                                       boost::random::normal_distribution<double> & w,
                                       boost::random::mt19937 & rng);
+Epetra_SerialDenseVector mvrandn(Epetra_SerialDenseVector & x,
+                                 Epetra_SerialDenseMatrix & sigma,
+                                 boost::random::normal_distribution<double> & w,
+                                 boost::random::mt19937 & rng);
 void printHeader(Epetra_Comm & comm);
 void printStatus(Epetra_Comm & comm, int eval, double value, Epetra_SerialDenseVector & x);
 
@@ -82,26 +86,35 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseVector v(nparam);
     Epetra_SerialDenseVector x(nparam);
     
-    printHeader(Comm);
-    int eval = 1;
-    double value = 1.0;
-    
-    //while (value>1e-4){
-    if (Comm.MyPID()==0){
+    /*if (Comm.MyPID()==0){
         for (unsigned int j=0; j<nparam; ++j){
             u(j) = rand(rng);
             x(j) = (ub(j)-lb(j))*u(j)+lb(j);
         }
+    }*/
+    
+    Epetra_SerialDenseMatrix L(nparam,nparam);
+    for (unsigned int i=0; i<nparam; ++i){
+        L(i,i) = 1.0;
     }
+    
+    printHeader(Comm);
+    int eval = 1;
+    double value = 1.0;
+    x(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr");
+    x(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
+    x(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
+    x(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
+    x(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
+    x(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
     Comm.Broadcast(x.Values(),x.Length(),0);
     value = obj->value(x);
     printStatus(Comm,eval,value,x);
     eval++;
-    //}
     
     double svalue = value;
     while(value>1e-6){
-        v = u;
+        v = x;
         
         while(value>=svalue){
             if (Comm.MyPID()==0){
@@ -109,14 +122,14 @@ int main(int argc, char *argv[]){
                 
                 while (error){
                     error = 0;
-                    u = randhypersph(v,randn,rng);
+                    x = mvrandn(v,L,randn,rng);
                     for (unsigned int j=0; j<nparam; ++j){
-                        x(j) = (ub(j)-lb(j))*u(j)+lb(j);
                         if (x(j)<lb(j)||x(j)>ub(j)){
                             error = 1;
                             break;
-                            }
+                        }
                     }
+                
                 }//endwhile
                 
             }
@@ -137,10 +150,27 @@ int main(int argc, char *argv[]){
 return 0;
 }
 
+Epetra_SerialDenseVector mvrandn(Epetra_SerialDenseVector & x,
+                                 Epetra_SerialDenseMatrix & L,
+                                 boost::random::normal_distribution<double> & w,
+                                 boost::random::mt19937 & rng){
+    int n = x.Length();
+    Epetra_SerialDenseVector z(n);
+    Epetra_SerialDenseVector g(n);
+    
+    for (unsigned int j=0; j<n; ++j){
+        z(j) = w(rng);
+    }
+    
+    g.Multiply('N','N',1.0,L,z,0.0);
+    g+=x;
+    
+    return g;
+}
+
 Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & v,
                                       boost::random::normal_distribution<double> & w,
                                       boost::random::mt19937 & rng){
-    
     int n = v.Length();
     Epetra_SerialDenseVector X(n);
     Epetra_SerialDenseVector Y(n);
