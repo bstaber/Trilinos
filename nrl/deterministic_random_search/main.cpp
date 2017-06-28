@@ -86,14 +86,7 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseVector v(nparam);
     Epetra_SerialDenseVector x(nparam);
     Epetra_SerialDenseMatrix L(nparam,nparam);
-    
-    /*if (Comm.MyPID()==0){
-        for (unsigned int j=0; j<nparam; ++j){
-            u(j) = rand(rng);
-            x(j) = (ub(j)-lb(j))*u(j)+lb(j);
-        }
-    }*/
-    
+        
     printHeader(Comm);
     int eval = 1;
     double value = 1.0;
@@ -111,7 +104,7 @@ int main(int argc, char *argv[]){
     double svalue = value;
     while(value>1e-6){
         for (unsigned int i=0; i<nparam; ++i){
-            L(i,i) = 0.1*x(j);
+            L(i,i) = 0.1*x(i);
         }
         v = x;
         
