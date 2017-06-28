@@ -118,20 +118,19 @@ int main(int argc, char *argv[]){
         
         while(value>=svalue){
             if (Comm.MyPID()==0){
-                int error = 1;
-                
-                while (error){
-                    error = 0;
+                //int error = 1;
+                //while (error){
+                    //error = 0;
                     x = mvrandn(v,L,randn,rng);
                     for (unsigned int j=0; j<nparam; ++j){
-                        if (x(j)<lb(j)||x(j)>ub(j)){
-                            error = 1;
-                            break;
+                        if (x(j)<lb(j)){
+                            x(j)=lb(j);
+                        }
+                        if (x(j)>ub(j)){
+                            x(j)=ub(j);
                         }
                     }
-                
-                }//endwhile
-                
+                //}//endwhile
             }
             Comm.Broadcast(x.Values(),x.Length(),0);
             value = obj->value(x);
