@@ -44,6 +44,7 @@ public:
         pmbeta4 = std::pow(m,beta4);
         pmbeta5 = std::pow(m,beta5);
     }
+    
     void set_plyagl(double & Plyagl){
         plyagl = Plyagl;
     }
@@ -166,7 +167,12 @@ public:
         L(4) = (1.0/(det*det))*(C(0,1)*C(1,2)-C(0,2)*C(1,1));
         L(5) = (1.0/(det*det))*(C(0,2)*C(2,1)-C(0,1)*C(2,2));
         
-        M(0) = m1*sin_plyagl*sin_plyagl+m2*cos_plyagl*cos_plyagl; M(1) = m1*cos_plyagl*cos_plyagl+m2*sin_plyagl*sin_plyagl; M(2) = m1; M(3) = 0.0; M(4) = 0.0; M(5) = (m2-m1)*cos_plyagl*sin_plyagl;
+        M(0) = m1*sin_plyagl*sin_plyagl+m2*cos_plyagl*cos_plyagl;
+        M(1) = m1*cos_plyagl*cos_plyagl+m2*sin_plyagl*sin_plyagl;
+        M(2) = m2;
+        M(3) = 0.0;
+        M(4) = 0.0;
+        M(5) = (m1-m1)*cos_plyagl*sin_plyagl;
         
         LML(0) = M(0)*L(0)*L(0) + 2.0*M(4)*L(0)*L(4) + 2.0*M(5)*L(0)*L(5) + M(2)*L(4)*L(4) + 2.0*M(3)*L(4)*L(5) + M(1)*L(5)*L(5);
         LML(1) = M(1)*L(1)*L(1) + 2.0*M(4)*L(1)*L(3) + 2.0*M(5)*L(1)*L(5) + M(2)*L(3)*L(3) + 2*M(4)*L(3)*L(5) + M(0)*L(5)*L(5);
