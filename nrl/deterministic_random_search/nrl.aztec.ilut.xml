@@ -84,14 +84,14 @@
     </ParameterList>
     
     <ParameterList name="ModelF">
-        <Parameter name="pr" type="double" value="2.7564"/>
-        <Parameter name="m1" type="double" value="1.0162"/>
-        <Parameter name="m2" type="double" value="0.27054"/>
-        <Parameter name="beta3" type="double" value="0.0018234"/>
-        <Parameter name="beta4" type="double" value="36.13"/>
-        <Parameter name="beta5" type="double" value="1.0359"/>
+        <Parameter name="pr" type="double" value="100.0"/>
+        <Parameter name="m1" type="double" value="2.472282"/>
+        <Parameter name="m2" type="double" value="7.799414e-1"/>
+        <Parameter name="beta3" type="double" value="7.574204e-4"/>
+        <Parameter name="beta4" type="double" value="1.303199"/>
+        <Parameter name="beta5" type="double" value="9.966062"/>
         <Parameter name="pr_inf" type="double" value="1.0e-6"/>
-        <Parameter name="pr_sup" type="double" value="1.0e2"/>
+        <Parameter name="pr_sup" type="double" value="1.0e4"/>
         <Parameter name="m1_inf" type="double" value="1.0e-1"/>
         <Parameter name="m1_sup" type="double" value="1.0e4"/>
         <Parameter name="m2_inf" type="double" value="1.0e-1"/>
