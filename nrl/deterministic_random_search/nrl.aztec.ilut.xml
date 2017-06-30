@@ -97,11 +97,11 @@
         <Parameter name="m2_inf" type="double" value="1.0e-1"/>
         <Parameter name="m2_sup" type="double" value="1.0e4"/>
         <Parameter name="beta3_inf" type="double" value="1e-6"/>
-        <Parameter name="beta3_sup" type="double" value="20.0"/>
+        <Parameter name="beta3_sup" type="double" value="10.0"/>
         <Parameter name="beta4_inf" type="double" value="0.0"/>
-        <Parameter name="beta4_sup" type="double" value="20.0"/>
+        <Parameter name="beta4_sup" type="double" value="10.0"/>
         <Parameter name="beta5_inf" type="double" value="0.0"/>
-        <Parameter name="beta5_sup" type="double" value="40.0"/>
+        <Parameter name="beta5_sup" type="double" value="10.0"/>
     </ParameterList>
     
 </ParameterList>
