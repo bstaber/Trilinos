@@ -90,7 +90,7 @@ public:
         comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
         
-        return val/ref;
+        return std::sqrt(val/ref);
     }
     
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
