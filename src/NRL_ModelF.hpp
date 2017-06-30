@@ -32,7 +32,6 @@ public:
     ~NRL_ModelF(){
     }
     
-    //void set_parameters(double & Pr, double & M1, double & M2, double & Beta3, double & Beta4, double & Beta5){
     void set_parameters(Epetra_SerialDenseVector & x){
         pr = x(0);
         m1 = x(1);
