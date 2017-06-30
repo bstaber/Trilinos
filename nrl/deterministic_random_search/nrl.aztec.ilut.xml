@@ -91,11 +91,11 @@
         <Parameter name="beta4" type="double" value="37.377"/>
         <Parameter name="beta5" type="double" value="2.1532"/>
         <Parameter name="pr_inf" type="double" value="1.0e-6"/>
-        <Parameter name="pr_sup" type="double" value="1.0e4"/>
+        <Parameter name="pr_sup" type="double" value="1.0e8"/>
         <Parameter name="m1_inf" type="double" value="1.0e-1"/>
-        <Parameter name="m1_sup" type="double" value="1.0e4"/>
+        <Parameter name="m1_sup" type="double" value="1.0e8"/>
         <Parameter name="m2_inf" type="double" value="1.0e-1"/>
-        <Parameter name="m2_sup" type="double" value="1.0e4"/>
+        <Parameter name="m2_sup" type="double" value="1.0e8"/>
         <Parameter name="beta3_inf" type="double" value="1e-6"/>
         <Parameter name="beta3_sup" type="double" value="40.0"/>
         <Parameter name="beta4_inf" type="double" value="0.0"/>
