@@ -93,6 +93,56 @@ public:
         return std::sqrt(val/ref);
     }
     
+    void retrieve_data(std::string & filepoints, std::string & filedefs){
+        
+        double testx, testy, testz, xi, eta, residual;
+        unsigned int n_local_faces = interface->Mesh->n_local_faces;
+        int node, result, e_gid;
+        int nvert = interface->Mesh->face_type;
+        
+        Epetra_SerialDenseVector x(nvert), y(nvert), z(nvert);
+        
+        std::vector<double> data_xyz;
+        std::vector<double> data_exx, data_eyy, data_exy;
+        
+        import_exp_points(filepoints, data_xyz);
+        import_exp_def(filedefs, data_exx, data_eyy, data_exy);
+        
+        npoints = data_xyz.size()/3;
+        nloads  = data_exx.size()/npoints;
+        for (unsigned int p=0; p<npoints; ++p){
+            testx = data_xyz[3*p+0]/1000.0;
+            testy = data_xyz[3*p+1]/1000.0;
+            testz = data_xyz[3*p+2]/1000.0;
+            for (unsigned int e_lid=0; e_lid<n_local_faces; ++e_lid){
+                e_gid = interface->Mesh->local_faces[e_lid];
+                result = -1;
+                for (unsigned int inode=0; inode<nvert; ++inode){
+                    node = interface->Mesh->faces_nodes[nvert*e_gid+inode];
+                    x(inode) = interface->Mesh->nodes_coord[3*node+0];
+                    y(inode) = interface->Mesh->nodes_coord[3*node+1];
+                    z(inode) = interface->Mesh->nodes_coord[3*node+2];
+                }
+                if (z(0)==testz && testx>=0.0 && testx<=50.0/1000.0 && testy>=0.0 && testy<=25.0/1000.0){
+                    result = pnpoly(nvert,x,y,testx,testy);
+                }
+                if (result==1){
+                    exp_cells.push_back(e_lid);
+                    residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
+                    my_xi.push_back(xi);
+                    my_eta.push_back(eta);
+                    for (unsigned int load=0; load<nloads; ++load){
+                        my_exx.push_back(data_exx[p+load*npoints]);
+                        my_eyy.push_back(data_eyy[p+load*npoints]);
+                        my_exy.push_back(data_exy[p+load*npoints]);
+                    }
+                }
+            }
+        }
+        
+        std::cout << npoints << std::setw(30) << nloads << std::setw(30) << exp_cells.size() << "\n";
+    }
+    
     void import_exp_points(std::string & filename, std::vector<double> & data_xyz){
         int ndata;
         double coordinate;
@@ -147,56 +197,6 @@ public:
             std::cout << "Couldn't open something with path " << filename << "\n";
         }
         
-    }
-    
-    void retrieve_data(std::string & filepoints, std::string & filedefs){
-        
-        double testx, testy, testz, xi, eta, residual;
-        unsigned int n_local_faces = interface->Mesh->n_local_faces;
-        int node, result, e_gid;
-        int nvert = interface->Mesh->face_type;
-        
-        Epetra_SerialDenseVector x(nvert), y(nvert), z(nvert);
-        
-        std::vector<double> data_xyz;
-        std::vector<double> data_exx, data_eyy, data_exy;
-            
-        import_exp_points(filepoints, data_xyz);
-        import_exp_def(filedefs, data_exx, data_eyy, data_exy);
-            
-        npoints = data_xyz.size()/3;
-        nloads  = data_exx.size()/npoints;
-        for (unsigned int p=0; p<npoints; ++p){
-            testx = data_xyz[3*p+0]/1000.0;
-            testy = data_xyz[3*p+1]/1000.0;
-            testz = data_xyz[3*p+2]/1000.0;
-            for (unsigned int e_lid=0; e_lid<n_local_faces; ++e_lid){
-                e_gid = interface->Mesh->local_faces[e_lid];
-                result = -1;
-                for (unsigned int inode=0; inode<nvert; ++inode){
-                    node = interface->Mesh->faces_nodes[nvert*e_gid+inode];
-                    x(inode) = interface->Mesh->nodes_coord[3*node+0];
-                    y(inode) = interface->Mesh->nodes_coord[3*node+1];
-                    z(inode) = interface->Mesh->nodes_coord[3*node+2];
-                }
-                if (z(0)==testz && testx>=0.0 && testx<=50.0/1000.0 && testy>=0.0 && testy<=25.0/1000.0){
-                    result = pnpoly(nvert,x,y,testx,testy);
-                }
-                if (result==1){
-                    exp_cells.push_back(e_lid);
-                    residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
-                    my_xi.push_back(xi);
-                    my_eta.push_back(eta);
-                    for (unsigned int load=0; load<nloads; ++load){
-                        my_exx.push_back(data_exx[p+load*npoints]);
-                        my_eyy.push_back(data_eyy[p+load*npoints]);
-                        my_exy.push_back(data_exy[p+load*npoints]);
-                    }
-                }
-            }
-        }
-        
-        std::cout << npoints << std::setw(30) << nloads << std::setw(30) << exp_cells.size() << "\n";
     }
     
     double inverse_isoparametric_mapping(double & testx, double & testy, Epetra_SerialDenseVector & x, Epetra_SerialDenseVector & y, double & xi, double & eta){
