@@ -80,8 +80,10 @@ public:
             }
             
             for (unsigned int j=0; j<exp_cells.size(); ++j){
-                partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]);
-                partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads];
+                //partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]);
+                //partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads];
+                partialval += (exx_com(j)*exx_com(j)+eyy_com(j)*eyy_com(j)+2.0*exy_com(j)*exy_com(j) - my_exx[i+j*nloads]*my_exx[i+j*nloads] - my_eyy[i+j*nloads]*my_eyy[i+j*nloads] - 2.0*my_exy[i+j*nloads]*my_exy[i+j*nloads]);
+                partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + 2.0*my_exy[i+j*nloads]*my_exy[i+j*nloads];
             }
         }
         
@@ -90,7 +92,7 @@ public:
         comm->SumAll(&partialRef,&ref,1);
         comm->SumAll(&partialVal,&val,1);
         
-        return std::sqrt(val/ref);
+        return std::fabs(val)/ref;
     }
     
     void retrieve_data(std::string & filepoints, std::string & filedefs){
