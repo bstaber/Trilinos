@@ -57,9 +57,8 @@ public:
         double plyagl = 30.0*2.0*M_PI/360.0;
         interface->set_parameters(x);
         interface->set_plyagl(plyagl);
-        
-        double partialRef = 0.0;
-        double partialVal = 0.0;
+    
+        double val = 0.0;
         newton->Initialization();
         for (unsigned int i=0; i<data_bc.size(); i=i+50){
             newton->setParameters(_paramList);
@@ -79,20 +78,22 @@ public:
                 }
             }
             
+            double absError = 0.0;
+            double loadRef = 0.0;
+            double partialLoadRef = 0.0;
+            double partialAbsError = 0.0;
             for (unsigned int j=0; j<exp_cells.size(); ++j){
                 //partialVal += (exx_comp(j)-my_exx[i+j*nloads])*(exx_comp(j)-my_exx[i+j*nloads]) + (eyy_comp(j)-my_eyy[i+j*nloads])*(eyy_comp(j)-my_eyy[i+j*nloads]) + (exy_comp(j)-my_exy[i+j*nloads])*(exy_comp(j)-my_exy[i+j*nloads]);
                 //partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + my_exy[i+j*nloads]*my_exy[i+j*nloads];
-                partialval += (exx_com(j)*exx_com(j)+eyy_com(j)*eyy_com(j)+2.0*exy_com(j)*exy_com(j) - my_exx[i+j*nloads]*my_exx[i+j*nloads] - my_eyy[i+j*nloads]*my_eyy[i+j*nloads] - 2.0*my_exy[i+j*nloads]*my_exy[i+j*nloads]);
-                partialRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + 2.0*my_exy[i+j*nloads]*my_exy[i+j*nloads];
+                partialAbsError += (exx_com(j)*exx_com(j)+eyy_com(j)*eyy_com(j)+2.0*exy_com(j)*exy_com(j) - my_exx[i+j*nloads]*my_exx[i+j*nloads] - my_eyy[i+j*nloads]*my_eyy[i+j*nloads] - 2.0*my_exy[i+j*nloads]*my_exy[i+j*nloads]);
+                partialLoadRef += my_exx[i+j*nloads]*my_exx[i+j*nloads] + my_eyy[i+j*nloads]*my_eyy[i+j*nloads] + 2.0*my_exy[i+j*nloads]*my_exy[i+j*nloads];
             }
+            comm->SumAll(&partialAbsError,absError);
+            comm->SumAll(&partialLoadRef,loadRef);
+            val += std::fabs(partialAbsError)/loadRef;
         }
         
-        double ref = 0.0;
-        double val = 0.0;
-        comm->SumAll(&partialRef,&ref,1);
-        comm->SumAll(&partialVal,&val,1);
-        
-        return std::fabs(val)/ref;
+        return val;
     }
     
     void retrieve_data(std::string & filepoints, std::string & filedefs){
