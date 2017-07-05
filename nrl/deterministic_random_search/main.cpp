@@ -123,7 +123,7 @@ int main(int argc, char *argv[]){
             Comm.Broadcast(x.Values(),x.Length(),0);
             value = obj->value(x);
             eval++;
-        
+            printStatus(Comm,eval,value,x);
         }//endwhile
         
         printStatus(Comm,eval,value,x);
