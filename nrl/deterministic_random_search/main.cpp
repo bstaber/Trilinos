@@ -162,7 +162,7 @@ Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & v,
     Epetra_SerialDenseVector Y(n);
     Epetra_SerialDenseVector u(n);
     
-    double radius = 0.1;
+    double radius = 0.25;
     
     for (unsigned int j=0; j<n; ++j){
         X(j) = w(rng);
