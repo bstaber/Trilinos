@@ -103,8 +103,8 @@ int main(int argc, char *argv[]){
         Comm.Broadcast(x.Values(),x.Length(),0);
         value = obj->value(x);
         eval++;
+        printStatus(Comm,eval,value,x);
     }
-    printStatus(Comm,eval,value,x);
     
     double svalue = value;
     while(value>1e-2){
