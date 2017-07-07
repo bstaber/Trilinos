@@ -96,7 +96,7 @@ int main(int argc, char *argv[]){
     x(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
     x(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
     x(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
-    while (value=>1.0){
+    while (value>=1.0){
         for (unsigned int j=0; j<nparam; ++j){
             x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
         }
