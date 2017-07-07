@@ -8,7 +8,6 @@
 
 #include "Newton_Raphsonpp.hpp"
 #include "objectiveFunction.hpp"
-
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/normal_distribution.hpp>
 #include <boost/random/uniform_real_distribution.hpp>
@@ -25,27 +24,27 @@ void printHeader(Epetra_Comm & comm);
 void printStatus(Epetra_Comm & comm, int eval, double value, Epetra_SerialDenseVector & x);
 
 int main(int argc, char *argv[]){
-    
+
     std::string    xmlInFileName = "";
-    
+
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
     clp.setDocString("TO DO.");
-    
+
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
     parse_return = clp.parse(argc,argv);
     if( parse_return != Teuchos::CommandLineProcessor::PARSE_SUCCESSFUL ) {
         std::cout << "\nEnd Result: TEST FAILED" << std::endl;
         return parse_return;
     }
-	
+
 #ifdef HAVE_MPI
     MPI_Init(&argc, &argv);
     Epetra_MpiComm Comm(MPI_COMM_WORLD);
 #else
     Epetra_SerialComm Comm;
 #endif
-    
+
     Teuchos::RCP<Teuchos::ParameterList> paramList = Teuchos::rcp(new Teuchos::ParameterList);
     if(xmlInFileName.length()){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
@@ -53,14 +52,14 @@ int main(int argc, char *argv[]){
     if (Comm.MyPID()==0){
         paramList->print(std::cout,2,true,true);
     }
-    
+
     Teuchos::RCP<objectiveFunction> obj = Teuchos::rcp(new objectiveFunction(Comm,*paramList));
-    
+
     Teuchos::RCP<Teuchos::ParameterList> parlist = Teuchos::rcp( new Teuchos::ParameterList() );
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*parlist));
     }
-    
+
     int nparam = 6;
     Epetra_SerialDenseVector lb(nparam);
     Epetra_SerialDenseVector ub(nparam);
@@ -77,16 +76,16 @@ int main(int argc, char *argv[]){
     ub(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_sup");
     lb(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_inf");
     ub(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_sup");
-    
+
     boost::random::mt19937 rng(std::time(0));
     boost::random::normal_distribution<double> randn(0.0,1.0);
     boost::random::uniform_real_distribution<double> rand(0.0,1.0);
-    
+
     Epetra_SerialDenseVector u(nparam);
     Epetra_SerialDenseVector v(nparam);
     Epetra_SerialDenseVector x(nparam);
     Epetra_SerialDenseMatrix L(nparam,nparam);
-        
+
     printHeader(Comm);
     int eval = 0;
     double value = 1.0;
@@ -105,14 +104,14 @@ int main(int argc, char *argv[]){
         eval++;
         printStatus(Comm,eval,value,x);
     }
-    
+
     double svalue = value;
     while(value>1e-2){
         for (unsigned int i=0; i<nparam; ++i){
             L(i,i) = 0.1*x(i);
         }
         v = x;
-        
+
         while(value>=svalue){
             if (Comm.MyPID()==0){
                     x = mvrandn(v,L,randn,rng);
@@ -129,10 +128,10 @@ int main(int argc, char *argv[]){
             value = obj->value(x);
             eval++;
         }//endwhile
-        
+
         printStatus(Comm,eval,value,x);
         svalue = value;
-        
+
     }//endwhile
 
 #ifdef HAVE_MPI
@@ -148,14 +147,14 @@ Epetra_SerialDenseVector mvrandn(Epetra_SerialDenseVector & x,
     int n = x.Length();
     Epetra_SerialDenseVector z(n);
     Epetra_SerialDenseVector g(n);
-    
+
     for (unsigned int j=0; j<n; ++j){
         z(j) = w(rng);
     }
-    
+
     g.Multiply('N','N',1.0,L,z,0.0);
     g+=x;
-    
+
     return g;
 }
 
@@ -166,9 +165,9 @@ Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & v,
     Epetra_SerialDenseVector X(n);
     Epetra_SerialDenseVector Y(n);
     Epetra_SerialDenseVector u(n);
-    
+
     double radius = 0.25;
-    
+
     for (unsigned int j=0; j<n; ++j){
         X(j) = w(rng);
     }
@@ -178,7 +177,7 @@ Epetra_SerialDenseVector randhypersph(Epetra_SerialDenseVector & v,
         Y(j) = X(j)*(radius*std::pow(gammainc,1.0/double(n))/s);
         u(j) = Y(j) + v(j);
     }
-    
+
     return u;
 }
 
