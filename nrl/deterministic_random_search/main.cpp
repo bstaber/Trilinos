@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseMatrix L(nparam,nparam);
         
     printHeader(Comm);
-    int eval = 1;
+    int eval = 0;
     double value = 1.0;
     /*x(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr");
     x(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
@@ -96,16 +96,18 @@ int main(int argc, char *argv[]){
     x(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
     x(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
     x(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
-    for (unsigned int j=0; j<nparam; ++j){
-        x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
+    while (value>1e-2){
+        for (unsigned int j=0; j<nparam; ++j){
+            x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
+        }
+        Comm.Broadcast(x.Values(),x.Length(),0);
+        value = obj->value(x);
+        eval++;
     }
-    Comm.Broadcast(x.Values(),x.Length(),0);
-    value = obj->value(x);
     printStatus(Comm,eval,value,x);
-    eval++;
     
     double svalue = value;
-    while(value>1e-6){
+    while(value>1e-2){
         for (unsigned int i=0; i<nparam; ++i){
             L(i,i) = 0.1*x(i);
         }
