@@ -107,7 +107,7 @@ int main(int argc, char *argv[]){
     printStatus(Comm,eval,value,x);
     
     double svalue = value;
-    while(value>1e-2){
+    while(value>2.0){
         for (unsigned int i=0; i<nparam; ++i){
             L(i,i) = 0.1*x(i);
         }
