@@ -90,12 +90,15 @@ int main(int argc, char *argv[]){
     printHeader(Comm);
     int eval = 1;
     double value = 1.0;
-    x(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr");
+    /*x(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr");
     x(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
     x(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
     x(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
     x(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
-    x(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
+    x(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
+    for (unsigned int j=0; j<nparam; ++j){
+        x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
+    }
     Comm.Broadcast(x.Values(),x.Length(),0);
     value = obj->value(x);
     printStatus(Comm,eval,value,x);
