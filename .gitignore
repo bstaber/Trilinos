@@ -22,3 +22,4 @@ nrl/deterministic/trilinos_mpi
 nrl/deterministic/trilinos_mpi
 src/Newton_Raphsonpp.o
 src/Newton_Raphsonpp.o
+arteries/gmrf_neumann/main.o
