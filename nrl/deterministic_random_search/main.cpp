@@ -96,10 +96,13 @@ int main(int argc, char *argv[]){
     x(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
     x(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
     while (value>=1.0){
+        //if (Comm.MyPID()==0){
         for (unsigned int j=0; j<nparam; ++j){
             x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
         }
+        //}
         Comm.Broadcast(x.Values(),x.Length(),0);
+        //Comm.Barrier();
         value = obj->value(x);
         eval++;
         printStatus(Comm,eval,value,x);
