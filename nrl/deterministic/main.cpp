@@ -6,7 +6,7 @@
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "NRL_ModelF.hpp"
+#include "Compressible_Mooney_Transverse_Isotropic.hpp"
 #include "Newton_Raphsonpp.hpp"
 
 int main(int argc, char *argv[]){
@@ -41,8 +41,11 @@ MPI_Init(&argc, &argv);
     }
     
     Teuchos::RCP<NRL_ModelF> interface = Teuchos::rcp(new NRL_ModelF(Comm,*paramList));
-    double m1     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
-    double m2     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
+    double mu1     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1");
+    double mu2     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2");
+    double mu3     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3");
+    double mu4     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4");
+    double mu5     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5");
     double beta3  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
     double beta4  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
     double beta5  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");

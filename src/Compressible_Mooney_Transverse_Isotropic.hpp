@@ -1,5 +1,5 @@
-#ifndef NRL_MODELF_HPP
-#define NRL_MODELF_HPP
+#ifndef COMPRESSIBLE_MOONEY_TRANSVERSE_ISOTROPIC_HPP
+#define COMPRESSIBLE_MOONEY_TRANSVERSE_ISOTROPIC_HPP
 
 #include "tensor_calculus.hpp"
 #include "hyperelasticity_setup_pp.hpp"

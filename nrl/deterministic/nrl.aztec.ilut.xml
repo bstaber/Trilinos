@@ -79,8 +79,11 @@
     </ParameterList>
     
     <ParameterList name="ModelF">
-        <Parameter name="m1" type="double" value="5357.0"/>
-        <Parameter name="m2" type="double" value="7923.0"/>
+        <Parameter name="mu1" type="double" value="0.0"/>
+        <Parameter name="mu2" type="double" value="0.0"/>
+        <Parameter name="mu3" type="double" value="0.0"/>
+        <Parameter name="mu4" type="double" value="5357.0"/>
+        <Parameter name="mu5" type="double" value="7923.0"/>
         <Parameter name="beta3" type="double" value="2.0"/>
         <Parameter name="beta4" type="double" value="2.0"/>
         <Parameter name="beta5" type="double" value="2.0"/>
