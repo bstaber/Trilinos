@@ -94,15 +94,15 @@
         <Parameter name="beta5" type="double" value="2.0"/>
         <Parameter name="angle" type="double" value="0.5236"/>
         <Parameter name="mu1_inf" type="double" value="1.0e-1"/>
-        <Parameter name="mu1_sup" type="double" value="1.0e4"/>
+        <Parameter name="mu1_sup" type="double" value="1.0e2"/>
         <Parameter name="mu2_inf" type="double" value="1.0e-1"/>
-        <Parameter name="mu2_sup" type="double" value="1.0e4"/>
+        <Parameter name="mu2_sup" type="double" value="1.0e2"/>
         <Parameter name="mu3_inf" type="double" value="1.0e-1"/>
-        <Parameter name="mu3_sup" type="double" value="1.0e4"/>
+        <Parameter name="mu3_sup" type="double" value="1.0e2"/>
         <Parameter name="mu4_inf" type="double" value="1.0e-1"/>
-        <Parameter name="mu4_sup" type="double" value="1.0e4"/>
+        <Parameter name="mu4_sup" type="double" value="1.0e2"/>
         <Parameter name="mu5_inf" type="double" value="1.0e-1"/>
-        <Parameter name="mu5_sup" type="double" value="1.0e4"/>
+        <Parameter name="mu5_sup" type="double" value="1.0e2"/>
         <Parameter name="beta3_inf" type="double" value="-0.5"/>
         <Parameter name="beta3_sup" type="double" value="10.0"/>
         <Parameter name="beta4_inf" type="double" value="0.0"/>
