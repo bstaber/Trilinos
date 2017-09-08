@@ -60,23 +60,28 @@ int main(int argc, char *argv[]){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*parlist));
     }
 
-    int nparam = 6;
+    int nparam = 8;
     Epetra_SerialDenseVector lb(nparam);
     Epetra_SerialDenseVector ub(nparam);
 
-    lb(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr_inf");
-    ub(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr_sup");
-    lb(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_inf");
-    ub(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1_sup");
-    lb(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_inf");
-    ub(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2_sup");
-    lb(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_inf");
-    ub(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_sup");
-    lb(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_inf");
-    ub(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_sup");
-    lb(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_inf");
-    ub(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_sup");
+    lb(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1_inf");
+    ub(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1_sup");
+    lb(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2_inf");
+    ub(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2_sup");
+    lb(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3_inf");
+    ub(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3_sup");
+    lb(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4_inf");
+    ub(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4_sup");
+    lb(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5_inf");
+    ub(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5_sup");
+    lb(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_inf");
+    ub(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_sup");
+    lb(6) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_inf");
+    ub(6) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_sup");
+    lb(7) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_inf");
+    ub(7) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_sup");
 
+    //may be this should only be done on root
     boost::random::mt19937 rng(std::time(0));
     boost::random::normal_distribution<double> randn(0.0,1.0);
     boost::random::uniform_real_distribution<double> rand(0.0,1.0);
