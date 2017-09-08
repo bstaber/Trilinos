@@ -190,7 +190,7 @@ public:
         double I3 = det*det;
         double I4 = C(0,0)*M(0) + C(1,1)*M(1) + C(2,2)*M(2) + 2.0*C(0,1)*M(5) + 2.0*C(0,2)*M(4) + 2.0*C(1,2)*M(3);
         double I5 = CC(0,0)*M(0) + CC(1,1)*M(1) + CC(2,2)*M(2) + 2.0*CC(0,1)*M(5) + 2.0*CC(0,2)*M(4) + 2.0*CC(1,2)*M(3);
-        double J5 = I5 - I1*I4 + I2*m;
+        double J5 = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
         double pI4 = std::pow(I4,beta4);
         double pJ5 = std::pow(J5,beta5);

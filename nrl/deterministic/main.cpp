@@ -40,17 +40,18 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
+    Epetra_SerialDenseVector parameters;
     Teuchos::RCP<NRL_ModelF> interface = Teuchos::rcp(new NRL_ModelF(Comm,*paramList));
-    double mu1     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1");
-    double mu2     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2");
-    double mu3     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3");
-    double mu4     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4");
-    double mu5     = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5");
-    double beta3  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
-    double beta4  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
-    double beta5  = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
+    parameters(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1");
+    parameters(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2");
+    parameters(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3");
+    parameters(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4");
+    parameters(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5");
+    parameters(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
+    parameters(6) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
+    parameters(7) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
     double plyagl = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"angle");
-    interface->set_parameters(m1,m2,beta3,beta4,beta5);
+    interface->set_parameters(parameters);
     interface->set_plyagl(plyagl);
     
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
