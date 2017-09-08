@@ -41,16 +41,16 @@ MPI_Init(&argc, &argv);
     }
     
     Epetra_SerialDenseVector parameters;
-    Teuchos::RCP<NRL_ModelF> interface = Teuchos::rcp(new NRL_ModelF(Comm,*paramList));
-    parameters(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1");
-    parameters(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2");
-    parameters(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3");
-    parameters(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4");
-    parameters(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5");
-    parameters(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
-    parameters(6) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
-    parameters(7) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");
-    double plyagl = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"angle");
+    Teuchos::RCP<TIMooney> interface = Teuchos::rcp(new TIMooney(Comm,*paramList));
+    parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+    parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+    parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+    parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+    parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+    parameters(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
+    parameters(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    parameters(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    double plyagl = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
     interface->set_parameters(parameters);
     interface->set_plyagl(plyagl);
     

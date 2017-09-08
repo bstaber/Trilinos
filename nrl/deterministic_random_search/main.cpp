@@ -64,22 +64,22 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseVector lb(nparam);
     Epetra_SerialDenseVector ub(nparam);
 
-    lb(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1_inf");
-    ub(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu1_sup");
-    lb(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2_inf");
-    ub(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu2_sup");
-    lb(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3_inf");
-    ub(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu3_sup");
-    lb(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4_inf");
-    ub(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu4_sup");
-    lb(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5_inf");
-    ub(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"mu5_sup");
-    lb(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_inf");
-    ub(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3_sup");
-    lb(6) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_inf");
-    ub(6) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4_sup");
-    lb(7) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_inf");
-    ub(7) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5_sup");
+    lb(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1_inf");
+    ub(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1_sup");
+    lb(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2_inf");
+    ub(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2_sup");
+    lb(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3_inf");
+    ub(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3_sup");
+    lb(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4_inf");
+    ub(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4_sup");
+    lb(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5_inf");
+    ub(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5_sup");
+    lb(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3_inf");
+    ub(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3_sup");
+    lb(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4_inf");
+    ub(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4_sup");
+    lb(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5_inf");
+    ub(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5_sup");
 
     //may be this should only be done on root
     boost::random::mt19937 rng(std::time(0));
@@ -94,12 +94,12 @@ int main(int argc, char *argv[]){
     printHeader(Comm);
     int eval = 0;
     double value = 1.0;
-    /*x(0) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"pr");
-    x(1) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m1");
-    x(2) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"m2");
-    x(3) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta3");
-    x(4) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta4");
-    x(5) = Teuchos::getParameter<double>(paramList->sublist("ModelF"),"beta5");*/
+    /*x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"pr");
+    x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"m1");
+    x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"m2");
+    x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
+    x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");*/
     while (value>=1.0){
         //if (Comm.MyPID()==0){
         for (unsigned int j=0; j<nparam; ++j){

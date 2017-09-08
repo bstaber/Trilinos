@@ -78,7 +78,7 @@
         <Parameter name="AZ_reorder" type="int" value="1"/>
     </ParameterList>
     
-    <ParameterList name="ModelF">
+    <ParameterList name="TIMooney">
         <Parameter name="mu1" type="double" value="0.0"/>
         <Parameter name="mu2" type="double" value="0.0"/>
         <Parameter name="mu3" type="double" value="0.0"/>

@@ -4,11 +4,11 @@
 #include "tensor_calculus.hpp"
 #include "hyperelasticity_setup_pp.hpp"
 
-class NRL_ModelF : public hyperelasticity_setup
+class TIMooney : public hyperelasticity_setup
 {
 public:
     
-    NRL_ModelF(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    TIMooney(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
@@ -29,7 +29,7 @@ public:
         }
     }
     
-    ~NRL_ModelF(){
+    ~TIMooney(){
     }
     
     void set_parameters(Epetra_SerialDenseVector & x){
