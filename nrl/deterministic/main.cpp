@@ -40,7 +40,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Epetra_SerialDenseVector parameters;
+    Epetra_SerialDenseVector parameters(8);
     Teuchos::RCP<TIMooney> interface = Teuchos::rcp(new TIMooney(Comm,*paramList));
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
