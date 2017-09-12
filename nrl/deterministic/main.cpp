@@ -51,9 +51,9 @@ MPI_Init(&argc, &argv);
     parameters(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     parameters(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     double plyagl = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
-    /*for (unsigned int i=0; i<5; i++){
-        parameters(i) = 1.0e9*parameters(i);
-    }*/
+    for (unsigned int i=0; i<5; i++){
+        parameters(i) = 1.0e6*parameters(i);
+    }
     
     interface->set_parameters(parameters);
     interface->set_plyagl(plyagl);
@@ -61,16 +61,16 @@ MPI_Init(&argc, &argv);
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
     std::vector<double> bcdisp(10);
-    bcdisp[0] = 0.00033234/1000.0;
-    bcdisp[1] = 0.018369/1000.0;
-    bcdisp[2] = 0.038198/1000.0;
-    bcdisp[3] = 0.060977/1000.0;
-    bcdisp[4] = 0.073356/1000.0;
-    bcdisp[5] = 0.092648/1000.0;
-    bcdisp[6] = 0.11062/1000.0;
-    bcdisp[7] = 0.12838/1000.0;
-    bcdisp[8] = 0.14934/1000.0;
-    bcdisp[9] = 0.0001571809118641;
+    bcdisp[0] = 0.00033234; //1000.0;
+    bcdisp[1] = 0.018369;//1000.0;
+    bcdisp[2] = 0.038198;//1000.0;
+    bcdisp[3] = 0.060977;//1000.0;
+    bcdisp[4] = 0.073356;//1000.0;
+    bcdisp[5] = 0.092648;//1000.0;
+    bcdisp[6] = 0.11062;//1000.0;
+    bcdisp[7] = 0.12838;//1000.0;
+    bcdisp[8] = 0.14934;//1000.0;
+    bcdisp[9] = 0.0001571809118641*1.0e3;
     
     Newton->Initialization();
     for (unsigned int i=0; i<bcdisp.size(); ++i){
