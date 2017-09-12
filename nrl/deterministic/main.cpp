@@ -54,6 +54,10 @@ MPI_Init(&argc, &argv);
     interface->set_parameters(parameters);
     interface->set_plyagl(plyagl);
     
+    for (unsigned int i=0; i<5; i++){
+        parameters(i) = parameters(i)*1.0e9;
+    }
+    
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
     std::vector<double> bcdisp(10);
