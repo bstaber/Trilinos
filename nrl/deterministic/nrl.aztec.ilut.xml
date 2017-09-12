@@ -86,7 +86,7 @@
         <Parameter name="mu4" type="double" value="1.3137"/>
         <Parameter name="mu5" type="double" value="0.060711"/>
         <Parameter name="beta3" type="double" value="-0.46845"/>
-        <Parameter name="beta4" type="double" value="2.7948"/>
+        <Parameter name="beta4" type="double" value="27.948"/>
         <Parameter name="beta5" type="double" value="0.027735"/>
         <Parameter name="angle" type="double" value="0.5236"/>
     </ParameterList>
