@@ -52,10 +52,10 @@ MPI_Init(&argc, &argv);
     parameters(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     double plyagl = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
     
-    for (unsigned int i=0; i<3; i++){
+    /*for (unsigned int i=0; i<5; i++){
         //parameters(i) = 0.0;
-        parameters(i) = parameters(i)*1.0e3;
-    }
+        parameters(i) = parameters(i)*1.0e9;
+    }*/
     
     interface->set_parameters(parameters);
     interface->set_plyagl(plyagl);
