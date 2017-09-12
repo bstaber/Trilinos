@@ -56,9 +56,12 @@ MPI_Init(&argc, &argv);
     
     parameters(0) = 0.0;
     parameters(1) = 0.0;
-    for (unsigned int i=0; i<5; i++){
-        parameters(i) = parameters(i)*1.0e9;
-    }
+    parameters(2) = 0.0;
+    parameters(3) = 5357.0;
+    parameters(4) = 7923.0;
+    parameters(5) = -0.5;
+    parameters(6) = 2.495;
+    parameters(7) = 0.694;
     
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
