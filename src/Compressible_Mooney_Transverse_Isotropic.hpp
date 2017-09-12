@@ -67,7 +67,7 @@ public:
                 n_bc_dof+=3;
             }
             if(coord==25.0/1000.0){
-                n_bc_dof+=1;
+                n_bc_dof+=3;
             }
         }
         
@@ -83,10 +83,10 @@ public:
                 indbc+=3;
             }
             if (coord==25.0/1000.0){
-                //dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc] = 3*inode+dof;
-                //dof_on_boundary[indbc+2] = 3*inode+2;
-                indbc+=1;
+                dof_on_boundary[indbc+0] = 3*inode+0;
+                dof_on_boundary[indbc+1] = 3*inode+dof;
+                dof_on_boundary[indbc+2] = 3*inode+2;
+                indbc+=3;
             }
         }
     }
@@ -120,9 +120,9 @@ public:
                 F[0][StandardMap->LID(3*node+2)] = 0.0;
             }
             if (coord==25.0/1000.0){
-                //F[0][StandardMap->LID(3*node+0)]   = 0.0;
+                F[0][StandardMap->LID(3*node+0)]   = 0.0;
                 F[0][StandardMap->LID(3*node+dof)] = displacement;
-                //F[0][StandardMap->LID(3*node+2)]   = 0.0;
+                F[0][StandardMap->LID(3*node+2)]   = 0.0;
             }
         }
         //}
