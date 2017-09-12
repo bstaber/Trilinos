@@ -55,11 +55,11 @@ MPI_Init(&argc, &argv);
     parameters(0) = 0.0;
     parameters(1) = 0.0;
     parameters(2) = 0.0;
-    parameters(3) = 5357.0;
+    /*parameters(3) = 5357.0;
     parameters(4) = 7923.0;
     parameters(5) = -0.5;
     parameters(6) = 2.495;
-    parameters(7) = 0.694;
+    parameters(7) = 0.694;*/
     
     interface->set_parameters(parameters);
     interface->set_plyagl(plyagl);
