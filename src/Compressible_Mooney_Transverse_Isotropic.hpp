@@ -206,10 +206,10 @@ public:
         scalarAB = -4.0*mu2;
         sym_tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
         
-        scalarAB = 4.0*mu3*det;
+        scalarAB = 2.0*mu3*det*det;
         tensor_product(scalarAB,L,L,tangent_piola,1.0);
         
-        scalarAB = -4.0*mu3*det*det-2.0*mu;
+        scalarAB = -4.0*mu3*det*det+2.0*mu;
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
         
         scalarAB = J5;
