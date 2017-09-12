@@ -153,7 +153,6 @@ public:
         Epetra_SerialDenseVector dJ5(6);
         Epetra_SerialDenseVector M(6);
         Epetra_SerialDenseVector L(6);
-        Epetra_SerialDenseVector D(6);
         Epetra_SerialDenseVector c(6);
         
         C.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
@@ -201,8 +200,20 @@ public:
             (2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
         }
         
-        double scalarAB = J5;
-        tensor_product(scalarAB,L,L,ddJ5,0.0);
+        double scalarAB = 4.0*mu2;
+        tensor_product(scalarAB,eye,eye,tangent_piola,0.0);
+        
+        scalarAB = -4.0*mu2;
+        sym_tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
+        
+        scalarAB = 4.0*mu3*det;
+        tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        
+        scalarAB = -4.0*mu3*det*det-2.0*mu;
+        sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        
+        scalarAB = J5;
+        tensor_product(scalarAB,L,L,ddJ5,1.0);
         scalarAB = -J5;
         sym_tensor_product(scalarAB,L,L,ddJ5,1.0);
         scalarAB = -I3;
@@ -225,18 +236,6 @@ public:
         
         ddJ5.Scale(4.0*pJ5/ptrmbeta5);
         tangent_piola += ddJ5;
-        
-        scalarAB = 4.0*mu2;
-        tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
-        
-        scalarAB = -4.0*mu2;
-        sym_tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
-        
-        scalarAB = 4.0*mu3*det*det;
-        tensor_product(scalarAB,L,L,tangent_piola,1.0);
-        
-        scalarAB = -4.0*mu3*det*det-mu;
-        sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
     }
     
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
