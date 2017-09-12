@@ -51,8 +51,6 @@ MPI_Init(&argc, &argv);
     parameters(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     parameters(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     double plyagl = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
-    interface->set_parameters(parameters);
-    interface->set_plyagl(plyagl);
     
     parameters(0) = 0.0;
     parameters(1) = 0.0;
@@ -62,6 +60,9 @@ MPI_Init(&argc, &argv);
     parameters(5) = -0.5;
     parameters(6) = 2.495;
     parameters(7) = 0.694;
+    
+    interface->set_parameters(parameters);
+    interface->set_plyagl(plyagl);
     
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
