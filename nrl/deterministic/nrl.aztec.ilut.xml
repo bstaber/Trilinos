@@ -84,7 +84,7 @@
         <Parameter name="mu1" type="double" value="1.7212"/>
         <Parameter name="mu2" type="double" value="0.0426"/>
         <Parameter name="mu3" type="double" value="0.0429"/>
-        <Parameter name="mu4" type="double" value="0.13138"/>
+        <Parameter name="mu4" type="double" value="0.013138"/>
         <Parameter name="mu5" type="double" value="0.0609"/>
         <Parameter name="beta3" type="double" value="-0.5"/>
         <Parameter name="beta4" type="double" value="0.0"/> <!--27.9535"/-->
