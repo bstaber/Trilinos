@@ -81,14 +81,14 @@
     <!-- Check if MPa, GPa or Pa 
      1.7222    0.0426    0.0429    1.3138    0.0609   -0.4694   27.9535    0.0306 -->
     <ParameterList name="TIMooney">
-        <Parameter name="mu1" type="double" value="0.17212"/>
+        <Parameter name="mu1" type="double" value="1.7212"/>
         <Parameter name="mu2" type="double" value="0.0426"/>
         <Parameter name="mu3" type="double" value="0.0429"/>
         <Parameter name="mu4" type="double" value="1.3138"/>
         <Parameter name="mu5" type="double" value="0.0609"/>
-        <Parameter name="beta3" type="double" value="-0.5"/>
-        <Parameter name="beta4" type="double" value="0.0"/> <!--27.9535"/-->
-        <Parameter name="beta5" type="double" value="0.0"/>
+        <Parameter name="beta3" type="double" value="-0.4694"/>
+        <Parameter name="beta4" type="double" value="27.9535"/>
+        <Parameter name="beta5" type="double" value="0.0306"/>
         <Parameter name="angle" type="double" value="0.0"/> <!--1.570796326794897"/-->
     </ParameterList>
     
