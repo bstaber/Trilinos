@@ -54,8 +54,6 @@ MPI_Init(&argc, &argv);
     for (unsigned int i=0; i<5; i++){
         parameters(i) = 1.0e9*parameters(i);
     }
-    parameters(3) = 0.0;
-    parameters(4) = 0.0;
     
     interface->set_parameters(parameters);
     interface->set_plyagl(plyagl);
