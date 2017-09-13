@@ -24,7 +24,7 @@ public:
         for (unsigned int e=0; e<Mesh->n_cells/n_ply; ++e){
             for (unsigned int j=0; j<n_ply/2; ++j){
                 phase.push_back(0);
-                phase.push_back(1);
+                phase.push_back(0);
             }
         }
     }
@@ -196,8 +196,8 @@ public:
         
         for (unsigned int i=0; i<6; ++i){
             dJ5(i) = J5*L(i) - I3*LML(i);
-            piola_stress(i) = 2.0*mu1*eye(i) + 2.0*mu2*(I1*eye(i)-c(i)) + (2.0*mu3*det*det-mu)*L(i); // +
-            //(2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
+            piola_stress(i) = 2.0*mu1*eye(i) + 2.0*mu2*(I1*eye(i)-c(i)) + (2.0*mu3*det*det-mu)*L(i) +
+            (2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
         }
         
         double scalarAB = 4.0*mu2;
@@ -212,7 +212,7 @@ public:
         scalarAB = -4.0*mu3*det*det+2.0*mu;
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
         
-        /*scalarAB = J5;
+        scalarAB = J5;
         tensor_product(scalarAB,L,L,ddJ5,1.0);
         scalarAB = -J5;
         sym_tensor_product(scalarAB,L,L,ddJ5,1.0);
@@ -235,7 +235,7 @@ public:
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
         
         ddJ5.Scale(4.0*pJ5/ptrmbeta5);
-        tangent_piola += ddJ5;*/
+        tangent_piola += ddJ5;
     }
     
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
