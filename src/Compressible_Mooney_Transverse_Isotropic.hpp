@@ -24,7 +24,7 @@ public:
         for (unsigned int e=0; e<Mesh->n_cells/n_ply; ++e){
             for (unsigned int j=0; j<n_ply/2; ++j){
                 phase.push_back(0);
-                phase.push_back(0);
+                phase.push_back(1);
             }
         }
     }
