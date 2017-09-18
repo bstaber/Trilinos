@@ -94,25 +94,6 @@ int main(int argc, char *argv[]){
     printHeader(Comm);
     int eval = 0;
     double value = 1.0;
-    /*x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"pr");
-    x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"m1");
-    x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"m2");
-    x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
-    x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
-    x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");*/
-    /*while (value>=1.0){
-        //if (Comm.MyPID()==0){
-        for (unsigned int j=0; j<nparam; ++j){
-            x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
-        }
-        //}
-        Comm.Broadcast(x.Values(),x.Length(),0);
-        //Comm.Barrier();
-        value = obj->value(x);
-        eval++;
-        printStatus(Comm,eval,value,x);
-    }*/
-
     x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
     x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
@@ -121,6 +102,19 @@ int main(int argc, char *argv[]){
     x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
     x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     x(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    /*while (value>=1.0){
+        if (Comm.MyPID()==0){
+            for (unsigned int j=0; j<nparam; ++j){
+                x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
+            }
+        }
+        Comm.Broadcast(x.Values(),x.Length(),0);
+        Comm.Barrier();*/
+        value = obj->value(x);
+        eval++;
+        printStatus(Comm,eval,value,x);
+    //}
+
     double svalue = value;
     while(value>1e-2){
         for (unsigned int i=0; i<nparam; ++i){
@@ -141,11 +135,12 @@ int main(int argc, char *argv[]){
                     }
             }
             Comm.Broadcast(x.Values(),x.Length(),0);
+            Comm.Barrier();
             value = obj->value(x);
+            printStatus(Comm,eval,value,x);
             eval++;
         }//endwhile
 
-        printStatus(Comm,eval,value,x);
         svalue = value;
 
     }//endwhile
