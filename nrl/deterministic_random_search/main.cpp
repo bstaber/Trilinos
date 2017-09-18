@@ -102,6 +102,9 @@ int main(int argc, char *argv[]){
     x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
     x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     x(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    for (unsigned int i=0; i<5; i++){
+        x(i) = 1.0e9*x(i);
+    }
     /*while (value>=1.0){
         if (Comm.MyPID()==0){
             for (unsigned int j=0; j<nparam; ++j){
