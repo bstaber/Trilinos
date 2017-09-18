@@ -100,7 +100,7 @@ int main(int argc, char *argv[]){
     x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
     x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");*/
-    while (value>=1.0){
+    /*while (value>=1.0){
         //if (Comm.MyPID()==0){
         for (unsigned int j=0; j<nparam; ++j){
             x(j) = (ub(j)-lb(j))*rand(rng) + lb(j);
@@ -111,8 +111,16 @@ int main(int argc, char *argv[]){
         value = obj->value(x);
         eval++;
         printStatus(Comm,eval,value,x);
-    }
+    }*/
 
+    x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+    x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+    x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+    x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+    x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+    x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
+    x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    x(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     double svalue = value;
     while(value>1e-2){
         for (unsigned int i=0; i<nparam; ++i){

@@ -85,15 +85,15 @@
     
     <!-- Check if MPa, GPa or Pa -->
     <ParameterList name="ModelF">
-        <Parameter name="mu1" type="double" value="1721.2"/>
-        <Parameter name="mu2" type="double" value="42.885"/>
-        <Parameter name="mu3" type="double" value="44.405"/>
-        <Parameter name="mu4" type="double" value="1313.7"/>
-        <Parameter name="mu5" type="double" value="60.711"/>
-        <Parameter name="beta3" type="double" value="-0.46845"/>
-        <Parameter name="beta4" type="double" value="27.948"/>
-        <Parameter name="beta5" type="double" value="0.027735"/>
-        <Parameter name="angle" type="double" value="0.5236"/>
+        <Parameter name="mu1" type="double" value="1.7212"/>
+        <Parameter name="mu2" type="double" value="0.0426"/>
+        <Parameter name="mu3" type="double" value="0.0429"/>
+        <Parameter name="mu4" type="double" value="1.3138"/>
+        <Parameter name="mu5" type="double" value="0.0609"/>
+        <Parameter name="beta3" type="double" value="-0.4694"/>
+        <Parameter name="beta4" type="double" value="27.9535"/>
+        <Parameter name="beta5" type="double" value="0.0306"/>
+        <Parameter name="angle" type="double" value="0.0"/> <!--1.570796326794897"/-->
         <Parameter name="mu1_inf" type="double" value="1.0e-1"/>
         <Parameter name="mu1_sup" type="double" value="1.0e2"/>
         <Parameter name="mu2_inf" type="double" value="1.0e-1"/>

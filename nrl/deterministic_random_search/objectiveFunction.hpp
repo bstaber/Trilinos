@@ -6,7 +6,7 @@
 #include "ROL_StatusTest.hpp"
 #include "Epetra_SerialDenseSolver.h"
 #include  <math.h>
-#include "NRL_ModelF.hpp"
+#include "Compressible_Mooney_Transverse_Isotropic.hpp"
 #include "Newton_Raphsonpp.hpp"
 
 class objectiveFunction
