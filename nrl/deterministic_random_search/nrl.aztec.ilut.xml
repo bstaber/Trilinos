@@ -49,7 +49,7 @@
     </ParameterList>
     
     <ParameterList name="Newton">
-        <Parameter name="delta" type="double" value="1.0"/>
+        <Parameter name="delta" type="double" value="0.5"/>
         <Parameter name="iterMin" type="int" value="2"/>
         <Parameter name="iterMax" type="int" value="10"/>
         <Parameter name="nbBisMax" type="int" value="5"/>
