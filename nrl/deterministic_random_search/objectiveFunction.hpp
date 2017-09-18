@@ -16,7 +16,7 @@ private:
     Teuchos::ParameterList _paramList;
     Epetra_Comm * comm;
     Teuchos::RCP<Newton_Raphson> newton;
-    Teuchos::RCP<NRL_ModelF> interface;
+    Teuchos::RCP<TIMooney> interface;
     
     unsigned int npoints;
     unsigned int nloads;
@@ -33,7 +33,7 @@ public:
     objectiveFunction(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         
         comm = &Comm;
-        interface = Teuchos::rcp(new NRL_ModelF(Comm,paramList));
+        interface = Teuchos::rcp(new TIMooney(Comm,paramList));
         newton = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         
         std::string path_exp_points =
