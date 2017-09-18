@@ -201,7 +201,7 @@ void printHeader(Epetra_Comm & comm){
     comm.Barrier();
     if (comm.MyPID()==0){
         std::cout << "Direct Random Search Algorithm\n";
-        std::cout << std::setw(10) << "#eval" << std::setw(10) << "value";
+        std::cout << std::setw(10) << "#eval" << std::setw(15) << "value";
         for (unsigned int i=0; i<8; ++i){
             std::cout << std::setw(10) << "x(" << i << ")";
         }
@@ -212,9 +212,9 @@ void printHeader(Epetra_Comm & comm){
 void printStatus(Epetra_Comm & comm, int eval, double value, Epetra_SerialDenseVector & x){
     comm.Barrier();
     if (comm.MyPID()==0){
-        std::cout << std::setw(10) << eval << std::setw(19) << std::scientific << value;
+        std::cout << std::setw(10) << eval << std::setw(15) << std::scientific << value;
         for (unsigned int j=0; j<x.Length(); ++j){
-            std::cout << std::setw(10) << x(j);
+            std::cout << std::setw(15) << x(j);
         }
         std::cout << "\n";
     }
