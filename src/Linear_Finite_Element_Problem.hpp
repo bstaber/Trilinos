@@ -12,10 +12,11 @@ public:
     ~Linear_Finite_Element_Problem(){
     };
     
-    Epetra_SerialDenseVector dead_pressure;
+    double pressure_load;
+    //Epetra_SerialDenseVector dead_pressure;
     
-    virtual void setup_dirichlet_conditions() = 0;
-    virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement) = 0;
+    //virtual void setup_dirichlet_conditions() = 0;
+    //virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement) = 0;
     
     mesh * Mesh;
     Epetra_Comm * Comm;
