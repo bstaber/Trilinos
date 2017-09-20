@@ -62,7 +62,12 @@ MPI_Init(&argc, &argv);
     Epetra_FEVector rhs(*interface->StandardMap);
     Epetra_Vector lhs(*interface->StandardMap);
     
+    stiffness.PutScalar(0.0);
+    rhs.PutScalar(0.0);
+    lhs.PutScalar(0.0);
+    
     interface->material_stiffness_and_rhs_dirichlet(stiffness);
+    interface->force_dead_pressure(rhs);
     
     //interface->assemble_dirichlet_dead_neumann(stiffness,rhs);
     //interface->apply_dirichlet_conditions(stiffness,rhs,displacement);
