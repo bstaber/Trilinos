@@ -6,6 +6,9 @@
 #include "Epetra_SerialComm.h"
 #endif
 
+#include "Teuchos_StandardCatchMacros.hpp"
+#include "Teuchos_ParameterList.hpp"
+#include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "orthotropicRF_laminate.hpp"
 
 int main(int argc, char *argv[]){
