@@ -6,6 +6,7 @@
 #include "Epetra_SerialComm.h"
 #endif
 
+#include "Teuchos_RCP.hpp"
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
