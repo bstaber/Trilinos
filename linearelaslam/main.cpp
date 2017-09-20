@@ -7,9 +7,17 @@
 #endif
 
 #include "Teuchos_RCP.hpp"
+#include "Ifpack.h"
+#include "Ifpack_AdditiveSchwarz.h"
+#include "BelosLinearProblem.hpp"
+#include "BelosBlockGmresSolMgr.hpp"
+#include "BelosEpetraAdapter.hpp"
+#include <BelosSolverFactory.hpp>
+#include "BelosBlockGmresSolMgr.hpp"
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
+#include "Stratimikos_DefaultLinearSolverBuilder.hpp"
 #include "orthotropicRF_laminate.hpp"
 
 int main(int argc, char *argv[]){
@@ -43,7 +51,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<orthotropicRF_laminate> interface = Teuchos::rcp(new orthotropicRF_laminate(Comm,*paramList));
+    Teuchos::RCP<orthotropicRF_Laminate> interface = Teuchos::rcp(new orthotropicRF_Laminate(Comm,*paramList));
     
     //->setup_bcs(choose displacement)
     //get_lhs_and_rhs
