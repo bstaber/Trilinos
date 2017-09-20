@@ -479,7 +479,7 @@ void hyperelasticity_setup::force_dead_pressure(Epetra_FEVector & F){
             }
         }
         
-        for (unsigned int inode=0; inode<6; ++inode){
+        for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             for (unsigned int iddl=0; iddl<3; ++iddl){
                 F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
             }
