@@ -57,7 +57,7 @@ void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & 
     K.PutScalar(0.0);
         
     //material_stiffness_and_rhs_dirichlet(K,F);
-    force_dead_pressure(F);
+    //force_dead_pressure(F);
     
     Comm->Barrier();
     
