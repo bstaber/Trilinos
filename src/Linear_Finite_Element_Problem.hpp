@@ -12,7 +12,7 @@ public:
     ~Linear_Finite_Element_Problem(){
     };
     
-    double pressure_load;
+    Epetra_SerialDenseVector dead_pressure;
         
     mesh * Mesh;
     Epetra_Comm * Comm;

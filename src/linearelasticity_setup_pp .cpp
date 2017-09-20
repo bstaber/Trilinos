@@ -2,6 +2,7 @@
 #include "fepp.hpp"
 
 LinearizedElasticity::LinearizedElasticity(){
+    dead_pressure.Resize(3);
 }
 
 LinearizedElasticity::~LinearizedElasticity(){
@@ -143,7 +144,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
         e_gid  = Mesh->local_faces[e_lid];
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             node = Mesh->faces_nodes[Mesh->face_type*e_gid+inode];
-            Indices_tri[3*inode] = 3*node;
+            Indices_tri[3*inode]   = 3*node;
             Indices_tri[3*inode+1] = 3*node+1;
             Indices_tri[3*inode+2] = 3*node+2;
             for (unsigned int iddl=0; iddl<3; ++iddl){
