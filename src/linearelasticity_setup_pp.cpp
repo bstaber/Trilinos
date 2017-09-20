@@ -35,14 +35,14 @@ void LinearizedElasticity::create_FECrsGraph(){
     delete[] index;
 }
 
-void LinearizedElasticity::assemble_dirichlet(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void LinearizedElasticity::assemble_dirichlet(Epetra_FECrsMatrix & K){
 
     int error;
     
     F.PutScalar(0.0);
     K.PutScalar(0.0);
     
-    material_stiffness_and_rhs_dirichlet(K,F);
+    material_stiffness_and_rhs_dirichlet(K);
     
     Comm->Barrier();
     
@@ -56,7 +56,7 @@ void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & 
     F.PutScalar(0.0);
     K.PutScalar(0.0);
         
-    material_stiffness_and_rhs_dirichlet(K,F);
+    material_stiffness_and_rhs_dirichlet(F);
     force_dead_pressure(F);
     
     Comm->Barrier();
@@ -66,7 +66,7 @@ void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & 
     F.GlobalAssemble();
 }
 
-void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K){
 
     /*int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;

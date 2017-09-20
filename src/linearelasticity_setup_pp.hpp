@@ -11,10 +11,10 @@ public:
     
     void create_FECrsGraph();
     
-    void assemble_dirichlet(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void assemble_dirichlet(Epetra_FECrsMatrix & K);
     void assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     
-    void material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K);
     void force_dead_pressure(Epetra_FEVector & F);
     
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);

@@ -62,9 +62,9 @@ MPI_Init(&argc, &argv);
     Epetra_FEVector rhs(*interface->StandardMap);
     Epetra_Vector lhs(*interface->StandardMap);
     
-    std::cout << stiffness;
+    interface->material_stiffness_and_rhs_dirichlet(stiffness);
     
-    interface->assemble_dirichlet_dead_neumann(stiffness,rhs);
+    //interface->assemble_dirichlet_dead_neumann(stiffness,rhs);
     //interface->apply_dirichlet_conditions(stiffness,rhs,displacement);
     
     //->setup_bcs(choose displacement)
