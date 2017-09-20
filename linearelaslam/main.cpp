@@ -62,6 +62,9 @@ MPI_Init(&argc, &argv);
     Epetra_FEVector rhs(*interface->StandardMap);
     Epetra_Vector lhs(*interface->StandardMap);
     
+    interface->assemble_dirichlet_dead_neumann(K,F);
+    interface->apply_dirichlet_conditions(K,F,displacement);
+    
     //->setup_bcs(choose displacement)
     //get_lhs_and_rhs
     //apply_bcs
