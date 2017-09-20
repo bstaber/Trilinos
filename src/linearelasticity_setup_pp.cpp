@@ -131,7 +131,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
     
     Epetra_SerialDenseVector force(3*Mesh->face_type);
     
-    for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
+    /*for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
         e_gid  = Mesh->local_faces[e_lid];
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             node = Mesh->faces_nodes[Mesh->face_type*e_gid+inode];
@@ -157,7 +157,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
             }
         }
         
-    }
+    }*/
 }
 
 void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B){
