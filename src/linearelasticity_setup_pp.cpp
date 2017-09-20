@@ -54,7 +54,7 @@ void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & 
     F.PutScalar(0.0);
     K.PutScalar(0.0);
         
-    material_stiffness_and_rhs_dirichlet(F);
+    material_stiffness_and_rhs_dirichlet(K);
     force_dead_pressure(F);
     
     Comm->Barrier();
@@ -66,7 +66,7 @@ void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & 
 
 void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K){
 
-    /*int node, e_gid, error;
+    int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
     double gauss_weight;
 
@@ -115,7 +115,7 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
                 error=K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
             }
         }
-    }*/
+    }
     
 }
 
