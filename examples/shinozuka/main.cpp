@@ -11,7 +11,6 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "shinozukapp.hpp"
-#include "NRL_ModelF.hpp"
 
 int main(int argc, char *argv[]){
     
@@ -73,7 +72,7 @@ int main(int argc, char *argv[]){
     double tau1 = 5.0; double tau2 = 8.0;
     RandomField->icdf_beta(V,B,tau1,tau2);
     
-    std::string path = "/Users/Brian/Documents/Thesis/Trilinos/examples/shinozuka/result/";
+    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/examples/shinozuka/";
     int NumTargetElements = 0;
     if (Comm.MyPID()==0){
         NumTargetElements = Mesh.n_nodes;
