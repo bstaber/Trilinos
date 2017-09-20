@@ -12,7 +12,6 @@ public:
     ~Linear_Finite_Element_Problem(){
     };
     
-    //double pressure_load;
     Epetra_SerialDenseVector dead_pressure;
     
     virtual void setup_dirichlet_conditions() = 0;
