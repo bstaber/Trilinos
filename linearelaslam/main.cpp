@@ -67,7 +67,7 @@ MPI_Init(&argc, &argv);
     lhs.PutScalar(0.0);
     
     interface->material_stiffness_and_rhs_dirichlet(stiffness);
-    //interface->force_dead_pressure(rhs);
+    interface->force_dead_pressure(rhs);
     
     //interface->assemble_dirichlet_dead_neumann(stiffness,rhs);
     //interface->apply_dirichlet_conditions(stiffness,rhs,displacement);
