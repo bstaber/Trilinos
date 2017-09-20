@@ -35,17 +35,14 @@ void LinearizedElasticity::create_FECrsGraph(){
     delete[] index;
 }
 
-void LinearizedElasticity::assemble_dirichlet(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void LinearizedElasticity::assemble_dirichlet(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
 
     int error;
     
     F.PutScalar(0.0);
     K.PutScalar(0.0);
     
-    Epetra_Vector u(*OverlapMap);
-    u.Import(x, *ImportToOverlapMap, Insert);
-    
-    material_stiffness_and_rhs_dirichlet(u,K,F);
+    material_stiffness_and_rhs_dirichlet(K,F);
     
     Comm->Barrier();
     
@@ -54,15 +51,12 @@ void LinearizedElasticity::assemble_dirichlet(Epetra_Vector & x, Epetra_FECrsMat
     error=F.GlobalAssemble();
 }
 
-void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
     
     F.PutScalar(0.0);
     K.PutScalar(0.0);
-    
-    Epetra_Vector u(*OverlapMap);
-    u.Import(x, *ImportToOverlapMap, Insert);
-    
-    material_stiffness_and_rhs_dirichlet(u,K,F);
+        
+    material_stiffness_and_rhs_dirichlet(K,F);
     force_dead_pressure(F);
     
     Comm->Barrier();
