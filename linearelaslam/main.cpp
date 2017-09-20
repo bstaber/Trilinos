@@ -51,7 +51,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<orthotropicRF_Laminate> interface = Teuchos::rcp(new orthotropicRF_Laminate(Comm,*paramList));
+    Teuchos::RCP<OrthotropicRF_Laminate> interface = Teuchos::rcp(new OrthotropicRF_Laminate(Comm,*paramList));
     
     //->setup_bcs(choose displacement)
     //get_lhs_and_rhs
