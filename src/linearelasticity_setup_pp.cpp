@@ -2,7 +2,7 @@
 #include "fepp.hpp"
 
 LinearizedElasticity::LinearizedElasticity(){
-    //dead_pressure.Resize(3);
+    dead_pressure.Resize(3);
 }
 
 LinearizedElasticity::~LinearizedElasticity(){
