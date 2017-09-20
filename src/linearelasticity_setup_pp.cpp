@@ -68,7 +68,7 @@ void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & 
 
 void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
 
-    int node, e_gid, error;
+    /*int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
     double gauss_weight;
 
@@ -114,10 +114,10 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
         
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
             for (unsigned int j=0; j<3*Mesh->el_type; ++j){
-                //error=K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
+                error=K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
             }
         }
-    }
+    }*/
     
 }
 
@@ -156,7 +156,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
         
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             for (unsigned int iddl=0; iddl<3; ++iddl){
-                //F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
+                F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
             }
         }
         
