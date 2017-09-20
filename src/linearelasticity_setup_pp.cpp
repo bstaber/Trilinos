@@ -129,10 +129,9 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
     int n_gauss_points = Mesh->n_gauss_faces;
     double gauss_weight;
     
-    Epetra_SerialDenseVector dead_pressure_load(3);
     Epetra_SerialDenseVector force(3*Mesh->face_type);
     
-    for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
+    /*for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
         e_gid  = Mesh->local_faces[e_lid];
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             node = Mesh->faces_nodes[Mesh->face_type*e_gid+inode];
@@ -147,7 +146,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
             gauss_weight = Mesh->gauss_weight_faces(gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    force(3*inode+iddl) += gauss_weight*dead_pressure_load(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
+                    force(3*inode+iddl) += gauss_weight*dead_pressure(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
                 }
             }
         }
@@ -158,7 +157,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
             }
         }
         
-    }
+    }*/
 }
 
 void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B){
