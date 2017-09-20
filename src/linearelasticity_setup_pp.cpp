@@ -146,7 +146,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
             gauss_weight = Mesh->gauss_weight_faces(gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    //force(3*inode+iddl) += gauss_weight*dead_pressure(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
+                    force(3*inode+iddl) += gauss_weight*dead_pressure(iddl); //*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
                 }
             }
         }
