@@ -72,7 +72,7 @@ int main(int argc, char *argv[]){
     double tau1 = 5.0; double tau2 = 8.0;
     RandomField->icdf_beta(V,B,tau1,tau2);
     
-    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/examples/shinozuka/";
+    /*std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/examples/shinozuka/";
     int NumTargetElements = 0;
     if (Comm.MyPID()==0){
         NumTargetElements = Mesh.n_nodes;
@@ -93,7 +93,8 @@ int main(int argc, char *argv[]){
     lhs_root.Export(V,ExportOnRoot,Insert);
     filename = path + "shinozuka_gaussian.mtx";
     error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
- 
+     */
+    
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
