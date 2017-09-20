@@ -101,7 +101,7 @@ public:
     
     void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix){
         
-        for (unsigned int i=0; i<tangent_matrix>M(); ++i){
+        for (unsigned int i=0; i<tangent_matrix.M(); ++i){
             for (unsigned int j=0; j<tangent_matrix.N(); ++j){
                 if (i==j){
                     tangent_matrix(i,j) = 1.0;
