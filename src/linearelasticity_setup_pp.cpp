@@ -39,7 +39,7 @@ void LinearizedElasticity::assemble_dirichlet(Epetra_FECrsMatrix & K){
 
     int error;
     
-    F.PutScalar(0.0);
+    K.PutScalar(0.0);
     
     material_stiffness_and_rhs_dirichlet(K);
     
