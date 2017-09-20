@@ -142,7 +142,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
                 force(3*inode+iddl) = 0.0;
             }
         }
-        /*for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+        for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_faces(gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
@@ -150,12 +150,12 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
                 }
             }
         }
-        */
+        /*
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             for (unsigned int iddl=0; iddl<3; ++iddl){
                 F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
             }
-        }
+        }*/
         
     }
 }
