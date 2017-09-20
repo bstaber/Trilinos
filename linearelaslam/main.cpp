@@ -75,7 +75,7 @@ MPI_Init(&argc, &argv);
     problem.SetLHS(&lhs);
     problem.SetRHS(&rhs);
     solver.SetProblem(problem);
-    solver.SetParameters(*paramList->sublist("Krylov"));
+    solver.SetParameters(paramList->sublist("Krylov"));
     
     //solver.Iterate(2000,1e-6);
     
