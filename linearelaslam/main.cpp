@@ -53,6 +53,15 @@ MPI_Init(&argc, &argv);
     
     Teuchos::RCP<OrthotropicRF_Laminate> interface = Teuchos::rcp(new OrthotropicRF_Laminate(Comm,*paramList));
     
+    double displacement = 1.0/1000.0;
+    interface->dead_pressure(0) = 0.0;
+    interface->dead_pressure(1) = 1.0;
+    interface->dead_pressure(2) = 0.0;
+    
+    Epetra_FECrsMatrix stiffness(Copy,*interface->FEGraph);
+    Epetra_FEVector rhs(*interface->StandardMap);
+    Epetra_Vector lhs(*interface->StandardMap);
+    
     //->setup_bcs(choose displacement)
     //get_lhs_and_rhs
     //apply_bcs
