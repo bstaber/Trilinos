@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<shinozuka> RandomField = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
     RandomField->rng.seed(std::time(0));
     
-    std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"),"mesh");
+    std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"),"mesh_file");
     //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/arteries/mesh/media_flatboundaries.msh";
     //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/nrl/mesh/composite_hexa.msh";
     
