@@ -11,7 +11,7 @@
         <Parameter name="order" type="int" value="30"/>
         <Parameter name="lx" type="double" value="0.005"/>
         <Parameter name="ly" type="double" value="0.005"/>
-        <Parameter name="lz" type="double" value="0.0002"/>
+        <Parameter name="lz" type="double" value="0.005"/>
     </ParameterList>
     
 </ParameterList>
