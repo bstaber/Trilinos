@@ -70,17 +70,21 @@ int main(int argc, char *argv[]){
     double GRFNorm2 = 0.0;
     
     if (Comm.MyPID()==0){
-        std::cout << std::setw(10) << "E(||V||^2)/npoints\n";
+        std::cout << std::setw(10) << "(||E{V.*V}||)\n";
     }
     for (unsigned int j=1; j<=nmc; ++j){
         RandomField->rng.seed(j);
         RandomField->generator(V,Mesh);
         
-        V.Multiply(1.0,v,v,0.0);
+        V.Multiply(1.0,V,V,0.0);
         scdOrderMoment.Update(1.0/double(j),V,(double(j)-1.0)/double(j));
-        scdOrderMoment.Norm2(convScdOrderMoment);
+        scdOrderMoment.Norm2(&convScdOrderMoment);
         convScdOrderMoment = std::sqrt(convScdOrderMoment);
         //scdOrderMoment = ((double(j)-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
+        
+        if (Comm.MyPID()==0){
+            std::cout << std::setw(10) << convScdOrderMoment << "\n";
+        }
     }
     
     //double alpha = 1.0/(0.10*0.10); double beta = 10.0*0.10*0.10;
