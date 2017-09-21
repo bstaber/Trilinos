@@ -74,6 +74,7 @@ int main(int argc, char *argv[]){
         scdOrderMoment += (double(j-1.0)/double(j))*scdOrderMoment + 1.0/double(j)*GRFNorm2;
     }
     
+    scdOrderMoment = scdOrderMoment/V.GlobalLength();
     if (Comm.MyPID()==0){
         std::cout << "\n E(||V||^2) = " << scdOrderMoment << "\n";
     }
