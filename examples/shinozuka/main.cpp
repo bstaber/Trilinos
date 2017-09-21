@@ -57,8 +57,10 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<shinozuka> RandomField = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
     
     Epetra_Vector V(StandardMap);
+    Epetra_Vector W(StandardMap);
     Epetra_Vector scdOrderMoment(StandardMap);
     
+    W.PutScalar(0.0);
     scdOrderMoment.PutScalar(0.0);
     double convScdOrderMoment = 0.0;
     double GRFNorm2 = 0.0;
@@ -70,8 +72,8 @@ int main(int argc, char *argv[]){
         RandomField->rng.seed(j);
         RandomField->generator(V,Mesh);
         
-        V.Multiply(1.0,V,V,0.0);
-        scdOrderMoment.Update(1.0/double(j),V,(double(j)-1.0)/double(j));
+        W.Multiply(1.0,V,V,0.0);
+        scdOrderMoment.Update(1.0/double(j),W,(double(j)-1.0)/double(j));
         scdOrderMoment.Norm2(&convScdOrderMoment);
         //scdOrderMoment = ((double(j)-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
         
