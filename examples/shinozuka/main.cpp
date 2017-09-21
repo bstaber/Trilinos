@@ -43,9 +43,6 @@ int main(int argc, char *argv[]){
             paramList->print(std::cout,2,true,true);
         }
     }
-
-    //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/arteries/mesh/media_flatboundaries.msh";
-    //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/nrl/mesh/composite_hexa.msh";
     
     std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"),"mesh_file");
     mesh Mesh(Comm,mesh_file);
@@ -58,10 +55,7 @@ int main(int argc, char *argv[]){
     double L3 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lz");
     
     Teuchos::RCP<shinozuka> RandomField = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
-    //RandomField->rng.seed(std::time(0));
     
-    //Epetra_Vector G(StandardMap);
-    //Epetra_Vector B(StandardMap);
     Epetra_Vector V(StandardMap);
     Epetra_Vector scdOrderMoment(StandardMap);
     
@@ -87,13 +81,14 @@ int main(int argc, char *argv[]){
     }
     convScdOrderMoment = convScdOrderMoment/std::sqrt(Mesh.n_nodes);
     
+    //Epetra_Vector G(StandardMap);
+    //Epetra_Vector B(StandardMap);
     //double alpha = 1.0/(0.10*0.10); double beta = 10.0*0.10*0.10;
     //RandomField->icdf_gamma(V,G,alpha,beta);
-    
     //double tau1 = 5.0; double tau2 = 8.0;
     //RandomField->icdf_beta(V,B,tau1,tau2);
     
-    /*std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/examples/shinozuka/";
+    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/examples/shinozuka/";
     int NumTargetElements = 0;
     if (Comm.MyPID()==0){
         NumTargetElements = Mesh.n_nodes;
@@ -107,6 +102,7 @@ int main(int argc, char *argv[]){
     std::string filename = path + "shinozuka_gaussian.mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
     
+    /*
     lhs_root.Export(G,ExportOnRoot,Insert);
     std::string filename = path + "shinozuka_gamma.mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
