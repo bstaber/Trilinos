@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
     for (unsigned int j=1; j<=nmc; ++j){
         RandomField->rng.seed(j);
         RandomField->generator(V,Mesh);
-        V.Norm2(GRFNorm2);
+        V.Norm2(&GRFNorm2);
         scdOrderMoment += (double(j-1.0)/double(j))*scdOrderMoment + 1.0/double(j)*GRFNorm2;
         if (Comm.MyPID()==0 || Comm.MyPID()==1){
             std::cout << scdOrderMoment << "\n";
