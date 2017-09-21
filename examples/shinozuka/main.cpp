@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
         V.Multiply(1.0,V,V,0.0);
         scdOrderMoment.Update(1.0/double(j),V,(double(j)-1.0)/double(j));
         scdOrderMoment.Norm2(&convScdOrderMoment);
-        convScdOrderMoment = std::sqrt(convScdOrderMoment);
+        convScdOrderMoment = convScdOrderMoment/std::sqrt(mesh.n_nodes);
         //scdOrderMoment = ((double(j)-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
         
         if (Comm.MyPID()==0){
