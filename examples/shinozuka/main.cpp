@@ -72,11 +72,11 @@ int main(int argc, char *argv[]){
         RandomField->generator(V,Mesh);
         V.Norm2(&GRFNorm2);
         scdOrderMoment += (double(j-1.0)/double(j))*scdOrderMoment + 1.0/double(j)*GRFNorm2;
-        if (Comm.MyPID()==0 || Comm.MyPID()==1){
-            std::cout << scdOrderMoment << "\n";
-        }
     }
     
+    if (Comm.MyPID()==0){
+        std::cout << "\n E(||V||^2) = " << scdOrderMoment << "\n";
+    }
     //double alpha = 1.0/(0.10*0.10); double beta = 10.0*0.10*0.10;
     //RandomField->icdf_gamma(V,G,alpha,beta);
     
