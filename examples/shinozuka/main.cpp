@@ -60,13 +60,13 @@ int main(int argc, char *argv[]){
     Teuchos::RCP<shinozuka> RandomField = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
     //RandomField->rng.seed(std::time(0));
     
-    Epetra_Vector V(StandardMap);
-    Epetra_Vector scdOrderMoment(StandardMap);
     //Epetra_Vector G(StandardMap);
     //Epetra_Vector B(StandardMap);
+    Epetra_Vector V(StandardMap);
+    Epetra_Vector scdOrderMoment(StandardMap);
     
+    scdOrderMoment.PutScalar(0.0);
     double convScdOrderMoment = 0.0;
-    double scdOrderMoment = 0.0;
     double GRFNorm2 = 0.0;
     
     if (Comm.MyPID()==0){
