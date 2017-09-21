@@ -101,21 +101,21 @@ int main(int argc, char *argv[]){
     Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
     Epetra_Export ExportOnRoot(StandardMap,MapOnRoot);
     Epetra_MultiVector lhs_root(MapOnRoot,true);
+    
+    lhs_root.PutScalar(0.0);
+    lhs_root.Export(V,ExportOnRoot,Insert);
+    std::string filename = path + "shinozuka_gaussian.mtx";
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+    
     lhs_root.Export(G,ExportOnRoot,Insert);
     std::string filename = path + "shinozuka_gamma.mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
-    
     lhs_root.PutScalar(0.0);
     lhs_root.Export(B,ExportOnRoot,Insert);
     filename = path + "shinozuka_beta.mtx";
     error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
-    
-    lhs_root.PutScalar(0.0);
-    lhs_root.Export(V,ExportOnRoot,Insert);
-    filename = path + "shinozuka_gaussian.mtx";
-    error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
-     */
-    
+    */
+     
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif

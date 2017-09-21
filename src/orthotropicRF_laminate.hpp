@@ -1,6 +1,7 @@
 #ifndef ORTHOTROPICRF_LAMINATE_HPP
 #define ORTHOTROPICRF_LAMINATE_HPP
 
+#include "shinozukapp.hpp"
 #include "tensor_calculus.hpp"
 #include "linearelasticity_setup_pp.hpp"
 
