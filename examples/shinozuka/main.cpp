@@ -74,13 +74,13 @@ int main(int argc, char *argv[]){
         RandomField->rng.seed(j);
         RandomField->generator(V,Mesh);
         V.Norm2(&GRFNorm2);
-        scdOrderMoment += (double(j-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*GRFNorm2*GRFNorm2;
+        scdOrderMoment += (double(j-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
         if (Comm.MyPID()==0){
-            std::cout << scdOrderMoment/V.GlobalLength() << "\n";
+            std::cout << scdOrderMoment << "\n";
         }
     }
     
-    scdOrderMoment = scdOrderMoment/V.GlobalLength();
+    //scdOrderMoment = scdOrderMoment/V.GlobalLength();
     if (Comm.MyPID()==0){
         std::cout << "\n\n E(||V||^2)/npoints = " << scdOrderMoment << "\n";
     }
