@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
     double GRFNorm2 = 0.0;
     
     if (Comm.MyPID()==0){
-        std::cout << "\n E(||V||^2)/npoints = ";
+        std::cout << std::setw(10) << "E(||V||^2)/npoints\n";
     }
     for (unsigned int j=1; j<=nmc; ++j){
         RandomField->rng.seed(j);
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
         V.Norm2(&GRFNorm2);
         scdOrderMoment = ((double(j)-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
         if (Comm.MyPID()==0){
-            std::cout << scdOrderMoment << "\n";
+            std::cout << std::setw(10) << scdOrderMoment << "\n";
         }
     }
     
