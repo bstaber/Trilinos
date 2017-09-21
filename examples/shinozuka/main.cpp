@@ -44,33 +44,42 @@ int main(int argc, char *argv[]){
         }
     }
 
+    //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/arteries/mesh/media_flatboundaries.msh";
+    //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/nrl/mesh/composite_hexa.msh";
+    
+    std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"),"mesh_file");
+    mesh Mesh(Comm,mesh_file);
+    Epetra_Map StandardMap(-1,Mesh.n_local_nodes_without_ghosts,&Mesh.local_nodes_without_ghosts[0],0,Comm);
+    
     int order = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
+    int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "nmc");
     double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double L3 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lz");
     
     Teuchos::RCP<shinozuka> RandomField = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
-    RandomField->rng.seed(std::time(0));
+    //RandomField->rng.seed(std::time(0));
     
-    std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"),"mesh_file");
-    //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/arteries/mesh/media_flatboundaries.msh";
-    //mesh_file = "/Users/Brian/Documents/Thesis/0-Trilinos/Trilinos/nrl/mesh/composite_hexa.msh";
-    
-    mesh Mesh(Comm,mesh_file);
-    Epetra_Map StandardMap(-1,Mesh.n_local_nodes_without_ghosts,&Mesh.local_nodes_without_ghosts[0],0,Comm);
-
     Epetra_Vector V(StandardMap);
-    Epetra_Vector G(StandardMap);
-    Epetra_Vector B(StandardMap);
+    //Epetra_Vector G(StandardMap);
+    //Epetra_Vector B(StandardMap);
     
-    RandomField->rng.seed(0);
-    RandomField->generator(V,Mesh);
+    double scdOrderMoment = 0.0;
     
-    double alpha = 1.0/(0.10*0.10); double beta = 10.0*0.10*0.10;
-    RandomField->icdf_gamma(V,G,alpha,beta);
+    for (unsigned int j=1; j<=nmc; ++j){
+        RandomField->rng.seed(j);
+        RandomField->generator(V,Mesh);
+        scdOrderMoment += (double(j-1.0)/double(j))*scdOrderMoment + 1.0/double(j)*V.Norm2();
+        if (Comm.MyPID()==0 || Comm.MyPID()==1){
+            std::cout << scdOrderMoment << "\n";
+        }
+    }
     
-    double tau1 = 5.0; double tau2 = 8.0;
-    RandomField->icdf_beta(V,B,tau1,tau2);
+    //double alpha = 1.0/(0.10*0.10); double beta = 10.0*0.10*0.10;
+    //RandomField->icdf_gamma(V,G,alpha,beta);
+    
+    //double tau1 = 5.0; double tau2 = 8.0;
+    //RandomField->icdf_beta(V,B,tau1,tau2);
     
     /*std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/examples/shinozuka/";
     int NumTargetElements = 0;
