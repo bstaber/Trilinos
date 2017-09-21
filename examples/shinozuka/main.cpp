@@ -61,9 +61,11 @@ int main(int argc, char *argv[]){
     //RandomField->rng.seed(std::time(0));
     
     Epetra_Vector V(StandardMap);
+    Epetra_Vector scdOrderMoment(StandardMap);
     //Epetra_Vector G(StandardMap);
     //Epetra_Vector B(StandardMap);
     
+    double convScdOrderMoment = 0.0;
     double scdOrderMoment = 0.0;
     double GRFNorm2 = 0.0;
     
@@ -73,17 +75,14 @@ int main(int argc, char *argv[]){
     for (unsigned int j=1; j<=nmc; ++j){
         RandomField->rng.seed(j);
         RandomField->generator(V,Mesh);
-        V.Norm2(&GRFNorm2);
-        scdOrderMoment = ((double(j)-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
-        if (Comm.MyPID()==0){
-            std::cout << std::setw(10) << scdOrderMoment << "\n";
-        }
+        
+        V.Multiply(1.0,v,v,0.0);
+        scdOrderMoment.Update(1.0/double(j),V,(double(j)-1.0)/double(j));
+        scdOrderMoment.Norm2(convScdOrderMoment);
+        convScdOrderMoment = std::sqrt(convScdOrderMoment);
+        //scdOrderMoment = ((double(j)-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
     }
     
-    //scdOrderMoment = scdOrderMoment/V.GlobalLength();
-    if (Comm.MyPID()==0){
-        std::cout << "\n\n E(||V||^2)/npoints = " << scdOrderMoment << "\n";
-    }
     //double alpha = 1.0/(0.10*0.10); double beta = 10.0*0.10*0.10;
     //RandomField->icdf_gamma(V,G,alpha,beta);
     
