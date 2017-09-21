@@ -82,10 +82,10 @@ int main(int argc, char *argv[]){
         //scdOrderMoment = ((double(j)-1.0)/double(j))*scdOrderMoment + (1.0/double(j))*V[0]*V[0];
         
         if (Comm.MyPID()==0){
-            std::cout << std::setw(10) << convScdOrderMoment/std::sqrt(mesh.n_nodes) << "\n";
+            std::cout << std::setw(10) << convScdOrderMoment/std::sqrt(Mesh.n_nodes) << "\n";
         }
     }
-    convScdOrderMoment = convScdOrderMoment/std::sqrt(mesh.n_nodes);
+    convScdOrderMoment = convScdOrderMoment/std::sqrt(Mesh.n_nodes);
     
     //double alpha = 1.0/(0.10*0.10); double beta = 10.0*0.10*0.10;
     //RandomField->icdf_gamma(V,G,alpha,beta);
