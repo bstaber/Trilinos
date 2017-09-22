@@ -40,6 +40,7 @@ public:
     Epetra_Map * StandardMap;
     Epetra_Import * ImportToOverlapMap;
     Epetra_FECrsGraph * FEGraph;
+    
 };
 
 #endif

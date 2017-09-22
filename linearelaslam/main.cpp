@@ -53,12 +53,14 @@ MPI_Init(&argc, &argv);
     
     Teuchos::RCP<OrthotropicRF_Laminate> interface = Teuchos::rcp(new OrthotropicRF_Laminate(Comm,*paramList));
     
-    double displacement = 1.0/1000.0;
-    interface->dead_pressure(0) = 0.0;
-    interface->dead_pressure(1) = 1.0;
-    interface->dead_pressure(2) = 0.0;
+    int * seed = new int [5];
+    seed[0] = 0; seed[1] = 1; seed[2] = 2; seed[3] = 3; seed[4] = 4;
     
-    Epetra_FECrsMatrix stiffness(Copy,*interface->FEGraph);
+    double displacement = 1.0/1000.0;
+    
+    interface->solveOneRealization(displacement,seed);
+    
+    /*Epetra_FECrsMatrix stiffness(Copy,*interface->FEGraph);
     Epetra_FEVector rhs(*interface->StandardMap);
     Epetra_Vector lhs(*interface->StandardMap);
     
@@ -78,7 +80,7 @@ MPI_Init(&argc, &argv);
     solver.SetParameters(paramList->sublist("Krylov"));
     
     solver.Iterate(2000,1e-6);
-    
+    */
     
 #ifdef HAVE_MPI
     MPI_Finalize();

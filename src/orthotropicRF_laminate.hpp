@@ -11,6 +11,8 @@ public:
     
     OrthotropicRF_Laminate(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
+        Krylov = &Parameters.sublist("Krylov");
+        
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         Mesh = new mesh(comm, mesh_file);
         Comm = Mesh->Comm;
@@ -21,11 +23,104 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
+        for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
+            for (unsigned int j=0; j<16; ++j){
+                phase.push_back(0);
+                phase.push_back(1);
+            }
+        }
+        
+        int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
+        double L1 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
+        double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
+        double L3 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lz");
+        
+        GRF_Generator = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
     }
     
     ~OrthotropicRF_Laminate(){
     }
+    
+    void solveOneRealization(double & bcDisp, int * seeds){
         
+        Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w2_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w3_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w4_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w5_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        
+        m1.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        m2.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        m3.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        m4.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        m5.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        
+        GRF_Generator->rng.seed(seeds[0]);
+        GRF_Generator->generator_gauss_points(w1_shino,*Mesh);
+        
+        GRF_Generator->rng.seed(seeds[1]);
+        GRF_Generator->generator_gauss_points(w2_shino,*Mesh);
+        
+        GRF_Generator->rng.seed(seeds[2]);
+        GRF_Generator->generator_gauss_points(w3_shino,*Mesh);
+        
+        GRF_Generator->rng.seed(seeds[3]);
+        GRF_Generator->generator_gauss_points(w4_shino,*Mesh);
+        
+        GRF_Generator->rng.seed(seeds[4]);
+        GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
+        
+        double deltaN = 0.05;
+        double alpha; double beta = 1.0;
+        double Psi1, Psi2;
+        
+        for (unsigned int i=0; i<w1_shino.Length(); ++i){
+            alpha = 3.0/(2.0*deltaN*deltaN) + (1.0-1.0)/2.0;
+            Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
+            m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
+            
+            alpha = 3.0/(2.0*deltaN*deltaN) + (1.0-2.0)/2.0;
+            Psi2 = icdf_gamma(w2_shino(i),alpha,beta);
+            m2(i) = (deltaN*deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
+            
+            m3(i) = (deltaN*deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
+            
+            alpha = 1.0/(0.10*0.10); beta = 1.0*0.10*0.10;
+            m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
+            m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
+        }
+        
+        Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
+        Epetra_FEVector    rhs(*StandardMap);
+        Epetra_Vector      lhs(*StandardMap);
+        
+        rhs.PutScalar(0.0);
+        lhs.PutScalar(0.0);
+        
+        assemble_dirichlet(linearOperator);
+        apply_dirichlet_conditions(linearOperator,rhs,bcDisp);
+        
+        Epetra_LinearProblem problem;
+        AztecOO solver;
+        
+        problem.SetOperator(&linearOperator);
+        problem.SetLHS(&lhs);
+        problem.SetRHS(&rhs);
+        solver.SetProblem(problem);
+        solver.SetParameters(*Krylov);
+        
+        solver.Iterate(2000,1e-6);
+        
+    }
+    
+    double icdf_gamma(double & w, double & alpha, double & beta){
+        double erfx = boost::math::erf<double>(w);
+        double y = (1.0/2.0)*(1.0 + erfx);
+        double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
+        double z = yinv*beta;
+        return z;
+    }
+    
     void setup_dirichlet_conditions(){
         n_bc_dof = 0;
         int dof = 1;
@@ -102,19 +197,78 @@ public:
     
     void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix){
         
-        for (unsigned int i=0; i<tangent_matrix.M(); ++i){
-            for (unsigned int j=0; j<tangent_matrix.N(); ++j){
-                if (i==j){
-                    tangent_matrix(i,j) = 1.0;
-                }
-                else{
-                    tangent_matrix(i,j) = 0.0;
-                }
-            }
-        }
+        int e_gid = Mesh->local_cells[e_lid];
+        int n_gauss_cells = Mesh->n_gauss_cells;
+        
+        Epetra_SerialDenseMatrix M(6,6);
+        double M1 = m1(e_lid*n_gauss_cells+gp);
+        double M2 = m2(e_lid*n_gauss_cells+gp);
+        double M3 = m3(e_lid*n_gauss_cells+gp);
+        double M4 = m4(e_lid*n_gauss_cells+gp);
+        double M5 = m5(e_lid*n_gauss_cells+gp);
+        
+        transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
+        tangent_matrix = M;
+    }
+    
+    void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
+        
+        C(0,0) = c1/16.0 + (9.0*c2)/32.0 + (9.0*c4)/32.0 + (3.0*c5)/8.0 + (3.0*std::sqrt(2.0)*c3)/16.0;
+        C(0,1) = (3.0*c1)/16.0 + (3.0*c2)/32.0 + (3.0*c4)/32.0 - (3.0*c5)/8.0 + (5.0*std::sqrt(2.0)*c3)/16.0;
+        C(0,2) = (3.0*c2)/8.0 - (3.0*c4)/8.0 + (std::sqrt(2.0)*c3)/8.0;
+        C(0,3) = 0.0;
+        C(0,4) = 0.0;
+        C(0,5) = std::sqrt(6)*(c1/16.0 - (3.0*c2)/32.0 - (3.0*c4)/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
+
+        C(1,0) = (3.0*c1)/16.0 + (3.0*c2)/32.0 + (3.0*c4)/32.0 - (3.0*c5)/8.0 + (5*std::sqrt(2.0)*c3)/16.0;
+        C(1,1) = (9.0*c1)/16.0 + c2/32.0 + c4/32.0 + (3.0*c5)/8.0 + (3.0*std::sqrt(2.0)*c3)/16.0;
+        C(1,2) = c2/8.0 - c4/8.0 + (3.0*std::sqrt(2.0)*c3)/8.0;
+        C(1,3) = 0.0;
+        C(1,4) = 0.0;
+        C(1,5) = -std::sqrt(6.0)*(c2/32.0 - (3.0*c1)/16.0 + c4/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
+        
+        C(2,0) = (3.0*c2)/8.0 - (3.0*c4)/8.0 + std::sqrt(2.0)*c3/8.0;
+        C(2,1) = c2/8.0 - c4/8.0 + (3.0*std::sqrt(2.0)*c3)/8.0;
+        C(2,2) = c2/2.0 + c4/2.0;
+        C(2,3) = 0.0;
+        C(2,4) = 0.0;
+        C(2,5) = (std::sqrt(3.0)*(2.0*c3 - std::sqrt(2.0)*c2 + std::sqrt(2.0)*c4))/8.0;
+        
+        C(3,0) = 0.0;
+        C(3,1) = 0.0;
+        C(3,2) = 0.0;
+        C(3,3) = c4/4.0 + (3.0*c5)/4.0;
+        C(3,4) = -(std::sqrt(3.0)*(c4 - c5))/4.0;
+        C(3,5) = 0.0;
+        
+        C(4,0) = 0.0;
+        C(4,1) = 0.0;
+        C(4,2) = 0.0;
+        C(4,3) = -(std::sqrt(3.0)*(c4 - c5))/4.0;
+        C(4,4) = (3.0*c4)/4.0 + c5/4.0;
+        C(4,5) = 0.0;
+        
+        C(5,0) = std::sqrt(6.0)*(c1/16.0 - (3.0*c2)/32.0 - (3.0*c4)/32.0 + c5/8.0 + std::sqrt(2.0)*c3/16.0);
+        C(5,1) = -std::sqrt(6.0)*(c2/32.0 - (3.0*c1)/16.0 + c4/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
+        C(5,2) = (std::sqrt(3.0)*(2.0*c3 - std::sqrt(2.0)*c2 + std::sqrt(2.0)*c4))/8.0;
+        C(5,3) = 0.0;
+        C(5,4) = 0.0;
+        C(5,5) = (3.0*c1)/8.0 + (3.0*c2)/16.0 + (3.0*c4)/16.0 + c5/4.0 - (3.0*std::sqrt(2.0)*c3)/8.0;
         
     }
     
+    Teuchos::ParameterList * Krylov;
+    Teuchos::RCP<shinozuka> GRF_Generator;
+    
+    Epetra_SerialDenseVector m1;
+    Epetra_SerialDenseVector m2;
+    Epetra_SerialDenseVector m3;
+    Epetra_SerialDenseVector m4;
+    Epetra_SerialDenseVector m5;
+    
+    std::vector<int> phase;
+    
 };
+
 
 #endif
