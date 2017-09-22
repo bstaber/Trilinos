@@ -60,27 +60,6 @@ MPI_Init(&argc, &argv);
     
     interface->solveOneRealization(displacement,seed);
     
-    /*Epetra_FECrsMatrix stiffness(Copy,*interface->FEGraph);
-    Epetra_FEVector rhs(*interface->StandardMap);
-    Epetra_Vector lhs(*interface->StandardMap);
-    
-    rhs.PutScalar(0.0);
-    lhs.PutScalar(0.0);
-    
-    interface->assemble_dirichlet(stiffness);
-    interface->apply_dirichlet_conditions(stiffness,rhs,displacement);
-    
-    Epetra_LinearProblem problem;
-    AztecOO solver;
-    
-    problem.SetOperator(&stiffness);
-    problem.SetLHS(&lhs);
-    problem.SetRHS(&rhs);
-    solver.SetProblem(problem);
-    solver.SetParameters(paramList->sublist("Krylov"));
-    
-    solver.Iterate(2000,1e-6);
-    */
     
 #ifdef HAVE_MPI
     MPI_Finalize();
