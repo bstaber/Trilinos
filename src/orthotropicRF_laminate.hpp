@@ -200,15 +200,40 @@ public:
         int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
         
+        double epsilon = 1.0e-6;
         Epetra_SerialDenseMatrix M(6,6);
-        double M1 = m1(e_lid*n_gauss_cells+gp);
-        double M2 = m2(e_lid*n_gauss_cells+gp);
+        double M1 = m1(e_lid*n_gauss_cells+gp) + epsilon;
+        double M2 = m2(e_lid*n_gauss_cells+gp) + epsilon;
         double M3 = m3(e_lid*n_gauss_cells+gp);
-        double M4 = m4(e_lid*n_gauss_cells+gp);
-        double M5 = m5(e_lid*n_gauss_cells+gp);
+        double M4 = m4(e_lid*n_gauss_cells+gp) + epsilon;
+        double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
-        tangent_matrix = M;
+        
+        double c1 = 144.8969*1.0e9;
+        double c2 = 14.2500*1.0e9;
+        double c3 = 5.8442*1.0e9;
+        double c4 = 7.5462*1.0e9;
+        double c5 = 12.5580*1.0e9;
+        
+        double constant = std::sqrt(c1*c1-2.0*c1*c2+c2*c2+4.0*c3*c3);
+        
+        double d1 = (std::sqrt(2.0)*(c1-c2+constant)*std::sqrt(c1+c2+constant))/(4.0*constant) + (std::sqrt(2.0)*(c2-c1+constant)*std::sqrt(c1+c2-constant))/(4.0*constant);
+        double d2 = (std::sqrt(2.0)*(c2-c1+constant)*std::sqrt(c1+c2+constant))/(4.0*constant) + (std::sqrt(2.0)*(c1-c2+constant)*std::sqrt(c1+c2-constant))/(4.0*constant);
+        double d3 = std::sqrt(2.0)*c3*( std::sqrt(c1+c2+constant) - std::sqrt(c1+c2-constant) )/( 2.0*constant );
+        double d4 = std::sqrt(c4);
+        double d5 = std::sqrt(c5);
+        
+        Epetra_SerialDenseMatrix sqrtmCmoy(6,6);
+        transverse_isotropic_matrix(sqrtmCmoy,d1,d2,d3,d4,d5);
+        
+        Epetra_SerialDenseMatrix AtimesB(6,6);
+        
+        AtimesB.Multiply('N','N',1.0,M,sqrtmCmoy,0.0);
+        tangent_matrix.Multiply('N','N',1.0,sqrtmCmoy,AtimesB,0.0);
+        
+        tangent_matrix.Scale(1.0/(1.0+epsilon));
+        
     }
     
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
