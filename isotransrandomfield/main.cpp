@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
     
     // it gives the translated field but not the coefficients M1,...,M5.
     
-    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/isotransrandomfield/";
+    /*std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/isotransrandomfield/";
     int NumTargetElements = 0;
     if (Comm.MyPID()==0){
         NumTargetElements = Mesh.n_nodes;
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
     lhs_root.PutScalar(0.0);
     lhs_root.Export(G,ExportOnRoot,Insert);
     std::string filename = path + "shinozuka_translatedfield.mtx";
-    int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);*/
      
 #ifdef HAVE_MPI
     MPI_Finalize();
