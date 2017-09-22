@@ -59,6 +59,8 @@ MPI_Init(&argc, &argv);
     double displacement = 1.0/1000.0;
     
     interface->solveOneRealization(displacement,seed);
+    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/linearelaslam/stochastic_solution.mtx";
+    interface->print_solution(path);
     
     
 #ifdef HAVE_MPI

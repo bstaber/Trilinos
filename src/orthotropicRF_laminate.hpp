@@ -23,8 +23,8 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
-        for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
-            for (unsigned int j=0; j<16; ++j){
+        for (unsigned int e=0; e<Mesh->n_cells/4; ++e){
+            for (unsigned int j=0; j<2; ++j){
                 phase.push_back(0);
                 phase.push_back(1);
             }
@@ -36,6 +36,8 @@ public:
         double L3 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lz");
         
         GRF_Generator = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
+        
+        x = new Epetra_Vector(*StandardMap);
     }
     
     ~OrthotropicRF_Laminate(){
@@ -110,6 +112,8 @@ public:
         solver.SetParameters(*Krylov);
         
         solver.Iterate(2000,1e-6);
+        
+        *x = lhs;
         
     }
     
@@ -234,10 +238,21 @@ public:
         
         tangent_matrix.Scale(1.0/(1.0+epsilon));
         
+        if(phase[e_gid]==1){
+            tangent_matrix(0,5) = -tangent_matrix(0,5);
+            tangent_matrix(5,0) = -tangent_matrix(5,0);
+            tangent_matrix(1,5) = -tangent_matrix(1,5);
+            tangent_matrix(5,1) = -tangent_matrix(5,1);
+            tangent_matrix(2,5) = -tangent_matrix(2,5);
+            tangent_matrix(5,2) = -tangent_matrix(5,2);
+            tangent_matrix(3,4) = -tangent_matrix(3,4);
+            tangent_matrix(4,3) = -tangent_matrix(4,3);
+        }
+        
     }
     
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
-        
+                
         C(0,0) = c1/16.0 + (9.0*c2)/32.0 + (9.0*c4)/32.0 + (3.0*c5)/8.0 + (3.0*std::sqrt(2.0)*c3)/16.0;
         C(0,1) = (3.0*c1)/16.0 + (3.0*c2)/32.0 + (3.0*c4)/32.0 - (3.0*c5)/8.0 + (5.0*std::sqrt(2.0)*c3)/16.0;
         C(0,2) = (3.0*c2)/8.0 - (3.0*c4)/8.0 + (std::sqrt(2.0)*c3)/8.0;
@@ -282,6 +297,24 @@ public:
         
     }
     
+    int print_solution(std::string fileName){
+        
+        int NumTargetElements = 0;
+        if (Comm->MyPID()==0){
+            NumTargetElements = 3*Mesh->n_nodes;
+        }
+        Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+        Epetra_Export ExportOnRoot(*StandardMap,MapOnRoot);
+        Epetra_MultiVector lhs_root(MapOnRoot,true);
+        lhs_root.Export(*x,ExportOnRoot,Insert);
+        
+        int error = EpetraExt::MultiVectorToMatrixMarketFile(fileName.c_str(),lhs_root,0,0,false);
+        
+        return error;
+        
+    }
+    
+    Epetra_Vector * x;
     Teuchos::ParameterList * Krylov;
     Teuchos::RCP<shinozuka> GRF_Generator;
     
