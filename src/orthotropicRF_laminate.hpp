@@ -213,9 +213,9 @@ public:
         double M4 = 1.0 + epsilon; //m4(e_lid*n_gauss_cells+gp) + epsilon;
         double M5 = 1.0 + epsilon; //m5(e_lid*n_gauss_cells+gp) + epsilon;
         
-        transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
+        transverse_isotropic_matrix(tangent_matrix,M1,M2,M3,M4,M5);
         
-        double c1 = 144.8969*1.0e9;
+        /*double c1 = 144.8969*1.0e9;
         double c2 = 14.2500*1.0e9;
         double c3 = 5.8442*1.0e9;
         double c4 = 7.5462*1.0e9;
@@ -249,7 +249,7 @@ public:
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
         }
-        
+        */
     }
     
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
