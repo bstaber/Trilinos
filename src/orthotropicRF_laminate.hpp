@@ -60,16 +60,16 @@ public:
         GRF_Generator->rng.seed(seeds[0]);
         GRF_Generator->generator_gauss_points(w1_shino,*Mesh);
         
-        //GRF_Generator->rng.seed(seeds[1]);
+        GRF_Generator->rng.seed(seeds[1]);
         GRF_Generator->generator_gauss_points(w2_shino,*Mesh);
         
-        //GRF_Generator->rng.seed(seeds[2]);
+        GRF_Generator->rng.seed(seeds[2]);
         GRF_Generator->generator_gauss_points(w3_shino,*Mesh);
         
-        //GRF_Generator->rng.seed(seeds[3]);
+        GRF_Generator->rng.seed(seeds[3]);
         GRF_Generator->generator_gauss_points(w4_shino,*Mesh);
         
-        //GRF_Generator->rng.seed(seeds[4]);
+        GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
         
         double deltaN = 0.05;
