@@ -72,7 +72,7 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
         
-        double deltaN = 0.10;
+        double deltaN = 0.05;
         double deltaM = 0.10;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
@@ -207,11 +207,11 @@ public:
         
         double epsilon = 1.0e-6;
         Epetra_SerialDenseMatrix M(6,6);
-        double M1 = m1(e_lid*n_gauss_cells+gp) + epsilon;
-        double M2 = m2(e_lid*n_gauss_cells+gp) + epsilon;
-        double M3 = m3(e_lid*n_gauss_cells+gp);
-        double M4 = m4(e_lid*n_gauss_cells+gp) + epsilon;
-        double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
+        double M1 = 1.0 + epsilon; //m1(e_lid*n_gauss_cells+gp) + epsilon;
+        double M2 = 1.0 + epsilon; //m2(e_lid*n_gauss_cells+gp) + epsilon;
+        double M3 = 0.0 + epsilon; //m3(e_lid*n_gauss_cells+gp);
+        double M4 = 1.0 + epsilon; //m4(e_lid*n_gauss_cells+gp) + epsilon;
+        double M5 = 1.0 + epsilon; //m5(e_lid*n_gauss_cells+gp) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
