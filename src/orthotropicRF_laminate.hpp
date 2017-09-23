@@ -245,7 +245,6 @@ public:
         AtimesB.Multiply('N','N',1.0,M,sqrtmCmoy,0.0);
         tangent_matrix.Multiply('N','N',1.0,sqrtmCmoy,AtimesB,0.0);
         
-        tangent_matrix.Scale(1.0/(1.0+epsilon));
         if(phase[e_gid]==1){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
@@ -256,6 +255,8 @@ public:
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
         }
+        
+        tangent_matrix.Scale(1.0/(1.0+epsilon));
         
     }
     
