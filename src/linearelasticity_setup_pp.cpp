@@ -208,7 +208,6 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     
     Epetra_SerialDenseVector epsilon(6);
     Epetra_SerialDenseVector cauchy_stress(6);
-    Epetra_SerialDenseVector B_times_epsilon(6);
     Epetra_SerialDenseVector vector_u(3*Mesh->el_type);
     Epetra_SerialDenseMatrix tangent_matrix(6,6);
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
@@ -236,10 +235,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             compute_B_matrices(dx_shape_functions,matrix_B);
             epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
             get_elasticity_tensor(e_lid, gp, tangent_matrix);
-            B_times_epsilon.Multiply('N','N',1.0,matrix_B,epsilon,0.0);
-            cauchy_stress.Multiply('N','N',1.0,tangent_matrix,B_times_epsilon,0.0);
-            
-            std::cout << cauchy_stress;
+            cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
             
             sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0);
             sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(1);
