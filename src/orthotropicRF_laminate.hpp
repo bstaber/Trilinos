@@ -23,7 +23,7 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
-        for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
+        for (unsigned int e=0; e<Mesh->n_cells/16; ++e){
             for (unsigned int j=0; j<2; ++j){
                 phase.push_back(0);
                 phase.push_back(1);
@@ -239,7 +239,7 @@ public:
         
         tangent_matrix.Scale(1.0/(1.0+epsilon));
         
-        /*if(phase[e_gid]==1){
+        if(phase[e_gid]==1){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);
@@ -248,7 +248,7 @@ public:
             tangent_matrix(5,2) = -tangent_matrix(5,2);
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
-        }*/
+        }
         
     }
     
