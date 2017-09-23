@@ -41,7 +41,7 @@
         <Parameter name="ilut_fill" type="double" value="4.0"/>
         <!--Parameter name="AZ_conv" type="string" value="noscaled"/-->
         <Parameter name="AZ_tol" type="double" value="1e-6"/>
-        <Parameter name="AZ_output" type="int" value="AZ_last"/>
+        <Parameter name="AZ_output" type="int" value="summary"/>
         <Parameter name="AZ_diagnostics" type="string" value="all"/>
         <Parameter name="AZ_reorder" type="int" value="1"/>
     </ParameterList>
