@@ -49,7 +49,7 @@
     <ParameterList name="Krylov">
         <Parameter name="solver" type="string" value="cg"/>
         <Parameter name="precond" type="string" value="Jacobi"/>
-        <Parameter name="AZ_conv" type="string" value="noscaled"/>
+        <!--Parameter name="AZ_conv" type="string" value="noscaled"/-->
         <Parameter name="AZ_tol" type="double" value="1e-6"/>
         <Parameter name="AZ_output" type="int" value="1"/>
         <Parameter name="AZ_diagnostics" type="string" value="all"/>
