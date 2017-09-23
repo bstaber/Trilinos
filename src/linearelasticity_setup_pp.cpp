@@ -239,12 +239,12 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             B_times_epsilon.Multiply('N','N',1.0,matrix_B,epsilon,0.0);
             cauchy_stress.Multiply('N','N',1.0,tangent_matrix,B_times_epsilon,0.0);
             
-            sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0,0);
-            sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(1,1);
-            sigma33[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(2,2);
-            sigma12[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0,1);
-            sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0,2);
-            sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(1,2);
+            sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0);
+            sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(1);
+            sigma33[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(2);
+            sigma12[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(5);
+            sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(4);
+            sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(3);
             
             theta += gauss_weight*det*Mesh->detJac_tetra(e_lid,gp);
             
