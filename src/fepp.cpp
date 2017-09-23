@@ -87,13 +87,13 @@ void tri6::dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMa
 
 void hexa8::shape_functions(Epetra_SerialDenseVector & N, double & xi, double & eta, double & zeta){
     N(0) = (1.0/8.0)*(1.0-xi)*(1.0-eta)*(1.0-zeta);
-    N(1) = (1.0/8.0)*(1.0+xi)*(1.0-eta)*(1.0-zeta);
-    N(2) = (1.0/8.0)*(1.0+xi)*(1.0+eta)*(1.0-zeta);
+    N(1) = (1.0/8.0)*(1.0+xi)*(1.0+eta)*(1.0-zeta);
+    N(2) = (1.0/8.0)*(1.0+xi)*(1.0-eta)*(1.0-zeta);
     N(3) = (1.0/8.0)*(1.0-xi)*(1.0+eta)*(1.0-zeta);
-    N(4) = (1.0/8.0)*(1.0-xi)*(1.0-eta)*(1.0+zeta);
+    N(4) = (1.0/8.0)*(1.0-xi)*(1.0+eta)*(1.0+zeta);
     N(5) = (1.0/8.0)*(1.0+xi)*(1.0-eta)*(1.0+zeta);
     N(6) = (1.0/8.0)*(1.0+xi)*(1.0+eta)*(1.0+zeta);
-    N(7) = (1.0/8.0)*(1.0-xi)*(1.0+eta)*(1.0+zeta);
+    N(7) = (1.0/8.0)*(1.0-xi)*(1.0-eta)*(1.0+zeta);
 }
 
 void hexa8::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double & eta, double & zeta){

@@ -106,13 +106,13 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
             compute_B_matrices(dx_shape_functions,matrix_B);
             get_elasticity_tensor(e_lid, gp, tangent_matrix);
             
-            error=B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
-            error=Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
+            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
+            error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
         }
         
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
             for (unsigned int j=0; j<3*Mesh->el_type; ++j){
-                error=K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
+                error = K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
             }
         }
     }
