@@ -61,6 +61,8 @@ MPI_Init(&argc, &argv);
     interface->solveOneRealization(displacement,seed);
     //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/linearelaslam/stochastic_solution.mtx";
     std::string path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution.mtx";
+    //std::string path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution";
+    //interface->compute_mean_cauchy_stress(*interface->x, filename);
     interface->print_solution(path);
     
     
