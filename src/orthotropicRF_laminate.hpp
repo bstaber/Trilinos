@@ -238,7 +238,7 @@ public:
         
         tangent_matrix.Scale(1.0/(1.0+epsilon));
         
-        if(phase[e_gid]==1){
+        if(phase[e_gid]==0){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);
