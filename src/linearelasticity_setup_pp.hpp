@@ -19,6 +19,8 @@ public:
     
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
     
+    void compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename);
+    
     virtual void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix) = 0;
     
     unsigned int n_bc_dof;
