@@ -73,6 +73,7 @@ public:
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
         
         double deltaN = 0.05;
+        double deltaM = 0.05;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
@@ -87,7 +88,7 @@ public:
             
             m3(i) = (deltaN*deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
             
-            alpha = 1.0/(0.10*0.10); beta = 1.0*0.10*0.10;
+            alpha = 1.0/(deltaM*deltaM); beta = 1.0*deltaM*deltaM;
             m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
         }
@@ -238,7 +239,7 @@ public:
         
         tangent_matrix.Scale(1.0/(1.0+epsilon));
         
-        if(phase[e_gid]==1){
+        /*if(phase[e_gid]==1){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);
@@ -247,7 +248,7 @@ public:
             tangent_matrix(5,2) = -tangent_matrix(5,2);
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
-        }
+        }*/
         
     }
     
