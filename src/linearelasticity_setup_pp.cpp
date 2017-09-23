@@ -204,7 +204,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     
     int node, e_gid;
     int n_gauss_points = Mesh->n_gauss_cells;
-    double det_jac_tetra, det, gauss_weight, theta;
+    double det_jac_tetra, gauss_weight, theta;
     
     Epetra_SerialDenseVector epsilon(6);
     Epetra_SerialDenseVector cauchy_stress(6);
@@ -244,10 +244,9 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(4);
             sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(3);
             
-            theta += gauss_weight*det*Mesh->detJac_tetra(e_lid,gp);
+            theta += gauss_weight*Mesh->detJac_tetra(e_lid,gp);
             
         }
-        std::cout << "\theta = " << theta << "\n";
         sigma11[e_lid] = sigma11[e_lid]/theta;
         sigma22[e_lid] = sigma22[e_lid]/theta;
         sigma33[e_lid] = sigma33[e_lid]/theta;
