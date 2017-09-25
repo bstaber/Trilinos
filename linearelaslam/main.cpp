@@ -54,18 +54,16 @@ MPI_Init(&argc, &argv);
     Teuchos::RCP<OrthotropicRF_Laminate> interface = Teuchos::rcp(new OrthotropicRF_Laminate(Comm,*paramList));
     
     int * seed = new int [5];
+    seed[0] = 0; seed[1] = 1; seed[2] = 2; seed[3] = 3; seed[4] = 4;
+    
     double displacement = 1.0/1000.0;
     
-    for (unsigned int j = 0; j<1; j++){
-        seed[0] = 5*j; seed[1] = 5*j+1; seed[2] = 5*j+2; seed[3] = 5*j+3; seed[4] = 5*j+4;
-    
-        interface->solveOneRealization(displacement,seed);
-        //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/linearelaslam/stochastic_solution.mtx";
-        std::string path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution_" + std::to_string(j) + ".mtx";
-        interface->print_solution(path);
-        path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution";
-        interface->compute_mean_cauchy_stress(*interface->x, path, true, true);
-    }
+    interface->solveOneRealization(displacement,seed);
+    //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/linearelaslam/stochastic_solution.mtx";
+    std::string path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution_" + std::to_string(0) + ".mtx";
+    interface->print_solution(path);
+    path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution";
+    interface->compute_mean_cauchy_stress(*interface->x, path, true, true);
     
 #ifdef HAVE_MPI
     MPI_Finalize();
