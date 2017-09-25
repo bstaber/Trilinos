@@ -56,7 +56,7 @@ MPI_Init(&argc, &argv);
     int * seed = new int [5];
     seed[0] = 0; seed[1] = 1; seed[2] = 2; seed[3] = 3; seed[4] = 4;
     
-    double displacement = 1.0/1000.0;
+    double displacement = 5.0/1000.0;
     
     interface->solveOneRealization(displacement,seed);
     //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/linearelaslam/stochastic_solution.mtx";
