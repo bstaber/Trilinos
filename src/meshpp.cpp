@@ -597,8 +597,6 @@ void mesh::store_feinterp_tetra(){
         }
     }
     
-    std::cout << detJac_tetra << "\n";
-    
 }
 
 
