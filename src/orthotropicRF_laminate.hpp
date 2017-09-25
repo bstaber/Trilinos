@@ -209,11 +209,11 @@ public:
         
         double epsilon = 1.0e-6;
         Epetra_SerialDenseMatrix M(6,6);
-        double M1 = 1.0; //m1(e_lid*n_gauss_cells+gp) + epsilon;
-        double M2 = 1.0; //m2(e_lid*n_gauss_cells+gp) + epsilon;
-        double M3 = 0.0; //m3(e_lid*n_gauss_cells+gp);
-        double M4 = 1.0; //m4(e_lid*n_gauss_cells+gp) + epsilon;
-        double M5 = 1.0; //m5(e_lid*n_gauss_cells+gp) + epsilon;
+        double M1 = m1(e_lid*n_gauss_cells+gp) + epsilon;
+        double M2 = m2(e_lid*n_gauss_cells+gp) + epsilon;
+        double M3 = m3(e_lid*n_gauss_cells+gp);
+        double M4 = m4(e_lid*n_gauss_cells+gp) + epsilon;
+        double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
@@ -247,7 +247,7 @@ public:
         AtimesB.Multiply('N','N',1.0,M,sqrtmCmoy,0.0);
         tangent_matrix.Multiply('N','N',1.0,sqrtmCmoy,AtimesB,0.0);
         
-        if(phase[e_gid]==1){
+        /*if(phase[e_gid]==1){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);
@@ -256,7 +256,7 @@ public:
             tangent_matrix(5,2) = -tangent_matrix(5,2);
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
-        }
+        }*/
         
         //tangent_matrix.Scale(1.0/(1.0+epsilon));
         
