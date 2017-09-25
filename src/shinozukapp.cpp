@@ -86,7 +86,9 @@ void shinozuka::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh
                 psi = psi_(rng);
                 phi = phi_(rng);
                 
-                std::cout << psi << "\n";
+                if (k==10){
+                    std::cout << psi << "\n";
+                }
                 w = std::sqrt(-std::log(psi));
                 
                 for (int e_lid=0; e_lid<n_local_cells; ++e_lid){
