@@ -224,6 +224,8 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             vector_u(3*inode+2) = u[OverlapMap->LID(3*node+2)];
         }
         
+        std::cout << vector_u << "\n";
+        
         theta = 0.0;
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
