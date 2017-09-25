@@ -263,7 +263,7 @@ public:
         for (unsigned int i=0; i<6; ++i){
             for (unsigned int j=0; j<6; ++j){
                 if (i==j){
-                    tangent_matrix(i,i) = 1.0;
+                    tangent_matrix(i,i) = 1.0e9;
                 }
                 else{
                     tangent_matrix(i,j) = 0.0;
