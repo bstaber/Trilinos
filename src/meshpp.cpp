@@ -582,8 +582,8 @@ void mesh::store_feinterp_tetra(){
                     tetra10::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                     break;
             }
-            std::cout << D << "\n";
             jacobian_matrix(X,D,JacobianMatrix);
+            std::cout << JacobianMatrix << "\n";
             jacobian_det(JacobianMatrix,detJac_tetra(eloc,gp));
             dX_shape_functions(D,JacobianMatrix,detJac_tetra(eloc,gp),DX);
             vol_tetra(eloc) += gauss_weight_cells(gp)*detJac_tetra(eloc,gp);
