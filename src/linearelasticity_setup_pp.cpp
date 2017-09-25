@@ -105,6 +105,7 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
             
             compute_B_matrices(dx_shape_functions,matrix_B);
             get_elasticity_tensor(e_lid, gp, tangent_matrix);
+            std::cout << tangent_matrix << "\n";
             
             error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
