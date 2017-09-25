@@ -116,7 +116,7 @@ public:
         
         solver.Iterate(2000,1e-6);
         
-        *x = lhs;
+        *solution = lhs;
         
     }
     
@@ -317,7 +317,7 @@ public:
         Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
         Epetra_Export ExportOnRoot(*StandardMap,MapOnRoot);
         Epetra_MultiVector lhs_root(MapOnRoot,true);
-        lhs_root.Export(*x,ExportOnRoot,Insert);
+        lhs_root.Export(*solution,ExportOnRoot,Insert);
         
         int error = EpetraExt::MultiVectorToMatrixMarketFile(fileName.c_str(),lhs_root,0,0,false);
         
@@ -325,7 +325,7 @@ public:
         
     }
     
-    Epetra_Vector * x;
+    Epetra_Vector * solution;
     Teuchos::ParameterList * Krylov;
     Teuchos::RCP<shinozuka> GRF_Generator;
     
