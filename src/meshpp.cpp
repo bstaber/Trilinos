@@ -529,8 +529,6 @@ void mesh::store_feinterp_tetra(){
     DX_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
     DY_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
     DZ_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
-
-    double volume = 0.0;
     
     switch (el_type){
         case 4:
@@ -588,7 +586,6 @@ void mesh::store_feinterp_tetra(){
             jacobian_det(JacobianMatrix,detJac_tetra(eloc,gp));
             dX_shape_functions(D,JacobianMatrix,detJac_tetra(eloc,gp),DX);
             vol_tetra(eloc) += gauss_weight_cells(gp)*detJac_tetra(eloc,gp);
-            volume += vol_tetra(eloc);
             
             for (int inode=0; inode<el_type; ++inode){
                 DX_N_tetra(gp+n_gauss_cells*inode,eloc) = DX(inode,0);
@@ -597,8 +594,6 @@ void mesh::store_feinterp_tetra(){
             }
         }
     }
-    
-    std::cout << volume << "\n";
     
 }
 
