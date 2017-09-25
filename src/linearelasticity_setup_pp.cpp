@@ -237,7 +237,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             }
             
             compute_B_matrices(dx_shape_functions,matrix_B);
-            epsilon.Multiply('N','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,vector_u,1.0);
+            epsilon.Multiply('N','N',1.0,matrix_B,vector_u,1.0);
             //get_elasticity_tensor(e_lid, gp, tangent_matrix);
             //cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
             
@@ -252,12 +252,12 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             
         }
         
-        sigma11[e_lid]  = epsilon(0)/theta;
-        sigma22[e_lid]  = epsilon(1)/theta;
-        sigma33[e_lid]  = epsilon(2)/theta;
-        sigma12[e_lid]  = epsilon(5)/theta;
-        sigma13[e_lid]  = epsilon(4)/theta;
-        sigma23[e_lid]  = epsilon(3)/theta;
+        sigma11[e_lid]  = epsilon(0)/double(n_gauss_points);
+        sigma22[e_lid]  = epsilon(1)/double(n_gauss_points);
+        sigma33[e_lid]  = epsilon(2)/double(n_gauss_points);
+        sigma12[e_lid]  = epsilon(5)/double(n_gauss_points);
+        sigma13[e_lid]  = epsilon(4)/double(n_gauss_points);
+        sigma23[e_lid]  = epsilon(3)/double(n_gauss_points);
         
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
