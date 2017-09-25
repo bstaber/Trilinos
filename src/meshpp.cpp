@@ -46,7 +46,7 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
     Comm->Barrier();
     std::cerr << std::setw(5) << MyPID << std::setw(20) << n_local_cells << std::setw(20) << n_local_nodes_without_ghosts << std::setw(20) << n_local_faces << "\n";
     
-    if (n_local_faces>0 && (face_type==3 || face_type==6)){
+    if (n_local_faces>0 && (face_type==3 || face_type==4 || face_type==6)){
         store_feinterp_tri();
     }
     store_feinterp_tetra();
