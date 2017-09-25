@@ -79,11 +79,11 @@ public:
         
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
             
-            alpha = 3.0/(2.0*deltaN*deltaN) + (1.0-1.0)/2.0;
+            alpha = 3.0/(2.0*deltaN*deltaN);
             Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
             m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
             
-            alpha = 3.0/(2.0*deltaN*deltaN) + (1.0-2.0)/2.0;
+            alpha = 3.0/(2.0*deltaN*deltaN) + -1.0/2.0;
             Psi2 = icdf_gamma(w2_shino(i),alpha,beta);
             m2(i) = (deltaN*deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
             
@@ -216,6 +216,8 @@ public:
         double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
+        
+        std::cout << M;
         
         double c1 = 144.8969*1.0e9;
         double c2 = 14.2500*1.0e9;
