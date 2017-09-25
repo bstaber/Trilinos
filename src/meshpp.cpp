@@ -557,6 +557,8 @@ void mesh::store_feinterp_tetra(){
             break;
     };
     
+    std::cout << N << "\n";
+    
     for (unsigned int eloc=0; eloc<n_local_cells; ++eloc){
         eglob = local_cells[eloc];
         for (unsigned int inode=0; inode<el_type; ++inode){
