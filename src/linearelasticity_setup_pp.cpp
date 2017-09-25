@@ -245,19 +245,21 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(4);
             sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(3);
             
-            /*if(e_lid==0 && Comm->MyPID()==0){
-                std::cout << gauss_weight << std::setw(20) << Mesh->detJac_tetra(e_lid,gp) << std::setw(20) << epsilon(0) << std::setw(20) << sigma11[e_lid] << "\n";
-            }*/
-            
             theta += gauss_weight*Mesh->detJac_tetra(e_lid,gp);
             
         }
+        
+        if(e_lid==0 && Comm->MyPID()==0){
+            std::cout << gauss_weight << std::setw(20) << Mesh->detJac_tetra(e_lid,gp) << std::setw(20) << epsilon(0) << std::setw(20) << sigma11[e_lid] << std::setw(10) << theta << "\n";
+        }
+        
         sigma11[e_lid]  = sigma11[e_lid]/theta;
         sigma22[e_lid]  = sigma22[e_lid]/theta;
         sigma33[e_lid]  = sigma33[e_lid]/theta;
         sigma12[e_lid]  = sigma12[e_lid]/theta;
         sigma13[e_lid]  = sigma13[e_lid]/theta;
         sigma23[e_lid]  = sigma23[e_lid]/theta;
+        
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
     
