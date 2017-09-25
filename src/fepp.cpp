@@ -174,7 +174,6 @@ JacobianMatrix.Multiply('N','N',1.0,X,D,0.0);
 
 void jacobian_det(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac){
     jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1)*JacobianMatrix(2,2)-JacobianMatrix(0,0)*JacobianMatrix(1,2)*JacobianMatrix(2,1)-JacobianMatrix(0,1)*JacobianMatrix(1,0)*JacobianMatrix(2,2)+JacobianMatrix(0,1)*JacobianMatrix(1,2)*JacobianMatrix(2,0)+JacobianMatrix(0,2)*JacobianMatrix(1,0)*JacobianMatrix(2,1)-JacobianMatrix(0,2)*JacobianMatrix(1,1)*JacobianMatrix(2,0) );
-    std::cout << jac << "\n";
 }
 
 void jacobian_det_tri(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac){

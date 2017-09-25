@@ -490,6 +490,8 @@ void mesh::store_feinterp_tri(){
 
 void mesh::store_feinterp_tetra(){
     
+    std::cout << xi_cells << std::setw(20) << eta_cells << std::setw(20) << zeta_cells << "\n";
+    
     int node, eglob;
     double alpha, beta;
     Epetra_SerialDenseVector N(el_type); //, xi(4), eta(4), zeta(4);
