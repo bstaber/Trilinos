@@ -557,8 +557,6 @@ void mesh::store_feinterp_tetra(){
             break;
     };
     
-    std::cout << N << "\n";
-    
     for (unsigned int eloc=0; eloc<n_local_cells; ++eloc){
         eglob = local_cells[eloc];
         for (unsigned int inode=0; inode<el_type; ++inode){
@@ -584,6 +582,7 @@ void mesh::store_feinterp_tetra(){
                     tetra10::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                     break;
             }
+            std::cout << D << "\n";
             jacobian_matrix(X,D,JacobianMatrix);
             jacobian_det(JacobianMatrix,detJac_tetra(eloc,gp));
             dX_shape_functions(D,JacobianMatrix,detJac_tetra(eloc,gp),DX);
