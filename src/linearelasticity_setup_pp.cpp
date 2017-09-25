@@ -223,6 +223,9 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             vector_u(3*inode+1) = u[OverlapMap->LID(3*node+1)];
             vector_u(3*inode+2) = u[OverlapMap->LID(3*node+2)];
         }
+        for (unsigned int i=0; i<6; ++i){
+            epsilon(i) = 0.0;
+        }
         
         theta = 0.0;
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
@@ -234,27 +237,27 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             }
             
             compute_B_matrices(dx_shape_functions,matrix_B);
-            epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
-            get_elasticity_tensor(e_lid, gp, tangent_matrix);
-            cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
+            epsilon.Multiply('N','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,vector_u,1.0);
+            //get_elasticity_tensor(e_lid, gp, tangent_matrix);
+            //cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
             
-            sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(0);
-            sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(1);
-            sigma33[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(2);
-            sigma12[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(5);
-            sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(4);
-            sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(3);
+            //sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(0);
+            //sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(1);
+            //sigma33[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(2);
+            //sigma12[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(5);
+            //sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(4);
+            //sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(3);
             
             theta += gauss_weight*Mesh->detJac_tetra(e_lid,gp);
             
         }
         
-        sigma11[e_lid]  = sigma11[e_lid]/theta;
-        sigma22[e_lid]  = sigma22[e_lid]/theta;
-        sigma33[e_lid]  = sigma33[e_lid]/theta;
-        sigma12[e_lid]  = sigma12[e_lid]/theta;
-        sigma13[e_lid]  = sigma13[e_lid]/theta;
-        sigma23[e_lid]  = sigma23[e_lid]/theta;
+        sigma11[e_lid]  = epsilon(0)/theta;
+        sigma22[e_lid]  = epsilon(1)/theta;
+        sigma33[e_lid]  = epsilon(2)/theta;
+        sigma12[e_lid]  = epsilon(5)/theta;
+        sigma13[e_lid]  = epsilon(4)/theta;
+        sigma23[e_lid]  = epsilon(3)/theta;
         
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
