@@ -209,19 +209,19 @@ public:
         
         double epsilon = 1.0e-6;
         Epetra_SerialDenseMatrix M(6,6);
-        double M1 = m1(e_lid*n_gauss_cells+gp) + epsilon;
-        double M2 = m2(e_lid*n_gauss_cells+gp) + epsilon;
-        double M3 = m3(e_lid*n_gauss_cells+gp);
-        double M4 = m4(e_lid*n_gauss_cells+gp) + epsilon;
-        double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
+        double M1 = 1.0; //m1(e_lid*n_gauss_cells+gp) + epsilon;
+        double M2 = 1.0; //m2(e_lid*n_gauss_cells+gp) + epsilon;
+        double M3 = 0.0; //m3(e_lid*n_gauss_cells+gp);
+        double M4 = 1.0; //m4(e_lid*n_gauss_cells+gp) + epsilon;
+        double M5 = 1.0; //m5(e_lid*n_gauss_cells+gp) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
-        double c1 = 144.8969*1.0e9;
-        double c2 = 14.2500*1.0e9;
-        double c3 = 5.8442*1.0e9;
-        double c4 = 7.5462*1.0e9;
-        double c5 = 12.5580*1.0e9;
+        double c1 = 144.8969*1.0e6;
+        double c2 = 14.2500*1.0e6;
+        double c3 = 5.8442*1.0e6;
+        double c4 = 7.5462*1.0e6;
+        double c5 = 12.5580*1.0e6;
         
         /*double constant = std::sqrt(c1*c1-2.0*c1*c2+c2*c2+4.0*c3*c3);
         
@@ -247,7 +247,7 @@ public:
         AtimesB.Multiply('N','N',1.0,M,sqrtmCmoy,0.0);
         tangent_matrix.Multiply('N','N',1.0,sqrtmCmoy,AtimesB,0.0);
         
-        if(phase[e_gid]==1){
+        /*if(phase[e_gid]==1){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);
@@ -256,21 +256,9 @@ public:
             tangent_matrix(5,2) = -tangent_matrix(5,2);
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
-        }
+        }*/
         
-        tangent_matrix.Scale(1.0/(1.0+epsilon));
-        
-        for (unsigned int i=0; i<6; ++i){
-            for (unsigned int j=0; j<6; ++j){
-                if (i==j){
-                    tangent_matrix(i,i) = 1.0e9;
-                }
-                else{
-                    tangent_matrix(i,j) = 0.0;
-                }
-                
-            }
-        }
+        //tangent_matrix.Scale(1.0/(1.0+epsilon));
         
     }
     
