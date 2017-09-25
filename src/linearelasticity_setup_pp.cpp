@@ -108,6 +108,7 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
             
             error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
+            std::cout << Mesh->detJac_tetra(e_lid,gp) << "\n";
         }
         
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
@@ -245,19 +246,19 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(4);
             sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(3);
             
-            if(e_lid==0 && Comm->MyPID()==0){
+            /*if(e_lid==0 && Comm->MyPID()==0){
                 std::cout << gauss_weight << std::setw(20) << Mesh->detJac_tetra(e_lid,gp) << std::setw(20) << epsilon(0) << std::setw(20) << sigma11[e_lid] << "\n";
-            }
+            }*/
             
             theta += gauss_weight*Mesh->detJac_tetra(e_lid,gp);
             
         }
-        sigma11[e_lid]  = sigma11[e_lid]; //theta;
-        sigma22[e_lid]  = sigma22[e_lid]; //theta;
-        sigma33[e_lid]  = sigma33[e_lid]; //theta;
-        sigma12[e_lid]  = sigma12[e_lid]; //theta;
-        sigma13[e_lid]  = sigma13[e_lid]; //theta;
-        sigma23[e_lid]  = sigma23[e_lid]; //theta;
+        sigma11[e_lid]  = sigma11[e_lid]/theta;
+        sigma22[e_lid]  = sigma22[e_lid]/theta;
+        sigma33[e_lid]  = sigma33[e_lid]/theta;
+        sigma12[e_lid]  = sigma12[e_lid]/theta;
+        sigma13[e_lid]  = sigma13[e_lid]/theta;
+        sigma23[e_lid]  = sigma23[e_lid]/theta;
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
     
