@@ -249,12 +249,12 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             
         }
         
-        sigma11[e_lid]  = sigma11[e_lid]/theta;
-        sigma22[e_lid]  = sigma22[e_lid]/theta;
-        sigma33[e_lid]  = sigma33[e_lid]/theta;
-        sigma12[e_lid]  = sigma12[e_lid]/theta;
-        sigma13[e_lid]  = sigma13[e_lid]/theta;
-        sigma23[e_lid]  = sigma23[e_lid]/theta;
+        sigma11[e_lid]  = epsilon(0); //sigma11[e_lid]/theta;
+        sigma22[e_lid]  = epsilon(1); //sigma22[e_lid]/theta;
+        sigma33[e_lid]  = epsilon(2); //sigma33[e_lid]/theta;
+        sigma12[e_lid]  = epsilon(5); //sigma12[e_lid]/theta;
+        sigma13[e_lid]  = epsilon(4); //sigma13[e_lid]/theta;
+        sigma23[e_lid]  = epsilon(3); //sigma23[e_lid]/theta;
         
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
