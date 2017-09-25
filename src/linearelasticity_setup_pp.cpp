@@ -108,7 +108,6 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
             
             error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
-            std::cout << Mesh->detJac_tetra(e_lid,gp) << "\n";
         }
         
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
