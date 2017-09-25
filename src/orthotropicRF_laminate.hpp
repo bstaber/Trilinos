@@ -209,11 +209,11 @@ public:
         
         double epsilon = 1.0e-6;
         Epetra_SerialDenseMatrix M(6,6);
-        double M1 = m1(e_lid*n_gauss_cells+gp) + epsilon;
-        double M2 = m2(e_lid*n_gauss_cells+gp) + epsilon;
-        double M3 = m3(e_lid*n_gauss_cells+gp);
-        double M4 = m4(e_lid*n_gauss_cells+gp) + epsilon;
-        double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
+        double M1 = 1.0; //m1(e_lid*n_gauss_cells+gp) + epsilon;
+        double M2 = 1.0; //m2(e_lid*n_gauss_cells+gp) + epsilon;
+        double M3 = 0.0; //m3(e_lid*n_gauss_cells+gp);
+        double M4 = 1.0; //m4(e_lid*n_gauss_cells+gp) + epsilon;
+        double M5 = 1.0; //m5(e_lid*n_gauss_cells+gp) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
@@ -223,17 +223,17 @@ public:
         double c4 = 7.5462*1.0e9;
         double c5 = 12.5580*1.0e9;
         
-        double constant = std::sqrt(c1*c1-2.0*c1*c2+c2*c2+4.0*c3*c3);
+        /*double constant = std::sqrt(c1*c1-2.0*c1*c2+c2*c2+4.0*c3*c3);
         
         double d1 = (std::sqrt(2.0)*(c1-c2+constant)*std::sqrt(c1+c2+constant))/(4.0*constant) + (std::sqrt(2.0)*(c2-c1+constant)*std::sqrt(c1+c2-constant))/(4.0*constant);
         double d2 = (std::sqrt(2.0)*(c2-c1+constant)*std::sqrt(c1+c2+constant))/(4.0*constant) + (std::sqrt(2.0)*(c1-c2+constant)*std::sqrt(c1+c2-constant))/(4.0*constant);
         double d3 = std::sqrt(2.0)*c3*( std::sqrt(c1+c2+constant) - std::sqrt(c1+c2-constant) )/( 2.0*constant );
         double d4 = std::sqrt(c4);
         double d5 = std::sqrt(c5);
-        
+    
+        transverse_isotropic_matrix(sqrtmCmoy,d1,d2,d3,d4,d5);*/
+    
         Epetra_SerialDenseMatrix sqrtmCmoy(6,6);
-        transverse_isotropic_matrix(sqrtmCmoy,d1,d2,d3,d4,d5);
-        
         sqrtmCmoy(0,0)=1.267507136303929;  sqrtmCmoy(0,1)=0.537697071946998;   sqrtmCmoy(0,2)=0.140427049024295;  sqrtmCmoy(0,3)=0.000000000000000;  sqrtmCmoy(0,4)=0.000000000000001;   sqrtmCmoy(0,5)=0.478648374632629;
         sqrtmCmoy(1,0)=0.537697071946998;  sqrtmCmoy(1,1)=2.655705959144135;   sqrtmCmoy(1,2)=0.101989080906815;  sqrtmCmoy(1,3)=0.000000000000000;  sqrtmCmoy(1,4)=0.000000000000001;   sqrtmCmoy(1,5)=1.221541014112757;
         sqrtmCmoy(2,0)=0.140427049024295;  sqrtmCmoy(2,1)=0.101989080906815;   sqrtmCmoy(2,2)=1.028334699982750;  sqrtmCmoy(2,3)=0.000000000000001;   sqrtmCmoy(2,4)=0.000000000000000;   sqrtmCmoy(2,5)=0.047076704318598;
