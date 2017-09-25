@@ -490,8 +490,6 @@ void mesh::store_feinterp_tri(){
 
 void mesh::store_feinterp_tetra(){
     
-    std::cout << xi_cells << std::setw(20) << eta_cells << std::setw(20) << zeta_cells << "\n";
-    
     int node, eglob;
     double alpha, beta;
     Epetra_SerialDenseVector N(el_type); //, xi(4), eta(4), zeta(4);
@@ -531,6 +529,8 @@ void mesh::store_feinterp_tetra(){
     DX_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
     DY_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
     DZ_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
+    
+    std::cout << detJac_tetra << "\n";
     
     switch (el_type){
         case 4:
