@@ -72,12 +72,13 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
         
-        double deltaN = 0.05;
-        double deltaM = 0.10;
+        double deltaN = 0.01;
+        double deltaM = 0.01;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
+            
             alpha = 3.0/(2.0*deltaN*deltaN) + (1.0-1.0)/2.0;
             Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
             m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
@@ -91,6 +92,7 @@ public:
             alpha = 1.0/(deltaM*deltaM); beta = 1.0*deltaM*deltaM;
             m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
+            
         }
         
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
