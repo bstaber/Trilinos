@@ -189,18 +189,19 @@ void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shap
     }
 }
 
-void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename){
+void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
     
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
     
     Epetra_Map CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
-    Epetra_Vector sigma11(CellsMap); sigma11.PutScalar(0.0);
-    Epetra_Vector sigma22(CellsMap); sigma22.PutScalar(0.0);
-    Epetra_Vector sigma33(CellsMap); sigma33.PutScalar(0.0);
-    Epetra_Vector sigma12(CellsMap); sigma12.PutScalar(0.0);
-    Epetra_Vector sigma13(CellsMap); sigma13.PutScalar(0.0);
-    Epetra_Vector sigma23(CellsMap); sigma23.PutScalar(0.0);
+    Epetra_Vector sigma11(CellsMap);  sigma11.PutScalar(0.0);
+    Epetra_Vector sigma22(CellsMap);  sigma22.PutScalar(0.0);
+    Epetra_Vector sigma33(CellsMap);  sigma33.PutScalar(0.0);
+    Epetra_Vector sigma12(CellsMap);  sigma12.PutScalar(0.0);
+    Epetra_Vector sigma13(CellsMap);  sigma13.PutScalar(0.0);
+    Epetra_Vector sigma23(CellsMap);  sigma23.PutScalar(0.0);
+    Epetra_Vector vonmises(CellsMap); vonmises.PutScalar(0.0);
     
     int node, e_gid;
     int n_gauss_points = Mesh->n_gauss_cells;
@@ -247,49 +248,59 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             theta += gauss_weight*Mesh->detJac_tetra(e_lid,gp);
             
         }
-        sigma11[e_lid] = sigma11[e_lid]/theta;
-        sigma22[e_lid] = sigma22[e_lid]/theta;
-        sigma33[e_lid] = sigma33[e_lid]/theta;
-        sigma12[e_lid] = sigma12[e_lid]/theta;
-        sigma13[e_lid] = sigma13[e_lid]/theta;
-        sigma23[e_lid] = sigma23[e_lid]/theta;
+        sigma11[e_lid]  = sigma11[e_lid]/theta;
+        sigma22[e_lid]  = sigma22[e_lid]/theta;
+        sigma33[e_lid]  = sigma33[e_lid]/theta;
+        sigma12[e_lid]  = sigma12[e_lid]/theta;
+        sigma13[e_lid]  = sigma13[e_lid]/theta;
+        sigma23[e_lid]  = sigma23[e_lid]/theta;
+        vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
     
-    int NumTargetElements = 0;
-    if (Comm->MyPID()==0){
-        NumTargetElements = Mesh->n_cells;
+    if (printCauchy || printVM){
+        int NumTargetElements = 0;
+        if (Comm->MyPID()==0){
+            NumTargetElements = Mesh->n_cells;
+        }
+        Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+        Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
     }
-    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
-    Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+    if (printCauchy){
+        Epetra_MultiVector lhs_root11(MapOnRoot,true);
+        lhs_root11.Export(sigma11,ExportOnRoot,Insert);
+        std::string file11 = filename + "_sigma11.mtx";
+        int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);
     
-    Epetra_MultiVector lhs_root11(MapOnRoot,true);
-    lhs_root11.Export(sigma11,ExportOnRoot,Insert);
-    std::string file11 = filename + "_sigma11.mtx";
-    int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);
+        Epetra_MultiVector lhs_root22(MapOnRoot,true);
+        lhs_root22.Export(sigma22,ExportOnRoot,Insert);
+        std::string file22 = filename + "_sigma22.mtx";
+        int error22 = EpetraExt::MultiVectorToMatrixMarketFile(file22.c_str(),lhs_root22,0,0,false);
     
-    Epetra_MultiVector lhs_root22(MapOnRoot,true);
-    lhs_root22.Export(sigma22,ExportOnRoot,Insert);
-    std::string file22 = filename + "_sigma22.mtx";
-    int error22 = EpetraExt::MultiVectorToMatrixMarketFile(file22.c_str(),lhs_root22,0,0,false);
+        Epetra_MultiVector lhs_root33(MapOnRoot,true);
+        lhs_root33.Export(sigma33,ExportOnRoot,Insert);
+        std::string file33 = filename + "_sigma33.mtx";
+        int error33 = EpetraExt::MultiVectorToMatrixMarketFile(file33.c_str(),lhs_root33,0,0,false);
     
-    Epetra_MultiVector lhs_root33(MapOnRoot,true);
-    lhs_root33.Export(sigma33,ExportOnRoot,Insert);
-    std::string file33 = filename + "_sigma33.mtx";
-    int error33 = EpetraExt::MultiVectorToMatrixMarketFile(file33.c_str(),lhs_root33,0,0,false);
+        Epetra_MultiVector lhs_root12(MapOnRoot,true);
+        lhs_root12.Export(sigma12,ExportOnRoot,Insert);
+        std::string file12 = filename + "_sigma12.mtx";
+        int error12 = EpetraExt::MultiVectorToMatrixMarketFile(file12.c_str(),lhs_root12,0,0,false);
     
-    Epetra_MultiVector lhs_root12(MapOnRoot,true);
-    lhs_root12.Export(sigma12,ExportOnRoot,Insert);
-    std::string file12 = filename + "_sigma12.mtx";
-    int error12 = EpetraExt::MultiVectorToMatrixMarketFile(file12.c_str(),lhs_root12,0,0,false);
+        Epetra_MultiVector lhs_root13(MapOnRoot,true);
+        lhs_root13.Export(sigma13,ExportOnRoot,Insert);
+        std::string file13 = filename + "_sigma13.mtx";
+        int error13 = EpetraExt::MultiVectorToMatrixMarketFile(file13.c_str(),lhs_root13,0,0,false);
     
-    Epetra_MultiVector lhs_root13(MapOnRoot,true);
-    lhs_root13.Export(sigma13,ExportOnRoot,Insert);
-    std::string file13 = filename + "_sigma13.mtx";
-    int error13 = EpetraExt::MultiVectorToMatrixMarketFile(file13.c_str(),lhs_root13,0,0,false);
-    
-    Epetra_MultiVector lhs_root23(MapOnRoot,true);
-    lhs_root23.Export(sigma23,ExportOnRoot,Insert);
-    std::string file23 = filename + "_sigma23.mtx";
-    int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);
+        Epetra_MultiVector lhs_root23(MapOnRoot,true);
+        lhs_root23.Export(sigma23,ExportOnRoot,Insert);
+        std::string file23 = filename + "_sigma23.mtx";
+        int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);
+    }
+    if (printVM){
+        Epetra_MultiVector lhs_rootvm(MapOnRoot,true);
+        lhs_rootvm.Export(vonmises,ExportOnRoot,Insert);
+        std::string filevm = filename + "_vm.mtx";
+        int errorvm = EpetraExt::MultiVectorToMatrixMarketFile(filevm.c_str(),lhs_rootvm,0,0,false);
+    }
 }
 
