@@ -79,8 +79,8 @@ public:
         
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
             
-            alpha = 3.0/(2.0*deltaN*deltaN);
-            Psi1 = icdf_gamma(w1_shino(i),alpha,1.0);
+            alpha = 3.0/(2.0*deltaN*deltaN); beta = 1.0;
+            Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
             m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
             
             if (i<10){
@@ -88,7 +88,7 @@ public:
             }
             
             alpha = 3.0/(2.0*deltaN*deltaN) - 1.0/2.0;
-            Psi2 = icdf_gamma(w2_shino(i),alpha,1.0);
+            Psi2 = icdf_gamma(w2_shino(i),alpha,beta);
             m2(i) = (deltaN*deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
             
             m3(i) = (deltaN*deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
