@@ -111,8 +111,7 @@ void shinozuka::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh
                         vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
                         arg = 2.0*M_PI*phi + (M_PI/l1)*ti*vector_x(0) + (M_PI/l2)*tj*vector_x(1) + (M_PI/l3)*tk*vector_x(2);
                         v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj*sk)*w*std::cos(arg);
-                    }
-                    
+                    }   
                 }
                 
             }
