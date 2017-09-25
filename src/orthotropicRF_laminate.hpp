@@ -37,7 +37,7 @@ public:
         
         GRF_Generator = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
         
-        x = new Epetra_Vector(*StandardMap);
+        solution = new Epetra_Vector(*StandardMap);
     }
     
     ~OrthotropicRF_Laminate(){
