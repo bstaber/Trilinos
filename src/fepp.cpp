@@ -87,24 +87,24 @@ void tri6::dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMa
 
 void hexa8::shape_functions(Epetra_SerialDenseVector & N, double & xi, double & eta, double & zeta){
     N(0) = (1.0/8.0)*(1.0-xi)*(1.0-eta)*(1.0-zeta);
-    N(2) = (1.0/8.0)*(1.0+xi)*(1.0+eta)*(1.0-zeta);
-    N(1) = (1.0/8.0)*(1.0+xi)*(1.0-eta)*(1.0-zeta);
+    N(1) = (1.0/8.0)*(1.0+xi)*(1.0+eta)*(1.0-zeta);
+    N(2) = (1.0/8.0)*(1.0+xi)*(1.0-eta)*(1.0-zeta);
     N(3) = (1.0/8.0)*(1.0-xi)*(1.0+eta)*(1.0-zeta);
-    N(7) = (1.0/8.0)*(1.0-xi)*(1.0+eta)*(1.0+zeta);
+    N(4) = (1.0/8.0)*(1.0-xi)*(1.0+eta)*(1.0+zeta);
     N(5) = (1.0/8.0)*(1.0+xi)*(1.0-eta)*(1.0+zeta);
     N(6) = (1.0/8.0)*(1.0+xi)*(1.0+eta)*(1.0+zeta);
-    N(4) = (1.0/8.0)*(1.0-xi)*(1.0-eta)*(1.0+zeta);
+    N(7) = (1.0/8.0)*(1.0-xi)*(1.0-eta)*(1.0+zeta);
 }
 
 void hexa8::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double & eta, double & zeta){
     D(0,0) = -(1.0/8.0)*(1.0-eta)*(1.0-zeta); D(0,1) = -(1.0/8.0)*(1.0-xi)*(1.0-zeta); D(0,2) = -(1.0/8.0)*(1.0-xi)*(1.0-eta);
-    D(1,0) = (1.0/8.0)*(1.0-eta)*(1.0-zeta);  D(1,1) = -(1.0/8.0)*(1.0+xi)*(1.0-zeta); D(1,2) = -(1.0/8.0)*(1.0+xi)*(1.0-eta);
-    D(2,0) = (1.0/8.0)*(1.0+eta)*(1.0-zeta);  D(2,1) = (1.0/8.0)*(1.0+xi)*(1.0-zeta);  D(2,2) = -(1.0/8.0)*(1.0+xi)*(1.0+eta);
+    D(2,0) = (1.0/8.0)*(1.0-eta)*(1.0-zeta);  D(2,1) = -(1.0/8.0)*(1.0+xi)*(1.0-zeta); D(2,2) = -(1.0/8.0)*(1.0+xi)*(1.0-eta);
+    D(1,0) = (1.0/8.0)*(1.0+eta)*(1.0-zeta);  D(1,1) = (1.0/8.0)*(1.0+xi)*(1.0-zeta);  D(1,2) = -(1.0/8.0)*(1.0+xi)*(1.0+eta);
     D(3,0) = -(1.0/8.0)*(1.0+eta)*(1.0-zeta); D(3,1) = (1.0/8.0)*(1.0-xi)*(1.0-zeta);  D(3,2) = -(1.0/8.0)*(1.0-xi)*(1.0+eta);
-    D(4,0) = -(1.0/8.0)*(1.0-eta)*(1.0+zeta); D(4,1) = -(1.0/8.0)*(1.0-xi)*(1.0+zeta); D(4,2) = (1.0/8.0)*(1.0-xi)*(1.0-eta);
+    D(7,0) = -(1.0/8.0)*(1.0-eta)*(1.0+zeta); D(7,1) = -(1.0/8.0)*(1.0-xi)*(1.0+zeta); D(7,2) = (1.0/8.0)*(1.0-xi)*(1.0-eta);
     D(5,0) = (1.0/8.0)*(1.0-eta)*(1.0+zeta);  D(5,1) = -(1.0/8.0)*(1.0+xi)*(1.0+zeta); D(5,2) = (1.0/8.0)*(1.0+xi)*(1.0-eta);
     D(6,0) = (1.0/8.0)*(1.0+eta)*(1.0+zeta);  D(6,1) = (1.0/8.0)*(1.0+xi)*(1.0+zeta);  D(6,2) = (1.0/8.0)*(1.0+xi)*(1.0+eta);
-    D(7,0) = -(1.0/8.0)*(1.0+eta)*(1.0+zeta); D(7,1) = (1.0/8.0)*(1.0-xi)*(1.0+zeta);  D(7,2) = (1.0/8.0)*(1.0-xi)*(1.0+eta);
+    D(4,0) = -(1.0/8.0)*(1.0+eta)*(1.0+zeta); D(4,1) = (1.0/8.0)*(1.0-xi)*(1.0+zeta);  D(4,2) = (1.0/8.0)*(1.0-xi)*(1.0+eta);
 }
 
 void tetra4::shape_functions(Epetra_SerialDenseVector & N, double & xi, double & eta, double & zeta){
@@ -237,15 +237,15 @@ void gauss_points_hexa6(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVec
 void gauss_points_hexa8(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(8); xi.Resize(8); eta.Resize(8); zeta.Resize(8);
     
-    double a = 1.0/std::sqrt(3.0);
-    xi(0)=-a;  eta(0)=-a;  zeta(0)=-a;   weight(0)=1.0;
-    xi(1)=-a;  eta(1)=-a;  zeta(1)=a;    weight(1)=1.0;
-    xi(2)=-a;  eta(2)=a;   zeta(2)=-a;   weight(2)=1.0;
-    xi(3)=-a;  eta(3)=a;   zeta(3)=a;    weight(3)=1.0;
-    xi(4)= a;  eta(4)=-a;  zeta(4)=-a;   weight(4)=1.0;
-    xi(5)= a;  eta(5)=-a;  zeta(5)=a;    weight(5)=1.0;
-    xi(6)= a;  eta(6)=a;   zeta(6)=-a;   weight(6)=1.0;
-    xi(7)= a;  eta(7)=a;   zeta(7)=a;    weight(7)=1.0;
+    double a = 0.577350269189626;
+    xi(0)=-a;  eta(0)=1.0/3.0; zeta(0)=1.0/3.0; weight(0)=-27.0/96.0;
+    xi(1)=-a;  eta(1)=0.6;     zeta(1)=0.2;     weight(1)=25.0/96.0;
+    xi(2)=-a;  eta(2)=0.2;     zeta(2)=0.6;     weight(2)=25.0/96.0;
+    xi(3)=-a;  eta(3)=0.2;     zeta(3)=0.2;     weight(3)=25.0/96.0;
+    xi(4)= a;  eta(4)=1.0/3.0; zeta(4)=1.0/3.0; weight(4)=-27.0/96.0;
+    xi(5)= a;  eta(5)=0.6;     zeta(5)=0.2;     weight(5)=25.0/96.0;
+    xi(6)= a;  eta(6)=0.2;     zeta(6)=0.6;     weight(6)=25.0/96.0;
+    xi(7)= a;  eta(7)=0.2;     zeta(7)=0.2;     weight(7)=25.0/96.0;
 }
 
 void gauss_points_tetra1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
