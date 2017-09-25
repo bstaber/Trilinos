@@ -62,7 +62,7 @@ MPI_Init(&argc, &argv);
     //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/linearelaslam/stochastic_solution.mtx";
     std::string path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution_" + std::to_string(0) + ".mtx";
     interface->print_solution(path);
-    path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution;
+    path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution";
     interface->compute_mean_cauchy_stress(*interface->x, path, "false", "true");
     
 #ifdef HAVE_MPI
