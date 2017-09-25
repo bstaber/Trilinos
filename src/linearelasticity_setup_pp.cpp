@@ -238,11 +238,6 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             get_elasticity_tensor(e_lid, gp, tangent_matrix);
             cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
             
-            std::cout << vector_u << "\n";
-            std::cout << matrix_B << "\n";
-            std::cout << epsilon << "\n";
-            std::cout << "\n";
-            
             sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(0);
             sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(1);
             sigma33[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(2);
@@ -254,12 +249,12 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             
         }
         
-        sigma11[e_lid]  = sigma11[e_lid]/theta;
-        sigma22[e_lid]  = sigma22[e_lid]/theta;
-        sigma33[e_lid]  = sigma33[e_lid]/theta;
-        sigma12[e_lid]  = sigma12[e_lid]/theta;
-        sigma13[e_lid]  = sigma13[e_lid]/theta;
-        sigma23[e_lid]  = sigma23[e_lid]/theta;
+        sigma11[e_lid]  = epsilon(0); //sigma11[e_lid]/theta;
+        sigma22[e_lid]  = epsilon(1); //sigma22[e_lid]/theta;
+        sigma33[e_lid]  = epsilon(2); //sigma33[e_lid]/theta;
+        sigma12[e_lid]  = epsilon(5); //sigma12[e_lid]/theta;
+        sigma13[e_lid]  = epsilon(4); //sigma13[e_lid]/theta;
+        sigma23[e_lid]  = epsilon(3); //sigma23[e_lid]/theta;
         
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
