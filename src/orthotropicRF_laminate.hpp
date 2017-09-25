@@ -83,10 +83,6 @@ public:
             Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
             m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
             
-            if (i<10){
-                std::cout << std::setprecision(16) << w1_shino(i) << std::setw(30) << Psi1 << std::setw(30) << m1(i) << "\n";
-            }
-            
             alpha = 3.0/(2.0*deltaN*deltaN) - 1.0/2.0;
             Psi2 = icdf_gamma(w2_shino(i),alpha,beta);
             m2(i) = (deltaN*deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
@@ -98,11 +94,7 @@ public:
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
             
         }
-        
-        if (Comm->MyPID()==0){
-            std::cout << w1_shino;
-        }
-        
+                
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
         Epetra_Vector      lhs(*StandardMap);
