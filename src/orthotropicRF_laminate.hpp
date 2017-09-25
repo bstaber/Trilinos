@@ -215,7 +215,7 @@ public:
         double M4 = m4(e_lid*n_gauss_cells+gp) + epsilon;
         double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
         
-        std::cout << M1;
+        std::cout << M1 << "\n";
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
