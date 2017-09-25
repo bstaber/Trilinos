@@ -257,13 +257,12 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
     
-    if (printCauchy || printVM){
-        int NumTargetElements = 0;
-        if (Comm->MyPID()==0){
-            NumTargetElements = Mesh->n_cells;
-        }
-        Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
-        Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+    int NumTargetElements = 0;
+    if (Comm->MyPID()==0){
+        NumTargetElements = Mesh->n_cells;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+    Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
     if (printCauchy){
         Epetra_MultiVector lhs_root11(MapOnRoot,true);
         lhs_root11.Export(sigma11,ExportOnRoot,Insert);
@@ -300,7 +299,6 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         lhs_rootvm.Export(vonmises,ExportOnRoot,Insert);
         std::string filevm = filename + "_vm.mtx";
         int errorvm = EpetraExt::MultiVectorToMatrixMarketFile(filevm.c_str(),lhs_rootvm,0,0,false);
-    }
     }
 }
 
