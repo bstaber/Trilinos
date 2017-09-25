@@ -39,7 +39,7 @@
         <Parameter name="type_overlap" type="string" value="symmetric"/>
         <Parameter name="pre_calc" type="string" value="recalc"/>
         <Parameter name="ilut_fill" type="double" value="4.0"/>
-        <Parameter name="AZ_conv" type="string" value="noscaled">
+        <Parameter name="AZ_conv" type="string" value="noscaled"/>
         <Parameter name="AZ_tol" type="double" value="1e-6"/>
         <Parameter name="AZ_output" type="string" value="last"/>
         <Parameter name="AZ_diagnostics" type="string" value="all"/>
