@@ -530,8 +530,6 @@ void mesh::store_feinterp_tetra(){
     DY_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
     DZ_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
     
-    std::cout << detJac_tetra << "\n";
-    
     switch (el_type){
         case 4:
             for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
@@ -596,6 +594,8 @@ void mesh::store_feinterp_tetra(){
             }
         }
     }
+    
+    std::cout << detJac_tetra << "\n";
     
 }
 
