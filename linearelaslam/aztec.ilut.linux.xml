@@ -59,9 +59,9 @@
     <ParameterList name="Shinozuka">
         <Parameter name="order" type="int" value="10"/>
         <Parameter name="nmc" type="int" value="1"/>
-        <Parameter name="lx" type="double" value="0.05"/>
-        <Parameter name="ly" type="double" value="0.025"/>
-        <Parameter name="lz" type="double" value="0.08"/>
+        <Parameter name="lx" type="double" value="0.005"/>
+        <Parameter name="ly" type="double" value="0.0025"/>
+        <Parameter name="lz" type="double" value="0.008"/>
     </ParameterList>
     
 </ParameterList>
