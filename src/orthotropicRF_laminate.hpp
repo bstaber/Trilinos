@@ -258,7 +258,7 @@ public:
             tangent_matrix(4,3) = -tangent_matrix(4,3);
         }
         
-        //tangent_matrix.Scale(1.0/(1.0+epsilon));
+        tangent_matrix.Scale(1.0/(1.0+epsilon));
         
     }
     
