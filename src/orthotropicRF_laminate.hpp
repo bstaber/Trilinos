@@ -23,7 +23,7 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
-        for (unsigned int e=0; e<Mesh->n_cells/16; ++e){
+        for (unsigned int e=0; e<Mesh->n_cells/2; ++e){
             for (unsigned int j=0; j<2; ++j){
                 phase.push_back(0);
                 phase.push_back(1);
@@ -209,11 +209,11 @@ public:
         
         double epsilon = 1.0e-6;
         Epetra_SerialDenseMatrix M(6,6);
-        double M1 = 1.0; //m1(e_lid*n_gauss_cells+gp) + epsilon;
-        double M2 = 1.0; //m2(e_lid*n_gauss_cells+gp) + epsilon;
-        double M3 = 0.0; //m3(e_lid*n_gauss_cells+gp);
-        double M4 = 1.0; //m4(e_lid*n_gauss_cells+gp) + epsilon;
-        double M5 = 1.0; //m5(e_lid*n_gauss_cells+gp) + epsilon;
+        double M1 = m1(e_lid*n_gauss_cells+gp) + epsilon;
+        double M2 = m2(e_lid*n_gauss_cells+gp) + epsilon;
+        double M3 = m3(e_lid*n_gauss_cells+gp);
+        double M4 = m4(e_lid*n_gauss_cells+gp) + epsilon;
+        double M5 = m5(e_lid*n_gauss_cells+gp) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
