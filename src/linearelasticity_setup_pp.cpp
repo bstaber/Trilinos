@@ -246,7 +246,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(3);
             
             if(e_lid==0 && Comm->MyPID()==0){
-                std::cout << gauss_weight << std::setw(20) << Mesh->detJac_tetra(e_lid,gp) << std::setw(20) << epsilon(0) << std::set(20) << sigma11[e_lid] << "\n";
+                std::cout << gauss_weight << std::setw(20) << Mesh->detJac_tetra(e_lid,gp) << std::setw(20) << epsilon(0) << std::setw(20) << sigma11[e_lid] << "\n";
             }
             
             theta += gauss_weight*Mesh->detJac_tetra(e_lid,gp);
