@@ -260,6 +260,18 @@ public:
         
         tangent_matrix.Scale(1.0/(1.0+epsilon));
         
+        for (unsigned int i=0; i<6; ++i){
+            for (unsigned int i=0; i<6; ++i){
+                if (i==j){
+                    tangent_matrix(i,i) = 1.0;
+                }
+                else{
+                    tangent_matrix(i,i) = 0.0;
+                }
+                
+            }
+        }
+        
     }
     
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
