@@ -23,7 +23,7 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
-        for (unsigned int e=0; e<Mesh->n_cells/2; ++e){
+        for (unsigned int e=0; e<Mesh->n_cells/16; ++e){
             for (unsigned int j=0; j<2; ++j){
                 phase.push_back(0);
                 phase.push_back(1);
