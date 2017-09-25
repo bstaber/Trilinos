@@ -95,6 +95,10 @@ public:
             
         }
         
+        if (Comm->MyPID()==0){
+            std::cout << m4;
+        }
+        
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
         Epetra_Vector      lhs(*StandardMap);
