@@ -264,7 +264,6 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         }
         Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
         Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
-    }
     if (printCauchy){
         Epetra_MultiVector lhs_root11(MapOnRoot,true);
         lhs_root11.Export(sigma11,ExportOnRoot,Insert);
@@ -301,6 +300,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         lhs_rootvm.Export(vonmises,ExportOnRoot,Insert);
         std::string filevm = filename + "_vm.mtx";
         int errorvm = EpetraExt::MultiVectorToMatrixMarketFile(filevm.c_str(),lhs_rootvm,0,0,false);
+    }
     }
 }
 
