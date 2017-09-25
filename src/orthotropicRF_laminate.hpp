@@ -84,7 +84,7 @@ public:
             m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
             
             if (i<10){
-                std::cout << std::setprecision(16) << w1_shino(i) << std::setw(10) << Psi1 << std::setw(10) << m1(i) << "\n";
+                std::cout << std::setprecision(16) << w1_shino(i) << std::setw(30) << Psi1 << std::setw(30) << m1(i) << "\n";
             }
             
             alpha = 3.0/(2.0*deltaN*deltaN) - 1.0/2.0;
