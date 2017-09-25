@@ -72,7 +72,7 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
         
-        double deltaN = 0.05;
+        double deltaN = 0.10;
         double deltaM = 0.10;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
@@ -94,7 +94,7 @@ public:
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
             
         }
-                
+        
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
         Epetra_Vector      lhs(*StandardMap);
@@ -247,7 +247,7 @@ public:
         AtimesB.Multiply('N','N',1.0,M,sqrtmCmoy,0.0);
         tangent_matrix.Multiply('N','N',1.0,sqrtmCmoy,AtimesB,0.0);
         
-        /*if(phase[e_gid]==1){
+        if(phase[e_gid]==1){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);
@@ -256,7 +256,7 @@ public:
             tangent_matrix(5,2) = -tangent_matrix(5,2);
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
-        }*/
+        }
         
         tangent_matrix.Scale(1.0/(1.0+epsilon));
         
