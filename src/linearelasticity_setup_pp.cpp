@@ -238,6 +238,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             
             compute_B_matrices(dx_shape_functions,matrix_B);
             epsilon.Multiply('N','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,vector_u,1.0);
+            std::cout << gauss_weight << std::setw(20) << Mesh->detJac_tetra(e_lid,gp) << "\n";
             
             //get_elasticity_tensor(e_lid, gp, tangent_matrix);
             //cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
