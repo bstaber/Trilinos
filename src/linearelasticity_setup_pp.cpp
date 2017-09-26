@@ -274,15 +274,17 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         jacobian_det(JacobianMatrix,det_jac_tetra);
         dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
         compute_B_matrices(dx_shape_functions,matrix_B);
+        get_elasticity_tensor_for_recovery(e_lid, tangent_matrix);
+        cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
         
         epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
         
-        sigma11[e_lid]  = epsilon(0);
-        sigma22[e_lid]  = epsilon(1);
-        sigma33[e_lid]  = epsilon(2);
-        sigma12[e_lid]  = epsilon(5);
-        sigma13[e_lid]  = epsilon(4);
-        sigma23[e_lid]  = epsilon(3);
+        sigma11[e_lid]  = cauchy_stress(0);
+        sigma22[e_lid]  = cauchy_stress(1);
+        sigma33[e_lid]  = cauchy_stress(2);
+        sigma12[e_lid]  = cauchy_stress(5);
+        sigma13[e_lid]  = cauchy_stress(4);
+        sigma23[e_lid]  = cauchy_stress(3);
         
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
