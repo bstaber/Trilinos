@@ -270,6 +270,54 @@ public:
         Epetra_SerialDenseVector w4_shino(Mesh->n_local_cells);
         Epetra_SerialDenseVector w5_shino(Mesh->n_local_cells);
         
+        m1.Resize(Mesh->n_local_cells);
+        m2.Resize(Mesh->n_local_cells);
+        m3.Resize(Mesh->n_local_cells);
+        m4.Resize(Mesh->n_local_cells);
+        m5.Resize(Mesh->n_local_cells);
+        
+        double xi = 0.0; double eta = 0.0; double zeta = 0.0;
+        
+        GRF_Generator->rng.seed(seeds[0]);
+        GRF_Generator->generator_one_gauss_points(w1_shino,*Mesh,xi,eta,zeta);
+        
+        GRF_Generator->rng.seed(seeds[1]);
+        GRF_Generator->generator_one_gauss_points(w2_shino,*Mesh,xi,eta,zeta);
+        
+        GRF_Generator->rng.seed(seeds[2]);
+        GRF_Generator->generator_one_gauss_points(w3_shino,*Mesh,xi,eta,zeta);
+        
+        GRF_Generator->rng.seed(seeds[3]);
+        GRF_Generator->generator_one_gauss_points(w4_shino,*Mesh,xi,eta,zeta);
+        
+        GRF_Generator->rng.seed(seeds[4]);
+        GRF_Generator->generator_one_gauss_points(w5_shino,*Mesh,xi,eta,zeta);
+        
+        double deltaN = 0.20;
+        double deltaM = 0.20;
+        double alpha; double beta = 1.0;
+        double Psi1, Psi2;
+        
+        for (unsigned int i=0; i<w1_shino.Length(); ++i){
+            
+            alpha = 3.0/(2.0*deltaN*deltaN); beta = 1.0;
+            Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
+            m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
+            
+            alpha = 3.0/(2.0*deltaN*deltaN) - 1.0/2.0;
+            Psi2 = icdf_gamma(w2_shino(i),alpha,beta);
+            m2(i) = (deltaN*deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
+            
+            m3(i) = (deltaN*deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
+            
+            alpha = 1.0/(deltaM*deltaM); beta = 1.0*deltaM*deltaM;
+            m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
+            m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
+            
+        }
+        
+        compute_mean_cauchy_stress(*solution, filename, true, true);
+        
     }
     
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
