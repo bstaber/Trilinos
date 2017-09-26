@@ -189,6 +189,127 @@ void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shap
     }
 }
 
+void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
+    
+    Epetra_Vector u(*OverlapMap);
+    u.Import(x, *ImportToOverlapMap, Insert);
+    
+    Epetra_Map CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
+    Epetra_Vector epsilon11(CellsMap);  epsilon11.PutScalar(0.0);
+    Epetra_Vector epsilon22(CellsMap);  epsilon22.PutScalar(0.0);
+    Epetra_Vector epsilon33(CellsMap);  epsilon33.PutScalar(0.0);
+    Epetra_Vector epsilon12(CellsMap);  epsilon12.PutScalar(0.0);
+    Epetra_Vector epsilon13(CellsMap);  epsilon13.PutScalar(0.0);
+    Epetra_Vector epsilon23(CellsMap);  epsilon23.PutScalar(0.0);
+    Epetra_Vector vonmises(CellsMap); vonmises.PutScalar(0.0);
+    
+    int node, e_gid;
+    int n_gauss_points = Mesh->n_gauss_cells;
+    double det_jac_tetra, gauss_weight, theta;
+    
+    Epetra_SerialDenseVector epsilon(6);
+    Epetra_SerialDenseVector vector_u(3*Mesh->el_type);    
+    Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
+    
+    Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
+    Epetra_SerialDenseMatrix D(Mesh->el_type,3);
+    Epetra_SerialDenseMatrix JacobianMatrix(3,3);
+    
+    double xi   = 0.0;
+    double eta  = 0.0;
+    double zeta = 0.0;
+    
+    for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+        e_gid = Mesh->local_cells[e_lid];
+        
+        for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+            node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+            matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+            matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+            matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
+            vector_u(3*inode+0) = u[OverlapMap->LID(3*node+0)];
+            vector_u(3*inode+1) = u[OverlapMap->LID(3*node+1)];
+            vector_u(3*inode+2) = u[OverlapMap->LID(3*node+2)];
+        }
+        for (unsigned int i=0; i<6; ++i){
+            epsilon(i) = 0.0;
+        }
+        
+        switch (Mesh->el_type){
+            case 4:
+                tetra4::d_shape_functions(D, xi, eta, zeta);
+                break;
+            case 8:
+                hexa8::d_shape_functions(D, xi, eta, zeta);
+                break;
+            case 10:
+                tetra10::d_shape_functions(D, xi, eta, zeta);
+                break;
+        }
+        
+        jacobian_matrix(matrix_X,D,JacobianMatrix);
+        jacobian_det(JacobianMatrix,det_jac_tetra);
+        dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+        compute_B_matrices(dx_shape_functions,matrix_B);
+        epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
+        
+        epsilon11[e_lid]  = epsilon(0);
+        epsilon22[e_lid]  = epsilon(1);
+        epsilon33[e_lid]  = epsilon(2);
+        epsilon12[e_lid]  = epsilon(5);
+        epsilon13[e_lid]  = epsilon(4);
+        epsilon23[e_lid]  = epsilon(3);
+        
+        vonmises[e_lid] = std::sqrt( (epsilon11[e_lid]-epsilon22[e_lid])*(epsilon11[e_lid]-epsilon22[e_lid]) + (epsilon22[e_lid]-epsilon33[e_lid])*(epsilon22[e_lid]-epsilon33[e_lid]) + (epsilon33[e_lid]-epsilon11[e_lid])*(epsilon33[e_lid]-epsilon11[e_lid]) + 6.0*(epsilon23[e_lid]*epsilon23[e_lid] + epsilon13[e_lid]*epsilon13[e_lid] + epsilon12[e_lid]*epsilon12[e_lid]) );
+    }
+    
+    int NumTargetElements = 0;
+    if (Comm->MyPID()==0){
+        NumTargetElements = Mesh->n_cells;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+    Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+    if (printCauchy){
+        Epetra_MultiVector lhs_root11(MapOnRoot,true);
+        lhs_root11.Export(epsilon11,ExportOnRoot,Insert);
+        std::string file11 = filename + "_epsilon11.mtx";
+        int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);
+        
+        Epetra_MultiVector lhs_root22(MapOnRoot,true);
+        lhs_root22.Export(epsilon22,ExportOnRoot,Insert);
+        std::string file22 = filename + "_epsilon22.mtx";
+        int error22 = EpetraExt::MultiVectorToMatrixMarketFile(file22.c_str(),lhs_root22,0,0,false);
+        
+        Epetra_MultiVector lhs_root33(MapOnRoot,true);
+        lhs_root33.Export(epsilon33,ExportOnRoot,Insert);
+        std::string file33 = filename + "_epsilon33.mtx";
+        int error33 = EpetraExt::MultiVectorToMatrixMarketFile(file33.c_str(),lhs_root33,0,0,false);
+        
+        Epetra_MultiVector lhs_root12(MapOnRoot,true);
+        lhs_root12.Export(epsilon12,ExportOnRoot,Insert);
+        std::string file12 = filename + "_epsilon12.mtx";
+        int error12 = EpetraExt::MultiVectorToMatrixMarketFile(file12.c_str(),lhs_root12,0,0,false);
+        
+        Epetra_MultiVector lhs_root13(MapOnRoot,true);
+        lhs_root13.Export(epsilon13,ExportOnRoot,Insert);
+        std::string file13 = filename + "_epsilon13.mtx";
+        int error13 = EpetraExt::MultiVectorToMatrixMarketFile(file13.c_str(),lhs_root13,0,0,false);
+        
+        Epetra_MultiVector lhs_root23(MapOnRoot,true);
+        lhs_root23.Export(epsilon23,ExportOnRoot,Insert);
+        std::string file23 = filename + "_epsilon23.mtx";
+        int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);
+    }
+    if (printVM){
+        Epetra_MultiVector lhs_rootvm(MapOnRoot,true);
+        lhs_rootvm.Export(vonmises,ExportOnRoot,Insert);
+        std::string filevm = filename + "_vm.mtx";
+        int errorvm = EpetraExt::MultiVectorToMatrixMarketFile(filevm.c_str(),lhs_rootvm,0,0,false);
+    }
+    
+}
+
 void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
     
     Epetra_Vector u(*OverlapMap);
@@ -221,6 +342,18 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     double xi   = 0.0;
     double eta  = 0.0;
     double zeta = 0.0;
+    
+    switch (Mesh->el_type){
+        case 4:
+            tetra4::d_shape_functions(D, xi, eta, zeta);
+            break;
+        case 8:
+            hexa8::d_shape_functions(D, xi, eta, zeta);
+            break;
+        case 10:
+            tetra10::d_shape_functions(D, xi, eta, zeta);
+            break;
+    }
     
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
@@ -257,27 +390,14 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             theta += gauss_weight*det*Mesh->detJac_tetra(e_lid,gp);
             
         }*/
-        
-        switch (Mesh->el_type){
-            case 4:
-                tetra4::d_shape_functions(D, xi, eta, zeta);
-                break;
-            case 8:
-                hexa8::d_shape_functions(D, xi, eta, zeta);
-                break;
-            case 10:
-                tetra10::d_shape_functions(D, xi, eta, zeta);
-                break;
-        }
-        
+    
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_tetra);
         dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
         compute_B_matrices(dx_shape_functions,matrix_B);
+        epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
         get_elasticity_tensor_for_recovery(e_lid, tangent_matrix);
         cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
-        
-        epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
         
         sigma11[e_lid]  = cauchy_stress(0);
         sigma22[e_lid]  = cauchy_stress(1);
