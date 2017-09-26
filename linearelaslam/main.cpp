@@ -65,6 +65,7 @@ MPI_Init(&argc, &argv);
     path = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution";
     //interface->compute_mean_cauchy_stress(*interface->solution, path, true, true);
     interface->recover_cauchy_stress(path,seed);
+    interface->compute_deformation(*interface->solutionmpath,true,true);
     
 #ifdef HAVE_MPI
     MPI_Finalize();
