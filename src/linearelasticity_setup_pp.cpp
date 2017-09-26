@@ -214,7 +214,6 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
     Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
     
-    double det_jac_tetra;
     Epetra_SerialDenseMatrix D(Mesh->el_type,3);
     Epetra_SerialDenseMatrix JacobianMatrix(3,3);
     Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
