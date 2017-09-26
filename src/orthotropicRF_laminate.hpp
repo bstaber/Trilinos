@@ -72,8 +72,8 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
         
-        double deltaN = 0.05;
-        double deltaM = 0.10;
+        double deltaN = 0.20;
+        double deltaM = 0.20;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
