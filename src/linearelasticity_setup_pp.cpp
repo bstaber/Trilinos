@@ -269,6 +269,9 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
                 tetra10::d_shape_functions(D, xi, eta, zeta);
                 break;
         }
+        
+        std::cout << matrix_X << "\n";
+        
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_tetra);
         dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
