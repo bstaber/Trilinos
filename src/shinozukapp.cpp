@@ -126,7 +126,6 @@ void generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, double
     int n_local_cells = Mesh.n_local_cells;
     int n_gauss_cells = Mesh.n_gauss_cells;
     double x, y, z;
-    double xi, eta, zeta;
     double ti, tj, tk;
     double si, sj, sk;
     double psi, phi, w, arg;

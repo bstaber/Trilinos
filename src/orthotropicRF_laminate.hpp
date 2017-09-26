@@ -262,7 +262,13 @@ public:
         
     }
     
-    void recover_cauchy_stress(std::string & filename){
+    void recover_cauchy_stress(std::string & filename, int * seeds){
+        
+        Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells);
+        Epetra_SerialDenseVector w2_shino(Mesh->n_local_cells);
+        Epetra_SerialDenseVector w3_shino(Mesh->n_local_cells);
+        Epetra_SerialDenseVector w4_shino(Mesh->n_local_cells);
+        Epetra_SerialDenseVector w5_shino(Mesh->n_local_cells);
         
     }
     
