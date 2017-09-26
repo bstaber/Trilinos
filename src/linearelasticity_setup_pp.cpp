@@ -214,18 +214,18 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
     Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
     
-    double det;
-    Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
-    Epetra_SerialDenseMatrix deformation_gradient(3,3);
+    Epetra_SerialDenseMatrix D(Mesh->el_type,3);
+    Epetra_SerialDenseMatrix JacobianMatrix(3,3);
+    
+    double xi   = 0.0;
+    double eta  = 0.0;
+    double zeta = 0.0;
     
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
         
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
-            matrix_x(0,inode) = u[OverlapMap->LID(3*node+0)] + Mesh->nodes_coord[3*node+0];
-            matrix_x(1,inode) = u[OverlapMap->LID(3*node+1)] + Mesh->nodes_coord[3*node+1];
-            matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
             vector_u(3*inode+0) = u[OverlapMap->LID(3*node+0)];
             vector_u(3*inode+1) = u[OverlapMap->LID(3*node+1)];
             vector_u(3*inode+2) = u[OverlapMap->LID(3*node+2)];
@@ -234,7 +234,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             epsilon(i) = 0.0;
         }
                 
-        theta = 0.0;
+        /*theta = 0.0;
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             
             gauss_weight = Mesh->gauss_weight_cells(gp);
@@ -244,32 +244,39 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
                 dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
             }
             
-            deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
-            double det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
-            
             compute_B_matrices(dx_shape_functions,matrix_B);
-            epsilon.Multiply('N','N',gauss_weight*det*Mesh->detJac_tetra(e_lid,gp),matrix_B,vector_u,1.0);
+            epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
             
             //get_elasticity_tensor(e_lid, gp, tangent_matrix);
             //cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
             
-            //sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(0);
-            //sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(1);
-            //sigma33[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(2);
-            //sigma12[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(5);
-            //sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(4);
-            //sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*epsilon(3);
-            
             theta += gauss_weight*det*Mesh->detJac_tetra(e_lid,gp);
             
-        }
+        }*/
         
-        sigma11[e_lid]  = epsilon(0)/theta;
-        sigma22[e_lid]  = epsilon(1)/theta;
-        sigma33[e_lid]  = epsilon(2)/theta;
-        sigma12[e_lid]  = epsilon(5)/theta;
-        sigma13[e_lid]  = epsilon(4)/theta;
-        sigma23[e_lid]  = epsilon(3)/theta;
+        switch (Mesh->el_type){
+            case 4:
+                tetra4::d_shape_functions(D, xi, eta, zeta);
+                break;
+            case 8:
+                hexa8::d_shape_functions(D, xi, eta, zeta);
+                break;
+            case 10:
+                tetra10::d_shape_functions(D, xi, eta, zeta);
+                break;
+        }
+        jacobian_matrix(matrix_X,D,JacobianMatrix);
+        jacobian_det(JacobianMatrix,det_jac_tetra);
+        dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+        compute_B_matrices(dx_shape_functions,matrix_B);
+        epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
+        
+        sigma11[e_lid]  = epsilon(0);
+        sigma22[e_lid]  = epsilon(1);
+        sigma33[e_lid]  = epsilon(2);
+        sigma12[e_lid]  = epsilon(5);
+        sigma13[e_lid]  = epsilon(4);
+        sigma23[e_lid]  = epsilon(3);
         
         vonmises[e_lid] = std::sqrt( (sigma11[e_lid]-sigma22[e_lid])*(sigma11[e_lid]-sigma22[e_lid]) + (sigma22[e_lid]-sigma33[e_lid])*(sigma22[e_lid]-sigma33[e_lid]) + (sigma33[e_lid]-sigma11[e_lid])*(sigma33[e_lid]-sigma11[e_lid]) + 6.0*(sigma23[e_lid]*sigma23[e_lid] + sigma13[e_lid]*sigma13[e_lid] + sigma12[e_lid]*sigma12[e_lid]) );
     }
