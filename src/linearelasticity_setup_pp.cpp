@@ -214,6 +214,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
     Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
     
+    Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
     Epetra_SerialDenseMatrix D(Mesh->el_type,3);
     Epetra_SerialDenseMatrix JacobianMatrix(3,3);
     
@@ -226,6 +227,9 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+            matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+            matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+            matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
             vector_u(3*inode+0) = u[OverlapMap->LID(3*node+0)];
             vector_u(3*inode+1) = u[OverlapMap->LID(3*node+1)];
             vector_u(3*inode+2) = u[OverlapMap->LID(3*node+2)];
