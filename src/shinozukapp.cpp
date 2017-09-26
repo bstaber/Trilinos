@@ -120,7 +120,7 @@ void shinozuka::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh
     
 }
 
-void generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, double & xi, double & eta, double & zeta){
+void shinozuka::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, double & xi, double & eta, double & zeta){
     
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
