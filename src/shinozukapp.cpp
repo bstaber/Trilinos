@@ -179,8 +179,6 @@ void shinozuka::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & M
     }
     
 }
-    
-}
 
 void shinozuka::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta){
     for (unsigned int i=0; i<V.MyLength(); ++i){
