@@ -258,7 +258,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             
         }*/
         
-        switch (Mesh->el_type){
+        /*switch (Mesh->el_type){
             case 4:
                 tetra4::d_shape_functions(D, xi, eta, zeta);
                 break;
@@ -272,10 +272,19 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_tetra);
-        dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
-        compute_B_matrices(dx_shape_functions,matrix_B);
+        dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);*/
+        unsigned int gp = 0;
+        for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+            dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
+            dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
+            dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+        }
         
+        compute_B_matrices(dx_shape_functions,matrix_B);
         epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
+        
+        get_elasticity_tensor(e_lid, gp, tangent_matrix);
+        cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
         
         sigma11[e_lid]  = epsilon(0);
         sigma22[e_lid]  = epsilon(1);
