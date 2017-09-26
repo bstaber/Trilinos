@@ -23,7 +23,7 @@ public:
     
     void generator(Epetra_Vector & v, mesh & Mesh);
     void generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh);
-    void generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh * Mesh, double & xi, double & eta, double & zeta);
+    void generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, double & xi, double & eta, double & zeta);
     
     void icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta);
     void icdf_beta(Epetra_Vector & V, Epetra_Vector & B, double & tau1, double & tau2);
