@@ -63,7 +63,7 @@ MPI_Init(&argc, &argv);
         std::string path2 = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution_" + std::to_string(j);
         interface->print_solution(path1);
         interface->recover_cauchy_stress(path2,seed);
-        interface->compute_deformation(*interface->solution,path2,true,true);
+        interface->compute_deformation(*interface->solution,path2,true,false);
     }
     
 #ifdef HAVE_MPI

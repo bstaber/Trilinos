@@ -271,17 +271,17 @@ void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & 
     Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
     Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
     if (printCauchy){
-        Epetra_MultiVector lhs_root11(MapOnRoot,true);
+        /*Epetra_MultiVector lhs_root11(MapOnRoot,true);
         lhs_root11.Export(epsilon11,ExportOnRoot,Insert);
         std::string file11 = filename + "_epsilon11.mtx";
-        int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);
+        int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);*/
         
         Epetra_MultiVector lhs_root22(MapOnRoot,true);
         lhs_root22.Export(epsilon22,ExportOnRoot,Insert);
         std::string file22 = filename + "_epsilon22.mtx";
         int error22 = EpetraExt::MultiVectorToMatrixMarketFile(file22.c_str(),lhs_root22,0,0,false);
         
-        Epetra_MultiVector lhs_root33(MapOnRoot,true);
+        /*Epetra_MultiVector lhs_root33(MapOnRoot,true);
         lhs_root33.Export(epsilon33,ExportOnRoot,Insert);
         std::string file33 = filename + "_epsilon33.mtx";
         int error33 = EpetraExt::MultiVectorToMatrixMarketFile(file33.c_str(),lhs_root33,0,0,false);
@@ -299,12 +299,12 @@ void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & 
         Epetra_MultiVector lhs_root23(MapOnRoot,true);
         lhs_root23.Export(epsilon23,ExportOnRoot,Insert);
         std::string file23 = filename + "_epsilon23.mtx";
-        int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);
+        int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);*/
     }
     if (printVM){
         Epetra_MultiVector lhs_rootvm(MapOnRoot,true);
         lhs_rootvm.Export(vonmises,ExportOnRoot,Insert);
-        std::string filevm = filename + "_vm.mtx";
+        std::string filevm = filename + "_epsilon_vm.mtx";
         int errorvm = EpetraExt::MultiVectorToMatrixMarketFile(filevm.c_str(),lhs_rootvm,0,0,false);
     }
     
@@ -416,17 +416,17 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
     Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
     if (printCauchy){
-        Epetra_MultiVector lhs_root11(MapOnRoot,true);
+        /*Epetra_MultiVector lhs_root11(MapOnRoot,true);
         lhs_root11.Export(sigma11,ExportOnRoot,Insert);
         std::string file11 = filename + "_sigma11.mtx";
-        int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);
+        int error11 = EpetraExt::MultiVectorToMatrixMarketFile(file11.c_str(),lhs_root11,0,0,false);*/
     
         Epetra_MultiVector lhs_root22(MapOnRoot,true);
         lhs_root22.Export(sigma22,ExportOnRoot,Insert);
         std::string file22 = filename + "_sigma22.mtx";
         int error22 = EpetraExt::MultiVectorToMatrixMarketFile(file22.c_str(),lhs_root22,0,0,false);
     
-        Epetra_MultiVector lhs_root33(MapOnRoot,true);
+        /*Epetra_MultiVector lhs_root33(MapOnRoot,true);
         lhs_root33.Export(sigma33,ExportOnRoot,Insert);
         std::string file33 = filename + "_sigma33.mtx";
         int error33 = EpetraExt::MultiVectorToMatrixMarketFile(file33.c_str(),lhs_root33,0,0,false);
@@ -444,7 +444,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         Epetra_MultiVector lhs_root23(MapOnRoot,true);
         lhs_root23.Export(sigma23,ExportOnRoot,Insert);
         std::string file23 = filename + "_sigma23.mtx";
-        int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);
+        int error23 = EpetraExt::MultiVectorToMatrixMarketFile(file23.c_str(),lhs_root23,0,0,false);*/
     }
     if (printVM){
         Epetra_MultiVector lhs_rootvm(MapOnRoot,true);
