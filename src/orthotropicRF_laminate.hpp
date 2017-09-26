@@ -262,6 +262,10 @@ public:
         
     }
     
+    void recover_cauchy_stress(std::string & filename){
+        
+    }
+    
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
                 
         C(0,0) = c1/16.0 + (9.0*c2)/32.0 + (9.0*c4)/32.0 + (3.0*c5)/8.0 + (3.0*std::sqrt(2.0)*c3)/16.0;
