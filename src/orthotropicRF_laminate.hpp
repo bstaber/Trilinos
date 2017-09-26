@@ -326,11 +326,11 @@ public:
         
         double epsilon = 1.0e-6;
         Epetra_SerialDenseMatrix M(6,6);
-        double M1 = m1(e_lid+gp) + epsilon;
-        double M2 = m2(e_lid+gp) + epsilon;
-        double M3 = m3(e_lid+gp);
-        double M4 = m4(e_lid+gp) + epsilon;
-        double M5 = m5(e_lid+gp) + epsilon;
+        double M1 = m1(e_lid) + epsilon;
+        double M2 = m2(e_lid) + epsilon;
+        double M3 = m3(e_lid);
+        double M4 = m4(e_lid) + epsilon;
+        double M5 = m5(e_lid) + epsilon;
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
