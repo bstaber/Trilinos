@@ -275,12 +275,6 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
         compute_B_matrices(dx_shape_functions,matrix_B);
         
-        std::cout << D << "\n";
-        std::cout << JacobianMatrix << "\n";
-        std::cout << dx_shape_functions << "\n";
-        std::cout << matrix_B << "\n";
-        std::cout << "\n\n";
-        
         epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
         
         sigma11[e_lid]  = epsilon(0);
