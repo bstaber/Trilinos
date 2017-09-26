@@ -279,19 +279,19 @@ public:
         double xi = 0.0; double eta = 0.0; double zeta = 0.0;
         
         GRF_Generator->rng.seed(seeds[0]);
-        GRF_Generator->generator_one_gauss_points(w1_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w1_shino,*Mesh,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[1]);
-        GRF_Generator->generator_one_gauss_points(w2_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w2_shino,*Mesh,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[2]);
-        GRF_Generator->generator_one_gauss_points(w3_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w3_shino,*Mesh,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[3]);
-        GRF_Generator->generator_one_gauss_points(w4_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w4_shino,*Mesh,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[4]);
-        GRF_Generator->generator_one_gauss_points(w5_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w5_shino,*Mesh,xi,eta,zeta);
         
         double deltaN = 0.20;
         double deltaM = 0.20;
