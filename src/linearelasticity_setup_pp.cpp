@@ -208,7 +208,7 @@ void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & 
     double det_jac_tetra, gauss_weight, theta;
     
     Epetra_SerialDenseVector epsilon(6);
-    Epetra_SerialDenseVector vector_u(3*Mesh->el_type);    
+    Epetra_SerialDenseVector vector_u(3*Mesh->el_type);
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
     Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
     
