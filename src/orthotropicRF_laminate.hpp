@@ -72,8 +72,9 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
         
-        double deltaN = 0.20;
-        double deltaM = 0.20;
+        double deltaN = 0.0970;
+        double deltaM4 = 0.0461;
+        double deltaM5 = 0.0952;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
@@ -89,8 +90,9 @@ public:
             
             m3(i) = (deltaN*deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
             
-            alpha = 1.0/(deltaM*deltaM); beta = 1.0*deltaM*deltaM;
+            alpha = 1.0/(deltaM4*deltaM4); beta = 1.0*deltaM4*deltaM4;
             m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
+            alpha = 1.0/(deltaM5*deltaM5); beta = 1.0*deltaM5*deltaM5;
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
             
         }
