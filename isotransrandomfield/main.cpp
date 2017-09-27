@@ -63,13 +63,16 @@ int main(int argc, char *argv[]){
         RandomField->generator(*V(i),Mesh);
     }
     
-    double alpha = 3.0/(2.0*0.05*0.05); double beta = 1.0;
+    double deltaN = 0.10;
+    double deltaMk = 0.10;
+    
+    double alpha = 3.0/(2.0*deltaN*deltaN); double beta = 1.0;
     RandomField->icdf_gamma(*V(0),*G(0),alpha,beta);
     
-    alpha = 3.0/(2.0*0.05*0.05) - 1.0/2.0;
+    alpha = 3.0/(2.0*deltaN*deltaN) - 1.0/2.0;
     RandomField->icdf_gamma(*V(1),*G(1),alpha,beta);
     
-    alpha = 1.0/(0.10*0.10); beta = 1.0*0.10*0.10;
+    alpha = 1.0/(deltaMk*deltaMk); beta = 1.0*deltaMk*deltaMk;
     RandomField->icdf_gamma(*V(3),*G(3),alpha,beta);
     RandomField->icdf_gamma(*V(4),*G(4),alpha,beta);
     *G(2) = *V(2);
@@ -87,7 +90,7 @@ int main(int argc, char *argv[]){
     
     lhs_root.PutScalar(0.0);
     lhs_root.Export(G,ExportOnRoot,Insert);
-    std::string filename = path + "shinozuka_translatedfield.mtx";
+    std::string filename = path + "shinozuka_translatedfield_deltaN_" + std::to_string(deltaN) + "_deltaMk_" + std::to_string(deltaMk) + ".mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
      
 #ifdef HAVE_MPI
