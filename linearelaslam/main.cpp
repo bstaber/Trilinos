@@ -53,9 +53,9 @@ MPI_Init(&argc, &argv);
     
     Teuchos::RCP<OrthotropicRF_Laminate> interface = Teuchos::rcp(new OrthotropicRF_Laminate(Comm,*paramList));
     
-    double deltaN  = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"), "deltaN");
-    double deltaM4 = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"), "deltaM4");
-    double deltaM5 = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"), "deltaM5");
+    double deltaN  = Teuchos::getParameter<std::double>(paramList->sublist("Shinozuka"), "deltaN");
+    double deltaM4 = Teuchos::getParameter<std::double>(paramList->sublist("Shinozuka"), "deltaM4");
+    double deltaM5 = Teuchos::getParameter<std::double>(paramList->sublist("Shinozuka"), "deltaM5");
     
     interface->_deltaN  = deltaN;
     interface->_deltaM4 = deltaM4;
