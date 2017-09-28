@@ -219,11 +219,11 @@ public:
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
-        double c1 = 144.8969*1.0e6;
-        double c2 = 14.2500*1.0e6;
-        double c3 = 5.8442*1.0e6;
-        double c4 = 7.5462*1.0e6;
-        double c5 = 12.5580*1.0e6;
+        double c1 = 144.8969*1.0e3;
+        double c2 = 14.2500*1.0e3;
+        double c3 = 5.8442*1.0e3;
+        double c4 = 7.5462*1.0e3;
+        double c5 = 12.5580*1.0e3;
     
         Epetra_SerialDenseMatrix sqrtmCmoy(6,6);
         double constant = std::sqrt(c1*c1-2.0*c1*c2+c2*c2+4.0*c3*c3);
@@ -338,11 +338,11 @@ public:
         
         transverse_isotropic_matrix(M,M1,M2,M3,M4,M5);
         
-        double c1 = 144.8969*1.0e6;
-        double c2 = 14.2500*1.0e6;
-        double c3 = 5.8442*1.0e6;
-        double c4 = 7.5462*1.0e6;
-        double c5 = 12.5580*1.0e6;
+        double c1 = 144.8969*1.0e3;
+        double c2 = 14.2500*1.0e3;
+        double c3 = 5.8442*1.0e3;
+        double c4 = 7.5462*1.0e3;
+        double c5 = 12.5580*1.0e3;
         
         Epetra_SerialDenseMatrix sqrtmCmoy(6,6);
         double constant = std::sqrt(c1*c1-2.0*c1*c2+c2*c2+4.0*c3*c3);
