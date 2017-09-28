@@ -62,6 +62,9 @@
         <Parameter name="lx" type="double" value="5.0"/>
         <Parameter name="ly" type="double" value="2.5"/>
         <Parameter name="lz" type="double" value="2.05"/>
+        <Parameter name="deltaN" type="double" value="0.0970"/>
+        <Parameter name="deltaM4" type="double" value="0.0461"/>
+        <Parameter name="deltaM5" type="double" value="0.0952"/>
     </ParameterList>
     
 </ParameterList>

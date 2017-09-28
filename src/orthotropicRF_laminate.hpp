@@ -458,6 +458,10 @@ public:
     
     std::vector<int> phase;
     
+    double _deltaN;
+    double _deltaM4;
+    double _deltaM5;
+    
 };
 
 
