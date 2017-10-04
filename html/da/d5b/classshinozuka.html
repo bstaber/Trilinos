@@ -86,6 +86,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a10aadda5a91264b8225e5cde398ca2bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9947cdc92e30009a5fc658ad4184e113"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d5b/classshinozuka.html#a9947cdc92e30009a5fc658ad4184e113">generator_gauss_points</a> (Epetra_SerialDenseVector &amp;v, <a class="el" href="../../d6/d6b/classmesh.html">mesh</a> &amp;Mesh)</td></tr>
 <tr class="separator:a9947cdc92e30009a5fc658ad4184e113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ecdbf546e122a6ec0a8627373a92b81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d5b/classshinozuka.html#a2ecdbf546e122a6ec0a8627373a92b81">generator_one_gauss_point</a> (Epetra_SerialDenseVector &amp;v, <a class="el" href="../../d6/d6b/classmesh.html">mesh</a> &amp;Mesh, double &amp;xi, double &amp;eta, double &amp;zeta)</td></tr>
+<tr class="separator:a2ecdbf546e122a6ec0a8627373a92b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ad4b09c1dc81c1eceb0ba8b48fae376"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d5b/classshinozuka.html#a9ad4b09c1dc81c1eceb0ba8b48fae376">icdf_gamma</a> (Epetra_Vector &amp;V, Epetra_Vector &amp;G, double &amp;alpha, double &amp;beta)</td></tr>
 <tr class="separator:a9ad4b09c1dc81c1eceb0ba8b48fae376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f66c1be45e7e4ef79ab3b5e73645ec2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d5b/classshinozuka.html#a0f66c1be45e7e4ef79ab3b5e73645ec2">icdf_beta</a> (Epetra_Vector &amp;V, Epetra_Vector &amp;B, double &amp;tau1, double &amp;tau2)</td></tr>
@@ -188,7 +190,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html#l00141">141</a> of file <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html">shinozukapp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html#l00200">200</a> of file <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html">shinozukapp.cpp</a>.</p>
 
 </div>
 </div>
@@ -253,6 +255,54 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a2ecdbf546e122a6ec0a8627373a92b81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ecdbf546e122a6ec0a8627373a92b81">&#9670;&nbsp;</a></span>generator_one_gauss_point()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shinozuka::generator_one_gauss_point </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d6/d6b/classmesh.html">mesh</a> &amp;&#160;</td>
+          <td class="paramname"><em>Mesh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>eta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html#l00123">123</a> of file <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html">shinozukapp.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a0f66c1be45e7e4ef79ab3b5e73645ec2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0f66c1be45e7e4ef79ab3b5e73645ec2">&#9670;&nbsp;</a></span>icdf_beta()</h2>
 
@@ -291,7 +341,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html#l00133">133</a> of file <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html">shinozukapp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html#l00192">192</a> of file <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html">shinozukapp.cpp</a>.</p>
 
 </div>
 </div>
@@ -333,7 +383,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html#l00124">124</a> of file <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html">shinozukapp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html#l00183">183</a> of file <a class="el" href="../../d3/d48/shinozukapp_8cpp_source.html">shinozukapp.cpp</a>.</p>
 
 </div>
 </div>
@@ -392,7 +442,7 @@ template&lt;typename typearg &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00031">31</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00032">32</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
 
 </div>
 </div>
@@ -408,7 +458,7 @@ template&lt;typename typearg &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00032">32</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00033">33</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
 
 </div>
 </div>
@@ -424,7 +474,7 @@ template&lt;typename typearg &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00033">33</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00034">34</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +490,7 @@ template&lt;typename typearg &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00030">30</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00031">31</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +506,7 @@ template&lt;typename typearg &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00035">35</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00036">36</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
 
 </div>
 </div>
@@ -472,7 +522,7 @@ template&lt;typename typearg &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00036">36</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00037">37</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +538,7 @@ template&lt;typename typearg &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00034">34</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html#l00035">35</a> of file <a class="el" href="../../d7/de5/shinozukapp_8hpp_source.html">shinozukapp.hpp</a>.</p>
 
 </div>
 </div>

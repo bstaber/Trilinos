@@ -1,17 +1,8 @@
 var searchData=
 [
-  ['c1',['c1',['../d6/daf/class_interface__arteries.html#a61115447f3d4835f97bfd89cb5aee6bf',1,'Interface_arteries']]],
-  ['c1_5fadv',['c1_adv',['../d6/daf/class_interface__arteries.html#a2ae07052bdcd0cd8c859531815ba8d74',1,'Interface_arteries']]],
-  ['c1_5fgmrf',['c1_gmrf',['../d6/daf/class_interface__arteries.html#a2b9b320e6f9c57677532dcf88fb842df',1,'Interface_arteries']]],
-  ['c1_5fmed',['c1_med',['../d6/daf/class_interface__arteries.html#ac6761ea9a160fa6e3467777f2fe46029',1,'Interface_arteries']]],
-  ['c2',['c2',['../d6/daf/class_interface__arteries.html#a768a287901f59ff63a7be7c1a250826f',1,'Interface_arteries']]],
-  ['c2_5fadv',['c2_adv',['../d6/daf/class_interface__arteries.html#afd1f2b9d6451ef69a6c37f76d6d271fa',1,'Interface_arteries']]],
-  ['c2_5fgmrf',['c2_gmrf',['../d6/daf/class_interface__arteries.html#ac22782ab52d7fe6ead74c700b061c164',1,'Interface_arteries']]],
-  ['c2_5fmed',['c2_med',['../d6/daf/class_interface__arteries.html#ab24ca3a3d8cdf4134f015125e66123bf',1,'Interface_arteries']]],
-  ['cells_5fnodes',['cells_nodes',['../d6/d6b/classmesh.html#afcd4e342035ab14af53066c8f289ff10',1,'mesh']]],
-  ['cells_5fnodes_5fadv',['cells_nodes_adv',['../d6/daf/class_interface__arteries.html#a1f0021c94db44575e59ebf06be21b5b5',1,'Interface_arteries']]],
-  ['cells_5fnodes_5fmed',['cells_nodes_med',['../d6/daf/class_interface__arteries.html#ae410206765aad3f17bb32a07417d38d6',1,'Interface_arteries']]],
-  ['cells_5fnodes_5fp1_5fmed',['cells_nodes_p1_med',['../d6/daf/class_interface__arteries.html#a007c844f6d3106043b40121f57f8805e',1,'Interface_arteries']]],
-  ['comm',['Comm',['../d8/dc2/class_finite___element___problem.html#add69f478a633667a98acf55c21887609',1,'Finite_Element_Problem::Comm()'],['../d3/d9f/class_linear___finite___element___problem.html#adf16aec0b9e8ee1a0d9c25f9eb8f86a5',1,'Linear_Finite_Element_Problem::Comm()'],['../d6/d6b/classmesh.html#a0fd0a38e416a36cce4d4958d88e11edb',1,'mesh::Comm()'],['../d0/d9d/class_newton___raphson.html#aa7e3283541bc2c3658cc7abe3996788a',1,'Newton_Raphson::Comm()']]],
-  ['cos_5fplyagl',['cos_plyagl',['../d8/d66/class_interface__dirichlet.html#af9701dc02b931fe3cabdd99bb8f31969',1,'Interface_dirichlet::cos_plyagl()'],['../de/dd1/class_t_i_mooney.html#ad6c228917098dcb27098348edfc1927b',1,'TIMooney::cos_plyagl()'],['../d6/d26/class_n_r_l___model_f.html#adfdd123dd06ed6fdef496deabc508e9c',1,'NRL_ModelF::cos_plyagl()'],['../dd/d02/class_n_r_l___random_field_model.html#aec599290de76f3da57d540d270366a94',1,'NRL_RandomFieldModel::cos_plyagl()']]]
+  ['b',['b',['../d6/daf/class_interface__arteries.html#aaee6b3cf6615af56b59f40c78444f092',1,'Interface_arteries']]],
+  ['bc_5fdisp',['bc_disp',['../d0/d9d/class_newton___raphson.html#a2c2eac31f2b5f544687fbf16070bc1be',1,'Newton_Raphson']]],
+  ['beta3',['beta3',['../d6/daf/class_interface__arteries.html#a7a42a071fe36ef47ae4d14017444888b',1,'Interface_arteries::beta3()'],['../de/dd1/class_t_i_mooney.html#a4070acb97c110120d2e80717b9613fac',1,'TIMooney::beta3()'],['../d6/d26/class_n_r_l___model_f.html#a1a4ad15ad1703ef483c9321f4c621c3d',1,'NRL_ModelF::beta3()'],['../dd/d02/class_n_r_l___random_field_model.html#a0f6976bb1b3b949c896d4d2282affd55',1,'NRL_RandomFieldModel::beta3()']]],
+  ['beta4',['beta4',['../d6/daf/class_interface__arteries.html#a454d1834ca3c902a097fca924650257c',1,'Interface_arteries::beta4()'],['../d8/d66/class_interface__dirichlet.html#a25021466e547c83cf3261259a0feb35c',1,'Interface_dirichlet::beta4()'],['../de/dd1/class_t_i_mooney.html#a32c5513a367ed0a46d6a5489491b6f93',1,'TIMooney::beta4()'],['../d6/d26/class_n_r_l___model_f.html#af1d5780175c0029df169de311c22adf6',1,'NRL_ModelF::beta4()'],['../dd/d02/class_n_r_l___random_field_model.html#ad40cb4d5fb3cab2696deb67648b4a6d8',1,'NRL_RandomFieldModel::beta4()']]],
+  ['beta5',['beta5',['../d8/d66/class_interface__dirichlet.html#a9ded9908e1c20cf94712eaa4c0d7e8b0',1,'Interface_dirichlet::beta5()'],['../de/dd1/class_t_i_mooney.html#a330a5214bd1e9d51cfccecb86330aa82',1,'TIMooney::beta5()'],['../d6/d26/class_n_r_l___model_f.html#a866a2055a5dcfe83240666ac74128e14',1,'NRL_ModelF::beta5()'],['../dd/d02/class_n_r_l___random_field_model.html#a04a7d74015f17aa3de5c9a5e42bb7d3b',1,'NRL_RandomFieldModel::beta5()']]]
 ];

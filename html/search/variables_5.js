@@ -1,8 +1,15 @@
 var searchData=
 [
-  ['face_5ftype',['face_type',['../d6/d6b/classmesh.html#a93f1b30d16013e2564c388f28b94c3d0',1,'mesh']]],
-  ['faces_5fnodes',['faces_nodes',['../d6/d6b/classmesh.html#a6b1a4e32411b602e9d5042f464cfde52',1,'mesh']]],
-  ['failure',['failure',['../d0/d9d/class_newton___raphson.html#afa12789c5d8add146be4670832114bc8',1,'Newton_Raphson']]],
-  ['fegraph',['FEGraph',['../d8/dc2/class_finite___element___problem.html#a88e07b8fd2870286bc065c9e542f52a9',1,'Finite_Element_Problem::FEGraph()'],['../d3/d9f/class_linear___finite___element___problem.html#a84aecb5b50891d3e477366ebc01cc740',1,'Linear_Finite_Element_Problem::FEGraph()']]],
-  ['fixed',['fixed',['../d6/daf/class_interface__arteries.html#a6c9309b7b837443cf11a7562f57831cd',1,'Interface_arteries']]]
+  ['e1',['E1',['../d6/daf/class_interface__arteries.html#acf946910e98b8997303dceb1d4a72caa',1,'Interface_arteries']]],
+  ['e2',['E2',['../d6/daf/class_interface__arteries.html#a1f573be4803c13741e003c4fcf364afd',1,'Interface_arteries']]],
+  ['e3',['E3',['../d6/daf/class_interface__arteries.html#aea015297c299a1f4f72b0728e5060c28',1,'Interface_arteries']]],
+  ['el_5ftype',['el_type',['../d6/d6b/classmesh.html#a42962aa7adaec45d69c1dc212cd89bd0',1,'mesh']]],
+  ['epart',['epart',['../d6/d6b/classmesh.html#affe34969c2212d1db294154c01d6ce0e',1,'mesh']]],
+  ['eps',['eps',['../d0/d9d/class_newton___raphson.html#ac4d8377ea44241ad177ec1fa09b8d726',1,'Newton_Raphson']]],
+  ['epsilon',['epsilon',['../d6/daf/class_interface__arteries.html#a9162de5cf898e08949da58aba7a70bb1',1,'Interface_arteries']]],
+  ['epsilon1',['epsilon1',['../d8/d66/class_interface__dirichlet.html#af13f681935dc8653550e135bf1bea9f1',1,'Interface_dirichlet']]],
+  ['epsilon2',['epsilon2',['../d8/d66/class_interface__dirichlet.html#ac8e2222baa254cae628171dc8577167f',1,'Interface_dirichlet']]],
+  ['eta',['eta',['../d6/daf/class_interface__arteries.html#acc25e0baf7afd511a5f0d252787cd2f5',1,'Interface_arteries']]],
+  ['eta_5fcells',['eta_cells',['../d6/d6b/classmesh.html#ad79b5f2a09900de0c3ff4ad32c80ca31',1,'mesh']]],
+  ['eta_5ffaces',['eta_faces',['../d6/d6b/classmesh.html#a22378acaff4d850360690da1d124fbe7',1,'mesh']]]
 ];

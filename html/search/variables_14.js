@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['x',['x',['../d0/d9d/class_newton___raphson.html#aa55f8dfd71a13e9433c685a5ff0b784a',1,'Newton_Raphson']]],
-  ['xi',['xi',['../d6/daf/class_interface__arteries.html#ae3ce4564bcd76d9cbae05a269e9067ce',1,'Interface_arteries']]],
-  ['xi_5fcells',['xi_cells',['../d6/d6b/classmesh.html#a6e99418d0694a634216606c0b6c3e0e7',1,'mesh']]],
-  ['xi_5ffaces',['xi_faces',['../d6/d6b/classmesh.html#a97a7401342ae6c6d785a1ccf110c2f2c',1,'mesh']]],
-  ['xxmax',['xxmax',['../d6/daf/class_interface__arteries.html#a6d52adb48e78d0ec0a9f7c369262e8fb',1,'Interface_arteries']]]
+  ['w1',['w1',['../d6/daf/class_interface__arteries.html#a4858fdea44aaf35269501ccb293d9ca7',1,'Interface_arteries']]],
+  ['w1_5fgmrf',['w1_gmrf',['../d6/daf/class_interface__arteries.html#a89720d644ae46963749b60c947e53407',1,'Interface_arteries']]],
+  ['w2',['w2',['../d6/daf/class_interface__arteries.html#aa66a661cc31249bce319fcd1ca671b25',1,'Interface_arteries']]],
+  ['w2_5fgmrf',['w2_gmrf',['../d6/daf/class_interface__arteries.html#a3470395f80a097aa452e8d8f79366fcf',1,'Interface_arteries']]],
+  ['w3',['w3',['../d6/daf/class_interface__arteries.html#a2f54e7bbc24ee9e8fcbc5990b04f5013',1,'Interface_arteries']]],
+  ['w3_5fgmrf',['w3_gmrf',['../d6/daf/class_interface__arteries.html#ae9d622e6b6aebcbff5e2722eafd8e6b2',1,'Interface_arteries']]],
+  ['w4',['w4',['../d6/daf/class_interface__arteries.html#ac6fe0edd4bcc4282ce1227a6d007837f',1,'Interface_arteries']]],
+  ['w4_5fgmrf',['w4_gmrf',['../d6/daf/class_interface__arteries.html#aaaacb01f4aefd6b2e2a94f915f6a623c',1,'Interface_arteries']]]
 ];

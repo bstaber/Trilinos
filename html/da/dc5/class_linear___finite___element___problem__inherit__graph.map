@@ -1,3 +1,5 @@
 <map id="Linear_Finite_Element_Problem" name="Linear_Finite_Element_Problem">
-<area shape="rect" id="node2" href="$d7/d76/classlaplace.html" title="laplace" alt="" coords="51,92,114,117"/>
+<area shape="rect" id="node2" href="$d7/d76/classlaplace.html" title="laplace" alt="" coords="5,92,69,117"/>
+<area shape="rect" id="node3" href="$d9/df7/class_linearized_elasticity.html" title="LinearizedElasticity" alt="" coords="93,92,229,117"/>
+<area shape="rect" id="node4" href="$d0/daf/class_orthotropic_r_f___laminate.html" title="OrthotropicRF_Laminate" alt="" coords="77,165,245,191"/>
 </map>
