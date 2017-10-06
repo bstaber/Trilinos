@@ -1,7 +1,7 @@
 #include "shinozukapp_layeredcomp.hpp"
 #include <math.h>
 
-shinozuka_layeredcomppp_layeredcomp::shinozuka_layeredcomp(int & nu, double & length_x, double & length_y, double & length_z):
+shinozuka_layeredcomp::shinozuka_layeredcomp(int & nu, double & length_x, double & length_y, double & length_z):
 psi_(0.0,1.0), phi_(0.0,1.0), order(nu), l1(length_x), l2(length_y), l3(length_z){
 }
 
