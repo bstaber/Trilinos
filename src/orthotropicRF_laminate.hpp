@@ -35,7 +35,7 @@ public:
         double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
         double L3 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lz");
         
-        GRF_Generator = Teuchos::rcp(new shinozukapp_layeredcomp(order,L1,L2,L3));
+        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp(order,L1,L2,L3));
         
         solution = new Epetra_Vector(*StandardMap);
     }
@@ -448,8 +448,8 @@ public:
     
     Epetra_Vector * solution;
     Teuchos::ParameterList * Krylov;
-    Teuchos::RCP<shinozukapp_layeredcomp> GRF_Generator;
-    
+    Teuchos::RCP<shinozuka_layeredcomp> GRF_Generator;
+
     Epetra_SerialDenseVector m1;
     Epetra_SerialDenseVector m2;
     Epetra_SerialDenseVector m3;
