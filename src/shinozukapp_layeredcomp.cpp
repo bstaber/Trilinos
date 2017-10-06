@@ -1,20 +1,20 @@
 #include "shinozukapp_layeredcomp.hpp"
 #include <math.h>
 
-shinozuka::shinozuka(int & nu, double & length_x, double & length_y, double & length_z):
+shinozuka_layeredcomppp_layeredcomp::shinozuka_layeredcomp(int & nu, double & length_x, double & length_y, double & length_z):
 psi_(0.0,1.0), phi_(0.0,1.0), order(nu), l1(length_x), l2(length_y), l3(length_z){
 }
 
-shinozuka::shinozuka(){
+shinozuka_layeredcomp::shinozuka_layeredcomp(){
 }
 
 template<typename typearg>
-double shinozuka::tau_beta(typearg & beta){
+double shinozuka_layeredcomp::tau_beta(typearg & beta){
     double tau = -1.0 + (2.0*double(beta)-1.0)/double(order);
     return tau;
 }
 
-double shinozuka::s_tau(double & tau){
+double shinozuka_layeredcomp::s_tau(double & tau){
     double s = 0.0;
     if (tau>=-1.0 && tau<=1.0){
         s = (2.0/double(order))*(1.0-fabs(tau));
@@ -22,7 +22,7 @@ double shinozuka::s_tau(double & tau){
     return s;
 }
 
-void shinozuka::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh){
+void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh){
     
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
@@ -83,7 +83,7 @@ void shinozuka::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh
     
 }
 
-void shinozuka::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, double & xi, double & eta, double & zeta){
+void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, double & xi, double & eta, double & zeta){
     
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
@@ -141,7 +141,7 @@ void shinozuka::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & M
     
 }
 
-void shinozuka::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta){
+void shinozuka_layeredcomp::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta){
     for (unsigned int i=0; i<V.MyLength(); ++i){
         double erfx = boost::math::erf<double>(V[i]);
         double y = (1.0/2.0)*(1.0 + erfx);
@@ -150,7 +150,7 @@ void shinozuka::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha,
     }
 }
 
-void shinozuka::icdf_beta(Epetra_Vector & V, Epetra_Vector & B, double & tau1, double & tau2){
+void shinozuka_layeredcomp::icdf_beta(Epetra_Vector & V, Epetra_Vector & B, double & tau1, double & tau2){
     for (unsigned int i=0; i<V.MyLength(); ++i){
         double erfx = boost::math::erf<double>(V[i]);
         double y = (1.0/2.0)*(1.0 + erfx);
@@ -158,7 +158,7 @@ void shinozuka::icdf_beta(Epetra_Vector & V, Epetra_Vector & B, double & tau1, d
     }
 }
 
-shinozuka::~shinozuka(){
+shinozuka_layeredcomp::~shinozuka_layeredcomp(){
 }
 
 

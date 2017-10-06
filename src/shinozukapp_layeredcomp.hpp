@@ -9,13 +9,13 @@
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/beta.hpp>
 
-class shinozuka
+class shinozuka_layeredcomp
 {
 public:
     
-    shinozuka();
-    shinozuka(int & nu, double & L1, double & L2, double & L3);
-    ~shinozuka();
+    shinozuka_layeredcomp();
+    shinozuka_layeredcomp(int & nu, double & L1, double & L2, double & L3);
+    ~shinozuka_layeredcomp();
     
     template<typename typearg>
     double tau_beta(typearg & beta);
