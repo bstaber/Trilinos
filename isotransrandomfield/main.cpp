@@ -52,13 +52,15 @@ int main(int argc, char *argv[]){
     double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double L3 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lz");
+
+    for (int real=0; real<32; ++real){
     
     Teuchos::RCP<shinozuka> RandomField = Teuchos::rcp(new shinozuka(order,L1,L2,L3));
     
     Epetra_MultiVector V(StandardMap,5,"true");
     Epetra_MultiVector G(StandardMap,5,"true");
     
-    RandomField->rng.seed(1);
+    RandomField->rng.seed(real);
     for (unsigned int i=0; i<5; ++i){
         RandomField->generator(*V(i),Mesh);
     }
@@ -90,8 +92,9 @@ int main(int argc, char *argv[]){
     
     lhs_root.PutScalar(0.0);
     lhs_root.Export(G,ExportOnRoot,Insert);
-    std::string filename = path + "shinozuka_translatedfield_deltaN_" + std::to_string(deltaN) + "_deltaMk_" + std::to_string(deltaMk) + ".mtx";
+    std::string filename = path + "shinozuka_translatedfield_deltaN_" + std::to_string(deltaN) + "_deltaMk_" + std::to_string(deltaMk) + "_real_" + std::to_string(real) +".mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+    }
      
 #ifdef HAVE_MPI
     MPI_Finalize();
