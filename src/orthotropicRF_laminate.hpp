@@ -24,9 +24,8 @@ public:
         
         setup_dirichlet_conditions();
         for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
-            for (unsigned int j=0; j<16; ++j){
-                phase.push_back(0);
-                phase.push_back(1);
+            for (unsigned int j=0; j<32; ++j){
+                phase.push_back(j);
             }
         }
         
@@ -58,19 +57,19 @@ public:
         m5.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
         
         GRF_Generator->rng.seed(seeds[0]);
-        GRF_Generator->generator_gauss_points(w1_shino,*Mesh);
+        GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
         
         GRF_Generator->rng.seed(seeds[1]);
-        GRF_Generator->generator_gauss_points(w2_shino,*Mesh);
+        GRF_Generator->generator_gauss_points(w2_shino,*Mesh,phase);
         
         GRF_Generator->rng.seed(seeds[2]);
-        GRF_Generator->generator_gauss_points(w3_shino,*Mesh);
+        GRF_Generator->generator_gauss_points(w3_shino,*Mesh,phase);
         
         GRF_Generator->rng.seed(seeds[3]);
-        GRF_Generator->generator_gauss_points(w4_shino,*Mesh);
+        GRF_Generator->generator_gauss_points(w4_shino,*Mesh,phase);
         
         GRF_Generator->rng.seed(seeds[4]);
-        GRF_Generator->generator_gauss_points(w5_shino,*Mesh);
+        GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
         
         double deltaN = 0.0970;
         double deltaM4 = 0.0461;
@@ -235,21 +234,13 @@ public:
         double d5 = std::sqrt(c5);
     
         transverse_isotropic_matrix(sqrtmCmoy,d1,d2,d3,d4,d5);
-    
-        /*sqrtmCmoy(0,0)=1.267507136303929;  sqrtmCmoy(0,1)=0.537697071946998;   sqrtmCmoy(0,2)=0.140427049024295;  sqrtmCmoy(0,3)=0.000000000000000;  sqrtmCmoy(0,4)=0.000000000000001;   sqrtmCmoy(0,5)=0.478648374632629;
-        sqrtmCmoy(1,0)=0.537697071946998;  sqrtmCmoy(1,1)=2.655705959144135;   sqrtmCmoy(1,2)=0.101989080906815;  sqrtmCmoy(1,3)=0.000000000000000;  sqrtmCmoy(1,4)=0.000000000000001;   sqrtmCmoy(1,5)=1.221541014112757;
-        sqrtmCmoy(2,0)=0.140427049024295;  sqrtmCmoy(2,1)=0.101989080906815;   sqrtmCmoy(2,2)=1.028334699982750;  sqrtmCmoy(2,3)=0.000000000000001;   sqrtmCmoy(2,4)=0.000000000000000;   sqrtmCmoy(2,5)=0.047076704318598;
-        sqrtmCmoy(3,0)=0.000000000000000;  sqrtmCmoy(3,1)=0.000000000000000;   sqrtmCmoy(3,2)=0.000000000000001;  sqrtmCmoy(3,3)=1.057640786008243;   sqrtmCmoy(3,4)=0.109091556831260;   sqrtmCmoy(3,5)=0.000000000000000;
-        sqrtmCmoy(4,0)=0.000000000000001;  sqrtmCmoy(4,1)=0.000000000000001;   sqrtmCmoy(4,2)=0.000000000000000;  sqrtmCmoy(4,3)=0.109091556831260;   sqrtmCmoy(4,4)=0.931672706602556;   sqrtmCmoy(4,5)=0.000000000000000;
-        sqrtmCmoy(5,0)=0.478648374632629;  sqrtmCmoy(5,1)=1.221541014112757;   sqrtmCmoy(5,2)=-0.047076704318598; sqrtmCmoy(5,3)=0.000000000000000;   sqrtmCmoy(5,4)=0.000000000000000;   sqrtmCmoy(5,5)=2.030478775908934;
-        sqrtmCmoy.Scale(1.0e5);*/
-        
+            
         Epetra_SerialDenseMatrix AtimesB(6,6);
         
         AtimesB.Multiply('N','N',1.0,M,sqrtmCmoy,0.0);
         tangent_matrix.Multiply('N','N',1.0,sqrtmCmoy,AtimesB,0.0);
         
-        if(phase[e_gid]==1){
+        if(phase[e_gid] % 2){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);
@@ -281,19 +272,19 @@ public:
         double xi = 0.0; double eta = 0.0; double zeta = 0.0;
         
         GRF_Generator->rng.seed(seeds[0]);
-        GRF_Generator->generator_one_gauss_point(w1_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w1_shino,*Mesh,phase,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[1]);
-        GRF_Generator->generator_one_gauss_point(w2_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w2_shino,*Mesh,phase,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[2]);
-        GRF_Generator->generator_one_gauss_point(w3_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w3_shino,*Mesh,phase,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[3]);
-        GRF_Generator->generator_one_gauss_point(w4_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w4_shino,*Mesh,phase,xi,eta,zeta);
         
         GRF_Generator->rng.seed(seeds[4]);
-        GRF_Generator->generator_one_gauss_point(w5_shino,*Mesh,xi,eta,zeta);
+        GRF_Generator->generator_one_gauss_point(w5_shino,*Mesh,phase,xi,eta,zeta);
         
         double deltaN = 0.0970;
         double deltaM4 = 0.0461;
@@ -355,20 +346,12 @@ public:
         
         transverse_isotropic_matrix(sqrtmCmoy,d1,d2,d3,d4,d5);
         
-        /*sqrtmCmoy(0,0)=1.267507136303929;  sqrtmCmoy(0,1)=0.537697071946998;   sqrtmCmoy(0,2)=0.140427049024295;  sqrtmCmoy(0,3)=0.000000000000000;  sqrtmCmoy(0,4)=0.000000000000001;   sqrtmCmoy(0,5)=0.478648374632629;
-         sqrtmCmoy(1,0)=0.537697071946998;  sqrtmCmoy(1,1)=2.655705959144135;   sqrtmCmoy(1,2)=0.101989080906815;  sqrtmCmoy(1,3)=0.000000000000000;  sqrtmCmoy(1,4)=0.000000000000001;   sqrtmCmoy(1,5)=1.221541014112757;
-         sqrtmCmoy(2,0)=0.140427049024295;  sqrtmCmoy(2,1)=0.101989080906815;   sqrtmCmoy(2,2)=1.028334699982750;  sqrtmCmoy(2,3)=0.000000000000001;   sqrtmCmoy(2,4)=0.000000000000000;   sqrtmCmoy(2,5)=0.047076704318598;
-         sqrtmCmoy(3,0)=0.000000000000000;  sqrtmCmoy(3,1)=0.000000000000000;   sqrtmCmoy(3,2)=0.000000000000001;  sqrtmCmoy(3,3)=1.057640786008243;   sqrtmCmoy(3,4)=0.109091556831260;   sqrtmCmoy(3,5)=0.000000000000000;
-         sqrtmCmoy(4,0)=0.000000000000001;  sqrtmCmoy(4,1)=0.000000000000001;   sqrtmCmoy(4,2)=0.000000000000000;  sqrtmCmoy(4,3)=0.109091556831260;   sqrtmCmoy(4,4)=0.931672706602556;   sqrtmCmoy(4,5)=0.000000000000000;
-         sqrtmCmoy(5,0)=0.478648374632629;  sqrtmCmoy(5,1)=1.221541014112757;   sqrtmCmoy(5,2)=-0.047076704318598; sqrtmCmoy(5,3)=0.000000000000000;   sqrtmCmoy(5,4)=0.000000000000000;   sqrtmCmoy(5,5)=2.030478775908934;
-         sqrtmCmoy.Scale(1.0e5);*/
-        
         Epetra_SerialDenseMatrix AtimesB(6,6);
         
         AtimesB.Multiply('N','N',1.0,M,sqrtmCmoy,0.0);
         tangent_matrix.Multiply('N','N',1.0,sqrtmCmoy,AtimesB,0.0);
         
-        if(phase[e_gid]==1){
+        if(phase[e_gid] % 2){
             tangent_matrix(0,5) = -tangent_matrix(0,5);
             tangent_matrix(5,0) = -tangent_matrix(5,0);
             tangent_matrix(1,5) = -tangent_matrix(1,5);

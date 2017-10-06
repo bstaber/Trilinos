@@ -56,6 +56,7 @@ MPI_Init(&argc, &argv);
     double deltaN  = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "deltaN");
     double deltaM4 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "deltaM4");
     double deltaM5 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "deltaM5");
+    std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path");
     
     interface->_deltaN  = deltaN;
     interface->_deltaM4 = deltaM4;
@@ -64,11 +65,11 @@ MPI_Init(&argc, &argv);
     int * seed = new int [5];
     double displacement = 1.0;
     
-    for (unsigned int j=500; j<501; ++j){
+    for (unsigned int j=0; j<10; ++j){
         seed[0] = 5*j; seed[1] = 5*j+1; seed[2] = 5*j+2; seed[3] = 5*j+3; seed[4] = 5*j+4;
         interface->solveOneRealization(displacement,seed);
-        std::string path1 = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution_" + std::to_string(j) + ".mtx";
-        std::string path2 = "/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution_" + std::to_string(j);
+        std::string path1 = path + std::to_string(j) + ".mtx";
+        std::string path2 = path + std::to_string(j);
         interface->print_solution(path1);
         interface->recover_cauchy_stress(path2,seed);
         interface->compute_deformation(*interface->solution,path2,true,false);

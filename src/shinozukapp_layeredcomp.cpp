@@ -22,7 +22,7 @@ double shinozuka_layeredcomp::s_tau(double & tau){
     return s;
 }
 
-void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh){
+void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh, std::vector<int> & phase){
     
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
@@ -50,32 +50,34 @@ void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v,
                     psi = psi_(rng);
                     phi = phi_(rng);
                     w = std::sqrt(-std::log(psi));
-                    for (int e_lid=il; e_lid<n_local_cells; e_lid+=32){
+                    for (int e_lid=il; e_lid<n_local_cells; e_lid++){
                         e_gid = Mesh.local_cells[e_lid];
-                        for (unsigned inode=0; inode<Mesh.el_type; ++inode){
-                            node = Mesh.cells_nodes[Mesh.el_type*e_gid+inode];
-                            matrix_X(0,inode) = Mesh.nodes_coord[3*node+0];
-                            matrix_X(1,inode) = Mesh.nodes_coord[3*node+1];
-                            matrix_X(2,inode) = Mesh.nodes_coord[3*node+2];
-                        }
-                        for (int gp=0; gp<n_gauss_cells; ++gp){
-                            xi = Mesh.xi_cells(gp); eta = Mesh.eta_cells(gp); zeta = Mesh.zeta_cells(gp);
-                            switch (Mesh.el_type){
-                                case 4:
-                                    tetra4::shape_functions(shape_functions, xi, eta, zeta);
-                                    break;
-                                case 8:
-                                    hexa8::shape_functions(shape_functions, xi, eta, zeta);
-                                    break;
-                                case 10:
-                                    tetra10::shape_functions(shape_functions, xi, eta, zeta);
-                                    break;
+                        if(phase[e_gid]==il){
+                            for (unsigned inode=0; inode<Mesh.el_type; ++inode){
+                                node = Mesh.cells_nodes[Mesh.el_type*e_gid+inode];
+                                matrix_X(0,inode) = Mesh.nodes_coord[3*node+0];
+                                matrix_X(1,inode) = Mesh.nodes_coord[3*node+1];
+                                matrix_X(2,inode) = Mesh.nodes_coord[3*node+2];
                             }
-                            vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
-                            arg = 2.0*M_PI*phi + (M_PI/l1)*ti*vector_x(0) + (M_PI/l2)*tj*vector_x(1) + (M_PI/l3)*tk*vector_x(2);
-                            v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj*sk)*w*std::cos(arg);
+                            for (int gp=0; gp<n_gauss_cells; ++gp){
+                                xi = Mesh.xi_cells(gp); eta = Mesh.eta_cells(gp); zeta = Mesh.zeta_cells(gp);
+                                switch (Mesh.el_type){
+                                    case 4:
+                                        tetra4::shape_functions(shape_functions, xi, eta, zeta);
+                                        break;
+                                    case 8:
+                                        hexa8::shape_functions(shape_functions, xi, eta, zeta);
+                                        break;
+                                    case 10:
+                                        tetra10::shape_functions(shape_functions, xi, eta, zeta);
+                                        break;
+                                }
+                                vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
+                                arg = 2.0*M_PI*phi + (M_PI/l1)*ti*vector_x(0) + (M_PI/l2)*tj*vector_x(1) + (M_PI/l3)*tk*vector_x(2);
+                                v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj*sk)*w*std::cos(arg);
+                            }
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -83,7 +85,7 @@ void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v,
     
 }
 
-void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, double & xi, double & eta, double & zeta){
+void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, std::vector<int> & phase, double & xi, double & eta, double & zeta){
     
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
@@ -122,17 +124,19 @@ void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector &
                     psi = psi_(rng);
                     phi = phi_(rng);
                     w = std::sqrt(-std::log(psi));
-                    for (int e_lid=il; e_lid<n_local_cells; e_lid+=32){
+                    for (int e_lid=0; e_lid<n_local_cells; ++e_lid){
                         e_gid = Mesh.local_cells[e_lid];
-                        for (unsigned inode=0; inode<Mesh.el_type; ++inode){
-                            node = Mesh.cells_nodes[Mesh.el_type*e_gid+inode];
-                            matrix_X(0,inode) = Mesh.nodes_coord[3*node+0];
-                            matrix_X(1,inode) = Mesh.nodes_coord[3*node+1];
-                            matrix_X(2,inode) = Mesh.nodes_coord[3*node+2];
-                        }
-                            vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
-                            arg = 2.0*M_PI*phi + (M_PI/l1)*ti*vector_x(0) + (M_PI/l2)*tj*vector_x(1) + (M_PI/l3)*tk*vector_x(2);
-                            v(e_lid) += std::sqrt(2.0*si*sj*sk)*w*std::cos(arg);
+                            if(phase[e_gid]==il){
+                                for (unsigned inode=0; inode<Mesh.el_type; ++inode){
+                                    node = Mesh.cells_nodes[Mesh.el_type*e_gid+inode];
+                                    matrix_X(0,inode) = Mesh.nodes_coord[3*node+0];
+                                    matrix_X(1,inode) = Mesh.nodes_coord[3*node+1];
+                                    matrix_X(2,inode) = Mesh.nodes_coord[3*node+2];
+                                }
+                                vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
+                                arg = 2.0*M_PI*phi + (M_PI/l1)*ti*vector_x(0) + (M_PI/l2)*tj*vector_x(1) + (M_PI/l3)*tk*vector_x(2);
+                                v(e_lid) += std::sqrt(2.0*si*sj*sk)*w*std::cos(arg);
+                            }
                     }
                 }
             }
