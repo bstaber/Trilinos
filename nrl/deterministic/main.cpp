@@ -84,7 +84,7 @@ MPI_Init(&argc, &argv);
         std::string path1 = "/home/s/staber/Trilinos_results/nrl/deterministic/displacement_" + std::to_string(i) + ".mtx";
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/deterministic/greenlag_" + std::to_string(i) + ".mtx";
         Newton->print_newton_solution(path1);
-        interface->compute_green_lagrange(*Newton->x,xi,xi,xi);
+        interface->compute_green_lagrange(*Newton->x,xi,xi,xi,path2);
     }
     
     
