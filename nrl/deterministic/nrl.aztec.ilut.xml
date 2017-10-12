@@ -89,7 +89,7 @@
         <Parameter name="beta3" type="double" value="-0.4694"/>
         <Parameter name="beta4" type="double" value="27.9535"/>
         <Parameter name="beta5" type="double" value="0.0306"/>
-        <Parameter name="angle" type="double" value="0.5"/> <!--1.570796326794897"/-->
+        <Parameter name="angle" type="double" value="30.0"/> <!--1.570796326794897"/-->
     </ParameterList>
     
 </ParameterList>

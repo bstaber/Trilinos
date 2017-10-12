@@ -117,7 +117,7 @@ int main(int argc, char *argv[]){
         eval++;
         printStatus(Comm,eval,value,x);
     //}
-
+    /*
     double svalue = value;
     while(value>1e-2){
         for (unsigned int i=0; i<nparam; ++i){
@@ -146,7 +146,7 @@ int main(int argc, char *argv[]){
 
         svalue = value;
 
-    }//endwhile
+    }//endwhile */
 
 #ifdef HAVE_MPI
     MPI_Finalize();

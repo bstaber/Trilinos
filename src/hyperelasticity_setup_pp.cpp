@@ -488,7 +488,7 @@ void hyperelasticity_setup::force_dead_pressure(Epetra_FEVector & F){
     }
 }
 
-void hyperelasticity_setup::compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta){
+void hyperelasticity_setup::compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta, std::string & filename){
     
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
@@ -549,7 +549,7 @@ void hyperelasticity_setup::compute_green_lagrange(Epetra_Vector & x, double & x
     Epetra_MultiVector lhs_root(MapOnRoot,true);
     lhs_root.Export(green_lagrange,ExportOnRoot,Insert);
     
-    int error = EpetraExt::MultiVectorToMatrixMarketFile("green_lagrange.mtx",lhs_root,0,0,false);
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
 }
 
 void hyperelasticity_setup::compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename){

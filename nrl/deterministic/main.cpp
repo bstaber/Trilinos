@@ -42,6 +42,7 @@ MPI_Init(&argc, &argv);
     
     Epetra_SerialDenseVector parameters(8);
     Teuchos::RCP<TIMooney> interface = Teuchos::rcp(new TIMooney(Comm,*paramList));
+    
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
     parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
@@ -50,9 +51,10 @@ MPI_Init(&argc, &argv);
     parameters(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
     parameters(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     parameters(7) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
-    double plyagl = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
+    double plyagldeg = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
+    double plyagl    = 2.0*M_PI*plyagldeg/360.0;
     for (unsigned int i=0; i<5; i++){
-        parameters(i) = 1.0e9*parameters(i);
+        parameters(i) = 1.0e3*parameters(i);
     }
     
     interface->set_parameters(parameters);
@@ -61,24 +63,28 @@ MPI_Init(&argc, &argv);
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
     std::vector<double> bcdisp(10);
-    bcdisp[0] = 0.00033234/1000.0;
-    bcdisp[1] = 0.018369/1000.0;
-    bcdisp[2] = 0.038198/1000.0;
-    bcdisp[3] = 0.060977/1000.0;
-    bcdisp[4] = 0.073356/1000.0;
-    bcdisp[5] = 0.092648/1000.0;
-    bcdisp[6] = 0.11062/1000.0;
-    bcdisp[7] = 0.12838/1000.0;
-    bcdisp[8] = 0.14934/1000.0;
-    bcdisp[9] = 0.0001571809118641;
+    bcdisp[0] = 0.00033234;
+    bcdisp[1] = 0.018369;
+    bcdisp[2] = 0.038198;
+    bcdisp[3] = 0.060977;
+    bcdisp[4] = 0.073356;
+    bcdisp[5] = 0.092648;
+    bcdisp[6] = 0.11062;
+    bcdisp[7] = 0.12838;
+    bcdisp[8] = 0.14934;
+    bcdisp[9] = 0.1571809118641;
+    
+    double xi = 0.0;
     
     Newton->Initialization();
     for (unsigned int i=0; i<bcdisp.size(); ++i){
         Newton->setParameters(*paramList);
         Newton->bc_disp = bcdisp[i];
         int error = Newton->Solve_with_Aztec(true);
-        std::string name = "/home/s/staber/Trilinos_results/nrl/deterministic/Newton_solution.mtx";
-        Newton->print_newton_solution(name);
+        std::string path1 = "/home/s/staber/Trilinos_results/nrl/deterministic/displacement_" + std::to_string(i) + ".mtx";
+        std::string path2 = "/home/s/staber/Trilinos_results/nrl/deterministic/greenlag_" + std::to_string(i) + ".mtx";
+        Newton->print_newton_solution(path1);
+        interface->compute_green_lagrange(*Newton->x,xi,xi,xi);
     }
     
     
