@@ -8,8 +8,6 @@ var searchData=
   ['deltac1',['deltaC1',['../d6/daf/class_interface__arteries.html#a004de8792bcbfb0067be092c59ac099c',1,'Interface_arteries']]],
   ['deltac2',['deltaC2',['../d6/daf/class_interface__arteries.html#ad62f3703d5d7cf35e5fbbfe3d31313aa',1,'Interface_arteries']]],
   ['deltag4',['deltaG4',['../d6/daf/class_interface__arteries.html#a02ece4e088cec5bb0593f0ead6533e96',1,'Interface_arteries']]],
-  ['deltam1',['deltaM1',['../dd/d02/class_n_r_l___random_field_model.html#adda9fb41b70444b76b6566c9f748e71e',1,'NRL_RandomFieldModel']]],
-  ['deltam2',['deltaM2',['../dd/d02/class_n_r_l___random_field_model.html#ac5f2cbcce7c0f7f3eb2dcb01c6a6497c',1,'NRL_RandomFieldModel']]],
   ['deltau1',['deltaU1',['../d6/daf/class_interface__arteries.html#a1b775f9ff20b07cfce9ab43d393fcf59',1,'Interface_arteries']]],
   ['detjac_5ftetra',['detJac_tetra',['../d6/d6b/classmesh.html#afd3c0bab57494c476f53f7000df7bde4',1,'mesh']]],
   ['detjac_5ftri',['detJac_tri',['../d6/d6b/classmesh.html#af04ac3c78d0c5fa39cb4e85c32e1d947',1,'mesh']]],

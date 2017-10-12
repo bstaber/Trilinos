@@ -1,8 +1,5 @@
 <map id="hyperelasticity_setup" name="hyperelasticity_setup">
-<area shape="rect" id="node3" href="$d6/daf/class_interface__arteries.html" title="Interface_arteries" alt="" coords="51,152,176,177"/>
-<area shape="rect" id="node4" href="$d8/d66/class_interface__dirichlet.html" title="Interface_dirichlet" alt="" coords="200,152,326,177"/>
-<area shape="rect" id="node5" href="$d6/d26/class_n_r_l___model_f.html" title="NRL_ModelF" alt="" coords="350,152,450,177"/>
-<area shape="rect" id="node6" href="$dd/d02/class_n_r_l___random_field_model.html" title="NRL_RandomFieldModel" alt="" coords="475,152,646,177"/>
-<area shape="rect" id="node7" href="$de/dd1/class_t_i_mooney.html" title="TIMooney" alt="" coords="669,152,750,177"/>
-<area shape="rect" id="node2" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="30,5,197,31"/>
+<area shape="rect" id="node3" href="$d6/daf/class_interface__arteries.html" title="Interface_arteries" alt="" coords="26,152,152,177"/>
+<area shape="rect" id="node4" href="$de/dd1/class_t_i_mooney.html" title="TIMooney" alt="" coords="175,152,256,177"/>
+<area shape="rect" id="node2" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="5,5,173,31"/>
 </map>

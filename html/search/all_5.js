@@ -8,9 +8,6 @@ var searchData=
   ['epetra_5fread_5fgmsh_5ftetra',['epetra_read_gmsh_tetra',['../d6/d6b/classmesh.html#a5142a58d57f98f7843bb0849d0e9800d',1,'mesh']]],
   ['eps',['eps',['../d0/d9d/class_newton___raphson.html#ac4d8377ea44241ad177ec1fa09b8d726',1,'Newton_Raphson']]],
   ['epsilon',['epsilon',['../d6/daf/class_interface__arteries.html#a9162de5cf898e08949da58aba7a70bb1',1,'Interface_arteries']]],
-  ['epsilon1',['epsilon1',['../d8/d66/class_interface__dirichlet.html#af13f681935dc8653550e135bf1bea9f1',1,'Interface_dirichlet']]],
-  ['epsilon2',['epsilon2',['../d8/d66/class_interface__dirichlet.html#ac8e2222baa254cae628171dc8577167f',1,'Interface_dirichlet']]],
-  ['eta',['eta',['../d6/daf/class_interface__arteries.html#acc25e0baf7afd511a5f0d252787cd2f5',1,'Interface_arteries']]],
   ['eta_5fcells',['eta_cells',['../d6/d6b/classmesh.html#ad79b5f2a09900de0c3ff4ad32c80ca31',1,'mesh']]],
   ['eta_5ffaces',['eta_faces',['../d6/d6b/classmesh.html#a22378acaff4d850360690da1d124fbe7',1,'mesh']]],
   ['example_5fpnpoly_5finverse_5fisoparam_2ecpp',['example_pnpoly_inverse_isoparam.cpp',['../de/de8/example__pnpoly__inverse__isoparam_8cpp.html',1,'']]]

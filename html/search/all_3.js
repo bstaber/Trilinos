@@ -1,16 +1,8 @@
 var searchData=
 [
   ['c1',['c1',['../d6/daf/class_interface__arteries.html#a61115447f3d4835f97bfd89cb5aee6bf',1,'Interface_arteries']]],
-  ['c1_5fadv',['c1_adv',['../d6/daf/class_interface__arteries.html#a2ae07052bdcd0cd8c859531815ba8d74',1,'Interface_arteries']]],
-  ['c1_5fgmrf',['c1_gmrf',['../d6/daf/class_interface__arteries.html#a2b9b320e6f9c57677532dcf88fb842df',1,'Interface_arteries']]],
-  ['c1_5fmed',['c1_med',['../d6/daf/class_interface__arteries.html#ac6761ea9a160fa6e3467777f2fe46029',1,'Interface_arteries']]],
   ['c2',['c2',['../d6/daf/class_interface__arteries.html#a768a287901f59ff63a7be7c1a250826f',1,'Interface_arteries']]],
-  ['c2_5fadv',['c2_adv',['../d6/daf/class_interface__arteries.html#afd1f2b9d6451ef69a6c37f76d6d271fa',1,'Interface_arteries']]],
-  ['c2_5fgmrf',['c2_gmrf',['../d6/daf/class_interface__arteries.html#ac22782ab52d7fe6ead74c700b061c164',1,'Interface_arteries']]],
-  ['c2_5fmed',['c2_med',['../d6/daf/class_interface__arteries.html#ab24ca3a3d8cdf4134f015125e66123bf',1,'Interface_arteries']]],
   ['cells_5fnodes',['cells_nodes',['../d6/d6b/classmesh.html#afcd4e342035ab14af53066c8f289ff10',1,'mesh']]],
-  ['cells_5fnodes_5fadv',['cells_nodes_adv',['../d6/daf/class_interface__arteries.html#a1f0021c94db44575e59ebf06be21b5b5',1,'Interface_arteries']]],
-  ['cells_5fnodes_5fmed',['cells_nodes_med',['../d6/daf/class_interface__arteries.html#ae410206765aad3f17bb32a07417d38d6',1,'Interface_arteries']]],
   ['cells_5fnodes_5fp1_5fmed',['cells_nodes_p1_med',['../d6/daf/class_interface__arteries.html#a007c844f6d3106043b40121f57f8805e',1,'Interface_arteries']]],
   ['comm',['Comm',['../d8/dc2/class_finite___element___problem.html#add69f478a633667a98acf55c21887609',1,'Finite_Element_Problem::Comm()'],['../d3/d9f/class_linear___finite___element___problem.html#adf16aec0b9e8ee1a0d9c25f9eb8f86a5',1,'Linear_Finite_Element_Problem::Comm()'],['../d6/d6b/classmesh.html#a0fd0a38e416a36cce4d4958d88e11edb',1,'mesh::Comm()'],['../d0/d9d/class_newton___raphson.html#aa7e3283541bc2c3658cc7abe3996788a',1,'Newton_Raphson::Comm()']]],
   ['compressible_5fmooney_5ftransverse_5fisotropic_2ehpp',['Compressible_Mooney_Transverse_Isotropic.hpp',['../df/dc0/_compressible___mooney___transverse___isotropic_8hpp.html',1,'']]],
@@ -23,6 +15,6 @@ var searchData=
   ['compute_5flocal_5fdirections',['compute_local_directions',['../d7/d76/classlaplace.html#a77a372ce2968181cba111d99f75cb0d8',1,'laplace']]],
   ['compute_5fmean_5fcauchy_5fstress',['compute_mean_cauchy_stress',['../d8/daf/classhyperelasticity__setup.html#a823b708f1c38940db0b751d412892486',1,'hyperelasticity_setup::compute_mean_cauchy_stress()'],['../d9/df7/class_linearized_elasticity.html#a07b867f2b66c09c54be81b533e82defb',1,'LinearizedElasticity::compute_mean_cauchy_stress()']]],
   ['compute_5fstress',['compute_stress',['../d5/d0e/classobjective_function.html#a4292d1e9e448b4ac68694743dad96703',1,'objectiveFunction']]],
-  ['cos_5fplyagl',['cos_plyagl',['../d8/d66/class_interface__dirichlet.html#af9701dc02b931fe3cabdd99bb8f31969',1,'Interface_dirichlet::cos_plyagl()'],['../de/dd1/class_t_i_mooney.html#ad6c228917098dcb27098348edfc1927b',1,'TIMooney::cos_plyagl()'],['../d6/d26/class_n_r_l___model_f.html#adfdd123dd06ed6fdef496deabc508e9c',1,'NRL_ModelF::cos_plyagl()'],['../dd/d02/class_n_r_l___random_field_model.html#aec599290de76f3da57d540d270366a94',1,'NRL_RandomFieldModel::cos_plyagl()']]],
+  ['cos_5fplyagl',['cos_plyagl',['../de/dd1/class_t_i_mooney.html#ad6c228917098dcb27098348edfc1927b',1,'TIMooney']]],
   ['create_5ffecrsgraph',['create_FECrsGraph',['../d8/daf/classhyperelasticity__setup.html#aecc2523650a1aa0295bb504bf4e3f87d',1,'hyperelasticity_setup::create_FECrsGraph()'],['../d7/d76/classlaplace.html#a2b27c28c4f7c39936d6a328663f14595',1,'laplace::create_FECrsGraph()'],['../d9/df7/class_linearized_elasticity.html#a5958e89bf756f16d575be382f3b45075',1,'LinearizedElasticity::create_FECrsGraph()']]]
 ];
