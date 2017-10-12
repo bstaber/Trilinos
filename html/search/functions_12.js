@@ -14,5 +14,6 @@ var searchData=
   ['_7eobjectivefunction',['~objectiveFunction',['../d5/d0e/classobjective_function.html#aa5cdced6ba0dd29d0e5aa683861b66fe',1,'objectiveFunction::~objectiveFunction()'],['../d5/d0e/classobjective_function.html#aa5cdced6ba0dd29d0e5aa683861b66fe',1,'objectiveFunction::~objectiveFunction()'],['../d5/d0e/classobjective_function.html#aa5cdced6ba0dd29d0e5aa683861b66fe',1,'objectiveFunction::~objectiveFunction()']]],
   ['_7eorthotropicrf_5flaminate',['~OrthotropicRF_Laminate',['../d0/daf/class_orthotropic_r_f___laminate.html#a1da906f12e5740e81f9fc14bc794c656',1,'OrthotropicRF_Laminate']]],
   ['_7eshinozuka',['~shinozuka',['../da/d5b/classshinozuka.html#a2b908e958961141ba0a6d5c02685b25a',1,'shinozuka']]],
+  ['_7eshinozuka_5flayeredcomp',['~shinozuka_layeredcomp',['../da/dd9/classshinozuka__layeredcomp.html#ae4a191e86afb6cb3f86ce08248a71d4c',1,'shinozuka_layeredcomp']]],
   ['_7etimooney',['~TIMooney',['../de/dd1/class_t_i_mooney.html#a560778410ea9a31c832a69d7f8d1941f',1,'TIMooney']]]
 ];

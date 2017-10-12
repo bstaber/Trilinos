@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_5ftau',['s_tau',['../da/d5b/classshinozuka.html#a7a11c3d11febd7d37006e89ac4eec3ac',1,'shinozuka']]],
+  ['s_5ftau',['s_tau',['../da/d5b/classshinozuka.html#a7a11c3d11febd7d37006e89ac4eec3ac',1,'shinozuka::s_tau()'],['../da/dd9/classshinozuka__layeredcomp.html#a4edda9c1745d4e2ea92912dd8828f479',1,'shinozuka_layeredcomp::s_tau()']]],
   ['set_5fexperimental_5fdata',['set_experimental_data',['../d5/d0e/classobjective_function.html#a5fb008f27e0bf66b3229a19f492a754a',1,'objectiveFunction']]],
   ['set_5fexponents',['set_exponents',['../dd/d02/class_n_r_l___random_field_model.html#af437411c302c6b7cb6403df0f52f625f',1,'NRL_RandomFieldModel']]],
   ['set_5fparameters',['set_parameters',['../de/dd1/class_t_i_mooney.html#a032a49aa2b4a951bfabce7dc3b6db3e4',1,'TIMooney::set_parameters()'],['../d6/d26/class_n_r_l___model_f.html#a0f7003ad7e0ad3678da5f08d4d5c06ec',1,'NRL_ModelF::set_parameters()']]],
@@ -14,6 +14,7 @@ var searchData=
   ['setup_5fslipbc_5fand_5fclamp',['setup_slipbc_and_clamp',['../d6/daf/class_interface__arteries.html#abf0d5ee3594b5824ea2696af030b8460',1,'Interface_arteries::setup_slipbc_and_clamp()'],['../d6/daf/class_interface__arteries.html#abf0d5ee3594b5824ea2696af030b8460',1,'Interface_arteries::setup_slipbc_and_clamp()'],['../d6/daf/class_interface__arteries.html#abf0d5ee3594b5824ea2696af030b8460',1,'Interface_arteries::setup_slipbc_and_clamp()']]],
   ['shape_5ffunctions',['shape_functions',['../d5/d11/namespacetri3.html#aceaae63322465b0658dd661035eeb8c4',1,'tri3::shape_functions()'],['../d9/d88/namespacequad4.html#a37cc24ed6ae24a68c7c1ea6204ab45e4',1,'quad4::shape_functions()'],['../dc/d58/namespacetri6.html#aa6c76c7f11aa77569c0542a258474976',1,'tri6::shape_functions()'],['../d8/dd3/namespacetetra4.html#ae8cecd87bfbcfde8b3a4f8f8cce4561a',1,'tetra4::shape_functions()'],['../da/da9/namespacetetra10.html#a371554180a96cf9e148a8079b4e10359',1,'tetra10::shape_functions()'],['../d8/d94/namespacehexa8.html#a57945e1da292f5b506c03833a497e1a9',1,'hexa8::shape_functions()']]],
   ['shinozuka',['shinozuka',['../da/d5b/classshinozuka.html#a139361e8f32a6b4d1db2d60ba7aee9ff',1,'shinozuka::shinozuka()'],['../da/d5b/classshinozuka.html#a056cbff8bc8dc72a9b743cee3f870a0e',1,'shinozuka::shinozuka(int &amp;nu, double &amp;L1, double &amp;L2, double &amp;L3)']]],
+  ['shinozuka_5flayeredcomp',['shinozuka_layeredcomp',['../da/dd9/classshinozuka__layeredcomp.html#aa070d731946a1bc57512e70100646d4a',1,'shinozuka_layeredcomp::shinozuka_layeredcomp()'],['../da/dd9/classshinozuka__layeredcomp.html#a8c266ed5a34783e91c39614d86af798d',1,'shinozuka_layeredcomp::shinozuka_layeredcomp(int &amp;nu, double &amp;L1, double &amp;L2, double &amp;L3)']]],
   ['solve_5famesos',['solve_amesos',['../d7/d76/classlaplace.html#a4ff0db201265ee41ea6620757ceba9fc',1,'laplace']]],
   ['solve_5faztec',['solve_aztec',['../d7/d76/classlaplace.html#af2a1cb5a85d603bb2b616e196899964f',1,'laplace']]],
   ['solve_5fwith_5faztec',['Solve_with_Aztec',['../d0/d9d/class_newton___raphson.html#ad94282360b1e26d9e0dd3c55a4634919',1,'Newton_Raphson']]],

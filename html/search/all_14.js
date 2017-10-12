@@ -4,7 +4,7 @@ var searchData=
   ['tau11_5fexp_5fcirc',['tau11_exp_circ',['../d5/d0e/classobjective_function.html#a6d281d92f060b36a61cf47056d246723',1,'objectiveFunction']]],
   ['tau11_5fexp_5flong',['tau11_exp_long',['../d5/d0e/classobjective_function.html#a2a1f7e0547598ec503cf8684e2261b6b',1,'objectiveFunction']]],
   ['tau2',['tau2',['../d6/daf/class_interface__arteries.html#a5121bb35b25ee64ed090c8012991be0c',1,'Interface_arteries']]],
-  ['tau_5fbeta',['tau_beta',['../da/d5b/classshinozuka.html#a802f748fa67f2d84d28f64d4f489970a',1,'shinozuka']]],
+  ['tau_5fbeta',['tau_beta',['../da/d5b/classshinozuka.html#a802f748fa67f2d84d28f64d4f489970a',1,'shinozuka::tau_beta()'],['../da/dd9/classshinozuka__layeredcomp.html#aa21035b8ce836575a044a71093754f6b',1,'shinozuka_layeredcomp::tau_beta()']]],
   ['tensor_5fcalculus_2ehpp',['tensor_calculus.hpp',['../de/d49/tensor__calculus_8hpp.html',1,'']]],
   ['tensor_5fproduct',['tensor_product',['../de/d49/tensor__calculus_8hpp.html#a83328513d7280ef443df4e146aa67298',1,'tensor_calculus.hpp']]],
   ['tetra10',['tetra10',['../da/da9/namespacetetra10.html',1,'']]],
