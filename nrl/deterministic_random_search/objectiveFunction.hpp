@@ -112,9 +112,9 @@ public:
         npoints = data_xyz.size()/3;
         nloads  = data_exx.size()/npoints;
         for (unsigned int p=0; p<npoints; ++p){
-            testx = data_xyz[3*p+0]/1000.0;
-            testy = data_xyz[3*p+1]/1000.0;
-            testz = data_xyz[3*p+2]/1000.0;
+            testx = data_xyz[3*p+0];
+            testy = data_xyz[3*p+1];
+            testz = data_xyz[3*p+2];
             for (unsigned int e_lid=0; e_lid<n_local_faces; ++e_lid){
                 e_gid = interface->Mesh->local_faces[e_lid];
                 result = -1;
@@ -124,7 +124,7 @@ public:
                     y(inode) = interface->Mesh->nodes_coord[3*node+1];
                     z(inode) = interface->Mesh->nodes_coord[3*node+2];
                 }
-                if (z(0)==testz && testx>=0.0 && testx<=50.0/1000.0 && testy>=0.0 && testy<=25.0/1000.0){
+                if (z(0)==testz && testx>=0.0 && testx<=50.0 && testy>=0.0 && testy<=25.0){
                     result = pnpoly(nvert,x,y,testx,testy);
                 }
                 if (result==1){
