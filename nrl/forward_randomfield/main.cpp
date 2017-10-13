@@ -57,10 +57,13 @@ MPI_Init(&argc, &argv);
     
     double xi = 0.0;
     
+    int * seed = new int [5];
     Newton->Initialization();
     for (unsigned int i=0; i<bcdisp.size(); ++i){
         Newton->setParameters(*paramList);
         Newton->bc_disp = bcdisp[i];
+        seed[0] = 5*j; seed[1] = 5*j+1; seed[2] = 5*j+2; seed[3] = 5*j+3; seed[4] = 5*j+4;
+        interface->RandomFieldGenerator(seed);
         int error = Newton->Solve_with_Aztec(true);
         std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/displacement_" + std::to_string(i) + ".mtx";
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/greenlag_" + std::to_string(i) + ".mtx";
