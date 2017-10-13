@@ -12,7 +12,8 @@ public:
     Teuchos::RCP<shinozuka_layeredcomp_2d> GRF_Generator;
     
     Epetra_SerialDenseVector mu1rf, mu2rf, mu3rf, mu4rf, mu5rf;
-    double mu1, mu2, mu3, mu4, mu5, mu, trm;
+    double mu1, mu2, mu3, mu4, mu5;
+    double mean_mu1, mean_mu2, mean_mu3, mean_mu4, mean_mu5, mu, trm;
     double beta3, beta4, beta5, ptrmbeta4, ptrmbeta5;
     double plyagl, cos_plyagl, sin_plyagl;
     int n_ply;
@@ -76,29 +77,30 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
         
-        /*for (unsigned int i=0; i<w1_shino.Length(); ++i){
-            mu1rf(i) = icdf_gamma(w1_shino(i),alpha,beta);
-            mu2rf(i) = icdf_gamma(w2_shino(i),alpha,beta);
-            mu3rf(i) = icdf_gamma(w3_shino(i),alpha,beta);
-            mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
-            mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
-        }*/
+        double delta = 0.10;
+        double alpha = 1.0/(delta*delta);
+        double beta;
+        for (unsigned int i=0; i<w1_shino.Length(); ++i){
+            beta = mean_mu1*delta*delta; mu1rf(i) = icdf_gamma(w1_shino(i),alpha,beta);
+            beta = mean_mu2*delta*delta; mu2rf(i) = icdf_gamma(w2_shino(i),alpha,beta);
+            beta = mean_mu3*delta*delta; mu3rf(i) = icdf_gamma(w3_shino(i),alpha,beta);
+            beta = mean_mu4*delta*delta; mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
+            beta = mean_mu5*delta*delta; mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
+        }
         
     }
     
+    double icdf_gamma(double & w, double & alpha, double & beta){
+        double erfx = boost::math::erf<double>(w);
+        double y = (1.0/2.0)*(1.0 + erfx);
+        double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
+        double z = yinv*beta;
+        return z;
+    }
+    
     void set_parameters(Epetra_SerialDenseVector & x){
-        mu1 = x(0);
-        mu2 = x(1);
-        mu3 = x(2);
-        mu4 = x(3);
-        mu5 = x(4);
-        beta3 = x(5);
-        beta4 = x(6);
-        beta5 = x(7);
-        mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
-        trm = mu4 + 2.0*mu5;
-        ptrmbeta4 = std::pow(trm,beta4);
-        ptrmbeta5 = std::pow(trm,beta5);
+        mean_mu1 = x(0); mean_mu2 = x(1); mean_mu3 = x(2); mean_mu4 = x(3); mean_mu5 = x(4);
+        beta3 = x(5); beta4 = x(6); beta5 = x(7);
     }
     
     void set_plyagl(double & Plyagl){
@@ -185,6 +187,12 @@ public:
     
     void get_material_parameters(unsigned int & e_lid, unsigned int & gp){
         int e_gid = Mesh->local_cells[e_lid];
+        int n_gauss_cells = Mesh->n_gauss_cells;
+        mu1 = mu1rf(e_lid*n_gauss_cells+gp); mu2 = mu2rf(e_lid*n_gauss_cells+gp); mu3 = mu3rf(e_lid*n_gauss_cells+gp); mu4 = mu4rf(e_lid*n_gauss_cells+gp); mu5 = mu5rf(e_lid*n_gauss_cells+gp);
+        mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
+        trm = mu4 + 2.0*mu5;
+        ptrmbeta4 = std::pow(trm,beta4);
+        ptrmbeta5 = std::pow(trm,beta5);
         if (phase[e_gid] % 2){
             cos_plyagl = std::cos(plyagl);
             sin_plyagl = -std::sin(plyagl);
