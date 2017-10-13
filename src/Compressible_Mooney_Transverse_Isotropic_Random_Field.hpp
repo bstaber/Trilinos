@@ -2,12 +2,20 @@
 #define COMPRESSIBLE_MOONEY_TRANSVERSE_ISOTROPIC_RANDOM_FIELD_HPP
 
 #include "tensor_calculus.hpp"
-#include "shinozukapp_layeredcomp.hpp"
+#include "shinozukapp_layeredcomp_2d.hpp"
 #include "hyperelasticity_setup_pp.hpp"
 
 class TIMooney : public hyperelasticity_setup
 {
 public:
+    
+    Teuchos::RCP<shinozuka_layeredcomp> GRF_Generator;
+    
+    double mu1, mu2, mu3, mu4, mu5, mu, trm;
+    double beta3, beta4, beta5, ptrmbeta4, ptrmbeta5;
+    double plyagl, cos_plyagl, sin_plyagl;
+    int n_ply;
+    std::vector<int> phase;
     
     TIMooney(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
@@ -27,6 +35,12 @@ public:
                 phase.push_back(j);
             }
         }
+        
+        int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
+        double L1 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
+        double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
+        
+        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
     }
     
     ~TIMooney(){
@@ -250,26 +264,6 @@ public:
                                                       
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
-    
-    double mu1;
-    double mu2;
-    double mu3;
-    double mu4;
-    double mu5;
-    double mu;
-    double trm;
-    double beta3;
-    double beta4;
-    double beta5;
-    
-    double ptrmbeta4;
-    double ptrmbeta5;
-    
-    double plyagl;
-    double cos_plyagl;
-    double sin_plyagl;
-    int n_ply;
-    std::vector<int> phase;
     
 };
 
