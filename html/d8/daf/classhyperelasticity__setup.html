@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: hyperelasticity_setup Class Reference</title>
+<title>Trilinos based (stochastic) FEM solvers: hyperelasticity_setup Class Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">Trilinos based (stochastic) FEM solvers
    </div>
   </td>
  </tr>
@@ -116,8 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac35d16141f36e92714cad8ac60786254"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7050c638e04f1516548172ee9a02fc93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a7050c638e04f1516548172ee9a02fc93">compute_B_matrices</a> (Epetra_SerialDenseMatrix &amp;F, Epetra_SerialDenseMatrix &amp;dx_shape_functions, Epetra_SerialDenseMatrix &amp;B, Epetra_SerialDenseMatrix &amp;BG)</td></tr>
 <tr class="separator:a7050c638e04f1516548172ee9a02fc93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f8596d77503ccb4ca2ecd264dd56b13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a9f8596d77503ccb4ca2ecd264dd56b13">compute_green_lagrange</a> (Epetra_Vector &amp;x, double &amp;xi, double &amp;eta, double &amp;zeta)</td></tr>
-<tr class="separator:a9f8596d77503ccb4ca2ecd264dd56b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a194cb81606bafd0130f445a7b27f3afe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a194cb81606bafd0130f445a7b27f3afe">compute_green_lagrange</a> (Epetra_Vector &amp;x, double &amp;xi, double &amp;eta, double &amp;zeta, std::string &amp;filename)</td></tr>
+<tr class="separator:a194cb81606bafd0130f445a7b27f3afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a823b708f1c38940db0b751d412892486"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a823b708f1c38940db0b751d412892486">compute_mean_cauchy_stress</a> (Epetra_Vector &amp;x, std::string &amp;filename)</td></tr>
 <tr class="separator:a823b708f1c38940db0b751d412892486"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9069153633be1777bb6f0c5a2e077c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ae9069153633be1777bb6f0c5a2e077c9">compute_gauss_vonmises</a> (Epetra_Vector &amp;x, std::string &amp;filename)</td></tr>
@@ -465,8 +465,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9f8596d77503ccb4ca2ecd264dd56b13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f8596d77503ccb4ca2ecd264dd56b13">&#9670;&nbsp;</a></span>compute_green_lagrange()</h2>
+<a id="a194cb81606bafd0130f445a7b27f3afe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a194cb81606bafd0130f445a7b27f3afe">&#9670;&nbsp;</a></span>compute_green_lagrange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -493,7 +493,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>zeta</em>&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
