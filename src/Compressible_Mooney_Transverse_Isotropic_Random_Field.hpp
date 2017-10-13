@@ -5,19 +5,20 @@
 #include "shinozukapp_layeredcomp_2d.hpp"
 #include "hyperelasticity_setup_pp.hpp"
 
-class TIMooney : public hyperelasticity_setup
+class TIMooney_RandomField : public hyperelasticity_setup
 {
 public:
     
-    Teuchos::RCP<shinozuka_layeredcomp> GRF_Generator;
+    Teuchos::RCP<shinozuka_layeredcomp_2d> GRF_Generator;
     
+    Epetra_SerialDenseVector mu1rf, mu2rf, mu3rf, mu4rf, mu5rf;
     double mu1, mu2, mu3, mu4, mu5, mu, trm;
     double beta3, beta4, beta5, ptrmbeta4, ptrmbeta5;
     double plyagl, cos_plyagl, sin_plyagl;
     int n_ply;
     std::vector<int> phase;
     
-    TIMooney(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    TIMooney_RandomField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
@@ -43,7 +44,46 @@ public:
         GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
     }
     
-    ~TIMooney(){
+    ~TIMooney_RandomField(){
+    }
+    
+    void RandomFieldGenerator(int * seeds){
+        
+        Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w2_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w3_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w4_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        Epetra_SerialDenseVector w5_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        
+        mu1rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        mu2rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        mu3rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        mu4rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        mu5rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
+        
+        GRF_Generator->rng.seed(seeds[0]);
+        GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
+        
+        GRF_Generator->rng.seed(seeds[1]);
+        GRF_Generator->generator_gauss_points(w2_shino,*Mesh,phase);
+        
+        GRF_Generator->rng.seed(seeds[2]);
+        GRF_Generator->generator_gauss_points(w3_shino,*Mesh,phase);
+        
+        GRF_Generator->rng.seed(seeds[3]);
+        GRF_Generator->generator_gauss_points(w4_shino,*Mesh,phase);
+        
+        GRF_Generator->rng.seed(seeds[4]);
+        GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
+        
+        /*for (unsigned int i=0; i<w1_shino.Length(); ++i){
+            mu1rf(i) = icdf_gamma(w1_shino(i),alpha,beta);
+            mu2rf(i) = icdf_gamma(w2_shino(i),alpha,beta);
+            mu3rf(i) = icdf_gamma(w3_shino(i),alpha,beta);
+            mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
+            mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
+        }*/
+        
     }
     
     void set_parameters(Epetra_SerialDenseVector & x){
