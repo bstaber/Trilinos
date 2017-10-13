@@ -38,6 +38,19 @@ public:
             }
         }
         
+        double plyagldeg = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
+        mean_mu1 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+        mean_mu2 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+        mean_mu3 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+        mean_mu4 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+        mean_mu5 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+        beta3    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
+        beta4    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+        beta5    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+        plyagl   = 2.0*M_PI*plyagldeg/360.0;
+        for (unsigned int i=0; i<5; i++){
+            parameters(i) = 1.0e3*parameters(i);
+        }
         int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
         double L1 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
         double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
@@ -96,15 +109,6 @@ public:
         double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
         double z = yinv*beta;
         return z;
-    }
-    
-    void set_parameters(Epetra_SerialDenseVector & x){
-        mean_mu1 = x(0); mean_mu2 = x(1); mean_mu3 = x(2); mean_mu4 = x(3); mean_mu5 = x(4);
-        beta3 = x(5); beta4 = x(6); beta5 = x(7);
-    }
-    
-    void set_plyagl(double & Plyagl){
-        plyagl = Plyagl;
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){

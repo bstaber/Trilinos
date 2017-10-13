@@ -40,8 +40,8 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<TIMooney_RandomField> interface = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));    
-    
+    Teuchos::RCP<TIMooney_RandomField> interface = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
+        
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
