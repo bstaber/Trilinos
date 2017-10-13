@@ -6,5 +6,5 @@ var searchData=
   ['tau2',['tau2',['../d6/daf/class_interface__arteries.html#a5121bb35b25ee64ed090c8012991be0c',1,'Interface_arteries']]],
   ['theta',['theta',['../d6/daf/class_interface__arteries.html#a7a0ef952ae698d4b5116ba96c060e62f',1,'Interface_arteries']]],
   ['time',['time',['../d0/d9d/class_newton___raphson.html#a1bbcdaf5ba62f2431287a90c5fbfdecc',1,'Newton_Raphson']]],
-  ['trm',['trm',['../de/dd1/class_t_i_mooney.html#a4fc489310d57d6639453fcf0d28b4762',1,'TIMooney']]]
+  ['trm',['trm',['../de/dd1/class_t_i_mooney.html#a4fc489310d57d6639453fcf0d28b4762',1,'TIMooney::trm()'],['../d1/dd7/class_t_i_mooney___random_field.html#a5e0a011cf7ef0077c7156bf06d7cfd1f',1,'TIMooney_RandomField::trm()']]]
 ];
