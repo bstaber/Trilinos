@@ -81,8 +81,8 @@ MPI_Init(&argc, &argv);
         Newton->setParameters(*paramList);
         Newton->bc_disp = bcdisp[i];
         int error = Newton->Solve_with_Aztec(true);
-        std::string path1 = "/home/s/staber/Trilinos_results/nrl/deterministic/displacement_" + std::to_string(i) + ".mtx";
-        std::string path2 = "/home/s/staber/Trilinos_results/nrl/deterministic/greenlag_" + std::to_string(i) + ".mtx";
+        std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/displacement_" + std::to_string(i) + ".mtx";
+        std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/greenlag_" + std::to_string(i) + ".mtx";
         Newton->print_newton_solution(path1);
         interface->compute_green_lagrange(*Newton->x,xi,xi,xi,path2);
     }

@@ -44,7 +44,7 @@
     </ParameterList>
     
     <ParameterList name="Newton">
-        <Parameter name="delta" type="double" value="1.0"/>
+        <Parameter name="delta" type="double" value="0.1"/>
         <Parameter name="iterMin" type="int" value="2"/>
         <Parameter name="iterMax" type="int" value="10"/>
         <Parameter name="nbBisMax" type="int" value="5"/>
@@ -78,8 +78,6 @@
         <Parameter name="AZ_reorder" type="int" value="1"/>
     </ParameterList>
     
-    <!-- Check if MPa, GPa or Pa 
-     1.7222    0.0426    0.0429    1.3138    0.0609   -0.4694   27.9535    0.0306 -->
     <ParameterList name="TIMooney">
         <Parameter name="mu1" type="double" value="1.7212"/>
         <Parameter name="mu2" type="double" value="0.0426"/>

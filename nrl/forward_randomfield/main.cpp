@@ -41,6 +41,32 @@ MPI_Init(&argc, &argv);
     }
     
     Teuchos::RCP<TIMooney_RandomField> interface = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
+    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
+    
+    std::vector<double> bcdisp(10);
+    bcdisp[0] = 0.00033234;
+    bcdisp[1] = 0.018369;
+    bcdisp[2] = 0.038198;
+    bcdisp[3] = 0.060977;
+    bcdisp[4] = 0.073356;
+    bcdisp[5] = 0.092648;
+    bcdisp[6] = 0.11062;
+    bcdisp[7] = 0.12838;
+    bcdisp[8] = 0.14934;
+    bcdisp[9] = 0.1571809118641;
+    
+    double xi = 0.0;
+    
+    Newton->Initialization();
+    for (unsigned int i=0; i<bcdisp.size(); ++i){
+        Newton->setParameters(*paramList);
+        Newton->bc_disp = bcdisp[i];
+        int error = Newton->Solve_with_Aztec(true);
+        std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/displacement_" + std::to_string(i) + ".mtx";
+        std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/greenlag_" + std::to_string(i) + ".mtx";
+        Newton->print_newton_solution(path1);
+        interface->compute_green_lagrange(*Newton->x,xi,xi,xi,path2);
+    }
         
 #ifdef HAVE_MPI
     MPI_Finalize();
