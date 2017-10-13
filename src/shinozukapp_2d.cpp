@@ -9,7 +9,7 @@ shinozuka_2d::shinozuka_2d(){
 }
 
 template<typename typearg>
-double shinozuka::tau_beta(typearg & beta){
+double shinozuka_2d::tau_beta(typearg & beta){
     double tau = -1.0 + (2.0*double(beta)-1.0)/double(order);
     return tau;
 }
@@ -46,7 +46,7 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
                     x = Mesh.nodes_coord[3*node+0];
                     y = Mesh.nodes_coord[3*node+1];
                     arg = 2.0*M_PI*phi + (M_PI/l1)*ti*x + (M_PI/l2)*tj*y;
-                    v[inode] += std::sqrt(2.0*si*sj*sk)*w*std::cos(arg);
+                    v[inode] += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                 }
                 
         }
