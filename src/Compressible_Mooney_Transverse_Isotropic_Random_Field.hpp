@@ -38,19 +38,17 @@ public:
             }
         }
         
-        double plyagldeg = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
-        mean_mu1 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
-        mean_mu2 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
-        mean_mu3 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
-        mean_mu4 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
-        mean_mu5 = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
-        beta3    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
-        beta4    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
-        beta5    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+        double plyagldeg = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"angle");
+        mean_mu1 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu1");
+        mean_mu2 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu2");
+        mean_mu3 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu3");
+        mean_mu4 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu4");
+        mean_mu5 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu5");
+        beta3    = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"beta3");
+        beta4    = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"beta4");
+        beta5    = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"beta5");
         plyagl   = 2.0*M_PI*plyagldeg/360.0;
-        for (unsigned int i=0; i<5; i++){
-            parameters(i) = 1.0e3*parameters(i);
-        }
+        mean_mu1 *= 1.0e3; mean_mu2 *= 1.0e3; mean_mu3 *= 1.0e3; mean_mu4 *= 1.0e3; mean_mu5 *= 1.0e3;
         int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
         double L1 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
         double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
