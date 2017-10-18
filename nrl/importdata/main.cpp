@@ -33,6 +33,11 @@ int main(int argc, char *argv[]){
             std::cout << nrldata->local_xi[i] << std::setw(10) << nrldata->local_eta[i] << "\n";
         }
     }
+    Comm.Barrier();
+    if (Comm.MyPID()==0){
+        std::cout << nrldata->boundaryconditions << "\n";
+        std::cout << nrldata->energy << "\n";
+    }
     
     //Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata());
     /*if (Comm.MyPID()==0){

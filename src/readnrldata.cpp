@@ -4,6 +4,7 @@
 readnrldata::readnrldata(){
     import_boundaryconditions();
     import_exp_points();
+    import_expenergy();
     import_exp_def();
 }
 
