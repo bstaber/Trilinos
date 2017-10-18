@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
  
-    Teuchos::RCP<Interface_arteries> my_interface = Teuchos::rcp(new Interface_arteries(Comm,*paramList));
+    Teuchos::RCP<NeumannInnerSurface_StochasticPolyconvexHGO> my_interface = Teuchos::rcp(new NeumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
     
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_gmrf");

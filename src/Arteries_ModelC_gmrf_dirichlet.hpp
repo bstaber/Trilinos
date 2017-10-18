@@ -11,11 +11,11 @@
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/beta.hpp>
 
-class Interface_arteries : public hyperelasticity_setup
+class DirichletStripElongation_StochasticPolyconvexHGO : public hyperelasticity_setup
 {
 public:
     
-    Interface_arteries(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    DirichletStripElongation_StochasticPolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         //std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
@@ -71,7 +71,7 @@ public:
         setup_dirichlet_conditions();
     }
     
-    ~Interface_arteries(){
+    ~DirichletStripElongation_StochasticPolyconvexHGO(){
     }
     
     void get_media(unsigned int & n_cells, unsigned int & n_nodes, std::string & path){

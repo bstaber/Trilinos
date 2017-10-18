@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['finite_5felement_5fproblem',['Finite_Element_Problem',['../d8/dc2/class_finite___element___problem.html',1,'']]]
+  ['dirichletinletoutlet_5fpolyconvexhgo',['DirichletInletOutlet_PolyconvexHGO',['../da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html',1,'']]],
+  ['dirichletstripelongation_5fstochasticpolyconvexhgo',['DirichletStripElongation_StochasticPolyconvexHGO',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html',1,'']]]
 ];

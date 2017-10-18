@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['n',['N',['../d6/daf/class_interface__arteries.html#aa2f42d9ac92276d348e098fceecc8922',1,'Interface_arteries']]],
+  ['n',['N',['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#afb62ac7efa4c9f710ddf03f1f1ca3476',1,'NeumannInnerSurface_StochasticPolyconvexHGO']]],
   ['n_5fbc_5fdof',['n_bc_dof',['../d8/daf/classhyperelasticity__setup.html#af46ccf90792cad4401cc32bbc9768469',1,'hyperelasticity_setup::n_bc_dof()'],['../d9/df7/class_linearized_elasticity.html#a87087f0191a67c4ddde58cd936c9980b',1,'LinearizedElasticity::n_bc_dof()']]],
   ['n_5fcells',['n_cells',['../d6/d6b/classmesh.html#aa6de71610c82f4a4b565d7eb2f1a61d1',1,'mesh']]],
   ['n_5ffaces',['n_faces',['../d6/d6b/classmesh.html#acc073247dcf27de46689af730c9d29f9',1,'mesh']]],
@@ -16,6 +16,8 @@ var searchData=
   ['n_5ftri',['N_tri',['../d6/d6b/classmesh.html#a001cb792919a394dd7f9c730b1c1dcbf',1,'mesh']]],
   ['nb_5fbis_5fmax',['nb_bis_max',['../d0/d9d/class_newton___raphson.html#a6fee960a690c814e7c970157ea12a0d5',1,'Newton_Raphson']]],
   ['ncirc',['ncirc',['../d5/d0e/classobjective_function.html#a4b818ff78b5913badd252e7dadc7c2bc',1,'objectiveFunction']]],
+  ['neumanninnersurface_5fpolyconvexhgo',['NeumannInnerSurface_PolyconvexHGO',['../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html',1,'NeumannInnerSurface_PolyconvexHGO'],['../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a8bfd3cbe3ba5ef7a6e36ec8066da00c9',1,'NeumannInnerSurface_PolyconvexHGO::NeumannInnerSurface_PolyconvexHGO()']]],
+  ['neumanninnersurface_5fstochasticpolyconvexhgo',['NeumannInnerSurface_StochasticPolyconvexHGO',['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html',1,'NeumannInnerSurface_StochasticPolyconvexHGO'],['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a3a65b28e5d813bffe7706d401b9a6a13',1,'NeumannInnerSurface_StochasticPolyconvexHGO::NeumannInnerSurface_StochasticPolyconvexHGO()']]],
   ['newton',['newton',['../d5/d0e/classobjective_function.html#aac4512b923fda082f3583c50176ed63e',1,'objectiveFunction']]],
   ['newton_5fraphson',['Newton_Raphson',['../d0/d9d/class_newton___raphson.html',1,'Newton_Raphson'],['../d0/d9d/class_newton___raphson.html#a4db290485aaa6ff23096b2625dc01e6d',1,'Newton_Raphson::Newton_Raphson()']]],
   ['newton_5fraphsonpp_2ecpp',['Newton_Raphsonpp.cpp',['../d5/dc7/_newton___raphsonpp_8cpp.html',1,'']]],

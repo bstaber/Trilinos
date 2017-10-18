@@ -4,11 +4,11 @@
 #include "tensor_calculus.hpp"
 #include "hyperelasticity_setup_pp.hpp"
 
-class Interface_arteries : public hyperelasticity_setup
+class NeumannInnerSurface_PolyconvexHGO : public hyperelasticity_setup
 {
 public:
     
-    Interface_arteries(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    NeumannInnerSurface_PolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
@@ -59,7 +59,7 @@ public:
         setup_dirichlet_conditions();
     }
     
-    ~Interface_arteries(){
+    ~NeumannInnerSurface_PolyconvexHGO(){
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){

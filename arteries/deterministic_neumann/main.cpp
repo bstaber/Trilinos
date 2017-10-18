@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
  
-    Teuchos::RCP<Interface_arteries> my_interface = Teuchos::rcp(new Interface_arteries(Comm,*paramList));
+    Teuchos::RCP<NeumannInnerSurface_PolyconvexHGO> my_interface = Teuchos::rcp(new NeumannInnerSurface_PolyconvexHGO(Comm,*paramList));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
     
     Newton->Initialization();

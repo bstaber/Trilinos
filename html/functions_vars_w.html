@@ -9,9 +9,19 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +34,21 @@
    <div id="projectname">Trilinos based (stochastic) FEM solvers
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -33,16 +58,21 @@
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-</script>
-<div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_vars_w.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,36 +92,47 @@ $(function() {
 
 <h3><a id="index_w"></a>- w -</h3><ul>
 <li>w1
-: <a class="el" href="d6/daf/class_interface__arteries.html#a4858fdea44aaf35269501ccb293d9ca7">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#add4fd3cfdd345ae29e3f6f4352c35ee3">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#ab0164d8ed1f0126998356a6880a5e3e0">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 <li>w1_gmrf
-: <a class="el" href="d6/daf/class_interface__arteries.html#a89720d644ae46963749b60c947e53407">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a60e422ced18cf3ff3dd4be708141542c">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a25dcad649dc2eb37f1c6a56529164412">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 <li>w2
-: <a class="el" href="d6/daf/class_interface__arteries.html#aa66a661cc31249bce319fcd1ca671b25">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a39c61380704f7438de4db5b72b64c431">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#abb095e2a6274ebaabaf5cd54a44db8e6">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 <li>w2_gmrf
-: <a class="el" href="d6/daf/class_interface__arteries.html#a3470395f80a097aa452e8d8f79366fcf">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a1c2121787cefd0ac02e3538cc719659a">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#adf0d12c965ee8599b944cc864774586c">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 <li>w3
-: <a class="el" href="d6/daf/class_interface__arteries.html#a2f54e7bbc24ee9e8fcbc5990b04f5013">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a5fc8ffa14a15120db3b69d88e00ba229">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#adfc751a55918a0f9c180acd8a46f692a">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 <li>w3_gmrf
-: <a class="el" href="d6/daf/class_interface__arteries.html#ae9d622e6b6aebcbff5e2722eafd8e6b2">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a903115e5fdc5170de727ceb9f05d9203">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a153b20d760d116bff5d5e5d5d9d0d6c2">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 <li>w4
-: <a class="el" href="d6/daf/class_interface__arteries.html#ac6fe0edd4bcc4282ce1227a6d007837f">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a118dd567556fa9a299529c4ccd674f1f">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#af6898a84743a8cb22074cea67fd72f0e">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 <li>w4_gmrf
-: <a class="el" href="d6/daf/class_interface__arteries.html#aaaacb01f4aefd6b2e2a94f915f6a623c">Interface_arteries</a>
+: <a class="el" href="d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a3830ade23770b5403668552691a65cd3">DirichletStripElongation_StochasticPolyconvexHGO</a>
+, <a class="el" href="dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a2930f1d55b9edb3ae257ab4f1923bc7d">NeumannInnerSurface_StochasticPolyconvexHGO</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

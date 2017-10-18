@@ -67,118 +67,20 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Interface_arteries:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d2/d55/class_interface__arteries__inherit__graph.svg" width="178" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d2/d55/class_interface__arteries__inherit__graph.svg" width="178" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Interface_arteries:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/d6b/class_interface__arteries__coll__graph.svg" width="358" height="298"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d9/d6b/class_interface__arteries__coll__graph.svg" width="358" height="298"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6262b35a1c8a29e2690a1b79795e16ee">Interface_arteries</a> (Epetra_Comm &amp;comm, Teuchos::ParameterList &amp;Parameters)</td></tr>
-<tr class="separator:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6304788830cce670dfc939f64e4310b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6304788830cce670dfc939f64e4310b1">~Interface_arteries</a> ()</td></tr>
-<tr class="separator:a6304788830cce670dfc939f64e4310b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54aa88384990063d9300f44962fa063e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a54aa88384990063d9300f44962fa063e">get_matrix_and_rhs</a> (Epetra_Vector &amp;x, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F)</td></tr>
-<tr class="separator:a54aa88384990063d9300f44962fa063e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76cc7932de739f2e05fca7f03d4fdd88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a76cc7932de739f2e05fca7f03d4fdd88">setup_dirichlet_conditions</a> ()</td></tr>
-<tr class="separator:a76cc7932de739f2e05fca7f03d4fdd88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3684b04cf23a3b500aaee9fceca636bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a3684b04cf23a3b500aaee9fceca636bb">apply_dirichlet_conditions</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F, double &amp;displacement)</td></tr>
-<tr class="separator:a3684b04cf23a3b500aaee9fceca636bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12c563982bed5cc66223ae914d7e71af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a12c563982bed5cc66223ae914d7e71af">get_material_parameters</a> (unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
-<tr class="separator:a12c563982bed5cc66223ae914d7e71af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac63142b9dd44581baeeb06481d2703bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ac63142b9dd44581baeeb06481d2703bb">get_constitutive_tensors</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, Epetra_SerialDenseVector &amp;piola_stress, Epetra_SerialDenseMatrix &amp;tangent_piola)</td></tr>
-<tr class="separator:ac63142b9dd44581baeeb06481d2703bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3223538c65b1b26a68e17dba0a00544"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aa3223538c65b1b26a68e17dba0a00544">get_constitutive_tensors_static_condensation</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;L, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:aa3223538c65b1b26a68e17dba0a00544"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a227d22f8df5bcd0dc2429b22da32c6aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a227d22f8df5bcd0dc2429b22da32c6aa">get_internal_pressure</a> (double &amp;<a class="el" href="../../d6/daf/class_interface__arteries.html#a7a0ef952ae698d4b5116ba96c060e62f">theta</a>, double &amp;pressure, double &amp;dpressure)</td></tr>
-<tr class="separator:a227d22f8df5bcd0dc2429b22da32c6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2403aa2e0f8f2c8d559981a2869cff4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ad2403aa2e0f8f2c8d559981a2869cff4">get_material_parameters_for_recover</a> (unsigned int &amp;e_lid, double &amp;xi, double &amp;eta, double &amp;zeta)</td></tr>
-<tr class="separator:ad2403aa2e0f8f2c8d559981a2869cff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a551ab3a2a14f1c4c682f85ca9f330b59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a551ab3a2a14f1c4c682f85ca9f330b59">get_stress_for_recover</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseMatrix &amp;piola_stress)</td></tr>
-<tr class="separator:a551ab3a2a14f1c4c682f85ca9f330b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6262b35a1c8a29e2690a1b79795e16ee">Interface_arteries</a> (Epetra_Comm &amp;comm, Teuchos::ParameterList &amp;Parameters)</td></tr>
-<tr class="separator:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6304788830cce670dfc939f64e4310b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6304788830cce670dfc939f64e4310b1">~Interface_arteries</a> ()</td></tr>
-<tr class="separator:a6304788830cce670dfc939f64e4310b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54aa88384990063d9300f44962fa063e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a54aa88384990063d9300f44962fa063e">get_matrix_and_rhs</a> (Epetra_Vector &amp;x, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F)</td></tr>
-<tr class="separator:a54aa88384990063d9300f44962fa063e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76cc7932de739f2e05fca7f03d4fdd88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a76cc7932de739f2e05fca7f03d4fdd88">setup_dirichlet_conditions</a> ()</td></tr>
-<tr class="separator:a76cc7932de739f2e05fca7f03d4fdd88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3684b04cf23a3b500aaee9fceca636bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a3684b04cf23a3b500aaee9fceca636bb">apply_dirichlet_conditions</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F, double &amp;displacement)</td></tr>
-<tr class="separator:a3684b04cf23a3b500aaee9fceca636bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12c563982bed5cc66223ae914d7e71af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a12c563982bed5cc66223ae914d7e71af">get_material_parameters</a> (unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
-<tr class="separator:a12c563982bed5cc66223ae914d7e71af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac63142b9dd44581baeeb06481d2703bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ac63142b9dd44581baeeb06481d2703bb">get_constitutive_tensors</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, Epetra_SerialDenseVector &amp;piola_stress, Epetra_SerialDenseMatrix &amp;tangent_piola)</td></tr>
-<tr class="separator:ac63142b9dd44581baeeb06481d2703bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fe4ac5b573fa62c2034ee016165478a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a7fe4ac5b573fa62c2034ee016165478a">get_constitutive_tensors_static_condensation</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;inverse_cauchy, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:a7fe4ac5b573fa62c2034ee016165478a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a227d22f8df5bcd0dc2429b22da32c6aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a227d22f8df5bcd0dc2429b22da32c6aa">get_internal_pressure</a> (double &amp;<a class="el" href="../../d6/daf/class_interface__arteries.html#a7a0ef952ae698d4b5116ba96c060e62f">theta</a>, double &amp;pressure, double &amp;dpressure)</td></tr>
-<tr class="separator:a227d22f8df5bcd0dc2429b22da32c6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2403aa2e0f8f2c8d559981a2869cff4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ad2403aa2e0f8f2c8d559981a2869cff4">get_material_parameters_for_recover</a> (unsigned int &amp;e_lid, double &amp;xi, double &amp;eta, double &amp;zeta)</td></tr>
-<tr class="separator:ad2403aa2e0f8f2c8d559981a2869cff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a551ab3a2a14f1c4c682f85ca9f330b59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a551ab3a2a14f1c4c682f85ca9f330b59">get_stress_for_recover</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseMatrix &amp;piola_stress)</td></tr>
-<tr class="separator:a551ab3a2a14f1c4c682f85ca9f330b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e24e527068789a10eb7b214e3db2d01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6e24e527068789a10eb7b214e3db2d01">setup_clamp</a> ()</td></tr>
-<tr class="separator:a6e24e527068789a10eb7b214e3db2d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0916ec32561ca3fa4cbcef6a1d5298ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a0916ec32561ca3fa4cbcef6a1d5298ee">setup_slipbc</a> ()</td></tr>
-<tr class="separator:a0916ec32561ca3fa4cbcef6a1d5298ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9ce1f8fab83bd38dd4b2d0a90d5897d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#af9ce1f8fab83bd38dd4b2d0a90d5897d">setup_semislipbc</a> ()</td></tr>
-<tr class="separator:af9ce1f8fab83bd38dd4b2d0a90d5897d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf0d5ee3594b5824ea2696af030b8460"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#abf0d5ee3594b5824ea2696af030b8460">setup_slipbc_and_clamp</a> ()</td></tr>
-<tr class="separator:abf0d5ee3594b5824ea2696af030b8460"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8c43faf73b8dd4fc9d4cf472f887612"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#af8c43faf73b8dd4fc9d4cf472f887612">apply_clamp</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F, double &amp;displacement)</td></tr>
-<tr class="separator:af8c43faf73b8dd4fc9d4cf472f887612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a973024f460b9798a336f5266253e6881"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a973024f460b9798a336f5266253e6881">apply_slipbc</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F, double &amp;displacement)</td></tr>
-<tr class="separator:a973024f460b9798a336f5266253e6881"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d1fbc83177b0ecd71b7ddf17d4c9eb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a8d1fbc83177b0ecd71b7ddf17d4c9eb5">apply_semiselipbc</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F, double &amp;displacement)</td></tr>
-<tr class="separator:a8d1fbc83177b0ecd71b7ddf17d4c9eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf2da2ea6ec9b9536afe70a447c452af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#acf2da2ea6ec9b9536afe70a447c452af">apply_slipbc_and_clamp</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F, double &amp;displacement)</td></tr>
-<tr class="separator:acf2da2ea6ec9b9536afe70a447c452af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ad1a74818c6b3cf6e319fb841d6a08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a91ad1a74818c6b3cf6e319fb841d6a08">model_C</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;L, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:a91ad1a74818c6b3cf6e319fb841d6a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeeb76d115735faa51b1d8425b265d353"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aeeb76d115735faa51b1d8425b265d353">model_B</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:aeeb76d115735faa51b1d8425b265d353"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f2886ed04ec8772aa5d01ca6b7ad6f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a9f2886ed04ec8772aa5d01ca6b7ad6f9">model_A</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:a9f2886ed04ec8772aa5d01ca6b7ad6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6262b35a1c8a29e2690a1b79795e16ee">Interface_arteries</a> (Epetra_Comm &amp;comm, Teuchos::ParameterList &amp;Parameters)</td></tr>
-<tr class="separator:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6304788830cce670dfc939f64e4310b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6304788830cce670dfc939f64e4310b1">~Interface_arteries</a> ()</td></tr>
-<tr class="separator:a6304788830cce670dfc939f64e4310b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a768313792526a8dccf19aaaf57d15426"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a768313792526a8dccf19aaaf57d15426">get_media</a> (unsigned int &amp;n_cells, unsigned int &amp;n_nodes, std::string &amp;path)</td></tr>
-<tr class="separator:a768313792526a8dccf19aaaf57d15426"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54aa88384990063d9300f44962fa063e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a54aa88384990063d9300f44962fa063e">get_matrix_and_rhs</a> (Epetra_Vector &amp;x, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F)</td></tr>
-<tr class="separator:a54aa88384990063d9300f44962fa063e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76cc7932de739f2e05fca7f03d4fdd88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a76cc7932de739f2e05fca7f03d4fdd88">setup_dirichlet_conditions</a> ()</td></tr>
-<tr class="separator:a76cc7932de739f2e05fca7f03d4fdd88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3684b04cf23a3b500aaee9fceca636bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a3684b04cf23a3b500aaee9fceca636bb">apply_dirichlet_conditions</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F, double &amp;displacement)</td></tr>
-<tr class="separator:a3684b04cf23a3b500aaee9fceca636bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12c563982bed5cc66223ae914d7e71af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a12c563982bed5cc66223ae914d7e71af">get_material_parameters</a> (unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
-<tr class="separator:a12c563982bed5cc66223ae914d7e71af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa28aa9e376cc2d8675fa2eff0df9f660"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aa28aa9e376cc2d8675fa2eff0df9f660">icdf_gamma</a> (double &amp;w, double &amp;alpha, double &amp;beta)</td></tr>
-<tr class="separator:aa28aa9e376cc2d8675fa2eff0df9f660"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9ce0f61c520476c81205313f2795711"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aa9ce0f61c520476c81205313f2795711">icdf_beta</a> (double &amp;w, double &amp;<a class="el" href="../../d6/daf/class_interface__arteries.html#af7bacd873b7f81d9be0ed5e4c14ced36">tau1</a>, double &amp;<a class="el" href="../../d6/daf/class_interface__arteries.html#a5121bb35b25ee64ed090c8012991be0c">tau2</a>)</td></tr>
-<tr class="separator:aa9ce0f61c520476c81205313f2795711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac63142b9dd44581baeeb06481d2703bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ac63142b9dd44581baeeb06481d2703bb">get_constitutive_tensors</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, Epetra_SerialDenseVector &amp;piola_stress, Epetra_SerialDenseMatrix &amp;tangent_piola)</td></tr>
-<tr class="separator:ac63142b9dd44581baeeb06481d2703bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fe4ac5b573fa62c2034ee016165478a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a7fe4ac5b573fa62c2034ee016165478a">get_constitutive_tensors_static_condensation</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;inverse_cauchy, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:a7fe4ac5b573fa62c2034ee016165478a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a227d22f8df5bcd0dc2429b22da32c6aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a227d22f8df5bcd0dc2429b22da32c6aa">get_internal_pressure</a> (double &amp;<a class="el" href="../../d6/daf/class_interface__arteries.html#a7a0ef952ae698d4b5116ba96c060e62f">theta</a>, double &amp;pressure, double &amp;dpressure)</td></tr>
-<tr class="separator:a227d22f8df5bcd0dc2429b22da32c6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2403aa2e0f8f2c8d559981a2869cff4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ad2403aa2e0f8f2c8d559981a2869cff4">get_material_parameters_for_recover</a> (unsigned int &amp;e_lid, double &amp;xi, double &amp;eta, double &amp;zeta)</td></tr>
-<tr class="separator:ad2403aa2e0f8f2c8d559981a2869cff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a551ab3a2a14f1c4c682f85ca9f330b59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a551ab3a2a14f1c4c682f85ca9f330b59">get_stress_for_recover</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseMatrix &amp;piola_stress)</td></tr>
-<tr class="separator:a551ab3a2a14f1c4c682f85ca9f330b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ad1a74818c6b3cf6e319fb841d6a08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a91ad1a74818c6b3cf6e319fb841d6a08">model_C</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;L, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:a91ad1a74818c6b3cf6e319fb841d6a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6262b35a1c8a29e2690a1b79795e16ee">Interface_arteries</a> (Epetra_Comm &amp;comm, Teuchos::ParameterList &amp;Parameters)</td></tr>
 <tr class="separator:a6262b35a1c8a29e2690a1b79795e16ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6304788830cce670dfc939f64e4310b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6304788830cce670dfc939f64e4310b1">~Interface_arteries</a> ()</td></tr>
@@ -272,32 +174,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a09274042bf87bb04f7ac9433f03b9879"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d76/classlaplace.html">laplace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a09274042bf87bb04f7ac9433f03b9879">Laplace</a></td></tr>
-<tr class="separator:a09274042bf87bb04f7ac9433f03b9879"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad135c29198bbfcaa820bf2c4b8ab5a4f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ad135c29198bbfcaa820bf2c4b8ab5a4f">mu1</a></td></tr>
-<tr class="separator:ad135c29198bbfcaa820bf2c4b8ab5a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af66e7d3d22d6c31dd2725944c90ab7b4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#af66e7d3d22d6c31dd2725944c90ab7b4">mu2</a></td></tr>
-<tr class="separator:af66e7d3d22d6c31dd2725944c90ab7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa85df7a078edb21259d484236aa26ccd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aa85df7a078edb21259d484236aa26ccd">mu3</a></td></tr>
-<tr class="separator:aa85df7a078edb21259d484236aa26ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af66b5f50d220146315c81ba98731f366"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#af66b5f50d220146315c81ba98731f366">mu4</a></td></tr>
-<tr class="separator:af66b5f50d220146315c81ba98731f366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a42a071fe36ef47ae4d14017444888b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a7a42a071fe36ef47ae4d14017444888b">beta3</a></td></tr>
-<tr class="separator:a7a42a071fe36ef47ae4d14017444888b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a454d1834ca3c902a097fca924650257c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a454d1834ca3c902a097fca924650257c">beta4</a></td></tr>
-<tr class="separator:a454d1834ca3c902a097fca924650257c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a0ef952ae698d4b5116ba96c060e62f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a7a0ef952ae698d4b5116ba96c060e62f">theta</a></td></tr>
-<tr class="separator:a7a0ef952ae698d4b5116ba96c060e62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d52adb48e78d0ec0a9f7c369262e8fb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6d52adb48e78d0ec0a9f7c369262e8fb">xxmax</a></td></tr>
-<tr class="separator:a6d52adb48e78d0ec0a9f7c369262e8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c9309b7b837443cf11a7562f57831cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6c9309b7b837443cf11a7562f57831cd">fixed</a> = 2</td></tr>
-<tr class="separator:a6c9309b7b837443cf11a7562f57831cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5278710e9a7dd30ef6ab473b4a78495f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a5278710e9a7dd30ef6ab473b4a78495f">moved</a> = 3</td></tr>
-<tr class="separator:a5278710e9a7dd30ef6ab473b4a78495f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a667774c8eea3293085358472eeec6329"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a667774c8eea3293085358472eeec6329">a</a></td></tr>
-<tr class="separator:a667774c8eea3293085358472eeec6329"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaee6b3cf6615af56b59f40c78444f092"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aaee6b3cf6615af56b59f40c78444f092">b</a></td></tr>
-<tr class="separator:aaee6b3cf6615af56b59f40c78444f092"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13b81e3a5fac35221a57f090702216b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d76/classlaplace.html">laplace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ab13b81e3a5fac35221a57f090702216b">Laplace</a></td></tr>
+<tr class="separator:ab13b81e3a5fac35221a57f090702216b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4858fdea44aaf35269501ccb293d9ca7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a4858fdea44aaf35269501ccb293d9ca7">w1</a></td></tr>
 <tr class="separator:a4858fdea44aaf35269501ccb293d9ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa66a661cc31249bce319fcd1ca671b25"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aa66a661cc31249bce319fcd1ca671b25">w2</a></td></tr>
@@ -326,14 +204,22 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a1b775f9ff20b07cfce9ab43d393fcf59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f89855f9242b031caa96061fbb910e0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6f89855f9242b031caa96061fbb910e0">mean_mu4</a></td></tr>
 <tr class="separator:a6f89855f9242b031caa96061fbb910e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66b5f50d220146315c81ba98731f366"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#af66b5f50d220146315c81ba98731f366">mu4</a></td></tr>
+<tr class="separator:af66b5f50d220146315c81ba98731f366"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02ece4e088cec5bb0593f0ead6533e96"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a02ece4e088cec5bb0593f0ead6533e96">deltaG4</a></td></tr>
 <tr class="separator:a02ece4e088cec5bb0593f0ead6533e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1515b6c853bd4d0464700fb5324b48f7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a1515b6c853bd4d0464700fb5324b48f7">mean_mu1</a></td></tr>
 <tr class="separator:a1515b6c853bd4d0464700fb5324b48f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad135c29198bbfcaa820bf2c4b8ab5a4f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#ad135c29198bbfcaa820bf2c4b8ab5a4f">mu1</a></td></tr>
+<tr class="separator:ad135c29198bbfcaa820bf2c4b8ab5a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a309c723dead4afa7889799bf97101dc1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a309c723dead4afa7889799bf97101dc1">mean_mu2</a></td></tr>
 <tr class="separator:a309c723dead4afa7889799bf97101dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66e7d3d22d6c31dd2725944c90ab7b4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#af66e7d3d22d6c31dd2725944c90ab7b4">mu2</a></td></tr>
+<tr class="separator:af66e7d3d22d6c31dd2725944c90ab7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae02050bf4c22ac0f183b223d117e112"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aae02050bf4c22ac0f183b223d117e112">mean_mu3</a></td></tr>
 <tr class="separator:aae02050bf4c22ac0f183b223d117e112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85df7a078edb21259d484236aa26ccd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aa85df7a078edb21259d484236aa26ccd">mu3</a></td></tr>
+<tr class="separator:aa85df7a078edb21259d484236aa26ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a175a4ce77212ca11a251d3d3c958cd29"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a175a4ce77212ca11a251d3d3c958cd29">alpha1</a></td></tr>
 <tr class="separator:a175a4ce77212ca11a251d3d3c958cd29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acad3c7a4e1d1fc9cf17518fadb1c8e4f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#acad3c7a4e1d1fc9cf17518fadb1c8e4f">alpha2</a></td></tr>
@@ -350,6 +236,12 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a1c0b8eb22ff0e7d70d5562347ddfa1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d546caacc0f1ad66c4521b418ee9994"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a6d546caacc0f1ad66c4521b418ee9994">alpha6</a></td></tr>
 <tr class="separator:a6d546caacc0f1ad66c4521b418ee9994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a42a071fe36ef47ae4d14017444888b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a7a42a071fe36ef47ae4d14017444888b">beta3</a></td></tr>
+<tr class="separator:a7a42a071fe36ef47ae4d14017444888b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a454d1834ca3c902a097fca924650257c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a454d1834ca3c902a097fca924650257c">beta4</a></td></tr>
+<tr class="separator:a454d1834ca3c902a097fca924650257c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a0ef952ae698d4b5116ba96c060e62f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a7a0ef952ae698d4b5116ba96c060e62f">theta</a></td></tr>
+<tr class="separator:a7a0ef952ae698d4b5116ba96c060e62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9162de5cf898e08949da58aba7a70bb1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a9162de5cf898e08949da58aba7a70bb1">epsilon</a> = 1e-6</td></tr>
 <tr class="separator:a9162de5cf898e08949da58aba7a70bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a007c844f6d3106043b40121f57f8805e"><td class="memItemLeft" align="right" valign="top">Epetra_IntSerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a007c844f6d3106043b40121f57f8805e">cells_nodes_p1_med</a></td></tr>
@@ -362,6 +254,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ae9d622e6b6aebcbff5e2722eafd8e6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaacb01f4aefd6b2e2a94f915f6a623c"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aaaacb01f4aefd6b2e2a94f915f6a623c">w4_gmrf</a></td></tr>
 <tr class="separator:aaaacb01f4aefd6b2e2a94f915f6a623c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a667774c8eea3293085358472eeec6329"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a667774c8eea3293085358472eeec6329">a</a></td></tr>
+<tr class="separator:a667774c8eea3293085358472eeec6329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaee6b3cf6615af56b59f40c78444f092"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#aaee6b3cf6615af56b59f40c78444f092">b</a></td></tr>
+<tr class="separator:aaee6b3cf6615af56b59f40c78444f092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf946910e98b8997303dceb1d4a72caa"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#acf946910e98b8997303dceb1d4a72caa">E1</a></td></tr>
 <tr class="separator:acf946910e98b8997303dceb1d4a72caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f573be4803c13741e003c4fcf364afd"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/daf/class_interface__arteries.html#a1f573be4803c13741e003c4fcf364afd">E2</a></td></tr>
@@ -393,205 +289,10 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00007">7</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00014">14</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6262b35a1c8a29e2690a1b79795e16ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6262b35a1c8a29e2690a1b79795e16ee">&#9670;&nbsp;</a></span>Interface_arteries() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Interface_arteries::Interface_arteries </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Comm &amp;&#160;</td>
-          <td class="paramname"><em>comm</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Teuchos::ParameterList &amp;&#160;</td>
-          <td class="paramname"><em>Parameters</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00011">11</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6304788830cce670dfc939f64e4310b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6304788830cce670dfc939f64e4310b1">&#9670;&nbsp;</a></span>~Interface_arteries() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Interface_arteries::~Interface_arteries </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00054">54</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6262b35a1c8a29e2690a1b79795e16ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6262b35a1c8a29e2690a1b79795e16ee">&#9670;&nbsp;</a></span>Interface_arteries() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Interface_arteries::Interface_arteries </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Comm &amp;&#160;</td>
-          <td class="paramname"><em>comm</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Teuchos::ParameterList &amp;&#160;</td>
-          <td class="paramname"><em>Parameters</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00011">11</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6304788830cce670dfc939f64e4310b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6304788830cce670dfc939f64e4310b1">&#9670;&nbsp;</a></span>~Interface_arteries() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Interface_arteries::~Interface_arteries </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00062">62</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6262b35a1c8a29e2690a1b79795e16ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6262b35a1c8a29e2690a1b79795e16ee">&#9670;&nbsp;</a></span>Interface_arteries() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Interface_arteries::Interface_arteries </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Comm &amp;&#160;</td>
-          <td class="paramname"><em>comm</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Teuchos::ParameterList &amp;&#160;</td>
-          <td class="paramname"><em>Parameters</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6304788830cce670dfc939f64e4310b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6304788830cce670dfc939f64e4310b1">&#9670;&nbsp;</a></span>~Interface_arteries() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Interface_arteries::~Interface_arteries </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00074">74</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6262b35a1c8a29e2690a1b79795e16ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6262b35a1c8a29e2690a1b79795e16ee">&#9670;&nbsp;</a></span>Interface_arteries() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6262b35a1c8a29e2690a1b79795e16ee">&#9670;&nbsp;</a></span>Interface_arteries()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,7 +330,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a6304788830cce670dfc939f64e4310b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6304788830cce670dfc939f64e4310b1">&#9670;&nbsp;</a></span>~Interface_arteries() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6304788830cce670dfc939f64e4310b1">&#9670;&nbsp;</a></span>~Interface_arteries()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -657,51 +358,7 @@ Public Attributes</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="af8c43faf73b8dd4fc9d4cf472f887612"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8c43faf73b8dd4fc9d4cf472f887612">&#9670;&nbsp;</a></span>apply_clamp() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::apply_clamp </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>displacement</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00316">316</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="af8c43faf73b8dd4fc9d4cf472f887612"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8c43faf73b8dd4fc9d4cf472f887612">&#9670;&nbsp;</a></span>apply_clamp() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af8c43faf73b8dd4fc9d4cf472f887612">&#9670;&nbsp;</a></span>apply_clamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -745,99 +402,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a3684b04cf23a3b500aaee9fceca636bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3684b04cf23a3b500aaee9fceca636bb">&#9670;&nbsp;</a></span>apply_dirichlet_conditions() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::apply_dirichlet_conditions </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>displacement</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a4e3e67ca83f8e23c83f9e422d5528deb">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00076">76</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3684b04cf23a3b500aaee9fceca636bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3684b04cf23a3b500aaee9fceca636bb">&#9670;&nbsp;</a></span>apply_dirichlet_conditions() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::apply_dirichlet_conditions </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>displacement</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a4e3e67ca83f8e23c83f9e422d5528deb">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00089">89</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3684b04cf23a3b500aaee9fceca636bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3684b04cf23a3b500aaee9fceca636bb">&#9670;&nbsp;</a></span>apply_dirichlet_conditions() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3684b04cf23a3b500aaee9fceca636bb">&#9670;&nbsp;</a></span>apply_dirichlet_conditions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -882,98 +447,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3684b04cf23a3b500aaee9fceca636bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3684b04cf23a3b500aaee9fceca636bb">&#9670;&nbsp;</a></span>apply_dirichlet_conditions() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::apply_dirichlet_conditions </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>displacement</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a4e3e67ca83f8e23c83f9e422d5528deb">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00140">140</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a8d1fbc83177b0ecd71b7ddf17d4c9eb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d1fbc83177b0ecd71b7ddf17d4c9eb5">&#9670;&nbsp;</a></span>apply_semiselipbc() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::apply_semiselipbc </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>displacement</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00364">364</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a8d1fbc83177b0ecd71b7ddf17d4c9eb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d1fbc83177b0ecd71b7ddf17d4c9eb5">&#9670;&nbsp;</a></span>apply_semiselipbc() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d1fbc83177b0ecd71b7ddf17d4c9eb5">&#9670;&nbsp;</a></span>apply_semiselipbc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1017,51 +492,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a973024f460b9798a336f5266253e6881"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a973024f460b9798a336f5266253e6881">&#9670;&nbsp;</a></span>apply_slipbc() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::apply_slipbc </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>displacement</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00331">331</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a973024f460b9798a336f5266253e6881"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a973024f460b9798a336f5266253e6881">&#9670;&nbsp;</a></span>apply_slipbc() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a973024f460b9798a336f5266253e6881">&#9670;&nbsp;</a></span>apply_slipbc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1105,51 +536,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="acf2da2ea6ec9b9536afe70a447c452af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf2da2ea6ec9b9536afe70a447c452af">&#9670;&nbsp;</a></span>apply_slipbc_and_clamp() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::apply_slipbc_and_clamp </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>displacement</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00382">382</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="acf2da2ea6ec9b9536afe70a447c452af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf2da2ea6ec9b9536afe70a447c452af">&#9670;&nbsp;</a></span>apply_slipbc_and_clamp() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acf2da2ea6ec9b9536afe70a447c452af">&#9670;&nbsp;</a></span>apply_slipbc_and_clamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1193,99 +580,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="ac63142b9dd44581baeeb06481d2703bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac63142b9dd44581baeeb06481d2703bb">&#9670;&nbsp;</a></span>get_constitutive_tensors() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_constitutive_tensors </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_stress</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a9cca717b6ef0662c83cfb6ee117a0ded">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00095">95</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ac63142b9dd44581baeeb06481d2703bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac63142b9dd44581baeeb06481d2703bb">&#9670;&nbsp;</a></span>get_constitutive_tensors() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_constitutive_tensors </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_stress</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a9cca717b6ef0662c83cfb6ee117a0ded">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00149">149</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ac63142b9dd44581baeeb06481d2703bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac63142b9dd44581baeeb06481d2703bb">&#9670;&nbsp;</a></span>get_constitutive_tensors() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63142b9dd44581baeeb06481d2703bb">&#9670;&nbsp;</a></span>get_constitutive_tensors()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1330,194 +625,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac63142b9dd44581baeeb06481d2703bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac63142b9dd44581baeeb06481d2703bb">&#9670;&nbsp;</a></span>get_constitutive_tensors() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_constitutive_tensors </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_stress</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a9cca717b6ef0662c83cfb6ee117a0ded">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00224">224</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a7fe4ac5b573fa62c2034ee016165478a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fe4ac5b573fa62c2034ee016165478a">&#9670;&nbsp;</a></span>get_constitutive_tensors_static_condensation() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_constitutive_tensors_static_condensation </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>inverse_cauchy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afef20997a9dd026abae3c47ef439f28a">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00099">99</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa3223538c65b1b26a68e17dba0a00544"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3223538c65b1b26a68e17dba0a00544">&#9670;&nbsp;</a></span>get_constitutive_tensors_static_condensation() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_constitutive_tensors_static_condensation </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afef20997a9dd026abae3c47ef439f28a">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00153">153</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a7fe4ac5b573fa62c2034ee016165478a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fe4ac5b573fa62c2034ee016165478a">&#9670;&nbsp;</a></span>get_constitutive_tensors_static_condensation() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fe4ac5b573fa62c2034ee016165478a">&#9670;&nbsp;</a></span>get_constitutive_tensors_static_condensation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1586,124 +695,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7fe4ac5b573fa62c2034ee016165478a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fe4ac5b573fa62c2034ee016165478a">&#9670;&nbsp;</a></span>get_constitutive_tensors_static_condensation() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_constitutive_tensors_static_condensation </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>inverse_cauchy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afef20997a9dd026abae3c47ef439f28a">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00228">228</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a227d22f8df5bcd0dc2429b22da32c6aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a227d22f8df5bcd0dc2429b22da32c6aa">&#9670;&nbsp;</a></span>get_internal_pressure() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_internal_pressure </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>theta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>pressure</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dpressure</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aabfa762fd21b5c29488e08614b671617">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00105">105</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a227d22f8df5bcd0dc2429b22da32c6aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a227d22f8df5bcd0dc2429b22da32c6aa">&#9670;&nbsp;</a></span>get_internal_pressure() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a227d22f8df5bcd0dc2429b22da32c6aa">&#9670;&nbsp;</a></span>get_internal_pressure()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1748,180 +741,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a227d22f8df5bcd0dc2429b22da32c6aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a227d22f8df5bcd0dc2429b22da32c6aa">&#9670;&nbsp;</a></span>get_internal_pressure() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_internal_pressure </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>theta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>pressure</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dpressure</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aabfa762fd21b5c29488e08614b671617">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00232">232</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a227d22f8df5bcd0dc2429b22da32c6aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a227d22f8df5bcd0dc2429b22da32c6aa">&#9670;&nbsp;</a></span>get_internal_pressure() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_internal_pressure </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>theta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>pressure</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dpressure</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aabfa762fd21b5c29488e08614b671617">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00264">264</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a12c563982bed5cc66223ae914d7e71af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12c563982bed5cc66223ae914d7e71af">&#9670;&nbsp;</a></span>get_material_parameters() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_material_parameters </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>gp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa5a05e262adae7bda067f022ad9b2908">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00083">83</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a12c563982bed5cc66223ae914d7e71af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12c563982bed5cc66223ae914d7e71af">&#9670;&nbsp;</a></span>get_material_parameters() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_material_parameters </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>gp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa5a05e262adae7bda067f022ad9b2908">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00129">129</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a12c563982bed5cc66223ae914d7e71af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12c563982bed5cc66223ae914d7e71af">&#9670;&nbsp;</a></span>get_material_parameters() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a12c563982bed5cc66223ae914d7e71af">&#9670;&nbsp;</a></span>get_material_parameters()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1960,100 +781,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a12c563982bed5cc66223ae914d7e71af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12c563982bed5cc66223ae914d7e71af">&#9670;&nbsp;</a></span>get_material_parameters() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_material_parameters </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>gp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa5a05e262adae7bda067f022ad9b2908">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00179">179</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="ad2403aa2e0f8f2c8d559981a2869cff4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2403aa2e0f8f2c8d559981a2869cff4">&#9670;&nbsp;</a></span>get_material_parameters_for_recover() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_material_parameters_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>xi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>eta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>zeta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afee5a404dffb03a9f27710a4f0296501">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00111">111</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ad2403aa2e0f8f2c8d559981a2869cff4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2403aa2e0f8f2c8d559981a2869cff4">&#9670;&nbsp;</a></span>get_material_parameters_for_recover() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2403aa2e0f8f2c8d559981a2869cff4">&#9670;&nbsp;</a></span>get_material_parameters_for_recover()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2104,250 +833,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad2403aa2e0f8f2c8d559981a2869cff4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2403aa2e0f8f2c8d559981a2869cff4">&#9670;&nbsp;</a></span>get_material_parameters_for_recover() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_material_parameters_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>xi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>eta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>zeta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afee5a404dffb03a9f27710a4f0296501">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00238">238</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ad2403aa2e0f8f2c8d559981a2869cff4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2403aa2e0f8f2c8d559981a2869cff4">&#9670;&nbsp;</a></span>get_material_parameters_for_recover() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_material_parameters_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>xi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>eta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>zeta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afee5a404dffb03a9f27710a4f0296501">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00270">270</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a54aa88384990063d9300f44962fa063e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54aa88384990063d9300f44962fa063e">&#9670;&nbsp;</a></span>get_matrix_and_rhs() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_matrix_and_rhs </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a080f0fd94cb76f1199022216cc0ecb38">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a54aa88384990063d9300f44962fa063e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54aa88384990063d9300f44962fa063e">&#9670;&nbsp;</a></span>get_matrix_and_rhs() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_matrix_and_rhs </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a080f0fd94cb76f1199022216cc0ecb38">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00065">65</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a54aa88384990063d9300f44962fa063e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54aa88384990063d9300f44962fa063e">&#9670;&nbsp;</a></span>get_matrix_and_rhs() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_matrix_and_rhs </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
-          <td class="paramname"><em>K</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
-          <td class="paramname"><em>F</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a080f0fd94cb76f1199022216cc0ecb38">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00100">100</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a54aa88384990063d9300f44962fa063e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54aa88384990063d9300f44962fa063e">&#9670;&nbsp;</a></span>get_matrix_and_rhs() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a54aa88384990063d9300f44962fa063e">&#9670;&nbsp;</a></span>get_matrix_and_rhs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2393,51 +880,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a768313792526a8dccf19aaaf57d15426"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a768313792526a8dccf19aaaf57d15426">&#9670;&nbsp;</a></span>get_media() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_media </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>n_cells</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>n_nodes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>path</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a768313792526a8dccf19aaaf57d15426"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a768313792526a8dccf19aaaf57d15426">&#9670;&nbsp;</a></span>get_media() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a768313792526a8dccf19aaaf57d15426">&#9670;&nbsp;</a></span>get_media()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2481,53 +924,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a551ab3a2a14f1c4c682f85ca9f330b59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551ab3a2a14f1c4c682f85ca9f330b59">&#9670;&nbsp;</a></span>get_stress_for_recover() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_stress_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>piola_stress</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a171b91f4586a5122cebb54500f4cf32d">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00113">113</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a551ab3a2a14f1c4c682f85ca9f330b59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551ab3a2a14f1c4c682f85ca9f330b59">&#9670;&nbsp;</a></span>get_stress_for_recover() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a551ab3a2a14f1c4c682f85ca9f330b59">&#9670;&nbsp;</a></span>get_stress_for_recover()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2572,100 +969,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a551ab3a2a14f1c4c682f85ca9f330b59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551ab3a2a14f1c4c682f85ca9f330b59">&#9670;&nbsp;</a></span>get_stress_for_recover() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_stress_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>piola_stress</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a171b91f4586a5122cebb54500f4cf32d">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00241">241</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a551ab3a2a14f1c4c682f85ca9f330b59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551ab3a2a14f1c4c682f85ca9f330b59">&#9670;&nbsp;</a></span>get_stress_for_recover() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::get_stress_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>piola_stress</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a171b91f4586a5122cebb54500f4cf32d">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00272">272</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="aa9ce0f61c520476c81205313f2795711"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9ce0f61c520476c81205313f2795711">&#9670;&nbsp;</a></span>icdf_beta() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9ce0f61c520476c81205313f2795711">&#9670;&nbsp;</a></span>icdf_beta()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2708,52 +1013,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa9ce0f61c520476c81205313f2795711"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9ce0f61c520476c81205313f2795711">&#9670;&nbsp;</a></span>icdf_beta() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double Interface_arteries::icdf_beta </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>tau1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>tau2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00217">217</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="aa28aa9e376cc2d8675fa2eff0df9f660"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa28aa9e376cc2d8675fa2eff0df9f660">&#9670;&nbsp;</a></span>icdf_gamma() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa28aa9e376cc2d8675fa2eff0df9f660">&#9670;&nbsp;</a></span>icdf_gamma()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2796,114 +1057,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa28aa9e376cc2d8675fa2eff0df9f660"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa28aa9e376cc2d8675fa2eff0df9f660">&#9670;&nbsp;</a></span>icdf_gamma() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double Interface_arteries::icdf_gamma </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>alpha</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>beta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00209">209</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a9f2886ed04ec8772aa5d01ca6b7ad6f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f2886ed04ec8772aa5d01ca6b7ad6f9">&#9670;&nbsp;</a></span>model_A() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::model_A </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00611">611</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a9f2886ed04ec8772aa5d01ca6b7ad6f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f2886ed04ec8772aa5d01ca6b7ad6f9">&#9670;&nbsp;</a></span>model_A() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f2886ed04ec8772aa5d01ca6b7ad6f9">&#9670;&nbsp;</a></span>model_A()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2965,69 +1120,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="aeeb76d115735faa51b1d8425b265d353"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeeb76d115735faa51b1d8425b265d353">&#9670;&nbsp;</a></span>model_B() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::model_B </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00503">503</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aeeb76d115735faa51b1d8425b265d353"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeeb76d115735faa51b1d8425b265d353">&#9670;&nbsp;</a></span>model_B() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeb76d115735faa51b1d8425b265d353">&#9670;&nbsp;</a></span>model_B()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3089,143 +1182,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a91ad1a74818c6b3cf6e319fb841d6a08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91ad1a74818c6b3cf6e319fb841d6a08">&#9670;&nbsp;</a></span>model_C() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::model_C </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00301">301</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a91ad1a74818c6b3cf6e319fb841d6a08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91ad1a74818c6b3cf6e319fb841d6a08">&#9670;&nbsp;</a></span>model_C() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::model_C </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>L</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00407">407</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a91ad1a74818c6b3cf6e319fb841d6a08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91ad1a74818c6b3cf6e319fb841d6a08">&#9670;&nbsp;</a></span>model_C() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ad1a74818c6b3cf6e319fb841d6a08">&#9670;&nbsp;</a></span>model_C()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3293,34 +1250,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a6e24e527068789a10eb7b214e3db2d01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e24e527068789a10eb7b214e3db2d01">&#9670;&nbsp;</a></span>setup_clamp() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::setup_clamp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00173">173</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6e24e527068789a10eb7b214e3db2d01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e24e527068789a10eb7b214e3db2d01">&#9670;&nbsp;</a></span>setup_clamp() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e24e527068789a10eb7b214e3db2d01">&#9670;&nbsp;</a></span>setup_clamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3347,94 +1277,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a76cc7932de739f2e05fca7f03d4fdd88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76cc7932de739f2e05fca7f03d4fdd88">&#9670;&nbsp;</a></span>setup_dirichlet_conditions() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::setup_dirichlet_conditions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#aaf9379443bd52a3d462f124017354a38">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00061">61</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a76cc7932de739f2e05fca7f03d4fdd88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76cc7932de739f2e05fca7f03d4fdd88">&#9670;&nbsp;</a></span>setup_dirichlet_conditions() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::setup_dirichlet_conditions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#aaf9379443bd52a3d462f124017354a38">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00069">69</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a76cc7932de739f2e05fca7f03d4fdd88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76cc7932de739f2e05fca7f03d4fdd88">&#9670;&nbsp;</a></span>setup_dirichlet_conditions() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::setup_dirichlet_conditions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#aaf9379443bd52a3d462f124017354a38">Finite_Element_Problem</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00104">104</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a76cc7932de739f2e05fca7f03d4fdd88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76cc7932de739f2e05fca7f03d4fdd88">&#9670;&nbsp;</a></span>setup_dirichlet_conditions() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a76cc7932de739f2e05fca7f03d4fdd88">&#9670;&nbsp;</a></span>setup_dirichlet_conditions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3463,34 +1306,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="af9ce1f8fab83bd38dd4b2d0a90d5897d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9ce1f8fab83bd38dd4b2d0a90d5897d">&#9670;&nbsp;</a></span>setup_semislipbc() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::setup_semislipbc </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00250">250</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="af9ce1f8fab83bd38dd4b2d0a90d5897d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9ce1f8fab83bd38dd4b2d0a90d5897d">&#9670;&nbsp;</a></span>setup_semislipbc() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af9ce1f8fab83bd38dd4b2d0a90d5897d">&#9670;&nbsp;</a></span>setup_semislipbc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3517,34 +1333,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a0916ec32561ca3fa4cbcef6a1d5298ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0916ec32561ca3fa4cbcef6a1d5298ee">&#9670;&nbsp;</a></span>setup_slipbc() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::setup_slipbc </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a0916ec32561ca3fa4cbcef6a1d5298ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0916ec32561ca3fa4cbcef6a1d5298ee">&#9670;&nbsp;</a></span>setup_slipbc() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0916ec32561ca3fa4cbcef6a1d5298ee">&#9670;&nbsp;</a></span>setup_slipbc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3571,34 +1360,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="abf0d5ee3594b5824ea2696af030b8460"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf0d5ee3594b5824ea2696af030b8460">&#9670;&nbsp;</a></span>setup_slipbc_and_clamp() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Interface_arteries::setup_slipbc_and_clamp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00277">277</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="abf0d5ee3594b5824ea2696af030b8460"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf0d5ee3594b5824ea2696af030b8460">&#9670;&nbsp;</a></span>setup_slipbc_and_clamp() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abf0d5ee3594b5824ea2696af030b8460">&#9670;&nbsp;</a></span>setup_slipbc_and_clamp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3637,7 +1399,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00289">289</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00884">884</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3653,7 +1415,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00405">405</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00870">870</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3669,7 +1431,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00405">405</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00870">870</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3685,7 +1447,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00406">406</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00871">871</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3701,7 +1463,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00406">406</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00871">871</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3717,7 +1479,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00408">408</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00873">873</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3733,7 +1495,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00408">408</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00873">873</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3749,7 +1511,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00290">290</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00885">885</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3765,7 +1527,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00281">281</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00874">874</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3781,7 +1543,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00282">282</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00874">874</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3797,7 +1559,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00398">398</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00863">863</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3813,7 +1575,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00399">399</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00864">864</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3829,7 +1591,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00413">413</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00878">878</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3845,7 +1607,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00398">398</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00863">863</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3861,7 +1623,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00399">399</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00864">864</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3877,7 +1639,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00401">401</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00866">866</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3893,7 +1655,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00400">400</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00865">865</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3909,7 +1671,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00420">420</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00886">886</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3925,7 +1687,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00420">420</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00886">886</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3941,7 +1703,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00420">420</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00886">886</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -3957,39 +1719,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00411">411</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00876">876</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6c9309b7b837443cf11a7562f57831cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c9309b7b837443cf11a7562f57831cd">&#9670;&nbsp;</a></span>fixed</h2>
+<a id="ab13b81e3a5fac35221a57f090702216b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab13b81e3a5fac35221a57f090702216b">&#9670;&nbsp;</a></span>Laplace</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Interface_arteries::fixed = 2</td>
+          <td class="memname"><a class="el" href="../../d7/d76/classlaplace.html">laplace</a>* Interface_arteries::Laplace</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00286">286</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a09274042bf87bb04f7ac9433f03b9879"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09274042bf87bb04f7ac9433f03b9879">&#9670;&nbsp;</a></span>Laplace</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d7/d76/classlaplace.html">laplace</a> * Interface_arteries::Laplace</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00275">275</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00860">860</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4005,7 +1751,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00398">398</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00863">863</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4021,7 +1767,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00399">399</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00864">864</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4037,7 +1783,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00402">402</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00867">867</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4053,7 +1799,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00403">403</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00868">868</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4069,7 +1815,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00404">404</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00869">869</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4085,7 +1831,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00401">401</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00866">866</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4101,23 +1847,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00400">400</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a5278710e9a7dd30ef6ab473b4a78495f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5278710e9a7dd30ef6ab473b4a78495f">&#9670;&nbsp;</a></span>moved</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Interface_arteries::moved = 3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00287">287</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00865">865</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4133,7 +1863,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00277">277</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00867">867</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4149,7 +1879,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00278">278</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00868">868</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4165,7 +1895,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00279">279</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00869">869</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4181,7 +1911,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00280">280</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00866">866</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4213,7 +1943,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00407">407</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00872">872</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4229,7 +1959,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00407">407</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00872">872</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4245,7 +1975,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00283">283</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00875">875</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4261,7 +1991,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00400">400</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00865">865</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4277,7 +2007,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00397">397</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00862">862</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4293,7 +2023,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00414">414</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00879">879</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4309,7 +2039,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00397">397</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00862">862</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4325,7 +2055,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00415">415</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00880">880</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4341,7 +2071,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00397">397</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00862">862</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4357,7 +2087,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00416">416</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00881">881</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4373,7 +2103,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00397">397</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00862">862</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
@@ -4389,30 +2119,11 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html#l00417">417</a> of file <a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html#l00882">882</a> of file <a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6d52adb48e78d0ec0a9f7c369262e8fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d52adb48e78d0ec0a9f7c369262e8fb">&#9670;&nbsp;</a></span>xxmax</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double Interface_arteries::xxmax</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html#l00284">284</a> of file <a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="../../d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp_source.html">Arteries_ModelC_deterministic_dirichlet.hpp</a></li>
-<li>src/<a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a></li>
-<li>src/<a class="el" href="../../de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp_source.html">Arteries_ModelC_gmrf_dirichlet.hpp</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<a class="el" href="../../dd/d1f/_arteries___model_c__gmrf__neumann_8hpp_source.html">Arteries_ModelC_gmrf_neumann.hpp</a></li>
 </ul>
 </div><!-- contents -->

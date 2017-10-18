@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
     laplace.set("AZ_diagnostics", 0);
     laplace.set("AZ_reorder", 1);
     
-    Teuchos::RCP<Interface_arteries> my_interface = Teuchos::rcp(new Interface_arteries(Comm,Parameters));
+    Teuchos::RCP<DirichletInletOutlet_PolyconvexHGO> my_interface = Teuchos::rcp(new DirichletInletOutlet_PolyconvexHGO(Comm,Parameters));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,Parameters));
     
     my_interface->fixed = 2;

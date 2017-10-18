@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['tau1',['tau1',['../d6/daf/class_interface__arteries.html#af7bacd873b7f81d9be0ed5e4c14ced36',1,'Interface_arteries']]],
+  ['tau1',['tau1',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a2c804d9e3e96321a73bcd03eebbd34de',1,'DirichletStripElongation_StochasticPolyconvexHGO::tau1()'],['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a778257362594d373c0ca67da333ab1b3',1,'NeumannInnerSurface_StochasticPolyconvexHGO::tau1()']]],
   ['tau11_5fexp_5fcirc',['tau11_exp_circ',['../d5/d0e/classobjective_function.html#a6d281d92f060b36a61cf47056d246723',1,'objectiveFunction']]],
   ['tau11_5fexp_5flong',['tau11_exp_long',['../d5/d0e/classobjective_function.html#a2a1f7e0547598ec503cf8684e2261b6b',1,'objectiveFunction']]],
-  ['tau2',['tau2',['../d6/daf/class_interface__arteries.html#a5121bb35b25ee64ed090c8012991be0c',1,'Interface_arteries']]],
-  ['theta',['theta',['../d6/daf/class_interface__arteries.html#a7a0ef952ae698d4b5116ba96c060e62f',1,'Interface_arteries']]],
+  ['tau2',['tau2',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#afa7dfeed7a965b7f93da9708d36ea51d',1,'DirichletStripElongation_StochasticPolyconvexHGO::tau2()'],['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a8955408ca86e634a7242879f1bf9ac84',1,'NeumannInnerSurface_StochasticPolyconvexHGO::tau2()']]],
+  ['theta',['theta',['../da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html#a19af812c7ce9ae056f9247f05d98d1fe',1,'DirichletInletOutlet_PolyconvexHGO::theta()'],['../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a9b98723c91b8ca35a44bd9dca93749db',1,'NeumannInnerSurface_PolyconvexHGO::theta()'],['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a0b481375aa5ea889f32b0a145c7874ec',1,'DirichletStripElongation_StochasticPolyconvexHGO::theta()'],['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a7a4b7622f44fd12557f58a9692285f85',1,'NeumannInnerSurface_StochasticPolyconvexHGO::theta()']]],
   ['time',['time',['../d0/d9d/class_newton___raphson.html#a1bbcdaf5ba62f2431287a90c5fbfdecc',1,'Newton_Raphson']]],
   ['trm',['trm',['../de/dd1/class_t_i_mooney.html#a4fc489310d57d6639453fcf0d28b4762',1,'TIMooney::trm()'],['../d1/dd7/class_t_i_mooney___random_field.html#a5e0a011cf7ef0077c7156bf06d7cfd1f',1,'TIMooney_RandomField::trm()']]]
 ];
