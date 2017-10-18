@@ -16,11 +16,13 @@ var searchData=
   ['n_5ftri',['N_tri',['../d6/d6b/classmesh.html#a001cb792919a394dd7f9c730b1c1dcbf',1,'mesh']]],
   ['nb_5fbis_5fmax',['nb_bis_max',['../d0/d9d/class_newton___raphson.html#a6fee960a690c814e7c970157ea12a0d5',1,'Newton_Raphson']]],
   ['ncirc',['ncirc',['../d5/d0e/classobjective_function.html#a4b818ff78b5913badd252e7dadc7c2bc',1,'objectiveFunction']]],
+  ['nloads',['nloads',['../d1/d14/classdistributenrldata.html#aeeaf0e57ae4a5f99ca510be30da663bd',1,'distributenrldata::nloads()'],['../dd/de7/classreadnrldata.html#a729c7de2c4f6ec3407996996d567c4c5',1,'readnrldata::nloads()']]],
   ['nlong',['nlong',['../d5/d0e/classobjective_function.html#a98780146a67203abe828bc5bfea30eb0',1,'objectiveFunction']]],
   ['nodes_5fcoord',['nodes_coord',['../d6/d6b/classmesh.html#aaa6c571e53131c072dbbbb7bf650cc33',1,'mesh']]],
   ['nodes_5fto_5fboundaries',['nodes_to_boundaries',['../d6/d6b/classmesh.html#ad3c9ec63c3580de9923cfa759c308c99',1,'mesh']]],
   ['norm_5finf_5fmax',['norm_inf_max',['../d0/d9d/class_newton___raphson.html#aea6cb5fe3ffda163d7bf5d80bf3d714c',1,'Newton_Raphson']]],
   ['norm_5finf_5ftol',['norm_inf_tol',['../d0/d9d/class_newton___raphson.html#abc446e446fd5fd01d4bfcb58a6fc83a9',1,'Newton_Raphson']]],
   ['npart',['npart',['../d6/d6b/classmesh.html#ae77d70c3363a1791b93d9cf467a9810a',1,'mesh']]],
+  ['npoints',['npoints',['../d1/d14/classdistributenrldata.html#a7f36a7fc469c27b703870b2dc6344e83',1,'distributenrldata::npoints()'],['../dd/de7/classreadnrldata.html#ab87b4e270727ec2b7a63068a24a03457',1,'readnrldata::npoints()']]],
   ['numindicesperrow',['NumIndicesPerRow',['../d6/d6b/classmesh.html#a19e3669fa6e42a7982800c92643f6c9f',1,'mesh']]]
 ];

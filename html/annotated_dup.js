@@ -2,6 +2,7 @@ var annotated_dup =
 [
     [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o" ],
     [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ],
+    [ "distributenrldata", "d1/d14/classdistributenrldata.html", "d1/d14/classdistributenrldata" ],
     [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", "d8/dc2/class_finite___element___problem" ],
     [ "hyperelasticity_setup", "d8/daf/classhyperelasticity__setup.html", "d8/daf/classhyperelasticity__setup" ],
     [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ],
@@ -13,6 +14,7 @@ var annotated_dup =
     [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", "d0/d9d/class_newton___raphson" ],
     [ "objectiveFunction", "d5/d0e/classobjective_function.html", "d5/d0e/classobjective_function" ],
     [ "OrthotropicRF_Laminate", "d0/daf/class_orthotropic_r_f___laminate.html", "d0/daf/class_orthotropic_r_f___laminate" ],
+    [ "readnrldata", "dd/de7/classreadnrldata.html", "dd/de7/classreadnrldata" ],
     [ "shinozuka", "da/d5b/classshinozuka.html", "da/d5b/classshinozuka" ],
     [ "shinozuka_2d", "d0/d91/classshinozuka__2d.html", "d0/d91/classshinozuka__2d" ],
     [ "shinozuka_layeredcomp", "da/dd9/classshinozuka__layeredcomp.html", "da/dd9/classshinozuka__layeredcomp" ],

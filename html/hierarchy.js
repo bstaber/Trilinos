@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "distributenrldata", "d1/d14/classdistributenrldata.html", null ],
     [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", [
       [ "hyperelasticity_setup", "d8/daf/classhyperelasticity__setup.html", [
         [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", null ],
@@ -21,6 +22,7 @@ var hierarchy =
     [ "Objective", null, [
       [ "objectiveFunction< Real, XPrim, XDual >", "d5/d0e/classobjective_function.html", null ]
     ] ],
+    [ "readnrldata", "dd/de7/classreadnrldata.html", null ],
     [ "shinozuka", "da/d5b/classshinozuka.html", null ],
     [ "shinozuka_2d", "d0/d91/classshinozuka__2d.html", null ],
     [ "shinozuka_layeredcomp", "da/dd9/classshinozuka__layeredcomp.html", null ],
