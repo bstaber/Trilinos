@@ -143,22 +143,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac261f12c26a93365059694553111ca98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a944905dbddee161d1861862b47708bb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#a944905dbddee161d1861862b47708bb4">compute_green_lagrange</a> (Epetra_Vector &amp;x, Epetra_SerialDenseMatrix &amp;eij)</td></tr>
 <tr class="separator:a944905dbddee161d1861862b47708bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af24c1b7596118eeb031c0ca8e5e06351"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#af24c1b7596118eeb031c0ca8e5e06351">objectiveFunction</a> (Epetra_Comm &amp;Comm, Teuchos::ParameterList &amp;paramList)</td></tr>
-<tr class="separator:af24c1b7596118eeb031c0ca8e5e06351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5cdced6ba0dd29d0e5aa683861b66fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#aa5cdced6ba0dd29d0e5aa683861b66fe">~objectiveFunction</a> ()</td></tr>
-<tr class="separator:aa5cdced6ba0dd29d0e5aa683861b66fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad33f93cb257d8c7eb469f4441497d144"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#ad33f93cb257d8c7eb469f4441497d144">value</a> (Epetra_SerialDenseVector &amp;x)</td></tr>
-<tr class="separator:ad33f93cb257d8c7eb469f4441497d144"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18168d2aa1123443e0410311957dbd29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#a18168d2aa1123443e0410311957dbd29">retrieve_data</a> (std::string &amp;filepoints, std::string &amp;filedefs)</td></tr>
-<tr class="separator:a18168d2aa1123443e0410311957dbd29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c54a7b58a589fb4f75ce57b1c04554d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#a0c54a7b58a589fb4f75ce57b1c04554d">import_exp_points</a> (std::string &amp;filename, std::vector&lt; double &gt; &amp;data_xyz)</td></tr>
-<tr class="separator:a0c54a7b58a589fb4f75ce57b1c04554d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa309e7015e7e533f86afd88fbf7ac1f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#aa309e7015e7e533f86afd88fbf7ac1f4">import_exp_def</a> (std::string &amp;filename, std::vector&lt; double &gt; &amp;data_exx, std::vector&lt; double &gt; &amp;data_eyy, std::vector&lt; double &gt; &amp;data_exy)</td></tr>
-<tr class="separator:aa309e7015e7e533f86afd88fbf7ac1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5cf4dd86c655c20b550358e64ff1b60"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#ae5cf4dd86c655c20b550358e64ff1b60">inverse_isoparametric_mapping</a> (double &amp;testx, double &amp;testy, Epetra_SerialDenseVector &amp;x, Epetra_SerialDenseVector &amp;y, double &amp;xi, double &amp;eta)</td></tr>
-<tr class="separator:ae5cf4dd86c655c20b550358e64ff1b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52d6a81677caa80a3ab6bded844cb154"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0e/classobjective_function.html#a52d6a81677caa80a3ab6bded844cb154">compute_green_lagrange</a> (Epetra_Vector &amp;x, Epetra_SerialDenseVector &amp;exx_comp, Epetra_SerialDenseVector &amp;eyy_comp, Epetra_SerialDenseVector &amp;exy_comp)</td></tr>
-<tr class="separator:a52d6a81677caa80a3ab6bded844cb154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -185,7 +169,7 @@ class objectiveFunction&lt; Real, XPrim, XDual &gt;</h3>
 <p class="definition">Definition at line <a class="el" href="../../d5/d70/fitting_2objective_function_8hpp_source.html#l00021">21</a> of file <a class="el" href="../../d5/d70/fitting_2objective_function_8hpp_source.html">objectiveFunction.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0a3551b480263ebcee709a3612453292"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a3551b480263ebcee709a3612453292">&#9670;&nbsp;</a></span>objectiveFunction() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a3551b480263ebcee709a3612453292">&#9670;&nbsp;</a></span>objectiveFunction() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +209,7 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div>
 </div>
 <a id="a4bc5d1742d7ee7f1954309519b90490d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bc5d1742d7ee7f1954309519b90490d">&#9670;&nbsp;</a></span>objectiveFunction() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc5d1742d7ee7f1954309519b90490d">&#9670;&nbsp;</a></span>objectiveFunction() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,7 +238,7 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div>
 </div>
 <a id="af24c1b7596118eeb031c0ca8e5e06351"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af24c1b7596118eeb031c0ca8e5e06351">&#9670;&nbsp;</a></span>objectiveFunction() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af24c1b7596118eeb031c0ca8e5e06351">&#9670;&nbsp;</a></span>objectiveFunction() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,7 +278,7 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div>
 </div>
 <a id="aa5cdced6ba0dd29d0e5aa683861b66fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5cdced6ba0dd29d0e5aa683861b66fe">&#9670;&nbsp;</a></span>~objectiveFunction() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5cdced6ba0dd29d0e5aa683861b66fe">&#9670;&nbsp;</a></span>~objectiveFunction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -319,75 +303,6 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../df/d27/nrl_2deterministic__random__search_2objective_function_8hpp_source.html#l00049">49</a> of file <a class="el" href="../../df/d27/nrl_2deterministic__random__search_2objective_function_8hpp_source.html">objectiveFunction.hpp</a>.</p>
-
-</div>
-</div>
-<a id="af24c1b7596118eeb031c0ca8e5e06351"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af24c1b7596118eeb031c0ca8e5e06351">&#9670;&nbsp;</a></span>objectiveFunction() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::<a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a> </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Comm &amp;&#160;</td>
-          <td class="paramname"><em>Comm</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Teuchos::ParameterList &amp;&#160;</td>
-          <td class="paramname"><em>paramList</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00033">33</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa5cdced6ba0dd29d0e5aa683861b66fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5cdced6ba0dd29d0e5aa683861b66fe">&#9670;&nbsp;</a></span>~objectiveFunction() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::~<a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00052">52</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
 
 </div>
 </div>
@@ -423,7 +338,7 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div>
 </div>
 <a id="a944905dbddee161d1861862b47708bb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a944905dbddee161d1861862b47708bb4">&#9670;&nbsp;</a></span>compute_green_lagrange() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a944905dbddee161d1861862b47708bb4">&#9670;&nbsp;</a></span>compute_green_lagrange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -459,58 +374,6 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../df/d27/nrl_2deterministic__random__search_2objective_function_8hpp_source.html#l00168">168</a> of file <a class="el" href="../../df/d27/nrl_2deterministic__random__search_2objective_function_8hpp_source.html">objectiveFunction.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a52d6a81677caa80a3ab6bded844cb154"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52d6a81677caa80a3ab6bded844cb154">&#9670;&nbsp;</a></span>compute_green_lagrange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::compute_green_lagrange </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>exx_comp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>eyy_comp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>exy_comp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00271">271</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
 
 </div>
 </div>
@@ -609,162 +472,6 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../d5/d70/fitting_2objective_function_8hpp_source.html#l00212">212</a> of file <a class="el" href="../../d5/d70/fitting_2objective_function_8hpp_source.html">objectiveFunction.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa309e7015e7e533f86afd88fbf7ac1f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa309e7015e7e533f86afd88fbf7ac1f4">&#9670;&nbsp;</a></span>import_exp_def()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::import_exp_def </td>
-          <td>(</td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data_exx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data_eyy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data_exy</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00166">166</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a0c54a7b58a589fb4f75ce57b1c04554d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c54a7b58a589fb4f75ce57b1c04554d">&#9670;&nbsp;</a></span>import_exp_points()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::import_exp_points </td>
-          <td>(</td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data_xyz</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00147">147</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ae5cf4dd86c655c20b550358e64ff1b60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5cf4dd86c655c20b550358e64ff1b60">&#9670;&nbsp;</a></span>inverse_isoparametric_mapping()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double <a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::inverse_isoparametric_mapping </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>testx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>testy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>xi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>eta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00203">203</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
 
 </div>
 </div>
@@ -981,46 +688,6 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 
 </div>
 </div>
-<a id="a18168d2aa1123443e0410311957dbd29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18168d2aa1123443e0410311957dbd29">&#9670;&nbsp;</a></span>retrieve_data()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::retrieve_data </td>
-          <td>(</td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>filepoints</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>filedefs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00097">97</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a5fb008f27e0bf66b3229a19f492a754a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5fb008f27e0bf66b3229a19f492a754a">&#9670;&nbsp;</a></span>set_experimental_data()</h2>
 
@@ -1062,7 +729,7 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 </div>
 </div>
 <a id="a094ac180a6a18a99d478efeae69aeb7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a094ac180a6a18a99d478efeae69aeb7c">&#9670;&nbsp;</a></span>value() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a094ac180a6a18a99d478efeae69aeb7c">&#9670;&nbsp;</a></span>value() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1101,38 +768,8 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 
 </div>
 </div>
-<a id="ad33f93cb257d8c7eb469f4441497d144"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad33f93cb257d8c7eb469f4441497d144">&#9670;&nbsp;</a></span>value() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual  = ROL::StdVector&lt;Real&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double <a class="el" href="../../d5/d0e/classobjective_function.html">objectiveFunction</a>&lt; Real, XPrim, XDual &gt;::value </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>x</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html#l00055">55</a> of file <a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a>.</p>
-
-</div>
-</div>
 <a id="ac261f12c26a93365059694553111ca98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac261f12c26a93365059694553111ca98">&#9670;&nbsp;</a></span>value() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac261f12c26a93365059694553111ca98">&#9670;&nbsp;</a></span>value() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1298,9 +935,8 @@ template&lt;class Real , class XPrim  = ROL::StdVector&lt;Real&gt;, class XDual 
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>fitting/<a class="el" href="../../d5/d70/fitting_2objective_function_8hpp_source.html">objectiveFunction.hpp</a></li>
-<li>nrl/deterministic_random_search/<a class="el" href="../../de/d26/objective_function__bak_8hpp_source.html">objectiveFunction_bak.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
