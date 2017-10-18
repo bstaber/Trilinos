@@ -60,6 +60,7 @@ int main(int argc, char *argv[]){
     int id = 0;
     int niter = 1000;
     double fval = obj->randomsearch(x,id,niter);
+    x = obj->solution;
 
 #ifdef HAVE_MPI
     MPI_Finalize();
