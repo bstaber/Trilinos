@@ -19,9 +19,7 @@ var hierarchy =
     ] ],
     [ "mesh", "d6/d6b/classmesh.html", null ],
     [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", null ],
-    [ "Objective", null, [
-      [ "objectiveFunction< Real, XPrim, XDual >", "d5/d0e/classobjective_function.html", null ]
-    ] ],
+    [ "objectiveFunction", "d5/d0e/classobjective_function.html", null ],
     [ "readnrldata", "dd/de7/classreadnrldata.html", null ],
     [ "shinozuka", "da/d5b/classshinozuka.html", null ],
     [ "shinozuka_2d", "d0/d91/classshinozuka__2d.html", null ],

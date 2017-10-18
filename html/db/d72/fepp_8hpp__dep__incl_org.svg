@@ -495,66 +495,66 @@
 <!-- Node50 -->
 <g id="node19" class="node">
 <title>Node50</title>
-<g id="a_node19"><a xlink:href="../../df/d27/nrl_2deterministic__random__search_2objective_function_8hpp.html" target="_top" xlink:title="nrl/deterministic_random\l_search/objectiveFunction.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="338.0598,-65.5 338.0598,-93.5 489.6994,-93.5 489.6994,-65.5 338.0598,-65.5"/>
-<text text-anchor="start" x="346.0598" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">nrl/deterministic_random</text>
-<text text-anchor="middle" x="413.8796" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_search/objectiveFunction.hpp</text>
-</a>
-</g>
-</g>
-<!-- Node49&#45;&gt;Node50 -->
-<g id="edge18" class="edge">
-<title>Node49&#45;&gt;Node50</title>
-<path fill="none" stroke="#191970" d="M656.2156,-132.9908C652.0447,-131.9632 647.9048,-130.958 643.8796,-130 589.0952,-116.9616 526.6748,-103.3332 480.6982,-93.5248"/>
-<polygon fill="#191970" stroke="#191970" points="655.4146,-136.3982 665.964,-135.418 657.1059,-129.6056 655.4146,-136.3982"/>
-</g>
-<!-- Node53 -->
-<g id="node22" class="node">
-<title>Node53</title>
-<g id="a_node22"><a xlink:href="../../d5/d58/nrl_2forward__deterministic_2main_8cpp.html" target="_top" xlink:title="nrl/forward_deterministic\l/main.cpp">
+<g id="a_node19"><a xlink:href="../../d5/d58/nrl_2forward__deterministic_2main_8cpp.html" target="_top" xlink:title="nrl/forward_deterministic\l/main.cpp">
 <polygon fill="#ffffff" stroke="#000000" points="646.4167,-65.5 646.4167,-93.5 771.3425,-93.5 771.3425,-65.5 646.4167,-65.5"/>
 <text text-anchor="start" x="654.4167" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">nrl/forward_deterministic</text>
 <text text-anchor="middle" x="708.8796" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node49&#45;&gt;Node53 -->
-<g id="edge21" class="edge">
-<title>Node49&#45;&gt;Node53</title>
+<!-- Node49&#45;&gt;Node50 -->
+<g id="edge18" class="edge">
+<title>Node49&#45;&gt;Node50</title>
 <path fill="none" stroke="#191970" d="M716.093,-125.4038C714.4292,-114.8157 712.5329,-102.7484 711.1023,-93.6445"/>
 <polygon fill="#191970" stroke="#191970" points="712.6435,-125.999 717.6536,-135.3345 719.5587,-124.9123 712.6435,-125.999"/>
 </g>
 <!-- Node51 -->
 <g id="node20" class="node">
 <title>Node51</title>
-<g id="a_node20"><a xlink:href="../../de/de8/example__pnpoly__inverse__isoparam_8cpp.html" target="_top" xlink:title="examples/pnpoly/example\l_pnpoly_inverse_isoparam.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="468.6706,-.5 468.6706,-28.5 623.0886,-28.5 623.0886,-.5 468.6706,-.5"/>
-<text text-anchor="start" x="476.6706" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">examples/pnpoly/example</text>
-<text text-anchor="middle" x="545.8796" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_pnpoly_inverse_isoparam.cpp</text>
+<g id="a_node20"><a xlink:href="../../d9/dd9/objective_function_8hpp.html" target="_top" xlink:title="nrl/randomsearch_deterministicmodel\l/objectiveFunction.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="306.5104,-65.5 306.5104,-93.5 489.2487,-93.5 489.2487,-65.5 306.5104,-65.5"/>
+<text text-anchor="start" x="314.5104" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">nrl/randomsearch_deterministicmodel</text>
+<text text-anchor="middle" x="397.8796" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/objectiveFunction.hpp</text>
 </a>
 </g>
 </g>
-<!-- Node50&#45;&gt;Node51 -->
+<!-- Node49&#45;&gt;Node51 -->
 <g id="edge19" class="edge">
-<title>Node50&#45;&gt;Node51</title>
-<path fill="none" stroke="#191970" d="M451.7467,-60.8533C472.6174,-50.5761 498.1054,-38.0252 517.2934,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="449.9467,-57.8383 442.5216,-65.396 453.0391,-64.1182 449.9467,-57.8383"/>
+<title>Node49&#45;&gt;Node51</title>
+<path fill="none" stroke="#191970" d="M656.4625,-132.983C652.2097,-131.9511 647.9859,-130.9477 643.8796,-130 585.9975,-116.6415 520.045,-103.1976 471.0086,-93.5432"/>
+<polygon fill="#191970" stroke="#191970" points="655.8503,-136.4367 666.3971,-135.4293 657.5241,-129.6397 655.8503,-136.4367"/>
 </g>
 <!-- Node52 -->
 <g id="node21" class="node">
 <title>Node52</title>
-<g id="a_node21"><a xlink:href="../../d8/dc8/nrl_2deterministic__random__search_2main_8cpp.html" target="_top" xlink:title="nrl/deterministic_random\l_search/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="707.1359,-.5 707.1359,-28.5 832.6232,-28.5 832.6232,-.5 707.1359,-.5"/>
-<text text-anchor="start" x="715.1359" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">nrl/deterministic_random</text>
-<text text-anchor="middle" x="769.8796" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_search/main.cpp</text>
+<g id="a_node21"><a xlink:href="../../de/de8/example__pnpoly__inverse__isoparam_8cpp.html" target="_top" xlink:title="examples/pnpoly/example\l_pnpoly_inverse_isoparam.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="446.6706,-.5 446.6706,-28.5 601.0886,-28.5 601.0886,-.5 446.6706,-.5"/>
+<text text-anchor="start" x="454.6706" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">examples/pnpoly/example</text>
+<text text-anchor="middle" x="523.8796" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_pnpoly_inverse_isoparam.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node50&#45;&gt;Node52 -->
+<!-- Node51&#45;&gt;Node52 -->
 <g id="edge20" class="edge">
-<title>Node50&#45;&gt;Node52</title>
-<path fill="none" stroke="#191970" d="M499.8783,-63.798C563.8034,-52.1263 649.5607,-36.4683 707.1197,-25.959"/>
-<polygon fill="#191970" stroke="#191970" points="499.0225,-60.3963 489.8139,-65.6356 500.2799,-67.2824 499.0225,-60.3963"/>
+<title>Node51&#45;&gt;Node52</title>
+<path fill="none" stroke="#191970" d="M434.2949,-60.7143C454.1665,-50.4631 478.3595,-37.9826 496.5928,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="432.5022,-57.7008 425.2197,-65.396 435.7115,-63.9218 432.5022,-57.7008"/>
+</g>
+<!-- Node53 -->
+<g id="node22" class="node">
+<title>Node53</title>
+<g id="a_node22"><a xlink:href="../../d5/d17/nrl_2randomsearch__deterministicmodel_2main_8cpp.html" target="_top" xlink:title="nrl/randomsearch_deterministicmodel\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="682.5104,-.5 682.5104,-28.5 865.2487,-28.5 865.2487,-.5 682.5104,-.5"/>
+<text text-anchor="start" x="690.5104" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">nrl/randomsearch_deterministicmodel</text>
+<text text-anchor="middle" x="773.8796" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
+</a>
+</g>
+</g>
+<!-- Node51&#45;&gt;Node53 -->
+<g id="edge21" class="edge">
+<title>Node51&#45;&gt;Node53</title>
+<path fill="none" stroke="#191970" d="M489.187,-63.7155C551.2835,-52.9807 632.718,-38.9029 692.5776,-28.5549"/>
+<polygon fill="#191970" stroke="#191970" points="488.2607,-60.3236 479.0031,-65.476 489.4531,-67.2213 488.2607,-60.3236"/>
 </g>
 <!-- Node55 -->
 <g id="node24" class="node">
@@ -698,31 +698,31 @@
 <polygon fill="#191970" stroke="#191970" points="916.7883,-134.6172 907.9519,-140.4627 918.5049,-141.4035 916.7883,-134.6172"/>
 </g>
 <!-- Node61&#45;&gt;Node50 -->
-<g id="edge44" class="edge">
+<g id="edge43" class="edge">
 <title>Node61&#45;&gt;Node50</title>
-<path fill="none" stroke="#191970" d="M832.8753,-138.0233C820.9544,-135.1141 807.9671,-132.1953 795.8796,-130 664.6193,-106.1614 629.8758,-113.3527 497.8796,-94 495.2439,-93.6136 492.5636,-93.2098 489.858,-92.793"/>
-<polygon fill="#191970" stroke="#191970" points="832.0449,-141.4234 842.5948,-140.4488 833.7397,-134.6317 832.0449,-141.4234"/>
+<path fill="none" stroke="#191970" d="M845.11,-136.6026C815.992,-124.3974 772.3935,-106.1226 742.4031,-93.5518"/>
+<polygon fill="#191970" stroke="#191970" points="843.8135,-139.8541 854.3891,-140.492 846.5196,-133.3983 843.8135,-139.8541"/>
 </g>
 <!-- Node61&#45;&gt;Node51 -->
-<g id="edge42" class="edge">
+<g id="edge46" class="edge">
 <title>Node61&#45;&gt;Node51</title>
-<path fill="none" stroke="#191970" d="M857.8326,-133.59C830.1052,-109.1492 780.1659,-65.1444 779.8796,-65 730.991,-40.3405 670.4453,-27.6874 623.1899,-21.2139"/>
-<polygon fill="#191970" stroke="#191970" points="855.829,-136.4896 865.645,-140.4767 860.4579,-131.2385 855.829,-136.4896"/>
+<path fill="none" stroke="#191970" d="M832.8753,-138.0233C820.9544,-135.1141 807.9671,-132.1953 795.8796,-130 664.6193,-106.1614 630.1245,-111.5732 497.8796,-94 495.0972,-93.6303 492.272,-93.2501 489.4202,-92.8623"/>
+<polygon fill="#191970" stroke="#191970" points="832.0449,-141.4234 842.5948,-140.4488 833.7397,-134.6317 832.0449,-141.4234"/>
 </g>
 <!-- Node61&#45;&gt;Node52 -->
-<g id="edge43" class="edge">
+<g id="edge42" class="edge">
 <title>Node61&#45;&gt;Node52</title>
-<path fill="none" stroke="#191970" d="M863.3221,-131.9753C850.8321,-114.7096 830.9728,-87.6972 812.8796,-65 802.9742,-52.5742 791.2528,-38.8702 782.5516,-28.8769"/>
-<polygon fill="#191970" stroke="#191970" points="860.7601,-134.4068 869.4448,-140.4752 866.4399,-130.3154 860.7601,-134.4068"/>
+<path fill="none" stroke="#191970" d="M857.8329,-133.5894C830.1059,-109.1478 780.1672,-65.1419 779.8796,-65 749.054,-49.7939 664.8202,-34.8707 601.3277,-25.238"/>
+<polygon fill="#191970" stroke="#191970" points="855.8293,-136.489 865.6452,-140.4764 860.4583,-131.238 855.8293,-136.489"/>
 </g>
 <!-- Node61&#45;&gt;Node53 -->
 <g id="edge45" class="edge">
 <title>Node61&#45;&gt;Node53</title>
-<path fill="none" stroke="#191970" d="M845.11,-136.6026C815.992,-124.3974 772.3935,-106.1226 742.4031,-93.5518"/>
-<polygon fill="#191970" stroke="#191970" points="843.8135,-139.8541 854.3891,-140.492 846.5196,-133.3983 843.8135,-139.8541"/>
+<path fill="none" stroke="#191970" d="M862.6779,-131.61C849.9909,-114.4611 830.2391,-87.8766 812.8796,-65 803.5048,-52.6458 792.7199,-38.7008 784.8709,-28.5998"/>
+<polygon fill="#191970" stroke="#191970" points="860.1813,-134.1208 868.9393,-140.083 865.8109,-129.9605 860.1813,-134.1208"/>
 </g>
 <!-- Node61&#45;&gt;Node55 -->
-<g id="edge46" class="edge">
+<g id="edge44" class="edge">
 <title>Node61&#45;&gt;Node55</title>
 <path fill="none" stroke="#191970" d="M829.4257,-138.0011C818.4374,-135.3299 806.7532,-132.5291 795.8796,-130 739.2135,-116.8198 674.4349,-102.5481 628.4439,-92.55"/>
 <polygon fill="#191970" stroke="#191970" points="828.7334,-141.4348 839.2782,-140.4064 830.3936,-134.6345 828.7334,-141.4348"/>
@@ -810,10 +810,10 @@
 <path fill="none" stroke="#191970" d="M90.8796,-325.1081C90.8796,-316.1539 90.8796,-306.3227 90.8796,-298.5765"/>
 <polygon fill="#191970" stroke="#191970" points="87.3797,-325.3959 90.8796,-335.396 94.3797,-325.396 87.3797,-325.3959"/>
 </g>
-<!-- Node70&#45;&gt;Node50 -->
-<g id="edge60" class="edge">
-<title>Node70&#45;&gt;Node50</title>
-<path fill="none" stroke="#191970" d="M440.2547,-331.6187C445.5226,-322.2875 451.1999,-310.4531 453.8796,-299 471.8379,-222.2467 435.9692,-128.8169 420.5022,-93.7241"/>
+<!-- Node70&#45;&gt;Node51 -->
+<g id="edge61" class="edge">
+<title>Node70&#45;&gt;Node51</title>
+<path fill="none" stroke="#191970" d="M440.2547,-331.6187C445.5226,-322.2875 451.1999,-310.4531 453.8796,-299 456.8159,-286.4501 455.7158,-282.7574 453.8796,-270 444.1063,-202.0999 415.6887,-124.6511 403.5185,-93.5283"/>
 <polygon fill="#191970" stroke="#191970" points="437.1826,-329.9365 435.0558,-340.3157 443.191,-333.5281 437.1826,-329.9365"/>
 </g>
 <!-- Node71 -->
@@ -826,7 +826,7 @@
 </g>
 </g>
 <!-- Node70&#45;&gt;Node71 -->
-<g id="edge61" class="edge">
+<g id="edge60" class="edge">
 <title>Node70&#45;&gt;Node71</title>
 <path fill="none" stroke="#191970" d="M417.0024,-331.9542C408.7043,-319.6956 397.949,-303.807 391.2306,-293.8821"/>
 <polygon fill="#191970" stroke="#191970" points="414.2575,-334.1429 422.7616,-340.462 420.0542,-330.2189 414.2575,-334.1429"/>

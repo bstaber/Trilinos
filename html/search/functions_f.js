@@ -1,7 +1,6 @@
 var searchData=
 [
   ['s_5ftau',['s_tau',['../da/d5b/classshinozuka.html#a7a11c3d11febd7d37006e89ac4eec3ac',1,'shinozuka::s_tau()'],['../d0/d91/classshinozuka__2d.html#a2a68775d630c9601ec6651ac4f8a481b',1,'shinozuka_2d::s_tau()'],['../da/dd9/classshinozuka__layeredcomp.html#a4edda9c1745d4e2ea92912dd8828f479',1,'shinozuka_layeredcomp::s_tau()'],['../d6/db3/classshinozuka__layeredcomp__2d.html#a90a342fa6d2be82ed2cd1d3929676a7a',1,'shinozuka_layeredcomp_2d::s_tau()']]],
-  ['set_5fexperimental_5fdata',['set_experimental_data',['../d5/d0e/classobjective_function.html#a5fb008f27e0bf66b3229a19f492a754a',1,'objectiveFunction']]],
   ['set_5fparameters',['set_parameters',['../de/dd1/class_t_i_mooney.html#a032a49aa2b4a951bfabce7dc3b6db3e4',1,'TIMooney']]],
   ['set_5fplyagl',['set_plyagl',['../de/dd1/class_t_i_mooney.html#a0c011bbf68cda33c801eb5f6f5555cc3',1,'TIMooney']]],
   ['setinitialization',['setInitialization',['../d0/d9d/class_newton___raphson.html#a7c17fef94d7f5e7f95ff1f1456b79736',1,'Newton_Raphson']]],

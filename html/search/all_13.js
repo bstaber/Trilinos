@@ -1,7 +1,6 @@
 var searchData=
 [
   ['s_5ftau',['s_tau',['../da/d5b/classshinozuka.html#a7a11c3d11febd7d37006e89ac4eec3ac',1,'shinozuka::s_tau()'],['../d0/d91/classshinozuka__2d.html#a2a68775d630c9601ec6651ac4f8a481b',1,'shinozuka_2d::s_tau()'],['../da/dd9/classshinozuka__layeredcomp.html#a4edda9c1745d4e2ea92912dd8828f479',1,'shinozuka_layeredcomp::s_tau()'],['../d6/db3/classshinozuka__layeredcomp__2d.html#a90a342fa6d2be82ed2cd1d3929676a7a',1,'shinozuka_layeredcomp_2d::s_tau()']]],
-  ['set_5fexperimental_5fdata',['set_experimental_data',['../d5/d0e/classobjective_function.html#a5fb008f27e0bf66b3229a19f492a754a',1,'objectiveFunction']]],
   ['set_5fparameters',['set_parameters',['../de/dd1/class_t_i_mooney.html#a032a49aa2b4a951bfabce7dc3b6db3e4',1,'TIMooney']]],
   ['set_5fplyagl',['set_plyagl',['../de/dd1/class_t_i_mooney.html#a0c011bbf68cda33c801eb5f6f5555cc3',1,'TIMooney']]],
   ['setinitialization',['setInitialization',['../d0/d9d/class_newton___raphson.html#a7c17fef94d7f5e7f95ff1f1456b79736',1,'Newton_Raphson']]],
@@ -25,7 +24,7 @@ var searchData=
   ['shinozukapp_5flayeredcomp_5f2d_2ecpp',['shinozukapp_layeredcomp_2d.cpp',['../db/d39/shinozukapp__layeredcomp__2d_8cpp.html',1,'']]],
   ['shinozukapp_5flayeredcomp_5f2d_2ehpp',['shinozukapp_layeredcomp_2d.hpp',['../d1/dac/shinozukapp__layeredcomp__2d_8hpp.html',1,'']]],
   ['sin_5fplyagl',['sin_plyagl',['../de/dd1/class_t_i_mooney.html#a0d87b55cc366096876842dcd879bc037',1,'TIMooney::sin_plyagl()'],['../d1/dd7/class_t_i_mooney___random_field.html#a9e2f037136d272518a82b3d483cae263',1,'TIMooney_RandomField::sin_plyagl()']]],
-  ['solution',['solution',['../d5/d0e/classobjective_function.html#a3c9f1663a7b2b94ec29973542478b132',1,'objectiveFunction::solution()'],['../d0/daf/class_orthotropic_r_f___laminate.html#a4217381d6c5ff81d197ee737df368abc',1,'OrthotropicRF_Laminate::solution()']]],
+  ['solution',['solution',['../d5/d0e/classobjective_function.html#a5f8ca1e6ee5083ec5482f096f5ba7538',1,'objectiveFunction::solution()'],['../d0/daf/class_orthotropic_r_f___laminate.html#a4217381d6c5ff81d197ee737df368abc',1,'OrthotropicRF_Laminate::solution()']]],
   ['solve_5famesos',['solve_amesos',['../d7/d76/classlaplace.html#a4ff0db201265ee41ea6620757ceba9fc',1,'laplace']]],
   ['solve_5faztec',['solve_aztec',['../d7/d76/classlaplace.html#af2a1cb5a85d603bb2b616e196899964f',1,'laplace']]],
   ['solve_5fwith_5faztec',['Solve_with_Aztec',['../d0/d9d/class_newton___raphson.html#ad94282360b1e26d9e0dd3c55a4634919',1,'Newton_Raphson']]],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value',['value',['../d5/d0e/classobjective_function.html#a094ac180a6a18a99d478efeae69aeb7c',1,'objectiveFunction::value(const ROL::Vector&lt; Real &gt; &amp;x, Real &amp;tol)'],['../d5/d0e/classobjective_function.html#ac261f12c26a93365059694553111ca98',1,'objectiveFunction::value(Epetra_SerialDenseVector &amp;x, int &amp;id)']]]
+  ['value',['value',['../d5/d0e/classobjective_function.html#ad40018e6701c276447aa77837d56a2e7',1,'objectiveFunction']]]
 ];
