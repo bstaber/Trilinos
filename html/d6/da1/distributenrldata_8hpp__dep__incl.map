@@ -1,7 +1,6 @@
 <map id="src/distributenrldata.hpp" name="src/distributenrldata.hpp">
 <area shape="rect" id="node2" href="$d6/d9c/nrl_2importdata_2main_8cpp.html" title="nrl/importdata/main.cpp" alt="" coords="5,85,166,111"/>
-<area shape="rect" id="node3" href="$d9/dd9/objective_function_8hpp.html" title="nrl/randomsearch_deterministicmodel\l/objectiveFunction.hpp" alt="" coords="191,79,434,117"/>
-<area shape="rect" id="node6" href="$d0/da3/distributenrldata_8cpp.html" title="src/distributenrldata.cpp" alt="" coords="458,85,620,111"/>
-<area shape="rect" id="node4" href="$de/de8/example__pnpoly__inverse__isoparam_8cpp.html" title="examples/pnpoly/example\l_pnpoly_inverse_isoparam.cpp" alt="" coords="84,165,290,204"/>
-<area shape="rect" id="node5" href="$d5/d17/nrl_2randomsearch__deterministicmodel_2main_8cpp.html" title="nrl/randomsearch_deterministicmodel\l/main.cpp" alt="" coords="315,165,558,204"/>
+<area shape="rect" id="node3" href="$dd/dae/_random_search___deterministic_model_8hpp.html" title="nrl/randomsearch_deterministicmodel\l/RandomSearch_DeterministicModel.hpp" alt="" coords="189,79,454,117"/>
+<area shape="rect" id="node5" href="$d0/da3/distributenrldata_8cpp.html" title="src/distributenrldata.cpp" alt="" coords="478,85,640,111"/>
+<area shape="rect" id="node4" href="$d5/d17/nrl_2randomsearch__deterministicmodel_2main_8cpp.html" title="nrl/randomsearch_deterministicmodel\l/main.cpp" alt="" coords="200,165,443,204"/>
 </map>
