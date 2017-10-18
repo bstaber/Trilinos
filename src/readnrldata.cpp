@@ -11,7 +11,6 @@ readnrldata::~readnrldata(){
 }
 
 void readnrldata::import_boundaryconditions(){
-    
     std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/dirichletbcs.txt";
     std::ifstream file;
     double gbc;
@@ -27,6 +26,24 @@ void readnrldata::import_boundaryconditions(){
     }
     else{
         std::cout << "Couldn't open the file containing the boundary conditions.\n";
+    }
+}
+
+void readnrldata::import_expenergy(){
+    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/expenergy.txt";
+    std::ifstream file;
+    double gen;
+    file.open(path);
+    if (file.is_open()){
+        energy.Resize(8);
+        for (unsigned int i=0; i<8; ++i){
+            file >> gen;
+            energy(i) = gen;
+        }
+        file.close();
+    }
+    else{
+        std::cout << "Couldn't open the file containing the experimental energies.\n";
     }
 }
 
@@ -54,7 +71,6 @@ void readnrldata::import_exp_points(){
 }
 
 void readnrldata::import_exp_def(){
-    
     std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/";
     double gexx,geyy,gexy;
     for (unsigned int id=0; id<8; ++id){
