@@ -7,7 +7,7 @@
 #include <boost/random/uniform_real_distribution.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 
-class objectiveFunction
+class RandomSearch_DeterministicModel
 {
 private:
     
@@ -22,7 +22,7 @@ public:
     
     Epetra_SerialDenseVector solution;
         
-    objectiveFunction(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
+    RandomSearch_DeterministicModel(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         comm = &Comm;
         _paramList = paramList;
         interface = Teuchos::rcp(new TIMooney(Comm,paramList));
@@ -46,7 +46,7 @@ public:
         ub(6) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"beta5_sup");
     }
     
-    ~objectiveFunction(){
+    ~RandomSearch_DeterministicModel(){
     }
     
     double randomsearch(Epetra_SerialDenseVector & x, int & id, int & niter){

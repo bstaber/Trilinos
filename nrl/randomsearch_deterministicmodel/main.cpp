@@ -7,7 +7,7 @@
 #endif
 
 #include "Newton_Raphsonpp.hpp"
-#include "objectiveFunction.hpp"
+#include "RandomSearch_DeterministicModel.hpp"
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/normal_distribution.hpp>
 #include <boost/random/uniform_real_distribution.hpp>
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    Teuchos::RCP<objectiveFunction> obj = Teuchos::rcp(new objectiveFunction(Comm,*paramList));
+    Teuchos::RCP<RandomSearch_DeterministicModel> obj = Teuchos::rcp(new RandomSearch_DeterministicModel(Comm,*paramList));
     
     Epetra_SerialDenseVector x(7);
     x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
