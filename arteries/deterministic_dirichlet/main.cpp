@@ -87,7 +87,7 @@ int main(int argc, char *argv[]){
     my_interface->moved = 2;
     my_interface->xxmax = 0.15685;
     
-    throwint = Newton->Solve_with_Aztec();
+    throwint = Newton->Solve_with_Aztec(true);
     
     std::string name="dirichlet_arteries.mtx";
     Newton->print_newton_solution(name);
