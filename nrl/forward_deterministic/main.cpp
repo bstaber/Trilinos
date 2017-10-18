@@ -40,7 +40,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Epetra_SerialDenseVector parameters(8);
+    Epetra_SerialDenseVector parameters(7);
     Teuchos::RCP<TIMooney> interface = Teuchos::rcp(new TIMooney(Comm,*paramList));
     
     parameters(0)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
@@ -48,9 +48,9 @@ MPI_Init(&argc, &argv);
     parameters(2)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
     parameters(3)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
     parameters(4)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
-    parameters(5)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
-    parameters(6)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
-    parameters(7)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    //parameters(5)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta3");
+    parameters(5)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    parameters(6)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     double plyagldeg = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"angle");
     double plyagl    = 2.0*M_PI*plyagldeg/360.0;
     for (unsigned int i=0; i<5; i++){

@@ -6,6 +6,8 @@ readnrldata::readnrldata(){
     import_exp_points();
     import_expenergy();
     import_exp_def();
+    angles.Resize(8);
+    angles(0) = 30.0; angles(1) = 60.0; angles(2) = 60.0; angles(3) = 30.0; angles(4) = 15.0; angles(5) = 15.0; angles(6) = 75.0; angles(7) = 75.0;
 }
 
 readnrldata::~readnrldata(){

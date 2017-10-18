@@ -24,7 +24,8 @@ void distributenrldata::retrieve_data(mesh & Mesh){
     npoints = nrldata->npoints;
     nloads  = nrldata->nloads;
     boundaryconditions = nrldata->boundaryconditions;
-    energy             = nrldata->energy;
+    energy = nrldata->energy;
+    angles = nrldata->angles;
     
     for (unsigned int p=0; p<npoints; ++p){
         testx = nrldata->points(p,0);

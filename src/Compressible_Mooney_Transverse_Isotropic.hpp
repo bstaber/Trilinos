@@ -38,9 +38,9 @@ public:
         mu3 = x(2);
         mu4 = x(3);
         mu5 = x(4);
-        beta3 = x(5);
-        beta4 = x(6);
-        beta5 = x(7);
+        beta3 = -0.5;
+        beta4 = x(5);
+        beta5 = x(6);
         mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
         trm = mu4 + 2.0*mu5;
         ptrmbeta4 = std::pow(trm,beta4);

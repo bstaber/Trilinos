@@ -18,7 +18,7 @@ public:
     
     int npoints,nloads;
     Epetra_SerialDenseMatrix points,exx,eyy,exy;
-    Epetra_SerialDenseVector boundaryconditions,energy;
+    Epetra_SerialDenseVector boundaryconditions,energy, angles;
     
     readnrldata();
     ~readnrldata();

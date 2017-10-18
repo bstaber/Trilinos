@@ -17,7 +17,7 @@ public:
     
     int npoints,nloads;
     Epetra_SerialDenseMatrix points,exx,eyy,exy;
-    Epetra_SerialDenseVector boundaryconditions, energy;
+    Epetra_SerialDenseVector boundaryconditions, energy, angles;
     
     std::vector<int> local_cells;
     std::vector<double> local_xi;

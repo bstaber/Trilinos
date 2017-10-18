@@ -44,6 +44,22 @@ int main(int argc, char *argv[]){
     }
 
     Teuchos::RCP<objectiveFunction> obj = Teuchos::rcp(new objectiveFunction(Comm,*paramList));
+    
+    Epetra_SerialDenseVector x(7);
+    x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+    x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+    x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+    x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+    x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+    x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    for (unsigned int i=0; i<5; i++){
+        x(i) = 1.0e3*x(i);
+    }
+    
+    int id = 0;
+    int niter = 1000;
+    double fval = obj->randomsearch(x,id,niter);
 
 #ifdef HAVE_MPI
     MPI_Finalize();
