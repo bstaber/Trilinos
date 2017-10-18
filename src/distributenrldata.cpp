@@ -23,6 +23,7 @@ void distributenrldata::retrieve_data(mesh & Mesh){
     Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata());
     npoints = nrldata->npoints;
     nloads  = nrldata->nloads;
+    boundaryconditions = nrldata->boundaryconditions;
     
     for (unsigned int p=0; p<npoints; ++p){
         testx = nrldata->points(p,0);
