@@ -14,7 +14,8 @@ readnrldata::~readnrldata(){
 }
 
 void readnrldata::import_boundaryconditions(){
-    std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/dirichletbcs.txt";
+    //std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/dirichletbcs.txt";
+    std::string filename = "/home/s/staber/Trilinos_results/nrl/data/dirichletbcs.txt";
     std::ifstream file;
     double gbc;
     file.open(filename);
@@ -33,7 +34,8 @@ void readnrldata::import_boundaryconditions(){
 }
 
 void readnrldata::import_expenergy(){
-    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/expenergy.txt";
+    //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/expenergy.txt";
+    std::string path = "/home/s/staber/Trilinos_results/nrl/data/expenergy.txt";
     std::ifstream file;
     double gen;
     file.open(path);
@@ -52,7 +54,8 @@ void readnrldata::import_expenergy(){
 
 void readnrldata::import_exp_points(){
     double x,y,z;
-    std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/xyz.txt";
+    //std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/xyz.txt";
+    std::string filename = "/home/s/staber/Trilinos_results/nrl/data/xyz.txt";
     std::ifstream file;
     file.open(filename);
     if (file.is_open()){
@@ -74,7 +77,8 @@ void readnrldata::import_exp_points(){
 }
 
 void readnrldata::import_exp_def(){
-    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/";
+    //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/";
+    std::string path = "/home/s/staber/Trilinos_results/nrl/data/";
     double gexx,geyy,gexy;
     for (unsigned int id=0; id<8; ++id){
         std::string path_exx = path + "exx_id" + std::to_string(id+1) + ".txt";
