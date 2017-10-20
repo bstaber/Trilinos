@@ -136,7 +136,6 @@ public:
         interface->set_plyagl(plyagl);
         
         double val = 0.0;
-        double totalEnergy = 0.0;
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
@@ -153,14 +152,16 @@ public:
                     std::cout << "Newton failed.\n";
                 }
             }
-            
+        
+            double totalEnergy = 0.0;
             double partialEnergy = 0.0;
             for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
+            val += totalEnergy;
         }
-        val = totalEnergy - nrldata->energy(id);
+        val = val - nrldata->energy(id);
         val = fabs(val);
         return val;
     }
