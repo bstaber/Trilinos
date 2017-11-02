@@ -12,22 +12,22 @@ public:
     Teuchos::RCP<shinozuka_layeredcomp_2d> GRF_Generator;
     
     Epetra_SerialDenseVector mu1rf, mu2rf, mu3rf, mu4rf, mu5rf;
+    Epetra_SerialDenseVector omega;
+    Epetra_SerialDenseVector mean_mu;
     double mu1, mu2, mu3, mu4, mu5;
     double mean_mu1, mean_mu2, mean_mu3, mean_mu4, mean_mu5, mu, trm;
     double beta3, beta4, beta5, ptrmbeta4, ptrmbeta5;
     double plyagl, cos_plyagl, sin_plyagl;
-    int n_ply;
     std::vector<int> phase;
     
     TIMooney_RandomField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
         Mesh = new mesh(comm, mesh_file);
         Comm = Mesh->Comm;
         
-        StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
-        OverlapMap = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
+        StandardMap        = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
+        OverlapMap         = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
         ImportToOverlapMap = new Epetra_Import(*OverlapMap,*StandardMap);
         create_FECrsGraph();
         
@@ -37,29 +37,23 @@ public:
                 phase.push_back(j);
             }
         }
-        
-        double plyagldeg = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"angle");
-        mean_mu1 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu1");
-        mean_mu2 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu2");
-        mean_mu3 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu3");
-        mean_mu4 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu4");
-        mean_mu5 = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"mu5");
-        beta3    = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"beta3");
-        beta4    = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"beta4");
-        beta5    = Teuchos::getParameter<double>(Parameters.sublist("TIMooney"),"beta5");
-        plyagl   = 2.0*M_PI*plyagldeg/360.0;
-        mean_mu1 *= 1.0e3; mean_mu2 *= 1.0e3; mean_mu3 *= 1.0e3; mean_mu4 *= 1.0e3; mean_mu5 *= 1.0e3;
+        mean_mu.Resize(5);
+        omega.Resize(6);
         int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
-        double L1 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
-        double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
+        omega(4) = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
+        omega(5) = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
         
-        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
+        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,omega(4),omega(5)));
     }
     
     ~TIMooney_RandomField(){
     }
     
-    void RandomFieldGenerator(int * seeds){
+    void set_plyagl(double & Plyagl){
+        plyagl = Plyagl;
+    }
+    
+    void RandomFieldGenerator(Epetra_IntSerialDenseVector & seeds){
         
         Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
         Epetra_SerialDenseVector w2_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
@@ -73,30 +67,36 @@ public:
         mu4rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
         mu5rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
         
-        GRF_Generator->rng.seed(seeds[0]);
+        GRF_Generator->l1 = omega(4);
+        GRF_Generator->l2 = omega(5);
+        
+        GRF_Generator->rng.seed(seeds(0));
         GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
         
-        GRF_Generator->rng.seed(seeds[1]);
+        GRF_Generator->rng.seed(seeds(1));
         GRF_Generator->generator_gauss_points(w2_shino,*Mesh,phase);
         
-        GRF_Generator->rng.seed(seeds[2]);
+        GRF_Generator->rng.seed(seeds(2));
         GRF_Generator->generator_gauss_points(w3_shino,*Mesh,phase);
         
-        GRF_Generator->rng.seed(seeds[3]);
+        GRF_Generator->rng.seed(seeds(3));
         GRF_Generator->generator_gauss_points(w4_shino,*Mesh,phase);
         
-        GRF_Generator->rng.seed(seeds[4]);
+        GRF_Generator->rng.seed(seeds(4));
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
         
-        double delta = 0.10;
-        double alpha = 1.0/(delta*delta);
-        double beta;
+        double alpha, beta;
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
-            beta = mean_mu1*delta*delta; mu1rf(i) = icdf_gamma(w1_shino(i),alpha,beta);
-            beta = mean_mu2*delta*delta; mu2rf(i) = icdf_gamma(w2_shino(i),alpha,beta);
-            beta = mean_mu3*delta*delta; mu3rf(i) = icdf_gamma(w3_shino(i),alpha,beta);
-            beta = mean_mu4*delta*delta; mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
-            beta = mean_mu5*delta*delta; mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
+            alpha = 1.0/(omega(0)*omega(0)); beta = mean_mu(0)*omega(0)*omega(0);
+            mu1rf(i) = icdf_gamma(w1_shino(i),alpha,beta);
+            alpha = 1.0/(omega(1)*omega(1)); beta = mean_mu(1)*omega(1)*omega(1);
+            mu2rf(i) = icdf_gamma(w2_shino(i),alpha,beta);
+            alpha = 1.0/(omega(2)*omega(2)); beta = mean_mu(2)*omega(2)*omega(2);
+            mu3rf(i) = icdf_gamma(w3_shino(i),alpha,beta);
+            alpha = 1.0/(omega(3)*omega(3)); beta = mean_mu(3)*omega(3)*omega(3);
+            mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
+            alpha = (2.0/alpha)-2.0; beta = mean_mu(4)/alpha;
+            mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
         }
         
     }

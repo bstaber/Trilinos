@@ -6,9 +6,7 @@
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
-#include "Newton_Raphsonpp.hpp"
-#include "readnrldata.hpp"
+#include "forwardCostfunction.hpp"
 
 int main(int argc, char *argv[]){
     
@@ -41,12 +39,11 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<TIMooney_RandomField> interface = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
-    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
+    Teuchos::RCP<forwardCostfunction> costFunction = Teuchos::rcp(new forwardCostfunction(Comm,*paramList));
     Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(false));
     data->import_boundaryconditions();
     
-    double xi = 0.0;
+    /*double xi = 0.0;
     int j = 0;
     int * seed = new int [5];
     seed[0] = 5*j; seed[1] = 5*j+1; seed[2] = 5*j+2; seed[3] = 5*j+3; seed[4] = 5*j+4;
@@ -61,8 +58,8 @@ MPI_Init(&argc, &argv);
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/greenlag_" + std::to_string(i) + ".mtx";
         Newton->print_newton_solution(path1);
         interface->compute_green_lagrange(*Newton->x,xi,xi,xi,path2);
-    }
-        
+    }*/
+    
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
