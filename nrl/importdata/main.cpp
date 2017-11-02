@@ -18,7 +18,8 @@ int main(int argc, char *argv[]){
     Epetra_SerialComm Comm;
 #endif
 
-    std::string filemesh = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
+    //std::string filemesh = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
+    std::string filemesh = "/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh";
     mesh Mesh(Comm,filemesh);
     Teuchos::RCP<distributenrldata> nrldata = Teuchos::rcp(new distributenrldata(Mesh));
     
