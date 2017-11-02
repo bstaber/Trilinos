@@ -53,9 +53,9 @@ MPI_Init(&argc, &argv);
     interface->RandomFieldGenerator(seed);
     
     Newton->Initialization();
-    for (unsigned int i=0; i<boundaryconditions.Length(); ++i){
+    for (unsigned int i=0; i<data->boundaryconditions.Length(); ++i){
         Newton->setParameters(*paramList);
-        Newton->bc_disp = boundaryconditions(i);
+        Newton->bc_disp = data->boundaryconditions(i);
         int error = Newton->Solve_with_Aztec(true);
         std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/displacement_" + std::to_string(i) + ".mtx";
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/greenlag_" + std::to_string(i) + ".mtx";
