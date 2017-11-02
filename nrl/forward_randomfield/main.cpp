@@ -45,7 +45,7 @@ MPI_Init(&argc, &argv);
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(false));
     
-    std::vector<double> bcdisp(10);
+    /*std::vector<double> bcdisp(10);
     bcdisp[0] = 0.00033234;
     bcdisp[1] = 0.018369;
     bcdisp[2] = 0.038198;
@@ -73,7 +73,7 @@ MPI_Init(&argc, &argv);
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/greenlag_" + std::to_string(i) + ".mtx";
         Newton->print_newton_solution(path1);
         interface->compute_green_lagrange(*Newton->x,xi,xi,xi,path2);
-    }
+    }*/
         
 #ifdef HAVE_MPI
     MPI_Finalize();
