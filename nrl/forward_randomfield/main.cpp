@@ -8,6 +8,7 @@
 
 #include "Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
 #include "Newton_Raphsonpp.hpp"
+#include "readnrldata.hpp"
 
 int main(int argc, char *argv[]){
     
@@ -42,6 +43,7 @@ MPI_Init(&argc, &argv);
     
     Teuchos::RCP<TIMooney_RandomField> interface = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
+    Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(false));
     
     std::vector<double> bcdisp(10);
     bcdisp[0] = 0.00033234;
