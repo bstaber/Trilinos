@@ -45,7 +45,7 @@ MPI_Init(&argc, &argv);
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(false));
     data->import_boundaryconditions();
-    std::cout << data->boundarycondition;
+    std::cout << data->boundaryconditions;
     
     /*std::vector<double> bcdisp(10);
     bcdisp[0] = 0.00033234;
