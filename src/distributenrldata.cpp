@@ -20,7 +20,7 @@ void distributenrldata::retrieve_data(mesh & Mesh){
     std::vector<double> data_xyz;
     std::vector<double> data_exx, data_eyy, data_exy;
     
-    Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata());
+    Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata(true));
     npoints = nrldata->npoints;
     nloads  = nrldata->nloads;
     boundaryconditions = nrldata->boundaryconditions;
