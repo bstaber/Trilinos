@@ -75,6 +75,14 @@ public:
         return val;
     }
     
+    void print_newton_solution(std::string & path){
+        newton->print_newton_solution(path);
+    }
+    void print_green_lagrange(std::string & path){
+        double xi = 0.0;
+        interface->compute_green_lagrange(*newton->x,xi,xi,xi,path);
+    }
+    
     void compute_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseMatrix & eij){
         Epetra_Vector u(*(interface->OverlapMap));
         u.Import(x, *(interface->ImportToOverlapMap), Insert);
@@ -127,7 +135,5 @@ public:
             eij(e,2) = (1.0/2.0)*right_cauchy(0,1);
         }
     }
-    
-    
     
 };

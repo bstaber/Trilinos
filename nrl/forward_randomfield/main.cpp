@@ -68,6 +68,10 @@ MPI_Init(&argc, &argv);
         parameters(i) = 1.0e3*parameters(i);
     }
     double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds);
+    std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/displacement.mtx";
+    std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/greenlag.mtx";
+    costFunction->print_newton_solution(path1);
+    costFunction->print_green_lagrange(path2);
     
     /*double xi = 0.0;
     int j = 0;
