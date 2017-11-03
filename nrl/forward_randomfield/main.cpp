@@ -51,10 +51,10 @@ MPI_Init(&argc, &argv);
     
     int id = 0;
     Epetra_SerialDenseVector parameters(6), exponents(2), hyperParameters(7);
-    hyperParameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta1");
-    hyperParameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta2");
-    hyperParameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta3");
-    hyperParameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta4");
+    hyperParameters(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
+    hyperParameters(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
+    hyperParameters(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
+    hyperParameters(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
     hyperParameters(4) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
     hyperParameters(5) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
