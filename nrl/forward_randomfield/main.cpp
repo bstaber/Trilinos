@@ -59,7 +59,7 @@ MPI_Init(&argc, &argv);
     }
     
     std::cout << "\n";
-    std::cout << "Value\n";
+    std::cout << "Value" << std::setw(10) << "Delta" << std::setw(10) << "lx" << std::setw(10) << "ly" << "\n";
     for (int I=0; I<5; ++I){
         for (int J=0; J<5; ++J){
             hyperParameters(0) = I/10.0;
@@ -72,14 +72,14 @@ MPI_Init(&argc, &argv);
                 for (int k=0; k<5; ++k){
                     seeds(k) = 5*j+k;
                 }
-            }
-            double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,false);
-            std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
-            std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
-            costFunction->print_newton_solution(path1);
-            costFunction->print_green_lagrange(path2);
-            if (Comm.MyPID()==0){
-                std::cout << value << "\n";
+                double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,false);
+                std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+                std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+                costFunction->print_newton_solution(path1);
+                costFunction->print_green_lagrange(path2);
+                if (Comm.MyPID()==0){
+                    std::cout << value << std::setw(10) << I/10.0 << std::setw(10) << 50.0*J*0.05 << std::setw(10) << 25.0*J*0.05 << "\n";
+                }
             }
         }
     }
