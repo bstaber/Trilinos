@@ -46,7 +46,7 @@ public:
         
         double val = 0.0;
         newton->Initialization();
-        for (unsigned int i=nrldata->boundaryconditions.Length(); i<=nrldata->boundaryconditions.Length(); ++i){
+        for (unsigned int i=nrldata->boundaryconditions.Length()-1; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=nrldata->boundaryconditions(i);
             int error = newton->Solve_with_Aztec(true);
