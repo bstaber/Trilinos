@@ -44,19 +44,9 @@ MPI_Init(&argc, &argv);
     data->import_boundaryconditions();
     
     Epetra_IntSerialDenseVector seeds(5);
-    int j = 0;
-    for (int k=0; k<5; ++k){
-        seeds(k) = 5*j+k;
-    }
     
     int id = 0;
     Epetra_SerialDenseVector parameters(5), exponents(2), hyperParameters(6);
-    hyperParameters(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
-    hyperParameters(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
-    hyperParameters(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
-    hyperParameters(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
-    hyperParameters(4) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
-    hyperParameters(5) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
     parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
@@ -67,12 +57,28 @@ MPI_Init(&argc, &argv);
     for (unsigned int i=0; i<5; i++){
         parameters(i) = 1.0e3*parameters(i);
     }
-    double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds);
-    std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/displacement.mtx";
-    std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/greenlag.mtx";
-    costFunction->print_newton_solution(path1);
-    costFunction->print_green_lagrange(path2);
     
+    for (int I=0; I<5; ++I){
+        for (int J=0; J<5; ++J){
+            hyperParameters(0) = I/10.0;
+            hyperParameters(1) = I/10.0;
+            hyperParameters(2) = I/10.0;
+            hyperParameters(3) = I/10.0;
+            hyperParameters(4) = 50.0*J*0.05;
+            hyperParameters(5) = 25.0*J*0.05;
+            for (int j=0; j<10; ++j){
+                for (int k=0; k<5; ++k){
+                    seeds(k) = 5*j+k;
+                }
+            }
+            double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds);
+            std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+            std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+            costFunction->print_newton_solution(path1);
+            costFunction->print_green_lagrange(path2);
+        }
+    }
+        
     /*double xi = 0.0;
     int j = 0;
     int * seed = new int [5];
