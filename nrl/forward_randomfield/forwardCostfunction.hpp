@@ -37,7 +37,8 @@ public:
                  Epetra_SerialDenseVector & exponents,
                  Epetra_SerialDenseVector & omega,
                  int & id,
-                 Epetra_IntSerialDenseVector & seeds)
+                 Epetra_IntSerialDenseVector & seeds,
+                 bool newtonPrint)
     {
         double plyagl = nrldata->angles(id)*2.0*M_PI/360.0;
         interface->setParameters(parameters,exponents,omega);
@@ -49,7 +50,7 @@ public:
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
             newton->bc_disp=nrldata->boundaryconditions(i);
-            int error = newton->Solve_with_Aztec(true);
+            int error = newton->Solve_with_Aztec(newtonPrint);
             
             Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
             
