@@ -92,19 +92,22 @@ public:
         GRF_Generator->rng.seed(seeds(4));
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
         
-        std::cout << omega;
-        std::cout << mean_mu;
         double alpha, beta;
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
             alpha = 1.0/(omega(0)*omega(0)); beta = mean_mu(0)*omega(0)*omega(0);
+            std::cout << alpha << std::setw(10) << beta << "\n";
             mu1rf(i) = icdf_gamma(w1_shino(i),alpha,beta);
             alpha = 1.0/(omega(1)*omega(1)); beta = mean_mu(1)*omega(1)*omega(1);
+            std::cout << alpha << std::setw(10) << beta << "\n";
             mu2rf(i) = icdf_gamma(w2_shino(i),alpha,beta);
             alpha = 1.0/(omega(2)*omega(2)); beta = mean_mu(2)*omega(2)*omega(2);
+            std::cout << alpha << std::setw(10) << beta << "\n";
             mu3rf(i) = icdf_gamma(w3_shino(i),alpha,beta);
             alpha = 1.0/(omega(3)*omega(3)); beta = mean_mu(3)*omega(3)*omega(3);
+            std::cout << alpha << std::setw(10) << beta << "\n";
             mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
             alpha = (2.0/alpha)-2.0; beta = mean_mu(4)/alpha;
+            std::cout << alpha << std::setw(10) << beta << "\n";
             mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
         }
         

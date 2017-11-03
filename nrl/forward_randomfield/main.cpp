@@ -50,7 +50,7 @@ MPI_Init(&argc, &argv);
     }
     
     int id = 0;
-    Epetra_SerialDenseVector parameters(6), exponents(2), hyperParameters(7);
+    Epetra_SerialDenseVector parameters(5), exponents(2), hyperParameters(6);
     hyperParameters(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
     hyperParameters(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
     hyperParameters(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
