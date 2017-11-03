@@ -33,12 +33,16 @@ public:
     ~forwardCostfunction(){
     }
     
-    double value(Epetra_SerialDenseVector & w, Epetra_SerialDenseVector & g, int & id, Epetra_IntSerialDenseVector & seed){
+    double value(Epetra_SerialDenseVector & parameters,
+                 Epetra_SerialDenseVector & exponents,
+                 Epetra_SerialDenseVector & omega,
+                 int & id,
+                 Epetra_IntSerialDenseVector & seeds)
+    {
         double plyagl = nrldata->angles(id)*2.0*M_PI/360.0;
-        interface->mean_mu = g;
-        interface->omega   = w;
+        interface->setParameters(parameters,exponents,omega);
         interface->set_plyagl(plyagl);
-        interface->RandomFieldGenerator(seed);
+        interface->RandomFieldGenerator(seeds);
         
         double val = 0.0;
         newton->Initialization();

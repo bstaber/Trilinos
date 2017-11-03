@@ -53,6 +53,13 @@ public:
         plyagl = Plyagl;
     }
     
+    void setParameters(Epetra_SerialDenseVector & parameters, Epetra_SerialDenseVector & exponents, Epetra_SerialDenseVector & hyperParameters){
+        mean_mu = parameters;
+        beta4   = exponents(0);
+        beta5   = exponents(1);
+        omega   = hyperParameters;
+    }
+    
     void RandomFieldGenerator(Epetra_IntSerialDenseVector & seeds){
         
         Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);

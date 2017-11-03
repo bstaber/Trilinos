@@ -43,6 +43,33 @@ MPI_Init(&argc, &argv);
     Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(false));
     data->import_boundaryconditions();
     
+    Epetra_IntSerialDenseVector seeds(5);
+    int j = 0;
+    for (int k=0; k<5; ++k){
+        seeds(k) = 5*j+k;
+    }
+    
+    int id = 0;
+    Epetra_SerialDenseVector parameters(6), exponents(2), hyperParameters(7);
+    hyperParameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta1");
+    hyperParameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta2");
+    hyperParameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta3");
+    hyperParameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"delta4");
+    hyperParameters(4) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
+    hyperParameters(5) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
+    parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+    parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+    parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+    parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+    parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+    exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    for (unsigned int i=0; i<5; i++){
+        parameters(i) = 1.0e3*parameters(i);
+    }
+
+    double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds);
+    
     /*double xi = 0.0;
     int j = 0;
     int * seed = new int [5];
