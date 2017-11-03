@@ -62,8 +62,8 @@ MPI_Init(&argc, &argv);
         std::cout << "\n";
         std::cout << "Value" << std::setw(10) << "Delta" << std::setw(10) << "lx" << std::setw(10) << "ly" << "\n";
     }
-    for (int I=0; I<5; ++I){
-        for (int J=0; J<5; ++J){
+    for (int I=1; I<=5; ++I){
+        for (int J=1; J<=5; ++J){
             hyperParameters(0) = I/10.0;
             hyperParameters(1) = I/10.0;
             hyperParameters(2) = I/10.0;
