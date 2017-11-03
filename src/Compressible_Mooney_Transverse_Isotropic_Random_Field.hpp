@@ -92,6 +92,8 @@ public:
         GRF_Generator->rng.seed(seeds(4));
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
         
+        std::cout << omega;
+        std::cout << mean_mu;
         double alpha, beta;
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
             alpha = 1.0/(omega(0)*omega(0)); beta = mean_mu(0)*omega(0)*omega(0);
