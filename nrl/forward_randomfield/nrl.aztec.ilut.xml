@@ -95,6 +95,10 @@
         <Parameter name="lx" type="double" value="5.0"/>
         <Parameter name="ly" type="double" value="2.5"/>
         <Parameter name="lz" type="double" value="0.128125"/>
+        <Parameter name="delta1" type="double" value="0.1"/>
+        <Parameter name="delta2" type="double" value="0.1"/>
+        <Parameter name="delta3" type="double" value="0.1"/>
+        <Parameter name="delta4" type="double" value="0.1"/>
     </ParameterList>
     
 </ParameterList>

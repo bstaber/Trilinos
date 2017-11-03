@@ -68,7 +68,7 @@ MPI_Init(&argc, &argv);
         parameters(i) = 1.0e3*parameters(i);
     }
 
-    double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds);
+    //double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds);
     
     /*double xi = 0.0;
     int j = 0;
