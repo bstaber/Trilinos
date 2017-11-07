@@ -4,6 +4,7 @@ var annotated_dup =
     [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ],
     [ "distributenrldata", "d1/d14/classdistributenrldata.html", "d1/d14/classdistributenrldata" ],
     [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", "d8/dc2/class_finite___element___problem" ],
+    [ "forwardCostfunction", "dd/dfc/classforward_costfunction.html", "dd/dfc/classforward_costfunction" ],
     [ "hyperelasticity_setup", "d8/daf/classhyperelasticity__setup.html", "d8/daf/classhyperelasticity__setup" ],
     [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ],
     [ "Linear_Finite_Element_Problem", "d3/d9f/class_linear___finite___element___problem.html", "d3/d9f/class_linear___finite___element___problem" ],

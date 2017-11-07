@@ -6,8 +6,9 @@
 <area shape="rect" id="node6" href="$db/db7/arteries_2vonmises_2main_8cpp.html" title="arteries/vonmises/main.cpp" alt="" coords="696,85,880,111"/>
 <area shape="rect" id="node7" href="$de/de8/example__pnpoly__inverse__isoparam_8cpp.html" title="examples/pnpoly/example\l_pnpoly_inverse_isoparam.cpp" alt="" coords="904,79,1110,117"/>
 <area shape="rect" id="node8" href="$d5/d58/nrl_2forward__deterministic_2main_8cpp.html" title="nrl/forward_deterministic\l/main.cpp" alt="" coords="1134,79,1301,117"/>
-<area shape="rect" id="node9" href="$db/de3/nrl_2forward__randomfield_2main_8cpp.html" title="nrl/forward_randomfield\l/main.cpp" alt="" coords="1325,79,1486,117"/>
-<area shape="rect" id="node10" href="$d5/d17/nrl_2randomsearch__deterministicmodel_2main_8cpp.html" title="nrl/randomsearch_deterministicmodel\l/main.cpp" alt="" coords="1486,165,1730,204"/>
-<area shape="rect" id="node11" href="$dd/dae/_random_search___deterministic_model_8hpp.html" title="nrl/randomsearch_deterministicmodel\l/RandomSearch_DeterministicModel.hpp" alt="" coords="1561,79,1826,117"/>
-<area shape="rect" id="node12" href="$d5/dc7/_newton___raphsonpp_8cpp.html" title="src/Newton_Raphsonpp.cpp" alt="" coords="1850,85,2039,111"/>
+<area shape="rect" id="node9" href="$df/df6/forward_costfunction_8hpp.html" title="nrl/forward_randomfield\l/forwardCostfunction.hpp" alt="" coords="1325,79,1494,117"/>
+<area shape="rect" id="node11" href="$d5/d17/nrl_2randomsearch__deterministicmodel_2main_8cpp.html" title="nrl/randomsearch_deterministicmodel\l/main.cpp" alt="" coords="1546,165,1790,204"/>
+<area shape="rect" id="node12" href="$dd/dae/_random_search___deterministic_model_8hpp.html" title="nrl/randomsearch_deterministicmodel\l/RandomSearch_DeterministicModel.hpp" alt="" coords="1569,79,1834,117"/>
+<area shape="rect" id="node13" href="$d5/dc7/_newton___raphsonpp_8cpp.html" title="src/Newton_Raphsonpp.cpp" alt="" coords="1858,85,2047,111"/>
+<area shape="rect" id="node10" href="$db/de3/nrl_2forward__randomfield_2main_8cpp.html" title="nrl/forward_randomfield\l/main.cpp" alt="" coords="1329,165,1490,204"/>
 </map>

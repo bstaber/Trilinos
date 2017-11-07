@@ -115,8 +115,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1f90b290c91eb2bf5650d87b8ac40c6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cb7c973331f0f1949daaabb2bea3208"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a8cb7c973331f0f1949daaabb2bea3208">~TIMooney_RandomField</a> ()</td></tr>
 <tr class="separator:a8cb7c973331f0f1949daaabb2bea3208"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a607faf43e7370c5bad363b8d83b2e25b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a607faf43e7370c5bad363b8d83b2e25b">RandomFieldGenerator</a> (int *seeds)</td></tr>
-<tr class="separator:a607faf43e7370c5bad363b8d83b2e25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc7b164b4c3c06e8295755f0d9bf7bb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#adc7b164b4c3c06e8295755f0d9bf7bb9">set_plyagl</a> (double &amp;Plyagl)</td></tr>
+<tr class="separator:adc7b164b4c3c06e8295755f0d9bf7bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50aef6406a849f81b47e5cf29f80262f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a50aef6406a849f81b47e5cf29f80262f">setParameters</a> (Epetra_SerialDenseVector &amp;parameters, Epetra_SerialDenseVector &amp;exponents, Epetra_SerialDenseVector &amp;hyperParameters)</td></tr>
+<tr class="separator:a50aef6406a849f81b47e5cf29f80262f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0559e0944b75948fe812f2dc76ae4437"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a0559e0944b75948fe812f2dc76ae4437">RandomFieldGenerator</a> (Epetra_IntSerialDenseVector &amp;seeds)</td></tr>
+<tr class="separator:a0559e0944b75948fe812f2dc76ae4437"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7add14136af0011dc27515c6751fe407"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a7add14136af0011dc27515c6751fe407">icdf_gamma</a> (double &amp;w, double &amp;alpha, double &amp;beta)</td></tr>
 <tr class="separator:a7add14136af0011dc27515c6751fe407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbe947fd7c39e4d457a6e2e1f0ce8943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#acbe947fd7c39e4d457a6e2e1f0ce8943">get_matrix_and_rhs</a> (Epetra_Vector &amp;x, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;F)</td></tr>
@@ -192,6 +196,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a917ddd4a710fb6b4f64a6012201b5e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af082292139db7226e954f4aa8b77834f"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#af082292139db7226e954f4aa8b77834f">mu5rf</a></td></tr>
 <tr class="separator:af082292139db7226e954f4aa8b77834f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a610dc5465a9b8568be9a08804344c364"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a610dc5465a9b8568be9a08804344c364">omega</a></td></tr>
+<tr class="separator:a610dc5465a9b8568be9a08804344c364"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8ebb114cc9069f3d4592d60e538aa1c"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#ab8ebb114cc9069f3d4592d60e538aa1c">mean_mu</a></td></tr>
+<tr class="separator:ab8ebb114cc9069f3d4592d60e538aa1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dba63e5e1c85463cab6156be36384d9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a8dba63e5e1c85463cab6156be36384d9">mu1</a></td></tr>
 <tr class="separator:a8dba63e5e1c85463cab6156be36384d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9c55c9975547d6ed3971a1c8bea8388"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#ad9c55c9975547d6ed3971a1c8bea8388">mu2</a></td></tr>
@@ -232,8 +240,6 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ae6175efd6ac4dfa06ae0b1aa61addddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e2f037136d272518a82b3d483cae263"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a9e2f037136d272518a82b3d483cae263">sin_plyagl</a></td></tr>
 <tr class="separator:a9e2f037136d272518a82b3d483cae263"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20a9588074ed8e5947602fe2ba44d585"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a20a9588074ed8e5947602fe2ba44d585">n_ply</a></td></tr>
-<tr class="separator:a20a9588074ed8e5947602fe2ba44d585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40edd69d0a984a96d1fabf2ebd47271e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a40edd69d0a984a96d1fabf2ebd47271e">phase</a></td></tr>
 <tr class="separator:a40edd69d0a984a96d1fabf2ebd47271e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classhyperelasticity__setup"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhyperelasticity__setup')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../d8/daf/classhyperelasticity__setup.html">hyperelasticity_setup</a></td></tr>
@@ -295,7 +301,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00022">22</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00023">23</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +328,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00059">59</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00049">49</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -369,7 +375,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a4e3e67ca83f8e23c83f9e422d5528deb">Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00152">152</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00163">163</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -415,7 +421,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a9cca717b6ef0662c83cfb6ee117a0ded">hyperelasticity_setup</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00208">208</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00219">219</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +491,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afef20997a9dd026abae3c47ef439f28a">hyperelasticity_setup</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00304">304</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00315">315</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -531,7 +537,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aabfa762fd21b5c29488e08614b671617">hyperelasticity_setup</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00308">308</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00319">319</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -571,7 +577,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa5a05e262adae7bda067f022ad9b2908">hyperelasticity_setup</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00190">190</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00201">201</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -623,7 +629,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afee5a404dffb03a9f27710a4f0296501">hyperelasticity_setup</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00312">312</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00323">323</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -669,7 +675,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a080f0fd94cb76f1199022216cc0ecb38">Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00112">112</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00123">123</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -715,7 +721,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a171b91f4586a5122cebb54500f4cf32d">hyperelasticity_setup</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00315">315</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00326">326</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -759,12 +765,12 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00104">104</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00115">115</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a607faf43e7370c5bad363b8d83b2e25b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a607faf43e7370c5bad363b8d83b2e25b">&#9670;&nbsp;</a></span>RandomFieldGenerator()</h2>
+<a id="a0559e0944b75948fe812f2dc76ae4437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0559e0944b75948fe812f2dc76ae4437">&#9670;&nbsp;</a></span>RandomFieldGenerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -775,7 +781,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void TIMooney_RandomField::RandomFieldGenerator </td>
           <td>(</td>
-          <td class="paramtype">int *&#160;</td>
+          <td class="paramtype">Epetra_IntSerialDenseVector &amp;&#160;</td>
           <td class="paramname"><em>seeds</em></td><td>)</td>
           <td></td>
         </tr>
@@ -787,7 +793,79 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00062">62</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00063">63</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="adc7b164b4c3c06e8295755f0d9bf7bb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc7b164b4c3c06e8295755f0d9bf7bb9">&#9670;&nbsp;</a></span>set_plyagl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TIMooney_RandomField::set_plyagl </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>Plyagl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00052">52</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a50aef6406a849f81b47e5cf29f80262f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50aef6406a849f81b47e5cf29f80262f">&#9670;&nbsp;</a></span>setParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TIMooney_RandomField::setParameters </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
+          <td class="paramname"><em>exponents</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
+          <td class="paramname"><em>hyperParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00056">56</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -816,7 +894,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#aaf9379443bd52a3d462f124017354a38">Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00116">116</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00127">127</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -833,7 +911,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -849,7 +927,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -865,7 +943,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -881,7 +959,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00020">20</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -901,6 +979,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab8ebb114cc9069f3d4592d60e538aa1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8ebb114cc9069f3d4592d60e538aa1c">&#9670;&nbsp;</a></span>mean_mu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_SerialDenseVector TIMooney_RandomField::mean_mu</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+
+</div>
+</div>
 <a id="aa13cf7304caebd13e8cebf092fa32bbd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa13cf7304caebd13e8cebf092fa32bbd">&#9670;&nbsp;</a></span>mean_mu1</h2>
 
@@ -913,7 +1007,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -929,7 +1023,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -945,7 +1039,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -961,7 +1055,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -977,7 +1071,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -993,7 +1087,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1009,7 +1103,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1041,7 +1135,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1073,7 +1167,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1105,7 +1199,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1137,7 +1231,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1157,19 +1251,19 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a20a9588074ed8e5947602fe2ba44d585"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20a9588074ed8e5947602fe2ba44d585">&#9670;&nbsp;</a></span>n_ply</h2>
+<a id="a610dc5465a9b8568be9a08804344c364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a610dc5465a9b8568be9a08804344c364">&#9670;&nbsp;</a></span>omega</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int TIMooney_RandomField::n_ply</td>
+          <td class="memname">Epetra_SerialDenseVector TIMooney_RandomField::omega</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1185,7 +1279,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00020">20</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00021">21</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1201,7 +1295,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00020">20</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1217,7 +1311,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1233,7 +1327,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1249,7 +1343,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00020">20</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1265,7 +1359,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>

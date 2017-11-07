@@ -11,6 +11,7 @@ var hierarchy =
         [ "TIMooney_RandomField", "d1/dd7/class_t_i_mooney___random_field.html", null ]
       ] ]
     ] ],
+    [ "forwardCostfunction", "dd/dfc/classforward_costfunction.html", null ],
     [ "Linear_Finite_Element_Problem", "d3/d9f/class_linear___finite___element___problem.html", [
       [ "laplace", "d7/d76/classlaplace.html", null ],
       [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", [

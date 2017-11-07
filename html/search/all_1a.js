@@ -4,6 +4,7 @@ var searchData=
   ['_7edirichletstripelongation_5fstochasticpolyconvexhgo',['~DirichletStripElongation_StochasticPolyconvexHGO',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a3d8810b6a7483c376a9eaca0a50bf4b1',1,'DirichletStripElongation_StochasticPolyconvexHGO']]],
   ['_7edistributenrldata',['~distributenrldata',['../d1/d14/classdistributenrldata.html#af80f134c5fb3b285cece3f5eb5c08cb2',1,'distributenrldata']]],
   ['_7efinite_5felement_5fproblem',['~Finite_Element_Problem',['../d8/dc2/class_finite___element___problem.html#a456ccd93250655de8d6bcb8e5ca4d616',1,'Finite_Element_Problem']]],
+  ['_7eforwardcostfunction',['~forwardCostfunction',['../dd/dfc/classforward_costfunction.html#a5d8ad93290c44117cf1c87e2bf3a36d8',1,'forwardCostfunction']]],
   ['_7ehyperelasticity_5fsetup',['~hyperelasticity_setup',['../d8/daf/classhyperelasticity__setup.html#adb39bd51c1de4815be3014d56e2f131a',1,'hyperelasticity_setup']]],
   ['_7elaplace',['~laplace',['../d7/d76/classlaplace.html#a5a11b5bc8dfc1a2cf1bb3eeec282692a',1,'laplace']]],
   ['_7elinear_5ffinite_5felement_5fproblem',['~Linear_Finite_Element_Problem',['../d3/d9f/class_linear___finite___element___problem.html#a15ae36c4a67a658beaf93dbc1900d59a',1,'Linear_Finite_Element_Problem']]],

@@ -1,8 +1,10 @@
 <map id="src/readnrldata.hpp" name="src/readnrldata.hpp">
 <area shape="rect" id="node2" href="$d6/d9c/nrl_2importdata_2main_8cpp.html" title="nrl/importdata/main.cpp" alt="" coords="5,159,166,184"/>
-<area shape="rect" id="node3" href="$d5/d75/distributenrldata_8hpp.html" title="src/distributenrldata.hpp" alt="" coords="211,79,374,104"/>
-<area shape="rect" id="node7" href="$de/d89/readnrldata_8cpp.html" title="src/readnrldata.cpp" alt="" coords="398,79,533,104"/>
-<area shape="rect" id="node4" href="$dd/dae/_random_search___deterministic_model_8hpp.html" title="nrl/randomsearch_deterministicmodel\l/RandomSearch_DeterministicModel.hpp" alt="" coords="189,152,454,191"/>
-<area shape="rect" id="node6" href="$d0/da3/distributenrldata_8cpp.html" title="src/distributenrldata.cpp" alt="" coords="478,159,640,184"/>
-<area shape="rect" id="node5" href="$d5/d17/nrl_2randomsearch__deterministicmodel_2main_8cpp.html" title="nrl/randomsearch_deterministicmodel\l/main.cpp" alt="" coords="200,239,443,277"/>
+<area shape="rect" id="node3" href="$d5/d75/distributenrldata_8hpp.html" title="src/distributenrldata.hpp" alt="" coords="193,79,357,104"/>
+<area shape="rect" id="node9" href="$de/d89/readnrldata_8cpp.html" title="src/readnrldata.cpp" alt="" coords="381,79,516,104"/>
+<area shape="rect" id="node4" href="$df/df6/forward_costfunction_8hpp.html" title="nrl/forward_randomfield\l/forwardCostfunction.hpp" alt="" coords="190,152,360,191"/>
+<area shape="rect" id="node6" href="$dd/dae/_random_search___deterministic_model_8hpp.html" title="nrl/randomsearch_deterministicmodel\l/RandomSearch_DeterministicModel.hpp" alt="" coords="384,152,649,191"/>
+<area shape="rect" id="node8" href="$d0/da3/distributenrldata_8cpp.html" title="src/distributenrldata.cpp" alt="" coords="672,159,835,184"/>
+<area shape="rect" id="node5" href="$db/de3/nrl_2forward__randomfield_2main_8cpp.html" title="nrl/forward_randomfield\l/main.cpp" alt="" coords="194,239,356,277"/>
+<area shape="rect" id="node7" href="$d5/d17/nrl_2randomsearch__deterministicmodel_2main_8cpp.html" title="nrl/randomsearch_deterministicmodel\l/main.cpp" alt="" coords="395,239,638,277"/>
 </map>
