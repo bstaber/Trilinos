@@ -49,7 +49,7 @@ public:
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
-            newton->bc_disp=nrldata->boundaryconditions(i)/1000.0;
+            newton->bc_disp=nrldata->boundaryconditions(i);
             int error = newton->Solve_with_Aztec(newtonPrint);
             
             Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
