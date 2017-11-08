@@ -188,7 +188,7 @@ public:
                 F[0][StandardMap->LID(3*node+1)] = 0.0;
                 F[0][StandardMap->LID(3*node+2)] = 0.0;
             }
-            if (coord==25.0){
+            if (coord==25.0/1000.0){
                 F[0][StandardMap->LID(3*node+0)]   = 0.0;
                 F[0][StandardMap->LID(3*node+dof)] = displacement;
                 F[0][StandardMap->LID(3*node+2)]   = 0.0;
