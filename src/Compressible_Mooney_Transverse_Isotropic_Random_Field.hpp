@@ -54,11 +54,15 @@ public:
     
     void findtop(){
         topcoord = 0.0;
-        for (unsigned int n=0; n<Mesh->n_nodes; ++n){
-            if (Mesh->nodes_coord[3*node+1]>topcoord){
-                topcoord = Mesh->nodes_coord[3*node+1];
+        if (Comm->MyPID()==0){
+            for (unsigned int n=0; n<Mesh->n_nodes; ++n){
+                if (Mesh->nodes_coord[3*n+1]>topcoord){
+                    topcoord = Mesh->nodes_coord[3*n+1];
+                }
             }
         }
+        Comm->Broadcast(&topcoord,1,0);
+        Comm->Barrier();
     }
     
     void set_plyagl(double & Plyagl){
