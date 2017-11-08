@@ -55,28 +55,28 @@ MPI_Init(&argc, &argv);
     exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     for (unsigned int i=0; i<5; i++){
-        parameters(i) = 1.0e9*parameters(i);
+        parameters(i) = 1.0e3*parameters(i);
     }
     
     if (Comm.MyPID()==0){
         std::cout << "\n";
         std::cout << "Value" << std::setw(10) << "Delta" << std::setw(10) << "lx" << std::setw(10) << "ly" << "\n";
     }
-    for (int I=1; I<=1; ++I){
-        for (int J=1; J<=1; ++J){
+    for (int I=1; I<=5; ++I){
+        for (int J=1; J<=5; ++J){
             hyperParameters(0) = I/10.0;
             hyperParameters(1) = I/10.0;
             hyperParameters(2) = I/10.0;
             hyperParameters(3) = I/10.0;
-            hyperParameters(4) = 50.0*J*0.05/1000;
-            hyperParameters(5) = 25.0*J*0.05/1000;
+            hyperParameters(4) = 50.0*J*0.05;
+            hyperParameters(5) = 25.0*J*0.05;
             for (int j=0; j<10; ++j){
                 for (int k=0; k<5; ++k){
                     seeds(k) = 5*j+k;
                 }
-                double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,true);
-                std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/gpa_u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
-                std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/gpa_e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+                double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,false);
+                std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+                std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
                 costFunction->print_newton_solution(path1);
                 costFunction->print_green_lagrange(path2);
                 if (Comm.MyPID()==0){
