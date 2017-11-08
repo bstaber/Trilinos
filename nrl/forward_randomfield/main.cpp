@@ -68,8 +68,8 @@ MPI_Init(&argc, &argv);
             hyperParameters(1) = I/10.0;
             hyperParameters(2) = I/10.0;
             hyperParameters(3) = I/10.0;
-            hyperParameters(4) = 50.0*J*0.05;
-            hyperParameters(5) = 25.0*J*0.05;
+            hyperParameters(4) = 50.0*J*0.05/1000;
+            hyperParameters(5) = 25.0*J*0.05/1000;
             for (int j=0; j<10; ++j){
                 for (int k=0; k<5; ++k){
                     seeds(k) = 5*j+k;
