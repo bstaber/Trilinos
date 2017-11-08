@@ -18,12 +18,15 @@ public:
     double mean_mu1, mean_mu2, mean_mu3, mean_mu4, mean_mu5, mu, trm;
     double beta3, beta4, beta5, ptrmbeta4, ptrmbeta5;
     double plyagl, cos_plyagl, sin_plyagl;
+    double topcoord;
     std::vector<int> phase;
     
     TIMooney_RandomField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         Mesh = new mesh(comm, mesh_file);
+        findtop();
+        std::cout << "topcoord = " << topcoord << "\n";
         Comm = Mesh->Comm;
         
         StandardMap        = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
@@ -47,6 +50,15 @@ public:
     }
     
     ~TIMooney_RandomField(){
+    }
+    
+    void findtop(){
+        topcoord = 0.0;
+        for (unsigned int n=0; n<Mesh->n_nodes; ++n){
+            if (Mesh->nodes_coord[3*node+1]>topcoord){
+                topcoord = Mesh->nodes_coord[3*node+1];
+            }
+        }
     }
     
     void set_plyagl(double & Plyagl){
