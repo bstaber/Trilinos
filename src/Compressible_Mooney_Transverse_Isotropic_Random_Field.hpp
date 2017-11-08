@@ -135,7 +135,7 @@ public:
             if(coord==0.0){
                 n_bc_dof+=3;
             }
-            if(coord==25.0){
+            if(coord==25.0/1000.0){
                 n_bc_dof+=3;
             }
         }
@@ -151,7 +151,7 @@ public:
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
-            if (coord==25.0){
+            if (coord==25.0/1000,0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+dof;
                 dof_on_boundary[indbc+2] = 3*inode+2;
@@ -171,7 +171,7 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==25.0){
+            if (coord==25.0/1000.0){
                 v[0][StandardMap->LID(3*node+dof)] = displacement;
             }
         }
