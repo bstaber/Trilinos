@@ -284,10 +284,12 @@ public:
         u(2) = std::sin((c3/c1)*u(0));
     }
     
-    Epetra_SerialDenseMatrix getManufacturedPiola(Epetra_SerialDenseVector & x){
+    Epetra_SerialDenseMatrix getManufacturedPiola(double & x1, double & x2, double & x3){
         
+        Epetra_SerialDenseVector x(3);
         Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
         
+        x(0) = x1; x(1) = x2; x(2) = x3;
         F(0,0) = 1.0 + alpha*(topcoord-x(1))*x(1); F(0,1) = alpha*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(0,2) = 0.0;
         F(1,0) = 0.0; F(1,1) = 1.0 + beta*(topcoord-2.0*x(1)); F(1,2) = 0.0;
         F(2,0) = (gamma/alpha)*std::cos((gamma/alpha))*alpha*(topcoord-x(1))*x(1); F(2,1) = (gamma/alpha)*std::cos((gamma/alpha))*alpha*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(2,2) = 1.0;
@@ -352,8 +354,8 @@ public:
             xb = x;
             xf(j) += h;
             xb(j) -= h;
-            Pf = manufacturedPiola(xf);
-            Pb = manufacturedPiola(xb);
+            Pf = manufacturedPiola(xf(0),xf(1),xf(2));
+            Pb = manufacturedPiola(xb(0),xb(1),xb(2));
             for (unsigned int i=0; i<3; ++i){
                 f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
             }
@@ -369,10 +371,10 @@ public:
         int *Indices_tetra;
         Indices_tetra = new int [3*Mesh->el_type];
         
-        Epetra_SerialDenseVector fe(3*Mesh->el_type);
-        Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
+        Epetra_SerialDenseVector fevol(3*Mesh->el_type);
+        Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
         Epetra_SerialDenseMatrix xg(3,n_gauss_points);
-        Epetra_SerialDenseVector force(3);
+        Epetra_SerialDenseVector fvol(3);
         
         for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
             e_gid = Mesh->local_cells[e_lid];
@@ -383,7 +385,7 @@ public:
                 matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
                 matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
                 for (int iddl=0; iddl<3; ++iddl){
-                    fe(3*inode+iddl) = 0.0;
+                    fevol(3*inode+iddl) = 0.0;
                     Indices_tetra[3*inode+iddl] = 3*node+iddl;
                 }
             }
@@ -392,17 +394,70 @@ public:
             
             for (unsigned int gp=0; gp<n_gauss_points; ++gp){
                 gauss_weight = Mesh->gauss_weight_cells(gp);
-                force = manufacturedForcing(xg(0,gp),xg(1,gp),x(2,gp));
+                fvol = manufacturedForcing(xg(0,gp),xg(1,gp),x(2,gp));
                 for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
                     for (unsigned int iddl=0; iddl<3; ++iddl){
-                        fe(3*inode+iddl) += gauss_weight*force(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tri(e_lid,gp);
+                        fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tri(e_lid,gp);
                     }
                 }
             }
             
             for (unsigned int i=0; i<3*Mesh->el_type; ++i){
-                int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fe(i));
+                int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
             }
+        }
+        
+        int* Indices_tri;
+        Indices_tri = new int [3*Mesh->face_type];
+        n_gauss_points = Mesh->n_gauss_faces;
+        Epetra_SerialDenseVector feneumann(3*Mesh->el_type), fneumann(3);
+        Epetra_SerialDenseMatrix piola(3,3);
+        Epetra_SerialDenseMatrix d_shape_functions(Mesh->face_type,2);
+        Epetra_SerialDenseMatrix dxi_matrix_x(3,2);
+        
+        xg.Reshape(3,n_gauss_points);
+        matrix_X.Reshape(3,Mesh->face_type);
+        
+        for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
+            e_gid  = Mesh->local_faces[e_lid];
+            for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
+                node = Mesh->faces_nodes[Mesh->face_type*e_gid+inode];
+                matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+                matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+                matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
+                Indices_tri[3*inode]   = 3*node;
+                Indices_tri[3*inode+1] = 3*node+1;
+                Indices_tri[3*inode+2] = 3*node+2;
+                for (unsigned int iddl=0; iddl<3; ++iddl){
+                    feneumann(3*inode+iddl) = 0.0;
+                }
+            }
+            xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tri,0.0);
+            for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+                gauss_weight = Mesh->gauss_weight_faces(gp);
+                piola = manufacturedPiola(xg(0,gp),xg(1,gp),xg(2,gp));
+                for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
+                    d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
+                    d_shape_functions(inode,1) = Mesh->D2_N_tri(gp,inode);
+                }
+                dxi_matrix_x.Multiply('N','N',1.0,matrix_x,d_shape_functions,0.0);
+                normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);
+                normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
+                normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
+                fneumann.Multiply('N','N',1.0,piola,normal,0.0);
+                for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
+                    for (unsigned int iddl=0; iddl<3; ++iddl){
+                        feneumann(3*inode+iddl) += gauss_weight*fneumann(iddl)*Mesh->N_tri(gp,inode);
+                    }
+                }
+            }
+            
+            for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
+                for (unsigned int iddl=0; iddl<3; ++iddl){
+                    F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &feneumann(3*inode+iddl));
+                }
+            }
+            
         }
         
     }
