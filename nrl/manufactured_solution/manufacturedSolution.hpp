@@ -338,11 +338,12 @@ public:
         return P;
     }
     
-    Epetra_SerialDenseVector manufacturedForcing(Epetra_SerialDenseVector & x){
-        Epetra_SerialDenseVector f(3), xf, xb;
+    Epetra_SerialDenseVector manufacturedForcing(double & x1, double & x2, double & x3){
+        Epetra_SerialDenseVector f(3), x(3), xf(3), xb(3);
         Epetra_SerialDenseMatrix Pf(3,3), Pb(3,3);
         double h = 1.0e-6;
         
+        x(0) = x1; x(1) = x2; x(2) = x3;
         for (unsigned int i=0; i<3; ++i){
             f(i) = 0.0;
         }
@@ -357,6 +358,53 @@ public:
                 f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
             }
         }
+    }
+    
+    void assemble_forcing_and_neumann(Epetra_Vector & x, Epetra_FEVector & F){
+        
+        int node, e_gid, error;
+        int n_gauss_points = Mesh->n_gauss_cells;
+        double gauss_weight;
+        
+        int *Indices_tetra;
+        Indices_tetra = new int [3*Mesh->el_type];
+        
+        Epetra_SerialDenseVector fe(3*Mesh->el_type);
+        Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
+        Epetra_SerialDenseMatrix xg(3,n_gauss_points);
+        Epetra_SerialDenseVector force(3);
+        
+        for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+            e_gid = Mesh->local_cells[e_lid];
+            
+            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+                matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+                matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+                matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
+                for (int iddl=0; iddl<3; ++iddl){
+                    fe(3*inode+iddl) = 0.0;
+                    Indices_tetra[3*inode+iddl] = 3*node+iddl;
+                }
+            }
+            
+            xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tetra,0.0);
+            
+            for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+                gauss_weight = Mesh->gauss_weight_cells(gp);
+                force = manufacturedForcing(xg(0,gp),xg(1,gp),x(2,gp));
+                for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                    for (unsigned int iddl=0; iddl<3; ++iddl){
+                        fe(3*inode+iddl) += gauss_weight*force(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tri(e_lid,gp);
+                    }
+                }
+            }
+            
+            for (unsigned int i=0; i<3*Mesh->el_type; ++i){
+                int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fe(i));
+            }
+        }
+        
     }
     
 };

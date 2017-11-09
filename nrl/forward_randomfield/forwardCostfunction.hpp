@@ -52,10 +52,10 @@ public:
             newton->bc_disp=nrldata->boundaryconditions(i);
             int error = newton->Solve_with_Aztec(newtonPrint);
             
-            std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + "mtx";
+            /*std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + "mtx";
             std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + "mtx";
             print_newton_solution(path1);
-            print_green_lagrange(path2);
+            print_green_lagrange(path2);*/
             
             Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
             
