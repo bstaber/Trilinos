@@ -30,8 +30,8 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
-        for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
-            for (unsigned int j=0; j<32; ++j){
+        for (unsigned int e=0; e<Mesh->n_cells/4; ++e){
+            for (unsigned int j=0; j<4; ++j){
                 phase.push_back(j);
             }
         }
@@ -68,7 +68,7 @@ public:
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
         assemble_dirichlet(x,K,F);
-        //forcing+neumann
+        assemble_forcing_and_neumann(F);
     }
     
     void setup_dirichlet_conditions(){
@@ -281,8 +281,8 @@ public:
         double c1 = 1.0e-4;
         double c2 = 1.0e-3;
         double c3 = 1.0e-3;
-        u(0) = c1*(x1-topcoord)*(topcoord-x1)*x1;
-        u(1) = c2*x1*(topcoord-x1);
+        u(0) = c1*(x1-topcoord)*(topcoord-x2)*x2;
+        u(1) = c2*x2*(topcoord-x2);
         u(2) = std::sin((c3/c1)*u(0));
         return u;
     }
@@ -361,6 +361,7 @@ public:
             xb(j) -= h;
             Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
             Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
+            std::cout << Pf << "\n";
             for (unsigned int i=0; i<3; ++i){
                 f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
             }
@@ -413,7 +414,7 @@ public:
             }
         }
         
-        int* Indices_tri;
+        /*int* Indices_tri;
         Indices_tri = new int [3*Mesh->face_type];
         n_gauss_points = Mesh->n_gauss_faces;
         Epetra_SerialDenseVector feneumann(3*Mesh->el_type), fneumann(3), normal(3);
@@ -465,7 +466,7 @@ public:
             }
             
         }
-        
+     */
     }
     
 };
