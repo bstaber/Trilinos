@@ -8,12 +8,21 @@ class TIMooney : public hyperelasticity_setup
 {
 public:
     
+    double topcoord;
+    double mu1, mu2, mu3, mu4, mu5, mu;
+    double trm, beta3, beta4, beta5;
+    double ptrmbeta4, ptrmbeta5;
+    double plyagl, cos_plyagl, sin_plyagl;
+    int n_ply;
+    std::vector<int> phase;
+    
     TIMooney(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
         Mesh = new mesh(comm, mesh_file);
         Comm = Mesh->Comm;
+        findtop();
         
         StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
         OverlapMap = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
@@ -21,10 +30,9 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
-        for (unsigned int e=0; e<Mesh->n_cells/n_ply; ++e){
-            for (unsigned int j=0; j<n_ply/2; ++j){
-                phase.push_back(0);
-                phase.push_back(1);
+        for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
+            for (unsigned int j=0; j<32; ++j){
+                phase.push_back(j);
             }
         }
     }
@@ -47,6 +55,19 @@ public:
         ptrmbeta5 = std::pow(trm,beta5);
     }
     
+    void findtop(){
+        topcoord = 0.0;
+        if (Comm->MyPID()==0){
+            for (unsigned int n=0; n<Mesh->n_nodes; ++n){
+                if (Mesh->nodes_coord[3*n+1]>topcoord){
+                    topcoord = Mesh->nodes_coord[3*n+1];
+                }
+            }
+        }
+        Comm->Broadcast(&topcoord,1,0);
+        Comm->Barrier();
+    }
+    
     void set_plyagl(double & Plyagl){
         plyagl = Plyagl;
     }
@@ -66,7 +87,7 @@ public:
             if(coord==0.0){
                 n_bc_dof+=3;
             }
-            if(coord==25.0){
+            if(coord==topcoord){
                 n_bc_dof+=3;
             }
         }
@@ -82,7 +103,7 @@ public:
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
-            if (coord==25.0){
+            if (coord==topcoord){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+dof;
                 dof_on_boundary[indbc+2] = 3*inode+2;
@@ -102,7 +123,7 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==25.0){
+            if (coord==topcoord){
                 v[0][StandardMap->LID(3*node+dof)] = displacement;
             }
         }
@@ -119,7 +140,7 @@ public:
                 F[0][StandardMap->LID(3*node+1)] = 0.0;
                 F[0][StandardMap->LID(3*node+2)] = 0.0;
             }
-            if (coord==25.0){
+            if (coord==topcoord){
                 F[0][StandardMap->LID(3*node+0)]   = 0.0;
                 F[0][StandardMap->LID(3*node+dof)] = displacement;
                 F[0][StandardMap->LID(3*node+2)]   = 0.0;
@@ -131,13 +152,13 @@ public:
     
     void get_material_parameters(unsigned int & e_lid, unsigned int & gp){
         int e_gid = Mesh->local_cells[e_lid];
-        if (phase[e_gid]==0){
+        if (phase[e_gid] % 2){
             cos_plyagl = std::cos(plyagl);
             sin_plyagl = std::sin(plyagl);
         }
         else{
             cos_plyagl = std::cos(plyagl);
-            sin_plyagl = -std::sin(plyagl);
+            sin_plyagl = std::sin(plyagl);
         }
     }
     
@@ -250,26 +271,6 @@ public:
                                                       
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
-    
-    double mu1;
-    double mu2;
-    double mu3;
-    double mu4;
-    double mu5;
-    double mu;
-    double trm;
-    double beta3;
-    double beta4;
-    double beta5;
-    
-    double ptrmbeta4;
-    double ptrmbeta5;
-    
-    double plyagl;
-    double cos_plyagl;
-    double sin_plyagl;
-    int n_ply;
-    std::vector<int> phase;
     
 };
 

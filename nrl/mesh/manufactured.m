@@ -17,7 +17,7 @@ assume(x,'real');
 assume(u,'real');
 u(1) = a*(x(1)-25)*x(2)*(25-x(2));
 u(2) = a*x(2)*(25-x(2));
-u(3) = sin((b/a)*u(1));
+u(3) = ((b/a)*u(1));
 
 for i = 1 : 3
     for j = 1 : 3
@@ -27,7 +27,12 @@ end
 F = eye(3)+gradu;
 C = F'*F;
 
-M = diag([mu4 mu5 mu5]);
+syms c s real
+n = [c;s;0];
+P = n*n';
+Q = [s*s, -c*s, 0; -c*s, c*c, 0; 0, 0, 1];
+M = mu4*P + mu5*Q;
+
 I1 = trace(C);
 I2 = 0.5*(I1^2-trace(C*C));
 I3 = det(C);

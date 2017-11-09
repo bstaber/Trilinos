@@ -1,35 +1,30 @@
-#ifndef COMPRESSIBLE_MOONEY_TRANSVERSE_ISOTROPIC_RANDOM_FIELD_HPP
-#define COMPRESSIBLE_MOONEY_TRANSVERSE_ISOTROPIC_RANDOM_FIELD_HPP
+#ifndef MANUFACTUREDSOLUTION_HPP
+#define MANUFACTUREDSOLUTION_HPP
 
 #include "tensor_calculus.hpp"
-#include "shinozukapp_layeredcomp_2d.hpp"
 #include "hyperelasticity_setup_pp.hpp"
 
-class TIMooney_RandomField : public hyperelasticity_setup
+class manufacturedSolution : public hyperelasticity_setup
 {
 public:
     
-    Teuchos::RCP<shinozuka_layeredcomp_2d> GRF_Generator;
-    
-    Epetra_SerialDenseVector mu1rf, mu2rf, mu3rf, mu4rf, mu5rf;
-    Epetra_SerialDenseVector omega;
-    Epetra_SerialDenseVector mean_mu;
-    double mu1, mu2, mu3, mu4, mu5;
-    double mean_mu1, mean_mu2, mean_mu3, mean_mu4, mean_mu5, mu, trm;
-    double beta3, beta4, beta5, ptrmbeta4, ptrmbeta5;
+    double mu1, mu2, mu3, mu4, mu5, mu;
+    double trm, beta3, beta4, beta5;
+    double ptrmbeta4, ptrmbeta5;
     double plyagl, cos_plyagl, sin_plyagl;
-    double topcoord;
+    int n_ply;
     std::vector<int> phase;
     
-    TIMooney_RandomField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    manufacturedSolution(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
+        n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
         Mesh = new mesh(comm, mesh_file);
         Comm = Mesh->Comm;
         findtop();
         
-        StandardMap        = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
-        OverlapMap         = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
+        StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
+        OverlapMap = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
         ImportToOverlapMap = new Epetra_Import(*OverlapMap,*StandardMap);
         create_FECrsGraph();
         
@@ -39,16 +34,24 @@ public:
                 phase.push_back(j);
             }
         }
-        mean_mu.Resize(5);
-        omega.Resize(6);
-        int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
-        omega(4) = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
-        omega(5) = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
-        
-        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,omega(4),omega(5)));
     }
     
-    ~TIMooney_RandomField(){
+    ~manufacturedSolution(){
+    }
+    
+    void set_parameters(Epetra_SerialDenseVector & x){
+        mu1 = x(0);
+        mu2 = x(1);
+        mu3 = x(2);
+        mu4 = x(3);
+        mu5 = x(4);
+        beta3 = -0.5;
+        beta4 = x(5);
+        beta5 = x(6);
+        mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
+        trm = mu4 + 2.0*mu5;
+        ptrmbeta4 = std::pow(trm,beta4);
+        ptrmbeta5 = std::pow(trm,beta5);
     }
     
     void findtop(){
@@ -66,73 +69,6 @@ public:
     
     void set_plyagl(double & Plyagl){
         plyagl = Plyagl;
-    }
-    
-    void setParameters(Epetra_SerialDenseVector & parameters, Epetra_SerialDenseVector & exponents, Epetra_SerialDenseVector & hyperParameters){
-        mean_mu = parameters;
-        beta4   = exponents(0);
-        beta5   = exponents(1);
-        omega   = hyperParameters;
-    }
-    
-    void RandomFieldGenerator(Epetra_IntSerialDenseVector & seeds){
-        
-        Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        Epetra_SerialDenseVector w2_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        Epetra_SerialDenseVector w3_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        Epetra_SerialDenseVector w4_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        Epetra_SerialDenseVector w5_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        
-        mu1rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        mu2rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        mu3rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        mu4rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        mu5rf.Resize(Mesh->n_local_cells*Mesh->n_gauss_cells);
-        
-        GRF_Generator->l1 = omega(4);
-        GRF_Generator->l2 = omega(5);
-        
-        GRF_Generator->rng.seed(seeds(0));
-        GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
-        
-        GRF_Generator->rng.seed(seeds(1));
-        GRF_Generator->generator_gauss_points(w2_shino,*Mesh,phase);
-        
-        GRF_Generator->rng.seed(seeds(2));
-        GRF_Generator->generator_gauss_points(w3_shino,*Mesh,phase);
-        
-        GRF_Generator->rng.seed(seeds(3));
-        GRF_Generator->generator_gauss_points(w4_shino,*Mesh,phase);
-        
-        GRF_Generator->rng.seed(seeds(4));
-        GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
-        
-        double alpha, beta;
-        for (unsigned int i=0; i<w1_shino.Length(); ++i){
-            alpha = 1.0/(omega(0)*omega(0)); beta = mean_mu(0)*omega(0)*omega(0);
-            mu1rf(i) = icdf_gamma(w1_shino(i),alpha,beta);
-            
-            alpha = 1.0/(omega(1)*omega(1)); beta = mean_mu(1)*omega(1)*omega(1);
-            mu2rf(i) = icdf_gamma(w2_shino(i),alpha,beta);
-            
-            alpha = 1.0/(omega(2)*omega(2)); beta = mean_mu(2)*omega(2)*omega(2);
-            mu3rf(i) = icdf_gamma(w3_shino(i),alpha,beta);
-            
-            alpha = 1.0/(omega(3)*omega(3)); beta = mean_mu(3)*omega(3)*omega(3);
-            mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
-            
-            alpha = (2.0*alpha)-1.0; beta = mean_mu(4)/alpha;
-            mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
-        }
-        
-    }
-    
-    double icdf_gamma(double & w, double & alpha, double & beta){
-        double erfx = boost::math::erf<double>(w);
-        double y = (1.0/2.0)*(1.0 + erfx);
-        double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
-        double z = yinv*beta;
-        return z;
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
@@ -215,15 +151,9 @@ public:
     
     void get_material_parameters(unsigned int & e_lid, unsigned int & gp){
         int e_gid = Mesh->local_cells[e_lid];
-        int n_gauss_cells = Mesh->n_gauss_cells;
-        mu1 = mu1rf(e_lid*n_gauss_cells+gp); mu2 = mu2rf(e_lid*n_gauss_cells+gp); mu3 = mu3rf(e_lid*n_gauss_cells+gp); mu4 = mu4rf(e_lid*n_gauss_cells+gp); mu5 = mu5rf(e_lid*n_gauss_cells+gp);
-        mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
-        trm = mu4 + 2.0*mu5;
-        ptrmbeta4 = std::pow(trm,beta4);
-        ptrmbeta5 = std::pow(trm,beta5);
         if (phase[e_gid] % 2){
             cos_plyagl = std::cos(plyagl);
-            sin_plyagl = std::sin(plyagl);
+            sin_plyagl = -std::sin(plyagl);
         }
         else{
             cos_plyagl = std::cos(plyagl);
@@ -337,10 +267,74 @@ public:
     
     void get_material_parameters_for_recover(unsigned int & e_lid, double & xi, double & eta, double & zeta){
     }
-                                                      
+    
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
+    }
+    
+    Epetra_SerialDenseVector getManufacturedSolution(Epetra_SerialDenseVector & x){
+        Epetra_SerialDenseVector u(3);
+        double c1 = 1.0e-4;
+        double c2 = 1.0e-3;
+        double c3 = 1.0e-3;
+        u(0) = c1*(x(0)-topcoord)*(topcoord-x(1))*x(1);
+        u(1) = c2*x(1)*(topcoord-x(1));
+        u(2) = std::sin((c3/c1)*u(0));
+    }
+    
+    Epetra_SerialDenseMatrix getManufacturedPiola(Epetra_SerialDenseVector & x){
+        
+        Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3)
+        
+        F(0,0) = 1.0 + alpha*(topcoord-x(1))*x(1); F(0,1) = alpha*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(0,2) = 0.0;
+        F(1,0) = 0.0; F(1,1) = 1.0 + beta*(topcoord-2.0*x(1)); F(1,2) = 0.0;
+        F(2,0) = (gamma/alpha)*std::cos((gamma/alpha))*alpha*(topcoord-x(1))*x(1); F(2,1) = (gamma/alpha)*std::cos((gamma/alpha))*alpha*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(2,2) = 1.0;
+        
+        double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
+        
+        M(0,0) = mu4*sin_plyagl*sin_plyagl+mu5*cos_plyagl*cos_plyagl;
+        M(1,1) = mu4*cos_plyagl*cos_plyagl+mu5*sin_plyagl*sin_plyagl;
+        M(2,2) = mu5;
+        M(1,2) = 0.0; M(2,1) = 0.0;
+        M(0,2) = 0.0; M(2,0) = 0.0;
+        M(0,1) = (mu4-mu5)*cos_plyagl*sin_plyagl; M(1,0) = M(0,1);
+        
+        L(0,0) = (1.0/(det*det))*(C(1,1)*C(2,2)-C(1,2)*C(2,1));
+        L(1,1) = (1.0/(det*det))*(C(0,0)*C(2,2)-C(0,2)*C(2,0));
+        L(2,2) = (1.0/(det*det))*(C(0,0)*C(1,1)-C(0,1)*C(1,0));
+        L(1,2) = (1.0/(det*det))*(C(0,2)*C(1,0)-C(0,0)*C(1,2)); L(2,1) = L(1,2);
+        L(0,2) = (1.0/(det*det))*(C(0,1)*C(1,2)-C(0,2)*C(1,1)); L(2,0) = L(0,2);
+        L(0,1) = (1.0/(det*det))*(C(0,2)*C(2,1)-C(0,1)*C(2,2)); L(1,0) = L(0,1);
+        
+        LML.Multiply('N','N',1.0,M,L,0.0);
+        LML.Multiply('N','N',1.0,L,LML,0.0);
+        
+        C.Multiply('T','N',1.0,F,F,0.0);
+        CC.Multiply('N','N',1.0,C,C,0.0);
+        
+        double I1 = C(0,0) + C(1,1) + C(2,2);
+        double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
+        double I2 = (1.0/2.0)*(I1*I1-II1);
+        double I3 = det*det;
+        double I4 = C(0,0)*M(0) + C(1,1)*M(1,1) + C(2,2)*M(3,3) + 2.0*C(0,1)*M(0,1) + 2.0*C(0,2)*M(0,2) + 2.0*C(1,2)*M(1,2);
+        double I5 = CC(0,0)*M(0) + CC(1,1)*M(1,1) + CC(2,2)*M(3,3) + 2.0*CC(0,1)*M(0,1) + 2.0*CC(0,2)*M(0,2) + 2.0*CC(1,2)*M(1,2);
+        double J5 = I5 - I1*I4 + I2*trm;
+        double pI3 = std::pow(I3,-beta3);
+        double pI4 = std::pow(I4,beta4);
+        double pJ5 = std::pow(J5,beta5);
+        
+        eye(0,0) = 1.0; eye(0,1) = 0.0; eye(0,2) = 0.0;
+        eye(1,0) = 0.0; eye(1,1) = 1.0; eye(1,2) = 0.0;
+        eye(2,0) = 0.0; eye(2,1) = 0.0; eye(2,2) = 1.0;
+        
+        for (unsigned int i=0; i<3; ++i){
+            for (unsigned int j=0; j<3; ++j){
+                piola_stress(i,j) = 2.0*mu1*eye(i,j) + 2.0*mu2*(I1*eye(i,j)-C(i,j)) + (2.0*mu3*det*det-mu)*L(i,j) + (2.0/ptrmbeta4)*pI4*M(i,j) + (2.0/ptrmbeta5)*pJ5*(J5*L(i,j)-I3*LML(i,j)) - 2.0*trm*pI3*L(i,j);
+            }
+        }
+        //to do: how to get phase ?
     }
     
 };
 
 #endif
+
