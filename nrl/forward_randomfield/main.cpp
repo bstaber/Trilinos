@@ -68,9 +68,9 @@ MPI_Init(&argc, &argv);
     double width  = 25.0;
     for (int I=1; I<=5; ++I){
         for (int J=1; J<=5; ++J){
-            hyperParameters(0) = I/10.0;
-            hyperParameters(1) = I/10.0;
-            hyperParameters(2) = I/10.0;
+            hyperParameters(0) = I/20.0;
+            hyperParameters(1) = I/20.0;
+            hyperParameters(2) = I/20.0;
             hyperParameters(3) = I/10.0;
             hyperParameters(4) = length*J*0.05;
             hyperParameters(5) = width*J*0.05;
@@ -79,8 +79,8 @@ MPI_Init(&argc, &argv);
                     seeds(k) = 5*j+k;
                 }
                 double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,false);
-                std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/mpa_u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
-                std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/mpa_e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+                std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+                std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
                 costFunction->print_newton_solution(path1);
                 costFunction->print_green_lagrange(path2);
                 if (Comm.MyPID()==0){
