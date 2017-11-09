@@ -68,9 +68,9 @@ MPI_Init(&argc, &argv);
     double width  = 25.0;
     for (int I=1; I<=5; ++I){
         for (int J=1; J<=5; ++J){
-            hyperParameters(0) = I/20.0;
-            hyperParameters(1) = I/20.0;
-            hyperParameters(2) = I/20.0;
+            hyperParameters(0) = I/10.0;
+            hyperParameters(1) = I/10.0;
+            hyperParameters(2) = I/10.0;
             hyperParameters(3) = I/10.0;
             hyperParameters(4) = length*J*0.05;
             hyperParameters(5) = width*J*0.05;
