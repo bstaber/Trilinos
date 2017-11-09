@@ -66,6 +66,7 @@ public:
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
         assemble_dirichlet(x,K,F);
+        //forcing+neumann
     }
     
     void setup_dirichlet_conditions(){
@@ -285,7 +286,7 @@ public:
     
     Epetra_SerialDenseMatrix getManufacturedPiola(Epetra_SerialDenseVector & x){
         
-        Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3)
+        Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
         
         F(0,0) = 1.0 + alpha*(topcoord-x(1))*x(1); F(0,1) = alpha*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(0,2) = 0.0;
         F(1,0) = 0.0; F(1,1) = 1.0 + beta*(topcoord-2.0*x(1)); F(1,2) = 0.0;
@@ -330,10 +331,32 @@ public:
         
         for (unsigned int i=0; i<3; ++i){
             for (unsigned int j=0; j<3; ++j){
-                piola_stress(i,j) = 2.0*mu1*eye(i,j) + 2.0*mu2*(I1*eye(i,j)-C(i,j)) + (2.0*mu3*det*det-mu)*L(i,j) + (2.0/ptrmbeta4)*pI4*M(i,j) + (2.0/ptrmbeta5)*pJ5*(J5*L(i,j)-I3*LML(i,j)) - 2.0*trm*pI3*L(i,j);
+                S(i,j) = 2.0*mu1*eye(i,j) + 2.0*mu2*(I1*eye(i,j)-C(i,j)) + (2.0*mu3*det*det-mu)*L(i,j) + (2.0/ptrmbeta4)*pI4*M(i,j) + (2.0/ptrmbeta5)*pJ5*(J5*L(i,j)-I3*LML(i,j)) - 2.0*trm*pI3*L(i,j);
             }
         }
-        //to do: how to get phase ?
+        P.Multiply('N','N',1.0,F,S,0.0);
+        return P;
+    }
+    
+    Epetra_SerialDenseVector manufacturedForcing(Epetra_SerialDenseVector & x){
+        Epetra_SerialDenseVector f(3), xf, xb;
+        Epetra_SerialDenseMatrix Pf(3,3), Pb(3,3);
+        double h = 1.0e-6;
+        
+        for (unsigned int i=0; i<3; ++i){
+            f(i) = 0.0;
+        }
+        for (unsigned int j=0; j<3; ++j){
+            xf = x;
+            xb = x;
+            xf(j) += h;
+            xb(j) -= h;
+            Pf = manufacturedPiola(xf);
+            Pb = manufacturedPiola(xb);
+            for (unsigned int i=0; i<3; ++i){
+                f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
+            }
+        }
     }
     
 };
