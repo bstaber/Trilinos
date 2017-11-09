@@ -16,7 +16,6 @@ public:
     std::vector<int> phase;
     
     manufacturedSolution(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
-        
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         n_ply = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
         Mesh = new mesh(comm, mesh_file);
@@ -40,14 +39,8 @@ public:
     }
     
     void set_parameters(Epetra_SerialDenseVector & x){
-        mu1 = x(0);
-        mu2 = x(1);
-        mu3 = x(2);
-        mu4 = x(3);
-        mu5 = x(4);
-        beta3 = -0.5;
-        beta4 = x(5);
-        beta5 = x(6);
+        mu1 = x(0); mu2 = x(1); mu3 = x(2); mu4 = x(3); mu5 = x(4);
+        beta3 = -0.5; beta4 = x(5); beta5 = x(6);
         mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
         trm = mu4 + 2.0*mu5;
         ptrmbeta4 = std::pow(trm,beta4);
@@ -77,16 +70,15 @@ public:
     
     void setup_dirichlet_conditions(){
         n_bc_dof = 0;
-        int dof = 1;
-        double coord;
+        double y;
         unsigned int node;
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             node = Mesh->local_nodes[i];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if(coord==0.0){
+            y = Mesh->nodes_coord[3*node+1];
+            if(y==0.0){
                 n_bc_dof+=3;
             }
-            if(coord==topcoord){
+            if(y==topcoord){
                 n_bc_dof+=3;
             }
         }
@@ -95,16 +87,16 @@ public:
         dof_on_boundary = new int [n_bc_dof];
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==0.0){
+            y = Mesh->nodes_coord[3*node+dof];
+            if (y==0.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
-            if (coord==topcoord){
+            if (y==topcoord){
                 dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc+1] = 3*inode+dof;
+                dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
@@ -112,18 +104,28 @@ public:
     }
     
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-        //if (n_bc_dof>0){
-        Epetra_MultiVector v(*StandardMap,true);
-        v.PutScalar(0.0);
         
+        Epetra_MultiVector v(*StandardMap,true);
+        Epetra_SerialDenseVector u(3);
+        v.PutScalar(0.0);
+        double x,y,z;
         int node;
-        int dof = 1;
-        double coord;
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==topcoord){
-                v[0][StandardMap->LID(3*node+dof)] = displacement;
+            x = Mesh->nodes_coord[3*node+0];
+            y = Mesh->nodes_coord[3*node+1];
+            z = Mesh->nodes_coord[3*node+2];
+            if (y==0.0){
+                u = manufacturedSolution(x,y,z);
+                v[0][StandardMap->LID(3*node+0)] = u(0);
+                v[0][StandardMap->LID(3*node+1)] = u(1);
+                v[0][StandardMap->LID(3*node+2)] = u(2);
+            }
+            if (y==topcoord){
+                u = manufacturedSolution(x,y,z);
+                v[0][StandardMap->LID(3*node+0)] = u(0);
+                v[0][StandardMap->LID(3*node+1)] = u(1);
+                v[0][StandardMap->LID(3*node+2)] = u(2);
             }
         }
         
@@ -133,19 +135,19 @@ public:
         
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
+            y = Mesh->nodes_coord[3*node+1];
             if (coord==0.0){
-                F[0][StandardMap->LID(3*node+0)] = 0.0;
-                F[0][StandardMap->LID(3*node+1)] = 0.0;
-                F[0][StandardMap->LID(3*node+2)] = 0.0;
+                F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+                F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+                F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
             if (coord==topcoord){
-                F[0][StandardMap->LID(3*node+0)]   = 0.0;
-                F[0][StandardMap->LID(3*node+dof)] = displacement;
-                F[0][StandardMap->LID(3*node+2)]   = 0.0;
+                F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+                F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+                F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
         }
-        //}
+        
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
     
@@ -153,11 +155,11 @@ public:
         int e_gid = Mesh->local_cells[e_lid];
         if (phase[e_gid] % 2){
             cos_plyagl = std::cos(plyagl);
-            sin_plyagl = -std::sin(plyagl);
+            sin_plyagl = std::sin(plyagl);
         }
         else{
             cos_plyagl = std::cos(plyagl);
-            sin_plyagl = -std::sin(plyagl);
+            sin_plyagl = std::sin(plyagl);
         }
     }
     
