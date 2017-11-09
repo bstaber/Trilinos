@@ -1,0 +1,100 @@
+<ParameterList>
+    
+    <ParameterList name="Mesh">
+        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_man.msh"/>
+        <Parameter name="n_ply" type="int" value="32"/>
+        <Parameter name="nb_phys_groups" type="unsigned int" value="32"/>
+    </ParameterList>
+    
+    <ParameterList name="Linear Solver Builder">
+        <Parameter name="Linear Solver Type" type="string" value="AztecOO"/>
+        <ParameterList name="Linear Solver Types">
+            <ParameterList name="AztecOO">
+                <Parameter name="Output Every RHS" type="bool" value="1"/>
+                <ParameterList name="Forward Solve">
+                    <Parameter name="Tolerance" type="double" value="1e-6"/>
+                    <Parameter name="Max Iterations" type="int" value="400"/>
+                    <ParameterList name="AztecOO Settings">
+                        <Parameter name="Aztec Solver" type="string" value="GMRES"/>
+                        <Parameter name="Aztec Preconditioner" type="string" value="ilut"/>
+                        <Parameter name="Overlap" type="int" value="2"/>
+                        <Parameter name="Fill Factor" type="double" value="3"/>
+                        <Parameter name="RCM Reordering" type="string" value="Enabled"/>
+                        <Parameter name="Orthogonalization" type="string" value="Classical"/>
+                        <Parameter name="Size of Krylov Subspace" type="int" value="300"/>
+                        <Parameter name="Convergence Test" type="string" value="no scaling"/>
+                        <Parameter name="Output Frequency" type="int" value="0"/>
+                    </ParameterList>
+                </ParameterList>
+            </ParameterList>
+        </ParameterList>
+        <Parameter name="Preconditioner Type" type="string" value="None"/> 
+    </ParameterList>
+    
+    <ParameterList name="Laplace">
+        <Parameter name="solver" type="string" value="cg"/>
+        <Parameter name="precond" type="string" value="dom_decomp"/>
+        <Parameter name="subdomain_solve" type="string" value="icc"/>
+        <Parameter name="AZ_conv" type="string" value="noscaled"/>
+        <Parameter name="AZ_tol" type="double" value="1e-6"/>
+        <Parameter name="overlap" type="int" value="0"/>
+        <Parameter name="AZ_output" type="int" value="0"/>
+        <Parameter name="AZ_diagnostics" type="int" value="0"/>
+        <Parameter name="AZ_reorder" type="int" value="1"/>
+    </ParameterList>
+    
+    <ParameterList name="Newton">
+        <Parameter name="delta" type="double" value="0.2"/>
+        <Parameter name="iterMin" type="int" value="2"/>
+        <Parameter name="iterMax" type="int" value="10"/>
+        <Parameter name="nbBisMax" type="int" value="5"/>
+        <Parameter name="NormFTol" type="double" value="1e-6"/>
+        <Parameter name="NormFMax" type="double" value="1e7"/>
+        <Parameter name="eps" type="double" value="1e-8"/>
+        <Parameter name="success_parameter" type="double" value="2.0"/>
+        <Parameter name="failure_parameter" type="double" value="2.0"/>
+        <Parameter name="number_of_loads" type="int" value="1"/>
+        <Parameter name="bc_disp" type="double" value="0.010"/>
+        <Parameter name="pressure_load" type="double" value="0.0"/>
+    </ParameterList>
+    
+    <ParameterList name="Krylov">
+        <Parameter name="solver" type="string" value="gmres"/>
+        <Parameter name="kspace" type="int" value="500"/>
+        <Parameter name="orthog" type="string" value="classical"/>
+        <Parameter name="precond" type="string" value="dom_decomp"/>
+        <Parameter name="subdomain" type="string" value="ilut"/>
+        <Parameter name="overlap" type="int" value="2"/>
+        <Parameter name="type_overlap" type="string" value="symmetric"/>
+        <Parameter name="pre_calc" type="string" value="recalc"/>
+        <Parameter name="ilut_fill" type="double" value="4.0"/>
+        <Parameter name="athresh" type="double" value="0.0"/>
+        <Parameter name="rthresh" type="double" value="0.0"/>
+        <Parameter name="drop" type="double" value="0.0"/>
+        <Parameter name="AZ_conv" type="string" value="noscaled"/>
+        <Parameter name="AZ_tol" type="double" value="1e-6"/>
+        <Parameter name="AZ_output" type="int" value="0"/>
+        <Parameter name="AZ_diagnostics" type="string" value="all"/>
+        <Parameter name="AZ_reorder" type="int" value="1"/>
+    </ParameterList>
+    
+    <ParameterList name="TIMooney">
+        <Parameter name="mu1" type="double" value="1.7212"/>
+        <Parameter name="mu2" type="double" value="0.0426"/>
+        <Parameter name="mu3" type="double" value="0.0429"/>
+        <Parameter name="mu4" type="double" value="1.3138"/>
+        <Parameter name="mu5" type="double" value="0.0609"/>
+        <Parameter name="beta3" type="double" value="-0.4694"/>
+        <Parameter name="beta4" type="double" value="27.9535"/>
+        <Parameter name="beta5" type="double" value="0.0306"/>
+        <Parameter name="angle" type="double" value="30.0"/> <!--1.570796326794897"/-->
+    </ParameterList>
+    
+    <ParameterList name="Shinozuka">
+    <Parameter name="order" type="int" value="10"/>
+    <Parameter name="lx" type="double" value="5.0"/>
+    <Parameter name="ly" type="double" value="2.5"/>
+    <Parameter name="lz" type="double" value="0.128125"/>
+    </ParameterList>
+    
+</ParameterList>

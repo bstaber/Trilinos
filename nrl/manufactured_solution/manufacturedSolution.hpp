@@ -2,6 +2,8 @@
 #define MANUFACTUREDSOLUTION_HPP
 
 #include "tensor_calculus.hpp"
+#include "Newton_Raphsonpp.hpp"
+#include "distributenrldata.hpp"
 #include "hyperelasticity_setup_pp.hpp"
 
 class manufacturedSolution : public hyperelasticity_setup
@@ -11,7 +13,7 @@ public:
     double mu1, mu2, mu3, mu4, mu5, mu;
     double trm, beta3, beta4, beta5;
     double ptrmbeta4, ptrmbeta5;
-    double plyagl, cos_plyagl, sin_plyagl;
+    double plyagl, cos_plyagl, sin_plyagl, topcoord;
     int n_ply;
     std::vector<int> phase;
     
@@ -88,7 +90,7 @@ public:
         dof_on_boundary = new int [n_bc_dof];
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            y = Mesh->nodes_coord[3*node+dof];
+            y = Mesh->nodes_coord[3*node+1];
             if (y==0.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
@@ -117,13 +119,13 @@ public:
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
             if (y==0.0){
-                u = manufacturedSolution(x,y,z);
+                u = getManufacturedSolution(x,y,z);
                 v[0][StandardMap->LID(3*node+0)] = u(0);
                 v[0][StandardMap->LID(3*node+1)] = u(1);
                 v[0][StandardMap->LID(3*node+2)] = u(2);
             }
             if (y==topcoord){
-                u = manufacturedSolution(x,y,z);
+                u = getManufacturedSolution(x,y,z);
                 v[0][StandardMap->LID(3*node+0)] = u(0);
                 v[0][StandardMap->LID(3*node+1)] = u(1);
                 v[0][StandardMap->LID(3*node+2)] = u(2);
@@ -137,12 +139,12 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             y = Mesh->nodes_coord[3*node+1];
-            if (coord==0.0){
+            if (y==0.0){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
                 F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
                 F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
-            if (coord==topcoord){
+            if (y==topcoord){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
                 F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
                 F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
@@ -274,25 +276,28 @@ public:
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
     
-    Epetra_SerialDenseVector getManufacturedSolution(Epetra_SerialDenseVector & x){
+    Epetra_SerialDenseVector getManufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
         double c1 = 1.0e-4;
         double c2 = 1.0e-3;
         double c3 = 1.0e-3;
-        u(0) = c1*(x(0)-topcoord)*(topcoord-x(1))*x(1);
-        u(1) = c2*x(1)*(topcoord-x(1));
+        u(0) = c1*(x1-topcoord)*(topcoord-x1)*x1;
+        u(1) = c2*x1*(topcoord-x1);
         u(2) = std::sin((c3/c1)*u(0));
+        return u;
     }
     
     Epetra_SerialDenseMatrix getManufacturedPiola(double & x1, double & x2, double & x3){
         
         Epetra_SerialDenseVector x(3);
         Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
-        
+        double c1 = 1.0e-4;
+        double c2 = 1.0e-3;
+        double c3 = 1.0e-3;
         x(0) = x1; x(1) = x2; x(2) = x3;
-        F(0,0) = 1.0 + alpha*(topcoord-x(1))*x(1); F(0,1) = alpha*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(0,2) = 0.0;
-        F(1,0) = 0.0; F(1,1) = 1.0 + beta*(topcoord-2.0*x(1)); F(1,2) = 0.0;
-        F(2,0) = (gamma/alpha)*std::cos((gamma/alpha))*alpha*(topcoord-x(1))*x(1); F(2,1) = (gamma/alpha)*std::cos((gamma/alpha))*alpha*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(2,2) = 1.0;
+        F(0,0) = 1.0 + c1*(topcoord-x(1))*x(1); F(0,1) = c1*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(0,2) = 0.0;
+        F(1,0) = 0.0; F(1,1) = 1.0 + c2*(topcoord-2.0*x(1)); F(1,2) = 0.0;
+        F(2,0) = (c3/c1)*std::cos((c3/c1))*c1*(topcoord-x(1))*x(1); F(2,1) = (c3/c1)*std::cos((c3/c1))*c1*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(2,2) = 1.0;
         
         double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
         
@@ -320,8 +325,8 @@ public:
         double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
         double I2 = (1.0/2.0)*(I1*I1-II1);
         double I3 = det*det;
-        double I4 = C(0,0)*M(0) + C(1,1)*M(1,1) + C(2,2)*M(3,3) + 2.0*C(0,1)*M(0,1) + 2.0*C(0,2)*M(0,2) + 2.0*C(1,2)*M(1,2);
-        double I5 = CC(0,0)*M(0) + CC(1,1)*M(1,1) + CC(2,2)*M(3,3) + 2.0*CC(0,1)*M(0,1) + 2.0*CC(0,2)*M(0,2) + 2.0*CC(1,2)*M(1,2);
+        double I4 = C(0,0)*M(0,0) + C(1,1)*M(1,1) + C(2,2)*M(3,3) + 2.0*C(0,1)*M(0,1) + 2.0*C(0,2)*M(0,2) + 2.0*C(1,2)*M(1,2);
+        double I5 = CC(0,0)*M(0,0) + CC(1,1)*M(1,1) + CC(2,2)*M(3,3) + 2.0*CC(0,1)*M(0,1) + 2.0*CC(0,2)*M(0,2) + 2.0*CC(1,2)*M(1,2);
         double J5 = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
         double pI4 = std::pow(I4,beta4);
@@ -354,15 +359,16 @@ public:
             xb = x;
             xf(j) += h;
             xb(j) -= h;
-            Pf = manufacturedPiola(xf(0),xf(1),xf(2));
-            Pb = manufacturedPiola(xb(0),xb(1),xb(2));
+            Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
+            Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
             for (unsigned int i=0; i<3; ++i){
                 f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
             }
         }
+        return f;
     }
     
-    void assemble_forcing_and_neumann(Epetra_Vector & x, Epetra_FEVector & F){
+    void assemble_forcing_and_neumann(Epetra_FEVector & F){
         
         int node, e_gid, error;
         int n_gauss_points = Mesh->n_gauss_cells;
@@ -394,7 +400,7 @@ public:
             
             for (unsigned int gp=0; gp<n_gauss_points; ++gp){
                 gauss_weight = Mesh->gauss_weight_cells(gp);
-                fvol = manufacturedForcing(xg(0,gp),xg(1,gp),x(2,gp));
+                fvol = manufacturedForcing(xg(0,gp),xg(1,gp),xg(2,gp));
                 for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
                     for (unsigned int iddl=0; iddl<3; ++iddl){
                         fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tri(e_lid,gp);
@@ -410,7 +416,7 @@ public:
         int* Indices_tri;
         Indices_tri = new int [3*Mesh->face_type];
         n_gauss_points = Mesh->n_gauss_faces;
-        Epetra_SerialDenseVector feneumann(3*Mesh->el_type), fneumann(3);
+        Epetra_SerialDenseVector feneumann(3*Mesh->el_type), fneumann(3), normal(3);
         Epetra_SerialDenseMatrix piola(3,3);
         Epetra_SerialDenseMatrix d_shape_functions(Mesh->face_type,2);
         Epetra_SerialDenseMatrix dxi_matrix_x(3,2);
@@ -435,12 +441,12 @@ public:
             xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tri,0.0);
             for (unsigned int gp=0; gp<n_gauss_points; ++gp){
                 gauss_weight = Mesh->gauss_weight_faces(gp);
-                piola = manufacturedPiola(xg(0,gp),xg(1,gp),xg(2,gp));
+                piola = getManufacturedPiola(xg(0,gp),xg(1,gp),xg(2,gp));
                 for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                     d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
                     d_shape_functions(inode,1) = Mesh->D2_N_tri(gp,inode);
                 }
-                dxi_matrix_x.Multiply('N','N',1.0,matrix_x,d_shape_functions,0.0);
+                dxi_matrix_x.Multiply('N','N',1.0,matrix_X,d_shape_functions,0.0);
                 normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);
                 normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
                 normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
