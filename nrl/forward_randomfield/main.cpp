@@ -63,6 +63,7 @@ MPI_Init(&argc, &argv);
         std::cout << "Value" << std::setw(10) << "Delta" << std::setw(10) << "lx" << std::setw(10) << "ly" << "\n";
     }
     
+    int nmc = 1;
     double length = 50.0;
     double width  = 25.0;
     for (int I=1; I<=5; ++I){
@@ -73,7 +74,7 @@ MPI_Init(&argc, &argv);
             hyperParameters(3) = I/10.0;
             hyperParameters(4) = length*J*0.05;
             hyperParameters(5) = width*J*0.05;
-            for (int j=0; j<10; ++j){
+            for (int j=0; j<nmc; ++j){
                 for (int k=0; k<5; ++k){
                     seeds(k) = 5*j+k;
                 }
