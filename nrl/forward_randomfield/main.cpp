@@ -45,7 +45,7 @@ MPI_Init(&argc, &argv);
     
     Epetra_IntSerialDenseVector seeds(5);
     
-    int id = 7;
+    int id = 2;
     Epetra_SerialDenseVector parameters(5), exponents(2), hyperParameters(6);
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
@@ -79,10 +79,10 @@ MPI_Init(&argc, &argv);
                     seeds(k) = 5*j+k;
                 }
                 double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,false);
-                std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
+                /*std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
                 std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
                 costFunction->print_newton_solution(path1);
-                costFunction->print_green_lagrange(path2);
+                costFunction->print_green_lagrange(path2);*/
                 if (Comm.MyPID()==0){
                     std::cout << value << std::setw(10) << I/10.0 << std::setw(10) << length*J*0.05 << std::setw(10) << width*J*0.05 << "\n";
                 }
