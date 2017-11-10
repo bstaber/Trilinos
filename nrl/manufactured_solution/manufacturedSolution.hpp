@@ -461,6 +461,7 @@ public:
                 normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
                 normal.Scale(normal.Norm2());
                 fneumann.Multiply('N','N',1.0,piola,normal,0.0);
+                std::cout << fneumann << "\n";
                 fneumann.Scale(stepInc);
                 for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                     for (unsigned int iddl=0; iddl<3; ++iddl){
