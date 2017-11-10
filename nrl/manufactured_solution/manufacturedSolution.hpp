@@ -13,7 +13,7 @@ public:
     double mu1, mu2, mu3, mu4, mu5, mu;
     double trm, beta3, beta4, beta5;
     double ptrmbeta4, ptrmbeta5;
-    double plyagl, cos_plyagl, sin_plyagl, topcoord;
+    double plyagl, cos_plyagl, sin_plyagl, topcoord, stepInc;
     int n_ply;
     std::vector<int> phase;
     
@@ -47,6 +47,10 @@ public:
         trm = mu4 + 2.0*mu5;
         ptrmbeta4 = std::pow(trm,beta4);
         ptrmbeta5 = std::pow(trm,beta5);
+    }
+    
+    void setStep(double step){
+        stepInc = step;
     }
     
     void findtop(){
@@ -278,9 +282,9 @@ public:
     
     Epetra_SerialDenseVector getManufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
-        double c1 = 1.0e-4;
-        double c2 = 1.0e-3;
-        double c3 = 1.0e-3;
+        double c1 = 2.0e2;
+        double c2 = 1.0e0;
+        double c3 = 2.0e2;
         u(0) = c1*(x1-topcoord)*(topcoord-x2)*x2;
         u(1) = c2*x2*(topcoord-x2);
         u(2) = std::sin((c3/c1)*u(0));
@@ -290,15 +294,14 @@ public:
     Epetra_SerialDenseMatrix getManufacturedPiola(double & x1, double & x2, double & x3){
         
         Epetra_SerialDenseVector x(3);
-        Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
-        double c1 = 1.0e-4;
-        double c2 = 1.0e-3;
-        double c3 = 1.0e-3;
+        Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), ML(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
+        double c1 = 2.0e2;
+        double c2 = 1.0e0;
+        double c3 = 2.0e2;
         x(0) = x1; x(1) = x2; x(2) = x3;
         F(0,0) = 1.0 + c1*(topcoord-x(1))*x(1); F(0,1) = c1*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(0,2) = 0.0;
         F(1,0) = 0.0; F(1,1) = 1.0 + c2*(topcoord-2.0*x(1)); F(1,2) = 0.0;
         F(2,0) = (c3/c1)*std::cos((c3/c1))*c1*(topcoord-x(1))*x(1); F(2,1) = (c3/c1)*std::cos((c3/c1))*c1*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(2,2) = 1.0;
-        
         double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
         
         M(0,0) = mu4*sin_plyagl*sin_plyagl+mu5*cos_plyagl*cos_plyagl;
@@ -308,6 +311,9 @@ public:
         M(0,2) = 0.0; M(2,0) = 0.0;
         M(0,1) = (mu4-mu5)*cos_plyagl*sin_plyagl; M(1,0) = M(0,1);
         
+        C.Multiply('T','N',1.0,F,F,0.0);
+        CC.Multiply('N','N',1.0,C,C,0.0);
+        
         L(0,0) = (1.0/(det*det))*(C(1,1)*C(2,2)-C(1,2)*C(2,1));
         L(1,1) = (1.0/(det*det))*(C(0,0)*C(2,2)-C(0,2)*C(2,0));
         L(2,2) = (1.0/(det*det))*(C(0,0)*C(1,1)-C(0,1)*C(1,0));
@@ -315,18 +321,15 @@ public:
         L(0,2) = (1.0/(det*det))*(C(0,1)*C(1,2)-C(0,2)*C(1,1)); L(2,0) = L(0,2);
         L(0,1) = (1.0/(det*det))*(C(0,2)*C(2,1)-C(0,1)*C(2,2)); L(1,0) = L(0,1);
         
-        LML.Multiply('N','N',1.0,M,L,0.0);
-        LML.Multiply('N','N',1.0,L,LML,0.0);
-        
-        C.Multiply('T','N',1.0,F,F,0.0);
-        CC.Multiply('N','N',1.0,C,C,0.0);
+        ML.Multiply('N','N',1.0,M,L,0.0);
+        LML.Multiply('N','N',1.0,L,ML,0.0);
         
         double I1 = C(0,0) + C(1,1) + C(2,2);
         double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
         double I2 = (1.0/2.0)*(I1*I1-II1);
         double I3 = det*det;
-        double I4 = C(0,0)*M(0,0) + C(1,1)*M(1,1) + C(2,2)*M(3,3) + 2.0*C(0,1)*M(0,1) + 2.0*C(0,2)*M(0,2) + 2.0*C(1,2)*M(1,2);
-        double I5 = CC(0,0)*M(0,0) + CC(1,1)*M(1,1) + CC(2,2)*M(3,3) + 2.0*CC(0,1)*M(0,1) + 2.0*CC(0,2)*M(0,2) + 2.0*CC(1,2)*M(1,2);
+        double I4 = C(0,0)*M(0,0) + C(1,1)*M(1,1) + C(2,2)*M(2,2) + 2.0*C(0,1)*M(0,1) + 2.0*C(0,2)*M(0,2) + 2.0*C(1,2)*M(1,2);
+        double I5 = CC(0,0)*M(0,0) + CC(1,1)*M(1,1) + CC(2,2)*M(2,2) + 2.0*CC(0,1)*M(0,1) + 2.0*CC(0,2)*M(0,2) + 2.0*CC(1,2)*M(1,2);
         double J5 = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
         double pI4 = std::pow(I4,beta4);
@@ -361,7 +364,6 @@ public:
             xb(j) -= h;
             Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
             Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
-            std::cout << Pf << "\n";
             for (unsigned int i=0; i<3; ++i){
                 f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
             }
@@ -402,19 +404,19 @@ public:
             for (unsigned int gp=0; gp<n_gauss_points; ++gp){
                 gauss_weight = Mesh->gauss_weight_cells(gp);
                 fvol = manufacturedForcing(xg(0,gp),xg(1,gp),xg(2,gp));
+                fvol.Scale(stepInc);
                 for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
                     for (unsigned int iddl=0; iddl<3; ++iddl){
-                        fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tri(e_lid,gp);
+                        fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tetra(e_lid,gp);
                     }
                 }
             }
-            
             for (unsigned int i=0; i<3*Mesh->el_type; ++i){
                 int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
             }
         }
         
-        /*int* Indices_tri;
+        int* Indices_tri;
         Indices_tri = new int [3*Mesh->face_type];
         n_gauss_points = Mesh->n_gauss_faces;
         Epetra_SerialDenseVector feneumann(3*Mesh->el_type), fneumann(3), normal(3);
@@ -452,6 +454,7 @@ public:
                 normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
                 normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
                 fneumann.Multiply('N','N',1.0,piola,normal,0.0);
+                fneumann.Scale(stepInc);
                 for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                     for (unsigned int iddl=0; iddl<3; ++iddl){
                         feneumann(3*inode+iddl) += gauss_weight*fneumann(iddl)*Mesh->N_tri(gp,inode);
@@ -466,7 +469,7 @@ public:
             }
             
         }
-     */
+     
     }
     
 };

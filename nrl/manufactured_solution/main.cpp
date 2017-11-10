@@ -52,7 +52,7 @@ MPI_Init(&argc, &argv);
     parameters(5)  = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     parameters(6)  = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     for (unsigned int i=0; i<5; i++){
-        parameters(i) = 1.0e3*parameters(i);
+        parameters(i) = 1.0e9*parameters(i);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
     manufactured->set_parameters(parameters);
@@ -62,7 +62,13 @@ MPI_Init(&argc, &argv);
     Newton->Initialization();
     Newton->setParameters(*paramList);
     Newton->bc_disp = 0.0;
-    int error = Newton->Solve_with_Aztec(true);
+    double delta = 0.025;
+    for (int k=1; k<5; ++k){
+        manufactured->setStep(k*delta);
+        int error = Newton->Solve_with_Aztec(true);
+    }
+    std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured.mtx";
+    Newton->print_newton_solution(path1);
     
 #ifdef HAVE_MPI
     MPI_Finalize();
