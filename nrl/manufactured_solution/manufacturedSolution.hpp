@@ -283,7 +283,7 @@ public:
     Epetra_SerialDenseVector getManufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e2;
-        double c2 = 1.0e0;
+        double c2 = 1.0e1;
         double c3 = 2.0e2;
         u(0) = c1*(x1-topcoord)*(topcoord-x2)*x2;
         u(1) = c2*x2*(topcoord-x2);
@@ -296,7 +296,7 @@ public:
         Epetra_SerialDenseVector x(3);
         Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), ML(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
         double c1 = 2.0e2;
-        double c2 = 1.0e0;
+        double c2 = 1.0e1;
         double c3 = 2.0e2;
         x(0) = x1; x(1) = x2; x(2) = x3;
         F(0,0) = 1.0 + c1*(topcoord-x(1))*x(1);
