@@ -1,7 +1,7 @@
 <ParameterList>
     
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_man.msh.msh"/>
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_man.msh"/>
         <Parameter name="n_ply" type="int" value="4"/>
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
     </ParameterList>
