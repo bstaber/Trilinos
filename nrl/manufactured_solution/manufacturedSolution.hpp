@@ -418,7 +418,7 @@ public:
                 }
             }
             for (unsigned int i=0; i<3*Mesh->el_type; ++i){
-                int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
+                //int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
             }
         }
         
@@ -460,7 +460,6 @@ public:
                 normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
                 normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
                 normal.Scale(1.0/normal.Norm2());
-                std::cout << normal(0) << std::setw(10) << normal(1) << std::setw(10) << normal(2) << "\n";
                 fneumann.Multiply('N','N',1.0,piola,normal,0.0);
                 fneumann.Scale(stepInc);
                 for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
