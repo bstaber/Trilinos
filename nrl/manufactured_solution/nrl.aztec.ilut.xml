@@ -1,9 +1,9 @@
 <ParameterList>
     
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh"/>
-        <Parameter name="n_ply" type="int" value="32"/>
-        <Parameter name="nb_phys_groups" type="unsigned int" value="32"/>
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_man.msh.msh"/>
+        <Parameter name="n_ply" type="int" value="4"/>
+        <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
     </ParameterList>
     
     <ParameterList name="Linear Solver Builder">
@@ -44,7 +44,7 @@
     </ParameterList>
     
     <ParameterList name="Newton">
-        <Parameter name="delta" type="double" value="0.5"/>
+        <Parameter name="delta" type="double" value="1.0"/>
         <Parameter name="iterMin" type="int" value="2"/>
         <Parameter name="iterMax" type="int" value="10"/>
         <Parameter name="nbBisMax" type="int" value="5"/>
