@@ -299,9 +299,15 @@ public:
         double c2 = 1.0e0;
         double c3 = 2.0e2;
         x(0) = x1; x(1) = x2; x(2) = x3;
-        F(0,0) = 1.0 + c1*(topcoord-x(1))*x(1); F(0,1) = c1*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(0,2) = 0.0;
-        F(1,0) = 0.0; F(1,1) = 1.0 + c2*(topcoord-2.0*x(1)); F(1,2) = 0.0;
-        F(2,0) = (c3/c1)*std::cos((c3/c1))*c1*(topcoord-x(1))*x(1); F(2,1) = (c3/c1)*std::cos((c3/c1))*c1*(x(0)-topcoord)*(topcoord-2.0*x(1)); F(2,2) = 1.0;
+        F(0,0) = 1.0 + c1*(topcoord-x(1))*x(1);
+        F(0,1) = c1*(x(0)-topcoord)*(topcoord-2.0*x(1));
+        F(0,2) = 0.0;
+        F(1,0) = 0.0;
+        F(1,1) = 1.0 + c2*(topcoord-2.0*x(1));
+        F(1,2) = 0.0;
+        F(2,0) = c3*std::cos(c3*(x(0)-topcoord)*(topcoord-x(1))*x(1))*(topcoord-x(1))*x(1);
+        F(2,1) = c3*std::cos(c3*(x(0)-topcoord)*(topcoord-x(1))*x(1))*(x(0)-topcoord)*(topcoord-2.0*x(1));
+        F(2,2) = 1.0;
         double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
         
         M(0,0) = mu4*sin_plyagl*sin_plyagl+mu5*cos_plyagl*cos_plyagl;
@@ -351,7 +357,7 @@ public:
     Epetra_SerialDenseVector manufacturedForcing(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector f(3), x(3), xf(3), xb(3);
         Epetra_SerialDenseMatrix Pf(3,3), Pb(3,3);
-        double h = 1.0e-6;
+        double h = 1.0e-8;
         
         x(0) = x1; x(1) = x2; x(2) = x3;
         for (unsigned int i=0; i<3; ++i){
@@ -453,11 +459,12 @@ public:
                 normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);
                 normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
                 normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
+                normal.Scale(normal.Norm2());
                 fneumann.Multiply('N','N',1.0,piola,normal,0.0);
                 fneumann.Scale(stepInc);
                 for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                     for (unsigned int iddl=0; iddl<3; ++iddl){
-                        feneumann(3*inode+iddl) += gauss_weight*fneumann(iddl)*Mesh->N_tri(gp,inode);
+                        feneumann(3*inode+iddl) += gauss_weight*fneumann(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
                     }
                 }
             }
