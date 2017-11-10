@@ -459,7 +459,6 @@ public:
                 normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);
                 normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
                 normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
-                normal.Scale(1.0/normal.Norm2());
                 fneumann.Multiply('N','N',1.0,piola,normal,0.0);
                 std::cout << normal << "\n";
                 fneumann.Scale(stepInc);
