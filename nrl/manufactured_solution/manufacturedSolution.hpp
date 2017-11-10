@@ -357,7 +357,7 @@ public:
     Epetra_SerialDenseVector manufacturedForcing(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector f(3), x(3), xf(3), xb(3);
         Epetra_SerialDenseMatrix Pf(3,3), Pb(3,3);
-        double h = 1.0e-8;
+        double h = 1.0e-6;
         
         x(0) = x1; x(1) = x2; x(2) = x3;
         for (unsigned int i=0; i<3; ++i){
@@ -418,7 +418,7 @@ public:
                 }
             }
             for (unsigned int i=0; i<3*Mesh->el_type; ++i){
-                int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
+                //int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
             }
         }
         
