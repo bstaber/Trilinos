@@ -62,8 +62,8 @@ MPI_Init(&argc, &argv);
     Newton->Initialization();
     Newton->setParameters(*paramList);
     Newton->bc_disp = 0.0;
-    double delta = 0.10;
-    for (int k=1; k<=9; ++k){
+    double delta = 0.05;
+    for (int k=1; k<=20; ++k){
         manufactured->setStep(k*delta);
         int error = Newton->Solve_with_Aztec(true);
     }
