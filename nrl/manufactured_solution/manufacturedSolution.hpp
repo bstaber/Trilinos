@@ -462,6 +462,7 @@ public:
                 normal.Scale(1.0/normal.Norm2());
                 fneumann.Multiply('N','N',1.0,piola,normal,0.0);
                 fneumann.Scale(stepInc);
+                std::cout << fneumann << "\n";
                 for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                     for (unsigned int iddl=0; iddl<3; ++iddl){
                         feneumann(3*inode+iddl) += gauss_weight*fneumann(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
