@@ -162,7 +162,7 @@ public:
         Epetra_Map CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
         Epetra_Vector sig22(CellsMap);
         
-        /*int node, e_gid;
+        int node, e_gid;
         double det_jac_tetra;
         double I1, det, dpressure;
         
@@ -177,7 +177,7 @@ public:
         eye(0,0) = 1.0; eye(0,1) = 0.0; eye(0,2) = 0.0;
         eye(1,0) = 0.0; eye(1,1) = 1.0; eye(1,2) = 0.0;
         eye(2,0) = 0.0; eye(2,1) = 0.0; eye(2,2) = 1.0;
-        
+        /*
         for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
             e_gid = Mesh->local_cells[e_lid];
             
