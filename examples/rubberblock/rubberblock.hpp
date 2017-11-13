@@ -154,6 +154,95 @@ public:
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
     }
     
+    void compute_cauchy(Epetra_Vector & solution, double & xi, double & eta, double & zeta, std::string & filename){
+        
+        Epetra_Vector u(*OverlapMap);
+        u.Import(solution, *ImportToOverlapMap, Insert);
+        
+        Epetra_Map CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
+        Epetra_Vector sig22(CellsMap);
+        
+        int node, e_gid;
+        double det_jac_tetra;
+        double I1, det, dpressure;
+        
+        Epetra_SerialDenseMatrix deformation_gradient(3,3), right_cauchy(3,3), inv_right_cauchy(3,3);
+        Epetra_SerialDenseMatrix s(3,3), sig(3,3), sf(3,3), eye(3,3);
+        Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
+        Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
+        Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
+        Epetra_SerialDenseMatrix D(Mesh->el_type,3), DX(Mesh->el_type,3);
+        Epetra_SerialDenseMatrix JacobianMatrix(3,3);
+        
+        eye(0,0) = 1.0; eye(0,1) = 0.0; eye(0,2) = 0.0;
+        eye(1,0) = 0.0; eye(1,1) = 1.0; eye(1,2) = 0.0;
+        eye(2,0) = 0.0; eye(2,1) = 0.0; eye(2,2) = 1.0;
+        
+        for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+            e_gid = Mesh->local_cells[e_lid];
+            
+            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+                matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+                matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+                matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
+                matrix_x(0,inode) = u[OverlapMap->LID(3*node+0)] + Mesh->nodes_coord[3*node+0];
+                matrix_x(1,inode) = u[OverlapMap->LID(3*node+1)] + Mesh->nodes_coord[3*node+1];
+                matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
+            }
+            
+            switch (Mesh->el_type){
+                case 4:
+                    tetra4::d_shape_functions(D, xi, eta, zeta);
+                    break;
+                case 8:
+                    hexa8::d_shape_functions(D, xi, eta, zeta);
+                    break;
+                case 10:
+                    tetra10::d_shape_functions(D, xi, eta, zeta);
+                    break;
+            }
+            jacobian_matrix(matrix_X,D,JacobianMatrix);
+            jacobian_det(JacobianMatrix,det_jac_tetra);
+            dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+            
+            deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
+            det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
+            right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
+            inv_right_cauchy(0,0) = (1.0/(det*det))*(right_cauchy(1,1)*right_cauchy(2,2)-right_cauchy(1,2)*right_cauchy(2,1));
+            inv_right_cauchy(1,1) = (1.0/(det*det))*(right_cauchy(0,0)*right_cauchy(2,2)-right_cauchy(0,2)*right_cauchy(2,0));
+            inv_right_cauchy(2,2) = (1.0/(det*det))*(right_cauchy(0,0)*right_cauchy(1,1)-right_cauchy(0,1)*right_cauchy(1,0));
+            inv_right_cauchy(1,2) = (1.0/(det*det))*(right_cauchy(0,2)*right_cauchy(1,0)-right_cauchy(0,0)*right_cauchy(1,2));
+            inv_right_cauchy(2,1) = inv_right_cauchy(1,2);
+            inv_right_cauchy(0,2) = (1.0/(det*det))*(right_cauchy(0,1)*right_cauchy(1,2)-right_cauchy(0,2)*right_cauchy(1,1));
+            inv_right_cauchy(2,0) = inv_right_cauchy(0,2);
+            inv_right_cauchy(0,1) = (1.0/(det*det))*(right_cauchy(0,2)*right_cauchy(2,1)-right_cauchy(0,1)*right_cauchy(2,2));
+            inv_right_cauchy(1,0) = inv_right_cauchy(0,1);
+            I1         = right_cauchy(0,0) + right_cauchy(1,1) + right_cauchy(2,2);
+            dpressure  = (lambda/2.0)*det - ((lambda/2.0) + mu)/det;
+            for (unsigned int i=0; i<6; ++i){
+                for (unsigned int j=0; j<6; ++j){
+                    s(i,j) = mu*eye(i,j) + det*dpressure*inv_right_cauchy(i,j);
+                }
+            }
+            sf.Multiply('N','T',1.0,s,deformation_gradient,0.0);
+            sig.Multiply('N','N',1.0,deformation_gradient,sf,0.0);
+            sig.Scale(1.0/det);
+            sig22[e_lid] = sig(1,1);
+        }
+        
+        int NumTargetElements = 0;
+        if (Comm->MyPID()==0){
+            NumTargetElements = Mesh->n_cells;
+        }
+        Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+        Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+        Epetra_MultiVector lhs_root(MapOnRoot,true);
+        lhs_root.Export(sig22,ExportOnRoot,Insert);
+        
+        int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+    }
+    
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
         std::cerr << "**Err: Not using static condensation method!\n";
     }
