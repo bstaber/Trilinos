@@ -45,13 +45,14 @@ MPI_Init(&argc, &argv);
     
     parameters(0)    = Teuchos::getParameter<double>(paramList->sublist("rubberblock"),"lambda");
     parameters(1)    = Teuchos::getParameter<double>(paramList->sublist("rubberblock"),"mu");
-    for (unsigned int i=0; i<2; i++){
-        parameters(i) = 1.0e9*parameters(i);
-    }
     interface->set_parameters(parameters);
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
-    double g = 5.0*0.3;
+    if (Comm.MyPID()==0){
+        std::cout << "Top = " << interface->topcoord << "\n";
+    }
+    
+    double g = -5.0*0.3;
     Newton->Initialization();
     Newton->setParameters(*paramList);
     Newton->bc_disp = g;
