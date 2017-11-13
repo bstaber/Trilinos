@@ -191,7 +191,7 @@ public:
                 matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
             }
             
-            /*switch (Mesh->el_type){
+            switch (Mesh->el_type){
                 case 4:
                     tetra4::d_shape_functions(D, xi, eta, zeta);
                     break;
@@ -220,6 +220,7 @@ public:
             inv_right_cauchy(1,0) = inv_right_cauchy(0,1);
             I1         = right_cauchy(0,0) + right_cauchy(1,1) + right_cauchy(2,2);
             dpressure  = (lambda/2.0)*det - ((lambda/2.0) + mu)/det;
+            /*
             for (unsigned int i=0; i<6; ++i){
                 for (unsigned int j=0; j<6; ++j){
                     s(i,j) = mu*eye(i,j) + det*dpressure*inv_right_cauchy(i,j);
