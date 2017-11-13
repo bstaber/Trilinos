@@ -3,9 +3,9 @@
 lc = 0.05;
 
 Point(0) = {0,0,0,lc};
-Point(1) = {1,0,0,lc};
-Point(2) = {1,1,0,lc};
-Point(3) = {0,1,0,lc};//+
+Point(1) = {10,0,0,lc};
+Point(2) = {10,10,0,lc};
+Point(3) = {0,10,0,lc};//+
 Line(1) = {0, 1};
 //+
 Line(2) = {1, 2};
@@ -25,8 +25,12 @@ Recombine Surface {6};
 //+
 Transfinite Surface {6};
 //+
-Extrude {0, 0, 1} {
+Extrude {0, 0, 5} {
   Surface{6};
   Layers{10};
   Recombine;
 }
+//+
+Physical Surface(1) = {19, 23, 28, 6, 15, 27};
+//+
+Physical Volume(2) = {1};
