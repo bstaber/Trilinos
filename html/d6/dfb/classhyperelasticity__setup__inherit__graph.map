@@ -1,9 +1,11 @@
 <map id="hyperelasticity_setup" name="hyperelasticity_setup">
 <area shape="rect" id="node3" href="$da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html" title="DirichletInletOutlet\l_PolyconvexHGO" alt="" coords="444,5,574,44"/>
 <area shape="rect" id="node4" href="$d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html" title="DirichletStripElongation\l_StochasticPolyconvexHGO" alt="" coords="415,68,603,107"/>
-<area shape="rect" id="node5" href="$de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html" title="NeumannInnerSurface\l_PolyconvexHGO" alt="" coords="431,131,587,169"/>
-<area shape="rect" id="node6" href="$dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html" title="NeumannInnerSurface\l_StochasticPolyconvexHGO" alt="" coords="415,193,603,232"/>
-<area shape="rect" id="node7" href="$de/dd1/class_t_i_mooney.html" title="TIMooney" alt="" coords="469,256,549,281"/>
-<area shape="rect" id="node8" href="$d1/dd7/class_t_i_mooney___random_field.html" title="TIMooney_RandomField" alt="" coords="425,305,593,331"/>
-<area shape="rect" id="node2" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="5,169,173,195"/>
+<area shape="rect" id="node5" href="$d1/dbe/classmanufactured_solution.html" title="manufacturedSolution" alt="" coords="433,131,584,156"/>
+<area shape="rect" id="node6" href="$de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html" title="NeumannInnerSurface\l_PolyconvexHGO" alt="" coords="431,180,587,219"/>
+<area shape="rect" id="node7" href="$dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html" title="NeumannInnerSurface\l_StochasticPolyconvexHGO" alt="" coords="415,243,603,281"/>
+<area shape="rect" id="node8" href="$dd/d20/classrubberblock.html" title="rubberblock" alt="" coords="463,305,554,331"/>
+<area shape="rect" id="node9" href="$de/dd1/class_t_i_mooney.html" title="TIMooney" alt="" coords="469,355,549,380"/>
+<area shape="rect" id="node10" href="$d1/dd7/class_t_i_mooney___random_field.html" title="TIMooney_RandomField" alt="" coords="425,404,593,429"/>
+<area shape="rect" id="node2" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="5,219,173,244"/>
 </map>
