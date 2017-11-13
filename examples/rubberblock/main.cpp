@@ -64,7 +64,7 @@ MPI_Init(&argc, &argv);
     Newton->bc_disp = g;
     int error = Newton->Solve_with_Aztec(true);
     Newton->print_newton_solution(pathsolut);
-    //interface->compute_cauchy(*Newton->x,xi,xi,xi,pathsig22);
+    interface->compute_cauchy(*Newton->x,xi,xi,xi,pathsig22);
     
     
 #ifdef HAVE_MPI
