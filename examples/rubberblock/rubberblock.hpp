@@ -235,12 +235,12 @@ public:
         if (Comm->MyPID()==0){
             NumTargetElements = Mesh->n_cells;
         }
-        Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
-        Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
-        Epetra_MultiVector lhs_root(MapOnRoot,true);
-        lhs_root.Export(sig22,ExportOnRoot,Insert);
+        //Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+        //Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+        //Epetra_MultiVector lhs_root(MapOnRoot,true);
+        //lhs_root.Export(sig22,ExportOnRoot,Insert);
         
-        int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+        //int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
     }
     
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
