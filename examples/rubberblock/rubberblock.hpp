@@ -191,7 +191,7 @@ public:
                 matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
             }
             
-            switch (Mesh->el_type){
+            /*switch (Mesh->el_type){
                 case 4:
                     tetra4::d_shape_functions(D, xi, eta, zeta);
                     break;
@@ -228,7 +228,7 @@ public:
             sf.Multiply('N','T',1.0,s,deformation_gradient,0.0);
             sig.Multiply('N','N',1.0,deformation_gradient,sf,0.0);
             sig.Scale(1.0/det);
-            //sig22[e_lid] = sig(1,1);
+            sig22[e_lid] = sig(1,1);*/
         }
         
         int NumTargetElements = 0;
