@@ -177,7 +177,7 @@ public:
         eye(0,0) = 1.0; eye(0,1) = 0.0; eye(0,2) = 0.0;
         eye(1,0) = 0.0; eye(1,1) = 1.0; eye(1,2) = 0.0;
         eye(2,0) = 0.0; eye(2,1) = 0.0; eye(2,2) = 1.0;
-        /*
+        
         for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
             e_gid = Mesh->local_cells[e_lid];
             
@@ -228,7 +228,7 @@ public:
             sf.Multiply('N','T',1.0,s,deformation_gradient,0.0);
             sig.Multiply('N','N',1.0,deformation_gradient,sf,0.0);
             sig.Scale(1.0/det);
-            sig22[e_lid] = sig(1,1);
+            //sig22[e_lid] = sig(1,1);
         }
         
         int NumTargetElements = 0;
@@ -240,7 +240,7 @@ public:
         Epetra_MultiVector lhs_root(MapOnRoot,true);
         lhs_root.Export(sig22,ExportOnRoot,Insert);
         
-        int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);*/
+        int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
     }
     
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
