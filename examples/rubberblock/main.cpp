@@ -53,9 +53,11 @@ MPI_Init(&argc, &argv);
     }
     
     double xi = 0.0;
-    double g  = -5.0*0.3;
-    std::string pathsig22 = "/Users/brian/Documents/GitHub/Trilinos/examples/rubberblock/sig22.mtx";
-    std::string pathsolut = "/Users/brian/Documents/GitHub/Trilinos/examples/rubberblock/u.mtx";
+    double g  = -interface->topcoord*0.3;
+    //std::string pathsig22 = "/Users/brian/Documents/GitHub/Trilinos/examples/rubberblock/sig22.mtx";
+    //std::string pathsolut = "/Users/brian/Documents/GitHub/Trilinos/examples/rubberblock/u.mtx";
+    std::string pathsig22 = "/home/s/staber/Trilinos/examples/rubberblock/sig22.mtx";
+    std::string pathsolut = "/home/s/staber/Trilinos/examples/rubberblock/u.mtx";
     
     Newton->Initialization();
     Newton->setParameters(*paramList);
