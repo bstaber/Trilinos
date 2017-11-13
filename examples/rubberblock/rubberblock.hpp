@@ -220,15 +220,15 @@ public:
             inv_right_cauchy(1,0) = inv_right_cauchy(0,1);
             I1         = right_cauchy(0,0) + right_cauchy(1,1) + right_cauchy(2,2);
             dpressure  = (lambda/2.0)*det - ((lambda/2.0) + mu)/det;
-            for (unsigned int i=0; i<6; ++i){
-                for (unsigned int j=0; j<6; ++j){
+            for (unsigned int i=0; i<3; ++i){
+                for (unsigned int j=0; j<3; ++j){
                     s(i,j) = mu*eye(i,j) + det*dpressure*inv_right_cauchy(i,j);
                 }
-            }/*
+            }
             sf.Multiply('N','T',1.0,s,deformation_gradient,0.0);
             sig.Multiply('N','N',1.0,deformation_gradient,sf,0.0);
             sig.Scale(1.0/det);
-            sig22[e_lid] = sig(1,1);*/
+            sig22[e_lid] = sig(1,1);
         }
         
         int NumTargetElements = 0;
