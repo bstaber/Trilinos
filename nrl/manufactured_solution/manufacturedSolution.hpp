@@ -418,7 +418,7 @@ public:
                 }
             }
             for (unsigned int i=0; i<3*Mesh->el_type; ++i){
-                //int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
+                int error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
             }
         }
         

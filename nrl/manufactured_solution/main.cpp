@@ -31,7 +31,7 @@ MPI_Init(&argc, &argv);
 #endif
     
     Teuchos::RCP<Teuchos::ParameterList> paramList = Teuchos::rcp(new Teuchos::ParameterList);
-    if(xmlInFileName.length()) {
+    if(xmlInFileName.length()){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
     
@@ -49,9 +49,9 @@ MPI_Init(&argc, &argv);
     parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
     parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
     parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
-    parameters(5)  = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
-    parameters(6)  = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
-    for (unsigned int i=0; i<5; i++){
+    parameters(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    parameters(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    for (unsigned int i=0; i<5; ++i){
         parameters(i) = 1.0e9*parameters(i);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
