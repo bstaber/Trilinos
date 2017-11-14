@@ -22,6 +22,7 @@ public:
     void compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM);
     void compute_deformation(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM);
     
+    virtual Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp) = 0;
     virtual void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix) = 0;
     virtual void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix) = 0;
     

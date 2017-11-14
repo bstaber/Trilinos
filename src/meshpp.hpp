@@ -53,7 +53,6 @@ public:
     
     int read_gmsh_tetra(std::string & fileName_mesh);
     int read_boundary_file(std::string & fileName_bc, unsigned int & number_physical_groups);
-    int epetra_read_gmsh_tetra(std::string & fileName_msh, Epetra_Vector & cells_nodes_mpi, Epetra_Vector & nodes_coord_mpi);
     int metis_part_mesh(int & NumProc);
     void print_info();
     void get_local_nodes(int & MyPID);

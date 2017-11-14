@@ -2,7 +2,7 @@
 #include "fepp.hpp"
 
 LinearizedElasticity::LinearizedElasticity(){
-    dead_pressure.Resize(3);
+    //dead_pressure.Resize(3);
 }
 
 LinearizedElasticity::~LinearizedElasticity(){
@@ -130,6 +130,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
     double gauss_weight;
     
     Epetra_SerialDenseVector force(3*Mesh->face_type);
+    Epetra_SerialDenseVector dead_pressure(3);
     
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
         e_gid  = Mesh->local_faces[e_lid];
@@ -144,6 +145,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
         }        
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_faces(gp);
+            dead_pressure = get_neumannBc(e_lid,gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
                     force(3*inode+iddl) += gauss_weight*dead_pressure(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
