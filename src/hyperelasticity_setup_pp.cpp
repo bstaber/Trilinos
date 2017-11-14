@@ -472,6 +472,7 @@ void hyperelasticity_setup::force_dead_pressure(Epetra_FEVector & F){
         }
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_faces(gp);
+            //dead_pressure_load = get_neumann_bc(e_lid,gp); TODO
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
                     force(3*inode+iddl) += gauss_weight*dead_pressure_load(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);

@@ -48,10 +48,6 @@ MPI_Init(&argc, &argv);
     interface->set_parameters(parameters);
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
-    if (Comm.MyPID()==0){
-        std::cout << "Top = " << interface->topcoord << "\n";
-    }
-    
     double xi = 0.0;
     double g  = -interface->topcoord*0.3;
     std::string pathsig22 = "sig22.mtx";
