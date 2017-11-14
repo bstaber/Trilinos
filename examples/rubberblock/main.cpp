@@ -45,7 +45,6 @@ MPI_Init(&argc, &argv);
     
     parameters(0)    = Teuchos::getParameter<double>(paramList->sublist("rubberblock"),"lambda");
     parameters(1)    = Teuchos::getParameter<double>(paramList->sublist("rubberblock"),"mu");
-    parameters.Scale(1.0e9);
     interface->set_parameters(parameters);
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     

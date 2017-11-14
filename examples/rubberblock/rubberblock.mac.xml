@@ -65,7 +65,7 @@
         <Parameter name="overlap" type="int" value="2"/>
         <Parameter name="type_overlap" type="string" value="symmetric"/>
         <Parameter name="pre_calc" type="string" value="recalc"/>
-        <Parameter name="ilut_fill" type="double" value="4.0"/>
+        <Parameter name="ilut_fill" type="double" value="2.0"/>
         <Parameter name="athresh" type="double" value="0.0"/>
         <Parameter name="rthresh" type="double" value="0.0"/>
         <Parameter name="drop" type="double" value="0.0"/>

@@ -20,7 +20,7 @@ Line Loop(5) = {4, 1, 2, 3};
 //+
 Plane Surface(6) = {5};
 //+
-Transfinite Line {1, 4, 3, 2} = 40 Using Progression 1;
+Transfinite Line {1, 4, 3, 2} = 20 Using Progression 1;
 //+
 //+
 Recombine Surface {6};
@@ -29,7 +29,7 @@ Transfinite Surface {6};
 //+
 Extrude {0, height, 0} {
   Surface{6};
-  Layers{40};
+  Layers{20};
   Recombine;
 }
 //+
