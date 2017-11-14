@@ -207,7 +207,7 @@ void hyperelasticity_setup::material_stiffness_and_rhs_dirichlet(Epetra_Vector &
             }
         }
     }
-    
+    delete[] Indices_tetra;
 }
 
 void hyperelasticity_setup::material_stiffness_and_rhs_static_condensation(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
@@ -348,7 +348,7 @@ void hyperelasticity_setup::material_stiffness_and_rhs_static_condensation(Epetr
         }
         
     }
-    
+    delete[] Indices_tetra;
     /*bool callFillComplete = false;
     K.GlobalAssemble(callFillComplete);
     F.GlobalAssemble();*/
@@ -440,7 +440,7 @@ void hyperelasticity_setup::force_stiffness_rhs_live_pressure(Epetra_Vector & u,
         }
         
     }
-    
+    delete[] Indices_tri;
     /*bool callFillComplete = false;
     K.GlobalAssemble(callFillComplete);
     F.GlobalAssemble();*/
@@ -485,8 +485,8 @@ void hyperelasticity_setup::force_dead_pressure(Epetra_FEVector & F){
                 F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
             }
         }
-        
     }
+    delete[] Indices_tri;
 }
 
 void hyperelasticity_setup::compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta, std::string & filename){

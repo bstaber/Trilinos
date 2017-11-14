@@ -116,7 +116,7 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
             }
         }
     }
-    
+    delete[] Indices_tetra;
 }
 
 void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
@@ -160,6 +160,7 @@ void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
         }
         
     }
+    delete[] Indices_tri;
 }
 
 void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B){
