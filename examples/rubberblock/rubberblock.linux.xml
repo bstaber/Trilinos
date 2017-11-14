@@ -77,8 +77,8 @@
     </ParameterList>
     
     <ParameterList name="rubberblock">
-        <Parameter name="lambda" type="double" value="830000.0"/>
-        <Parameter name="mu" type="double" value="50000.0"/>
+        <Parameter name="lambda" type="double" value="830.0"/>
+        <Parameter name="mu" type="double" value="50.0"/>
     </ParameterList>
         
 </ParameterList>
