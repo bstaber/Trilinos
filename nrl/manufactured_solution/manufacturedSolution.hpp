@@ -476,7 +476,8 @@ public:
             }
             
         }
-     
+        delete[] Indices_tetra;
+        delete[] Indices_tri;
     }
     
 };

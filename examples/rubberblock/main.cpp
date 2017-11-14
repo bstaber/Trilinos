@@ -54,10 +54,9 @@ MPI_Init(&argc, &argv);
     
     double xi = 0.0;
     double g  = -interface->topcoord*0.3;
-    //std::string pathsig22 = "/Users/brian/Documents/GitHub/Trilinos/examples/rubberblock/sig22.mtx";
-    //std::string pathsolut = "/Users/brian/Documents/GitHub/Trilinos/examples/rubberblock/u.mtx";
-    std::string pathsig22 = "/home/s/staber/Trilinos/examples/rubberblock/sig22.mtx";
-    std::string pathsolut = "/home/s/staber/Trilinos/examples/rubberblock/u.mtx";
+    std::string pathsig22 = "sig22.mtx";
+    std::string pathe22   = "e22.mtx";
+    std::string pathsolut = "u.mtx";
     
     Newton->Initialization();
     Newton->setParameters(*paramList);
@@ -65,7 +64,7 @@ MPI_Init(&argc, &argv);
     int error = Newton->Solve_with_Aztec(true);
     Newton->print_newton_solution(pathsolut);
     interface->compute_cauchy(*Newton->x,xi,xi,xi,pathsig22);
-    
+    interface->compute_green_lagrange(*Newton->x,xi,xi,xi,pathe22);
     
 #ifdef HAVE_MPI
     MPI_Finalize();
