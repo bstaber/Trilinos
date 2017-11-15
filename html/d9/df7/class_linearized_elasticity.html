@@ -121,10 +121,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5586a3490f8794b129956cb022092740"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a700a28b6d67ff078411eab81c4c36334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a700a28b6d67ff078411eab81c4c36334">assembleMixedDirichletNeumann_homogeneousForcing</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
 <tr class="separator:a700a28b6d67ff078411eab81c4c36334"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7d90bfa17ee658c41221a9e7d27f73c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#ad7d90bfa17ee658c41221a9e7d27f73c">stiffness_pureDirichlet_homogeneousForcing</a> (Epetra_FECrsMatrix &amp;K)</td></tr>
-<tr class="separator:ad7d90bfa17ee658c41221a9e7d27f73c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4080cb86f5256ccfd66397b13df5d090"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a4080cb86f5256ccfd66397b13df5d090">stiffness_pureDirichlet_inhomogeneousForcing</a> (Epetra_FECrsMatrix &amp;K, Epetra_FECrsMatrix &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:a4080cb86f5256ccfd66397b13df5d090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad544f1785e6da293d0ed97f41c900ba6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#ad544f1785e6da293d0ed97f41c900ba6">assembleMixedDirichletNeumann_inhomogeneousForcing</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:ad544f1785e6da293d0ed97f41c900ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a062089d8f089891784d4655b894dfec2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a062089d8f089891784d4655b894dfec2">stiffness_homogeneousForcing</a> (Epetra_FECrsMatrix &amp;K)</td></tr>
+<tr class="separator:a062089d8f089891784d4655b894dfec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a857f87cd5d993dbcc68e616b0dd3d2ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a857f87cd5d993dbcc68e616b0dd3d2ed">stiffness_inhomogeneousForcing</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:a857f87cd5d993dbcc68e616b0dd3d2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdbacad7e43c03799abbaa85c4742a0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#acdbacad7e43c03799abbaa85c4742a0f">rhs_NeumannBoundaryCondition</a> (Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
 <tr class="separator:acdbacad7e43c03799abbaa85c4742a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d4107a51ecc028126ffe6ca89897050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a2d4107a51ecc028126ffe6ca89897050">compute_B_matrices</a> (Epetra_SerialDenseMatrix &amp;dx_shape_functions, Epetra_SerialDenseMatrix &amp;B)</td></tr>
@@ -249,6 +251,36 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad544f1785e6da293d0ed97f41c900ba6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad544f1785e6da293d0ed97f41c900ba6">&#9670;&nbsp;</a></span>assembleMixedDirichletNeumann_inhomogeneousForcing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LinearizedElasticity::assembleMixedDirichletNeumann_inhomogeneousForcing </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
+          <td class="paramname"><em>F</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00068">68</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a5586a3490f8794b129956cb022092740"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5586a3490f8794b129956cb022092740">&#9670;&nbsp;</a></span>assemblePureDirichlet_homogeneousForcing()</h2>
 
@@ -295,7 +327,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00227">227</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00242">242</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
 
 </div>
 </div>
@@ -337,7 +369,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00256">256</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00271">271</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +411,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00377">377</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00392">392</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
 
 </div>
 </div>
@@ -576,18 +608,18 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00183">183</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00198">198</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ad7d90bfa17ee658c41221a9e7d27f73c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7d90bfa17ee658c41221a9e7d27f73c">&#9670;&nbsp;</a></span>stiffness_pureDirichlet_homogeneousForcing()</h2>
+<a id="a062089d8f089891784d4655b894dfec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a062089d8f089891784d4655b894dfec2">&#9670;&nbsp;</a></span>stiffness_homogeneousForcing()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void LinearizedElasticity::stiffness_pureDirichlet_homogeneousForcing </td>
+          <td class="memname">void LinearizedElasticity::stiffness_homogeneousForcing </td>
           <td>(</td>
           <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
           <td class="paramname"><em>K</em></td><td>)</td>
@@ -596,18 +628,18 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00068">68</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00083">83</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a4080cb86f5256ccfd66397b13df5d090"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4080cb86f5256ccfd66397b13df5d090">&#9670;&nbsp;</a></span>stiffness_pureDirichlet_inhomogeneousForcing()</h2>
+<a id="a857f87cd5d993dbcc68e616b0dd3d2ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a857f87cd5d993dbcc68e616b0dd3d2ed">&#9670;&nbsp;</a></span>stiffness_inhomogeneousForcing()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void LinearizedElasticity::stiffness_pureDirichlet_inhomogeneousForcing </td>
+          <td class="memname">void LinearizedElasticity::stiffness_inhomogeneousForcing </td>
           <td>(</td>
           <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
           <td class="paramname"><em>K</em>, </td>
@@ -615,7 +647,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
+          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
           <td class="paramname"><em>F</em>&#160;</td>
         </tr>
         <tr>
@@ -626,7 +658,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00123">123</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html#l00138">138</a> of file <a class="el" href="../../d4/d89/linearelasticity__setup__pp_8cpp_source.html">linearelasticity_setup_pp.cpp</a>.</p>
 
 </div>
 </div>
@@ -643,7 +675,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html#l00032">32</a> of file <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html">linearelasticity_setup_pp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html#l00033">33</a> of file <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html">linearelasticity_setup_pp.hpp</a>.</p>
 
 </div>
 </div>
@@ -659,7 +691,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html#l00031">31</a> of file <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html">linearelasticity_setup_pp.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html#l00032">32</a> of file <a class="el" href="../../d4/d4c/linearelasticity__setup__pp_8hpp_source.html">linearelasticity_setup_pp.hpp</a>.</p>
 
 </div>
 </div>

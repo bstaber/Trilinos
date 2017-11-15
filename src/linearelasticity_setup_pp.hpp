@@ -15,8 +15,8 @@ public:
     void assembleMixedDirichletNeumann_homogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void assembleMixedDirichletNeumann_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     
-    void stiffness_pureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K);
-    void stiffness_pureDirichlet_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void stiffness_homogeneousForcing(Epetra_FECrsMatrix & K);
+    void stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void rhs_NeumannBoundaryCondition(Epetra_FEVector & F);
     
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);

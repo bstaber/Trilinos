@@ -21,8 +21,8 @@ var searchData=
   ['solve_5fwith_5faztec',['Solve_with_Aztec',['../d0/d9d/class_newton___raphson.html#ad94282360b1e26d9e0dd3c55a4634919',1,'Newton_Raphson']]],
   ['solve_5fwith_5fstratimikos',['Solve_with_Stratimikos',['../d0/d9d/class_newton___raphson.html#a3cdf69d29fcf2ef8ce5ce7a28e1b5708',1,'Newton_Raphson']]],
   ['solveonerealization',['solveOneRealization',['../d0/daf/class_orthotropic_r_f___laminate.html#a8d742388f909fa32e7ee6f24f159e0af',1,'OrthotropicRF_Laminate']]],
-  ['stiffness_5fpuredirichlet_5fhomogeneousforcing',['stiffness_pureDirichlet_homogeneousForcing',['../d9/df7/class_linearized_elasticity.html#ad7d90bfa17ee658c41221a9e7d27f73c',1,'LinearizedElasticity']]],
-  ['stiffness_5fpuredirichlet_5finhomogeneousforcing',['stiffness_pureDirichlet_inhomogeneousForcing',['../d9/df7/class_linearized_elasticity.html#a4080cb86f5256ccfd66397b13df5d090',1,'LinearizedElasticity']]],
+  ['stiffness_5fhomogeneousforcing',['stiffness_homogeneousForcing',['../d9/df7/class_linearized_elasticity.html#a062089d8f089891784d4655b894dfec2',1,'LinearizedElasticity']]],
+  ['stiffness_5finhomogeneousforcing',['stiffness_inhomogeneousForcing',['../d9/df7/class_linearized_elasticity.html#a857f87cd5d993dbcc68e616b0dd3d2ed',1,'LinearizedElasticity']]],
   ['store_5ffeinterp_5ftetra',['store_feinterp_tetra',['../d6/d6b/classmesh.html#aec3804c8c0155f3e599b14144fc22ee2',1,'mesh']]],
   ['store_5ffeinterp_5ftri',['store_feinterp_tri',['../d6/d6b/classmesh.html#a51063e41338b1da593fa179e49868f67',1,'mesh']]],
   ['sym_5ftensor_5fproduct',['sym_tensor_product',['../de/d49/tensor__calculus_8hpp.html#a5b2bffd63a9471bf0196305afae53b10',1,'tensor_calculus.hpp']]]
