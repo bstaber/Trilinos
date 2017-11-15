@@ -6,6 +6,7 @@ LinearizedElasticity::LinearizedElasticity(){
 }
 
 LinearizedElasticity::~LinearizedElasticity(){
+    delete[] dof_on_boundary;
 }
 
 void LinearizedElasticity::create_FECrsGraph(){

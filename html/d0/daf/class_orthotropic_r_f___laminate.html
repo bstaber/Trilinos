@@ -115,6 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9ae0386ca1865686a10f09f09b4eb71b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1da906f12e5740e81f9fc14bc794c656"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/daf/class_orthotropic_r_f___laminate.html#a1da906f12e5740e81f9fc14bc794c656">~OrthotropicRF_Laminate</a> ()</td></tr>
 <tr class="separator:a1da906f12e5740e81f9fc14bc794c656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae602240342a233d65ebef02117ed4b5e"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/daf/class_orthotropic_r_f___laminate.html#ae602240342a233d65ebef02117ed4b5e">get_neumannBc</a> (unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
+<tr class="separator:ae602240342a233d65ebef02117ed4b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d742388f909fa32e7ee6f24f159e0af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/daf/class_orthotropic_r_f___laminate.html#a8d742388f909fa32e7ee6f24f159e0af">solveOneRealization</a> (double &amp;bcDisp, int *seeds)</td></tr>
 <tr class="separator:a8d742388f909fa32e7ee6f24f159e0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa74a66077f51eaf1c2544979a551f406"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/daf/class_orthotropic_r_f___laminate.html#aa74a66077f51eaf1c2544979a551f406">icdf_gamma</a> (double &amp;w, double &amp;alpha, double &amp;beta)</td></tr>
@@ -192,8 +194,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6e9852f0e01929ef0b99a71eb8bd0102 inherit pub_attribs_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a6e9852f0e01929ef0b99a71eb8bd0102">dof_on_boundary</a></td></tr>
 <tr class="separator:a6e9852f0e01929ef0b99a71eb8bd0102 inherit pub_attribs_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_linear___finite___element___problem"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_linear___finite___element___problem')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html">Linear_Finite_Element_Problem</a></td></tr>
-<tr class="memitem:a89b5be4b07c9f9d6c5d16147766c0248 inherit pub_attribs_class_linear___finite___element___problem"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#a89b5be4b07c9f9d6c5d16147766c0248">dead_pressure</a></td></tr>
-<tr class="separator:a89b5be4b07c9f9d6c5d16147766c0248 inherit pub_attribs_class_linear___finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a191842d882866a6a6992526aa9942b41 inherit pub_attribs_class_linear___finite___element___problem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d6b/classmesh.html">mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#a191842d882866a6a6992526aa9942b41">Mesh</a></td></tr>
 <tr class="separator:a191842d882866a6a6992526aa9942b41 inherit pub_attribs_class_linear___finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf16aec0b9e8ee1a0d9c25f9eb8f86a5 inherit pub_attribs_class_linear___finite___element___problem"><td class="memItemLeft" align="right" valign="top">Epetra_Comm *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#adf16aec0b9e8ee1a0d9c25f9eb8f86a5">Comm</a></td></tr>
@@ -319,7 +319,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#ab4bbdba423977cef810b6919817429a2">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00168">168</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00174">174</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -365,7 +365,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#ae6e37199b1afeff489561279b0b0cb47">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00206">206</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00212">212</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -405,7 +405,47 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#aab7312e665f248382e1f6bd4bd285478">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00318">318</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00324">324</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae602240342a233d65ebef02117ed4b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae602240342a233d65ebef02117ed4b5e">&#9670;&nbsp;</a></span>get_neumannBc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_SerialDenseVector OrthotropicRF_Laminate::get_neumannBc </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int &amp;&#160;</td>
+          <td class="paramname"><em>e_lid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int &amp;&#160;</td>
+          <td class="paramname"><em>gp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#ab9fd7ccb0e8d1aa808393e8451c5b28d">LinearizedElasticity</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00045">45</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +489,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00124">124</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00130">130</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -477,7 +517,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00415">415</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00421">421</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +555,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00258">258</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00264">264</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -544,7 +584,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#a5d9ac651a1e9cd308cc47a4c60e7cf95">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00132">132</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00138">138</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -582,7 +622,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00045">45</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -644,7 +684,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00369">369</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00375">375</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -661,7 +701,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00445">445</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00451">451</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -677,7 +717,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00446">446</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00452">452</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -693,7 +733,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00444">444</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00450">450</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -709,7 +749,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00434">434</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00440">440</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -725,7 +765,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00433">433</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00439">439</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -741,7 +781,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00436">436</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00442">442</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -757,7 +797,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00437">437</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00443">443</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -773,7 +813,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00438">438</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00444">444</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -789,7 +829,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00439">439</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00445">445</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -805,7 +845,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00440">440</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00446">446</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -821,7 +861,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00442">442</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00448">448</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>
@@ -837,7 +877,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00432">432</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00438">438</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
 </div>
 </div>

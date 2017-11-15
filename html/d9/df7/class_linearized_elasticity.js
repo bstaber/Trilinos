@@ -11,6 +11,7 @@ var class_linearized_elasticity =
     [ "force_dead_pressure", "d9/df7/class_linearized_elasticity.html#a9df7444ee030cbbe491adb6b2f14d9ca", null ],
     [ "get_elasticity_tensor", "d9/df7/class_linearized_elasticity.html#ae6e37199b1afeff489561279b0b0cb47", null ],
     [ "get_elasticity_tensor_for_recovery", "d9/df7/class_linearized_elasticity.html#aab7312e665f248382e1f6bd4bd285478", null ],
+    [ "get_neumannBc", "d9/df7/class_linearized_elasticity.html#ab9fd7ccb0e8d1aa808393e8451c5b28d", null ],
     [ "material_stiffness_and_rhs_dirichlet", "d9/df7/class_linearized_elasticity.html#a17b0473c755387958de24fd2f595061e", null ],
     [ "dof_on_boundary", "d9/df7/class_linearized_elasticity.html#a6e9852f0e01929ef0b99a71eb8bd0102", null ],
     [ "n_bc_dof", "d9/df7/class_linearized_elasticity.html#a87087f0191a67c4ddde58cd936c9980b", null ]

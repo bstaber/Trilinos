@@ -2,7 +2,6 @@ var searchData=
 [
   ['d1_5fn_5ftri',['D1_N_tri',['../d6/d6b/classmesh.html#a7666f3a0c5d1d25ed8780ee80f67876d',1,'mesh']]],
   ['d2_5fn_5ftri',['D2_N_tri',['../d6/d6b/classmesh.html#aa0ad549ccda2a85fcaf3859ba471b881',1,'mesh']]],
-  ['dead_5fpressure',['dead_pressure',['../d3/d9f/class_linear___finite___element___problem.html#a89b5be4b07c9f9d6c5d16147766c0248',1,'Linear_Finite_Element_Problem']]],
   ['delta',['delta',['../d0/d9d/class_newton___raphson.html#a6a42b747679adb745cf8476336e10238',1,'Newton_Raphson']]],
   ['deltac1',['deltaC1',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a5f3fcb09f1ab1db3f82e77dd112bc6cf',1,'DirichletStripElongation_StochasticPolyconvexHGO::deltaC1()'],['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a1c14acdb9b9c83a6c61b42672b521a25',1,'NeumannInnerSurface_StochasticPolyconvexHGO::deltaC1()']]],
   ['deltac2',['deltaC2',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a389fe42421909ca42eed0b3bfef87342',1,'DirichletStripElongation_StochasticPolyconvexHGO::deltaC2()'],['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a655facda775d4c7f434375e463c69c4c',1,'NeumannInnerSurface_StochasticPolyconvexHGO::deltaC2()']]],

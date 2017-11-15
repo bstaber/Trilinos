@@ -5,7 +5,6 @@ var class_linear___finite___element___problem =
     [ "apply_dirichlet_conditions", "d3/d9f/class_linear___finite___element___problem.html#ab4bbdba423977cef810b6919817429a2", null ],
     [ "setup_dirichlet_conditions", "d3/d9f/class_linear___finite___element___problem.html#a5d9ac651a1e9cd308cc47a4c60e7cf95", null ],
     [ "Comm", "d3/d9f/class_linear___finite___element___problem.html#adf16aec0b9e8ee1a0d9c25f9eb8f86a5", null ],
-    [ "dead_pressure", "d3/d9f/class_linear___finite___element___problem.html#a89b5be4b07c9f9d6c5d16147766c0248", null ],
     [ "FEGraph", "d3/d9f/class_linear___finite___element___problem.html#a84aecb5b50891d3e477366ebc01cc740", null ],
     [ "ImportToOverlapMap", "d3/d9f/class_linear___finite___element___problem.html#a4b1375c46128d9f9b4f6c4ed2514ff98", null ],
     [ "Mesh", "d3/d9f/class_linear___finite___element___problem.html#a191842d882866a6a6992526aa9942b41", null ],

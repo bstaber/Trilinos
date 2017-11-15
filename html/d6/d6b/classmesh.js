@@ -4,7 +4,6 @@ var classmesh =
     [ "mesh", "d6/d6b/classmesh.html#ac81b8e698b52eb5c415e528232acf33e", null ],
     [ "mesh", "d6/d6b/classmesh.html#a6b1710cf8fcac74adbd6fb9ab49364ed", null ],
     [ "~mesh", "d6/d6b/classmesh.html#a56c82806c9eeb4a50972ac55f2e7abb7", null ],
-    [ "epetra_read_gmsh_tetra", "d6/d6b/classmesh.html#a5142a58d57f98f7843bb0849d0e9800d", null ],
     [ "get_cells_and_ghosts", "d6/d6b/classmesh.html#ae4beb917adcbc091f4b7801ae5d7c4b2", null ],
     [ "get_local_nodes", "d6/d6b/classmesh.html#afa7a37895fe36f8a86ce9b222025b1cf", null ],
     [ "metis_part_mesh", "d6/d6b/classmesh.html#af71d5596d4cea905d22c0338127af284", null ],
