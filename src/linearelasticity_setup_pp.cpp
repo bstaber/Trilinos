@@ -36,13 +36,13 @@ void LinearizedElasticity::create_FECrsGraph(){
     delete[] index;
 }
 
-void LinearizedElasticity::assemble_dirichlet(Epetra_FECrsMatrix & K){
+void LinearizedElasticity::assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K){
 
     int error;
     
     K.PutScalar(0.0);
     
-    material_stiffness_and_rhs_dirichlet(K);
+    stiffness_pureDirichlet_homogeneousForcing(K);
     
     Comm->Barrier();
     
@@ -50,13 +50,13 @@ void LinearizedElasticity::assemble_dirichlet(Epetra_FECrsMatrix & K){
     error=K.FillComplete();
 }
 
-void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void LinearizedElasticity::assembleMixedDirichletNeumann_homogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
     
     F.PutScalar(0.0);
     K.PutScalar(0.0);
         
-    material_stiffness_and_rhs_dirichlet(K);
-    force_dead_pressure(F);
+    stiffness_pureDirichlet_homogeneousForcing(K);
+    rhs_NeumannBoundaryCondition(F);
     
     Comm->Barrier();
     
@@ -65,7 +65,7 @@ void LinearizedElasticity::assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & 
     F.GlobalAssemble();
 }
 
-void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K){
+void LinearizedElasticity::stiffness_pureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K){
 
     int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
@@ -120,7 +120,67 @@ void LinearizedElasticity::material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatr
     delete[] Indices_tetra;
 }
 
-void LinearizedElasticity::force_dead_pressure(Epetra_FEVector & F){
+void LinearizedElasticity::stiffness_pureDirichlet_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FECrsMatrix & F){
+    
+    int node, e_gid, error;
+    int n_gauss_points = Mesh->n_gauss_cells;
+    double gauss_weight;
+    
+    int *Indices_tetra;
+    Indices_tetra = new int [3*Mesh->el_type];
+    
+    Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
+    Epetra_SerialDenseMatrix tangent_matrix(6,6);
+    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
+    Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+    Epetra_SerialDenseMatrix B_times_TM(3*Mesh->el_type,6);
+    Epetra_SerialDenseVector fevol(3*Mesh->el_type), fvol(3);
+    
+    for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+        e_gid = Mesh->local_cells[e_lid];
+        
+        for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+            node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+            for (int iddl=0; iddl<3; ++iddl){
+                Indices_tetra[3*inode+iddl] = 3*node+iddl;
+                for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
+                    for (int jddl=0; jddl<3; ++jddl){
+                        Ke(3*inode+iddl,3*jnode+jddl) = 0.0;
+                    }
+                }
+            }
+        }
+        
+        for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+            gauss_weight = Mesh->gauss_weight_cells(gp);
+            fvol = get_forcing(e_lid,gp);
+            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                for (unsigned int iddl=0; iddl<3; ++iddl){
+                    fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tetra(e_lid,gp);
+                }
+            }
+            
+            compute_B_matrices(dx_shape_functions,matrix_B);
+            get_elasticity_tensor(e_lid, gp, tangent_matrix);
+            
+            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
+            error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
+        }
+        
+        for (unsigned int i=0; i<3*Mesh->el_type; ++i){
+            error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
+            for (unsigned int j=0; j<3*Mesh->el_type; ++j){
+                error = K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
+            }
+        }
+    }
+    delete[] Indices_tetra;
+}
+
+void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
 
     int node;
     int* Indices_tri;

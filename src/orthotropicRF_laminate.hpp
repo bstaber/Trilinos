@@ -47,6 +47,11 @@ public:
         Epetra_SerialDenseVector f(3);
         return f;
     }
+    Epetra_SerialDenseVector get_forcing(unsigned int & e_lid, unsigned int & gp){
+        std::cout << "Not using this method in this application.\n";
+        Epetra_SerialDenseVector f(3);
+        return f;
+    }
     
     void solveOneRealization(double & bcDisp, int * seeds){
         
@@ -109,7 +114,7 @@ public:
         rhs.PutScalar(0.0);
         lhs.PutScalar(0.0);
         
-        assemble_dirichlet(linearOperator);
+        assemblePureDirichlet_homogeneousForcing(linearOperator);
         apply_dirichlet_conditions(linearOperator,rhs,bcDisp);
         
         Epetra_LinearProblem problem;

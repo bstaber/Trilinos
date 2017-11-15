@@ -36,6 +36,8 @@ var searchData=
   ['solveonerealization',['solveOneRealization',['../d0/daf/class_orthotropic_r_f___laminate.html#a8d742388f909fa32e7ee6f24f159e0af',1,'OrthotropicRF_Laminate']]],
   ['standardmap',['StandardMap',['../d8/dc2/class_finite___element___problem.html#af85c985ad689effcfea35d2c1e4a7e55',1,'Finite_Element_Problem::StandardMap()'],['../d3/d9f/class_linear___finite___element___problem.html#abede3149681bd501834a89b324d07869',1,'Linear_Finite_Element_Problem::StandardMap()']]],
   ['stepinc',['stepInc',['../d1/dbe/classmanufactured_solution.html#af9ff8199a693f6fe28e3c626a5f79b9f',1,'manufacturedSolution']]],
+  ['stiffness_5fpuredirichlet_5fhomogeneousforcing',['stiffness_pureDirichlet_homogeneousForcing',['../d9/df7/class_linearized_elasticity.html#ad7d90bfa17ee658c41221a9e7d27f73c',1,'LinearizedElasticity']]],
+  ['stiffness_5fpuredirichlet_5finhomogeneousforcing',['stiffness_pureDirichlet_inhomogeneousForcing',['../d9/df7/class_linearized_elasticity.html#a4080cb86f5256ccfd66397b13df5d090',1,'LinearizedElasticity']]],
   ['store_5ffeinterp_5ftetra',['store_feinterp_tetra',['../d6/d6b/classmesh.html#aec3804c8c0155f3e599b14144fc22ee2',1,'mesh']]],
   ['store_5ffeinterp_5ftri',['store_feinterp_tri',['../d6/d6b/classmesh.html#a51063e41338b1da593fa179e49868f67',1,'mesh']]],
   ['success',['success',['../d0/d9d/class_newton___raphson.html#a8e2b0ddca7055d706387f21219b9ba3e',1,'Newton_Raphson']]],

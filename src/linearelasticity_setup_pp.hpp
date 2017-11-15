@@ -11,11 +11,12 @@ public:
     
     void create_FECrsGraph();
     
-    void assemble_dirichlet(Epetra_FECrsMatrix & K);
-    void assemble_dirichlet_dead_neumann(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K);
+    void assembleMixedDirichletNeumann_homogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     
-    void material_stiffness_and_rhs_dirichlet(Epetra_FECrsMatrix & K);
-    void force_dead_pressure(Epetra_FEVector & F);
+    void stiffness_pureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K);
+    void stiffness_pureDirichlet_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FECrsMatrix & F);
+    void rhs_NeumannBoundaryCondition(Epetra_FEVector & F);
     
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
     
@@ -23,6 +24,7 @@ public:
     void compute_deformation(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM);
     
     virtual Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp) = 0;
+    virtual Epetra_SerialDenseVector get_forcing(unsigned int & e_lid, unsigned int & gp) = 0;
     virtual void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix) = 0;
     virtual void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix) = 0;
     

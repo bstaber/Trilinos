@@ -5,6 +5,7 @@ var class_orthotropic_r_f___laminate =
     [ "apply_dirichlet_conditions", "d0/daf/class_orthotropic_r_f___laminate.html#ab2c9ffe9e81448ca936ee4a2da5a4a61", null ],
     [ "get_elasticity_tensor", "d0/daf/class_orthotropic_r_f___laminate.html#afd8401ceccf407014ba561770cb69552", null ],
     [ "get_elasticity_tensor_for_recovery", "d0/daf/class_orthotropic_r_f___laminate.html#a95ec99b9011056d3b2a205d1079863f8", null ],
+    [ "get_forcing", "d0/daf/class_orthotropic_r_f___laminate.html#af99a5434f8150a7dfee01c87904724c1", null ],
     [ "get_neumannBc", "d0/daf/class_orthotropic_r_f___laminate.html#ae602240342a233d65ebef02117ed4b5e", null ],
     [ "icdf_gamma", "d0/daf/class_orthotropic_r_f___laminate.html#aa74a66077f51eaf1c2544979a551f406", null ],
     [ "print_solution", "d0/daf/class_orthotropic_r_f___laminate.html#a504bcd91ddea0839e40aca93a6c00269", null ],
