@@ -65,6 +65,21 @@ void LinearizedElasticity::assembleMixedDirichletNeumann_homogeneousForcing(Epet
     F.GlobalAssemble();
 }
 
+void LinearizedElasticity::assembleMixedDirichletNeumann_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+    
+    F.PutScalar(0.0);
+    K.PutScalar(0.0);
+    
+    stiffness_pureDirichlet_inhomogeneousForcing(K,F);
+    rhs_NeumannBoundaryCondition(F);
+    
+    Comm->Barrier();
+    
+    K.GlobalAssemble();
+    K.FillComplete();
+    F.GlobalAssemble();
+}
+
 void LinearizedElasticity::stiffness_pureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K){
 
     int node, e_gid, error;
@@ -120,7 +135,7 @@ void LinearizedElasticity::stiffness_pureDirichlet_homogeneousForcing(Epetra_FEC
     delete[] Indices_tetra;
 }
 
-void LinearizedElasticity::stiffness_pureDirichlet_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FECrsMatrix & F){
+void LinearizedElasticity::stiffness_pureDirichlet_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
     
     int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
