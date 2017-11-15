@@ -1,11 +1,8 @@
 #ifndef BASECLASSFEM_HPP
 #define BASECLASSFEM_HPP
-
 #include "meshpp.hpp"
-
 class BaseClassFEM
 {
-    
 public:
     BaseClassFEM(){
     };
@@ -20,5 +17,4 @@ public:
     Epetra_Import * ImportToOverlapMap;
     Epetra_FECrsGraph * FEGraph;
 };
-
 #endif
