@@ -10,7 +10,7 @@ var searchData=
   ['import_5fexp_5fdef',['import_exp_def',['../dd/de7/classreadnrldata.html#a2d0de4262e6c0b07a72fb5c46e5b9a2e',1,'readnrldata']]],
   ['import_5fexp_5fpoints',['import_exp_points',['../dd/de7/classreadnrldata.html#a0e9f72a68793cbc59f20a952076d60df',1,'readnrldata']]],
   ['import_5fexpenergy',['import_expenergy',['../dd/de7/classreadnrldata.html#ad5c597dceacb7b14acc68416e68c350d',1,'readnrldata']]],
-  ['importtooverlapmap',['ImportToOverlapMap',['../d8/dc2/class_finite___element___problem.html#a0e20470bc0a42dd27f7cec9647e34af9',1,'Finite_Element_Problem::ImportToOverlapMap()'],['../d3/d9f/class_linear___finite___element___problem.html#a4b1375c46128d9f9b4f6c4ed2514ff98',1,'Linear_Finite_Element_Problem::ImportToOverlapMap()']]],
+  ['importtooverlapmap',['ImportToOverlapMap',['../d2/d97/class_base_class_f_e_m.html#afbef491cc79f2b31c8d71b9abff5bb32',1,'BaseClassFEM']]],
   ['initialization',['Initialization',['../d0/d9d/class_newton___raphson.html#ad539d48c7118ead7770bdfed2abc3d6a',1,'Newton_Raphson']]],
   ['interface',['interface',['../d0/d9d/class_newton___raphson.html#a8d429fdee60b65c9ad71db2f5052be05',1,'Newton_Raphson']]],
   ['inverse_5fisoparametric_5fmapping',['inverse_isoparametric_mapping',['../d1/d14/classdistributenrldata.html#a85ed5c2390f02027f87529572afaaed4',1,'distributenrldata']]],

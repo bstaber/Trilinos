@@ -4,6 +4,6 @@ var searchData=
   ['face_5ftype',['face_type',['../d6/d6b/classmesh.html#a93f1b30d16013e2564c388f28b94c3d0',1,'mesh']]],
   ['faces_5fnodes',['faces_nodes',['../d6/d6b/classmesh.html#a6b1a4e32411b602e9d5042f464cfde52',1,'mesh']]],
   ['failure',['failure',['../d0/d9d/class_newton___raphson.html#afa12789c5d8add146be4670832114bc8',1,'Newton_Raphson']]],
-  ['fegraph',['FEGraph',['../d8/dc2/class_finite___element___problem.html#a88e07b8fd2870286bc065c9e542f52a9',1,'Finite_Element_Problem::FEGraph()'],['../d3/d9f/class_linear___finite___element___problem.html#a84aecb5b50891d3e477366ebc01cc740',1,'Linear_Finite_Element_Problem::FEGraph()']]],
+  ['fegraph',['FEGraph',['../d2/d97/class_base_class_f_e_m.html#ac427a18001d2afce7250b4fc99f02d64',1,'BaseClassFEM']]],
   ['fixed',['fixed',['../da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html#a51f150247870fd47fc86ec6aaca2e024',1,'DirichletInletOutlet_PolyconvexHGO']]]
 ];

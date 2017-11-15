@@ -34,7 +34,7 @@ var searchData=
   ['solve_5fwith_5faztec',['Solve_with_Aztec',['../d0/d9d/class_newton___raphson.html#ad94282360b1e26d9e0dd3c55a4634919',1,'Newton_Raphson']]],
   ['solve_5fwith_5fstratimikos',['Solve_with_Stratimikos',['../d0/d9d/class_newton___raphson.html#a3cdf69d29fcf2ef8ce5ce7a28e1b5708',1,'Newton_Raphson']]],
   ['solveonerealization',['solveOneRealization',['../d0/daf/class_orthotropic_r_f___laminate.html#a8d742388f909fa32e7ee6f24f159e0af',1,'OrthotropicRF_Laminate']]],
-  ['standardmap',['StandardMap',['../d8/dc2/class_finite___element___problem.html#af85c985ad689effcfea35d2c1e4a7e55',1,'Finite_Element_Problem::StandardMap()'],['../d3/d9f/class_linear___finite___element___problem.html#abede3149681bd501834a89b324d07869',1,'Linear_Finite_Element_Problem::StandardMap()']]],
+  ['standardmap',['StandardMap',['../d2/d97/class_base_class_f_e_m.html#ae2e9c49f5c8b082ac535fed80e737d04',1,'BaseClassFEM']]],
   ['stepinc',['stepInc',['../d1/dbe/classmanufactured_solution.html#af9ff8199a693f6fe28e3c626a5f79b9f',1,'manufacturedSolution']]],
   ['stiffness_5fpuredirichlet_5fhomogeneousforcing',['stiffness_pureDirichlet_homogeneousForcing',['../d9/df7/class_linearized_elasticity.html#ad7d90bfa17ee658c41221a9e7d27f73c',1,'LinearizedElasticity']]],
   ['stiffness_5fpuredirichlet_5finhomogeneousforcing',['stiffness_pureDirichlet_inhomogeneousForcing',['../d9/df7/class_linearized_elasticity.html#a4080cb86f5256ccfd66397b13df5d090',1,'LinearizedElasticity']]],

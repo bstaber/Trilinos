@@ -2,8 +2,9 @@
 #define FINITE_ELEMENT_PROBLEM_HPP
 
 #include "meshpp.hpp"
+#include "BaseClassFEM.hpp"
 
-class Finite_Element_Problem
+class Finite_Element_Problem : public BaseClassFEM
 {
     
 public:
@@ -33,13 +34,13 @@ public:
         isAvailable = Factory.Query("Dscpack"); if(isAvailable){ std::cout << "Dscpack: yes.\n"; } else{ std::cout << "Dscpack: no.\n"; }
     }
     
-    mesh * Mesh;
+    /*mesh * Mesh;
     Epetra_Comm * Comm;
     
     Epetra_Map * OverlapMap;
     Epetra_Map * StandardMap;
     Epetra_Import * ImportToOverlapMap;
-    Epetra_FECrsGraph * FEGraph;
+    Epetra_FECrsGraph * FEGraph;*/
     
 };
 

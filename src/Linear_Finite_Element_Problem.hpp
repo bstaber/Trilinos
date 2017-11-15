@@ -2,8 +2,9 @@
 #define LINEAR_FINITE_ELEMENT_PROBLEM_HPP
 
 #include "meshpp.hpp"
+#include "BaseClassFEM.hpp"
 
-class Linear_Finite_Element_Problem
+class Linear_Finite_Element_Problem : public BaseClassFEM
 {
     
 public:
@@ -17,13 +18,13 @@ public:
     virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
     };
     
-    mesh * Mesh;
+    /*mesh * Mesh;
     Epetra_Comm * Comm;
     
     Epetra_Map * OverlapMap;
     Epetra_Map * StandardMap;
     Epetra_Import * ImportToOverlapMap;
-    Epetra_FECrsGraph * FEGraph;
+    Epetra_FECrsGraph * FEGraph;*/
 };
 
 #endif
