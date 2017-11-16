@@ -36,6 +36,18 @@ void LinearizedElasticity::create_FECrsGraph(){
     delete[] index;
 }
 
+void LinearizedElasticity::aztecSolver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & u, Teuchos::ParameterList & paramList){
+    u.PutScalar(0.0);
+    Epetra_LinearProblem problem;
+    AztecOO solver;
+    problem.SetOperator(&A);
+    problem.SetLHS(&u);
+    problem.SetRHS(&b);
+    solver.SetProblem(problem);
+    solver.SetParameters(paramList);
+    solver.Iterate(2000,1e-6);
+}
+
 void LinearizedElasticity::assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K){
 
     int error;

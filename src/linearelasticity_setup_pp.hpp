@@ -11,6 +11,8 @@ public:
     
     void create_FECrsGraph();
     
+    void aztecSolver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & u, Teuchos::ParameterList & paramList);
+    
     void assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K);
     void assembleMixedDirichletNeumann_homogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void assembleMixedDirichletNeumann_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F);
