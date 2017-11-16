@@ -280,6 +280,23 @@ void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shap
     }
 }
 
+int LinearizedElasticity::print_solution(Epetra_Vector & solution, std::string fileName){
+    
+    int NumTargetElements = 0;
+    if (Comm->MyPID()==0){
+        NumTargetElements = 3*Mesh->n_nodes;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+    Epetra_Export ExportOnRoot(*StandardMap,MapOnRoot);
+    Epetra_MultiVector lhs_root(MapOnRoot,true);
+    lhs_root.Export(solution,ExportOnRoot,Insert);
+    
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(fileName.c_str(),lhs_root,0,0,false);
+    
+    return error;
+    
+}
+
 void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
     
     Epetra_Vector u(*OverlapMap);

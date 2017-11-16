@@ -40,7 +40,7 @@ public:
         return f;
     }
     
-    void solve(){
+    void solve(bool doprint){
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
         Epetra_Vector      lhs(*StandardMap);
@@ -49,6 +49,9 @@ public:
         assemblePureDirichlet_homogeneousForcing(linearOperator);
         apply_dirichlet_conditions(linearOperator,rhs,dummy);
         aztecSolver(linearOperator,rhs,lhs,*Krylov);
+        if (doprint){
+            print_solution(lhs,"/Users/brian/Documents/GitHub/Trilinos_results/cee530/linearpatchtest/linearPatchTest.mtx");
+        }
     }
     
     void setup_dirichlet_conditions(){
@@ -93,9 +96,12 @@ public:
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
             if (x==0||y==0||z==0||x==10.0||y==10.0||z==10.0){
-                v[0][StandardMap->LID(3*node+0)] = 0.1*x;
-                v[0][StandardMap->LID(3*node+1)] = 0.1*y;
-                v[0][StandardMap->LID(3*node+2)] = 0.1*z;
+                x = x - 5.0;
+                y = y - 5.0;
+                z = z - 5.0;
+                v[0][StandardMap->LID(3*node+0)] = 0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
+                v[0][StandardMap->LID(3*node+1)] = 0.1*(0.05*x + 0.04*y + 0.1*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
+                v[0][StandardMap->LID(3*node+2)] = 0.1*(0.75*x + 0.09*y + 0.06*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
             }
         }
         

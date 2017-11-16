@@ -44,7 +44,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     Teuchos::RCP<linearPatchTest> interface = Teuchos::rcp(new linearPatchTest(Comm,*paramList));
-    interface->solve();
+    interface->solve(true);
         
 #ifdef HAVE_MPI
     MPI_Finalize();
