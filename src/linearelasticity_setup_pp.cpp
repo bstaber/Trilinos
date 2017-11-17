@@ -217,6 +217,7 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
     int n_gauss_points = Mesh->n_gauss_faces;
     double gauss_weight;
     
+    Epetra_SerialDenseMatrix xg(3,Mesh->face_type), matrix_X(3,Mesh->face_type);
     Epetra_SerialDenseVector force(3*Mesh->face_type);
     Epetra_SerialDenseVector dead_pressure(3);
     
@@ -227,13 +228,17 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
             Indices_tri[3*inode]   = 3*node;
             Indices_tri[3*inode+1] = 3*node+1;
             Indices_tri[3*inode+2] = 3*node+2;
+            matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+            matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+            matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
             for (unsigned int iddl=0; iddl<3; ++iddl){
                 force(3*inode+iddl) = 0.0;
             }
-        }        
+        }
+        xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tri,0.0);
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_faces(gp);
-            dead_pressure = get_neumannBc(e_lid,gp);
+            dead_pressure = get_neumannBc(matrix_X,xg,gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
                     force(3*inode+iddl) += gauss_weight*dead_pressure(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);

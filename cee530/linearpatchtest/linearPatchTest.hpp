@@ -29,7 +29,7 @@ public:
     ~linearPatchTest(){
     }
     
-    Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp){
+    Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         std::cout << "Not using this method in this application.\n";
         Epetra_SerialDenseVector f(3);
         return f;

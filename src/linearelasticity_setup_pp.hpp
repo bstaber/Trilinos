@@ -28,7 +28,7 @@ public:
     
     int print_solution(Epetra_Vector & solution, std::string fileName);
     
-    virtual Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp) = 0;
+    virtual Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp) = 0;
     virtual Epetra_SerialDenseVector get_forcing(unsigned int & e_lid, unsigned int & gp) = 0;
     virtual void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix) = 0;
     virtual void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix) = 0;

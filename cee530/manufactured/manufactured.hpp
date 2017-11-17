@@ -29,14 +29,60 @@ public:
     ~manufactured(){
     }
     
-    Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp){
-        std::cout << "Not using this method in this application.\n";
-        Epetra_SerialDenseVector f(3);
-        return f;
+    Epetra_SerialDenseVector manufacturedSolution(double & x1, double & x2, double & x3){
+        Epetra_SerialDenseVector u(3);
+        u(0) = 0.1*x1*x2*x2;
+        u(1) = 0.1*x1*x1;
+        u(2) = 0.2*x1*x2*x3;
+        return u;
+    }
+    
+    Epetra_SerialDenseMatrix manufacturedDeformation(double & x1, double & x2, double & x3){
+        Epetra_SerialDenseMatrix epsilon(3,3);
+        double a = 0.1; double b = 0.1; double c = 0.2;
+        epsilon(0,0) = a*x2*x2;       epsilon(0,1) = x1*(b + a*x2); epsilon(0,2) = (c*x2*x3)/2.0;
+        epsilon(1,0) = x1*(b+a*x2);   epsilon(1,1) = 0.0;           epsilon(1,2) = (c*x1*x3)/2.0;
+        epsilon(2,0) = (c*x2*x3)/2.0; epsilon(2,1) = (c*x1*x3)/2.0; epsilon(2,2) = c*x1*x2;
+        return epsilon;
+    }
+    
+    Epetra_SerialDenseMatrix manufacturedStress(double & x1, double & x2, double & x3){
+        Epetra_SerialDenseMatrix sigma(3,3), epsilon(3,3), elasticity(6,6);
+        Epetra_SerialDenseVector sigma_voigt(6), epsilon_voigt(6);
+        epsilon = manufacturedDeformation(x1,x2,x3);
+        epsilon_voigt(0) = epsilon(0,0); epsilon_voigt(1) = epsilon(1,1); epsilon_voigt(2) = epsilon(2,2);
+        epsilon_voigt(3) = epsilon(1,2); epsilon_voigt(4) = epsilon(0,2); epsilon_voigt(5) = epsilon(0,1);
+        unsigned int e_lid = 0;
+        unsigned int gp    = 0;
+        get_elasticity_tensor(e_lid,gp,elasticity);
+        sigma_voigt.Multiply('N','N',1.0,elasticity,epsilon_voigt,0.0);
+        sigma(0,0) = sigma_voigt(0); sigma(0,1) = sigma_voigt(5); sigma(0,2) = sigma_voigt(4);
+        sigma(1,0) = sigma_voigt(5); sigma(1,1) = sigma_voigt(1); sigma(1,2) = sigma_voigt(3);
+        sigma(2,0) = sigma_voigt(4); sigma(1,2) = sigma_voigt(3); sigma(2,2) = sigma_voigt(2);
+        return sigma;
+    }
+    
+    Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
+        Epetra_SerialDenseVector t(3), normal(3);
+        Epetra_SerialDenseMatrix sigma(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
+        sigma = manufacturedStress(xg(0,gp),xg(1,gp),xg(2,gp));
+        for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
+            d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
+            d_shape_functions(inode,1) = Mesh->D2_N_tri(gp,inode);
+        }
+        dxi_matrix_x.Multiply('N','N',1.0,matrix_X,d_shape_functions,0.0);
+        normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);
+        normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
+        normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
+        normal.Scale(1.0/normal.Norm2());
+        t.Multiply('N','N',1.0,sigma,normal,0.0);
+        return t;
     }
     Epetra_SerialDenseVector get_forcing(unsigned int & e_lid, unsigned int & gp){
-        std::cout << "Not using this method in this application.\n";
         Epetra_SerialDenseVector f(3);
+        f(0) = 0.0;
+        f(1) = 0.0;
+        f(2) = 0.0;
         return f;
     }
     
@@ -46,7 +92,7 @@ public:
         Epetra_Vector      lhs(*StandardMap);
         rhs.PutScalar(0.0);
         double dummy = 0.0;
-        assemblePureDirichlet_homogeneousForcing(linearOperator);
+        assembleMixedDirichletNeumann_inhomogeneousForcing(linearOperator,rhs);
         apply_dirichlet_conditions(linearOperator,rhs,dummy);
         aztecSolver(linearOperator,rhs,lhs,*Krylov);
         if (doprint){
@@ -56,14 +102,12 @@ public:
     
     void setup_dirichlet_conditions(){
         n_bc_dof = 0;
-        double x,y,z;
+        double x;
         unsigned int node;
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             node = Mesh->local_nodes[i];
             x = Mesh->nodes_coord[3*node+0];
-            y = Mesh->nodes_coord[3*node+1];
-            z = Mesh->nodes_coord[3*node+2];
-            if(x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
+            if(x==0){
                 n_bc_dof+=3;
             }
         }
@@ -73,9 +117,7 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             x = Mesh->nodes_coord[3*node+0];
-            y = Mesh->nodes_coord[3*node+1];
-            z = Mesh->nodes_coord[3*node+2];
-            if(x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
+            if(x==0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
@@ -89,16 +131,18 @@ public:
         v.PutScalar(0.0);
         
         int node;
-        double x,y,z;
+        double x, y, z;
+        Epetra_SerialDenseVector u(3);
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if (x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
-                v[0][StandardMap->LID(3*node+0)] = x*y; //0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
-                v[0][StandardMap->LID(3*node+1)] = 0.0; //0.1*(0.05*x + 0.04*y + 0.1*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
-                v[0][StandardMap->LID(3*node+2)] = 0.0; //0.1*(0.75*x + 0.09*y + 0.06*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
+            if (x==0){
+                u = manufacturedSolution(x,y,z);
+                v[0][StandardMap->LID(3*node+0)] = u(0);
+                v[0][StandardMap->LID(3*node+1)] = u(1);
+                v[0][StandardMap->LID(3*node+2)] = u(2);
             }
         }
         
@@ -111,7 +155,7 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if (x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
+            if (x==0){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
                 F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
                 F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
