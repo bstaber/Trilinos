@@ -85,7 +85,7 @@
         <Parameter name="precond" type="string" value="dom_decomp"/>
         <Parameter name="subdomain_solve" type="string" value="icc"/>
         <Parameter name="overlap" type="int" value="0"/>
-        <Parameter name="graph_fill" type="int" value="3"/>
+        <Parameter name="graph_fill" type="int" value="1"/>
         <!--Parameter name="type_overlap" type="string" value="symmetric"/-->
         <!--Parameter name="pre_calc" type="string" value="recalc"/-->
         <!--Parameter name="ilut_fill" type="double" value="3.0"/-->
