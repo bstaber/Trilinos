@@ -1,16 +1,16 @@
-#ifndef LINEARPATCHTEST_HPP
-#define LINEARPATCHTEST_HPP
+#ifndef manufactured_HPP
+#define manufactured_HPP
 
 #include "tensor_calculus.hpp"
 #include "linearelasticity_setup_pp.hpp"
 
-class linearPatchTest : public LinearizedElasticity
+class manufactured : public LinearizedElasticity
 {
 public:
     
     Teuchos::ParameterList * Krylov;
     
-    linearPatchTest(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    manufactured(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         Krylov = &Parameters.sublist("Krylov");
         
@@ -26,7 +26,7 @@ public:
         setup_dirichlet_conditions();
     }
     
-    ~linearPatchTest(){
+    ~manufactured(){
     }
     
     Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp){
@@ -50,7 +50,7 @@ public:
         apply_dirichlet_conditions(linearOperator,rhs,dummy);
         aztecSolver(linearOperator,rhs,lhs,*Krylov);
         if (doprint){
-            print_solution(lhs,"/Users/brian/Documents/GitHub/Trilinos_results/cee530/linearpatchtest/linearPatchTest.mtx");
+            print_solution(lhs,"/Users/brian/Documents/GitHub/Trilinos_results/cee530/manufactured/manufactured.mtx");
         }
     }
     
