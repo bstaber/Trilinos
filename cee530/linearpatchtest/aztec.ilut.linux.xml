@@ -1,8 +1,8 @@
 <ParameterList>
     
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh"/>
-        <Parameter name="path" type="string" value="/home/s/staber/Trilinos_results/linearelaslam/stochastic_solution_"/>
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/cee530/linearpatchtest/block.msh"/>
+        <Parameter name="path" type="string" value="/home/s/staber/Trilinos_results/cee530/linearpatchtest/solution.mtx"/>
     </ParameterList>
     
     <ParameterList name="Linear Solver Builder">
@@ -30,7 +30,7 @@
         <Parameter name="Preconditioner Type" type="string" value="None"/> 
     </ParameterList>
     
-    <ParameterList name="Krylov">
+    <!--ParameterList name="Krylov">
         <Parameter name="solver" type="string" value="gmres"/>
         <Parameter name="kspace" type="int" value="100"/>
         <Parameter name="orthog" type="string" value="classical"/>
@@ -40,32 +40,32 @@
         <Parameter name="type_overlap" type="string" value="symmetric"/>
         <Parameter name="pre_calc" type="string" value="recalc"/>
         <Parameter name="ilut_fill" type="double" value="4.0"/>
-        <!--Parameter name="AZ_conv" type="string" value="noscaled"/-->
+        <!--Parameter name="AZ_conv" type="string" value="noscaled"/>
         <Parameter name="AZ_tol" type="double" value="1e-6"/>
         <Parameter name="AZ_output" type="string" value="last"/>
         <Parameter name="AZ_diagnostics" type="string" value="all"/>
         <Parameter name="AZ_reorder" type="int" value="1"/>
-    </ParameterList>
-
-    <!--ParameterList name="Krylov">
-        <Parameter name="solver" type="string" value="cg"/>
-        <Parameter name="precond" type="string" value="Jacobi"/>
-        <Parameter name="AZ_conv" type="string" value="noscaled"/>
-        <Parameter name="AZ_tol" type="double" value="1e-6"/>
-        <Parameter name="AZ_output" type="int" value="1"/>
-        <Parameter name="AZ_diagnostics" type="string" value="all"/>
-        <Parameter name="AZ_reorder" type="int" value="1"/>
     </ParameterList-->
 
-    <ParameterList name="Shinozuka">
-        <Parameter name="order" type="int" value="10"/>
-        <Parameter name="nmc" type="int" value="1"/>
-        <Parameter name="lx" type="double" value="5.0"/>
-        <Parameter name="ly" type="double" value="2.5"/>
-        <Parameter name="lz" type="double" value="0.128125"/>
-        <Parameter name="deltaN" type="double" value="0.0970"/>
-        <Parameter name="deltaM4" type="double" value="0.0461"/>
-        <Parameter name="deltaM5" type="double" value="0.0952"/>
-    </ParameterList>
+<ParameterList name="Krylov">
+    <Parameter name="solver" type="string" value="cg"/>
+    <!--Parameter name="kspace" type="int" value="100"/-->
+    <!--Parameter name="orthog" type="string" value="classical"/-->
+    <Parameter name="precond" type="string" value="dom_decomp"/>
+    <Parameter name="subdomain_solve" type="string" value="icc"/>
+    <Parameter name="overlap" type="int" value="0"/>
+    <!--Parameter name="type_overlap" type="string" value="symmetric"/-->
+    <!--Parameter name="pre_calc" type="string" value="recalc"/-->
+    <!--Parameter name="ilut_fill" type="double" value="3.0"/-->
+    <!--Parameter name="athresh" type="double" value="0.0"/>
+     <Parameter name="rthresh" type="double" value="0.0"/>
+     <Parameter name="drop" type="double" value="0.0"/-->
+    <!--Parameter name="AZ_conv" type="string" value="noscaled"/-->
+    <Parameter name="AZ_tol" type="double" value="1e-6"/>
+    <Parameter name="AZ_output" type="string" value="summary"/>
+    <Parameter name="AZ_diagnostics" type="string" value="all"/>
+    <Parameter name="AZ_reorder" type="int" value="1"/>
+</ParameterList>
+
     
 </ParameterList>
