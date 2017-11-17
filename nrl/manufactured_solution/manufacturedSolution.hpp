@@ -404,9 +404,7 @@ public:
                     Indices_tetra[3*inode+iddl] = 3*node+iddl;
                 }
             }
-            
             xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tetra,0.0);
-            
             for (unsigned int gp=0; gp<n_gauss_points; ++gp){
                 gauss_weight = Mesh->gauss_weight_cells(gp);
                 fvol = manufacturedForcing(xg(0,gp),xg(1,gp),xg(2,gp));

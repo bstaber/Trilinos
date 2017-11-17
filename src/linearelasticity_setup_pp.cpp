@@ -158,7 +158,7 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
     
     Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
     Epetra_SerialDenseMatrix tangent_matrix(6,6);
-    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
+    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), matrix_X(3,Mesh->el_type), xg(3,n_gauss_points);
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
     Epetra_SerialDenseMatrix B_times_TM(3*Mesh->el_type,6);
     Epetra_SerialDenseVector fevol(3*Mesh->el_type), fvol(3);
@@ -168,6 +168,9 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
         
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+            matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+            matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+            matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
             for (int iddl=0; iddl<3; ++iddl){
                 Indices_tetra[3*inode+iddl] = 3*node+iddl;
                 for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
@@ -178,9 +181,10 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
             }
         }
         
+        xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tetra,0.0);
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
-            fvol = get_forcing(e_lid,gp);
+            fvol = get_forcing(xg(0,gp),xg(1,gp),xg(2,gp),e_lid,gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
                 dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
                 dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
@@ -191,7 +195,7 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
             }
             
             compute_B_matrices(dx_shape_functions,matrix_B);
-            get_elasticity_tensor(e_lid, gp, tangent_matrix);
+            get_elasticity_tensor(e_lid,gp,tangent_matrix);
             
             error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
@@ -217,7 +221,7 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
     int n_gauss_points = Mesh->n_gauss_faces;
     double gauss_weight;
     
-    Epetra_SerialDenseMatrix xg(3,Mesh->face_type), matrix_X(3,Mesh->face_type);
+    Epetra_SerialDenseMatrix xg(3,n_gauss_points), matrix_X(3,Mesh->face_type);
     Epetra_SerialDenseVector force(3*Mesh->face_type);
     Epetra_SerialDenseVector dead_pressure(3);
     

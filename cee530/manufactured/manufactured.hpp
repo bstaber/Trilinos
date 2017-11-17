@@ -40,7 +40,7 @@ public:
     Epetra_SerialDenseMatrix manufacturedDeformation(double & x1, double & x2, double & x3){
         Epetra_SerialDenseMatrix epsilon(3,3);
         double a = 0.1; double b = 0.1; double c = 0.2;
-        epsilon(0,0) = a*x2*x2;       epsilon(0,1) = x1*(b + a*x2); epsilon(0,2) = (c*x2*x3)/2.0;
+        epsilon(0,0) = a*x2*x2;       epsilon(0,1) = x1*(b+a*x2);   epsilon(0,2) = (c*x2*x3)/2.0;
         epsilon(1,0) = x1*(b+a*x2);   epsilon(1,1) = 0.0;           epsilon(1,2) = (c*x1*x3)/2.0;
         epsilon(2,0) = (c*x2*x3)/2.0; epsilon(2,1) = (c*x1*x3)/2.0; epsilon(2,2) = c*x1*x2;
         return epsilon;
@@ -51,14 +51,14 @@ public:
         Epetra_SerialDenseVector sigma_voigt(6), epsilon_voigt(6);
         epsilon = manufacturedDeformation(x1,x2,x3);
         epsilon_voigt(0) = epsilon(0,0); epsilon_voigt(1) = epsilon(1,1); epsilon_voigt(2) = epsilon(2,2);
-        epsilon_voigt(3) = epsilon(1,2); epsilon_voigt(4) = epsilon(0,2); epsilon_voigt(5) = epsilon(0,1);
+        epsilon_voigt(3) = std::sqrt(2.0)*epsilon(1,2); epsilon_voigt(4) = std::sqrt(2.0)*epsilon(0,2); epsilon_voigt(5) = std::sqrt(2.0)*epsilon(0,1);
         unsigned int e_lid = 0;
         unsigned int gp    = 0;
         get_elasticity_tensor(e_lid,gp,elasticity);
         sigma_voigt.Multiply('N','N',1.0,elasticity,epsilon_voigt,0.0);
-        sigma(0,0) = sigma_voigt(0); sigma(0,1) = sigma_voigt(5); sigma(0,2) = sigma_voigt(4);
-        sigma(1,0) = sigma_voigt(5); sigma(1,1) = sigma_voigt(1); sigma(1,2) = sigma_voigt(3);
-        sigma(2,0) = sigma_voigt(4); sigma(1,2) = sigma_voigt(3); sigma(2,2) = sigma_voigt(2);
+        sigma(0,0) = sigma_voigt(0);                sigma(0,1) = sigma_voigt(5)/std::sqrt(2.0); sigma(0,2) = sigma_voigt(4)/std::sqrt(2.0);
+        sigma(1,0) = sigma_voigt(5)/std::sqrt(2.0); sigma(1,1) = sigma_voigt(1);                sigma(1,2) = sigma_voigt(3)/std::sqrt(2.0);
+        sigma(2,0) = sigma_voigt(4)/std::sqrt(2.0); sigma(1,2) = sigma_voigt(3)/std::sqrt(2.0); sigma(2,2) = sigma_voigt(2);
         return sigma;
     }
     
@@ -66,23 +66,32 @@ public:
         Epetra_SerialDenseVector t(3), normal(3);
         Epetra_SerialDenseMatrix sigma(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
         sigma = manufacturedStress(xg(0,gp),xg(1,gp),xg(2,gp));
-        for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
-            d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
-            d_shape_functions(inode,1) = Mesh->D2_N_tri(gp,inode);
+        if (xg(0,gp)==1.0){
+            normal(0) = 1.0; normal(1) = 0.0; normal(2) = 0.0;
         }
-        dxi_matrix_x.Multiply('N','N',1.0,matrix_X,d_shape_functions,0.0);
-        normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);
-        normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
-        normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
-        normal.Scale(1.0/normal.Norm2());
+        if (xg(1,gp)==0.0){
+            normal(0) = 0.0; normal(1) = -1.0; normal(2) = 0.0;
+        }
+        if (xg(1,gp)==1.0){
+            normal(0) = 0.0; normal(1) = 1.0; normal(2) = 0.0;
+        }
+        if (xg(2,gp)==0.0){
+            normal(0) = 0.0; normal(1) = 0.0; normal(2) = -1.0;
+        }
+        if (xg(2,gp)==1.0){
+            normal(0) = 0.0; normal(1) = 0.0; normal(2) = 1.0;
+        }
         t.Multiply('N','N',1.0,sigma,normal,0.0);
         return t;
     }
-    Epetra_SerialDenseVector get_forcing(unsigned int & e_lid, unsigned int & gp){
+    Epetra_SerialDenseVector get_forcing(double & x1, double & x2, double & x3, unsigned int & e_lid, unsigned int & gp){
         Epetra_SerialDenseVector f(3);
-        f(0) = 0.0;
-        f(1) = 0.0;
-        f(2) = 0.0;
+        Epetra_SerialDenseMatrix C(6,6);
+        get_elasticity_tensor(e_lid,gp,C);
+        double a = 0.1; double b = 0.1; double c = 0.2;
+        f(0) = (std::sqrt(2.0)*(2.0*C(0,5)*a*x2 + C(2,5)*c*x1 + std::sqrt(2.0)*C(5,5)*a*x1 + (std::sqrt(2.0)*C(4,5)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*((std::sqrt(2.0)*C(3,4)*c*x1)/2.0 + (std::sqrt(2.0)*C(4,4)*c*x2)/2.0))/2.0 + C(0,2)*c*x2 + std::sqrt(2.0)*C(0,5)*(b + a*x2) + (std::sqrt(2.0)*C(0,3)*c*x3)/2.0;
+        f(1) = (std::sqrt(2.0)*(C(2,4)*c*x2 + std::sqrt(2.0)*C(4,5)*(b + a*x2) + (std::sqrt(2.0)*C(3,4)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*((std::sqrt(2.0)*C(3,3)*c*x1)/2.0 + (std::sqrt(2.0)*C(3,4)*c*x2)/2.0))/2.0 + 2.0*C(0,1)*a*x2 + C(1,2)*c*x1 + std::sqrt(2.0)*C(1,5)*a*x1 + (std::sqrt(2.0)*C(1,4)*c*x3)/2.0;
+        f(2) = (std::sqrt(2.0)*(C(2,4)*c*x2 + std::sqrt(2.0)*C(4,5)*(b + a*x2) + (std::sqrt(2.0)*C(3,4)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*(2.0*C(0,3)*a*x2 + C(2,3)*c*x1 + std::sqrt(2.0)*C(3,5)*a*x1 + (std::sqrt(2.0)*C(3,4)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*C(2,3)*c*x1)/2.0 + (std::sqrt(2.0)*C(2,4)*c*x2)/2.0;
         return f;
     }
     
@@ -167,11 +176,11 @@ public:
     void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix){
         int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
-        double c1 = 144.8969*1.0e9;
-        double c2 = 14.2500*1.0e9;
-        double c3 = 5.8442*1.0e9;
-        double c4 = 7.5462*1.0e9;
-        double c5 = 12.5580*1.0e9;
+        double c1 = 144.8969;
+        double c2 = 14.2500;
+        double c3 = 5.8442;
+        double c4 = 7.5462;
+        double c5 = 12.5580;
         transverse_isotropic_matrix(tangent_matrix,c1,c2,c3,c4,c5);
     }
     

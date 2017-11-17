@@ -57,7 +57,7 @@ Circle(14) = {16, 11, 10};
 //+
 Line Loop(15) = {8, 9, 10, 13, 14, -3, -2, -1, 4, 5, -12, -11, -7, -6};
 //+
-Plane Surface(16) = {15};
+Plane Surface(16) = {-15};
 //+
 out[] = Extrude {0, 0, 4.10} {
     Surface{16};
@@ -67,4 +67,5 @@ out[] = Extrude {0, 0, 4.10} {
   };
 
 Physical Volume(101) = {out[1]};
-Physical Surface(92) = {88,87,67,71,83,75,79,39,59,55,43,51,47,16};
+Physical Surface(92) = {88,87,67,71,83,75,79,39,59,55,43,51,47};
+Physical Surface(93) = {-16};

@@ -19,7 +19,7 @@ Line(4) = {3, 0};
 //+
 Line Loop(5) = {4, 1, 2, 3};
 //+
-Plane Surface(6) = {5};
+Plane Surface(6) = {-5};
 //+
 Transfinite Line {1, 4, 3, 2} = LC Using Progression 1;
 //+
@@ -35,6 +35,7 @@ Extrude {0, height, 0} {
 }
 //+
 //+
-Physical Surface(92) = {27, 6, 23, 28, 19};
+//Physical Surface(92) ={27, 6, 23, 28, 19};
+Physical Surface(92) = {6};
 //+
-Physical Volume(2) = {1};
+Physical Volume(2) = {-1};
