@@ -165,7 +165,6 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
     
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
-        
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
             matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
@@ -173,6 +172,7 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
             matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
             for (int iddl=0; iddl<3; ++iddl){
                 Indices_tetra[3*inode+iddl] = 3*node+iddl;
+                fevol(3*inode+iddl) = 0.0;
                 for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
                     for (int jddl=0; jddl<3; ++jddl){
                         Ke(3*inode+iddl,3*jnode+jddl) = 0.0;
@@ -181,7 +181,7 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
             }
         }
         
-        xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tetra,0.0);
+        xg.Multiply('N','N',1.0,matrix_X,Mesh->N_tetra,0.0);
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             fvol = get_forcing(xg(0,gp),xg(1,gp),xg(2,gp),e_lid,gp);
@@ -190,10 +190,9 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
                 dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
                 dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(gp,inode)*Mesh->detJac_tetra(e_lid,gp);
+                    fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(inode,gp)*Mesh->detJac_tetra(e_lid,gp);
                 }
             }
-            
             compute_B_matrices(dx_shape_functions,matrix_B);
             get_elasticity_tensor(e_lid,gp,tangent_matrix);
             
@@ -229,7 +228,7 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
         e_gid  = Mesh->local_faces[e_lid];
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             node = Mesh->faces_nodes[Mesh->face_type*e_gid+inode];
-            Indices_tri[3*inode]   = 3*node;
+            Indices_tri[3*inode+0] = 3*node+0;
             Indices_tri[3*inode+1] = 3*node+1;
             Indices_tri[3*inode+2] = 3*node+2;
             matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];

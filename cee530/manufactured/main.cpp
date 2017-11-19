@@ -45,6 +45,7 @@ MPI_Init(&argc, &argv);
     }
     Teuchos::RCP<manufactured> interface = Teuchos::rcp(new manufactured(Comm,*paramList));
     interface->solve(true);
+    
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif

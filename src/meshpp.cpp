@@ -418,11 +418,8 @@ void mesh::get_cells_and_ghosts(int & MyPID){
 void mesh::store_feinterp_tri(){
     
     int node, eglob;
-    Epetra_SerialDenseVector N(face_type); //xi(3), eta(3)
+    Epetra_SerialDenseVector N(face_type);
     Epetra_SerialDenseMatrix JacobianMatrix(2,2), X(2,face_type), D(face_type,2);
-    
-    /*xi(0) = 1.0/6.0; xi(1) = 2.0/3.0; xi(2) = 1.0/6.0;
-    eta(0) = 1.0/6.0; eta(1) = 1.0/6.0; eta(2) = 2.0/3.0;*/
     
     N_tri.Reshape(n_gauss_faces,face_type);
     D1_N_tri.Reshape(n_gauss_faces,face_type);
@@ -492,35 +489,8 @@ void mesh::store_feinterp_tetra(){
     
     int node, eglob;
     double alpha, beta;
-    Epetra_SerialDenseVector N(el_type); //, xi(4), eta(4), zeta(4);
+    Epetra_SerialDenseVector N(el_type);
     Epetra_SerialDenseMatrix JacobianMatrix(3,3), InverseJacobianMatrix(3,3), X(3,el_type), D(el_type,3), DX(el_type,3);
-    
-    /*switch (el_type){
-        case 4:
-            alpha = (5.0 - sqrt(5.0))/20.0;
-            beta = (5.0 + 3.0*sqrt(5.0))/20.0;
-            xi[0] = alpha; eta[0] = alpha; zeta[0] = alpha;
-            xi[1] = alpha; eta[1] = alpha; zeta[1] = beta;
-            xi[2] = alpha; eta[2] = beta; zeta[2] = alpha;
-            xi[3] = beta; eta[3] = alpha; zeta[3] = alpha;
-            break;
-        case 8:
-            alpha = std::sqrt(2.0/3.0);
-            beta = std::sqrt(1.0/3.0);
-            xi[0] = 0.0; eta[0] = alpha; zeta[0] = -beta;
-            xi[1] = 0.0; eta[1] = -alpha; zeta[1] = -beta;
-            xi[2] = alpha; eta[2] = 0.0; zeta[2] = beta;
-            xi[3]= -alpha; eta[3] = 0.0; zeta[3] = beta;
-            break;
-        case 10:
-            alpha = (5.0 - sqrt(5.0))/20.0;
-            beta = (5.0 + 3.0*sqrt(5.0))/20.0;
-            xi[0] = alpha; eta[0] = alpha; zeta[0] = alpha;
-            xi[1] = alpha; eta[1] = alpha; zeta[1] = beta;
-            xi[2] = alpha; eta[2] = beta; zeta[2] = alpha;
-            xi[3] = beta; eta[3] = alpha; zeta[3] = alpha;
-            break;
-    }*/
     
     local_rows.Resize(3*el_type*n_local_cells);
     vol_tetra.Resize(n_local_cells);
@@ -556,7 +526,6 @@ void mesh::store_feinterp_tetra(){
             }
             break;
     };
-    
     for (unsigned int eloc=0; eloc<n_local_cells; ++eloc){
         eglob = local_cells[eloc];
         for (unsigned int inode=0; inode<el_type; ++inode){
@@ -586,7 +555,6 @@ void mesh::store_feinterp_tetra(){
             jacobian_det(JacobianMatrix,detJac_tetra(eloc,gp));
             dX_shape_functions(D,JacobianMatrix,detJac_tetra(eloc,gp),DX);
             vol_tetra(eloc) += gauss_weight_cells(gp)*detJac_tetra(eloc,gp);
-            
             for (int inode=0; inode<el_type; ++inode){
                 DX_N_tetra(gp+n_gauss_cells*inode,eloc) = DX(inode,0);
                 DY_N_tetra(gp+n_gauss_cells*inode,eloc) = DX(inode,1);
@@ -594,7 +562,6 @@ void mesh::store_feinterp_tetra(){
             }
         }
     }
-    
 }
 
 

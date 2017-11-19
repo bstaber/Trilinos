@@ -58,13 +58,13 @@ public:
         sigma_voigt.Multiply('N','N',1.0,elasticity,epsilon_voigt,0.0);
         sigma(0,0) = sigma_voigt(0);                sigma(0,1) = sigma_voigt(5)/std::sqrt(2.0); sigma(0,2) = sigma_voigt(4)/std::sqrt(2.0);
         sigma(1,0) = sigma_voigt(5)/std::sqrt(2.0); sigma(1,1) = sigma_voigt(1);                sigma(1,2) = sigma_voigt(3)/std::sqrt(2.0);
-        sigma(2,0) = sigma_voigt(4)/std::sqrt(2.0); sigma(1,2) = sigma_voigt(3)/std::sqrt(2.0); sigma(2,2) = sigma_voigt(2);
+        sigma(2,0) = sigma_voigt(4)/std::sqrt(2.0); sigma(2,1) = sigma_voigt(3)/std::sqrt(2.0); sigma(2,2) = sigma_voigt(2);
         return sigma;
     }
     
     Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         Epetra_SerialDenseVector t(3), normal(3);
-        Epetra_SerialDenseMatrix sigma(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
+        Epetra_SerialDenseMatrix sigma(3,3);
         sigma = manufacturedStress(xg(0,gp),xg(1,gp),xg(2,gp));
         if (xg(0,gp)==1.0){
             normal(0) = 1.0; normal(1) = 0.0; normal(2) = 0.0;
@@ -88,10 +88,16 @@ public:
         Epetra_SerialDenseVector f(3);
         Epetra_SerialDenseMatrix C(6,6);
         get_elasticity_tensor(e_lid,gp,C);
-        double a = 0.1; double b = 0.1; double c = 0.2;
-        f(0) = (std::sqrt(2.0)*(2.0*C(0,5)*a*x2 + C(2,5)*c*x1 + std::sqrt(2.0)*C(5,5)*a*x1 + (std::sqrt(2.0)*C(4,5)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*((std::sqrt(2.0)*C(3,4)*c*x1)/2.0 + (std::sqrt(2.0)*C(4,4)*c*x2)/2.0))/2.0 + C(0,2)*c*x2 + std::sqrt(2.0)*C(0,5)*(b + a*x2) + (std::sqrt(2.0)*C(0,3)*c*x3)/2.0;
-        f(1) = (std::sqrt(2.0)*(C(2,4)*c*x2 + std::sqrt(2.0)*C(4,5)*(b + a*x2) + (std::sqrt(2.0)*C(3,4)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*((std::sqrt(2.0)*C(3,3)*c*x1)/2.0 + (std::sqrt(2.0)*C(3,4)*c*x2)/2.0))/2.0 + 2.0*C(0,1)*a*x2 + C(1,2)*c*x1 + std::sqrt(2.0)*C(1,5)*a*x1 + (std::sqrt(2.0)*C(1,4)*c*x3)/2.0;
-        f(2) = (std::sqrt(2.0)*(C(2,4)*c*x2 + std::sqrt(2.0)*C(4,5)*(b + a*x2) + (std::sqrt(2.0)*C(3,4)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*(2.0*C(0,3)*a*x2 + C(2,3)*c*x1 + std::sqrt(2.0)*C(3,5)*a*x1 + (std::sqrt(2.0)*C(3,4)*c*x3)/2.0))/2.0 + (std::sqrt(2.0)*C(2,3)*c*x1)/2.0 + (std::sqrt(2.0)*C(2,4)*c*x2)/2.0;
+        double a = 0.1; double b = 0.1; double c = 0.2; double k = std::sqrt(2);
+        double C11 = C(0,0); double C12 = C(0,1); double C13 = C(0,2); double C14 = C(0,3); double C15 = C(0,4); double C16 = C(0,5);
+                             double C22 = C(1,1); double C23 = C(1,2); double C24 = C(1,3); double C25 = C(1,4); double C26 = C(1,5);
+                                                  double C33 = C(2,2); double C34 = C(2,3); double C35 = C(2,4); double C36 = C(2,5);
+                                                                       double C44 = C(3,3); double C45 = C(3,4); double C46 = C(3,5);
+                                                                                            double C55 = C(4,4); double C56 = C(4,5);
+                                                                                                                 double C66 = C(5,5);
+        f(0) = (k*(2.0*C16*a*x2 + C36*c*x1 + k*C66*a*x1 + (k*C56*c*x3)/2.0))/2.0 + (k*((k*C45*c*x1)/2.0 + (k*C55*c*x2)/2.0))/2.0 + C13*c*x2 + k*C16*(b + a*x2) + (k*C14*c*x3)/2.0;
+        f(1) = (k*(C36*c*x2 + k*C66*(b + a*x2) + (k*C46*c*x3)/2.0))/2.0 + (k*((k*C44*c*x1)/2.0 + (k*C45*c*x2)/2.0))/2.0 + 2.0*C12*a*x2 + C23*c*x1 + k*C26*a*x1 + (k*C25*c*x3)/2.0;
+        f(2) = (k*(C35*c*x2 + k*C56*(b+a*x2) + (k*C45*c*x3)/2.0))/2.0 + (k*(2.0*C14*a*x2 + C34*c*x1 + k*C46*a*x1 + (k*C45*c*x3)/2.0))/2.0 + (k*C34*c*x1)/2.0 + (k*C35*c*x2)/2.0;
         return f;
     }
     
