@@ -95,9 +95,9 @@ public:
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
             if (x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
-                v[0][StandardMap->LID(3*node+0)] = x*y; //0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
-                v[0][StandardMap->LID(3*node+1)] = 0.0; //0.1*(0.05*x + 0.04*y + 0.1*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
-                v[0][StandardMap->LID(3*node+2)] = 0.0; //0.1*(0.75*x + 0.09*y + 0.06*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
+                v[0][StandardMap->LID(3*node+0)] = x; //0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
+                v[0][StandardMap->LID(3*node+1)] = y*x; //0.1*(0.05*x + 0.04*y + 0.1*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
+                v[0][StandardMap->LID(3*node+2)] = x*y*z; //0.1*(0.75*x + 0.09*y + 0.06*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
             }
         }
         
