@@ -9,8 +9,8 @@ public:
     nearlyIncompressibleHyperelasticity();
     ~nearlyIncompressibleHyperelasticity();
     
-    void assemblePureDirichletHomogeneousForcing(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
-    void assembleMixedDirichletDeformationDependentNeumannHomogeneousForcing(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void assemblePureDirichlet_homogeneousForcing(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void assembleMixedDirichletDeformationDependentNeumann_homogeneousForcing(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     
     void stiffnessRhsMaterialContribution(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void stiffnessRhsPressureContribution(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
