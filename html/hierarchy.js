@@ -2,7 +2,10 @@ var hierarchy =
 [
     [ "BaseClassFEM", "d2/d97/class_base_class_f_e_m.html", [
       [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", [
-        [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", null ],
+        [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", [
+          [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", null ],
+          [ "nearlyIncompressibleHyperelasticity", "d0/d85/classnearly_incompressible_hyperelasticity.html", null ]
+        ] ],
         [ "hyperelasticity_setup", "d8/daf/classhyperelasticity__setup.html", [
           [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", null ],
           [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", null ],

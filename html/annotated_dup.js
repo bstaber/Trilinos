@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "BaseClassFEM", "d2/d97/class_base_class_f_e_m.html", "d2/d97/class_base_class_f_e_m" ],
+    [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", "d1/d5c/classcompressible_hyperelasticity" ],
     [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o" ],
     [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ],
     [ "distributenrldata", "d1/d14/classdistributenrldata.html", "d1/d14/classdistributenrldata" ],
@@ -15,6 +16,7 @@ var annotated_dup =
     [ "manufactured", "d7/da3/classmanufactured.html", "d7/da3/classmanufactured" ],
     [ "manufacturedSolution", "d1/dbe/classmanufactured_solution.html", "d1/dbe/classmanufactured_solution" ],
     [ "mesh", "d6/d6b/classmesh.html", "d6/d6b/classmesh" ],
+    [ "nearlyIncompressibleHyperelasticity", "d0/d85/classnearly_incompressible_hyperelasticity.html", "d0/d85/classnearly_incompressible_hyperelasticity" ],
     [ "NeumannInnerSurface_PolyconvexHGO", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o" ],
     [ "NeumannInnerSurface_StochasticPolyconvexHGO", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o" ],
     [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", "d0/d9d/class_newton___raphson" ],

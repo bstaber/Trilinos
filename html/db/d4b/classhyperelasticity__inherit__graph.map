@@ -1,4 +1,6 @@
 <map id="hyperelasticity" name="hyperelasticity">
-<area shape="rect" id="node2" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="5,79,173,104"/>
-<area shape="rect" id="node3" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="32,5,146,31"/>
+<area shape="rect" id="node4" href="$d1/d5c/classcompressible_hyperelasticity.html" title="compressibleHyperelasticity" alt="" coords="5,225,192,251"/>
+<area shape="rect" id="node5" href="$d0/d85/classnearly_incompressible_hyperelasticity.html" title="nearlyIncompressibleHyperelasticity" alt="" coords="216,225,450,251"/>
+<area shape="rect" id="node2" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="132,79,300,104"/>
+<area shape="rect" id="node3" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="159,5,273,31"/>
 </map>
