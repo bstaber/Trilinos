@@ -1,7 +1,7 @@
 #ifndef NEARLYINCOMPRESSIBLEHYPERELASTICITY_HPP
 #define NEARLYINCOMPRESSIBLEHYPERELASTICITY_HPP
 
-#include "nearlyIncompressibleHyperelasticity.hpp"
+#include "hyperelasticity.hpp"
 
 class nearlyIncompressibleHyperelasticity : public hyperelasticity
 {

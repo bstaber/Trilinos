@@ -1,7 +1,7 @@
 #ifndef COMPRESSIBLEHYPERELASTICITY_HPP
 #define COMPRESSIBLEHYPERELASTICITY_HPP
 
-#include "compressibleHyperelasticity.hpp"
+#include "hyperelasticity.hpp"
 
 class compressibleHyperelasticity : public hyperelasticity
 {

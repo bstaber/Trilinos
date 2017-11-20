@@ -1,7 +1,7 @@
 <ParameterList>
     
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/Trilinos/cee530/linearpatchtest/block.msh"/>
+        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/Trilinos/cee530/linearpatchtest/block0.msh"/>
         <Parameter name="path" type="string" value="/Users/brian/Documents/GitHub/Trilinos_results/cee530/linearpatchtest/solution.mtx"/>
     </ParameterList>
     

@@ -1,7 +1,6 @@
 #ifndef LINEARPATCHTEST_HPP
 #define LINEARPATCHTEST_HPP
 
-#include "tensor_calculus.hpp"
 #include "linearelasticity_setup_pp.hpp"
 
 class linearPatchTest : public LinearizedElasticity
