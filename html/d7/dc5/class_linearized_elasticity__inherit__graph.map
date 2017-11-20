@@ -1,5 +1,7 @@
 <map id="LinearizedElasticity" name="LinearizedElasticity">
-<area shape="rect" id="node4" href="$d0/daf/class_orthotropic_r_f___laminate.html" title="OrthotropicRF_Laminate" alt="" coords="5,239,173,264"/>
-<area shape="rect" id="node2" href="$d3/d9f/class_linear___finite___element___problem.html" title="Linear_Finite_Element\l_Problem" alt="" coords="12,79,166,117"/>
-<area shape="rect" id="node3" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="32,5,146,31"/>
+<area shape="rect" id="node4" href="$d2/d69/classlinear_patch_test.html" title="linearPatchTest" alt="" coords="5,239,118,264"/>
+<area shape="rect" id="node5" href="$d7/da3/classmanufactured.html" title="manufactured" alt="" coords="142,239,245,264"/>
+<area shape="rect" id="node6" href="$d0/daf/class_orthotropic_r_f___laminate.html" title="OrthotropicRF_Laminate" alt="" coords="269,239,436,264"/>
+<area shape="rect" id="node2" href="$d3/d9f/class_linear___finite___element___problem.html" title="Linear_Finite_Element\l_Problem" alt="" coords="116,79,271,117"/>
+<area shape="rect" id="node3" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="137,5,250,31"/>
 </map>

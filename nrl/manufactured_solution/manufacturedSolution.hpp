@@ -286,8 +286,8 @@ public:
         double c2 = 1.0e1;
         double c3 = 2.0e2;
         u(0) = c1*(x1-topcoord)*(topcoord-x2)*x2;
-        u(1) = c2*x2*(topcoord-x2);
-        u(2) = std::sin((c3/c1)*u(0));
+        u(1) = c2*x2*((topcoord/2.0)-x2);
+        u(2) = 10.0*std::sin((c3/c1)*u(0));
         return u;
     }
     

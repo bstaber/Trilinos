@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "BaseClassFEM", "d2/d97/class_base_class_f_e_m.html", [
       [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", [
+        [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", null ],
         [ "hyperelasticity_setup", "d8/daf/classhyperelasticity__setup.html", [
           [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", null ],
           [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", null ],
@@ -16,6 +17,8 @@ var hierarchy =
       [ "Linear_Finite_Element_Problem", "d3/d9f/class_linear___finite___element___problem.html", [
         [ "laplace", "d7/d76/classlaplace.html", null ],
         [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", [
+          [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],
+          [ "manufactured", "d7/da3/classmanufactured.html", null ],
           [ "OrthotropicRF_Laminate", "d0/daf/class_orthotropic_r_f___laminate.html", null ]
         ] ]
       ] ]

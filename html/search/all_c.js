@@ -15,6 +15,8 @@ var searchData=
   ['linearelasticity_5fsetup_5fpp_2ecpp',['linearelasticity_setup_pp.cpp',['../d4/d89/linearelasticity__setup__pp_8cpp.html',1,'']]],
   ['linearelasticity_5fsetup_5fpp_2ehpp',['linearelasticity_setup_pp.hpp',['../d4/d4c/linearelasticity__setup__pp_8hpp.html',1,'']]],
   ['linearizedelasticity',['LinearizedElasticity',['../d9/df7/class_linearized_elasticity.html',1,'LinearizedElasticity'],['../d9/df7/class_linearized_elasticity.html#adbf792f70f7f36cf23f5906a331cedd2',1,'LinearizedElasticity::LinearizedElasticity()']]],
+  ['linearpatchtest',['linearPatchTest',['../d2/d69/classlinear_patch_test.html',1,'linearPatchTest'],['../d2/d69/classlinear_patch_test.html#adc3d967e706b4df60b38d0e1e9462b6c',1,'linearPatchTest::linearPatchTest()']]],
+  ['linearpatchtest_2ehpp',['linearPatchTest.hpp',['../de/d5d/linear_patch_test_8hpp.html',1,'']]],
   ['load_5fsolution',['load_solution',['../db/db7/arteries_2vonmises_2main_8cpp.html#aaeb4ce3a0f93f127751d939524a37a32',1,'main.cpp']]],
   ['local_5fcells',['local_cells',['../d1/d14/classdistributenrldata.html#aea2cb25cebcd31694218e51ad8f41a54',1,'distributenrldata::local_cells()'],['../d6/d6b/classmesh.html#a6bc4fb195dff05ce76d8f3b1fdb01208',1,'mesh::local_cells()']]],
   ['local_5fdof',['local_dof',['../d6/d6b/classmesh.html#a15a8a0d266c4f4ec9cef4ea720f16e81',1,'mesh']]],

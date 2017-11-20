@@ -144,6 +144,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8f311bf8f0be19cf851dd7a044b432c2 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5958e89bf756f16d575be382f3b45075 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a5958e89bf756f16d575be382f3b45075">create_FECrsGraph</a> ()</td></tr>
 <tr class="separator:a5958e89bf756f16d575be382f3b45075 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6f26a681afdc56777ff9c181f8a5b0b inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#ad6f26a681afdc56777ff9c181f8a5b0b">aztecSolver</a> (Epetra_FECrsMatrix &amp;A, Epetra_FEVector &amp;b, Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Teuchos::ParameterList &amp;paramList)</td></tr>
+<tr class="separator:ad6f26a681afdc56777ff9c181f8a5b0b inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5586a3490f8794b129956cb022092740 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a5586a3490f8794b129956cb022092740">assemblePureDirichlet_homogeneousForcing</a> (Epetra_FECrsMatrix &amp;K)</td></tr>
 <tr class="separator:a5586a3490f8794b129956cb022092740 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a700a28b6d67ff078411eab81c4c36334 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a700a28b6d67ff078411eab81c4c36334">assembleMixedDirichletNeumann_homogeneousForcing</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
@@ -162,6 +164,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a07b867f2b66c09c54be81b533e82defb inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b266d896ff293578dedceff7cee5f54 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a7b266d896ff293578dedceff7cee5f54">compute_deformation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename, bool printCauchy, bool printVM)</td></tr>
 <tr class="separator:a7b266d896ff293578dedceff7cee5f54 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4e000f733d86d35ab6ea3f1df4756c6 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#ad4e000f733d86d35ab6ea3f1df4756c6">print_solution</a> (Epetra_Vector &amp;solution, std::string fileName)</td></tr>
+<tr class="separator:ad4e000f733d86d35ab6ea3f1df4756c6 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83204de8d2b91c84e90655e87978b9c9 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">virtual Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a83204de8d2b91c84e90655e87978b9c9">get_neumannBc</a> (Epetra_SerialDenseMatrix &amp;matrix_X, Epetra_SerialDenseMatrix &amp;xg, unsigned int &amp;gp)=0</td></tr>
+<tr class="separator:a83204de8d2b91c84e90655e87978b9c9 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c80f33fec1a9857a712ea410907972f inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">virtual Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a6c80f33fec1a9857a712ea410907972f">get_forcing</a> (double &amp;x1, double &amp;x2, double &amp;x3, unsigned int &amp;e_lid, unsigned int &amp;gp)=0</td></tr>
+<tr class="separator:a6c80f33fec1a9857a712ea410907972f inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_linear___finite___element___problem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_linear___finite___element___problem')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html">Linear_Finite_Element_Problem</a></td></tr>
 <tr class="memitem:ad8d41fa15aee3e3cc32b80b0601dc066 inherit pub_methods_class_linear___finite___element___problem"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#ad8d41fa15aee3e3cc32b80b0601dc066">Linear_Finite_Element_Problem</a> ()</td></tr>
 <tr class="separator:ad8d41fa15aee3e3cc32b80b0601dc066 inherit pub_methods_class_linear___finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -449,12 +457,10 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#ad97f7f3f599dc96fee14ec18368454a4">LinearizedElasticity</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00050">50</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
@@ -489,12 +495,10 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#ab9fd7ccb0e8d1aa808393e8451c5b28d">LinearizedElasticity</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html#l00045">45</a> of file <a class="el" href="../../dd/d0f/orthotropic_r_f__laminate_8hpp_source.html">orthotropicRF_laminate.hpp</a>.</p>
 
