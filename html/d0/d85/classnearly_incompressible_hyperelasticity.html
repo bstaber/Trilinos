@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('d0/d85/classnearly_incompressible_hype
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="../../dc/d56/classnearly_incompressible_hyperelasticity-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">nearlyIncompressibleHyperelasticity Class Reference</div>  </div>
+<div class="title">nearlyIncompressibleHyperelasticity Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -114,6 +114,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab35220f8ee7346aca61fafa049952d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7953ce32909be97e94325b7dbd3aa40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#ae7953ce32909be97e94325b7dbd3aa40">~nearlyIncompressibleHyperelasticity</a> ()</td></tr>
 <tr class="separator:ae7953ce32909be97e94325b7dbd3aa40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a727294685f46f1159826d036980f29d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#a727294685f46f1159826d036980f29d1">assemblePureDirichletHomogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:a727294685f46f1159826d036980f29d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebdd5a84a1de6a94b57d9d443303cd94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#aebdd5a84a1de6a94b57d9d443303cd94">assembleMixedDirichletDeformationDependentNeumannHomogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:aebdd5a84a1de6a94b57d9d443303cd94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f1c66075f524a4168d10bc75d371e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#ae5f1c66075f524a4168d10bc75d371e5">stiffnessRhsMaterialContribution</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:ae5f1c66075f524a4168d10bc75d371e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecf8f49041f142afba4fa9aea21c7354"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#aecf8f49041f142afba4fa9aea21c7354">stiffnessRhsPressureContribution</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:aecf8f49041f142afba4fa9aea21c7354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4782436c4ce43b2610f04e57fa7efcbd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#a4782436c4ce43b2610f04e57fa7efcbd">get_constitutive_tensors_static_condensation</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;inverse_cauchy, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)=0</td></tr>
+<tr class="separator:a4782436c4ce43b2610f04e57fa7efcbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a218dee523bda56d6e02ef46b9a4258f2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#a218dee523bda56d6e02ef46b9a4258f2">get_internal_pressure</a> (double &amp;theta, double &amp;pressure, double &amp;dpressure)=0</td></tr>
+<tr class="separator:a218dee523bda56d6e02ef46b9a4258f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classhyperelasticity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhyperelasticity')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../dc/d5a/classhyperelasticity.html">hyperelasticity</a></td></tr>
 <tr class="memitem:a93037f7d3eed4f8de2d81dd967fbb5ff inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a93037f7d3eed4f8de2d81dd967fbb5ff">hyperelasticity</a> ()</td></tr>
 <tr class="separator:a93037f7d3eed4f8de2d81dd967fbb5ff inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,6 +227,251 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d7d/nearly_incompressible_hyperelasticity_8cpp_source.html#l00006">6</a> of file <a class="el" href="../../d8/d7d/nearly_incompressible_hyperelasticity_8cpp_source.html">nearlyIncompressibleHyperelasticity.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aebdd5a84a1de6a94b57d9d443303cd94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebdd5a84a1de6a94b57d9d443303cd94">&#9670;&nbsp;</a></span>assembleMixedDirichletDeformationDependentNeumannHomogeneousForcing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nearlyIncompressibleHyperelasticity::assembleMixedDirichletDeformationDependentNeumannHomogeneousForcing </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
+          <td class="paramname"><em>F</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a727294685f46f1159826d036980f29d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a727294685f46f1159826d036980f29d1">&#9670;&nbsp;</a></span>assemblePureDirichletHomogeneousForcing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nearlyIncompressibleHyperelasticity::assemblePureDirichletHomogeneousForcing </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
+          <td class="paramname"><em>F</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4782436c4ce43b2610f04e57fa7efcbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4782436c4ce43b2610f04e57fa7efcbd">&#9670;&nbsp;</a></span>get_constitutive_tensors_static_condensation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void nearlyIncompressibleHyperelasticity::get_constitutive_tensors_static_condensation </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
+          <td class="paramname"><em>deformation_gradient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>det</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
+          <td class="paramname"><em>inverse_cauchy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
+          <td class="paramname"><em>piola_isc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
+          <td class="paramname"><em>piola_vol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
+          <td class="paramname"><em>tangent_piola_isc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
+          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a218dee523bda56d6e02ef46b9a4258f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a218dee523bda56d6e02ef46b9a4258f2">&#9670;&nbsp;</a></span>get_internal_pressure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void nearlyIncompressibleHyperelasticity::get_internal_pressure </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>theta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>pressure</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dpressure</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5f1c66075f524a4168d10bc75d371e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5f1c66075f524a4168d10bc75d371e5">&#9670;&nbsp;</a></span>stiffnessRhsMaterialContribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nearlyIncompressibleHyperelasticity::stiffnessRhsMaterialContribution </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
+          <td class="paramname"><em>F</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aecf8f49041f142afba4fa9aea21c7354"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecf8f49041f142afba4fa9aea21c7354">&#9670;&nbsp;</a></span>stiffnessRhsPressureContribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nearlyIncompressibleHyperelasticity::stiffnessRhsPressureContribution </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FECrsMatrix &amp;&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_FEVector &amp;&#160;</td>
+          <td class="paramname"><em>F</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
