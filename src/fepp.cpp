@@ -28,14 +28,10 @@ void quad4::shape_functions(Epetra_SerialDenseVector & N, double & xi, double & 
     N(3) = (1.0/4.0)*(1.0-xi)*(1.0+eta);
 }
 void quad4::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double & eta){
-    D(0,0) = -(1.0/4.0)*(1.0-eta);
-    D(0,1) = -(1.0/4.0)*(1.0-xi);
-    D(1,0) = (1.0/4.0)*(1.0-eta);
-    D(1,1) = -(1.0/4.0)*(1.0+xi);
-    D(2,0) = (1.0/4.0)*(1.0+eta);
-    D(2,1) = (1.0/4.0)*(1.0+xi);
-    D(3,0) = -(1.0/4.0)*(1.0+eta);
-    D(3,1) = (1.0/4.0)*(1.0-xi);
+    D(0,0) = -(1.0/4.0)*(1.0-eta); D(0,1) = -(1.0/4.0)*(1.0-xi);
+    D(1,0) = (1.0/4.0)*(1.0-eta);  D(1,1) = -(1.0/4.0)*(1.0+xi);
+    D(2,0) = (1.0/4.0)*(1.0+eta);  D(2,1) = (1.0/4.0)*(1.0+xi);
+    D(3,0) = -(1.0/4.0)*(1.0+eta); D(3,1) = (1.0/4.0)*(1.0-xi);
 }
 void quad4::dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix & DX, double & jac, Epetra_SerialDenseMatrix & JacobianMatrix){
     

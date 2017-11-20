@@ -244,17 +244,16 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
             dead_pressure = get_neumannBc(matrix_X,xg,gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    force(3*inode+iddl) += gauss_weight*dead_pressure(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
+                    force(3*inode+iddl) += gauss_weight*dead_pressure(iddl)*Mesh->N_tri(gp,inode);
                 }
             }
         }
-        
+        //std::cout << "\n";
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             for (unsigned int iddl=0; iddl<3; ++iddl){
                 F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
             }
         }
-        
     }
     delete[] Indices_tri;
 }

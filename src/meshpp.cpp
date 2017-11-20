@@ -457,7 +457,7 @@ void mesh::store_feinterp_tri(){
         eglob = local_faces[eloc];
         for (unsigned int inode=0; inode<face_type; inode++){
             node = faces_nodes[face_type*eglob+inode];
-            X(0,inode) = nodes_coord[3*node];
+            X(0,inode) = nodes_coord[3*node+0];
             X(1,inode) = nodes_coord[3*node+1];
         }
         
