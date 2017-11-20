@@ -13,5 +13,6 @@ var classmanufactured =
     [ "setup_dirichlet_conditions", "d7/da3/classmanufactured.html#a00e9800cc61b9f15f02b9d0a55394dfe", null ],
     [ "solve", "d7/da3/classmanufactured.html#af3fc277057d06f37af6d1895c058db8f", null ],
     [ "transverse_isotropic_matrix", "d7/da3/classmanufactured.html#a1ed3526fde6245fefe3eef8fb7d26db9", null ],
-    [ "Krylov", "d7/da3/classmanufactured.html#a968b0164ef6fd8202ff6713b729fa2b8", null ]
+    [ "Krylov", "d7/da3/classmanufactured.html#a968b0164ef6fd8202ff6713b729fa2b8", null ],
+    [ "uh", "d7/da3/classmanufactured.html#a655688c855954166563ccbc93d256d58", null ]
 ];
