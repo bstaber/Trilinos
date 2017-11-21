@@ -11,11 +11,10 @@ public:
     Teuchos::ParameterList * Krylov;
     Epetra_Vector * uh;
     
-    manufactured(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    manufactured(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, std::string & mesh_file){
         
         Krylov = &Parameters.sublist("Krylov");
         
-        std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         Mesh = new mesh(comm, mesh_file);
         Comm = Mesh->Comm;
         
@@ -25,6 +24,7 @@ public:
         create_FECrsGraph();
         
         setup_dirichlet_conditions();
+        uh = new Epetra_Vector(*StandardMap);
     }
     
     ~manufactured(){
@@ -33,7 +33,7 @@ public:
     Epetra_SerialDenseVector manufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
         u(0) = x1*x1*x1*x1 + (2.0*x2*x3)/5.0;
-        u(1) = x2*x2*x2*x3 + (2.0*x1*x3)/5.0;
+        u(1) = x2*x2*x2*x2 + (2.0*x1*x3)/5.0;
         u(2) = x1*x1;
         return u;
     }
@@ -43,9 +43,9 @@ public:
         epsilon(0,0) = 4.0*x1*x1*x1;
         epsilon(1,1) = 4.0*x2*x2*x2;
         epsilon(2,2) = 0.0;
-        epsilon(1,2) = x1/5.0; epsilon(2,1) = epsilon(1,2);
-        epsilon(0,2) = x1 + x2/5.0; epsilon(2,0) = epsilon(0,2);
-        epsilon(0,1) = (2.0*x3)/5.0; epsilon(1,0) = epsilon(0,1);
+        epsilon(1,2) = x1/5.0;
+        epsilon(0,2) = x1 + x2/5.0;
+        epsilon(0,1) = (2.0*x3)/5.0;
         return epsilon;
     }
     
@@ -77,7 +77,7 @@ public:
         normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);
         normal(1) = dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1);
         normal(2) = dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1);
-        if (xg(2,gp)!=0.0){
+        if (xg(2,gp)==0.0){
             normal.Scale(-1.0);
         }
         t.Multiply('N','N',1.0,sigma,normal,0.0);
@@ -101,18 +101,15 @@ public:
         return f;
     }
     
-    void solve(bool doprint){
+    void solve(std::string & outPath){
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
-        Epetra_Vector      lhs(*StandardMap);
         rhs.PutScalar(0.0);
         double dummy = 0.0;
         assembleMixedDirichletNeumann_inhomogeneousForcing(linearOperator,rhs);
         apply_dirichlet_conditions(linearOperator,rhs,dummy);
-        aztecSolver(linearOperator,rhs,lhs,*Krylov);
-        if (doprint){
-            print_solution(lhs,"/Users/brian/Documents/GitHub/Trilinos_results/cee530/manufactured/manufactured.mtx");
-        }
+        aztecSolver(linearOperator,rhs,*uh,*Krylov);
+        print_solution(*uh,outPath);
     }
     
     void setup_dirichlet_conditions(){
