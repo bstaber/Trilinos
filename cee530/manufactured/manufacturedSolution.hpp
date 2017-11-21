@@ -32,20 +32,22 @@ public:
     
     Epetra_SerialDenseVector manufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
-        u(0) = 100.0*x1*x1*x1*x1 + 20.0*x2*x3;
-        u(1) = 100.0*x2*x2*x2*x2 + 20.0*x1*x3;
-        u(2) = x1*x1;
+        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
+        u(0) = -c1*x2*(topcoord - x1)*(topcoord - x2);
+        u(1) = c2*x2*(topcoord/2.0 - x2);
+        u(2) = std::sin(c1*x3);
         return u;
     }
     
     Epetra_SerialDenseMatrix manufacturedDeformation(double & x1, double & x2, double & x3){
         Epetra_SerialDenseMatrix epsilon(3,3);
-        epsilon(0,0) = 400.0*x1*x1*x1;
-        epsilon(1,1) = 400.0*x2*x2*x2;
-        epsilon(2,2) = 0.0;
-        epsilon(1,2) = 10.0*x1;      epsilon(2,1) = epsilon(1,2);
-        epsilon(0,2) = x1 + 10.0*x2; epsilon(2,0) = epsilon(0,2);
-        epsilon(0,1) = 20.0*x3;      epsilon(1,0) = epsilon(0,1);
+        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
+        epsilon(0,0) = c1*x2*(topcoord - x2);
+        epsilon(1,1) = c2*(topcoord/2 - x2) - c2*x2;
+        epsilon(2,2) = c1*cos(c1*x3);
+        epsilon(1,2) = 0.0;
+        epsilon(0,2) = 0.0;
+        epsilon(0,1) = (c1*x2*(topcoord-x1))/2.0 - (c1*(topcoord-x1)*(topcoord-x2))/2.0;
         return epsilon;
     }
     
@@ -94,9 +96,13 @@ public:
                                                                        double C44 = C(3,3); double C45 = C(3,4); double C46 = C(3,5);
                                                                                             double C55 = C(4,4); double C56 = C(4,5);
                                                                                                                  double C66 = C(5,5);
-        f(0) = 1200*C11*x1*x1 + 600*k*C26*x2*x2 + 30*C56 + 10*k*C14 + k*C15;
+        /*f(0) = 1200*C11*x1*x1 + 600*k*C26*x2*x2 + 30*C56 + 10*k*C14 + k*C15;
         f(1) = 600*k*C16*x1*x1 + 1200*C22*x2*x2 + 30*C46 + C56 + 10*k*C25;
-        f(2) = 600*k*C15*x1*x1 + 600*k*C24*x2*x2 + 20*C45 + C55 + 20*k*C36;
+        f(2) = 600*k*C15*x1*x1 + 600*k*C24*x2*x2 + 20*C45 + C55 + 20*k*C36;*/
+        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
+        f(0) = C66*c1*topcoord - k*C26*c2 - C66*c1*x1 - (k*C35*c1*c1*std::sin(c1*x3))/2 + k*C16*c1*topcoord - 2*k*C16*c1*x2;
+        f(1) = C12*c1*(topcoord - x2) - C66*((c1*x2)/2 - (c1*(topcoord - x2))/2) - C12*c1*x2 - 2*C22*c2 + k*C26*c1*(topcoord - x1) - (k*C34*c1*c1*std::sin(c1*x3))/2;
+        f(2) = - (k*(2*C24*c2 + C14*c1*x2 - C14*c1*(topcoord - x2) - k*C46*c1*(topcoord - x1)))/2 - C56*((c1*x2)/2 - (c1*(topcoord - x2))/2) - C33*c1*c1*std::sin(c1*x3);
         f.Scale(-1.0);
         return f;
     }
@@ -132,9 +138,6 @@ public:
         Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), X_I(3,Mesh->el_type), u_I(3,Mesh->el_type);
         Epetra_SerialDenseMatrix u_G(3,n_gauss_points), x_G(3,n_gauss_points);
         
-        int *Indexes;
-        Indexes = new int [3*Mesh->el_type];
-        
         for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
             e_gid = Mesh->local_cells[e_lid];
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
@@ -145,9 +148,6 @@ public:
                 u_I(0,inode) = u[OverlapMap->LID(3*node+0)];
                 u_I(1,inode) = u[OverlapMap->LID(3*node+1)];
                 u_I(2,inode) = u[OverlapMap->LID(3*node+2)];
-                for (int iddl=0; iddl<3; ++iddl){
-                    Indexes[3*inode+iddl] = 3*node+iddl;
-                }
             }
             x_G.Multiply('N','N',1.0,X_I,Mesh->N_tetra,0.0);
             u_G.Multiply('N','N',1.0,u_I,Mesh->N_tetra,0.0);
@@ -170,7 +170,6 @@ public:
         }
         Comm->SumAll(&error,&totalError,1);
         totalError = std::sqrt(totalError);
-        delete[] Indexes;
         return totalError;
     }
     
@@ -181,7 +180,7 @@ public:
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             node = Mesh->local_nodes[i];
             x = Mesh->nodes_coord[3*node+1];
-            if(x==0.0 || x==25.0/1000.0){
+            if(x==0.0 || x==25.0){
                 n_bc_dof+=3;
             }
         }
@@ -191,7 +190,7 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             x = Mesh->nodes_coord[3*node+1];
-            if(x==0.0 || x==25.0/1000.0){
+            if(x==0.0 || x==25.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
@@ -212,7 +211,7 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if(y==0.0 || y==25.0/1000.0){
+            if(y==0.0 || y==25.0){
                 u = manufacturedSolution(x,y,z);
                 v[0][StandardMap->LID(3*node+0)] = u(0);
                 v[0][StandardMap->LID(3*node+1)] = u(1);
@@ -229,7 +228,7 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if(y==0.0 || y==25.0/1000.0){
+            if(y==0.0 || y==25.0){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
                 F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
                 F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
@@ -241,11 +240,11 @@ public:
     void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix){
         int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
-        double c1 = 144.8969;
-        double c2 = 14.2500;
-        double c3 = 5.8442;
-        double c4 = 7.5462;
-        double c5 = 12.5580;
+        double c1 = 144.8969e3;
+        double c2 = 14.2500e3;
+        double c3 = 5.8442e3;
+        double c4 = 7.5462e3;
+        double c5 = 12.5580e3;
         transverse_isotropic_matrix(tangent_matrix,c1,c2,c3,c4,c5);
     }
     
