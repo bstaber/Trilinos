@@ -4,10 +4,8 @@
 class BaseClassFEM
 {
 public:
-    BaseClassFEM(){
-    };
-    ~BaseClassFEM(){
-    };
+    BaseClassFEM();
+    ~BaseClassFEM();
     
     mesh * Mesh;
     Epetra_Comm * Comm;

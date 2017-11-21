@@ -32,20 +32,20 @@ public:
     
     Epetra_SerialDenseVector manufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
-        u(0) = x1*x1*x1*x1 + (2.0*x2*x3)/5.0;
-        u(1) = x2*x2*x2*x2 + (2.0*x1*x3)/5.0;
+        u(0) = 100.0*x1*x1*x1*x1 + 20.0*x2*x3;
+        u(1) = 100.0*x2*x2*x2*x2 + 20.0*x1*x3;
         u(2) = x1*x1;
         return u;
     }
     
     Epetra_SerialDenseMatrix manufacturedDeformation(double & x1, double & x2, double & x3){
         Epetra_SerialDenseMatrix epsilon(3,3);
-        epsilon(0,0) = 4.0*x1*x1*x1;
-        epsilon(1,1) = 4.0*x2*x2*x2;
+        epsilon(0,0) = 400.0*x1*x1*x1;
+        epsilon(1,1) = 400.0*x2*x2*x2;
         epsilon(2,2) = 0.0;
-        epsilon(1,2) = x1/5.0;
-        epsilon(0,2) = x1 + x2/5.0;
-        epsilon(0,1) = (2.0*x3)/5.0;
+        epsilon(1,2) = 10.0*x1;      epsilon(2,1) = epsilon(1,2);
+        epsilon(0,2) = x1 + 10.0*x2; epsilon(2,0) = epsilon(0,2);
+        epsilon(0,1) = 20.0*x3;      epsilon(1,0) = epsilon(0,1);
         return epsilon;
     }
     
@@ -94,14 +94,14 @@ public:
                                                                        double C44 = C(3,3); double C45 = C(3,4); double C46 = C(3,5);
                                                                                             double C55 = C(4,4); double C56 = C(4,5);
                                                                                                                  double C66 = C(5,5);
-        f(0) = 12*C11*x1*x1 + 6*k*C26*x2*x2 + (3*C56)/5 + (k*C14)/5 + k*C15;
-        f(1) = 6*k*C16*x1*x1 + 12*C22*x2*x2 + (3*C46)/5 + C56 + (k*C25)/5;
-        f(2) = 6*k*C15*x1*x1 + 6*k*C24*x2*x2 + (2*C45)/5 + C55 + (2*k*C36)/5;
+        f(0) = 1200*C11*x1*x1 + 600*k*C26*x2*x2 + 30*C56 + 10*k*C14 + k*C15;
+        f(1) = 600*k*C16*x1*x1 + 1200*C22*x2*x2 + 30*C46 + C56 + 10*k*C25;
+        f(2) = 600*k*C15*x1*x1 + 600*k*C24*x2*x2 + 20*C45 + C55 + 20*k*C36;
         f.Scale(-1.0);
         return f;
     }
     
-    void solve(std::string & outPath){
+    double solve(std::string & outPath){
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
         rhs.PutScalar(0.0);
@@ -110,6 +110,68 @@ public:
         apply_dirichlet_conditions(linearOperator,rhs,dummy);
         aztecSolver(linearOperator,rhs,*uh,*Krylov);
         print_solution(*uh,outPath);
+        
+        double totalError = errorL2(*uh);
+        return totalError;
+    }
+    
+    double errorL2(Epetra_Vector & uStandardMap){
+        
+        Epetra_Vector u(*OverlapMap);
+        u.Import(uStandardMap, *ImportToOverlapMap, Insert);
+        double totalError;
+        double error = 0.0;
+        double normVH;
+        double gauss_weight;
+        int n_gauss_points = Mesh->n_gauss_cells;
+        int e_gid, node;
+        
+        //Epetra_SerialDenseVector epsilon(6);
+        //Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+        Epetra_SerialDenseVector uExact(3), vH(3);
+        Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), X_I(3,Mesh->el_type), u_I(3,Mesh->el_type);
+        Epetra_SerialDenseMatrix u_G(3,n_gauss_points), x_G(3,n_gauss_points);
+        
+        int *Indexes;
+        Indexes = new int [3*Mesh->el_type];
+        
+        for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+            e_gid = Mesh->local_cells[e_lid];
+            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+                X_I(0,inode) = Mesh->nodes_coord[3*node+0];
+                X_I(1,inode) = Mesh->nodes_coord[3*node+1];
+                X_I(2,inode) = Mesh->nodes_coord[3*node+2];
+                u_I(0,inode) = u[OverlapMap->LID(3*node+0)];
+                u_I(1,inode) = u[OverlapMap->LID(3*node+1)];
+                u_I(2,inode) = u[OverlapMap->LID(3*node+2)];
+                for (int iddl=0; iddl<3; ++iddl){
+                    Indexes[3*inode+iddl] = 3*node+iddl;
+                }
+            }
+            x_G.Multiply('N','N',1.0,X_I,Mesh->N_tetra,0.0);
+            u_G.Multiply('N','N',1.0,u_I,Mesh->N_tetra,0.0);
+            for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+                gauss_weight = Mesh->gauss_weight_cells(gp);
+                uExact = manufacturedSolution(x_G(0,gp),x_G(1,gp),x_G(2,gp));
+                vH(0) = uExact(0) - u_G(0,gp);
+                vH(1) = uExact(1) - u_G(1,gp);
+                vH(2) = uExact(2) - u_G(2,gp);
+                normVH = vH.Norm2();
+                /*for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                    dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
+                    dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
+                    dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                }
+                compute_B_matrices(dx_shape_functions,matrix_B);
+                epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);*/
+                error += gauss_weight*normVH*normVH*Mesh->detJac_tetra(e_lid,gp);
+            }
+        }
+        Comm->SumAll(&error,&totalError,1);
+        totalError = std::sqrt(totalError);
+        delete[] Indexes;
+        return totalError;
     }
     
     void setup_dirichlet_conditions(){
