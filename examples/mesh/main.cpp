@@ -17,8 +17,14 @@ Epetra_MpiComm Comm(MPI_COMM_WORLD);
 Epetra_SerialComm Comm;
 #endif
     
-    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_man.msh";
+    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
     mesh Mesh(Comm, mesh_file);
+    
+    if (Comm.MyPID()==0){
+        for (unsigned int i=0; i<Mesh.n_cells; ++i){
+            std::cout << Mesh.epart[i] << "\n";
+        }
+    }
     
 #ifdef HAVE_MPI
 MPI_Finalize();
