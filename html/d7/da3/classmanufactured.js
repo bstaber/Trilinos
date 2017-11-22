@@ -1,8 +1,9 @@
 var classmanufactured =
 [
-    [ "manufactured", "d7/da3/classmanufactured.html#abf45131bc05acffb9b2df4b80b15392e", null ],
+    [ "manufactured", "d7/da3/classmanufactured.html#a6dc4f7d34162e63c900ef90a7a77f40a", null ],
     [ "~manufactured", "d7/da3/classmanufactured.html#aa990498c6e4829a612978aa6223fe3fc", null ],
     [ "apply_dirichlet_conditions", "d7/da3/classmanufactured.html#af59b9cfdec39726dffdf7ba6b59f6c31", null ],
+    [ "errorL2", "d7/da3/classmanufactured.html#a822b3f27e2f229f0b1e8e6a8afab5298", null ],
     [ "get_elasticity_tensor", "d7/da3/classmanufactured.html#ab2d19438da65c4258857c68d714a12b7", null ],
     [ "get_elasticity_tensor_for_recovery", "d7/da3/classmanufactured.html#aabd39c5c6d274ae2ce18896b62b6a246", null ],
     [ "get_forcing", "d7/da3/classmanufactured.html#a2ab2ebabdfacbe28c034122f91c9a57d", null ],
@@ -11,7 +12,7 @@ var classmanufactured =
     [ "manufacturedSolution", "d7/da3/classmanufactured.html#a075e61afbdbe76cd958e221e61109fc1", null ],
     [ "manufacturedStress", "d7/da3/classmanufactured.html#a1e82b265f14c54aef9e6ac4291229c10", null ],
     [ "setup_dirichlet_conditions", "d7/da3/classmanufactured.html#a00e9800cc61b9f15f02b9d0a55394dfe", null ],
-    [ "solve", "d7/da3/classmanufactured.html#af3fc277057d06f37af6d1895c058db8f", null ],
+    [ "solve", "d7/da3/classmanufactured.html#adadccb74cbad86c0faa9bf7b8adae9fc", null ],
     [ "transverse_isotropic_matrix", "d7/da3/classmanufactured.html#a1ed3526fde6245fefe3eef8fb7d26db9", null ],
     [ "Krylov", "d7/da3/classmanufactured.html#a968b0164ef6fd8202ff6713b729fa2b8", null ],
     [ "uh", "d7/da3/classmanufactured.html#a655688c855954166563ccbc93d256d58", null ]

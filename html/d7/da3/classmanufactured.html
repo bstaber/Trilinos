@@ -111,8 +111,8 @@ Collaboration diagram for manufactured:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abf45131bc05acffb9b2df4b80b15392e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#abf45131bc05acffb9b2df4b80b15392e">manufactured</a> (Epetra_Comm &amp;comm, Teuchos::ParameterList &amp;Parameters)</td></tr>
-<tr class="separator:abf45131bc05acffb9b2df4b80b15392e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc4f7d34162e63c900ef90a7a77f40a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#a6dc4f7d34162e63c900ef90a7a77f40a">manufactured</a> (Epetra_Comm &amp;comm, Teuchos::ParameterList &amp;Parameters, std::string &amp;mesh_file)</td></tr>
+<tr class="separator:a6dc4f7d34162e63c900ef90a7a77f40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa990498c6e4829a612978aa6223fe3fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#aa990498c6e4829a612978aa6223fe3fc">~manufactured</a> ()</td></tr>
 <tr class="separator:aa990498c6e4829a612978aa6223fe3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a075e61afbdbe76cd958e221e61109fc1"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#a075e61afbdbe76cd958e221e61109fc1">manufacturedSolution</a> (double &amp;x1, double &amp;x2, double &amp;x3)</td></tr>
@@ -125,8 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a056d7caa468b0281a3a7bec5a06baa32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ab2ebabdfacbe28c034122f91c9a57d"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#a2ab2ebabdfacbe28c034122f91c9a57d">get_forcing</a> (double &amp;x1, double &amp;x2, double &amp;x3, unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
 <tr class="separator:a2ab2ebabdfacbe28c034122f91c9a57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3fc277057d06f37af6d1895c058db8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#af3fc277057d06f37af6d1895c058db8f">solve</a> (bool doprint)</td></tr>
-<tr class="separator:af3fc277057d06f37af6d1895c058db8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adadccb74cbad86c0faa9bf7b8adae9fc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#adadccb74cbad86c0faa9bf7b8adae9fc">solve</a> (std::string &amp;outPath)</td></tr>
+<tr class="separator:adadccb74cbad86c0faa9bf7b8adae9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822b3f27e2f229f0b1e8e6a8afab5298"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#a822b3f27e2f229f0b1e8e6a8afab5298">errorL2</a> (Epetra_Vector &amp;uStandardMap)</td></tr>
+<tr class="separator:a822b3f27e2f229f0b1e8e6a8afab5298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00e9800cc61b9f15f02b9d0a55394dfe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#a00e9800cc61b9f15f02b9d0a55394dfe">setup_dirichlet_conditions</a> ()</td></tr>
 <tr class="separator:a00e9800cc61b9f15f02b9d0a55394dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af59b9cfdec39726dffdf7ba6b59f6c31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/classmanufactured.html#af59b9cfdec39726dffdf7ba6b59f6c31">apply_dirichlet_conditions</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>, double &amp;displacement)</td></tr>
@@ -206,8 +208,8 @@ Public Attributes</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00007">7</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abf45131bc05acffb9b2df4b80b15392e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf45131bc05acffb9b2df4b80b15392e">&#9670;&nbsp;</a></span>manufactured()</h2>
+<a id="a6dc4f7d34162e63c900ef90a7a77f40a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dc4f7d34162e63c900ef90a7a77f40a">&#9670;&nbsp;</a></span>manufactured()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +227,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Teuchos::ParameterList &amp;&#160;</td>
-          <td class="paramname"><em>Parameters</em>&#160;</td>
+          <td class="paramname"><em>Parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>mesh_file</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -314,7 +322,35 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#ab4bbdba423977cef810b6919817429a2">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00144">144</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00202">202</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a822b3f27e2f229f0b1e8e6a8afab5298"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a822b3f27e2f229f0b1e8e6a8afab5298">&#9670;&nbsp;</a></span>errorL2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double manufactured::errorL2 </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
+          <td class="paramname"><em>uStandardMap</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00124">124</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +396,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#ae6e37199b1afeff489561279b0b0cb47">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00182">182</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00240">240</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -400,7 +436,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#aab7312e665f248382e1f6bd4bd285478">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00237">237</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00295">295</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -458,7 +494,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#a6c80f33fec1a9857a712ea410907972f">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00086">86</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00088">88</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -504,7 +540,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#a83204de8d2b91c84e90655e87978b9c9">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00068">68</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00070">70</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -548,7 +584,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00041">41</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00042">42</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -636,7 +672,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00052">52</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00054">54</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -665,12 +701,12 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#a5d9ac651a1e9cd308cc47a4c60e7cf95">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00118">118</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00176">176</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
-<a id="af3fc277057d06f37af6d1895c058db8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3fc277057d06f37af6d1895c058db8f">&#9670;&nbsp;</a></span>solve()</h2>
+<a id="adadccb74cbad86c0faa9bf7b8adae9fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adadccb74cbad86c0faa9bf7b8adae9fc">&#9670;&nbsp;</a></span>solve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -679,10 +715,10 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void manufactured::solve </td>
+          <td class="memname">double manufactured::solve </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>doprint</em></td><td>)</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>outPath</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -693,7 +729,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00104">104</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00110">110</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -755,7 +791,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html#l00251">251</a> of file <a class="el" href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>

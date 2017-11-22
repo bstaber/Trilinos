@@ -101,12 +101,12 @@ $(document).ready(function(){initNavTree('d1/dd7/class_t_i_mooney___random_field
 <div class="dynheader">
 Inheritance diagram for TIMooney_RandomField:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d4/d66/class_t_i_mooney___random_field__inherit__graph.svg" width="178" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d4/d66/class_t_i_mooney___random_field__inherit__graph.svg" width="198" height="330"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for TIMooney_RandomField:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d1/d87/class_t_i_mooney___random_field__coll__graph.svg" width="178" height="347"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d1/d87/class_t_i_mooney___random_field__coll__graph.svg" width="198" height="422"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -135,47 +135,46 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5b994fa26f3eea615dd5763ee010850a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10d0b920f34245bb17f6ab1d7fc9c296"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a10d0b920f34245bb17f6ab1d7fc9c296">get_constitutive_tensors</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, Epetra_SerialDenseVector &amp;piola_stress, Epetra_SerialDenseMatrix &amp;tangent_piola)</td></tr>
 <tr class="separator:a10d0b920f34245bb17f6ab1d7fc9c296"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1ac15e14b48638b10d15e1e51542157"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#af1ac15e14b48638b10d15e1e51542157">get_constitutive_tensors_static_condensation</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;inverse_cauchy, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
-<tr class="separator:af1ac15e14b48638b10d15e1e51542157"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabfd3dec467891efc2d8a5772671e4fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#aabfd3dec467891efc2d8a5772671e4fc">get_internal_pressure</a> (double &amp;theta, double &amp;pressure, double &amp;dpressure)</td></tr>
-<tr class="separator:aabfd3dec467891efc2d8a5772671e4fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade39874d4d1e5d838aecb6f7ca59aaab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#ade39874d4d1e5d838aecb6f7ca59aaab">get_material_parameters_for_recover</a> (unsigned int &amp;e_lid, double &amp;xi, double &amp;eta, double &amp;zeta)</td></tr>
-<tr class="separator:ade39874d4d1e5d838aecb6f7ca59aaab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba19e936bf971a9422ba3be45691f6e"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a3ba19e936bf971a9422ba3be45691f6e">get_neumannBc</a> (Epetra_SerialDenseMatrix &amp;matrix_X, Epetra_SerialDenseMatrix &amp;xg, unsigned int &amp;gp)</td></tr>
+<tr class="separator:a3ba19e936bf971a9422ba3be45691f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e7d1f7e20c090cbeae42ded6676c051"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a3e7d1f7e20c090cbeae42ded6676c051">get_forcing</a> (double &amp;x1, double &amp;x2, double &amp;x3, unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
+<tr class="separator:a3e7d1f7e20c090cbeae42ded6676c051"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3296e13f2da6b09d0886a53068a65631"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a3296e13f2da6b09d0886a53068a65631">get_stress_for_recover</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseMatrix &amp;piola_stress)</td></tr>
 <tr class="separator:a3296e13f2da6b09d0886a53068a65631"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classhyperelasticity__setup"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhyperelasticity__setup')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d8/daf/classhyperelasticity__setup.html">hyperelasticity_setup</a></td></tr>
-<tr class="memitem:a0b4405247220854960699602e20e43a5 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a0b4405247220854960699602e20e43a5">hyperelasticity_setup</a> ()</td></tr>
-<tr class="separator:a0b4405247220854960699602e20e43a5 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb39bd51c1de4815be3014d56e2f131a inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#adb39bd51c1de4815be3014d56e2f131a">~hyperelasticity_setup</a> ()</td></tr>
-<tr class="separator:adb39bd51c1de4815be3014d56e2f131a inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc2523650a1aa0295bb504bf4e3f87d inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aecc2523650a1aa0295bb504bf4e3f87d">create_FECrsGraph</a> ()</td></tr>
-<tr class="separator:aecc2523650a1aa0295bb504bf4e3f87d inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee4f4a142c72e4ff5d535247ccd6ac4f inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aee4f4a142c72e4ff5d535247ccd6ac4f">assemble_dirichlet</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:aee4f4a142c72e4ff5d535247ccd6ac4f inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99efe531e6fbb9832129f25104c0e444 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a99efe531e6fbb9832129f25104c0e444">assemble_dirichlet_dead_neumann</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:a99efe531e6fbb9832129f25104c0e444 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace45f5a7075acc20c2a98fcaa6ce29fb inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ace45f5a7075acc20c2a98fcaa6ce29fb">assemble_dirichlet_live_neumann_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:ace45f5a7075acc20c2a98fcaa6ce29fb inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afce0fbd554a28cfe88e65cdbb725aad7 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afce0fbd554a28cfe88e65cdbb725aad7">assemble_dirichlet_dead_neumann_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:afce0fbd554a28cfe88e65cdbb725aad7 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac205df59ab763c9736d2eae8fef65539 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ac205df59ab763c9736d2eae8fef65539">assemble_dirichlet_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:ac205df59ab763c9736d2eae8fef65539 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa73bd87de424f1bdf9db00186872a69f inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa73bd87de424f1bdf9db00186872a69f">material_stiffness_and_rhs_dirichlet</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:aa73bd87de424f1bdf9db00186872a69f inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af142fad5063b1b44b43463e51fde8050 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#af142fad5063b1b44b43463e51fde8050">material_stiffness_and_rhs_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:af142fad5063b1b44b43463e51fde8050 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28015f2f06806f1a42ff0b418fb3add0 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a28015f2f06806f1a42ff0b418fb3add0">force_stiffness_rhs_live_pressure</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:a28015f2f06806f1a42ff0b418fb3add0 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac35d16141f36e92714cad8ac60786254 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ac35d16141f36e92714cad8ac60786254">force_dead_pressure</a> (Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:ac35d16141f36e92714cad8ac60786254 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7050c638e04f1516548172ee9a02fc93 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a7050c638e04f1516548172ee9a02fc93">compute_B_matrices</a> (Epetra_SerialDenseMatrix &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>, Epetra_SerialDenseMatrix &amp;dx_shape_functions, Epetra_SerialDenseMatrix &amp;B, Epetra_SerialDenseMatrix &amp;BG)</td></tr>
-<tr class="separator:a7050c638e04f1516548172ee9a02fc93 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a194cb81606bafd0130f445a7b27f3afe inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a194cb81606bafd0130f445a7b27f3afe">compute_green_lagrange</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, double &amp;xi, double &amp;eta, double &amp;zeta, std::string &amp;filename)</td></tr>
-<tr class="separator:a194cb81606bafd0130f445a7b27f3afe inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a823b708f1c38940db0b751d412892486 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a823b708f1c38940db0b751d412892486">compute_mean_cauchy_stress</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
-<tr class="separator:a823b708f1c38940db0b751d412892486 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9069153633be1777bb6f0c5a2e077c9 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ae9069153633be1777bb6f0c5a2e077c9">compute_gauss_vonmises</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
-<tr class="separator:ae9069153633be1777bb6f0c5a2e077c9 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classcompressible_hyperelasticity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcompressible_hyperelasticity')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html">compressibleHyperelasticity</a></td></tr>
+<tr class="memitem:aae99ff9eaae4806469b3d745bcbb82c2 inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#aae99ff9eaae4806469b3d745bcbb82c2">compressibleHyperelasticity</a> ()</td></tr>
+<tr class="separator:aae99ff9eaae4806469b3d745bcbb82c2 inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf0fcea06733054b5c0233d23eeda221 inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#abf0fcea06733054b5c0233d23eeda221">~compressibleHyperelasticity</a> ()</td></tr>
+<tr class="separator:abf0fcea06733054b5c0233d23eeda221 inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06cb0bd8c859885aed98acf8cf078bf8 inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#a06cb0bd8c859885aed98acf8cf078bf8">assemblePureDirichlet_homogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:a06cb0bd8c859885aed98acf8cf078bf8 inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3fae2f14ad3f216f714a884283d6a73 inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#ae3fae2f14ad3f216f714a884283d6a73">assemblePureDirichlet_inhomogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:ae3fae2f14ad3f216f714a884283d6a73 inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b787c695ac369354f8d460ca7dcabb inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#ac1b787c695ac369354f8d460ca7dcabb">assembleMixedDirichletNeumann_homogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:ac1b787c695ac369354f8d460ca7dcabb inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac974922dac079bb187945aa90dbb9fbe inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#ac974922dac079bb187945aa90dbb9fbe">assembleMixedDirichletNeumann_inhomogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:ac974922dac079bb187945aa90dbb9fbe inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a291fe0d9088957b5df4da50f8e300e inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#a1a291fe0d9088957b5df4da50f8e300e">stiffnessRhs_homogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:a1a291fe0d9088957b5df4da50f8e300e inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc5917e4f86f575af7fb5e8fdd298aa1 inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#afc5917e4f86f575af7fb5e8fdd298aa1">stiffnessRhs_inhomogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:afc5917e4f86f575af7fb5e8fdd298aa1 inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70aedd5824177764fb3d1d8eb9d1b59e inherit pub_methods_classcompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#a70aedd5824177764fb3d1d8eb9d1b59e">rhs_NeumannBoundaryCondition</a> (Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:a70aedd5824177764fb3d1d8eb9d1b59e inherit pub_methods_classcompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classhyperelasticity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhyperelasticity')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../dc/d5a/classhyperelasticity.html">hyperelasticity</a></td></tr>
+<tr class="memitem:a93037f7d3eed4f8de2d81dd967fbb5ff inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a93037f7d3eed4f8de2d81dd967fbb5ff">hyperelasticity</a> ()</td></tr>
+<tr class="separator:a93037f7d3eed4f8de2d81dd967fbb5ff inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ab018d9249e7078cddb8cb2873f9ac inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#ae1ab018d9249e7078cddb8cb2873f9ac">~hyperelasticity</a> ()</td></tr>
+<tr class="separator:ae1ab018d9249e7078cddb8cb2873f9ac inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb91ba0572df36e862efcd21d8b83299 inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#adb91ba0572df36e862efcd21d8b83299">create_FECrsGraph</a> ()</td></tr>
+<tr class="separator:adb91ba0572df36e862efcd21d8b83299 inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b36b900a1b9bf490adf5b3cda6b1109 inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a0b36b900a1b9bf490adf5b3cda6b1109">compute_B_matrices</a> (Epetra_SerialDenseMatrix &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>, Epetra_SerialDenseMatrix &amp;dx_shape_functions, Epetra_SerialDenseMatrix &amp;B, Epetra_SerialDenseMatrix &amp;BG)</td></tr>
+<tr class="separator:a0b36b900a1b9bf490adf5b3cda6b1109 inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c8368897902780dcc79be6e37afb38a inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a9c8368897902780dcc79be6e37afb38a">compute_green_lagrange</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, double &amp;xi, double &amp;eta, double &amp;zeta, std::string &amp;filename)</td></tr>
+<tr class="separator:a9c8368897902780dcc79be6e37afb38a inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e2cfc109ab37ab7f666642a39322ae4 inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a8e2cfc109ab37ab7f666642a39322ae4">compute_mean_cauchy_stress</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
+<tr class="separator:a8e2cfc109ab37ab7f666642a39322ae4 inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a907c89f74407b3943266ade5f2634f0e inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a907c89f74407b3943266ade5f2634f0e">compute_gauss_vonmises</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
+<tr class="separator:a907c89f74407b3943266ade5f2634f0e inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_finite___element___problem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_finite___element___problem')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d8/dc2/class_finite___element___problem.html">Finite_Element_Problem</a></td></tr>
 <tr class="memitem:a9626150bd17f0375ecc66e0709c4dbd7 inherit pub_methods_class_finite___element___problem"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc2/class_finite___element___problem.html#a9626150bd17f0375ecc66e0709c4dbd7">Finite_Element_Problem</a> ()</td></tr>
 <tr class="separator:a9626150bd17f0375ecc66e0709c4dbd7 inherit pub_methods_class_finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,11 +250,11 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a0a03948194c77bdf07ea187b6238bd26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40edd69d0a984a96d1fabf2ebd47271e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd7/class_t_i_mooney___random_field.html#a40edd69d0a984a96d1fabf2ebd47271e">phase</a></td></tr>
 <tr class="separator:a40edd69d0a984a96d1fabf2ebd47271e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classhyperelasticity__setup"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhyperelasticity__setup')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../d8/daf/classhyperelasticity__setup.html">hyperelasticity_setup</a></td></tr>
-<tr class="memitem:af46ccf90792cad4401cc32bbc9768469 inherit pub_attribs_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#af46ccf90792cad4401cc32bbc9768469">n_bc_dof</a></td></tr>
-<tr class="separator:af46ccf90792cad4401cc32bbc9768469 inherit pub_attribs_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a273e5e218c49e19abe7917152ef089dd inherit pub_attribs_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a273e5e218c49e19abe7917152ef089dd">dof_on_boundary</a></td></tr>
-<tr class="separator:a273e5e218c49e19abe7917152ef089dd inherit pub_attribs_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhyperelasticity"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhyperelasticity')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../dc/d5a/classhyperelasticity.html">hyperelasticity</a></td></tr>
+<tr class="memitem:adc13af493511b96adce81c8a36953333 inherit pub_attribs_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#adc13af493511b96adce81c8a36953333">n_bc_dof</a></td></tr>
+<tr class="separator:adc13af493511b96adce81c8a36953333 inherit pub_attribs_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2369c4dc07aaeca47d71a1f1be69a1c inherit pub_attribs_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#af2369c4dc07aaeca47d71a1f1be69a1c">dof_on_boundary</a></td></tr>
+<tr class="separator:af2369c4dc07aaeca47d71a1f1be69a1c inherit pub_attribs_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_finite___element___problem"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_finite___element___problem')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../d8/dc2/class_finite___element___problem.html">Finite_Element_Problem</a></td></tr>
 <tr class="memitem:a6a4f08b6b5e25d6a5c60ae1738901388 inherit pub_attribs_class_finite___element___problem"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc2/class_finite___element___problem.html#a6a4f08b6b5e25d6a5c60ae1738901388">pressure_load</a></td></tr>
 <tr class="separator:a6a4f08b6b5e25d6a5c60ae1738901388 inherit pub_attribs_class_finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -456,14 +455,14 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a9cca717b6ef0662c83cfb6ee117a0ded">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#aea462ba84cff362352c15574e3213688">compressibleHyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00234">234</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00232">232</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="af1ac15e14b48638b10d15e1e51542157"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1ac15e14b48638b10d15e1e51542157">&#9670;&nbsp;</a></span>get_constitutive_tensors_static_condensation()</h2>
+<a id="a3e7d1f7e20c090cbeae42ded6676c051"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e7d1f7e20c090cbeae42ded6676c051">&#9670;&nbsp;</a></span>get_forcing()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -472,46 +471,34 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TIMooney_RandomField::get_constitutive_tensors_static_condensation </td>
+          <td class="memname">Epetra_SerialDenseVector TIMooney_RandomField::get_forcing </td>
           <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>det</em>, </td>
+          <td class="paramname"><em>x2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>inverse_cauchy</em>, </td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x3</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_isc</em>, </td>
+          <td class="paramtype">unsigned int &amp;&#160;</td>
+          <td class="paramname"><em>e_lid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_vol</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_isc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola_vol</em>&#160;</td>
+          <td class="paramtype">unsigned int &amp;&#160;</td>
+          <td class="paramname"><em>gp</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -526,53 +513,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afef20997a9dd026abae3c47ef439f28a">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00330">330</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aabfd3dec467891efc2d8a5772671e4fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabfd3dec467891efc2d8a5772671e4fc">&#9670;&nbsp;</a></span>get_internal_pressure()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void TIMooney_RandomField::get_internal_pressure </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>theta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>pressure</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>dpressure</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aabfa762fd21b5c29488e08614b671617">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#aa01858405b0482159a0f7bb239018da0">compressibleHyperelasticity</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00334">334</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
@@ -612,61 +553,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa5a05e262adae7bda067f022ad9b2908">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../dc/d5a/classhyperelasticity.html#a273d1701aaa129d63ef804253c797a97">hyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00216">216</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ade39874d4d1e5d838aecb6f7ca59aaab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade39874d4d1e5d838aecb6f7ca59aaab">&#9670;&nbsp;</a></span>get_material_parameters_for_recover()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void TIMooney_RandomField::get_material_parameters_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>xi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>eta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>zeta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afee5a404dffb03a9f27710a4f0296501">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00338">338</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00214">214</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -716,6 +605,52 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3ba19e936bf971a9422ba3be45691f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba19e936bf971a9422ba3be45691f6e">&#9670;&nbsp;</a></span>get_neumannBc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_SerialDenseVector TIMooney_RandomField::get_neumannBc </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
+          <td class="paramname"><em>matrix_X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
+          <td class="paramname"><em>xg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int &amp;&#160;</td>
+          <td class="paramname"><em>gp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html#a983e046c8d212d7b41c2aa79f241d555">compressibleHyperelasticity</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00328">328</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a3296e13f2da6b09d0886a53068a65631"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3296e13f2da6b09d0886a53068a65631">&#9670;&nbsp;</a></span>get_stress_for_recover()</h2>
 
@@ -756,9 +691,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a171b91f4586a5122cebb54500f4cf32d">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../dc/d5a/classhyperelasticity.html#a733200015955c6f902fd02684e6285c5">hyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00341">341</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html#l00340">340</a> of file <a class="el" href="../../d0/d77/_compressible___mooney___transverse___isotropic___random___field_8hpp_source.html">Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp</a>.</p>
 
 </div>
 </div>

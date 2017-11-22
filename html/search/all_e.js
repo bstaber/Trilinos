@@ -11,7 +11,7 @@ var searchData=
   ['n_5flocal_5fnodes',['n_local_nodes',['../d6/d6b/classmesh.html#a0f40f711b787ab63139da3d9ff58fcad',1,'mesh']]],
   ['n_5flocal_5fnodes_5fwithout_5fghosts',['n_local_nodes_without_ghosts',['../d6/d6b/classmesh.html#ad07e1b052467308b49986181676a17a6',1,'mesh']]],
   ['n_5fnodes',['n_nodes',['../d6/d6b/classmesh.html#ae3002711afb6b04e232073ef942c4a39',1,'mesh']]],
-  ['n_5fply',['n_ply',['../d1/dbe/classmanufactured_solution.html#abd1bd867fa658292c74dcc2243bf6e9f',1,'manufacturedSolution::n_ply()'],['../de/dd1/class_t_i_mooney.html#a49c3cf465a8f193f71c2aff5b011eef9',1,'TIMooney::n_ply()']]],
+  ['n_5fply',['n_ply',['../de/dd1/class_t_i_mooney.html#a49c3cf465a8f193f71c2aff5b011eef9',1,'TIMooney']]],
   ['n_5ftetra',['N_tetra',['../d6/d6b/classmesh.html#a39db91db7f46abc44ebaf66c5c83bbff',1,'mesh']]],
   ['n_5ftri',['N_tri',['../d6/d6b/classmesh.html#a001cb792919a394dd7f9c730b1c1dcbf',1,'mesh']]],
   ['nb_5fbis_5fmax',['nb_bis_max',['../d0/d9d/class_newton___raphson.html#a6fee960a690c814e7c970157ea12a0d5',1,'Newton_Raphson']]],

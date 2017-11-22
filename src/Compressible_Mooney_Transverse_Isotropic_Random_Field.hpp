@@ -3,9 +3,9 @@
 
 #include "tensor_calculus.hpp"
 #include "shinozukapp_layeredcomp_2d.hpp"
-#include "hyperelasticity_setup_pp.hpp"
+#include "compressibleHyperelasticity.hpp"
 
-class TIMooney_RandomField : public hyperelasticity_setup
+class TIMooney_RandomField : public compressibleHyperelasticity
 {
 public:
     
@@ -136,7 +136,7 @@ public:
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-        assemble_dirichlet(x,K,F);
+        assemblePureDirichlet_homogeneousForcing(x,K,F);
     }
     
     void setup_dirichlet_conditions(){
@@ -176,7 +176,6 @@ public:
     }
     
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-        //if (n_bc_dof>0){
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
         
@@ -209,7 +208,6 @@ public:
                 F[0][StandardMap->LID(3*node+2)]   = 0.0;
             }
         }
-        //}
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
     
@@ -327,17 +325,18 @@ public:
         tangent_piola += ddJ5;
     }
     
-    void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
-        std::cerr << "**Err: Not using static condensation method!\n";
+    Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
+        Epetra_SerialDenseVector h(3);
+        std::cout << "**Err: Not using that method in this example!\n";
+        return h;
     }
     
-    void get_internal_pressure(double & theta, double & pressure, double & dpressure){
-        std::cerr << "**Err: Not using static condensation method!\n";
+    Epetra_SerialDenseVector get_forcing(double & x1, double & x2, double & x3, unsigned int & e_lid, unsigned int & gp){
+        Epetra_SerialDenseVector f(3);
+        std::cout << "**Err: Not using that method in this example!\n";
+        return f;
     }
-    
-    void get_material_parameters_for_recover(unsigned int & e_lid, double & xi, double & eta, double & zeta){
-    }
-                                                      
+                                                          
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
     

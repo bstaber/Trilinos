@@ -113,9 +113,9 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
         meshfile >> xyz[0];
         meshfile >> xyz[1];
         meshfile >> xyz[2];
-        nodes_coord[3*i] = xyz[0]; ///1000.0;
-        nodes_coord[3*i+1] = xyz[1]; ///1000.0;
-        nodes_coord[3*i+2] = xyz[2]; ///1000.0;
+        nodes_coord[3*i] = xyz[0];
+        nodes_coord[3*i+1] = xyz[1];
+        nodes_coord[3*i+2] = xyz[2];
     }
     
     meshfile.getline(buf,100);

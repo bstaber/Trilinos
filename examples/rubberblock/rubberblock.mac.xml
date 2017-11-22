@@ -58,10 +58,10 @@
     
     <ParameterList name="Krylov">
         <Parameter name="solver" type="string" value="gmres"/>
-        <Parameter name="kspace" type="int" value="500"/>
+        <!--Parameter name="kspace" type="int" value="500"/-->
         <Parameter name="orthog" type="string" value="classical"/>
         <Parameter name="precond" type="string" value="dom_decomp"/>
-        <Parameter name="subdomain" type="string" value="ilut"/>
+        <Parameter name="subdomain_solve" type="string" value="ilut"/>
         <Parameter name="overlap" type="int" value="2"/>
         <Parameter name="type_overlap" type="string" value="symmetric"/>
         <Parameter name="pre_calc" type="string" value="recalc"/>

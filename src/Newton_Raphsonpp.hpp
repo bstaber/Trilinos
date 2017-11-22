@@ -1,7 +1,6 @@
 #ifndef NEWTON_RAPHSONPP_HPP
 #define NEWTON_RAPHSONPP_HPP
 
-#include "hyperelasticity_setup_pp.hpp"
 #include "Finite_Element_Problem.hpp"
 #include "Teuchos_RCP.hpp"
 #include "Ifpack.h"
