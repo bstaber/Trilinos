@@ -256,7 +256,7 @@ public:
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
         u(0) = 0.0; //-c1*x2*(topcoord-x1)*(topcoord-x2);
-        u(1) = x2/25.0; //c2*x2*(topcoord/2.0-x2);
+        u(1) = 0.005; //c2*x2*(topcoord/2.0-x2);
         u(2) = 0.0; //std::sin(c1*x3);
         return u;
     }
@@ -333,6 +333,7 @@ public:
                 f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
             }
         }
+        f.Scale(0.0);
         return f;
     }
     
