@@ -40,7 +40,7 @@ MPI_Init(&argc, &argv);
     }
     
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured2.msh";
-    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
+    std::string mesh_file = "/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh";
     Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
     
