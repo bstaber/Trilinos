@@ -44,7 +44,7 @@
     </ParameterList>
     
     <ParameterList name="Newton">
-        <Parameter name="delta" type="double" value="0.1"/>
+        <Parameter name="delta" type="double" value="1.0"/>
         <Parameter name="iterMin" type="int" value="2"/>
         <Parameter name="iterMax" type="int" value="10"/>
         <Parameter name="nbBisMax" type="int" value="5"/>
@@ -54,7 +54,7 @@
         <Parameter name="success_parameter" type="double" value="2.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads" type="int" value="1"/>
-        <Parameter name="bc_disp" type="double" value="0.010"/>
+        <Parameter name="bc_disp" type="double" value="1.0"/>
         <Parameter name="pressure_load" type="double" value="0.0"/>
     </ParameterList>
     
