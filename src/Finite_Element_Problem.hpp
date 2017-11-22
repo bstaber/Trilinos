@@ -34,14 +34,6 @@ public:
         isAvailable = Factory.Query("Dscpack"); if(isAvailable){ std::cout << "Dscpack: yes.\n"; } else{ std::cout << "Dscpack: no.\n"; }
     }
     
-    /*mesh * Mesh;
-    Epetra_Comm * Comm;
-    
-    Epetra_Map * OverlapMap;
-    Epetra_Map * StandardMap;
-    Epetra_Import * ImportToOverlapMap;
-    Epetra_FECrsGraph * FEGraph;*/
-    
 };
 
 #endif

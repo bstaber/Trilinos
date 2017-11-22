@@ -33,8 +33,8 @@ public:
     Epetra_SerialDenseVector manufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
-        u(0) = -c1*x2*(topcoord - x1)*(topcoord - x2);
-        u(1) = c2*x2*(topcoord/2.0 - x2);
+        u(0) = -c1*x2*(topcoord-x1)*(topcoord - x2);
+        u(1) = c2*x2*(topcoord/2.0-x2);
         u(2) = std::sin(c1*x3);
         return u;
     }

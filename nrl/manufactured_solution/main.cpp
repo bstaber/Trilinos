@@ -39,7 +39,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured1.msh";
+    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured2.msh";
     Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
     
@@ -61,9 +61,9 @@ MPI_Init(&argc, &argv);
     Newton->setParameters(*paramList);
     Newton->bc_disp = 1.0;
     int error = Newton->Solve_with_Aztec(true);
-    //std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured.mtx";
+    std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured/manufactured.mtx";
     //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured.mtx";
-    //Newton->print_newton_solution(path1);
+    Newton->print_newton_solution(path1);
     
 #ifdef HAVE_MPI
     MPI_Finalize();

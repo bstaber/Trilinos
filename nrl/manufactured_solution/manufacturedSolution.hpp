@@ -93,12 +93,14 @@ public:
             z = Mesh->nodes_coord[3*node+2];
             if (y==0.0){
                 u = getManufacturedSolution(x,y,z);
+                u.Scale(displacement);
                 v[0][StandardMap->LID(3*node+0)] = u(0);
                 v[0][StandardMap->LID(3*node+1)] = u(1);
                 v[0][StandardMap->LID(3*node+2)] = u(2);
             }
             if (y==topcoord){
                 u = getManufacturedSolution(x,y,z);
+                u.Scale(displacement);
                 v[0][StandardMap->LID(3*node+0)] = u(0);
                 v[0][StandardMap->LID(3*node+1)] = u(1);
                 v[0][StandardMap->LID(3*node+2)] = u(2);
@@ -126,7 +128,7 @@ public:
     
     Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         Epetra_SerialDenseVector h(3), normal(3);
-        Epetra_SerialDenseMatrix piola(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
+        /*Epetra_SerialDenseMatrix piola(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
         piola = getManufacturedPiola(xg(0,gp),xg(1,gp),xg(2,gp));
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
@@ -139,7 +141,7 @@ public:
         if (xg(2,gp)==0.0){
             normal.Scale(-1.0);
         }
-        h.Multiply('N','N',1.0,piola,normal,0.0);
+        h.Multiply('N','N',1.0,piola,normal,0.0);*/
         return h;
     }
     
@@ -253,21 +255,23 @@ public:
     Epetra_SerialDenseVector getManufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
-        u(0) = -c1*x2*(topcoord-x1)*(topcoord-x2);
-        u(1) = c2*x2*(topcoord/2.0-x2);
-        u(2) = std::sin(c1*x3);
+        u(0) = 0.0; //-c1*x2*(topcoord-x1)*(topcoord-x2);
+        u(1) = x2/25.0; //c2*x2*(topcoord/2.0-x2);
+        u(2) = 0.0; //std::sin(c1*x3);
         return u;
     }
     
     Epetra_SerialDenseMatrix getManufacturedPiola(double & x1, double & x2, double & x3){
         
-        Epetra_SerialDenseVector x(3);
         Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), ML(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
-        x(0) = x1; x(1) = x2; x(2) = x3;
-        F(0,0) = c1*x2*(topcoord-x2) + 1.0; F(0,1) = c1*x2*(topcoord-x1)-c1*(topcoord-x1)*(topcoord-x2); F(0,2) = 0.0;
-        F(1,0) = 0.0;                       F(1,1) = c2*(topcoord/2.0 - x2)-c2*x2+1.0;                   F(1,2) = 0.0;
-        F(2,0) = 0.0;                       F(2,1) = 0.0;                                                F(2,2) = c1*cos(c1*x3) + 1.0;
+        
+        /*F(0,0) = c1*x2*(topcoord-x2)+1.0;   F(0,1) = c1*x2*(topcoord-x1)-c1*(topcoord-x1)*(topcoord-x2); F(0,2) = 0.0;
+        F(1,0) = 0.0;                       F(1,1) = c2*(topcoord/2.0-x2)-c2*x2+1.0;                     F(1,2) = 0.0;
+        F(2,0) = 0.0;                       F(2,1) = 0.0;                                                F(2,2) = c1*std::cos(c1*x3)+1.0;*/
+        F(0,0) = 1.0; F(0,1) = 0.0;          F(0,2) = 0.0;
+        F(1,0) = 0.0; F(1,1) = 1.0+1.0/25.0; F(1,2) = 0.0;
+        F(2,0) = 0.0; F(2,1) = 0.0;          F(2,2) = 1.0;
         double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
         
         M(0,0) = mu4*sin_plyagl*sin_plyagl+mu5*cos_plyagl*cos_plyagl;
@@ -290,13 +294,13 @@ public:
         ML.Multiply('N','N',1.0,M,L,0.0);
         LML.Multiply('N','N',1.0,L,ML,0.0);
         
-        double I1 = C(0,0) + C(1,1) + C(2,2);
+        double I1  = C(0,0) + C(1,1) + C(2,2);
         double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
-        double I2 = (1.0/2.0)*(I1*I1-II1);
-        double I3 = det*det;
-        double I4 = C(0,0)*M(0,0) + C(1,1)*M(1,1) + C(2,2)*M(2,2) + 2.0*C(0,1)*M(0,1) + 2.0*C(0,2)*M(0,2) + 2.0*C(1,2)*M(1,2);
-        double I5 = CC(0,0)*M(0,0) + CC(1,1)*M(1,1) + CC(2,2)*M(2,2) + 2.0*CC(0,1)*M(0,1) + 2.0*CC(0,2)*M(0,2) + 2.0*CC(1,2)*M(1,2);
-        double J5 = I5 - I1*I4 + I2*trm;
+        double I2  = (1.0/2.0)*(I1*I1-II1);
+        double I3  = det*det;
+        double I4  = C(0,0)*M(0,0) + C(1,1)*M(1,1) + C(2,2)*M(2,2) + 2.0*C(0,1)*M(0,1) + 2.0*C(0,2)*M(0,2) + 2.0*C(1,2)*M(1,2);
+        double I5  = CC(0,0)*M(0,0) + CC(1,1)*M(1,1) + CC(2,2)*M(2,2) + 2.0*CC(0,1)*M(0,1) + 2.0*CC(0,2)*M(0,2) + 2.0*CC(1,2)*M(1,2);
+        double J5  = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
         double pI4 = std::pow(I4,beta4);
         double pJ5 = std::pow(J5,beta5);
