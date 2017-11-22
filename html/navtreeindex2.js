@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d7/d17/_newton___raphsonpp_8hpp_source.html":[2,0,5,27],
 "d7/d76/classlaplace.html":[1,0,8],
 "d7/d76/classlaplace.html#a0d9e17e307504c53daa627eaebd63827":[1,0,8,7],
 "d7/d76/classlaplace.html#a1cd9417fa341cc5198e9759d048d599a":[1,0,8,13],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a2ec77a080d13ba5b1deb6d66845e37c1":[1,0,17,17],
 "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a2f527d380d1fb035a6a8a5924ac065c7":[1,0,17,41],
 "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a31cac63b6ebd5bb39a7b3ff6d7762442":[1,0,17,3],
-"dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a39e22ecdbed3481546c9cf7d98f9cdb0":[1,0,17,30],
-"dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a3a65b28e5d813bffe7706d401b9a6a13":[1,0,17,0]
+"dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a39e22ecdbed3481546c9cf7d98f9cdb0":[1,0,17,30]
 };

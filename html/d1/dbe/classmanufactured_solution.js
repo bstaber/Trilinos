@@ -1,8 +1,9 @@
 var classmanufactured_solution =
 [
-    [ "manufacturedSolution", "d1/dbe/classmanufactured_solution.html#acdf5eeacac336f979659dc7df59eb112", null ],
+    [ "manufacturedSolution", "d1/dbe/classmanufactured_solution.html#acd93a7165df92220355189788f621ab7", null ],
     [ "~manufacturedSolution", "d1/dbe/classmanufactured_solution.html#a39cab08f07c4f839cab34b135474f28e", null ],
     [ "apply_dirichlet_conditions", "d1/dbe/classmanufactured_solution.html#aaef80929b115888e201f368a9a351c1c", null ],
+    [ "errorL2", "d1/dbe/classmanufactured_solution.html#a10118d1eb7b904ec03546c43d9e596af", null ],
     [ "get_constitutive_tensors", "d1/dbe/classmanufactured_solution.html#a102cb6330e9469659a4c28a6d63bd0ca", null ],
     [ "get_forcing", "d1/dbe/classmanufactured_solution.html#a0f864279782b0559bb35cabf527ab258", null ],
     [ "get_material_parameters", "d1/dbe/classmanufactured_solution.html#aacda1656d3dc76fb76b1ae491d073ac4", null ],
@@ -12,6 +13,7 @@ var classmanufactured_solution =
     [ "getManufacturedPiola", "d1/dbe/classmanufactured_solution.html#acb77044abd0ba7cd6d5661327b2f7025", null ],
     [ "getManufacturedSolution", "d1/dbe/classmanufactured_solution.html#a81a93413e335b368fff5f7097f5a27ae", null ],
     [ "manufacturedForcing", "d1/dbe/classmanufactured_solution.html#a581a19554e14425200492ecb380cb5e5", null ],
+    [ "set_parameters", "d1/dbe/classmanufactured_solution.html#ac3b696a6c587191551c479c35e68597b", null ],
     [ "setup_dirichlet_conditions", "d1/dbe/classmanufactured_solution.html#a9a9abfe88679a4eb8fb68a52bbce1a15", null ],
     [ "beta3", "d1/dbe/classmanufactured_solution.html#a88abd341529db8289dde3fc6b97a8e80", null ],
     [ "beta4", "d1/dbe/classmanufactured_solution.html#a06a671a51317d12fa20e906ca3423f7c", null ],
@@ -27,7 +29,6 @@ var classmanufactured_solution =
     [ "ptrmbeta4", "d1/dbe/classmanufactured_solution.html#a93155dc9e02c450e6d79f6d9fac81dba", null ],
     [ "ptrmbeta5", "d1/dbe/classmanufactured_solution.html#a77d652fc4c2150c8768860a1dc5ae4f7", null ],
     [ "sin_plyagl", "d1/dbe/classmanufactured_solution.html#aa8e1b43300410857b3d48096aa294123", null ],
-    [ "stepInc", "d1/dbe/classmanufactured_solution.html#af9ff8199a693f6fe28e3c626a5f79b9f", null ],
     [ "topcoord", "d1/dbe/classmanufactured_solution.html#a06ee96f03293598c8a3955abbe9e787c", null ],
     [ "trm", "d1/dbe/classmanufactured_solution.html#acdb53910b1e47f0d032d82b2c2b053c7", null ]
 ];
