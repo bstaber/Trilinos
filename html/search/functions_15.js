@@ -8,7 +8,6 @@ var searchData=
   ['_7efinite_5felement_5fproblem',['~Finite_Element_Problem',['../d8/dc2/class_finite___element___problem.html#a456ccd93250655de8d6bcb8e5ca4d616',1,'Finite_Element_Problem']]],
   ['_7eforwardcostfunction',['~forwardCostfunction',['../dd/dfc/classforward_costfunction.html#a5d8ad93290c44117cf1c87e2bf3a36d8',1,'forwardCostfunction']]],
   ['_7ehyperelasticity',['~hyperelasticity',['../dc/d5a/classhyperelasticity.html#ae1ab018d9249e7078cddb8cb2873f9ac',1,'hyperelasticity']]],
-  ['_7ehyperelasticity_5fsetup',['~hyperelasticity_setup',['../d8/daf/classhyperelasticity__setup.html#adb39bd51c1de4815be3014d56e2f131a',1,'hyperelasticity_setup']]],
   ['_7elaplace',['~laplace',['../d7/d76/classlaplace.html#a5a11b5bc8dfc1a2cf1bb3eeec282692a',1,'laplace']]],
   ['_7elinear_5ffinite_5felement_5fproblem',['~Linear_Finite_Element_Problem',['../d3/d9f/class_linear___finite___element___problem.html#a15ae36c4a67a658beaf93dbc1900d59a',1,'Linear_Finite_Element_Problem']]],
   ['_7elinearizedelasticity',['~LinearizedElasticity',['../d9/df7/class_linearized_elasticity.html#a8f311bf8f0be19cf851dd7a044b432c2',1,'LinearizedElasticity']]],

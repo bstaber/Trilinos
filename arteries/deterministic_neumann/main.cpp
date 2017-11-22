@@ -10,7 +10,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "Arteries_ModelC_deterministic_neumann.hpp"
+#include "NeumannInnerSurface_PolyconvexHGO.hpp"
 #include "Newton_Raphsonpp.hpp"
 
 int main(int argc, char *argv[]){

@@ -1,27 +1,54 @@
-#ifndef ARTERIES_MODELC_DETERMINISTIC_NEUMANN_HPP
-#define ARTERIES_MODELC_DETERMINISTIC_NEUMANN_HPP
+#ifndef NEUMANNINNERSURFACE_STOCHASTICPOLYCONVEXHGO_HPP
+#define NEUMANNINNERSURFACE_STOCHASTICPOLYCONVEXHGO_HPP
 
 #include "tensor_calculus.hpp"
-#include "hyperelasticity_setup_pp.hpp"
+#include "nearlyIncompressibleHyperelasticity.hpp"
+#include "laplacepp.hpp"
 
-class NeumannInnerSurface_PolyconvexHGO : public hyperelasticity_setup
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real_distribution.hpp>
+#include <boost/math/special_functions/erf.hpp>
+#include <boost/random/normal_distribution.hpp>
+#include <boost/math/special_functions/gamma.hpp>
+#include <boost/math/special_functions/beta.hpp>
+
+class NeumannInnerSurface_StochasticPolyconvexHGO : public nearlyIncompressibleHyperelasticity
 {
 public:
     
-    NeumannInnerSurface_PolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    NeumannInnerSurface_StochasticPolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
         unsigned int number_physical_groups = Teuchos::getParameter<unsigned int>(Parameters.sublist("Mesh"), "nb_phys_groups");
         std::string select_model = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "model");
         
-        mu1   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu1");
-        mu2   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu2");
-        mu3   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu3");
-        mu4   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu4");
-        beta3 = Teuchos::getParameter<double>(Parameters.sublist(select_model), "beta3");
-        beta4 = Teuchos::getParameter<double>(Parameters.sublist(select_model), "beta4");
-        theta = Teuchos::getParameter<double>(Parameters.sublist(select_model), "theta");
+        mean_mu1   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu1");
+        mean_mu2   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu2");
+        mean_mu3   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu3");
+        mean_mu4   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu4");
+        beta3      = Teuchos::getParameter<double>(Parameters.sublist(select_model), "beta3");
+        beta4      = Teuchos::getParameter<double>(Parameters.sublist(select_model), "beta4");
+        theta      = Teuchos::getParameter<double>(Parameters.sublist(select_model), "theta");
+        deltaC1    = Teuchos::getParameter<double>(Parameters.sublist(select_model), "deltaC1");
+        deltaC2    = Teuchos::getParameter<double>(Parameters.sublist(select_model), "deltaC2");
+        deltaU1    = Teuchos::getParameter<double>(Parameters.sublist(select_model), "deltaU1");
+        deltaG4    = Teuchos::getParameter<double>(Parameters.sublist(select_model), "deltaG4");
+        
+        mean_c1 = 2.0*mean_mu3*beta3*beta3;
+        mean_c2 = 2.0*mean_mu1 + std::sqrt(3.0)*3.0*mean_mu2;
+        mean_u1 = 2.0*mean_mu1/mean_c2;
+        
+        double gamma = 2.0*mean_mu1/(std::sqrt(3.0)*3.0*mean_mu2);
+        tau2 = (1.0 - deltaU1*deltaU1)/(deltaU1*deltaU1*gamma*(gamma+1.0));
+        tau1 = (2.0*mean_mu1/(std::sqrt(3.0)*3.0*mean_mu2))*tau2;
+        
+        alpha1 = 1.0/(deltaC1*deltaC1);
+        alpha2  = mean_c1*deltaC1*deltaC1;
+        alpha3 = 1.0/(deltaC2*deltaC2);
+        alpha4  = mean_c2*deltaC2*deltaC2;
+        alpha5 = 1.0/(deltaG4*deltaG4);
+        alpha6  = mean_mu4*deltaG4*deltaG4;
         
         Mesh = new mesh(comm, mesh_file);
         Mesh->read_boundary_file(boundary_file,number_physical_groups);
@@ -56,14 +83,41 @@ public:
         
         a.Resize(3);
         b.Resize(3);
+        E1.Resize(3);
+        E2.Resize(3);
+        E3.Resize(3);
+        N.Resize(4);
         setup_dirichlet_conditions();
     }
     
-    ~NeumannInnerSurface_PolyconvexHGO(){
+    ~NeumannInnerSurface_StochasticPolyconvexHGO(){
+    }
+    
+    void get_media(unsigned int & n_cells, unsigned int & n_nodes, std::string & path){
+        
+        std::ifstream connectivity_file_med;
+        connectivity_file_med.open(path);
+        
+        w1_gmrf.Resize(n_nodes);
+        w2_gmrf.Resize(n_nodes);
+        w3_gmrf.Resize(n_nodes);
+        w4_gmrf.Resize(n_nodes);
+        if (connectivity_file_med.is_open()){
+            cells_nodes_p1_med.Resize(4*n_cells);
+            for (unsigned int e=0; e<4*n_cells; ++e){
+                connectivity_file_med >> cells_nodes_p1_med[e];
+                cells_nodes_p1_med[e] = cells_nodes_p1_med[e]-1;
+            }
+            connectivity_file_med.close();
+        }
+        else{
+            std::cout << "Couldn't open the connectivity file for the media.\n";
+        }
+        
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-        assemble_dirichlet_live_neumann_static_condensation(x,K,F);
+        assembleMixedDirichletDeformationDependentNeumann_homogeneousForcing(x,K,F);
     }
     
     void setup_dirichlet_conditions(){
@@ -81,35 +135,67 @@ public:
     }
     
     void get_material_parameters(unsigned int & e_lid, unsigned int & gp){
-        
+                
         int n_gauss_points = Mesh->n_gauss_cells;
         int e_gid = Mesh->local_cells[e_lid];
+        int node;
+        double xi = Mesh->xi_cells[gp]; double eta = Mesh->eta_cells[gp]; double zeta = Mesh->zeta_cells[gp];
+        tetra4::shape_functions(N,xi,eta,zeta);
         
+        w1 = 0.0; w2 = 0.0; w3 = 0.0; w4 = 0.0;
+        for (unsigned int j=0; j<4; ++j){
+            node = cells_nodes_p1_med(4*e_gid+j);
+            w1 += N(j)*w1_gmrf(node);
+            w2 += N(j)*w2_gmrf(node);
+            w3 += N(j)*w3_gmrf(node);
+            w4 += N(j)*w4_gmrf(node);
+        }
+        
+        c1  = icdf_gamma(w1,alpha1,alpha2);
+        c2  = icdf_gamma(w2,alpha3,alpha4);
+        u1  = icdf_beta (w3,tau1,tau2);
+        mu4 = icdf_gamma(w4,alpha5,alpha6);
+        
+        mu1 = ( epsilon*mean_mu1 + (1.0/2.0)*c2*u1 )/( 1.0+epsilon );
+        mu2 = ( epsilon*mean_mu2 + (1.0/(std::sqrt(3.0)*3.0))*c2*(1.0-u1) )/( 1.0+epsilon );
+        mu3 = ( epsilon*mean_mu3 + c1/(2.0*beta3*beta3) )/( 1.0+epsilon );
+        mu4 = ( epsilon*mean_mu4 + mu4 )/( 1.0+epsilon );
+                
         for (int i=0; i<3; ++i){
-            a(i) = cos(theta)*Laplace->laplace_direction_one(n_gauss_points*e_lid+gp,i) + sin(theta)*Laplace->laplace_direction_two_cross_one(n_gauss_points*e_lid+gp,i);
-            b(i) = cos(theta)*Laplace->laplace_direction_one(n_gauss_points*e_lid+gp,i) - sin(theta)*Laplace->laplace_direction_two_cross_one(n_gauss_points*e_lid+gp,i);
+            E1(i) = Laplace->laplace_direction_one(n_gauss_points*e_lid+gp,i);
+            E2(i) = Laplace->laplace_direction_two_cross_one(n_gauss_points*e_lid+gp,i);
+            E3(i) = Laplace->laplace_direction_two(n_gauss_points*e_lid+gp,i);
+            a(i) = cos(theta)*E1(i) + sin(theta)*E2(i);
+            b(i) = cos(theta)*E1(i) - sin(theta)*E2(i);
         }
         
     }
     
-    void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient, Epetra_SerialDenseVector & piola_stress, Epetra_SerialDenseMatrix & tangent_piola){
-        std::cerr << "**Err: Using static condensation method!\n";
+    double icdf_gamma(double & w, double & alpha, double & beta){
+        double erfx = boost::math::erf<double>(w);
+        double y = (1.0/2.0)*(1.0 + erfx);
+        double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
+        double z = yinv*beta;
+        return z;
     }
-    
+
+    double icdf_beta(double & w, double & tau1, double & tau2){
+        double erfx = boost::math::erf<double>(w);
+        double y = (1.0/2.0)*(1.0 + erfx);
+        double z = boost::math::ibeta_inv<double,double,double>(tau1,tau2,y);
+        return z;
+    }
+        
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
-        
         model_C(deformation_gradient, det, inverse_cauchy, piola_isc, piola_vol, tangent_piola_isc, tangent_piola_vol);
-        
     }
     
     void get_internal_pressure(double & theta, double & pressure, double & dpressure){
         double ptheta = std::pow(theta,beta3);
-        pressure = mu3*beta3*( (ptheta/theta) - (1.0/(ptheta*theta)) );
-        dpressure = mu3*beta3*( (beta3-1.0)*(ptheta/(theta*theta)) + (beta3+1.0)/(ptheta*theta*theta) );
+        pressure = beta3*( (ptheta/theta) - (1.0/(ptheta*theta)) );
+        dpressure = beta3*( (beta3-1.0)*(ptheta/(theta*theta)) + (beta3+1.0)/(ptheta*theta*theta) );
     }
     
-    void get_material_parameters_for_recover(unsigned int & e_lid, double & xi, double & eta, double & zeta){
-    }
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
         
         det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
@@ -279,6 +365,19 @@ public:
         nodesblk_gid(0) = 480-1;
         nodesblk_gid(1) = 481-1;
         nodesblk_gid(2) = 479-1;
+        
+        /*nodesblk_gid(0) = 203-1;
+         nodesblk_gid(1) = 204-1;
+         nodesblk_gid(2) = 205-1;
+         nodesblk_gid(3) = 206-1;
+         nodesblk_gid(4) = 207-1;
+         nodesblk_gid(5) = 208-1;
+         nodesblk_gid(6) = 281-1;
+         nodesblk_gid(7) = 282-1;
+         nodesblk_gid(8) = 283-1;
+         nodesblk_gid(9) = 284-1;
+         nodesblk_gid(10) = 285-1;
+         nodesblk_gid(11) = 286-1;*/
         
         int node;
         n_bc_dof = 0;
@@ -455,14 +554,14 @@ public:
             piola_ani1(i) = 4.0*mu4*(I4_1-1.0)*exp(beta4*S4_1)*M1(i);
             piola_ani2(i) = 4.0*mu4*(I4_2-1.0)*exp(beta4*S4_2)*M2(i);
             
-            piola_vol(i) = det*L(i);
+            piola_vol(i) = mu3*det*L(i);
         }
         
         double scalarAB;
         
-        scalarAB = det;
+        scalarAB = mu3*det;
         tensor_product(det,L,L,tangent_piola_vol,0.0);
-        scalarAB = -2.0*det;
+        scalarAB = -2.0*mu3*det;
         sym_tensor_product(scalarAB,L,L,tangent_piola_vol,1.0);
         
         scalarAB = -2.0/3.0;
@@ -754,16 +853,32 @@ public:
     
     laplace * Laplace;
     
-    double mu1;
-    double mu2;
-    double mu3;
-    double mu4;
-    double beta3;
-    double beta4;
+    double w1, w2, w3, w4;
+    double mean_c1, c1, deltaC1;
+    double mean_c2, c2, deltaC2;
+    double mean_u1, u1, deltaU1;
+    double mean_mu4, mu4, deltaG4;
+    double mean_mu1, mu1;
+    double mean_mu2, mu2;
+    double mean_mu3, mu3;
+    double alpha1, alpha2;
+    double alpha3, alpha4;
+    double tau1, tau2;
+    double alpha5, alpha6;
+    double beta3, beta4;
     double theta;
+    double epsilon = 1e-6;
+    
+    Epetra_IntSerialDenseVector cells_nodes_p1_med;
+    Epetra_SerialDenseVector w1_gmrf;
+    Epetra_SerialDenseVector w2_gmrf;
+    Epetra_SerialDenseVector w3_gmrf;
+    Epetra_SerialDenseVector w4_gmrf;
     
     Epetra_SerialDenseVector a;
     Epetra_SerialDenseVector b;
+    Epetra_SerialDenseVector E1,E2,E3;
+    Epetra_SerialDenseVector N;
     
 };
 

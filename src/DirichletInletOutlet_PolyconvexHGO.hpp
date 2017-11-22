@@ -1,10 +1,11 @@
-#ifndef ARTERIES_MODELC_DETERMINISTIC_DIRICHLET_HPP
-#define ARTERIES_MODELC_DETERMINISTIC_DIRICHLET_HPP
+#ifndef DIRICHLETINLETOUTLET_POLYCONVEXHGO_HPP
+#define DIRICHLETINLETOUTLET_POLYCONVEXHGO_HPP
 
 #include "tensor_calculus.hpp"
-#include "hyperelasticity_setup_pp.hpp"
+#include "laplacepp.hpp"
+#include "nearlyIncompressibleHyperelasticity.hpp"
 
-class DirichletInletOutlet_PolyconvexHGO : public hyperelasticity_setup
+class DirichletInletOutlet_PolyconvexHGO : public nearlyIncompressibleHyperelasticity
 {
 public:
     
@@ -55,11 +56,10 @@ public:
     }
         
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-        assemble_dirichlet_static_condensation(x,K,F);
+        assemblePureDirichlet_homogeneousForcing(x,K,F);
     }
     
     void setup_dirichlet_conditions(){
-    
         n_bc_dof = 0;
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             if (Mesh->nodes_to_boundaries(i,fixed)==1){
@@ -87,7 +87,6 @@ public:
     }
     
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-        
         int node;
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
@@ -144,10 +143,6 @@ public:
             b(i) = cos(theta)*Laplace->laplace_direction_one(n_gauss_points*e_lid+gp,i) - sin(theta)*Laplace->laplace_direction_two_cross_one(n_gauss_points*e_lid+gp,i);
         }
         
-    }
-    
-    void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient, Epetra_SerialDenseVector & piola_stress, Epetra_SerialDenseMatrix & tangent_piola){
-        std::cerr << "**Err: Using static condensation method!\n";
     }
     
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & L, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
@@ -267,8 +262,6 @@ public:
         dpressure = mu3*beta3*( (beta3-1.0)*(ptheta/(theta*theta)) + (beta3+1.0)/(ptheta*theta*theta) );
     }
     
-    void get_material_parameters_for_recover(unsigned int & e_lid, double & xi, double & eta, double & zeta){
-    }
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
     

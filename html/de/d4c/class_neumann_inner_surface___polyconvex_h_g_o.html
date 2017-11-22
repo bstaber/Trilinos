@@ -97,16 +97,16 @@ $(document).ready(function(){initNavTree('de/d4c/class_neumann_inner_surface___p
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for NeumannInnerSurface_PolyconvexHGO:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/d15/class_neumann_inner_surface___polyconvex_h_g_o__inherit__graph.svg" width="178" height="270"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/d15/class_neumann_inner_surface___polyconvex_h_g_o__inherit__graph.svg" width="246" height="343"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for NeumannInnerSurface_PolyconvexHGO:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d3/d16/class_neumann_inner_surface___polyconvex_h_g_o__coll__graph.svg" width="358" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d3/d16/class_neumann_inner_surface___polyconvex_h_g_o__coll__graph.svg" width="372" height="472"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -123,14 +123,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a654f4dddf392e06abaa088c1dfb0af9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a229fc215d678940d832a0da62c48d015"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a229fc215d678940d832a0da62c48d015">get_material_parameters</a> (unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
 <tr class="separator:a229fc215d678940d832a0da62c48d015"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25283af611f3f135b75e98190613d33e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a25283af611f3f135b75e98190613d33e">get_constitutive_tensors</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, Epetra_SerialDenseVector &amp;piola_stress, Epetra_SerialDenseMatrix &amp;tangent_piola)</td></tr>
-<tr class="separator:a25283af611f3f135b75e98190613d33e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3500cb4e54bc65c7e1dbbf27abd25872"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a3500cb4e54bc65c7e1dbbf27abd25872">get_constitutive_tensors_static_condensation</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;inverse_cauchy, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
 <tr class="separator:a3500cb4e54bc65c7e1dbbf27abd25872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af17c96b4129b006ee2a9c4435e738e82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#af17c96b4129b006ee2a9c4435e738e82">get_internal_pressure</a> (double &amp;<a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a9b98723c91b8ca35a44bd9dca93749db">theta</a>, double &amp;pressure, double &amp;dpressure)</td></tr>
 <tr class="separator:af17c96b4129b006ee2a9c4435e738e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a443f55f77a66650527d91a7c5a8fc3e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a443f55f77a66650527d91a7c5a8fc3e9">get_material_parameters_for_recover</a> (unsigned int &amp;e_lid, double &amp;xi, double &amp;eta, double &amp;zeta)</td></tr>
-<tr class="separator:a443f55f77a66650527d91a7c5a8fc3e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09a16283ef088c14d31c79491cfec43a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a09a16283ef088c14d31c79491cfec43a">get_stress_for_recover</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseMatrix &amp;piola_stress)</td></tr>
 <tr class="separator:a09a16283ef088c14d31c79491cfec43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a249b6fdc0818fe96937e9ea48707c0c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a249b6fdc0818fe96937e9ea48707c0c1">setup_clamp</a> ()</td></tr>
@@ -155,39 +151,34 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a60c5e940b4032c09d99b73d3f6fae565"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaecc292c0ab780e3a292acb911c484be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#aaecc292c0ab780e3a292acb911c484be">model_A</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseVector &amp;piola_isc, Epetra_SerialDenseVector &amp;piola_vol, Epetra_SerialDenseMatrix &amp;tangent_piola_isc, Epetra_SerialDenseMatrix &amp;tangent_piola_vol)</td></tr>
 <tr class="separator:aaecc292c0ab780e3a292acb911c484be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classhyperelasticity__setup"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhyperelasticity__setup')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d8/daf/classhyperelasticity__setup.html">hyperelasticity_setup</a></td></tr>
-<tr class="memitem:a0b4405247220854960699602e20e43a5 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a0b4405247220854960699602e20e43a5">hyperelasticity_setup</a> ()</td></tr>
-<tr class="separator:a0b4405247220854960699602e20e43a5 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb39bd51c1de4815be3014d56e2f131a inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#adb39bd51c1de4815be3014d56e2f131a">~hyperelasticity_setup</a> ()</td></tr>
-<tr class="separator:adb39bd51c1de4815be3014d56e2f131a inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc2523650a1aa0295bb504bf4e3f87d inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aecc2523650a1aa0295bb504bf4e3f87d">create_FECrsGraph</a> ()</td></tr>
-<tr class="separator:aecc2523650a1aa0295bb504bf4e3f87d inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee4f4a142c72e4ff5d535247ccd6ac4f inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aee4f4a142c72e4ff5d535247ccd6ac4f">assemble_dirichlet</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:aee4f4a142c72e4ff5d535247ccd6ac4f inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99efe531e6fbb9832129f25104c0e444 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a99efe531e6fbb9832129f25104c0e444">assemble_dirichlet_dead_neumann</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:a99efe531e6fbb9832129f25104c0e444 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace45f5a7075acc20c2a98fcaa6ce29fb inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ace45f5a7075acc20c2a98fcaa6ce29fb">assemble_dirichlet_live_neumann_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:ace45f5a7075acc20c2a98fcaa6ce29fb inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afce0fbd554a28cfe88e65cdbb725aad7 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afce0fbd554a28cfe88e65cdbb725aad7">assemble_dirichlet_dead_neumann_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:afce0fbd554a28cfe88e65cdbb725aad7 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac205df59ab763c9736d2eae8fef65539 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ac205df59ab763c9736d2eae8fef65539">assemble_dirichlet_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:ac205df59ab763c9736d2eae8fef65539 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa73bd87de424f1bdf9db00186872a69f inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa73bd87de424f1bdf9db00186872a69f">material_stiffness_and_rhs_dirichlet</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:aa73bd87de424f1bdf9db00186872a69f inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af142fad5063b1b44b43463e51fde8050 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#af142fad5063b1b44b43463e51fde8050">material_stiffness_and_rhs_static_condensation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:af142fad5063b1b44b43463e51fde8050 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28015f2f06806f1a42ff0b418fb3add0 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a28015f2f06806f1a42ff0b418fb3add0">force_stiffness_rhs_live_pressure</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:a28015f2f06806f1a42ff0b418fb3add0 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac35d16141f36e92714cad8ac60786254 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ac35d16141f36e92714cad8ac60786254">force_dead_pressure</a> (Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
-<tr class="separator:ac35d16141f36e92714cad8ac60786254 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7050c638e04f1516548172ee9a02fc93 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a7050c638e04f1516548172ee9a02fc93">compute_B_matrices</a> (Epetra_SerialDenseMatrix &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>, Epetra_SerialDenseMatrix &amp;dx_shape_functions, Epetra_SerialDenseMatrix &amp;B, Epetra_SerialDenseMatrix &amp;BG)</td></tr>
-<tr class="separator:a7050c638e04f1516548172ee9a02fc93 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a194cb81606bafd0130f445a7b27f3afe inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a194cb81606bafd0130f445a7b27f3afe">compute_green_lagrange</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, double &amp;xi, double &amp;eta, double &amp;zeta, std::string &amp;filename)</td></tr>
-<tr class="separator:a194cb81606bafd0130f445a7b27f3afe inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a823b708f1c38940db0b751d412892486 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a823b708f1c38940db0b751d412892486">compute_mean_cauchy_stress</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
-<tr class="separator:a823b708f1c38940db0b751d412892486 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9069153633be1777bb6f0c5a2e077c9 inherit pub_methods_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#ae9069153633be1777bb6f0c5a2e077c9">compute_gauss_vonmises</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
-<tr class="separator:ae9069153633be1777bb6f0c5a2e077c9 inherit pub_methods_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classnearly_incompressible_hyperelasticity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classnearly_incompressible_hyperelasticity')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html">nearlyIncompressibleHyperelasticity</a></td></tr>
+<tr class="memitem:ab35220f8ee7346aca61fafa049952d3f inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#ab35220f8ee7346aca61fafa049952d3f">nearlyIncompressibleHyperelasticity</a> ()</td></tr>
+<tr class="separator:ab35220f8ee7346aca61fafa049952d3f inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7953ce32909be97e94325b7dbd3aa40 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#ae7953ce32909be97e94325b7dbd3aa40">~nearlyIncompressibleHyperelasticity</a> ()</td></tr>
+<tr class="separator:ae7953ce32909be97e94325b7dbd3aa40 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30c94292a0b110aa9839d87152a3298e inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#a30c94292a0b110aa9839d87152a3298e">assemblePureDirichlet_homogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:a30c94292a0b110aa9839d87152a3298e inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad47133a4e4b7649737f4999b42d1afa8 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#ad47133a4e4b7649737f4999b42d1afa8">assembleMixedDirichletDeformationDependentNeumann_homogeneousForcing</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:ad47133a4e4b7649737f4999b42d1afa8 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f1c66075f524a4168d10bc75d371e5 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#ae5f1c66075f524a4168d10bc75d371e5">stiffnessRhsMaterialContribution</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:ae5f1c66075f524a4168d10bc75d371e5 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecf8f49041f142afba4fa9aea21c7354 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#aecf8f49041f142afba4fa9aea21c7354">stiffnessRhsPressureContribution</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6c9659fd770f2bd2f5e77e9588619923">u</a>, Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>)</td></tr>
+<tr class="separator:aecf8f49041f142afba4fa9aea21c7354 inherit pub_methods_classnearly_incompressible_hyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classhyperelasticity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhyperelasticity')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../dc/d5a/classhyperelasticity.html">hyperelasticity</a></td></tr>
+<tr class="memitem:a93037f7d3eed4f8de2d81dd967fbb5ff inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a93037f7d3eed4f8de2d81dd967fbb5ff">hyperelasticity</a> ()</td></tr>
+<tr class="separator:a93037f7d3eed4f8de2d81dd967fbb5ff inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ab018d9249e7078cddb8cb2873f9ac inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#ae1ab018d9249e7078cddb8cb2873f9ac">~hyperelasticity</a> ()</td></tr>
+<tr class="separator:ae1ab018d9249e7078cddb8cb2873f9ac inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb91ba0572df36e862efcd21d8b83299 inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#adb91ba0572df36e862efcd21d8b83299">create_FECrsGraph</a> ()</td></tr>
+<tr class="separator:adb91ba0572df36e862efcd21d8b83299 inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b36b900a1b9bf490adf5b3cda6b1109 inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a0b36b900a1b9bf490adf5b3cda6b1109">compute_B_matrices</a> (Epetra_SerialDenseMatrix &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>, Epetra_SerialDenseMatrix &amp;dx_shape_functions, Epetra_SerialDenseMatrix &amp;B, Epetra_SerialDenseMatrix &amp;BG)</td></tr>
+<tr class="separator:a0b36b900a1b9bf490adf5b3cda6b1109 inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c8368897902780dcc79be6e37afb38a inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a9c8368897902780dcc79be6e37afb38a">compute_green_lagrange</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, double &amp;xi, double &amp;eta, double &amp;zeta, std::string &amp;filename)</td></tr>
+<tr class="separator:a9c8368897902780dcc79be6e37afb38a inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e2cfc109ab37ab7f666642a39322ae4 inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a8e2cfc109ab37ab7f666642a39322ae4">compute_mean_cauchy_stress</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
+<tr class="separator:a8e2cfc109ab37ab7f666642a39322ae4 inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a907c89f74407b3943266ade5f2634f0e inherit pub_methods_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#a907c89f74407b3943266ade5f2634f0e">compute_gauss_vonmises</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename)</td></tr>
+<tr class="separator:a907c89f74407b3943266ade5f2634f0e inherit pub_methods_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_finite___element___problem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_finite___element___problem')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d8/dc2/class_finite___element___problem.html">Finite_Element_Problem</a></td></tr>
 <tr class="memitem:a9626150bd17f0375ecc66e0709c4dbd7 inherit pub_methods_class_finite___element___problem"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc2/class_finite___element___problem.html#a9626150bd17f0375ecc66e0709c4dbd7">Finite_Element_Problem</a> ()</td></tr>
 <tr class="separator:a9626150bd17f0375ecc66e0709c4dbd7 inherit pub_methods_class_finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,11 +214,11 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6a1bd753562ab6d5f9485dce0162b2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a537de54de52931a82de833fe6050b3ab"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#a537de54de52931a82de833fe6050b3ab">b</a></td></tr>
 <tr class="separator:a537de54de52931a82de833fe6050b3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classhyperelasticity__setup"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhyperelasticity__setup')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../d8/daf/classhyperelasticity__setup.html">hyperelasticity_setup</a></td></tr>
-<tr class="memitem:af46ccf90792cad4401cc32bbc9768469 inherit pub_attribs_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#af46ccf90792cad4401cc32bbc9768469">n_bc_dof</a></td></tr>
-<tr class="separator:af46ccf90792cad4401cc32bbc9768469 inherit pub_attribs_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a273e5e218c49e19abe7917152ef089dd inherit pub_attribs_classhyperelasticity__setup"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a273e5e218c49e19abe7917152ef089dd">dof_on_boundary</a></td></tr>
-<tr class="separator:a273e5e218c49e19abe7917152ef089dd inherit pub_attribs_classhyperelasticity__setup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhyperelasticity"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhyperelasticity')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../dc/d5a/classhyperelasticity.html">hyperelasticity</a></td></tr>
+<tr class="memitem:adc13af493511b96adce81c8a36953333 inherit pub_attribs_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#adc13af493511b96adce81c8a36953333">n_bc_dof</a></td></tr>
+<tr class="separator:adc13af493511b96adce81c8a36953333 inherit pub_attribs_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2369c4dc07aaeca47d71a1f1be69a1c inherit pub_attribs_classhyperelasticity"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d5a/classhyperelasticity.html#af2369c4dc07aaeca47d71a1f1be69a1c">dof_on_boundary</a></td></tr>
+<tr class="separator:af2369c4dc07aaeca47d71a1f1be69a1c inherit pub_attribs_classhyperelasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_finite___element___problem"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_finite___element___problem')"><img src="../../closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="../../d8/dc2/class_finite___element___problem.html">Finite_Element_Problem</a></td></tr>
 <tr class="memitem:a6a4f08b6b5e25d6a5c60ae1738901388 inherit pub_attribs_class_finite___element___problem"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dc2/class_finite___element___problem.html#a6a4f08b6b5e25d6a5c60ae1738901388">pressure_load</a></td></tr>
 <tr class="separator:a6a4f08b6b5e25d6a5c60ae1738901388 inherit pub_attribs_class_finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,7 +238,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00007">7</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00008">8</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8bfd3cbe3ba5ef7a6e36ec8066da00c9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8bfd3cbe3ba5ef7a6e36ec8066da00c9">&#9670;&nbsp;</a></span>NeumannInnerSurface_PolyconvexHGO()</h2>
@@ -283,7 +274,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00011">11</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00012">12</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -310,7 +301,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00062">62</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00063">63</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -355,7 +346,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00316">316</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00311">311</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -401,7 +392,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a4e3e67ca83f8e23c83f9e422d5528deb">Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00076">76</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +436,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00364">364</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00359">359</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -489,7 +480,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00331">331</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00326">326</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -533,53 +524,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00382">382</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a25283af611f3f135b75e98190613d33e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25283af611f3f135b75e98190613d33e">&#9670;&nbsp;</a></span>get_constitutive_tensors()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NeumannInnerSurface_PolyconvexHGO::get_constitutive_tensors </td>
-          <td>(</td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>deformation_gradient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseVector &amp;&#160;</td>
-          <td class="paramname"><em>piola_stress</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
-          <td class="paramname"><em>tangent_piola</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a9cca717b6ef0662c83cfb6ee117a0ded">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00095">95</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00377">377</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -647,9 +592,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afef20997a9dd026abae3c47ef439f28a">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#a4782436c4ce43b2610f04e57fa7efcbd">nearlyIncompressibleHyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00099">99</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00096">96</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -693,9 +638,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aabfa762fd21b5c29488e08614b671617">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html#a218dee523bda56d6e02ef46b9a4258f2">nearlyIncompressibleHyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00105">105</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00102">102</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -733,61 +678,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#aa5a05e262adae7bda067f022ad9b2908">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../dc/d5a/classhyperelasticity.html#a273d1701aaa129d63ef804253c797a97">hyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00083">83</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a443f55f77a66650527d91a7c5a8fc3e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a443f55f77a66650527d91a7c5a8fc3e9">&#9670;&nbsp;</a></span>get_material_parameters_for_recover()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NeumannInnerSurface_PolyconvexHGO::get_material_parameters_for_recover </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>xi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>eta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>zeta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#afee5a404dffb03a9f27710a4f0296501">hyperelasticity_setup</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00111">111</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00084">84</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -833,7 +726,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#a080f0fd94cb76f1199022216cc0ecb38">Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00065">65</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00066">66</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -877,9 +770,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d8/daf/classhyperelasticity__setup.html#a171b91f4586a5122cebb54500f4cf32d">hyperelasticity_setup</a>.</p>
+<p>Implements <a class="el" href="../../dc/d5a/classhyperelasticity.html#a733200015955c6f902fd02684e6285c5">hyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00113">113</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00108">108</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -941,7 +834,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00611">611</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00606">606</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1003,7 +896,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00503">503</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00498">498</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1071,7 +964,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00407">407</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00402">402</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +991,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00173">173</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00168">168</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1127,7 +1020,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#aaf9379443bd52a3d462f124017354a38">Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00069">69</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00070">70</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1154,7 +1047,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00250">250</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00245">245</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1181,7 +1074,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00188">188</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1208,7 +1101,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00277">277</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00272">272</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1225,7 +1118,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00765">765</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00760">760</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1241,7 +1134,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00766">766</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00761">761</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1257,7 +1150,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00761">761</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00756">756</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1273,7 +1166,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00762">762</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00757">757</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1289,7 +1182,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00755">755</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00750">750</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1305,7 +1198,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00757">757</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00752">752</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1321,7 +1214,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00758">758</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00753">753</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1337,7 +1230,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00759">759</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00754">754</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1353,7 +1246,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00760">760</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00755">755</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
@@ -1369,12 +1262,12 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html#l00763">763</a> of file <a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html#l00758">758</a> of file <a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="../../dd/da4/_arteries___model_c__deterministic__neumann_8hpp_source.html">Arteries_ModelC_deterministic_neumann.hpp</a></li>
+<li>src/<a class="el" href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp_source.html">NeumannInnerSurface_PolyconvexHGO.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

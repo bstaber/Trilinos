@@ -8,7 +8,6 @@ var annotated_dup =
     [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", "d8/dc2/class_finite___element___problem" ],
     [ "forwardCostfunction", "dd/dfc/classforward_costfunction.html", "dd/dfc/classforward_costfunction" ],
     [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", "dc/d5a/classhyperelasticity" ],
-    [ "hyperelasticity_setup", "d8/daf/classhyperelasticity__setup.html", "d8/daf/classhyperelasticity__setup" ],
     [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ],
     [ "Linear_Finite_Element_Problem", "d3/d9f/class_linear___finite___element___problem.html", "d3/d9f/class_linear___finite___element___problem" ],
     [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", "d9/df7/class_linearized_elasticity" ],

@@ -1,10 +1,12 @@
 <map id="arteries/strip_dirichlet/main.cpp" name="arteries/strip_dirichlet/main.cpp">
-<area shape="rect" id="node8" href="$de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp.html" title="Arteries_ModelC_gmrf\l_dirichlet.hpp" alt="" coords="852,92,1007,131"/>
-<area shape="rect" id="node43" href="$d7/d17/_newton___raphsonpp_8hpp.html" title="Newton_Raphsonpp.hpp" alt="" coords="2092,99,2260,124"/>
-<area shape="rect" id="node9" href="$de/d49/tensor__calculus_8hpp.html" title="tensor_calculus.hpp" alt="" coords="976,339,1116,364"/>
-<area shape="rect" id="node33" href="$de/d9d/hyperelasticity__setup__pp_8hpp.html" title="hyperelasticity_setup\l_pp.hpp" alt="" coords="911,179,1057,217"/>
-<area shape="rect" id="node10" href="$d0/d02/meshpp_8hpp.html" title="meshpp.hpp" alt="" coords="1293,412,1388,437"/>
-<area shape="rect" id="node34" href="$d2/d8b/_finite___element___problem_8hpp.html" title="Finite_Element_Problem.hpp" alt="" coords="1261,265,1454,291"/>
-<area shape="rect" id="node36" href="$d5/d3f/laplacepp_8hpp.html" title="laplacepp.hpp" alt="" coords="932,265,1036,291"/>
-<area shape="rect" id="node35" href="$d0/d41/_base_class_f_e_m_8hpp.html" title="BaseClassFEM.hpp" alt="" coords="1324,339,1463,364"/>
+<area shape="rect" id="node8" href="$d5/d6a/_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" title="DirichletStripElongation\l_StochasticPolyconvexHGO.hpp" alt="" coords="1056,92,1271,131"/>
+<area shape="rect" id="node43" href="$d7/d17/_newton___raphsonpp_8hpp.html" title="Newton_Raphsonpp.hpp" alt="" coords="2426,99,2594,124"/>
+<area shape="rect" id="node9" href="$de/d49/tensor__calculus_8hpp.html" title="tensor_calculus.hpp" alt="" coords="1214,352,1353,377"/>
+<area shape="rect" id="node31" href="$d5/d3f/laplacepp_8hpp.html" title="laplacepp.hpp" alt="" coords="337,185,441,211"/>
+<area shape="rect" id="node34" href="$dc/de0/nearly_incompressible_hyperelasticity_8hpp.html" title="nearlyIncompressibleHyperelasticity.hpp" alt="" coords="798,185,1057,211"/>
+<area shape="rect" id="node10" href="$d0/d02/meshpp_8hpp.html" title="meshpp.hpp" alt="" coords="1187,499,1282,524"/>
+<area shape="rect" id="node32" href="$d9/dea/_linear___finite___element___problem_8hpp.html" title="Linear_Finite_Element\l_Problem.hpp" alt="" coords="497,265,652,304"/>
+<area shape="rect" id="node33" href="$d0/d41/_base_class_f_e_m_8hpp.html" title="BaseClassFEM.hpp" alt="" coords="1023,425,1162,451"/>
+<area shape="rect" id="node35" href="$d2/d34/hyperelasticity_8hpp.html" title="hyperelasticity.hpp" alt="" coords="945,272,1076,297"/>
+<area shape="rect" id="node36" href="$d2/d8b/_finite___element___problem_8hpp.html" title="Finite_Element_Problem.hpp" alt="" coords="996,352,1189,377"/>
 </map>

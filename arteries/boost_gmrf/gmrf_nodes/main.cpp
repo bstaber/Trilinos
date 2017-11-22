@@ -11,7 +11,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 
-#include "Arteries_ModelC_gmrf_neumann.hpp"
+#include "NeumannInnerSurface_StochasticPolyconvexHGO.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
 #include "shinozukapp.hpp"

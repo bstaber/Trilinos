@@ -10,7 +10,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "Arteries_ModelC_gmrf_dirichlet.hpp"
+#include "DirichletStripElongation_StochasticPolyconvexHGO.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 

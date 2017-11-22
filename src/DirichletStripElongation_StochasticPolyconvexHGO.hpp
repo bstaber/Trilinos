@@ -1,8 +1,9 @@
-#ifndef ARTERIES_MODELC_GMRF_DIRICHLET_HPP
-#define ARTERIES_MODELC_GMRF_DIRICHLET_HPP
+#ifndef DIRICHLETSTRIPELONGATION_STOCHASTICPOLYCONVEXHGO_HPP
+#define DIRICHLETSTRIPELONGATION_STOCHASTICPOLYCONVEXHGO_HPP
 
 #include "tensor_calculus.hpp"
-#include "hyperelasticity_setup_pp.hpp"
+#include "laplacepp.hpp"
+#include "nearlyIncompressibleHyperelasticity.hpp"
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_real_distribution.hpp>
@@ -11,7 +12,7 @@
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/beta.hpp>
 
-class DirichletStripElongation_StochasticPolyconvexHGO : public hyperelasticity_setup
+class DirichletStripElongation_StochasticPolyconvexHGO : public nearlyIncompressibleHyperelasticity
 {
 public:
     
@@ -98,7 +99,7 @@ public:
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-        assemble_dirichlet_static_condensation(x,K,F);
+        assemblePureDirichlet_homogeneousForcing(x,K,F);
     }
     
     void setup_dirichlet_conditions(){
@@ -138,8 +139,6 @@ public:
     }
     
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-        
-        //if (n_bc_dof>0){
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
         
@@ -172,7 +171,6 @@ public:
                 F[0][StandardMap->LID(3*node+2)]   = 0.0;
             }
         }
-        //}
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
     
@@ -221,10 +219,6 @@ public:
         return z;
     }
     
-    void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient, Epetra_SerialDenseVector & piola_stress, Epetra_SerialDenseMatrix & tangent_piola){
-        std::cerr << "**Err: Using static condensation method!\n";
-    }
-    
     void get_constitutive_tensors_static_condensation(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseVector & inverse_cauchy, Epetra_SerialDenseVector & piola_isc, Epetra_SerialDenseVector & piola_vol, Epetra_SerialDenseMatrix & tangent_piola_isc, Epetra_SerialDenseMatrix & tangent_piola_vol){
         model_C(deformation_gradient, det, inverse_cauchy, piola_isc, piola_vol, tangent_piola_isc, tangent_piola_vol);
     }
@@ -234,10 +228,7 @@ public:
         pressure = beta3*( (ptheta/theta) - (1.0/(ptheta*theta)) );
         dpressure = beta3*( (beta3-1.0)*(ptheta/(theta*theta)) + (beta3+1.0)/(ptheta*theta*theta) );
     }
-    
-    void get_material_parameters_for_recover(unsigned int & e_lid, double & xi, double & eta, double & zeta){
-    }
-    
+        
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
         
         det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);

@@ -1,17 +1,5 @@
 var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
-    [ "Arteries_ModelC_deterministic_dirichlet.hpp", "d6/db8/_arteries___model_c__deterministic__dirichlet_8hpp.html", [
-      [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o" ]
-    ] ],
-    [ "Arteries_ModelC_deterministic_neumann.hpp", "dd/da4/_arteries___model_c__deterministic__neumann_8hpp.html", [
-      [ "NeumannInnerSurface_PolyconvexHGO", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o" ]
-    ] ],
-    [ "Arteries_ModelC_gmrf_dirichlet.hpp", "de/d6d/_arteries___model_c__gmrf__dirichlet_8hpp.html", [
-      [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ]
-    ] ],
-    [ "Arteries_ModelC_gmrf_neumann.hpp", "dd/d1f/_arteries___model_c__gmrf__neumann_8hpp.html", [
-      [ "NeumannInnerSurface_StochasticPolyconvexHGO", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o" ]
-    ] ],
     [ "BaseClassFEM.cpp", "dc/ddf/_base_class_f_e_m_8cpp.html", null ],
     [ "BaseClassFEM.hpp", "d0/d41/_base_class_f_e_m_8hpp.html", [
       [ "BaseClassFEM", "d2/d97/class_base_class_f_e_m.html", "d2/d97/class_base_class_f_e_m" ]
@@ -26,6 +14,12 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "compressibleHyperelasticity.hpp", "da/d5c/compressible_hyperelasticity_8hpp.html", [
       [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", "d1/d5c/classcompressible_hyperelasticity" ]
     ] ],
+    [ "DirichletInletOutlet_PolyconvexHGO.hpp", "de/db1/_dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html", [
+      [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o" ]
+    ] ],
+    [ "DirichletStripElongation_StochasticPolyconvexHGO.hpp", "d5/d6a/_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html", [
+      [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ]
+    ] ],
     [ "distributenrldata.cpp", "d0/da3/distributenrldata_8cpp.html", null ],
     [ "distributenrldata.hpp", "d5/d75/distributenrldata_8hpp.html", [
       [ "distributenrldata", "d1/d14/classdistributenrldata.html", "d1/d14/classdistributenrldata" ]
@@ -38,10 +32,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "hyperelasticity.cpp", "d1/dc9/hyperelasticity_8cpp.html", null ],
     [ "hyperelasticity.hpp", "d2/d34/hyperelasticity_8hpp.html", [
       [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", "dc/d5a/classhyperelasticity" ]
-    ] ],
-    [ "hyperelasticity_setup_pp.cpp", "d0/d66/hyperelasticity__setup__pp_8cpp.html", null ],
-    [ "hyperelasticity_setup_pp.hpp", "de/d9d/hyperelasticity__setup__pp_8hpp.html", [
-      [ "hyperelasticity_setup", "d8/daf/classhyperelasticity__setup.html", "d8/daf/classhyperelasticity__setup" ]
     ] ],
     [ "laplacepp.cpp", "dc/d31/laplacepp_8cpp.html", null ],
     [ "laplacepp.hpp", "d5/d3f/laplacepp_8hpp.html", [
@@ -61,6 +51,12 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "nearlyIncompressibleHyperelasticity.cpp", "d8/d7d/nearly_incompressible_hyperelasticity_8cpp.html", null ],
     [ "nearlyIncompressibleHyperelasticity.hpp", "dc/de0/nearly_incompressible_hyperelasticity_8hpp.html", [
       [ "nearlyIncompressibleHyperelasticity", "d0/d85/classnearly_incompressible_hyperelasticity.html", "d0/d85/classnearly_incompressible_hyperelasticity" ]
+    ] ],
+    [ "NeumannInnerSurface_PolyconvexHGO.hpp", "da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp.html", [
+      [ "NeumannInnerSurface_PolyconvexHGO", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o" ]
+    ] ],
+    [ "NeumannInnerSurface_StochasticPolyconvexHGO.hpp", "da/d42/_neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html", [
+      [ "NeumannInnerSurface_StochasticPolyconvexHGO", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o" ]
     ] ],
     [ "Newton_Raphsonpp.cpp", "d5/dc7/_newton___raphsonpp_8cpp.html", null ],
     [ "Newton_Raphsonpp.hpp", "d7/d17/_newton___raphsonpp_8hpp.html", [
