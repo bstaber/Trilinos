@@ -13,23 +13,33 @@ public:
     double mu1, mu2, mu3, mu4, mu5, mu;
     double trm, beta3, beta4, beta5;
     double ptrmbeta4, ptrmbeta5;
-    double plyagl, cos_plyagl, sin_plyagl, topcoord, stepInc;
+    double plyagl, cos_plyagl, sin_plyagl, topcoord;
     
-    manufacturedSolution(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
-        std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
+    manufacturedSolution(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, std::string & mesh_file){
         Mesh = new mesh(comm, mesh_file);
         Comm = Mesh->Comm;
-        findtop();
         
         StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
         OverlapMap = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
         ImportToOverlapMap = new Epetra_Import(*OverlapMap,*StandardMap);
         create_FECrsGraph();
-        
+        topcoord = 25.0;
         setup_dirichlet_conditions();
     }
     
     ~manufacturedSolution(){
+    }
+    
+    void set_parameters(Epetra_SerialDenseVector & x, double & angle){
+        mu1 = x(0); mu2 = x(1); mu3 = x(2); mu4 = x(3); mu5 = x(4);
+        beta3 = -0.5; beta4 = x(5); beta5 = x(6);
+        mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
+        trm = mu4 + 2.0*mu5;
+        ptrmbeta4 = std::pow(trm,beta4);
+        ptrmbeta5 = std::pow(trm,beta5);
+        plyagl = angle;
+        cos_plyagl = std::cos(plyagl);
+        sin_plyagl = std::sin(plyagl);
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
@@ -71,7 +81,6 @@ public:
     }
     
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-        
         Epetra_MultiVector v(*StandardMap,true);
         Epetra_SerialDenseVector u(3);
         v.PutScalar(0.0);
@@ -118,7 +127,7 @@ public:
     Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         Epetra_SerialDenseVector h(3), normal(3);
         Epetra_SerialDenseMatrix piola(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
-        piola = manufacturedStress(xg(0,gp),xg(1,gp),xg(2,gp));
+        piola = getManufacturedPiola(xg(0,gp),xg(1,gp),xg(2,gp));
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
             d_shape_functions(inode,1) = Mesh->D2_N_tri(gp,inode);
@@ -145,7 +154,7 @@ public:
     }
     
     void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient, Epetra_SerialDenseVector & piola_stress, Epetra_SerialDenseMatrix & tangent_piola){
-        
+
         double det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
         
         Epetra_SerialDenseMatrix C(3,3);
@@ -243,10 +252,9 @@ public:
     
     Epetra_SerialDenseVector getManufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
-        Epetra_SerialDenseVector u(3);
-        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
-        u(0) = -c1*x2*(topcoord - x1)*(topcoord - x2);
-        u(1) = c2*x2*(topcoord/2.0 - x2);
+        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
+        u(0) = -c1*x2*(topcoord-x1)*(topcoord-x2);
+        u(1) = c2*x2*(topcoord/2.0-x2);
         u(2) = std::sin(c1*x3);
         return u;
     }
@@ -255,9 +263,7 @@ public:
         
         Epetra_SerialDenseVector x(3);
         Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), ML(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
-        double c1 = 2.0e2;
-        double c2 = 1.0e1;
-        double c3 = 2.0e2;
+        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
         x(0) = x1; x(1) = x2; x(2) = x3;
         F(0,0) = c1*x2*(topcoord-x2) + 1.0; F(0,1) = c1*x2*(topcoord-x1)-c1*(topcoord-x1)*(topcoord-x2); F(0,2) = 0.0;
         F(1,0) = 0.0;                       F(1,1) = c2*(topcoord/2.0 - x2)-c2*x2+1.0;                   F(1,2) = 0.0;
@@ -312,7 +318,8 @@ public:
         Epetra_SerialDenseVector f(3), x(3), xf(3), xb(3);
         Epetra_SerialDenseMatrix Pf(3,3), Pb(3,3);
         double h = 1.0e-6;
-        x(0) = x1; x(1) = x2; x(2) = x3;
+        x(0) = x1;  x(1) = x2;  x(2) = x3;
+        f(0) = 0.0; f(1) = 0.0; f(2) = 0.0;
         for (unsigned int j=0; j<3; ++j){
             xf = x;     xb = x;
             xf(j) += h; xb(j) -= h;

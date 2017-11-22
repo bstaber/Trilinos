@@ -39,10 +39,10 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList));
+    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured1.msh";
+    Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
     
-    int id = 1;
     Epetra_SerialDenseVector parameters(7);
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
@@ -52,24 +52,18 @@ MPI_Init(&argc, &argv);
     parameters(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     parameters(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
     for (unsigned int i=0; i<5; ++i){
-        parameters(i) = 1.0e9*parameters(i);
+        parameters(i) = 1.0e3*parameters(i);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
-    manufactured->set_parameters(parameters);
-    manufactured->set_plyagl(plyagl);
+    manufactured->set_parameters(parameters,plyagl);
     
-    double xi = 0.0;
     Newton->Initialization();
     Newton->setParameters(*paramList);
-    Newton->bc_disp = 0.0;
-    double delta = 0.05;
-    for (int k=1; k<=20; ++k){
-        manufactured->setStep(k*delta);
-        int error = Newton->Solve_with_Aztec(true);
-    }
+    Newton->bc_disp = 1.0;
+    int error = Newton->Solve_with_Aztec(true);
     //std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured.mtx";
-    std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured.mtx";
-    Newton->print_newton_solution(path1);
+    //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured.mtx";
+    //Newton->print_newton_solution(path1);
     
 #ifdef HAVE_MPI
     MPI_Finalize();

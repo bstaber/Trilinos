@@ -212,9 +212,9 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
 void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
 
     int node;
-    int* Indices_tri;
+    int* Indexes;
     unsigned int e_gid;
-    Indices_tri = new int [3*Mesh->face_type];
+    Indexes = new int [3*Mesh->face_type];
     
     int n_gauss_points = Mesh->n_gauss_faces;
     double gauss_weight;
@@ -227,9 +227,9 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
         e_gid  = Mesh->local_faces[e_lid];
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             node = Mesh->faces_nodes[Mesh->face_type*e_gid+inode];
-            Indices_tri[3*inode+0] = 3*node+0;
-            Indices_tri[3*inode+1] = 3*node+1;
-            Indices_tri[3*inode+2] = 3*node+2;
+            Indexes[3*inode+0] = 3*node+0;
+            Indexes[3*inode+1] = 3*node+1;
+            Indexes[3*inode+2] = 3*node+2;
             matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
             matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
             matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
@@ -250,11 +250,11 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
         //std::cout << "\n";
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             for (unsigned int iddl=0; iddl<3; ++iddl){
-                F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
+                F.SumIntoGlobalValues(1, &Indexes[3*inode+iddl], &force(3*inode+iddl));
             }
         }
     }
-    delete[] Indices_tri;
+    delete[] Indexes;
 }
 
 void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B){
