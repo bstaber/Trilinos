@@ -117,7 +117,7 @@ int Newton_Raphson::Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> 
                         }
                         else{
                             std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "pressure_load [kPa]" << "\n";
-                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t\t" << krylov_res << "\t\t" << assemble_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
+                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t\t" << krylov_res << "\t\t" << assemble_time << "\t\t\t" << time*pressure_load << "\n";
                         }
                     }
                     
@@ -267,11 +267,11 @@ int Newton_Raphson::Solve_with_Aztec(bool print){
                     
                     if (MyPID==0 && print){
                         if(iter>2){
-                            std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
+                            std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << time*pressure_load << "\n";
                         }
                         else{
                             std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "aztec_time" << "\t\t" << "pressure_load [kPa]" << "\n";
-                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << time*pressure_load/1000.0 << "\n";
+                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << time*pressure_load << "\n";
                         }
                     }
                     

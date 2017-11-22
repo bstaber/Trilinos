@@ -197,6 +197,7 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
             matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
             for (int iddl=0; iddl<3; ++iddl){
                 Re(3*inode+iddl) = 0.0;
+                fevol(3*inode+iddl) = 0.0;
                 Indexes[3*inode+iddl] = 3*node+iddl;
                 for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
                     for (int jddl=0; jddl<3; ++jddl){
@@ -214,7 +215,7 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
                 dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
                 dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(inode,gp)*Mesh->detJac_tetra(e_lid,gp);
+                    fevol(3*inode+iddl) += gauss_weight*pressure_load*fvol(iddl)*Mesh->N_tetra(inode,gp)*Mesh->detJac_tetra(e_lid,gp);
                 }
             }
             

@@ -128,7 +128,7 @@ public:
     
     Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         Epetra_SerialDenseVector h(3), normal(3);
-        /*Epetra_SerialDenseMatrix piola(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
+        Epetra_SerialDenseMatrix piola(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
         piola = getManufacturedPiola(xg(0,gp),xg(1,gp),xg(2,gp));
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
             d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
@@ -141,7 +141,7 @@ public:
         if (xg(2,gp)==0.0){
             normal.Scale(-1.0);
         }
-        h.Multiply('N','N',1.0,piola,normal,0.0);*/
+        h.Multiply('N','N',1.0,piola,normal,0.0);
         return h;
     }
     
@@ -255,9 +255,12 @@ public:
     Epetra_SerialDenseVector getManufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
-        u(0) = 0.0; //-c1*x2*(topcoord-x1)*(topcoord-x2);
-        u(1) = 0.005; //c2*x2*(topcoord/2.0-x2);
-        u(2) = 0.0; //std::sin(c1*x3);
+        u(0) = 0.0;
+        u(1) = x2*0.12/(25.0*25.0);
+        u(2) = 0.0;
+        /*u(0) = -c1*x2*(topcoord-x1)*(topcoord-x2);
+        u(1) = c2*x2*(topcoord-x2);
+        u(2) = std::sin(c1*x3);*/
         return u;
     }
     
@@ -266,12 +269,12 @@ public:
         Epetra_SerialDenseMatrix F(3,3), C(3,3), CC(3,3), ML(3,3), LML(3,3), L(3,3), M(3,3), eye(3,3), S(3,3), P(3,3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
         
-        /*F(0,0) = c1*x2*(topcoord-x2)+1.0;   F(0,1) = c1*x2*(topcoord-x1)-c1*(topcoord-x1)*(topcoord-x2); F(0,2) = 0.0;
-        F(1,0) = 0.0;                       F(1,1) = c2*(topcoord/2.0-x2)-c2*x2+1.0;                     F(1,2) = 0.0;
-        F(2,0) = 0.0;                       F(2,1) = 0.0;                                                F(2,2) = c1*std::cos(c1*x3)+1.0;*/
-        F(0,0) = 1.0; F(0,1) = 0.0;          F(0,2) = 0.0;
-        F(1,0) = 0.0; F(1,1) = 1.0+1.0/25.0; F(1,2) = 0.0;
-        F(2,0) = 0.0; F(2,1) = 0.0;          F(2,2) = 1.0;
+        /*F(0,0) = c1*x2*(topcoord-x2)+1.0; F(0,1) = c1*x2*(topcoord-x1)-c1*(topcoord-x1)*(topcoord-x2); F(0,2) = 0.0;
+        F(1,0) = 0.0;                     F(1,1) = c2*(topcoord-x2)-c2*x2+1.0;                         F(1,2) = 0.0;
+        F(2,0) = 0.0;                     F(2,1) = 0.0;                                                F(2,2) = c1*std::cos(c1*x3)+1.0;*/
+        F(0,0) = 1.0;           F(0,1) = 0.0;                         F(0,2) = 0.0;
+        F(1,0) = 0.0;           F(1,1) = 1.0+0.12/(25.0*25.0); F(1,2) = 0.0;
+        F(2,0) = 0.0;           F(2,1) = 0.0;                         F(2,2) = 1.0;
         double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
         
         M(0,0) = mu4*sin_plyagl*sin_plyagl+mu5*cos_plyagl*cos_plyagl;
@@ -319,26 +322,94 @@ public:
     }
     
     Epetra_SerialDenseVector manufacturedForcing(double & x1, double & x2, double & x3){
-        Epetra_SerialDenseVector f(3), x(3), xf(3), xb(3);
+        Epetra_SerialDenseVector f(3), xf(3), xb(3);
         Epetra_SerialDenseMatrix Pf(3,3), Pb(3,3);
-        double h = 1.0e-6;
-        x(0) = x1;  x(1) = x2;  x(2) = x3;
-        f(0) = 0.0; f(1) = 0.0; f(2) = 0.0;
-        for (unsigned int j=0; j<3; ++j){
-            xf = x;     xb = x;
-            xf(j) += h; xb(j) -= h;
-            Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
-            Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
-            for (unsigned int i=0; i<3; ++i){
-                f(i) -= (Pf(i,j)-Pb(i,j))/(2.0*h);
-            }
-        }
-        f.Scale(0.0);
+        double h = 1.0e-3;
+        
+        xf(0) = x1+h; xf(1) = x2; xf(2) = x3;
+        xb(0) = x1-h; xb(1) = x2; xb(2) = x3;
+        Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
+        Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
+        f(0) = (Pf(0,0)-Pb(0,0))/(2.0*h);
+        f(1) = (Pf(1,0)-Pb(1,0))/(2.0*h);
+        f(2) = (Pf(2,0)-Pb(2,0))/(2.0*h);
+        
+        xf(0) = x1; xf(1) = x2+h; xf(2) = x3;
+        xb(0) = x1; xb(1) = x2-h; xb(2) = x3;
+        Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
+        Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
+        f(0) += (Pf(0,1)-Pb(0,1))/(2.0*h);
+        f(1) += (Pf(1,1)-Pb(1,1))/(2.0*h);
+        f(2) += (Pf(2,1)-Pb(2,1))/(2.0*h);
+        
+        xf(0) = x1; xf(1) = x2; xf(2) = x3+h;
+        xb(0) = x1; xb(1) = x2; xb(2) = x3-h;
+        Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
+        Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
+        f(0) += (Pf(0,2)-Pb(0,2))/(2.0*h);
+        f(1) += (Pf(1,2)-Pb(1,2))/(2.0*h);
+        f(2) += (Pf(2,2)-Pb(2,2))/(2.0*h);
+        
+        f.Scale(-1.0);
+        //std::cout << x1 << std::setw(15) << x2 << std::setw(15) << x3 << "\n";
+        //std::cout << f(0) << std::setw(15) << f(1) << std::setw(15) << f(2) << "\n\n";
         return f;
     }
     
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
         std::cout << "**Err: Not using that method in this example!\n";
+    }
+    
+    double errorL2(Epetra_Vector & uStandardMap){
+        
+        Epetra_Vector u(*OverlapMap);
+        u.Import(uStandardMap, *ImportToOverlapMap, Insert);
+        double totalError;
+        double error = 0.0;
+        double normVH;
+        double gauss_weight;
+        int n_gauss_points = Mesh->n_gauss_cells;
+        int e_gid, node;
+        
+        //Epetra_SerialDenseVector epsilon(6);
+        //Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+        Epetra_SerialDenseVector uExact(3), vH(3);
+        Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), X_I(3,Mesh->el_type), u_I(3,Mesh->el_type);
+        Epetra_SerialDenseMatrix u_G(3,n_gauss_points), x_G(3,n_gauss_points);
+        
+        for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+            e_gid = Mesh->local_cells[e_lid];
+            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+                X_I(0,inode) = Mesh->nodes_coord[3*node+0];
+                X_I(1,inode) = Mesh->nodes_coord[3*node+1];
+                X_I(2,inode) = Mesh->nodes_coord[3*node+2];
+                u_I(0,inode) = u[OverlapMap->LID(3*node+0)];
+                u_I(1,inode) = u[OverlapMap->LID(3*node+1)];
+                u_I(2,inode) = u[OverlapMap->LID(3*node+2)];
+            }
+            x_G.Multiply('N','N',1.0,X_I,Mesh->N_tetra,0.0);
+            u_G.Multiply('N','N',1.0,u_I,Mesh->N_tetra,0.0);
+            for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+                gauss_weight = Mesh->gauss_weight_cells(gp);
+                uExact = getManufacturedSolution(x_G(0,gp),x_G(1,gp),x_G(2,gp));
+                vH(0) = uExact(0) - u_G(0,gp);
+                vH(1) = uExact(1) - u_G(1,gp);
+                vH(2) = uExact(2) - u_G(2,gp);
+                normVH = vH.Norm2();
+                /*for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                 dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
+                 dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
+                 dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                 }
+                 compute_B_matrices(dx_shape_functions,matrix_B);
+                 epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);*/
+                error += gauss_weight*normVH*normVH*Mesh->detJac_tetra(e_lid,gp);
+            }
+        }
+        Comm->SumAll(&error,&totalError,1);
+        totalError = std::sqrt(totalError);
+        return totalError;
     }
     
 };

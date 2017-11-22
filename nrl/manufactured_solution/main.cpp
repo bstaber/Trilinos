@@ -39,11 +39,6 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured2.msh";
-    std::string mesh_file = "/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh";
-    Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
-    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
-    
     Epetra_SerialDenseVector parameters(7);
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
@@ -56,15 +51,26 @@ MPI_Init(&argc, &argv);
         parameters(i) = 1.0e3*parameters(i);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
-    manufactured->set_parameters(parameters,plyagl);
     
-    Newton->Initialization();
-    Newton->setParameters(*paramList);
-    Newton->bc_disp = 1.0;
-    int error = Newton->Solve_with_Aztec(true);
-    std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured/manufactured.mtx";
-    //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured.mtx";
-    Newton->print_newton_solution(path1);
+    for (unsigned int i=0; i<5; ++i){
+        std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
+    
+        Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
+        Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
+        manufactured->set_parameters(parameters,plyagl);
+    
+        Newton->Initialization();
+        Newton->setParameters(*paramList);
+        int error = Newton->Solve_with_Aztec(false);
+        //std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured/manufactured.mtx";
+        //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured.mtx";
+        //Newton->print_newton_solution(path1);
+        double errorL2 = manufactured->errorL2(*Newton->x);
+        if (Comm.MyPID()==0){
+            std::cout << errorL2 << "\n";
+        }
+    }
+    
     
 #ifdef HAVE_MPI
     MPI_Finalize();
