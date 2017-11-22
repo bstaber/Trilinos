@@ -34,25 +34,6 @@ void hyperelasticity_setup::create_FECrsGraph(){
     delete[] index;
 }
 
-void hyperelasticity_setup::assemble_dirichlet(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-
-    int error;
-    
-    F.PutScalar(0.0);
-    K.PutScalar(0.0);
-    
-    Epetra_Vector u(*OverlapMap);
-    u.Import(x, *ImportToOverlapMap, Insert);
-    
-    material_stiffness_and_rhs_dirichlet(u,K,F);
-    
-    Comm->Barrier();
-    
-    error=K.GlobalAssemble();
-    error=K.FillComplete();
-    error=F.GlobalAssemble();
-}
-
 void hyperelasticity_setup::assemble_dirichlet_static_condensation(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
     
     F.PutScalar(0.0);
@@ -85,129 +66,6 @@ void hyperelasticity_setup::assemble_dirichlet_live_neumann_static_condensation(
     K.GlobalAssemble();
     K.FillComplete();
     F.GlobalAssemble();
-}
-
-void hyperelasticity_setup::assemble_dirichlet_dead_neumann_static_condensation(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-    
-    F.PutScalar(0.0);
-    K.PutScalar(0.0);
-    
-    Epetra_Vector u(*OverlapMap);
-    u.Import(x, *ImportToOverlapMap, Insert);
-    
-    material_stiffness_and_rhs_static_condensation(u,K,F);
-    force_dead_pressure(F);
-    
-    Comm->Barrier();
-    K.GlobalAssemble();
-    K.FillComplete();
-    F.GlobalAssemble();
-}
-
-void hyperelasticity_setup::assemble_dirichlet_dead_neumann(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-    
-    F.PutScalar(0.0);
-    K.PutScalar(0.0);
-    
-    Epetra_Vector u(*OverlapMap);
-    u.Import(x, *ImportToOverlapMap, Insert);
-    
-    material_stiffness_and_rhs_dirichlet(u,K,F);
-    force_dead_pressure(F);
-    
-    Comm->Barrier();
-    
-    K.GlobalAssemble();
-    K.FillComplete();
-    F.GlobalAssemble();
-}
-
-void hyperelasticity_setup::material_stiffness_and_rhs_dirichlet(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-
-    int node, e_gid, error;
-    int n_gauss_points = Mesh->n_gauss_cells;
-    double gauss_weight;
-
-    int *Indices_tetra;
-    Indices_tetra = new int [3*Mesh->el_type];
-    
-    Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
-    Epetra_SerialDenseVector Re(3*Mesh->el_type);
-    
-    Epetra_SerialDenseMatrix deformation_gradient(3,3);
-    Epetra_SerialDenseMatrix tangent_matrix(6,6);
-    Epetra_SerialDenseVector scd_piola_stress(6);
-    Epetra_SerialDenseMatrix block_scd_piola_stress(9,9);
-    Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
-    
-    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
-    Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
-    Epetra_SerialDenseMatrix B_times_TM(3*Mesh->el_type,6);
-    Epetra_SerialDenseMatrix matrix_BG(9,3*Mesh->el_type);
-    Epetra_SerialDenseMatrix BG_times_BSPS(3*Mesh->el_type,9);
-    
-    for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
-        e_gid = Mesh->local_cells[e_lid];
-        
-        for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-            node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
-            matrix_x(0,inode) = u[OverlapMap->LID(3*node+0)] + Mesh->nodes_coord[3*node+0];
-            matrix_x(1,inode) = u[OverlapMap->LID(3*node+1)] + Mesh->nodes_coord[3*node+1];
-            matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
-            for (int iddl=0; iddl<3; ++iddl){
-                Re(3*inode+iddl) = 0.0;
-                Indices_tetra[3*inode+iddl] = 3*node+iddl;
-                for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
-                    for (int jddl=0; jddl<3; ++jddl){
-                        Ke(3*inode+iddl,3*jnode+jddl) = 0.0;
-                    }
-                }
-            }
-        }
-                
-        for (unsigned int gp=0; gp<n_gauss_points; ++gp){
-            gauss_weight = Mesh->gauss_weight_cells(gp);
-            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
-            }
-            
-            error=deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
-            compute_B_matrices(deformation_gradient,dx_shape_functions,matrix_B,matrix_BG);
-            
-            get_material_parameters(e_lid, gp);
-            get_constitutive_tensors(deformation_gradient, scd_piola_stress, tangent_matrix);
-            
-            for (unsigned int i=0; i<3; ++i){
-                block_scd_piola_stress(3*i+0,3*i+0) = scd_piola_stress(0);
-                block_scd_piola_stress(3*i+0,3*i+1) = scd_piola_stress(5);
-                block_scd_piola_stress(3*i+0,3*i+2) = scd_piola_stress(4);
-                block_scd_piola_stress(3*i+1,3*i+0) = scd_piola_stress(5);
-                block_scd_piola_stress(3*i+1,3*i+1) = scd_piola_stress(1);
-                block_scd_piola_stress(3*i+1,3*i+2) = scd_piola_stress(3);
-                block_scd_piola_stress(3*i+2,3*i+0) = scd_piola_stress(4);
-                block_scd_piola_stress(3*i+2,3*i+1) = scd_piola_stress(3);
-                block_scd_piola_stress(3*i+2,3*i+2) = scd_piola_stress(2);
-            }
-            
-            error=Re.Multiply('T','N',-gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,scd_piola_stress,1.0);
-            
-            error=B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
-            error=Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
-            
-            error=BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
-            error=Ke.Multiply('N','N',1.0,BG_times_BSPS,matrix_BG,1.0);
-        }
-        
-        for (unsigned int i=0; i<3*Mesh->el_type; ++i){
-            error=F.SumIntoGlobalValues(1, &Indices_tetra[i], &Re(i));
-            for (unsigned int j=0; j<3*Mesh->el_type; ++j){
-                error=K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
-            }
-        }
-    }
-    delete[] Indices_tetra;
 }
 
 void hyperelasticity_setup::material_stiffness_and_rhs_static_condensation(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
@@ -444,49 +302,6 @@ void hyperelasticity_setup::force_stiffness_rhs_live_pressure(Epetra_Vector & u,
     /*bool callFillComplete = false;
     K.GlobalAssemble(callFillComplete);
     F.GlobalAssemble();*/
-}
-
-void hyperelasticity_setup::force_dead_pressure(Epetra_FEVector & F){
-
-    int node;
-    int* Indices_tri;
-    unsigned int e_gid;
-    Indices_tri = new int [3*Mesh->face_type];
-    
-    int n_gauss_points = Mesh->n_gauss_faces;
-    double gauss_weight;// = Mesh->gauss_weight_tri;
-    
-    Epetra_SerialDenseVector dead_pressure_load(3);
-    Epetra_SerialDenseVector force(3*Mesh->face_type);
-    
-    for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
-        e_gid  = Mesh->local_faces[e_lid];
-        for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
-            node = Mesh->faces_nodes[Mesh->face_type*e_gid+inode];
-            Indices_tri[3*inode] = 3*node;
-            Indices_tri[3*inode+1] = 3*node+1;
-            Indices_tri[3*inode+2] = 3*node+2;
-            for (unsigned int iddl=0; iddl<3; ++iddl){
-                force(3*inode+iddl) = 0.0;
-            }
-        }
-        for (unsigned int gp=0; gp<n_gauss_points; ++gp){
-            gauss_weight = Mesh->gauss_weight_faces(gp);
-            //dead_pressure_load = get_neumann_bc(e_lid,gp); TODO
-            for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
-                for (unsigned int iddl=0; iddl<3; ++iddl){
-                    force(3*inode+iddl) += gauss_weight*dead_pressure_load(iddl)*Mesh->N_tri(gp,inode)*Mesh->detJac_tri(e_lid,gp);
-                }
-            }
-        }
-        
-        for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
-            for (unsigned int iddl=0; iddl<3; ++iddl){
-                F.SumIntoGlobalValues(1, &Indices_tri[3*inode+iddl], &force(3*inode+iddl));
-            }
-        }
-    }
-    delete[] Indices_tri;
 }
 
 void hyperelasticity_setup::compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta, std::string & filename){

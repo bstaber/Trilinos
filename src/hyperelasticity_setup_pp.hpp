@@ -12,16 +12,11 @@ public:
     
     void create_FECrsGraph();
     
-    void assemble_dirichlet(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
-    void assemble_dirichlet_dead_neumann(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void assemble_dirichlet_live_neumann_static_condensation(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
-    void assemble_dirichlet_dead_neumann_static_condensation(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void assemble_dirichlet_static_condensation(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     
-    void material_stiffness_and_rhs_dirichlet(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void material_stiffness_and_rhs_static_condensation(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void force_stiffness_rhs_live_pressure(Epetra_Vector & u, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
-    void force_dead_pressure(Epetra_FEVector & F);
         
     void compute_B_matrices(Epetra_SerialDenseMatrix & F, Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B, Epetra_SerialDenseMatrix & BG);
     
