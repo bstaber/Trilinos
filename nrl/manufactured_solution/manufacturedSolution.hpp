@@ -378,7 +378,7 @@ public:
         
         Epetra_Vector u(*OverlapMap);
         u.Import(uStandardMap, *ImportToOverlapMap, Insert);
-        double totalError;
+        double totalError = 0.0;
         double error = 0.0;
         double normVH;
         double gauss_weight;
