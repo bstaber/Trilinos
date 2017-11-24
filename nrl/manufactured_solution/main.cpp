@@ -52,7 +52,9 @@ MPI_Init(&argc, &argv);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
     
-    for (unsigned int i=0; i<3; ++i){
+    unsigned int n = 3;
+    Epetra_SerialDenseVector errorL2(n);
+    for (unsigned int i=0; i<n; ++i){
         //std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
         std::string mesh_file  = "/home/s/staber/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
     
@@ -66,10 +68,10 @@ MPI_Init(&argc, &argv);
         //std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
         //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
         //Newton->print_newton_solution(path1);
-        double errorL2 = manufactured->errorL2(*Newton->x);
-        if (Comm.MyPID()==0){
-            std::cout << errorL2 << "\n";
-        }
+        errorL2(i) = manufactured->errorL2(*Newton->x);
+    }
+    if (Comm->MyPID()==0){
+        std::cout << errorL2;
     }
     
 #ifdef HAVE_MPI
