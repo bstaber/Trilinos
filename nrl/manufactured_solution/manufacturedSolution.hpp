@@ -407,7 +407,7 @@ public:
             for (unsigned int gp=0; gp<n_gauss_points; ++gp){
                 gauss_weight = Mesh->gauss_weight_cells(gp);
                 uExact = getManufacturedSolution(x_G(0,gp),x_G(1,gp),x_G(2,gp));
-                std::cout << uExact << "\n";
+                //std::cout << uExact << "\n";
                 vH(0) = uExact(0) - u_G(0,gp);
                 vH(1) = uExact(1) - u_G(1,gp);
                 vH(2) = uExact(2) - u_G(2,gp);
