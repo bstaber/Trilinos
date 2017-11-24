@@ -70,6 +70,7 @@ MPI_Init(&argc, &argv);
         //Newton->print_newton_solution(path1);
         errorL2(i) = manufactured->errorL2(*Newton->x);
     }
+    Comm.Barrier();
     if (Comm.MyPID()==0){
         std::cout << errorL2;
     }
