@@ -137,6 +137,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acb77044abd0ba7cd6d5661327b2f7025"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a581a19554e14425200492ecb380cb5e5"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dbe/classmanufactured_solution.html#a581a19554e14425200492ecb380cb5e5">manufacturedForcing</a> (double &amp;x1, double &amp;x2, double &amp;x3)</td></tr>
 <tr class="separator:a581a19554e14425200492ecb380cb5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb6a15f8b19689e82898b326a6640d7d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abb6a15f8b19689e82898b326a6640d7d"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d1/dbe/classmanufactured_solution.html#abb6a15f8b19689e82898b326a6640d7d">sign</a> (const T &amp;val)</td></tr>
+<tr class="separator:abb6a15f8b19689e82898b326a6640d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3734062304953ffc3748e9e5df934aeb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dbe/classmanufactured_solution.html#a3734062304953ffc3748e9e5df934aeb">get_stress_for_recover</a> (Epetra_SerialDenseMatrix &amp;deformation_gradient, double &amp;det, Epetra_SerialDenseMatrix &amp;piola_stress)</td></tr>
 <tr class="separator:a3734062304953ffc3748e9e5df934aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10118d1eb7b904ec03546c43d9e596af"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dbe/classmanufactured_solution.html#a10118d1eb7b904ec03546c43d9e596af">errorL2</a> (Epetra_Vector &amp;uStandardMap)</td></tr>
@@ -390,7 +393,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html#l00363">363</a> of file <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html#l00377">377</a> of file <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -672,7 +675,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../dc/d5a/classhyperelasticity.html#a733200015955c6f902fd02684e6285c5">hyperelasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html#l00359">359</a> of file <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html#l00373">373</a> of file <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>
@@ -872,6 +875,36 @@ Public Attributes</h2></td></tr>
 <p>Implements <a class="el" href="../../d8/dc2/class_finite___element___problem.html#aaf9379443bd52a3d462f124017354a38">Finite_Element_Problem</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html#l00049">49</a> of file <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abb6a15f8b19689e82898b326a6640d7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb6a15f8b19689e82898b326a6640d7d">&#9670;&nbsp;</a></span>sign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int manufacturedSolution::sign </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html#l00371">371</a> of file <a class="el" href="../../da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp_source.html">manufacturedSolution.hpp</a>.</p>
 
 </div>
 </div>

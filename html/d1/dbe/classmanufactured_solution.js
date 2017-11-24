@@ -15,6 +15,7 @@ var classmanufactured_solution =
     [ "manufacturedForcing", "d1/dbe/classmanufactured_solution.html#a581a19554e14425200492ecb380cb5e5", null ],
     [ "set_parameters", "d1/dbe/classmanufactured_solution.html#ac3b696a6c587191551c479c35e68597b", null ],
     [ "setup_dirichlet_conditions", "d1/dbe/classmanufactured_solution.html#a9a9abfe88679a4eb8fb68a52bbce1a15", null ],
+    [ "sign", "d1/dbe/classmanufactured_solution.html#abb6a15f8b19689e82898b326a6640d7d", null ],
     [ "beta3", "d1/dbe/classmanufactured_solution.html#a88abd341529db8289dde3fc6b97a8e80", null ],
     [ "beta4", "d1/dbe/classmanufactured_solution.html#a06a671a51317d12fa20e906ca3423f7c", null ],
     [ "beta5", "d1/dbe/classmanufactured_solution.html#a8cb49bc7a7f6432a18878997f0abf1b8", null ],
