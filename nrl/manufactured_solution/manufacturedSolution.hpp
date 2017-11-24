@@ -256,7 +256,7 @@ public:
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
         u(0) = 0.0;
-        u(1) = x2*0.12/(25.0*25.0);
+        u(1) = x2*x2*0.12/(25.0*25.0);
         u(2) = 0.0;
         /*u(0) = -c1*x2*(topcoord-x1)*(topcoord-x2);
         u(1) = c2*x2*(topcoord-x2);
@@ -273,7 +273,7 @@ public:
         F(1,0) = 0.0;                     F(1,1) = c2*(topcoord-x2)-c2*x2+1.0;                         F(1,2) = 0.0;
         F(2,0) = 0.0;                     F(2,1) = 0.0;                                                F(2,2) = c1*std::cos(c1*x3)+1.0;*/
         F(0,0) = 1.0;           F(0,1) = 0.0;                         F(0,2) = 0.0;
-        F(1,0) = 0.0;           F(1,1) = 1.0+0.12/(25.0*25.0); F(1,2) = 0.0;
+        F(1,0) = 0.0;           F(1,1) = 1.0+2.0*0.12*x2/(25.0*25.0); F(1,2) = 0.0;
         F(2,0) = 0.0;           F(2,1) = 0.0;                         F(2,2) = 1.0;
         double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
         
@@ -322,10 +322,10 @@ public:
     }
     
     Epetra_SerialDenseVector manufacturedForcing(double & x1, double & x2, double & x3){
-        Epetra_SerialDenseVector f(3), xf(3), xb(3);
+        Epetra_SerialDenseVector f(3);
+        /*Epetra_SerialDenseVector xf(3), xb(3);
         Epetra_SerialDenseMatrix Pf(3,3), Pb(3,3);
-        double h = 1.0e-3;
-        
+        double h = 1.0e-5;
         xf(0) = x1+h; xf(1) = x2; xf(2) = x3;
         xb(0) = x1-h; xb(1) = x2; xb(2) = x3;
         Pf = getManufacturedPiola(xf(0),xf(1),xf(2));
@@ -348,13 +348,27 @@ public:
         Pb = getManufacturedPiola(xb(0),xb(1),xb(2));
         f(0) += (Pf(0,2)-Pb(0,2))/(2.0*h);
         f(1) += (Pf(1,2)-Pb(1,2))/(2.0*h);
-        f(2) += (Pf(2,2)-Pb(2,2))/(2.0*h);
+        f(2) += (Pf(2,2)-Pb(2,2))/(2.0*h);*/
+        
+        double M11 = mu4*sin_plyagl*sin_plyagl+mu5*cos_plyagl*cos_plyagl;
+        double M22 = mu4*cos_plyagl*cos_plyagl+mu5*sin_plyagl*sin_plyagl;
+        double M33 = mu5;
+        double M23 = 0.0; double M32 = 0.0;
+        double M13 = 0.0; double M31 = 0.0;
+        double M12 = (mu4-mu5)*cos_plyagl*sin_plyagl; double M21 = M12;
+        
+        double ud = 0.12/(25.0*25.0);
+        
+        f(0) = (8*M12*M22*beta4*ud*(2*ud*x2+1)*std::pow(4*M22*ud*ud*x2*x2+4*M22*ud*x2+M11+M22+M33,beta4-1))/std::pow(M11+M22+M33,beta4) - (8*M12*beta5*ud*(2*ud*x2+1)*(M11+M33)*std::pow(M11+M22+M33 + 4*M11*ud*ud*x2*x2 + 4*M33*ud*ud*x2*x2 + 4*M11*ud*x2 + 4*M33*ud*x2,beta5-1))/std::pow(M11+M22+M33,beta5);
+        f(1) = 2*ud*(2*mu1 + 4*mu2 - (- 8*mu3*ud*ud*x2*x2 - 8*mu3*ud*x2 + 2*mu1 + 4*mu2)/(2*ud*x2 + 1)*(2*ud*x2 + 1) + (2*M22*std::pow(4*M22*ud*ud*x2*x2 + 4*M22*ud*x2 + M11 + M22 + M33,beta4))/std::pow(M11 + M22 + M33,beta4) + (2*(M11 + M33)*std::pow(M11 + M22 + M33 + 4*M11*ud*ud*x2*x2 + 4*M33*ud*ud*x2*x2 + 4*M11*ud*x2 + 4*M33*ud*x2,beta5))/std::pow(M11 + M22 + M33,beta5) - (sign(2*ud*x2 + 1)*(2*M11 + 2*M22 + 2*M33))/(2*ud*x2 + 1)) + (2*ud*x2 + 1)*((4*ud*(- 8*mu3*ud*ud*x2*x2 - 8*mu3*ud*x2 + 2*mu1 + 4*mu2))/std::pow(2*ud*x2 + 1,3) + (8*mu3*ud)/(2*ud*x2 + 1) + (2*ud*sign(2*ud*x2 + 1)*(2*M11 + 2*M22 + 2*M33))/(2*ud*x2 + 1)*(2*ud*x2 + 1) + (8*M22*M22*beta4*ud*(2*ud*x2 + 1)*std::pow(4*M22*ud*ud*x2*x2 + 4*M22*ud*x2 + M11 + M22 + M33,beta4 - 1))/std::pow(M11 + M22 + M33,beta4) + (8*beta5*ud*(2*ud*x2 + 1)*(M11 + M33)*(M11 + M33)*std::pow(M11 + M22 + M33 + 4*M11*ud*ud*x2*x2 + 4*M33*ud*ud*x2*x2 + 4*M11*ud*x2 + 4*M33*ud*x2,beta5 - 1))/std::pow(M11 + M22 + M33,beta5));
+        f(2) = 0.0;
         
         f.Scale(-1.0);
-        //std::cout << x1 << std::setw(15) << x2 << std::setw(15) << x3 << "\n";
-        //std::cout << f(0) << std::setw(15) << f(1) << std::setw(15) << f(2) << "\n\n";
         return f;
     }
+    
+    template <typename T>
+    int sign (const T &val) { return (val > 0) - (val < 0); }
     
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
         std::cout << "**Err: Not using that method in this example!\n";

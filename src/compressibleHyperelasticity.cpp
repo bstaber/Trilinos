@@ -137,19 +137,19 @@ void compressibleHyperelasticity::stiffnessRhs_homogeneousForcing(Epetra_Vector 
                 block_scd_piola_stress(3*i+2,3*i+2) = scd_piola_stress(2);
             }
             
-            error=Re.Multiply('T','N',-gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,scd_piola_stress,1.0);
+            error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,scd_piola_stress,1.0);
             
-            error=B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
-            error=Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
+            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
+            error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
             
-            error=BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
-            error=Ke.Multiply('N','N',1.0,BG_times_BSPS,matrix_BG,1.0);
+            error = BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
+            error = Ke.Multiply('N','N',1.0,BG_times_BSPS,matrix_BG,1.0);
         }
         
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
-            error=F.SumIntoGlobalValues(1, &Indexes[i], &Re(i));
+            error = F.SumIntoGlobalValues(1, &Indexes[i], &Re(i));
             for (unsigned int j=0; j<3*Mesh->el_type; ++j){
-                error=K.SumIntoGlobalValues(1, &Indexes[i], 1, &Indexes[j], &Ke(i,j));
+                error = K.SumIntoGlobalValues(1, &Indexes[i], 1, &Indexes[j], &Ke(i,j));
             }
         }
     }
@@ -189,9 +189,9 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
         
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
-            matrix_X(0,inode) = u[OverlapMap->LID(3*node+0)];
-            matrix_X(1,inode) = u[OverlapMap->LID(3*node+1)];
-            matrix_X(2,inode) = u[OverlapMap->LID(3*node+2)];
+            matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+            matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+            matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
             matrix_x(0,inode) = u[OverlapMap->LID(3*node+0)] + Mesh->nodes_coord[3*node+0];
             matrix_x(1,inode) = u[OverlapMap->LID(3*node+1)] + Mesh->nodes_coord[3*node+1];
             matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
@@ -219,7 +219,7 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
                 }
             }
             
-            error=deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
+            error = deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
             compute_B_matrices(deformation_gradient,dx_shape_functions,matrix_B,matrix_BG);
             
             get_material_parameters(e_lid, gp);
