@@ -65,7 +65,7 @@ MPI_Init(&argc, &argv);
         int error = Newton->Solve_with_Aztec(true);
         //std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
         //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
-        Newton->print_newton_solution(path1);
+        //Newton->print_newton_solution(path1);
         double errorL2 = manufactured->errorL2(*Newton->x);
         if (Comm.MyPID()==0){
             std::cout << errorL2 << "\n";
