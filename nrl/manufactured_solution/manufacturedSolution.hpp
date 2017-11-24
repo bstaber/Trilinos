@@ -422,6 +422,7 @@ public:
                  epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);*/
             }
         }
+        std::cout << error << "\n";
         Comm->SumAll(&error,&totalError,1);
         totalError = std::sqrt(totalError);
         return totalError;
