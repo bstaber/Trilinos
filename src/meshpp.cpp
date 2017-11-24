@@ -352,7 +352,7 @@ void mesh::get_local_nodes(int & MyPID){
     for (unsigned int j=0; j<n_nodes; ++j){
         if (npart[j]==MyPID){
             local_nodes_without_ghosts.push_back(j);
-            local_dof_without_ghosts.push_back(3*j);
+            local_dof_without_ghosts.push_back(3*j+0);
             local_dof_without_ghosts.push_back(3*j+1);
             local_dof_without_ghosts.push_back(3*j+2);
         }
@@ -375,7 +375,7 @@ void mesh::get_cells_and_ghosts(int & MyPID){
                 if (mynpart[node]!=MyPID){
                     mynpart[node]=MyPID;
                     local_nodes.push_back(node);
-                    local_dof.push_back(3*node);
+                    local_dof.push_back(3*node+0);
                     local_dof.push_back(3*node+1);
                     local_dof.push_back(3*node+2);
                 }
@@ -396,19 +396,21 @@ void mesh::get_cells_and_ghosts(int & MyPID){
             case 3:
                 if (mynpart[nodes[0]]==MyPID && mynpart[nodes[1]]==MyPID && mynpart[nodes[2]]==MyPID){
                     local_faces.push_back(i);
-                    break;
+                    //break;
                 }
+                break;
             case 4:
                 if (mynpart[nodes[0]]==MyPID && mynpart[nodes[1]]==MyPID && mynpart[nodes[2]]==MyPID && mynpart[nodes[3]]==MyPID){
                     local_faces.push_back(i);
-                    break;
+                    //break;
                 }
                 break;
             case 6:
                 if (mynpart[nodes[0]]==MyPID && mynpart[nodes[1]]==MyPID && mynpart[nodes[2]]==MyPID && mynpart[nodes[3]]==MyPID && mynpart[nodes[4]]==MyPID && mynpart[nodes[5]]==MyPID){
                     local_faces.push_back(i);
-                    break;
+                    //break;
                 }
+                break;
         }
     }
     n_local_faces = local_faces.size();
