@@ -52,7 +52,7 @@ MPI_Init(&argc, &argv);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
     
-    unsigned int n = 2;
+    unsigned int n = 5;
     Epetra_SerialDenseVector errorL2(n);
     for (unsigned int i=0; i<n; ++i){
         //std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
