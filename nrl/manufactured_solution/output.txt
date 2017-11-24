@@ -1,0 +1,296 @@
+  Newton -> 
+   delta : double = 0.25   [unused]
+   iterMin : int = 2   [unused]
+   iterMax : int = 10   [unused]
+   nbBisMax : int = 5   [unused]
+   NormFTol : double = 1e-06   [unused]
+   NormFMax : double = 1e+07   [unused]
+   eps : double = 1e-08   [unused]
+   success_parameter : double = 2   [unused]
+   failure_parameter : double = 2   [unused]
+   number_of_loads : int = 1   [unused]
+   bc_disp : double = 1   [unused]
+   pressure_load : double = 1   [unused]
+  Krylov -> 
+   solver : string = cg   [unused]
+   precond : string = dom_decomp   [unused]
+   subdomain_solve : string = icc   [unused]
+   overlap : int = 0   [unused]
+   graph_fill : int = 0   [unused]
+   AZ_tol : double = 1e-06   [unused]
+   AZ_output : int = 0   [unused]
+   AZ_diagnostics : string = all   [unused]
+   AZ_reorder : int = 1   [unused]
+  TIMooney -> 
+   mu1 : double = 1.7212   [unused]
+   mu2 : double = 0.0426   [unused]
+   mu3 : double = 0.0429   [unused]
+   mu4 : double = 1.3138   [unused]
+   mu5 : double = 0.0609   [unused]
+   beta3 : double = -0.4694   [unused]
+   beta4 : double = 27.9535   [unused]
+   beta5 : double = 0.0306   [unused]
+   angle : double = 30   [unused]
+MyPID             n_cells             el_type           face_type             n_nodes             n_faces         processors
+    0                  64                   8                   4                 170                 152                  28
+MyPID       n_local_cells       n_local_nodes       n_local_faces
+    0                   0                   0                   0
+    3                   2                   6                   5
+    6                   3                   8                   8
+    9                   3                   6                   6
+   11                   3                   8                   6
+   14                   3                   8                   6
+   15                   2                   7                   4
+   17                   3                   8                   7
+   20                   2                   3                   4
+   21                   3                   9                   7
+   22                   0                   0                   0
+   23                   3                  10                   9
+   24                   2                   4                   5
+   25                   3                   8                   6
+   26                   2                   6                   4
+   27                   2                   4                   6
+    1                   0                   0                   0
+    2                   3                   8                   6
+    4                   3                   6                  10
+    5                   3                   8                   9
+    7                   3                   8                   6
+    8                   0                   0                   0
+   10                   3                   8                   8
+   12                   3                   9                  10
+   13                   3                   9                   6
+   16                   2                   3                   4
+   18                   2                   8                   7
+   19                   3                   8                   7
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.25	0.25		2	79.9541	34		0.0203732		0.00204015			0.00259399			0.25
+			3	0.180386	38		0.000258965		0.00208402			0.00208187			0.25
+			4	8.78407e-07	37		5.13955e-07		0.00197387			0.00213504			0.25
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.5	0.25		2	72.8051	34		0.0194877		0.00205898			0.00184107			0.5
+			3	0.139198	38		0.000218643		0.00197697			0.00204611			0.5
+			4	4.81733e-07	37		3.81502e-07		0.00196195			0.00209093			0.5
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.75	0.25		2	66.7789	34		0.0213499		0.00198007			0.00185609			0.75
+			3	0.109505	38		0.000192066		0.00199199			0.00203896			0.75
+			4	2.83588e-07	37		2.77711e-07		0.00196695			0.0020771			0.75
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 1	0.25		2	61.635	34		0.0249414		0.00197697			0.00191903			1
+			3	0.087607	37		0.000268659		0.00197506			0.00198603			1
+			4	1.80853e-07	37		2.00866e-07		0.00198293			0.00208688			1
+0.0876569
+MyPID             n_cells             el_type           face_type             n_nodes             n_faces         processors
+    0                 512                   8                   4                 891                 608                  28
+MyPID       n_local_cells       n_local_nodes       n_local_faces
+    0                  18                  33                  20
+   27                  18                  33                  25
+    1                  19                  32                  21
+   19                  18                  33                  20
+    4                  18                  33                  32
+    3                  18                  34                  24
+    5                  18                  33                  30
+    7                  18                  33                  19
+    6                  19                  31                  27
+    8                  18                  33                  22
+    9                  19                  29                  24
+   10                  18                  33                  24
+   12                  19                  34                  33
+   11                  18                  34                  29
+   14                  18                  33                  18
+   13                  18                  29                  29
+   15                  18                  32                  18
+   16                  18                  34                  32
+   18                  18                  34                  21
+   17                  19                  33                  24
+   20                  19                  25                  24
+   21                  18                  29                  21
+   22                  19                  28                  25
+   23                  18                  33                  27
+   24                  18                  33                  27
+   25                  19                  34                  44
+   26                  18                  33                  20
+    2                  18                  23                  23
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.25	0.25		2	65.5949	75		0.0244628		0.00689793			0.00648785			0.25
+			3	0.181643	87		0.000251074		0.00688004			0.00679207			0.25
+			4	3.30432e-06	88		6.63216e-07		0.00682998			0.00682902			0.25
+			5	2.02812e-09	88		9.80316e-12		0.00688696			0.00705814			0.25
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.5	0.25		2	59.465	73		0.0268926		0.00684905			0.00575399			0.5
+			3	0.130005	86		0.00021889		0.00686812			0.00672388			0.5
+			4	1.33372e-06	86		5.04579e-07		0.00682116			0.00686193			0.5
+			5	1.79216e-09	86		3.92418e-12		0.00683093			0.00696802			0.5
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.75	0.25		2	54.492	72		0.0286708		0.00690913			0.0057478			0.75
+			3	0.0975951	86		0.000195034		0.00686288			0.0066812			0.75
+			4	6.54297e-07	86		3.66962e-07		0.00681305			0.00675583			0.75
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 1	0.25		2	50.3453	71		0.0353857		0.00683808			0.00565791			1
+			3	0.0757281	86		0.000160084		0.00688601			0.00677204			1
+			4	3.4451e-07	86		2.47397e-07		0.00685906			0.00676203			1
+0.573568
+MyPID             n_cells             el_type           face_type             n_nodes             n_faces         processors
+    0                4096                   8                   4                5525                2432                  28
+MyPID       n_local_cells       n_local_nodes       n_local_faces
+    0                 142                 204                  76
+    2                 148                 205                  86
+   27                 146                 201                  97
+    1                 143                 200                 119
+   26                 148                 202                 114
+   19                 150                 207                  98
+    4                 148                 199                 106
+    3                 147                 205                  73
+    5                 142                 192                  71
+    7                 146                 199                  73
+    6                 144                 152                  72
+    8                 150                 200                  75
+    9                 144                 190                  72
+   10                 148                 213                  90
+   12                 142                 205                 100
+   11                 148                 212                 122
+   14                 150                 199                  93
+   13                 142                 158                  74
+   15                 150                 200                 105
+   16                 148                 207                  74
+   18                 148                 206                  74
+   17                 144                 203                  72
+   20                 150                 207                 116
+   21                 148                 183                  74
+   22                 142                 205                  71
+   23                 148                 180                  74
+   24                 148                 191                  74
+   25                 142                 200                  87
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.25	0.25		2	10.5604	81		0.0284563		0.030148			0.016237			0.25
+			3	0.0290846	99		8.9376e-05		0.030041			0.018533			0.25
+			4	2.13678e-07	97		2.08512e-07		0.03004			0.018507			0.25
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.5	0.25		2	9.53119	83		0.0308531		0.029814			0.016222			0.5
+			3	0.0218093	99		8.11211e-05		0.0300159			0.018517			0.5
+			4	1.12663e-07	98		1.38256e-07		0.030009			0.01843			0.5
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.75	0.25		2	8.67585	86		0.0371994		0.029922			0.016593			0.75
+			3	0.0167443	99		7.7063e-05		0.0299461			0.0185232			0.75
+			4	6.2158e-08	98		1.08144e-07		0.0299878			0.0184228			0.75
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 1	0.25		2	7.95654	87		0.0361194		0.02999			0.016783			1
+			3	0.0131223	99		7.34368e-05		0.0299861			0.0185289			1
+			4	3.5847e-08	98		8.78242e-08		0.0299392			0.0184999			1
+0.0089518
+MyPID             n_cells             el_type           face_type             n_nodes             n_faces         processors
+    0               32768                   8                   4               38313                9728                  28
+MyPID       n_local_cells       n_local_nodes       n_local_faces
+   25                1173                1360                 295
+    2                1136                1309                 284
+   27                1203                1388                 483
+    1                1144                1309                 286
+   26                1144                1388                 358
+    4                1196                1401                 323
+    3                1152                1390                 392
+    5                1205                1426                 502
+    7                1172                1407                 494
+    6                1204                1427                 357
+    8                1160                1373                 346
+    9                1199                1407                 430
+   10                1205                1384                 298
+   12                1200                1370                 300
+   11                1144                1252                 286
+   14                1152                1392                 496
+   13                1188                1328                 297
+   15                1154                1374                 289
+   16                1136                1392                 330
+   18                1188                1361                 297
+   17                1152                1366                 288
+   20                1136                1370                 388
+   21                1170                1416                 295
+   22                1136                1219                 282
+   23                1174                1370                 293
+   24                1152                1358                 384
+    0                1203                1416                 300
+   19                1190                1360                 355
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.25	0.25		2	2.62853	136		0.0298734		0.215539			0.275476			0.25
+			3	0.00719097	186		4.18974e-05		0.215726			0.357965			0.25
+			4	5.33273e-08	182		8.79132e-08		0.215726			0.350715			0.25
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.5	0.25		2	2.3761	138		0.0351228		0.215602			0.277991			0.5
+			3	0.00542441	185		4.09433e-05		0.2152			0.356671			0.5
+			4	2.84744e-08	174		6.85301e-08		0.215537			0.337351			0.5
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.75	0.25		2	2.16489	138		0.0380079		0.215794			0.277029			0.75
+			3	0.00418272	183		3.92358e-05		0.215949			0.352681			0.75
+			4	1.53222e-08	176		5.57394e-08		0.215127			0.341284			0.75
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 1	0.25		2	1.98619	138		0.0402446		0.215407			0.277467			1
+			3	0.0032871	183		3.65829e-05		0.215323			0.35101			1
+			4	8.90697e-09	173		4.37073e-08		0.215349			0.336127			1
+0.00271202
+MyPID             n_cells             el_type           face_type             n_nodes             n_faces         processors
+    0              262144                   8                   4              283985               38912                  28
+MyPID       n_local_cells       n_local_nodes       n_local_faces
+   25                9424                9989                1443
+    2                9352                9651                1169
+   27                9370               10338                1181
+    1                9353               10021                1169
+   19                9311               10084                1600
+   26                9552               10388                2067
+    4                9376               10226                1428
+    3                9380               10226                1945
+    5                9351               10049                1165
+    7                9296               10272                1985
+    6                9324               10248                1657
+    8                9327               10272                1371
+    9                9314               10161                1162
+   10                9386               10223                1434
+   12                9373               10073                1185
+   11                9393               10249                1456
+   14                9306               10195                1421
+   13                9313                9802                1142
+   15                9391               10276                1258
+   16                9396               10275                1942
+   18                9385               10071                1170
+   17                9324               10147                1163
+   20                9313                9915                1146
+   21                9362               10144                1162
+   22                9367               10049                1197
+   23                9386               10144                1170
+    0                9357               10164                1166
+   24                9362               10333                1558
+
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.25	0.25		2	0.653999	242		0.0311166		1.64528			3.87915			0.25
+			3	0.00175485	342		2.13952e-05		1.64012			5.22019			0.25
+			4	1.25056e-08	336		4.09241e-08		1.64136			5.10057			0.25
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.5	0.25		2	0.592527	238		0.0352378		1.646			3.78856			0.5
+			3	0.00133599	337		2.05102e-05		1.6538			5.11507			0.5
+			4	6.70994e-09	329		3.16462e-08		1.64584			5.0447			0.5
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 0.75	0.25		2	0.540674	240		0.0377657		1.64067			3.81488			0.75
+			3	0.00103682	334		1.85355e-05		1.64343			5.11231			0.75
+			4	3.76579e-09	320		2.54496e-08		1.64207			5.19043			0.75
+
+ Time	Timestep	Iter	NormInf		GMRES_its	GMRES_res		assemble_time		aztec_time		pressure_load [kPa]
+ 1	0.25		2	0.496596	241		0.0410392		1.64157			4.30287			1
+			3	0.000818966	331		1.60509e-05		1.6418			5.66507			1
+			4	2.18358e-09	319		1.97005e-08		1.64671			5.48493			1
+0.00101725

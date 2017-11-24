@@ -386,9 +386,9 @@ public:
         int e_gid, node;
         
         //Epetra_SerialDenseVector epsilon(6);
-        //Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+        //Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type), dx_shape_functions(Mesh->el_type,3);
         Epetra_SerialDenseVector uExact(3), vH(3);
-        Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), X_I(3,Mesh->el_type), u_I(3,Mesh->el_type);
+        Epetra_SerialDenseMatrix X_I(3,Mesh->el_type), u_I(3,Mesh->el_type);
         Epetra_SerialDenseMatrix u_G(3,n_gauss_points), x_G(3,n_gauss_points);
         
         for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
@@ -411,6 +411,7 @@ public:
                 vH(1) = uExact(1) - u_G(1,gp);
                 vH(2) = uExact(2) - u_G(2,gp);
                 normVH = vH.Norm2();
+                error += gauss_weight*normVH*normVH*Mesh->detJac_tetra(e_lid,gp);
                 /*for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
                  dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
                  dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
@@ -418,7 +419,6 @@ public:
                  }
                  compute_B_matrices(dx_shape_functions,matrix_B);
                  epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);*/
-                error += gauss_weight*normVH*normVH*Mesh->detJac_tetra(e_lid,gp);
             }
         }
         Comm->SumAll(&error,&totalError,1);
