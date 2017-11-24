@@ -1,13 +1,7 @@
 <ParameterList>
     
-    <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_man.msh"/>
-        <Parameter name="n_ply" type="int" value="4"/>
-        <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
-    </ParameterList>
-    
     <ParameterList name="Newton">
-        <Parameter name="delta" type="double" value="1.0"/>
+        <Parameter name="delta" type="double" value="0.25"/>
         <Parameter name="iterMin" type="int" value="2"/>
         <Parameter name="iterMax" type="int" value="10"/>
         <Parameter name="nbBisMax" type="int" value="5"/>
@@ -72,16 +66,6 @@
         <Parameter name="beta4" type="double" value="27.9535"/>
         <Parameter name="beta5" type="double" value="0.0306"/>
         <Parameter name="angle" type="double" value="30.0"/> <!--1.570796326794897"/-->
-    </ParameterList>
-    
-    <ParameterList name="Shinozuka">
-        <Parameter name="order" type="int" value="10"/>
-        <Parameter name="lx" type="double" value="5.0"/>
-        <Parameter name="ly" type="double" value="2.5"/>
-        <Parameter name="delta1" type="double" value="0.1"/>
-        <Parameter name="delta2" type="double" value="0.1"/>
-        <Parameter name="delta3" type="double" value="0.1"/>
-        <Parameter name="delta4" type="double" value="0.1"/>
     </ParameterList>
     
 </ParameterList>
