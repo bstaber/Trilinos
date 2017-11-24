@@ -72,7 +72,6 @@ MPI_Init(&argc, &argv);
         }
     }
     
-    
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
