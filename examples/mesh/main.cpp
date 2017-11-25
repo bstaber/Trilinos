@@ -21,9 +21,15 @@ Epetra_SerialComm Comm;
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/arteries/mesh/media_flatboundaries.msh";
     mesh Mesh(Comm, mesh_file);
     
-    /*if (Comm.MyPID()==0){
+    /*Comm.Barrier();
+    if (Comm.MyPID()==0){
+        std::cout << "EPART:\n";
         for (unsigned int i=0; i<Mesh.n_cells; ++i){
             std::cout << Mesh.epart[i] << "\n";
+        }
+        std::cout << "FACES:\n";
+        for (unsigned int i=0; i<Mesh.n_local_faces; ++i){
+            std::cout << Mesh.local_faces[i] << "\n";
         }
     }*/
     

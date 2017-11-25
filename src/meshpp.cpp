@@ -332,7 +332,6 @@ int mesh::metis_part_mesh(int & NumProc){
     real_t *tpwgts=NULL;
     idx_t *options=NULL;
     idx_t objval;
-    
     check_PartMeshDual = METIS_PartMeshDual(&ne, &nn, eptr, eind, vwgt, vsize, &common, &nparts, tpwgts, options, &objval, epart, npart);
     
     if (check_PartMeshDual==0){
@@ -414,6 +413,17 @@ void mesh::get_cells_and_ghosts(int & MyPID){
         }
     }
     n_local_faces = local_faces.size();
+    }
+    int check_n_faces;
+    Comm->SumAll(&n_local_faces,&check_n_faces,1);
+    if (check_n_faces!=n_faces){
+        if (Comm->MyPID()==0){
+            std::cout << "\n";
+            std::cout << std::setw(15) << "****************************************************\n";
+            std::cout << std::setw(15) << "ALERT: SOME FACES MAY BELONG TO MULTIPLE PROCESSOR!!\n";
+            std::cout << std::setw(15) << "SOLUTION: LOWER THE NUMBER OF PROCESSORS!!\n";
+            std::cout << std::setw(15) << "****************************************************\n";
+        }
     }
 }
 
