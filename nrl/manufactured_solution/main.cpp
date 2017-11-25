@@ -55,8 +55,8 @@ MPI_Init(&argc, &argv);
     unsigned int n = 1;
     Epetra_SerialDenseVector errorL2(n);
     for (unsigned int i=0; i<n; ++i){
-        std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
-        //std::string mesh_file  = "/home/s/staber/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
+        //std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
+        std::string mesh_file  = "/home/s/staber/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
     
         Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
         Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
