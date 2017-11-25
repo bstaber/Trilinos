@@ -52,11 +52,11 @@ MPI_Init(&argc, &argv);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
     
-    unsigned int n = 5;
+    unsigned int n = 1;
     Epetra_SerialDenseVector errorL2(n);
-    for (unsigned int i=4; i<n; ++i){
-        //std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
-        std::string mesh_file  = "/home/s/staber/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
+    for (unsigned int i=0; i<n; ++i){
+        std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
+        //std::string mesh_file  = "/home/s/staber/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
     
         Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
         Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
@@ -67,8 +67,8 @@ MPI_Init(&argc, &argv);
         Newton->setParameters(*paramList);
         int error = Newton->Solve_with_Aztec(true);
         //std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
-        std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
-        Newton->print_newton_solution(path1);
+        //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
+        //Newton->print_newton_solution(path1);
         errorL2(i) = manufactured->errorL2(*Newton->x);
     }
     Comm.Barrier();

@@ -45,6 +45,7 @@
      <Parameter name="AZ_output" type="int" value="0"/>
      <Parameter name="AZ_diagnostics" type="string" value="all"/>
      <Parameter name="AZ_reorder" type="int" value="1"/>
+     <Parameter name="AZ_conv" type="string" value="noscaled"/>
      <!--Parameter name="kspace" type="int" value="100"/>
      <Parameter name="orthog" type="string" value="classical"/>
      <Parameter name="type_overlap" type="string" value="symmetric"/>
@@ -52,8 +53,7 @@
      <Parameter name="ilut_fill" type="double" value="3.0"/>
      <Parameter name="athresh" type="double" value="0.0"/>
      <Parameter name="rthresh" type="double" value="0.0"/>
-     <Parameter name="drop" type="double" value="0.0"/>
-     <Parameter name="AZ_conv" type="string" value="noscaled"/-->
+     <Parameter name="drop" type="double" value="0.0"/-->
     </ParameterList>
     
     <ParameterList name="TIMooney">
