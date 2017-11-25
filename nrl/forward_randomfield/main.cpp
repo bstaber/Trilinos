@@ -40,7 +40,7 @@ MPI_Init(&argc, &argv);
     }
     
     Teuchos::RCP<forwardCostfunction> costFunction = Teuchos::rcp(new forwardCostfunction(Comm,*paramList));
-    Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(false));
+    Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(true));
     data->import_boundaryconditions();
     
     Epetra_IntSerialDenseVector seeds(5);
