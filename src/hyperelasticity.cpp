@@ -38,7 +38,7 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
     
-    Epetra_Map CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
+    Epetra_Map    CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
     Epetra_Vector green_lagrange(CellsMap);
     
     int node, e_gid;
@@ -75,7 +75,7 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
             case 10:
                 tetra10::d_shape_functions(D, xi, eta, zeta);
                 break;
-        }
+        };
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_cells);
         dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
@@ -89,8 +89,8 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
     if (Comm->MyPID()==0){
         NumTargetElements = Mesh->n_cells;
     }
-    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
-    Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+    Epetra_Map         MapOnRoot(-1,NumTargetElements,0,*Comm);
+    Epetra_Export      ExportOnRoot(CellsMap,MapOnRoot);
     Epetra_MultiVector lhs_root(MapOnRoot,true);
     lhs_root.Export(green_lagrange,ExportOnRoot,Insert);
     

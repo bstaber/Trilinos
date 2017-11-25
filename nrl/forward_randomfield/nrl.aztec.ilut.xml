@@ -19,6 +19,7 @@
         <Parameter name="number_of_loads" type="int" value="1"/>
         <Parameter name="bc_disp" type="double" value="1.0"/>
         <Parameter name="pressure_load" type="double" value="0.0"/>
+        <Parameter name="AZ_conv" type="string" value="noscaled"/>
     </ParameterList>
     
     <!--ParameterList name="Krylov">
