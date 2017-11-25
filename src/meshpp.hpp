@@ -51,7 +51,7 @@ public:
     mesh(Epetra_Comm & comm, std::string & fileName_mesh);
     ~mesh();
     
-    int read_gmsh_tetra(std::string & fileName_mesh);
+    int read_gmsh(std::string & fileName_mesh);
     int read_boundary_file(std::string & fileName_bc, unsigned int & number_physical_groups);
     int metis_part_mesh(int & NumProc);
     void print_info();
@@ -59,7 +59,7 @@ public:
     void get_cells_and_ghosts(int & MyPID);
     
     void store_feinterp_faces();
-    void store_feinterp_tetra();
+    void store_feinterp_cells();
     
     Epetra_Comm* Comm;
     
@@ -68,12 +68,12 @@ public:
     Epetra_SerialDenseMatrix D2_N_faces;
     
     Epetra_SerialDenseVector local_rows;
-    Epetra_SerialDenseVector vol_tetra;
-    Epetra_SerialDenseMatrix N_tetra;
-    Epetra_SerialDenseMatrix detJac_tetra;
-    Epetra_SerialDenseMatrix DX_N_tetra;
-    Epetra_SerialDenseMatrix DY_N_tetra;
-    Epetra_SerialDenseMatrix DZ_N_tetra;
+    Epetra_SerialDenseVector vol_cells;
+    Epetra_SerialDenseMatrix N_cells;
+    Epetra_SerialDenseMatrix detJac_cells;
+    Epetra_SerialDenseMatrix DX_N_cells;
+    Epetra_SerialDenseMatrix DY_N_cells;
+    Epetra_SerialDenseMatrix DZ_N_cells;
     
     Epetra_IntSerialDenseMatrix nodes_to_boundaries;
     

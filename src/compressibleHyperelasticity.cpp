@@ -114,9 +114,9 @@ void compressibleHyperelasticity::stiffnessRhs_homogeneousForcing(Epetra_Vector 
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
             }
             
             error=deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
@@ -137,12 +137,12 @@ void compressibleHyperelasticity::stiffnessRhs_homogeneousForcing(Epetra_Vector 
                 block_scd_piola_stress(3*i+2,3*i+2) = scd_piola_stress(2);
             }
             
-            error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,scd_piola_stress,1.0);
+            error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,scd_piola_stress,1.0);
             
-            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
+            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
             
-            error = BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
+            error = BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
             error = Ke.Multiply('N','N',1.0,BG_times_BSPS,matrix_BG,1.0);
         }
         
@@ -206,16 +206,16 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
                 }
             }
         }
-        xg.Multiply('N','N',1.0,matrix_X,Mesh->N_tetra,0.0);
+        xg.Multiply('N','N',1.0,matrix_X,Mesh->N_cells,0.0);
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             fvol = get_forcing(xg(0,gp),xg(1,gp),xg(2,gp),e_lid,gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    fevol(3*inode+iddl) += gauss_weight*pressure_load*fvol(iddl)*Mesh->N_tetra(inode,gp)*Mesh->detJac_tetra(e_lid,gp);
+                    fevol(3*inode+iddl) += gauss_weight*pressure_load*fvol(iddl)*Mesh->N_cells(inode,gp)*Mesh->detJac_cells(e_lid,gp);
                 }
             }
             
@@ -237,12 +237,12 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
                 block_scd_piola_stress(3*i+2,3*i+2) = scd_piola_stress(2);
             }
             
-            error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,scd_piola_stress,1.0);
+            error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,scd_piola_stress,1.0);
             
-            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
+            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
             
-            error = BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
+            error = BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
             error = Ke.Multiply('N','N',1.0,BG_times_BSPS,matrix_BG,1.0);
         }
         

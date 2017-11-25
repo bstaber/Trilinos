@@ -158,7 +158,7 @@ public:
         Epetra_Vector sig22(CellsMap);
         
         int node, e_gid;
-        double det_jac_tetra;
+        double det_jac_cells;
         double I1, det, dpressure;
         
         Epetra_SerialDenseMatrix deformation_gradient(3,3), right_cauchy(3,3), inv_right_cauchy(3,3);
@@ -198,8 +198,8 @@ public:
                     break;
             }
             jacobian_matrix(matrix_X,D,JacobianMatrix);
-            jacobian_det(JacobianMatrix,det_jac_tetra);
-            dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+            jacobian_det(JacobianMatrix,det_jac_cells);
+            dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
             
             deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
             det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);

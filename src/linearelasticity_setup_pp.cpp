@@ -97,8 +97,8 @@ void LinearizedElasticity::stiffness_homogeneousForcing(Epetra_FECrsMatrix & K){
     int n_gauss_points = Mesh->n_gauss_cells;
     double gauss_weight;
 
-    int *Indices_tetra;
-    Indices_tetra = new int [3*Mesh->el_type];
+    int *Indices_cells;
+    Indices_cells = new int [3*Mesh->el_type];
     
     Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
     
@@ -113,7 +113,7 @@ void LinearizedElasticity::stiffness_homogeneousForcing(Epetra_FECrsMatrix & K){
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
             for (int iddl=0; iddl<3; ++iddl){
-                Indices_tetra[3*inode+iddl] = 3*node+iddl;
+                Indices_cells[3*inode+iddl] = 3*node+iddl;
                 for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
                     for (int jddl=0; jddl<3; ++jddl){
                         Ke(3*inode+iddl,3*jnode+jddl) = 0.0;
@@ -125,25 +125,25 @@ void LinearizedElasticity::stiffness_homogeneousForcing(Epetra_FECrsMatrix & K){
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
             }
             
             compute_B_matrices(dx_shape_functions,matrix_B);
             get_elasticity_tensor(e_lid, gp, tangent_matrix);
             
-            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
+            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
         }
         
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
             for (unsigned int j=0; j<3*Mesh->el_type; ++j){
-                error = K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
+                error = K.SumIntoGlobalValues(1, &Indices_cells[i], 1, &Indices_cells[j], &Ke(i,j));
             }
         }
     }
-    delete[] Indices_tetra;
+    delete[] Indices_cells;
 }
 
 void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
@@ -152,8 +152,8 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
     int n_gauss_points = Mesh->n_gauss_cells;
     double gauss_weight;
     
-    int *Indices_tetra;
-    Indices_tetra = new int [3*Mesh->el_type];
+    int *Indices_cells;
+    Indices_cells = new int [3*Mesh->el_type];
     
     Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
     Epetra_SerialDenseMatrix tangent_matrix(6,6);
@@ -170,7 +170,7 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
             matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
             matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
             for (int iddl=0; iddl<3; ++iddl){
-                Indices_tetra[3*inode+iddl] = 3*node+iddl;
+                Indices_cells[3*inode+iddl] = 3*node+iddl;
                 fevol(3*inode+iddl) = 0.0;
                 for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
                     for (int jddl=0; jddl<3; ++jddl){
@@ -180,33 +180,33 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
             }
         }
         
-        xg.Multiply('N','N',1.0,matrix_X,Mesh->N_tetra,0.0);
+        xg.Multiply('N','N',1.0,matrix_X,Mesh->N_cells,0.0);
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             fvol = get_forcing(xg(0,gp),xg(1,gp),xg(2,gp),e_lid,gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_tetra(inode,gp)*Mesh->detJac_tetra(e_lid,gp);
+                    fevol(3*inode+iddl) += gauss_weight*fvol(iddl)*Mesh->N_cells(inode,gp)*Mesh->detJac_cells(e_lid,gp);
                 }
             }
             compute_B_matrices(dx_shape_functions,matrix_B);
             get_elasticity_tensor(e_lid,gp,tangent_matrix);
             
-            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_tetra(e_lid,gp),matrix_B,tangent_matrix,0.0);
+            error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
         }
         
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
-            error = F.SumIntoGlobalValues(1, &Indices_tetra[i], &fevol(i));
+            error = F.SumIntoGlobalValues(1, &Indices_cells[i], &fevol(i));
             for (unsigned int j=0; j<3*Mesh->el_type; ++j){
-                error = K.SumIntoGlobalValues(1, &Indices_tetra[i], 1, &Indices_tetra[j], &Ke(i,j));
+                error = K.SumIntoGlobalValues(1, &Indices_cells[i], 1, &Indices_cells[j], &Ke(i,j));
             }
         }
     }
-    delete[] Indices_tetra;
+    delete[] Indices_cells;
 }
 
 void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
@@ -319,7 +319,7 @@ void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & 
     
     int node, e_gid;
     int n_gauss_points = Mesh->n_gauss_cells;
-    double det_jac_tetra, gauss_weight, theta;
+    double det_jac_cells, gauss_weight, theta;
     
     Epetra_SerialDenseVector epsilon(6);
     Epetra_SerialDenseVector vector_u(3*Mesh->el_type);
@@ -363,8 +363,8 @@ void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & 
         }
         
         jacobian_matrix(matrix_X,D,JacobianMatrix);
-        jacobian_det(JacobianMatrix,det_jac_tetra);
-        dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+        jacobian_det(JacobianMatrix,det_jac_cells);
+        dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
         compute_B_matrices(dx_shape_functions,matrix_B);
         epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
         
@@ -440,7 +440,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
     
     int node, e_gid;
     int n_gauss_points = Mesh->n_gauss_cells;
-    double det_jac_tetra, gauss_weight, theta;
+    double det_jac_cells, gauss_weight, theta;
     
     Epetra_SerialDenseVector epsilon(6);
     Epetra_SerialDenseVector cauchy_stress(6);
@@ -490,9 +490,9 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             
             gauss_weight = Mesh->gauss_weight_cells(gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
             }
             
             compute_B_matrices(dx_shape_functions,matrix_B);
@@ -501,13 +501,13 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
             //get_elasticity_tensor(e_lid, gp, tangent_matrix);
             //cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
             
-            theta += gauss_weight*det*Mesh->detJac_tetra(e_lid,gp);
+            theta += gauss_weight*det*Mesh->detJac_cells(e_lid,gp);
             
         }*/
     
         jacobian_matrix(matrix_X,D,JacobianMatrix);
-        jacobian_det(JacobianMatrix,det_jac_tetra);
-        dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+        jacobian_det(JacobianMatrix,det_jac_cells);
+        dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
         compute_B_matrices(dx_shape_functions,matrix_B);
         epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
         get_elasticity_tensor_for_recovery(e_lid, tangent_matrix);

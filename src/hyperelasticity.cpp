@@ -42,7 +42,7 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
     Epetra_Vector green_lagrange(CellsMap);
     
     int node, e_gid;
-    double det_jac_tetra;
+    double det_jac_cells;
     
     Epetra_SerialDenseMatrix deformation_gradient(3,3);
     Epetra_SerialDenseMatrix right_cauchy(3,3);
@@ -77,8 +77,8 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
                 break;
         }
         jacobian_matrix(matrix_X,D,JacobianMatrix);
-        jacobian_det(JacobianMatrix,det_jac_tetra);
-        dX_shape_functions(D,JacobianMatrix,det_jac_tetra,dx_shape_functions);
+        jacobian_det(JacobianMatrix,det_jac_cells);
+        dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
         
         deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
         right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
@@ -112,7 +112,7 @@ void hyperelasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::string 
     
     int node, e_gid;
     int n_gauss_points = Mesh->n_gauss_cells;
-    double det_jac_tetra, det, gauss_weight, theta;
+    double det_jac_cells, det, gauss_weight, theta;
     
     Epetra_SerialDenseMatrix deformation_gradient(3,3);
     Epetra_SerialDenseMatrix right_cauchy(3,3);
@@ -136,9 +136,9 @@ void hyperelasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::string 
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
             }
             
             deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
@@ -147,14 +147,14 @@ void hyperelasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::string 
             dg_times_ps.Multiply('N','N',1.0,deformation_gradient,piola_stress,0.0);
             cauchy_stress.Multiply('N','T',1.0,dg_times_ps,deformation_gradient,0.0);
             
-            sigma11[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0,0);
-            sigma22[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(1,1);
-            sigma33[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(2,2);
-            sigma12[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0,1);
-            sigma13[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(0,2);
-            sigma23[e_lid] += gauss_weight*Mesh->detJac_tetra(e_lid,gp)*cauchy_stress(1,2);
+            sigma11[e_lid] += gauss_weight*Mesh->detJac_cells(e_lid,gp)*cauchy_stress(0,0);
+            sigma22[e_lid] += gauss_weight*Mesh->detJac_cells(e_lid,gp)*cauchy_stress(1,1);
+            sigma33[e_lid] += gauss_weight*Mesh->detJac_cells(e_lid,gp)*cauchy_stress(2,2);
+            sigma12[e_lid] += gauss_weight*Mesh->detJac_cells(e_lid,gp)*cauchy_stress(0,1);
+            sigma13[e_lid] += gauss_weight*Mesh->detJac_cells(e_lid,gp)*cauchy_stress(0,2);
+            sigma23[e_lid] += gauss_weight*Mesh->detJac_cells(e_lid,gp)*cauchy_stress(1,2);
             
-            theta += gauss_weight*det*Mesh->detJac_tetra(e_lid,gp);
+            theta += gauss_weight*det*Mesh->detJac_cells(e_lid,gp);
             
         }
         sigma11[e_lid] = sigma11[e_lid]/theta;
@@ -210,7 +210,7 @@ void hyperelasticity::compute_gauss_vonmises(Epetra_Vector & x, std::string & fi
     
     int node, e_gid;
     int n_gauss_points = Mesh->n_gauss_cells;
-    double det_jac_tetra, det, gauss_weight;
+    double det_jac_cells, det, gauss_weight;
     
     Epetra_SerialDenseMatrix deformation_gradient(3,3);
     Epetra_SerialDenseMatrix right_cauchy(3,3);
@@ -243,9 +243,9 @@ void hyperelasticity::compute_gauss_vonmises(Epetra_Vector & x, std::string & fi
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
             }
             
             deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);

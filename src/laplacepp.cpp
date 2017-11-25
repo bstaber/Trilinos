@@ -198,11 +198,11 @@ void laplace::assembling(Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs){
         for (unsigned int gp=0; gp<Mesh->n_gauss_cells; ++gp){
             gaussWeight = Mesh->gauss_weight_cells(gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                B(0,inode) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,eloc);
-                B(1,inode) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,eloc);
-                B(2,inode) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,eloc);
+                B(0,inode) = Mesh->DX_N_cells(gp+n_gauss_points*inode,eloc);
+                B(1,inode) = Mesh->DY_N_cells(gp+n_gauss_points*inode,eloc);
+                B(2,inode) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,eloc);
             }
-            Ke.Multiply('T','N',gaussWeight*Mesh->detJac_tetra(eloc,gp),B,B,1.0);
+            Ke.Multiply('T','N',gaussWeight*Mesh->detJac_cells(eloc,gp),B,B,1.0);
         }
         
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
@@ -264,9 +264,9 @@ void laplace::compute_local_directions(Epetra_Vector & laplace_one, Epetra_Vecto
         
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                matrix_B(0,inode) = Mesh->DX_N_tetra(gp+n_gauss_points*inode,e_lid);
-                matrix_B(1,inode) = Mesh->DY_N_tetra(gp+n_gauss_points*inode,e_lid);
-                matrix_B(2,inode) = Mesh->DZ_N_tetra(gp+n_gauss_points*inode,e_lid);
+                matrix_B(0,inode) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                matrix_B(1,inode) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                matrix_B(2,inode) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
             }
             
             grad_phi.Multiply('N','N',1.0,matrix_B,phi_nodes,0.0);

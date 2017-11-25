@@ -4,7 +4,7 @@ mesh::mesh(){
 }
 
 mesh::mesh(std::string & fileName_mesh){
-    read_gmsh_tetra(fileName_mesh);
+    read_gmsh(fileName_mesh);
 }
 
 mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
@@ -12,7 +12,7 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
     int MyPID = Comm->MyPID();
     int NumProc = Comm->NumProc();
     
-    read_gmsh_tetra(fileName_mesh);
+    read_gmsh(fileName_mesh);
     
     epart = new idx_t[n_cells];
     npart = new idx_t[n_nodes];
@@ -49,7 +49,7 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
     if (n_local_faces>0 && (face_type==3 || face_type==4 || face_type==6)){
         store_feinterp_faces();
     }
-    store_feinterp_tetra();
+    store_feinterp_cells();
 }
 
 mesh::~mesh(){
@@ -57,7 +57,7 @@ mesh::~mesh(){
     delete[] npart;
 }
 
-int mesh::read_gmsh_tetra(std::string & fileName_mesh){
+int mesh::read_gmsh(std::string & fileName_mesh){
     int error = 0;
     std::ifstream meshfile;
     meshfile.open(fileName_mesh.c_str());
@@ -79,16 +79,16 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
     unsigned int n_faces3 = 0;
     unsigned int n_quad4 = 0;
     unsigned int n_faces6 = 0;
-    unsigned int n_tetra4 = 0;
+    unsigned int n_cells4 = 0;
     unsigned int n_hexa8 = 0;
-    unsigned int n_tetra10 = 0;
+    unsigned int n_cells10 = 0;
     unsigned int node;
     unsigned int nodes_faces3[3];
     unsigned int nodes_quad4[4];
     unsigned int nodes_faces6[6];
-    unsigned int nodes_tetra4[4];
+    unsigned int nodes_cells4[4];
     unsigned int nodes_hexa8[8];
-    unsigned int nodes_tetra10[10];
+    unsigned int nodes_cells10[10];
     
     std::vector<int> tri3_nodes;
     std::vector<int> quad4_nodes;
@@ -151,8 +151,8 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
                 break;
             case 4:
                 for (unsigned int inode=0; inode<4; ++inode){
-                    meshfile >> nodes_tetra4[inode];
-                    tetra4_nodes.push_back(nodes_tetra4[inode]-1);
+                    meshfile >> nodes_cells4[inode];
+                    tetra4_nodes.push_back(nodes_cells4[inode]-1);
                 }
                 break;
             case 5:
@@ -171,8 +171,8 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
                 break;
             case 11:
                 for (unsigned int inode=0; inode<10; ++inode){
-                    meshfile >> nodes_tetra10[inode];
-                    tetra10_nodes.push_back(nodes_tetra10[inode]-1);
+                    meshfile >> nodes_cells10[inode];
+                    tetra10_nodes.push_back(nodes_cells10[inode]-1);
                 }
                 break;
             case 15:
@@ -190,13 +190,13 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
     n_faces3 = tri3_nodes.size()/3;
     n_quad4 = quad4_nodes.size()/4;
     n_faces6 = tri6_nodes.size()/6;
-    n_tetra4 = tetra4_nodes.size()/4;
+    n_cells4 = tetra4_nodes.size()/4;
     n_hexa8 = hexa8_nodes.size()/8;
-    n_tetra10 = tetra10_nodes.size()/10;
+    n_cells10 = tetra10_nodes.size()/10;
     
-    if (n_tetra4==0 && n_tetra10==0 && n_hexa8==0){
+    if (n_cells4==0 && n_cells10==0 && n_hexa8==0){
         std::cerr << "Your mesh is empty!\n";}
-    if ( (n_tetra4>0 && n_tetra10>0) || (n_tetra4>0 && n_hexa8>0) || (n_tetra10>0 && n_hexa8>0) ){
+    if ( (n_cells4>0 && n_cells10>0) || (n_cells4>0 && n_hexa8>0) || (n_cells10>0 && n_hexa8>0) ){
         std::cerr << "We do not handle mixed meshes that contain tetra4's and/or tetra10's and/or hexa8's.\n";
         error = 1;
         return error;
@@ -233,13 +233,13 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
         gauss_points_quad4(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
-    if (n_tetra4>0){
-        n_cells = n_tetra4;
+    if (n_cells4>0){
+        n_cells = n_cells4;
         el_type = 4;
         cells_nodes.reserve(tetra4_nodes.size());
         cells_nodes = tetra4_nodes;
         
-        gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        gauss_points_cells4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
     if (n_hexa8>0){
@@ -251,13 +251,13 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
         gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
-    if (n_tetra10>0){
-        n_cells = n_tetra10;
+    if (n_cells10>0){
+        n_cells = n_cells10;
         el_type= 10;
         cells_nodes.reserve(tetra10_nodes.size());
         cells_nodes = tetra10_nodes;
                 
-        gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        gauss_points_cells11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
     return error;
@@ -511,7 +511,7 @@ void mesh::store_feinterp_faces(){
     }*/
 }
 
-void mesh::store_feinterp_tetra(){
+void mesh::store_feinterp_cells(){
     
     int node, eglob;
     double alpha, beta;
@@ -519,19 +519,19 @@ void mesh::store_feinterp_tetra(){
     Epetra_SerialDenseMatrix JacobianMatrix(3,3), InverseJacobianMatrix(3,3), X(3,el_type), D(el_type,3), DX(el_type,3);
     
     local_rows.Resize(3*el_type*n_local_cells);
-    vol_tetra.Resize(n_local_cells);
-    N_tetra.Reshape(el_type,n_gauss_cells);
-    detJac_tetra.Reshape(n_local_cells,n_gauss_cells);
-    DX_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
-    DY_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
-    DZ_N_tetra.Reshape(n_gauss_cells*el_type,n_local_cells);
+    vol_cells.Resize(n_local_cells);
+    N_cells.Reshape(el_type,n_gauss_cells);
+    detJac_cells.Reshape(n_local_cells,n_gauss_cells);
+    DX_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
+    DY_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
+    DZ_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
     
     switch (el_type){
         case 4:
             for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
                 tetra4::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                 for (int inode=0; inode<el_type; ++inode){
-                    N_tetra(inode,gp) = N(inode);
+                    N_cells(inode,gp) = N(inode);
                 }
             }
             break;
@@ -539,7 +539,7 @@ void mesh::store_feinterp_tetra(){
             for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
                 hexa8::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                 for (int inode=0; inode<el_type; ++inode){
-                    N_tetra(inode,gp) = N(inode);
+                    N_cells(inode,gp) = N(inode);
                 }
             }
             break;
@@ -547,7 +547,7 @@ void mesh::store_feinterp_tetra(){
             for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
                 tetra10::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                 for (int inode=0; inode<el_type; ++inode){
-                    N_tetra(inode,gp) = N(inode);
+                    N_cells(inode,gp) = N(inode);
                 }
             }
             break;
@@ -564,7 +564,7 @@ void mesh::store_feinterp_tetra(){
             local_rows(3*el_type*eloc+3*inode+2) = 3*node+2;
         }
         
-        vol_tetra(eloc) = 0.0;
+        vol_cells(eloc) = 0.0;
         for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
             switch (el_type){
                 case 4:
@@ -578,13 +578,13 @@ void mesh::store_feinterp_tetra(){
                     break;
             }
             jacobian_matrix(X,D,JacobianMatrix);
-            jacobian_det(JacobianMatrix,detJac_tetra(eloc,gp));
-            dX_shape_functions(D,JacobianMatrix,detJac_tetra(eloc,gp),DX);
-            vol_tetra(eloc) += gauss_weight_cells(gp)*detJac_tetra(eloc,gp);
+            jacobian_det(JacobianMatrix,detJac_cells(eloc,gp));
+            dX_shape_functions(D,JacobianMatrix,detJac_cells(eloc,gp),DX);
+            vol_cells(eloc) += gauss_weight_cells(gp)*detJac_cells(eloc,gp);
             for (int inode=0; inode<el_type; ++inode){
-                DX_N_tetra(gp+n_gauss_cells*inode,eloc) = DX(inode,0);
-                DY_N_tetra(gp+n_gauss_cells*inode,eloc) = DX(inode,1);
-                DZ_N_tetra(gp+n_gauss_cells*inode,eloc) = DX(inode,2);
+                DX_N_cells(gp+n_gauss_cells*inode,eloc) = DX(inode,0);
+                DY_N_cells(gp+n_gauss_cells*inode,eloc) = DX(inode,1);
+                DZ_N_cells(gp+n_gauss_cells*inode,eloc) = DX(inode,2);
             }
         }
     }
