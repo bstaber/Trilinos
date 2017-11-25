@@ -49,7 +49,7 @@
         <!--Parameter name="athresh" type="double" value="0.0"/>
          <Parameter name="rthresh" type="double" value="0.0"/>
          <Parameter name="drop" type="double" value="0.0"/-->
-        <Parameter name="AZ_conv" type="string" value="noscaled">
+        <Parameter name="AZ_conv" type="string" value="noscaled"/>
         <Parameter name="AZ_tol" type="double" value="1e-6"/>
         <Parameter name="AZ_output" type="int" value="0"/>
         <Parameter name="AZ_diagnostics" type="string" value="all"/>
