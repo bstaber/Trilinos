@@ -17,7 +17,7 @@ Epetra_MpiComm Comm(MPI_COMM_WORLD);
 Epetra_SerialComm Comm;
 #endif
     
-    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured0.msh";
+    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured1.msh";
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/arteries/mesh/media_flatboundaries.msh";
     mesh Mesh(Comm, mesh_file);
     

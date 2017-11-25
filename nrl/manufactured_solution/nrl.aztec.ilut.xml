@@ -1,5 +1,10 @@
 <ParameterList>
     
+    <ParameterList name="Mesh">
+        <Parameter name="path" type="string" value="/home/s/staber/Trilinos/cee530/mesh/"/>
+        <Parameter name="outpath" type="string" value="/home/s/staber/Trilinos_results/nrl/manufactured/manufactured"/>
+    </ParameterList>
+    
     <ParameterList name="Newton">
         <Parameter name="delta" type="double" value="0.25"/>
         <Parameter name="iterMin" type="int" value="2"/>

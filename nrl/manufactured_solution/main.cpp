@@ -11,9 +11,11 @@
 int main(int argc, char *argv[]){
     
     std::string    xmlInFileName = "";
+    int            meshIndex;
     
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
+    clp.setOption("mesh-index",&meshIndex,"The index of the manufactured mesh.");
     clp.setDocString("TO DO.");
     
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
@@ -22,7 +24,7 @@ int main(int argc, char *argv[]){
         std::cout << "\nEnd Result: TEST FAILED" << std::endl;
         return parse_return;
     }
-	
+    
 #ifdef HAVE_MPI
 MPI_Init(&argc, &argv);
     Epetra_MpiComm Comm(MPI_COMM_WORLD);
@@ -52,28 +54,28 @@ MPI_Init(&argc, &argv);
     }
     double plyagl = 2.0*M_PI*30.0/360.0;
     
-    unsigned int n = 5;
-    Epetra_SerialDenseVector errorL2(n);
-    for (unsigned int i=0; i<n; ++i){
-        //std::string mesh_file  = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
-        std::string mesh_file  = "/home/s/staber/Trilinos/cee530/mesh/manufactured" + std::to_string(i) + ".msh";
-    
-        Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
-        Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
-        manufactured->set_parameters(parameters,plyagl);
-        Comm.Barrier();
-        
-        Newton->Initialization();
-        Newton->setParameters(*paramList);
-        int error = Newton->Solve_with_Aztec(true);
-        //std::string path1 = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
-        //std::string path1 = "/home/s/staber/Trilinos_results/nrl/manufactured/manufactured" + std::to_string(i) + ".mtx";
-        //Newton->print_newton_solution(path1);
-        errorL2(i) = manufactured->errorL2(*Newton->x);
-    }
+    double errorL2;
+    std::string path     = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"),"path");
+    std::string meshname = "manufactured" + std::to_string(meshIndex) + ".msh";
+    std::string fullpath = path + meshname;
+    Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,fullpath));
+    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
+    manufactured->set_parameters(parameters,plyagl);
     Comm.Barrier();
+        
+    Newton->Initialization();
+    Newton->setParameters(*paramList);
+    int error = Newton->Solve_with_Aztec(true);
+    std::string outpath     = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"),"outpath");
+    std::string fulloutpath = outpath + std::to_string(meshIndex) + ".mtx";
+    Newton->print_newton_solution(fulloutpath);
+    errorL2 = manufactured->errorL2(*Newton->x);
+    
     if (Comm.MyPID()==0){
-        std::cout << errorL2;
+        std::ofstream output;
+        output.open("output.txt",std::ios_base::app);
+        output << meshname << std::setw(5) << Comm.NumProc() << std::setw(15) << errorL2 << "\n";
+        output.close();
     }
     
 #ifdef HAVE_MPI
@@ -82,5 +84,3 @@ MPI_Init(&argc, &argv);
 return 0;
     
 }
-
-//0.005 0.0105263157894737 0.0160526315789474 0.0215789473684211 0.0271052631578947 0.0326315789473684 0.0381578947368421 0.0436842105263158 0.0492105263157895 0.0547368421052632 0.0602631578947368 0.06578947368421049 0.07131578947368419 0.07684210526315791 0.0823684210526316 0.0878947368421053 0.0934210526315789 0.0989473684210526 0.1044736842105263 0.11 
