@@ -61,7 +61,8 @@ MPI_Init(&argc, &argv);
         Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,mesh_file));
         Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
         manufactured->set_parameters(parameters,plyagl);
-    
+        Comm.Barrier();
+        
         Newton->Initialization();
         Newton->setParameters(*paramList);
         int error = Newton->Solve_with_Aztec(true);
