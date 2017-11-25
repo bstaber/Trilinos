@@ -6,8 +6,13 @@ Mesh.RecombineAll=1;
 Mesh.RecombinationAlgorithm=1;
 Mesh.Algorithm = 8; 
 
-lc = 8.0;
-lcc = 8.0;
+Mesh.CharacteristicLengthMax = 4.1;
+
+//lc = 8.0;
+//lcc = 8.0;
+
+lc = 1000;
+lcc = 1000;
 
 Point(1) = {0,0,0,lc};
 Point(2) = {0,11,0,lc};

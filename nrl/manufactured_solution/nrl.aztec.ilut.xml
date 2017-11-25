@@ -2,7 +2,7 @@
     
     <ParameterList name="Mesh">
         <Parameter name="path" type="string" value="/home/s/staber/Trilinos/cee530/mesh/"/>
-        <Parameter name="outpath" type="string" value="/home/s/staber/Trilinos_results/nrl/manufactured/manufactured"/>
+        <Parameter name="outpath" type="string" value="/home/s/staber/Trilinos_results/nrl/manufactured/manufacturedv2"/>
     </ParameterList>
     
     <ParameterList name="Newton">
