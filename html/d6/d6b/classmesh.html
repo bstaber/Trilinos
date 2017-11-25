@@ -109,8 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6b1710cf8fcac74adbd6fb9ab49364ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56c82806c9eeb4a50972ac55f2e7abb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a56c82806c9eeb4a50972ac55f2e7abb7">~mesh</a> ()</td></tr>
 <tr class="separator:a56c82806c9eeb4a50972ac55f2e7abb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39d7096e719aa9b6e060a628143ca173"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a39d7096e719aa9b6e060a628143ca173">read_gmsh_tetra</a> (std::string &amp;fileName_mesh)</td></tr>
-<tr class="separator:a39d7096e719aa9b6e060a628143ca173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52939eb67914e8692dc47aedfcdd731c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a52939eb67914e8692dc47aedfcdd731c">read_gmsh</a> (std::string &amp;fileName_mesh)</td></tr>
+<tr class="separator:a52939eb67914e8692dc47aedfcdd731c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78a2b4feca50c441f0f4306b1bec05aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a78a2b4feca50c441f0f4306b1bec05aa">read_boundary_file</a> (std::string &amp;fileName_bc, unsigned int &amp;number_physical_groups)</td></tr>
 <tr class="separator:a78a2b4feca50c441f0f4306b1bec05aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af71d5596d4cea905d22c0338127af284"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#af71d5596d4cea905d22c0338127af284">metis_part_mesh</a> (int &amp;NumProc)</td></tr>
@@ -123,8 +123,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae4beb917adcbc091f4b7801ae5d7c4b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bc93b5ae13e978efe1b14e3c44c7dab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a1bc93b5ae13e978efe1b14e3c44c7dab">store_feinterp_faces</a> ()</td></tr>
 <tr class="separator:a1bc93b5ae13e978efe1b14e3c44c7dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec3804c8c0155f3e599b14144fc22ee2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#aec3804c8c0155f3e599b14144fc22ee2">store_feinterp_tetra</a> ()</td></tr>
-<tr class="separator:aec3804c8c0155f3e599b14144fc22ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0eb4915f7fd5aed6f48546308f8f7a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#ac0eb4915f7fd5aed6f48546308f8f7a2">store_feinterp_cells</a> ()</td></tr>
+<tr class="separator:ac0eb4915f7fd5aed6f48546308f8f7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -138,18 +138,18 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ae967ef2505306a8100509aa5686a7dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a8fc4b86d5c73fba213da5ccbb9cbf5"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a4a8fc4b86d5c73fba213da5ccbb9cbf5">local_rows</a></td></tr>
 <tr class="separator:a4a8fc4b86d5c73fba213da5ccbb9cbf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f90bc86bc3f05b5288f30115033f850"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a2f90bc86bc3f05b5288f30115033f850">vol_tetra</a></td></tr>
-<tr class="separator:a2f90bc86bc3f05b5288f30115033f850"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39db91db7f46abc44ebaf66c5c83bbff"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a39db91db7f46abc44ebaf66c5c83bbff">N_tetra</a></td></tr>
-<tr class="separator:a39db91db7f46abc44ebaf66c5c83bbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd3c0bab57494c476f53f7000df7bde4"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#afd3c0bab57494c476f53f7000df7bde4">detJac_tetra</a></td></tr>
-<tr class="separator:afd3c0bab57494c476f53f7000df7bde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0edb1ed4945634487266a8ba34169b87"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a0edb1ed4945634487266a8ba34169b87">DX_N_tetra</a></td></tr>
-<tr class="separator:a0edb1ed4945634487266a8ba34169b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a377402a626dfca7631b11977fab2cf1d"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a377402a626dfca7631b11977fab2cf1d">DY_N_tetra</a></td></tr>
-<tr class="separator:a377402a626dfca7631b11977fab2cf1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef8c52a4f0e861b64fa4436f60100912"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#aef8c52a4f0e861b64fa4436f60100912">DZ_N_tetra</a></td></tr>
-<tr class="separator:aef8c52a4f0e861b64fa4436f60100912"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a811b51c9e5737dd6fca47ec68c05b63f"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a811b51c9e5737dd6fca47ec68c05b63f">vol_cells</a></td></tr>
+<tr class="separator:a811b51c9e5737dd6fca47ec68c05b63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd806fff40cdbcf75bc7f24db992f160"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#acd806fff40cdbcf75bc7f24db992f160">N_cells</a></td></tr>
+<tr class="separator:acd806fff40cdbcf75bc7f24db992f160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac97e692eef401ad89557727bce88a80c"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#ac97e692eef401ad89557727bce88a80c">detJac_cells</a></td></tr>
+<tr class="separator:ac97e692eef401ad89557727bce88a80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a624bbd3f37ed3c1ac6c34eef6689c42d"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a624bbd3f37ed3c1ac6c34eef6689c42d">DX_N_cells</a></td></tr>
+<tr class="separator:a624bbd3f37ed3c1ac6c34eef6689c42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc21ef29878f354b64106aba791e35c7"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#adc21ef29878f354b64106aba791e35c7">DY_N_cells</a></td></tr>
+<tr class="separator:adc21ef29878f354b64106aba791e35c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172cc162d5a9e1c5287932161b6d78ec"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#a172cc162d5a9e1c5287932161b6d78ec">DZ_N_cells</a></td></tr>
+<tr class="separator:a172cc162d5a9e1c5287932161b6d78ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3c9ec63c3580de9923cfa759c308c99"><td class="memItemLeft" align="right" valign="top">Epetra_IntSerialDenseMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#ad3c9ec63c3580de9923cfa759c308c99">nodes_to_boundaries</a></td></tr>
 <tr class="separator:ad3c9ec63c3580de9923cfa759c308c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa6c571e53131c072dbbbb7bf650cc33"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d6b/classmesh.html#aaa6c571e53131c072dbbbb7bf650cc33">nodes_coord</a></td></tr>
@@ -415,14 +415,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a39d7096e719aa9b6e060a628143ca173"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39d7096e719aa9b6e060a628143ca173">&#9670;&nbsp;</a></span>read_gmsh_tetra()</h2>
+<a id="a52939eb67914e8692dc47aedfcdd731c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52939eb67914e8692dc47aedfcdd731c">&#9670;&nbsp;</a></span>read_gmsh()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int mesh::read_gmsh_tetra </td>
+          <td class="memname">int mesh::read_gmsh </td>
           <td>(</td>
           <td class="paramtype">std::string &amp;&#160;</td>
           <td class="paramname"><em>fileName_mesh</em></td><td>)</td>
@@ -432,6 +432,25 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html#l00060">60</a> of file <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html">meshpp.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac0eb4915f7fd5aed6f48546308f8f7a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0eb4915f7fd5aed6f48546308f8f7a2">&#9670;&nbsp;</a></span>store_feinterp_cells()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mesh::store_feinterp_cells </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html#l00514">514</a> of file <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html">meshpp.cpp</a>.</p>
 
 </div>
 </div>
@@ -451,25 +470,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html#l00428">428</a> of file <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html">meshpp.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aec3804c8c0155f3e599b14144fc22ee2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec3804c8c0155f3e599b14144fc22ee2">&#9670;&nbsp;</a></span>store_feinterp_tetra()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mesh::store_feinterp_tetra </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html#l00514">514</a> of file <a class="el" href="../../d5/d5e/meshpp_8cpp_source.html">meshpp.cpp</a>.</p>
 
 </div>
 </div>
@@ -538,14 +538,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afd3c0bab57494c476f53f7000df7bde4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd3c0bab57494c476f53f7000df7bde4">&#9670;&nbsp;</a></span>detJac_tetra</h2>
+<a id="ac97e692eef401ad89557727bce88a80c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac97e692eef401ad89557727bce88a80c">&#9670;&nbsp;</a></span>detJac_cells</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Epetra_SerialDenseMatrix mesh::detJac_tetra</td>
+          <td class="memname">Epetra_SerialDenseMatrix mesh::detJac_cells</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -554,14 +554,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0edb1ed4945634487266a8ba34169b87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0edb1ed4945634487266a8ba34169b87">&#9670;&nbsp;</a></span>DX_N_tetra</h2>
+<a id="a624bbd3f37ed3c1ac6c34eef6689c42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a624bbd3f37ed3c1ac6c34eef6689c42d">&#9670;&nbsp;</a></span>DX_N_cells</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Epetra_SerialDenseMatrix mesh::DX_N_tetra</td>
+          <td class="memname">Epetra_SerialDenseMatrix mesh::DX_N_cells</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -570,14 +570,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a377402a626dfca7631b11977fab2cf1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a377402a626dfca7631b11977fab2cf1d">&#9670;&nbsp;</a></span>DY_N_tetra</h2>
+<a id="adc21ef29878f354b64106aba791e35c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc21ef29878f354b64106aba791e35c7">&#9670;&nbsp;</a></span>DY_N_cells</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Epetra_SerialDenseMatrix mesh::DY_N_tetra</td>
+          <td class="memname">Epetra_SerialDenseMatrix mesh::DY_N_cells</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -586,14 +586,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aef8c52a4f0e861b64fa4436f60100912"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef8c52a4f0e861b64fa4436f60100912">&#9670;&nbsp;</a></span>DZ_N_tetra</h2>
+<a id="a172cc162d5a9e1c5287932161b6d78ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a172cc162d5a9e1c5287932161b6d78ec">&#9670;&nbsp;</a></span>DZ_N_cells</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Epetra_SerialDenseMatrix mesh::DZ_N_tetra</td>
+          <td class="memname">Epetra_SerialDenseMatrix mesh::DZ_N_cells</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -842,6 +842,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="acd806fff40cdbcf75bc7f24db992f160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd806fff40cdbcf75bc7f24db992f160">&#9670;&nbsp;</a></span>N_cells</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_SerialDenseMatrix mesh::N_cells</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d0/d02/meshpp_8hpp_source.html#l00072">72</a> of file <a class="el" href="../../d0/d02/meshpp_8hpp_source.html">meshpp.hpp</a>.</p>
+
+</div>
+</div>
 <a id="aa6de71610c82f4a4b565d7eb2f1a61d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6de71610c82f4a4b565d7eb2f1a61d1">&#9670;&nbsp;</a></span>n_cells</h2>
 
@@ -1002,22 +1018,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a39db91db7f46abc44ebaf66c5c83bbff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39db91db7f46abc44ebaf66c5c83bbff">&#9670;&nbsp;</a></span>N_tetra</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Epetra_SerialDenseMatrix mesh::N_tetra</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d0/d02/meshpp_8hpp_source.html#l00072">72</a> of file <a class="el" href="../../d0/d02/meshpp_8hpp_source.html">meshpp.hpp</a>.</p>
-
-</div>
-</div>
 <a id="aaa6c571e53131c072dbbbb7bf650cc33"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaa6c571e53131c072dbbbb7bf650cc33">&#9670;&nbsp;</a></span>nodes_coord</h2>
 
@@ -1082,14 +1082,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2f90bc86bc3f05b5288f30115033f850"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f90bc86bc3f05b5288f30115033f850">&#9670;&nbsp;</a></span>vol_tetra</h2>
+<a id="a811b51c9e5737dd6fca47ec68c05b63f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a811b51c9e5737dd6fca47ec68c05b63f">&#9670;&nbsp;</a></span>vol_cells</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Epetra_SerialDenseVector mesh::vol_tetra</td>
+          <td class="memname">Epetra_SerialDenseVector mesh::vol_cells</td>
         </tr>
       </table>
 </div><div class="memdoc">
