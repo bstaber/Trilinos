@@ -15,7 +15,7 @@
         <Parameter name="pressure_load" type="double" value="1.0"/>
     </ParameterList>
     
-    <ParameterList name="KrylovGMRES">
+    <ParameterList name="Krylov">
      <Parameter name="solver" type="string" value="gmres"/>
      <Parameter name="kspace" type="int" value="100"/>
      <Parameter name="orthog" type="string" value="classical"/>
@@ -35,7 +35,7 @@
      <Parameter name="AZ_reorder" type="int" value="1"/>
      </ParameterList>
     
-    <ParameterList name="Krylov">
+    <ParameterList name="KrylovCG">
         <Parameter name="solver" type="string" value="cg"/>
         <!--Parameter name="kspace" type="int" value="100"/-->
         <!--Parameter name="orthog" type="string" value="classical"/-->
