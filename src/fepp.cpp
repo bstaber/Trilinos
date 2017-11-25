@@ -172,23 +172,23 @@ void jacobian_det(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac){
     jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1)*JacobianMatrix(2,2)-JacobianMatrix(0,0)*JacobianMatrix(1,2)*JacobianMatrix(2,1)-JacobianMatrix(0,1)*JacobianMatrix(1,0)*JacobianMatrix(2,2)+JacobianMatrix(0,1)*JacobianMatrix(1,2)*JacobianMatrix(2,0)+JacobianMatrix(0,2)*JacobianMatrix(1,0)*JacobianMatrix(2,1)-JacobianMatrix(0,2)*JacobianMatrix(1,1)*JacobianMatrix(2,0) );
 }
 
-void jacobian_det_tri(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac){
+void jacobian_det_faces(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac){
     jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(0,1)*JacobianMatrix(0,1));
 }
 
-void gauss_points_tri1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
+void gauss_points_faces1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
     weight.Resize(1); xi.Resize(1); eta.Resize(1);
     weight(0) = 1.0/2.0;
     xi(0) = 1.0/3.0;
     eta(0) = 1.0/3.0;
 }
-void gauss_points_tri3(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
+void gauss_points_faces3(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
     weight.Resize(3); xi.Resize(3); eta.Resize(3);
     weight(0) = 1.0/6.0; weight(1) = 1.0/6.0; weight(2) = 1.0/6.0;
     xi(0) = 1.0/6.0; xi(1) = 2.0/3.0; xi(2) = 1.0/6.0;
     eta(0) = 1.0/6.0; eta(1) = 1.0/6.0; eta(2) = 2.0/3.0;
 }
-void gauss_points_tri4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
+void gauss_points_faces4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
     weight.Resize(4); xi.Resize(4); eta.Resize(4);
     weight(0) = -27.0/96.0; weight(1) = 25.0/96.0; weight(2) = 25.0/96.0; weight(3) = 25.0/96.0;
     xi(0) = 1.0/3.0; xi(1) = 1.0/5.0; xi(2) = 3.0/5.0; xi(3) = 1.0/5.0;

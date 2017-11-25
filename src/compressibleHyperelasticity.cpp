@@ -285,13 +285,13 @@ void compressibleHyperelasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector &
                 force(3*inode+iddl) = 0.0;
             }
         }
-        xg.Multiply('N','T',1.0,matrix_X,Mesh->N_tri,0.0);
+        xg.Multiply('N','T',1.0,matrix_X,Mesh->N_faces,0.0);
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight  = Mesh->gauss_weight_faces(gp);
             dead_pressure = get_neumannBc(matrix_X,xg,gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
                 for (unsigned int iddl=0; iddl<3; ++iddl){
-                    force(3*inode+iddl) += gauss_weight*pressure_load*dead_pressure(iddl)*Mesh->N_tri(gp,inode);
+                    force(3*inode+iddl) += gauss_weight*pressure_load*dead_pressure(iddl)*Mesh->N_faces(gp,inode);
                 }
             }
         }

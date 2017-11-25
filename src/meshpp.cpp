@@ -47,16 +47,14 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
     std::cout << std::setw(5) << MyPID << std::setw(20) << n_local_cells << std::setw(20) << n_local_nodes_without_ghosts << std::setw(20) << n_local_faces << "\n";
     
     if (n_local_faces>0 && (face_type==3 || face_type==4 || face_type==6)){
-        store_feinterp_tri();
+        store_feinterp_faces();
     }
     store_feinterp_tetra();
 }
 
 mesh::~mesh(){
-    //delete[] NumIndicesPerRow;
     delete[] epart;
     delete[] npart;
-    //delete Comm;
 }
 
 int mesh::read_gmsh_tetra(std::string & fileName_mesh){
@@ -78,16 +76,16 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
     unsigned int nbtag;
     unsigned int tag1;
     unsigned int tag2;
-    unsigned int n_tri3 = 0;
+    unsigned int n_faces3 = 0;
     unsigned int n_quad4 = 0;
-    unsigned int n_tri6 = 0;
+    unsigned int n_faces6 = 0;
     unsigned int n_tetra4 = 0;
     unsigned int n_hexa8 = 0;
     unsigned int n_tetra10 = 0;
     unsigned int node;
-    unsigned int nodes_tri3[3];
+    unsigned int nodes_faces3[3];
     unsigned int nodes_quad4[4];
-    unsigned int nodes_tri6[6];
+    unsigned int nodes_faces6[6];
     unsigned int nodes_tetra4[4];
     unsigned int nodes_hexa8[8];
     unsigned int nodes_tetra10[10];
@@ -139,8 +137,8 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
                 break;
             case 2:
                 for (unsigned int inode=0; inode<3; ++inode){
-                    meshfile >> nodes_tri3[inode];
-                    tri3_nodes.push_back(nodes_tri3[inode]-1);
+                    meshfile >> nodes_faces3[inode];
+                    tri3_nodes.push_back(nodes_faces3[inode]-1);
                 }
                 break;
             case 3:
@@ -165,9 +163,9 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
                 break;
             case 9:
                 for (unsigned int inode=0; inode<6; ++inode){
-                    meshfile >> nodes_tri6[inode];
+                    meshfile >> nodes_faces6[inode];
                     if (tag1==1){
-                        tri6_nodes.push_back(nodes_tri6[inode]-1);
+                        tri6_nodes.push_back(nodes_faces6[inode]-1);
                     }
                 }
                 break;
@@ -189,9 +187,9 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
     }
     meshfile.close();
     
-    n_tri3 = tri3_nodes.size()/3;
+    n_faces3 = tri3_nodes.size()/3;
     n_quad4 = quad4_nodes.size()/4;
-    n_tri6 = tri6_nodes.size()/6;
+    n_faces6 = tri6_nodes.size()/6;
     n_tetra4 = tetra4_nodes.size()/4;
     n_hexa8 = hexa8_nodes.size()/8;
     n_tetra10 = tetra10_nodes.size()/10;
@@ -203,27 +201,27 @@ int mesh::read_gmsh_tetra(std::string & fileName_mesh){
         error = 1;
         return error;
     }
-    if ( (n_tri3>0 && n_tri6>0) || (n_tri3>0 && n_quad4>0) || (n_tri6>0 && n_quad4>0) ){
+    if ( (n_faces3>0 && n_faces6>0) || (n_faces3>0 && n_quad4>0) || (n_faces6>0 && n_quad4>0) ){
         std::cerr << "We do not handle mixed meshes that contain tri3's and/or tri6's and/or quad4's.\n";
         error = 1;
         return error;
     }
-    if (n_tri3>0){
+    if (n_faces3>0){
         face_type = 3;
-        n_faces = n_tri3;
+        n_faces = n_faces3;
         faces_nodes.reserve(tri3_nodes.size());
         faces_nodes = tri3_nodes;
         
-        gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
+        gauss_points_faces3(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
-    if (n_tri6>0){
+    if (n_faces6>0){
         face_type = 6;
-        n_faces = n_tri6;
+        n_faces = n_faces6;
         faces_nodes.reserve(tri6_nodes.size());
         faces_nodes = tri6_nodes;
         
-        gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
+        gauss_points_faces4(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
     if (n_quad4>0){
@@ -427,23 +425,22 @@ void mesh::get_cells_and_ghosts(int & MyPID){
     }
 }
 
-void mesh::store_feinterp_tri(){
+void mesh::store_feinterp_faces(){
     
     int node, eglob;
     Epetra_SerialDenseVector N(face_type);
-    Epetra_SerialDenseMatrix JacobianMatrix(2,2), X(2,face_type), D(face_type,2);
+    Epetra_SerialDenseMatrix D(face_type,2);
     
-    N_tri.Reshape(n_gauss_faces,face_type);
-    D1_N_tri.Reshape(n_gauss_faces,face_type);
-    D2_N_tri.Reshape(n_gauss_faces,face_type);
-    detJac_tri.Reshape(n_local_faces,n_gauss_faces);
+    N_faces.Reshape(n_gauss_faces,face_type);
+    D1_N_faces.Reshape(n_gauss_faces,face_type);
+    D2_N_faces.Reshape(n_gauss_faces,face_type);
     
     switch (face_type){
         case 3:
             for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
                 tri3::shape_functions(N, xi_faces[gp], eta_faces[gp]);
                 for (int inode=0; inode<face_type; ++inode){
-                    N_tri(gp,inode) = N(inode);
+                    N_faces(gp,inode) = N(inode);
                 }
             }
             break;
@@ -451,7 +448,7 @@ void mesh::store_feinterp_tri(){
             for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
                 quad4::shape_functions(N, xi_faces[gp], eta_faces[gp]);
                 for (int inode=0; inode<face_type; ++inode){
-                    N_tri(gp,inode) = N(inode);
+                    N_faces(gp,inode) = N(inode);
                 }
             }
             break;
@@ -459,13 +456,31 @@ void mesh::store_feinterp_tri(){
             for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
                 tri6::shape_functions(N, xi_faces[gp], eta_faces[gp]);
                 for (int inode=0; inode<face_type; ++inode){
-                    N_tri(gp,inode) = N(inode);
+                    N_faces(gp,inode) = N(inode);
                 }
             }
             break;
     };
+
+    for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
+        switch (face_type){
+            case 3:
+                tri3::d_shape_functions(D, xi_faces[gp], eta_faces[gp]);
+                break;
+            case 4:
+                quad4::d_shape_functions(D, xi_faces[gp], eta_faces[gp]);
+                break;
+            case 6:
+                tri6::d_shape_functions(D, xi_faces[gp], eta_faces[gp]);
+                break;
+        };
+        for (unsigned int inode=0; inode<face_type; ++inode){
+            D1_N_faces(gp,inode) = D(inode,0);
+            D2_N_faces(gp,inode) = D(inode,1);
+        }
+    }
     
-    for (unsigned int eloc=0; eloc<n_local_faces; ++eloc){
+    /*for (unsigned int eloc=0; eloc<n_local_faces; ++eloc){
         eglob = local_faces[eloc];
         for (unsigned int inode=0; inode<face_type; inode++){
             node = faces_nodes[face_type*eglob+inode];
@@ -486,15 +501,14 @@ void mesh::store_feinterp_tri(){
                     break;
             }
             for (unsigned int inode=0; inode<face_type; ++inode){
-                D1_N_tri(gp,inode) = D(inode,0);
-                D2_N_tri(gp,inode) = D(inode,1);
+                D1_N_faces(gp,inode) = D(inode,0);
+                D2_N_faces(gp,inode) = D(inode,1);
             }
             
             JacobianMatrix.Multiply('N','N',1.0,X,D,0.0);
-            detJac_tri(eloc,gp) = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
+            detJac_faces(eloc,gp) = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
         }
-        
-    }
+    }*/
 }
 
 void mesh::store_feinterp_tetra(){

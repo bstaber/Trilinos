@@ -131,8 +131,8 @@ public:
         Epetra_SerialDenseMatrix piola(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
         piola = getManufacturedPiola(xg(0,gp),xg(1,gp),xg(2,gp));
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
-            d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
-            d_shape_functions(inode,1) = Mesh->D2_N_tri(gp,inode);
+            d_shape_functions(inode,0) = Mesh->D1_N_faces(gp,inode);
+            d_shape_functions(inode,1) = Mesh->D2_N_faces(gp,inode);
         }
         dxi_matrix_x.Multiply('N','N',1.0,matrix_X,d_shape_functions,0.0);
         normal(0) = dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1);

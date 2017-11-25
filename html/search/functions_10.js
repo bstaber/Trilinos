@@ -28,7 +28,7 @@ var searchData=
   ['stiffnessrhs_5finhomogeneousforcing',['stiffnessRhs_inhomogeneousForcing',['../d1/d5c/classcompressible_hyperelasticity.html#afc5917e4f86f575af7fb5e8fdd298aa1',1,'compressibleHyperelasticity']]],
   ['stiffnessrhsmaterialcontribution',['stiffnessRhsMaterialContribution',['../d0/d85/classnearly_incompressible_hyperelasticity.html#ae5f1c66075f524a4168d10bc75d371e5',1,'nearlyIncompressibleHyperelasticity']]],
   ['stiffnessrhspressurecontribution',['stiffnessRhsPressureContribution',['../d0/d85/classnearly_incompressible_hyperelasticity.html#aecf8f49041f142afba4fa9aea21c7354',1,'nearlyIncompressibleHyperelasticity']]],
+  ['store_5ffeinterp_5ffaces',['store_feinterp_faces',['../d6/d6b/classmesh.html#a1bc93b5ae13e978efe1b14e3c44c7dab',1,'mesh']]],
   ['store_5ffeinterp_5ftetra',['store_feinterp_tetra',['../d6/d6b/classmesh.html#aec3804c8c0155f3e599b14144fc22ee2',1,'mesh']]],
-  ['store_5ffeinterp_5ftri',['store_feinterp_tri',['../d6/d6b/classmesh.html#a51063e41338b1da593fa179e49868f67',1,'mesh']]],
   ['sym_5ftensor_5fproduct',['sym_tensor_product',['../de/d49/tensor__calculus_8hpp.html#a5b2bffd63a9471bf0196305afae53b10',1,'tensor_calculus.hpp']]]
 ];

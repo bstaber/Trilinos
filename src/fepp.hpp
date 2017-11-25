@@ -40,11 +40,11 @@ void dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix J
 
 void jacobian_matrix(Epetra_SerialDenseMatrix & X, Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix & JacobianMatrix);
 void jacobian_det(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac);
-void jacobian_det_tri(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac);
+void jacobian_det_faces(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac);
 
-void gauss_points_tri1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);
-void gauss_points_tri3(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);
-void gauss_points_tri4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);
+void gauss_points_faces1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);
+void gauss_points_faces3(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);
+void gauss_points_faces4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);
 
 void gauss_points_quad1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);
 void gauss_points_quad4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta);

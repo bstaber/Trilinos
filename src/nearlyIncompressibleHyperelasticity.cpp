@@ -218,24 +218,24 @@ void nearlyIncompressibleHyperelasticity::stiffnessRhsPressureContribution(Epetr
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_faces(gp);
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
-                d_shape_functions(inode,0) = Mesh->D1_N_tri(gp,inode);
-                d_shape_functions(inode,1) = Mesh->D2_N_tri(gp,inode);
+                d_shape_functions(inode,0) = Mesh->D1_N_faces(gp,inode);
+                d_shape_functions(inode,1) = Mesh->D2_N_faces(gp,inode);
             }
             dxi_matrix_x.Multiply('N','N',1.0,matrix_x,d_shape_functions,0.0);
             
             for (unsigned int inode=0; inode<Mesh->face_type; ++inode){
-                force(3*inode+0) += gauss_weight*pressure_load*Mesh->N_tri(gp,inode)*(dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1));
-                force(3*inode+1) += gauss_weight*pressure_load*Mesh->N_tri(gp,inode)*(dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1));
-                force(3*inode+2) += gauss_weight*pressure_load*Mesh->N_tri(gp,inode)*(dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1));
+                force(3*inode+0) += gauss_weight*pressure_load*Mesh->N_faces(gp,inode)*(dxi_matrix_x(1,0)*dxi_matrix_x(2,1) - dxi_matrix_x(2,0)*dxi_matrix_x(1,1));
+                force(3*inode+1) += gauss_weight*pressure_load*Mesh->N_faces(gp,inode)*(dxi_matrix_x(2,0)*dxi_matrix_x(0,1) - dxi_matrix_x(0,0)*dxi_matrix_x(2,1));
+                force(3*inode+2) += gauss_weight*pressure_load*Mesh->N_faces(gp,inode)*(dxi_matrix_x(0,0)*dxi_matrix_x(1,1) - dxi_matrix_x(1,0)*dxi_matrix_x(0,1));
                 
                 for (unsigned int jnode=0; jnode<Mesh->face_type; ++jnode){
-                    k1(inode,jnode) += 0.5*gauss_weight*pressure_load*( dxi_matrix_x(0,0)*(d_shape_functions(inode,1)*Mesh->N_tri(gp,jnode) - d_shape_functions(jnode,1)*Mesh->N_tri(gp,inode)) - dxi_matrix_x(0,1)*(d_shape_functions(inode,0)*Mesh->N_tri(gp,jnode) - d_shape_functions(jnode,0)*Mesh->N_tri(gp,inode)) );
-                    k2(inode,jnode) += 0.5*gauss_weight*pressure_load*( dxi_matrix_x(1,0)*(d_shape_functions(inode,1)*Mesh->N_tri(gp,jnode) - d_shape_functions(jnode,1)*Mesh->N_tri(gp,inode)) - dxi_matrix_x(1,1)*(d_shape_functions(inode,0)*Mesh->N_tri(gp,jnode) - d_shape_functions(jnode,0)*Mesh->N_tri(gp,inode)) );
-                    k3(inode,jnode) += 0.5*gauss_weight*pressure_load*( dxi_matrix_x(2,0)*(d_shape_functions(inode,1)*Mesh->N_tri(gp,jnode) - d_shape_functions(jnode,1)*Mesh->N_tri(gp,inode)) - dxi_matrix_x(2,1)*(d_shape_functions(inode,0)*Mesh->N_tri(gp,jnode) - d_shape_functions(jnode,0)*Mesh->N_tri(gp,inode)) );
+                    k1(inode,jnode) += 0.5*gauss_weight*pressure_load*( dxi_matrix_x(0,0)*(d_shape_functions(inode,1)*Mesh->N_faces(gp,jnode) - d_shape_functions(jnode,1)*Mesh->N_faces(gp,inode)) - dxi_matrix_x(0,1)*(d_shape_functions(inode,0)*Mesh->N_faces(gp,jnode) - d_shape_functions(jnode,0)*Mesh->N_faces(gp,inode)) );
+                    k2(inode,jnode) += 0.5*gauss_weight*pressure_load*( dxi_matrix_x(1,0)*(d_shape_functions(inode,1)*Mesh->N_faces(gp,jnode) - d_shape_functions(jnode,1)*Mesh->N_faces(gp,inode)) - dxi_matrix_x(1,1)*(d_shape_functions(inode,0)*Mesh->N_faces(gp,jnode) - d_shape_functions(jnode,0)*Mesh->N_faces(gp,inode)) );
+                    k3(inode,jnode) += 0.5*gauss_weight*pressure_load*( dxi_matrix_x(2,0)*(d_shape_functions(inode,1)*Mesh->N_faces(gp,jnode) - d_shape_functions(jnode,1)*Mesh->N_faces(gp,inode)) - dxi_matrix_x(2,1)*(d_shape_functions(inode,0)*Mesh->N_faces(gp,jnode) - d_shape_functions(jnode,0)*Mesh->N_faces(gp,inode)) );
                     //General case (leads to a non symmetric stiffness)
-                    //k1(inode,jnode) += gauss_weight*pressure_load*Mesh->N_tri(gp,inode)*(d_shape_functions(jnode,0)*dxi_matrix_x(0,1)-d_shape_functions(jnode,1)*dxi_matrix_x(0,0));
-                    //k2(inode,jnode) += gauss_Weight*pressure_load*Mesh->N_tri(gp,inode)*(d_shape_functions(jnode,0)*dxi_matrix_x(1,1)-d_shape_functions(jnode,1)*dxi_matrix_x(1,0));
-                    //k3(inode,jnode) += gauss_weight*pressure_load*Mesh->N_tri(gp,inode)*(d_shape_functions(jnode,0)*dxi_matrix_x(2,1)-d_shape_functions(jnode,1)*dxi_matrix_x(2,0));
+                    //k1(inode,jnode) += gauss_weight*pressure_load*Mesh->N_faces(gp,inode)*(d_shape_functions(jnode,0)*dxi_matrix_x(0,1)-d_shape_functions(jnode,1)*dxi_matrix_x(0,0));
+                    //k2(inode,jnode) += gauss_Weight*pressure_load*Mesh->N_faces(gp,inode)*(d_shape_functions(jnode,0)*dxi_matrix_x(1,1)-d_shape_functions(jnode,1)*dxi_matrix_x(1,0));
+                    //k3(inode,jnode) += gauss_weight*pressure_load*Mesh->N_faces(gp,inode)*(d_shape_functions(jnode,0)*dxi_matrix_x(2,1)-d_shape_functions(jnode,1)*dxi_matrix_x(2,0));
                 }
             }
         }

@@ -58,13 +58,14 @@ public:
     void get_local_nodes(int & MyPID);
     void get_cells_and_ghosts(int & MyPID);
     
-    void store_feinterp_tri();
+    void store_feinterp_faces();
     void store_feinterp_tetra();
     
-    Epetra_SerialDenseMatrix N_tri;
-    Epetra_SerialDenseMatrix D1_N_tri;
-    Epetra_SerialDenseMatrix D2_N_tri;
-    Epetra_SerialDenseMatrix detJac_tri;
+    Epetra_Comm* Comm;
+    
+    Epetra_SerialDenseMatrix N_faces;
+    Epetra_SerialDenseMatrix D1_N_faces;
+    Epetra_SerialDenseMatrix D2_N_faces;
     
     Epetra_SerialDenseVector local_rows;
     Epetra_SerialDenseVector vol_tetra;
@@ -109,10 +110,6 @@ public:
     Epetra_SerialDenseVector zeta_cells;
     Epetra_SerialDenseVector xi_faces;
     Epetra_SerialDenseVector eta_faces;
-    //double gauss_weight_tetra;
-    //double gauss_weight_tri;
-    
-    Epetra_Comm* Comm;
 };
 
 #endif
