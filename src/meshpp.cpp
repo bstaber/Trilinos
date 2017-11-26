@@ -212,7 +212,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         faces_nodes.reserve(tri3_nodes.size());
         faces_nodes = tri3_nodes;
         
-        gauss_points_faces3(gauss_weight_faces,xi_faces,eta_faces);
+        gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
     if (n_faces6>0){
@@ -221,7 +221,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         faces_nodes.reserve(tri6_nodes.size());
         faces_nodes = tri6_nodes;
         
-        gauss_points_faces4(gauss_weight_faces,xi_faces,eta_faces);
+        gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
     if (n_quad4>0){
@@ -239,7 +239,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         cells_nodes.reserve(tetra4_nodes.size());
         cells_nodes = tetra4_nodes;
         
-        gauss_points_cells4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
     if (n_hexa8>0){
@@ -248,7 +248,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         cells_nodes.reserve(hexa8_nodes.size());
         cells_nodes = hexa8_nodes;
         
-        gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
     if (n_cells10>0){
@@ -257,7 +257,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         cells_nodes.reserve(tetra10_nodes.size());
         cells_nodes = tetra10_nodes;
                 
-        gauss_points_cells11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
     return error;

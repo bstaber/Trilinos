@@ -176,19 +176,19 @@ void jacobian_det_faces(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac)
     jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(0,1)*JacobianMatrix(0,1));
 }
 
-void gauss_points_faces1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
+void gauss_points_tri1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
     weight.Resize(1); xi.Resize(1); eta.Resize(1);
     weight(0) = 1.0/2.0;
     xi(0) = 1.0/3.0;
     eta(0) = 1.0/3.0;
 }
-void gauss_points_faces3(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
+void gauss_points_tri3(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
     weight.Resize(3); xi.Resize(3); eta.Resize(3);
     weight(0) = 1.0/6.0; weight(1) = 1.0/6.0; weight(2) = 1.0/6.0;
     xi(0) = 1.0/6.0; xi(1) = 2.0/3.0; xi(2) = 1.0/6.0;
     eta(0) = 1.0/6.0; eta(1) = 1.0/6.0; eta(2) = 2.0/3.0;
 }
-void gauss_points_faces4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
+void gauss_points_tri4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta){
     weight.Resize(4); xi.Resize(4); eta.Resize(4);
     weight(0) = -27.0/96.0; weight(1) = 25.0/96.0; weight(2) = 25.0/96.0; weight(3) = 25.0/96.0;
     xi(0) = 1.0/3.0; xi(1) = 1.0/5.0; xi(2) = 3.0/5.0; xi(3) = 1.0/5.0;
@@ -244,7 +244,40 @@ void gauss_points_hexa8(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVec
     xi(7)= a;  eta(7)=a;   zeta(7)=a;    weight(7)=1.0;
 }
 
-void gauss_points_cells1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
+void gauss_points_hexa27(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
+    weight.Resize(27); xi.Resize(27); eta.Resize(27); zeta.Resize(27);
+    
+    double a = std::sqrt(3.0/5.0); double c1 = 5.0/9.0l double c2 = 8.0/9.0;
+    xi(0) =   -a;  eta(0) =  -a;  zeta(0) =  -a;  weight(0) = c1*c1*c1;
+    xi(1) =   -a;  eta(1) =  -a;  zeta(1) = 0.0;  weight(1) = c1*c1*c2;
+    xi(2) =   -a;  eta(2) =  -a;  zeta(2) =   a;  weight(2) = c1*c1*c1;
+    xi(3) =   -a;  eta(3) = 0.0;  zeta(3) =  -a;  weight(3) = c1*c1*c2;
+    xi(4) =   -a;  eta(4) = 0.0;  zeta(4) = 0.0;  weight(4) = c1*c2*c2;
+    xi(5) =   -a;  eta(5) = 0.0;  zeta(5) =   a;  weight(5) = c1*c1*c2;
+    xi(6) =   -a;  eta(6) =   a;  zeta(6) =  -a;  weight(6) = c1*c1*c1;
+    xi(7) =   -a;  eta(7) =   a;  zeta(7) = 0.0;  weight(7) = c1*c1*c2;
+    xi(8) =   -a;  eta(8) =   a;  zeta(8) =   a;  weight(8) = c1*c1*c1;
+    xi(9) =  0.0;  eta(9) =  -a;  zeta(9) =  -a;  weight(9) = c1*c1*c2;
+    xi(10) = 0.0; eta(10) =  -a; zeta(10) = 0.0; weight(10) = c1*c2*c2;
+    xi(11) = 0.0; eta(11) =  -a; zeta(11) =   a; weight(11) = c1*c1*c2;
+    xi(12) = 0.0; eta(12) = 0.0; zeta(12) =  -a; weight(12) = c1*c2*c2;
+    xi(13) = 0.0; eta(13) = 0.0; zeta(13) = 0.0; weight(13) = c2*c2*c2;
+    xi(14) = 0.0; eta(14) = 0.0; zeta(14) =   a; weight(14) = c1*c2*c2;
+    xi(15) = 0.0; eta(15) =   a; zeta(15) =  -a; weight(15) = c1*c1*c2;
+    xi(16) = 0.0; eta(16) =   a; zeta(16) = 0.0; weight(16) = c1*c2*c2;
+    xi(17) = 0.0; eta(17) =   a; zeta(17) =   a; weight(17) = c1*c1*c2;
+    xi(18) =   a; eta(18) =  -a; zeta(18) =  -a; weight(18) = c1*c1*c1;
+    xi(19) =   a; eta(19) =  -a; zeta(19) = 0.0; weight(19) = c1*c1*c2;
+    xi(20) =   a; eta(20) =  -a; zeta(20) =   a; weight(20) = c1*c1*c1;
+    xi(21) =   a; eta(21) = 0.0; zeta(21) =  -a; weight(21) = c1*c1*c2;
+    xi(22) =   a; eta(22) = 0.0; zeta(22) = 0.0; weight(22) = c1*c2*c2;
+    xi(23) =   a; eta(23) = 0.0; zeta(23) =   a; weight(23) = c1*c1*c2;
+    xi(24) =   a; eta(24) =   a; zeta(24) =  -a; weight(24) = c1*c1*c1;
+    xi(25) =   a; eta(25) =   a; zeta(25) = 0.0; weight(25) = c1*c1*c2;
+    xi(26) =   a; eta(26) =   a; zeta(26) =   a; weight(26) = c1*c1*c1;
+}
+
+void gauss_points_tetra1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(1);
     xi.Resize(1); eta.Resize(1); zeta.Resize(1);
     weight(0) = 1.0/6.0;
@@ -252,7 +285,7 @@ void gauss_points_cells1(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVe
     eta(0) = 1.0/4.0;
     zeta(0) = 1.0/4.0;
 }
-void gauss_points_cells4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
+void gauss_points_tetra4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(4); xi.Resize(4); eta.Resize(4); zeta.Resize(4);
     double alpha = (5.0 - sqrt(5.0))/20.0;
     double beta = (5.0 + 3.0*sqrt(5.0))/20.0;
@@ -262,7 +295,7 @@ void gauss_points_cells4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVe
     xi(2) = alpha; eta(2) = beta;  zeta(2) = alpha;
     xi(3) = beta;  eta(3) = alpha; zeta(3) = alpha;
 }
-void gauss_points_cells5(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
+void gauss_points_tetra5(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(5);xi.Resize(5); eta.Resize(5); zeta.Resize(5);
     xi(0) = 0.25; xi(1) = 0.50; xi(3) = 0.1666666666666667; xi(4) = 0.1666666666666667; xi(5) = 0.1666666666666667;
     eta(0) = 0.25; eta(1) = 0.1666666666666667; eta(2) = 0.1666666666666667; eta(3) = 0.1666666666666667; eta(4) = 0.50;
@@ -270,7 +303,7 @@ void gauss_points_cells5(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVe
     weight(0) = -0.8000000000000000/6.0; weight(1) = 0.45/6.0; weight(2) = 0.45/6.0; weight(3) = 0.45/6.0; weight(4) =0.45/6.0;
     
 }
-void gauss_points_cells11(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
+void gauss_points_tetra11(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(11); xi.Resize(11); eta.Resize(11); zeta.Resize(11);
     xi(0) = 0.25; xi(1) = 0.7857142857142857; xi(2) = 0.0714285714285714; xi(3) = 0.0714285714285714; xi(4) = 0.0714285714285714; xi(5) = 0.1005964238332008; xi(6) = 0.3994035761667992; xi(7) = 0.3994035761667992; xi(8) = 0.3994035761667992; xi(9) = 0.1005964238332008; xi(10) = 0.1005964238332008;
     eta(0) = 0.25; eta(1) = 0.0714285714285714; eta(2) = 0.0714285714285714; eta(3) = 0.0714285714285714; eta(4) = 0.7857142857142857; eta(5) = 0.3994035761667992; eta(6) = 0.1005964238332008; eta(7) = 0.3994035761667992; eta(8) = 0.1005964238332008; eta(9) = 0.3994035761667992; eta(10) = 0.1005964238332008;
