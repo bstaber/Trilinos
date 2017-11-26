@@ -45,7 +45,7 @@ MPI_Init(&argc, &argv);
     
     Epetra_IntSerialDenseVector seeds(5);
     
-    int id = 1;
+    int id = 0;
     Epetra_SerialDenseVector parameters(5), exponents(2), hyperParameters(6);
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
