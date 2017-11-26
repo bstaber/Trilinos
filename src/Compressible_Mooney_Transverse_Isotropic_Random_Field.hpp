@@ -70,6 +70,7 @@ public:
     
     void setParameters(Epetra_SerialDenseVector & parameters, Epetra_SerialDenseVector & exponents, Epetra_SerialDenseVector & hyperParameters){
         mean_mu = parameters;
+        beta    = -1.0/2.0;
         beta4   = exponents(0);
         beta5   = exponents(1);
         omega   = hyperParameters;
@@ -281,8 +282,6 @@ public:
         double pI3 = std::pow(I3,-beta3);
         double pI4 = std::pow(I4,beta4);
         double pJ5 = std::pow(J5,beta5);
-        
-        std::cout << beta3 << "\n";
         
         for (unsigned int i=0; i<6; ++i){
             dJ5(i) = J5*L(i) - I3*LML(i);
