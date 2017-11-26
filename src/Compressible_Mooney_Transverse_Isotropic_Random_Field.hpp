@@ -70,7 +70,7 @@ public:
     
     void setParameters(Epetra_SerialDenseVector & parameters, Epetra_SerialDenseVector & exponents, Epetra_SerialDenseVector & hyperParameters){
         mean_mu = parameters;
-        beta    = -1.0/2.0;
+        beta3   = -1.0/2.0;
         beta4   = exponents(0);
         beta5   = exponents(1);
         omega   = hyperParameters;
