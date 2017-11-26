@@ -23,7 +23,7 @@ public:
     
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
     
-    void compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM);
+    void compute_center_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM);
     void compute_deformation(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM);
     
     int print_solution(Epetra_Vector & solution, std::string fileName);

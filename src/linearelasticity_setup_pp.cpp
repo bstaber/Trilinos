@@ -424,7 +424,7 @@ void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & 
     
 }
 
-void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
+void LinearizedElasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
     
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
@@ -484,27 +484,7 @@ void LinearizedElasticity::compute_mean_cauchy_stress(Epetra_Vector & x, std::st
         for (unsigned int i=0; i<6; ++i){
             epsilon(i) = 0.0;
         }
-                
-        /*theta = 0.0;
-        for (unsigned int gp=0; gp<n_gauss_points; ++gp){
-            
-            gauss_weight = Mesh->gauss_weight_cells(gp);
-            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-                dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
-                dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
-            }
-            
-            compute_B_matrices(dx_shape_functions,matrix_B);
-            epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);
-            
-            //get_elasticity_tensor(e_lid, gp, tangent_matrix);
-            //cauchy_stress.Multiply('N','N',1.0,tangent_matrix,epsilon,0.0);
-            
-            theta += gauss_weight*det*Mesh->detJac_cells(e_lid,gp);
-            
-        }*/
-    
+                    
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_cells);
         dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);

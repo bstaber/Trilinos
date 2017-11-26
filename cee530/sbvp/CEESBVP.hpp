@@ -53,13 +53,13 @@ public:
     
     ~CEESBVP(){
     }
-    
-    Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp){
+        
+    Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         std::cout << "Not using this method in this application.\n";
         Epetra_SerialDenseVector f(3);
         return f;
     }
-    Epetra_SerialDenseVector get_forcing(unsigned int & e_lid, unsigned int & gp){
+    Epetra_SerialDenseVector get_forcing(double & x1, double & x2, double & x3, unsigned int & e_lid, unsigned int & gp){
         std::cout << "Not using this method in this application.\n";
         Epetra_SerialDenseVector f(3);
         return f;
@@ -94,14 +94,10 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
         
-        //double deltaN = 0.0970;
-        //double deltaM4 = 0.0461;
-        //double deltaM5 = 0.0952;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
-            
             alpha = 3.0/(2.0*_deltaN*_deltaN); beta = 1.0;
             Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
             m1(i) = (_deltaN*_deltaN/3.0)*2.0*Psi1;
@@ -116,7 +112,6 @@ public:
             m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
             alpha = 1.0/(_deltaM5*_deltaM5); beta = 1.0*_deltaM5*_deltaM5;
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
-            
         }
         
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
@@ -141,7 +136,6 @@ public:
         solver.Iterate(2000,1e-6);
         
         *solution = lhs;
-        
     }
     
     double icdf_gamma(double & w, double & alpha, double & beta){
@@ -304,14 +298,10 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_one_gauss_point(w5_shino,*Mesh,phase,xi,eta,zeta);
         
-        //double deltaN = 0.0970;
-        //double deltaM4 = 0.0461;
-        //double deltaM5 = 0.0952;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
-            
             alpha = 3.0/(2.0*_deltaN*_deltaN); beta = 1.0;
             Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
             m1(i) = (_deltaN*_deltaN/3.0)*2.0*Psi1;
@@ -326,9 +316,8 @@ public:
             m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
             alpha = 1.0/(_deltaM4*_deltaM4); beta = 1.0*_deltaM5*_deltaM5;
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
-            
         }
-        compute_center_von_mises(*solution, filename, true, true);
+        compute_center_cauchy_stress(*solution, filename, false, true);
     }
     
     void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix){

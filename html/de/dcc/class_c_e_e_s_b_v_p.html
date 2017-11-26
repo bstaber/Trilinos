@@ -115,10 +115,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8b50554ac52f006e4df4705b7dc128d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ffc3c864f125860a9876ad7833db149"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dcc/class_c_e_e_s_b_v_p.html#a3ffc3c864f125860a9876ad7833db149">~CEESBVP</a> ()</td></tr>
 <tr class="separator:a3ffc3c864f125860a9876ad7833db149"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b0f79471ef087175660150d06f3ea29"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dcc/class_c_e_e_s_b_v_p.html#a8b0f79471ef087175660150d06f3ea29">get_neumannBc</a> (unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
-<tr class="separator:a8b0f79471ef087175660150d06f3ea29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa00025debeb0f918a9584d6f0eda7977"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dcc/class_c_e_e_s_b_v_p.html#aa00025debeb0f918a9584d6f0eda7977">get_forcing</a> (unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
-<tr class="separator:aa00025debeb0f918a9584d6f0eda7977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89997e0cc5c7da84fc93c18b60ae77e7"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dcc/class_c_e_e_s_b_v_p.html#a89997e0cc5c7da84fc93c18b60ae77e7">get_neumannBc</a> (Epetra_SerialDenseMatrix &amp;matrix_X, Epetra_SerialDenseMatrix &amp;xg, unsigned int &amp;gp)</td></tr>
+<tr class="separator:a89997e0cc5c7da84fc93c18b60ae77e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bfa3c67d0c720fc818246acd224344d"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dcc/class_c_e_e_s_b_v_p.html#a7bfa3c67d0c720fc818246acd224344d">get_forcing</a> (double &amp;x1, double &amp;x2, double &amp;x3, unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
+<tr class="separator:a7bfa3c67d0c720fc818246acd224344d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea4de4cad4d7adcea2dd89dca213f690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dcc/class_c_e_e_s_b_v_p.html#aea4de4cad4d7adcea2dd89dca213f690">solveOneRealization</a> (double &amp;bcDisp, int *seeds)</td></tr>
 <tr class="separator:aea4de4cad4d7adcea2dd89dca213f690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02f802bb7cfa8409747ce08a670b6b72"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/dcc/class_c_e_e_s_b_v_p.html#a02f802bb7cfa8409747ce08a670b6b72">icdf_gamma</a> (double &amp;w, double &amp;alpha, double &amp;beta)</td></tr>
@@ -160,16 +160,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acdbacad7e43c03799abbaa85c4742a0f inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d4107a51ecc028126ffe6ca89897050 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a2d4107a51ecc028126ffe6ca89897050">compute_B_matrices</a> (Epetra_SerialDenseMatrix &amp;dx_shape_functions, Epetra_SerialDenseMatrix &amp;B)</td></tr>
 <tr class="separator:a2d4107a51ecc028126ffe6ca89897050 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07b867f2b66c09c54be81b533e82defb inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a07b867f2b66c09c54be81b533e82defb">compute_mean_cauchy_stress</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename, bool printCauchy, bool printVM)</td></tr>
-<tr class="separator:a07b867f2b66c09c54be81b533e82defb inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f62e8a06da304028eedc8bc493156b7 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a3f62e8a06da304028eedc8bc493156b7">compute_center_cauchy_stress</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename, bool printCauchy, bool printVM)</td></tr>
+<tr class="separator:a3f62e8a06da304028eedc8bc493156b7 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b266d896ff293578dedceff7cee5f54 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a7b266d896ff293578dedceff7cee5f54">compute_deformation</a> (Epetra_Vector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a32e5aec9f12d3ab4575d8cc873b912aa">x</a>, std::string &amp;filename, bool printCauchy, bool printVM)</td></tr>
 <tr class="separator:a7b266d896ff293578dedceff7cee5f54 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4e000f733d86d35ab6ea3f1df4756c6 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#ad4e000f733d86d35ab6ea3f1df4756c6">print_solution</a> (Epetra_Vector &amp;solution, std::string fileName)</td></tr>
 <tr class="separator:ad4e000f733d86d35ab6ea3f1df4756c6 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83204de8d2b91c84e90655e87978b9c9 inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">virtual Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a83204de8d2b91c84e90655e87978b9c9">get_neumannBc</a> (Epetra_SerialDenseMatrix &amp;matrix_X, Epetra_SerialDenseMatrix &amp;xg, unsigned int &amp;gp)=0</td></tr>
-<tr class="separator:a83204de8d2b91c84e90655e87978b9c9 inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c80f33fec1a9857a712ea410907972f inherit pub_methods_class_linearized_elasticity"><td class="memItemLeft" align="right" valign="top">virtual Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/df7/class_linearized_elasticity.html#a6c80f33fec1a9857a712ea410907972f">get_forcing</a> (double &amp;x1, double &amp;x2, double &amp;x3, unsigned int &amp;e_lid, unsigned int &amp;gp)=0</td></tr>
-<tr class="separator:a6c80f33fec1a9857a712ea410907972f inherit pub_methods_class_linearized_elasticity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_linear___finite___element___problem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_linear___finite___element___problem')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html">Linear_Finite_Element_Problem</a></td></tr>
 <tr class="memitem:ad8d41fa15aee3e3cc32b80b0601dc066 inherit pub_methods_class_linear___finite___element___problem"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#ad8d41fa15aee3e3cc32b80b0601dc066">Linear_Finite_Element_Problem</a> ()</td></tr>
 <tr class="separator:ad8d41fa15aee3e3cc32b80b0601dc066 inherit pub_methods_class_linear___finite___element___problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -338,7 +334,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#ab4bbdba423977cef810b6919817429a2">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00190">190</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00184">184</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
@@ -384,7 +380,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#ae6e37199b1afeff489561279b0b0cb47">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00226">226</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00220">220</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
@@ -424,12 +420,12 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#aab7312e665f248382e1f6bd4bd285478">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00334">334</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00323">323</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa00025debeb0f918a9584d6f0eda7977"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa00025debeb0f918a9584d6f0eda7977">&#9670;&nbsp;</a></span>get_forcing()</h2>
+<a id="a7bfa3c67d0c720fc818246acd224344d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bfa3c67d0c720fc818246acd224344d">&#9670;&nbsp;</a></span>get_forcing()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,6 +436,24 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">Epetra_SerialDenseVector CEESBVP::get_forcing </td>
           <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">unsigned int &amp;&#160;</td>
           <td class="paramname"><em>e_lid</em>, </td>
         </tr>
@@ -457,17 +471,19 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#a6c80f33fec1a9857a712ea410907972f">LinearizedElasticity</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00062">62</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8b0f79471ef087175660150d06f3ea29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b0f79471ef087175660150d06f3ea29">&#9670;&nbsp;</a></span>get_neumannBc()</h2>
+<a id="a89997e0cc5c7da84fc93c18b60ae77e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89997e0cc5c7da84fc93c18b60ae77e7">&#9670;&nbsp;</a></span>get_neumannBc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -478,8 +494,14 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">Epetra_SerialDenseVector CEESBVP::get_neumannBc </td>
           <td>(</td>
-          <td class="paramtype">unsigned int &amp;&#160;</td>
-          <td class="paramname"><em>e_lid</em>, </td>
+          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
+          <td class="paramname"><em>matrix_X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Epetra_SerialDenseMatrix &amp;&#160;</td>
+          <td class="paramname"><em>xg</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -495,10 +517,12 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#a83204de8d2b91c84e90655e87978b9c9">LinearizedElasticity</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
@@ -544,7 +568,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00147">147</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00141">141</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +596,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00429">429</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00418">418</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
@@ -610,7 +634,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00276">276</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00270">270</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
@@ -639,7 +663,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#a5d9ac651a1e9cd308cc47a4c60e7cf95">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00155">155</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00149">149</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>
@@ -739,7 +763,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00383">383</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html#l00372">372</a> of file <a class="el" href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp_source.html">CEESBVP.hpp</a>.</p>
 
 </div>
 </div>

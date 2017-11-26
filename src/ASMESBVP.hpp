@@ -42,12 +42,12 @@ public:
     ~ASMESBVP(){
     }
     
-    Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp){
+    Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         std::cout << "Not using this method in this application.\n";
         Epetra_SerialDenseVector f(3);
         return f;
     }
-    Epetra_SerialDenseVector get_forcing(unsigned int & e_lid, unsigned int & gp){
+    Epetra_SerialDenseVector get_forcing(double & x1, double & x2, double & x3, unsigned int & e_lid, unsigned int & gp){
         std::cout << "Not using this method in this application.\n";
         Epetra_SerialDenseVector f(3);
         return f;
@@ -321,9 +321,7 @@ public:
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
             
         }
-        
-        compute_mean_cauchy_stress(*solution, filename, true, true);
-        
+        compute_center_cauchy_stress(*solution, filename, true, true);
     }
     
     void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix){
