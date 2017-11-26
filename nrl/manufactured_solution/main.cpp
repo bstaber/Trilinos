@@ -66,9 +66,14 @@ MPI_Init(&argc, &argv);
     Newton->Initialization();
     Newton->setParameters(*paramList);
     int error = Newton->Solve_with_Aztec(true);
+    
     std::string outpath     = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"),"outpath");
     std::string fulloutpath = outpath + std::to_string(meshIndex) + ".mtx";
     Newton->print_newton_solution(fulloutpath);
+    
+    double xi = 0.0;
+    fulloutpath = outpath + "_gl_" + std::to_string(meshIndex) + ".mtx";
+    manufactured->compute_green_lagrange(*Newton->x,xi,xi,xi,fulloutpath);
     errorL2 = manufactured->errorL2(*Newton->x);
     
     if (Comm.MyPID()==0){

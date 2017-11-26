@@ -256,7 +256,7 @@ public:
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4;
         u(0) = 0.0;
-        u(1) = x2*x2*0.12/(25.0*25.0);
+        u(1) = x2*x2*1.1/(25.0*25.0);
         u(2) = 0.0;
         /*u(0) = -c1*x2*(topcoord-x1)*(topcoord-x2);
         u(1) = c2*x2*(topcoord-x2);
@@ -273,7 +273,7 @@ public:
         F(1,0) = 0.0;                     F(1,1) = c2*(topcoord-x2)-c2*x2+1.0;                         F(1,2) = 0.0;
         F(2,0) = 0.0;                     F(2,1) = 0.0;                                                F(2,2) = c1*std::cos(c1*x3)+1.0;*/
         F(0,0) = 1.0;           F(0,1) = 0.0;                         F(0,2) = 0.0;
-        F(1,0) = 0.0;           F(1,1) = 1.0+2.0*0.12*x2/(25.0*25.0); F(1,2) = 0.0;
+        F(1,0) = 0.0;           F(1,1) = 1.0+2.0*1.1*x2/(25.0*25.0);  F(1,2) = 0.0;
         F(2,0) = 0.0;           F(2,1) = 0.0;                         F(2,2) = 1.0;
         double det = F(0,0)*F(1,1)*F(2,2)-F(0,0)*F(1,2)*F(2,1)-F(0,1)*F(1,0)*F(2,2)+F(0,1)*F(1,2)*F(2,0)+F(0,2)*F(1,0)*F(2,1)-F(0,2)*F(1,1)*F(2,0);
         
@@ -357,7 +357,7 @@ public:
         double M13 = 0.0; double M31 = 0.0;
         double M12 = (mu4-mu5)*cos_plyagl*sin_plyagl; double M21 = M12;
         
-        double ud = 0.12/(25.0*25.0);
+        double ud = 1.1/(25.0*25.0);
         
         f(0) = (8*M12*M22*beta4*ud*(2*ud*x2+1)*std::pow(4*M22*ud*ud*x2*x2+4*M22*ud*x2+M11+M22+M33,beta4-1))/std::pow(M11+M22+M33,beta4) - (8*M12*beta5*ud*(2*ud*x2+1)*(M11+M33)*std::pow(M11+M22+M33 + 4*M11*ud*ud*x2*x2 + 4*M33*ud*ud*x2*x2 + 4*M11*ud*x2 + 4*M33*ud*x2,beta5-1))/std::pow(M11+M22+M33,beta5);
         f(1) = 2*ud*(2*mu1 + 4*mu2 - (- 8*mu3*ud*ud*x2*x2 - 8*mu3*ud*x2 + 2*mu1 + 4*mu2)/(2*ud*x2 + 1)*(2*ud*x2 + 1) + (2*M22*std::pow(4*M22*ud*ud*x2*x2 + 4*M22*ud*x2 + M11 + M22 + M33,beta4))/std::pow(M11 + M22 + M33,beta4) + (2*(M11 + M33)*std::pow(M11 + M22 + M33 + 4*M11*ud*ud*x2*x2 + 4*M33*ud*ud*x2*x2 + 4*M11*ud*x2 + 4*M33*ud*x2,beta5))/std::pow(M11 + M22 + M33,beta5) - (sign(2*ud*x2 + 1)*(2*M11 + 2*M22 + 2*M33))/(2*ud*x2 + 1)) + (2*ud*x2 + 1)*((4*ud*(- 8*mu3*ud*ud*x2*x2 - 8*mu3*ud*x2 + 2*mu1 + 4*mu2))/std::pow(2*ud*x2 + 1,3) + (8*mu3*ud)/(2*ud*x2 + 1) + (2*ud*sign(2*ud*x2 + 1)*(2*M11 + 2*M22 + 2*M33))/(2*ud*x2 + 1)*(2*ud*x2 + 1) + (8*M22*M22*beta4*ud*(2*ud*x2 + 1)*std::pow(4*M22*ud*ud*x2*x2 + 4*M22*ud*x2 + M11 + M22 + M33,beta4 - 1))/std::pow(M11 + M22 + M33,beta4) + (8*beta5*ud*(2*ud*x2 + 1)*(M11 + M33)*(M11 + M33)*std::pow(M11 + M22 + M33 + 4*M11*ud*ud*x2*x2 + 4*M33*ud*ud*x2*x2 + 4*M11*ud*x2 + 4*M33*ud*x2,beta5 - 1))/std::pow(M11 + M22 + M33,beta5));

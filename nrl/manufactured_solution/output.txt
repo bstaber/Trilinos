@@ -8,3 +8,8 @@ manufactured1.msh    2      0.0275573
 manufactured0.msh    2      0.0827154
 manufactured0.msh    2      0.0827154
 manufactured1.msh    2      0.0275573
+manufactured0.msh    2      0.0827154
+manufactured2.msh    2     0.00895194
+manufactured0.msh    2       0.965621
+manufactured2.msh    2        32.0112
+manufactured2.msh    2       0.147215

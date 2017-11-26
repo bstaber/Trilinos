@@ -9,7 +9,7 @@
         <Parameter name="delta" type="double" value="0.25"/>
         <Parameter name="iterMin" type="int" value="2"/>
         <Parameter name="iterMax" type="int" value="10"/>
-        <Parameter name="nbBisMax" type="int" value="1"/>
+        <Parameter name="nbBisMax" type="int" value="5"/>
         <Parameter name="NormFTol" type="double" value="1e-6"/>
         <Parameter name="NormFMax" type="double" value="1e7"/>
         <Parameter name="eps" type="double" value="1e-8"/>
