@@ -142,12 +142,11 @@ public:
     
     void setup_dirichlet_conditions(){
         n_bc_dof = 0;
-        int dof = 1;
         double coord;
         unsigned int node;
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             node = Mesh->local_nodes[i];
-            coord = Mesh->nodes_coord[3*node+dof];
+            coord = Mesh->nodes_coord[3*node+1];
             if(coord==0.0){
                 n_bc_dof+=3;
             }
@@ -160,7 +159,7 @@ public:
         dof_on_boundary = new int [n_bc_dof];
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
+            coord = Mesh->nodes_coord[3*node+1];
             if (coord==0.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
@@ -169,7 +168,7 @@ public:
             }
             if (coord==topcoord){
                 dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc+1] = 3*inode+dof;
+                dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
@@ -181,13 +180,12 @@ public:
         v.PutScalar(0.0);
         
         int node;
-        int dof = 1;
         double coord;
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
+            coord = Mesh->nodes_coord[3*node+1];
             if (coord==topcoord){
-                v[0][StandardMap->LID(3*node+dof)] = displacement;
+                v[0][StandardMap->LID(3*node+1)] = displacement;
             }
         }
         
@@ -197,16 +195,16 @@ public:
         
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
+            coord = Mesh->nodes_coord[3*node+1];
             if (coord==0.0){
-                F[0][StandardMap->LID(3*node+0)] = 0.0;
-                F[0][StandardMap->LID(3*node+1)] = 0.0;
-                F[0][StandardMap->LID(3*node+2)] = 0.0;
+                F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+                F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+                F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
             if (coord==topcoord){
-                F[0][StandardMap->LID(3*node+0)]   = 0.0;
-                F[0][StandardMap->LID(3*node+dof)] = displacement;
-                F[0][StandardMap->LID(3*node+2)]   = 0.0;
+                F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+                F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+                F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
         }
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
@@ -234,15 +232,8 @@ public:
         
         double det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
         
-        Epetra_SerialDenseMatrix C(3,3);
-        Epetra_SerialDenseMatrix CC(3,3);
-        Epetra_SerialDenseMatrix ddJ5(6,6);
-        Epetra_SerialDenseVector LML(6);
-        Epetra_SerialDenseVector eye(6);
-        Epetra_SerialDenseVector dJ5(6);
-        Epetra_SerialDenseVector M(6);
-        Epetra_SerialDenseVector L(6);
-        Epetra_SerialDenseVector c(6);
+        Epetra_SerialDenseMatrix C(3,3), CC(3,3), ddJ5(6,6);
+        Epetra_SerialDenseVector LML(6), eye(6), dJ5(6), M(6), L(6), c(6);
         
         C.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
         CC.Multiply('N','N',1.0,C,C,0.0);
@@ -272,13 +263,13 @@ public:
         
         eye(0) = 1.0; eye(1) = 1.0; eye(2) = 1.0; eye(3) = 0.0; eye(4) = 0.0; eye(5) = 0.0;
         
-        double I1 = C(0,0) + C(1,1) + C(2,2);
+        double I1  = C(0,0) + C(1,1) + C(2,2);
         double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
-        double I2 = (1.0/2.0)*(I1*I1-II1);
-        double I3 = det*det;
-        double I4 = C(0,0)*M(0) + C(1,1)*M(1) + C(2,2)*M(2) + 2.0*C(0,1)*M(5) + 2.0*C(0,2)*M(4) + 2.0*C(1,2)*M(3);
-        double I5 = CC(0,0)*M(0) + CC(1,1)*M(1) + CC(2,2)*M(2) + 2.0*CC(0,1)*M(5) + 2.0*CC(0,2)*M(4) + 2.0*CC(1,2)*M(3);
-        double J5 = I5 - I1*I4 + I2*trm;
+        double I2  = (1.0/2.0)*(I1*I1-II1);
+        double I3  = det*det;
+        double I4  = C(0,0)*M(0) + C(1,1)*M(1) + C(2,2)*M(2) + 2.0*C(0,1)*M(5) + 2.0*C(0,2)*M(4) + 2.0*C(1,2)*M(3);
+        double I5  = CC(0,0)*M(0) + CC(1,1)*M(1) + CC(2,2)*M(2) + 2.0*CC(0,1)*M(5) + 2.0*CC(0,2)*M(4) + 2.0*CC(1,2)*M(3);
+        double J5  = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
         double pI4 = std::pow(I4,beta4);
         double pJ5 = std::pow(J5,beta5);

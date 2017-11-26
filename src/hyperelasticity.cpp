@@ -82,6 +82,7 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
         
         deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
         right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
+        std::cout << right_cauchy << "\n";
         green_lagrange[e_lid] = 0.5*(right_cauchy(1,1)-1.0);
     }
     
