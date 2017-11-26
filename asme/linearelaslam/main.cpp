@@ -51,7 +51,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<OrthotropicRF_Laminate> interface = Teuchos::rcp(new OrthotropicRF_Laminate(Comm,*paramList));
+    Teuchos::RCP<ASMESBVP> interface = Teuchos::rcp(new ASMESBVP(Comm,*paramList));
     
     double deltaN  = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "deltaN");
     double deltaM4 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "deltaM4");

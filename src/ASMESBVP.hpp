@@ -1,15 +1,15 @@
-#ifndef ORTHOTROPICRF_LAMINATE_HPP
-#define ORTHOTROPICRF_LAMINATE_HPP
+#ifndef ASMESBVP_HPP
+#define ASMESBVP_HPP
 
 #include "shinozukapp_layeredcomp.hpp"
 #include "tensor_calculus.hpp"
 #include "linearelasticity_setup_pp.hpp"
 
-class OrthotropicRF_Laminate : public LinearizedElasticity
+class ASMESBVP : public LinearizedElasticity
 {
 public:
     
-    OrthotropicRF_Laminate(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    ASMESBVP(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         Krylov = &Parameters.sublist("Krylov");
         
@@ -39,7 +39,7 @@ public:
         solution = new Epetra_Vector(*StandardMap);
     }
     
-    ~OrthotropicRF_Laminate(){
+    ~ASMESBVP(){
     }
     
     Epetra_SerialDenseVector get_neumannBc(unsigned int & e_lid, unsigned int & gp){

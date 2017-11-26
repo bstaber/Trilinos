@@ -9,6 +9,15 @@ class CEESBVP : public LinearizedElasticity
 {
 public:
     
+    Epetra_Vector * solution;
+    Teuchos::ParameterList * Krylov;
+    Teuchos::RCP<shinozuka_layeredcomp> GRF_Generator;
+    
+    Epetra_SerialDenseVector m1, m2, m3, m4, m5;
+    std::vector<int> phase;
+    
+    double _deltaN, _deltaM4, _deltaM5;
+    
     CEESBVP(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         Krylov = &Parameters.sublist("Krylov");
@@ -29,10 +38,13 @@ public:
             }
         }
         
-        int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
+        int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"),    "order");
         double L1 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
         double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
         double L3 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lz");
+        _deltaN   = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaN");
+        _deltaM4  = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaM4");
+        _deltaM5  = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaM5");
         
         GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp(order,L1,L2,L3));
         
@@ -82,27 +94,27 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_gauss_points(w5_shino,*Mesh,phase);
         
-        double deltaN = 0.0970;
-        double deltaM4 = 0.0461;
-        double deltaM5 = 0.0952;
+        //double deltaN = 0.0970;
+        //double deltaM4 = 0.0461;
+        //double deltaM5 = 0.0952;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
             
-            alpha = 3.0/(2.0*deltaN*deltaN); beta = 1.0;
+            alpha = 3.0/(2.0*_deltaN*_deltaN); beta = 1.0;
             Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
-            m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
+            m1(i) = (_deltaN*_deltaN/3.0)*2.0*Psi1;
             
-            alpha = 3.0/(2.0*deltaN*deltaN) - 1.0/2.0;
+            alpha = 3.0/(2.0*_deltaN*_deltaN) - 1.0/2.0;
             Psi2 = icdf_gamma(w2_shino(i),alpha,beta);
-            m2(i) = (deltaN*deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
+            m2(i) = (_deltaN*_deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
             
-            m3(i) = (deltaN*deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
+            m3(i) = (_deltaN*_deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
             
-            alpha = 1.0/(deltaM4*deltaM4); beta = 1.0*deltaM4*deltaM4;
+            alpha = 1.0/(_deltaM4*_deltaM4); beta = 1.0*_deltaM4*_deltaM4;
             m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
-            alpha = 1.0/(deltaM5*deltaM5); beta = 1.0*deltaM5*deltaM5;
+            alpha = 1.0/(_deltaM5*_deltaM5); beta = 1.0*_deltaM5*_deltaM5;
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
             
         }
@@ -142,16 +154,15 @@ public:
     
     void setup_dirichlet_conditions(){
         n_bc_dof = 0;
-        int dof = 1;
-        double coord;
+        double y;
         unsigned int node;
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             node = Mesh->local_nodes[i];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if(coord==0.0){
+            y = Mesh->nodes_coord[3*node+1];
+            if(y==0.0){
                 n_bc_dof+=3;
             }
-            if(coord==25.0){
+            if(y==25.0){
                 n_bc_dof+=3;
             }
         }
@@ -160,16 +171,16 @@ public:
         dof_on_boundary = new int [n_bc_dof];
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==0.0){
+            y = Mesh->nodes_coord[3*node+1];
+            if (y==0.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
-            if (coord==25.0){
+            if (y==25.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc+1] = 3*inode+dof;
+                dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
@@ -177,18 +188,17 @@ public:
     }
     
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-        //if (n_bc_dof>0){
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
         
         int node;
         int dof = 1;
-        double coord;
+        double y;
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==25.0){
-                v[0][StandardMap->LID(3*node+dof)] = displacement;
+            y = Mesh->nodes_coord[3*node+1];
+            if (y==25.0){
+                v[0][StandardMap->LID(3*node+1)] = displacement;
             }
         }
         
@@ -198,19 +208,18 @@ public:
         
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==0.0){
+            y = Mesh->nodes_coord[3*node+1];
+            if (y==0.0){
                 F[0][StandardMap->LID(3*node+0)] = 0.0;
                 F[0][StandardMap->LID(3*node+1)] = 0.0;
                 F[0][StandardMap->LID(3*node+2)] = 0.0;
             }
-            if (coord==25.0){
+            if (y==25.0){
                 F[0][StandardMap->LID(3*node+0)]   = 0.0;
-                F[0][StandardMap->LID(3*node+dof)] = displacement;
+                F[0][StandardMap->LID(3*node+1)] = displacement;
                 F[0][StandardMap->LID(3*node+2)]   = 0.0;
             }
         }
-        //}
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
     
@@ -261,9 +270,7 @@ public:
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
         }
-        
         tangent_matrix.Scale(1.0/(1.0+epsilon));
-        
     }
     
     void recover_cauchy_stress(std::string & filename, int * seeds){
@@ -297,33 +304,31 @@ public:
         GRF_Generator->rng.seed(seeds[4]);
         GRF_Generator->generator_one_gauss_point(w5_shino,*Mesh,phase,xi,eta,zeta);
         
-        double deltaN = 0.0970;
-        double deltaM4 = 0.0461;
-        double deltaM5 = 0.0952;
+        //double deltaN = 0.0970;
+        //double deltaM4 = 0.0461;
+        //double deltaM5 = 0.0952;
         double alpha; double beta = 1.0;
         double Psi1, Psi2;
         
         for (unsigned int i=0; i<w1_shino.Length(); ++i){
             
-            alpha = 3.0/(2.0*deltaN*deltaN); beta = 1.0;
+            alpha = 3.0/(2.0*_deltaN*_deltaN); beta = 1.0;
             Psi1 = icdf_gamma(w1_shino(i),alpha,beta);
-            m1(i) = (deltaN*deltaN/3.0)*2.0*Psi1;
+            m1(i) = (_deltaN*_deltaN/3.0)*2.0*Psi1;
             
-            alpha = 3.0/(2.0*deltaN*deltaN) - 1.0/2.0;
+            alpha = 3.0/(2.0*_deltaN*_deltaN) - 1.0/2.0;
             Psi2 = icdf_gamma(w2_shino(i),alpha,beta);
-            m2(i) = (deltaN*deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
+            m2(i) = (_deltaN*_deltaN/3.0)*( 2.0*Psi2 + w3_shino(i)*w3_shino(i) );
             
-            m3(i) = (deltaN*deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
+            m3(i) = (_deltaN*_deltaN/3.0)*std::sqrt(2.0*Psi1)*w3_shino(i);
             
-            alpha = 1.0/(deltaM4*deltaM4); beta = 1.0*deltaM5*deltaM5;
+            alpha = 1.0/(_deltaM4*_deltaM4); beta = 1.0*_deltaM5*_deltaM5;
             m4(i) = icdf_gamma(w4_shino(i),alpha,beta);
-            alpha = 1.0/(deltaM4*deltaM4); beta = 1.0*deltaM5*deltaM5;
+            alpha = 1.0/(_deltaM4*_deltaM4); beta = 1.0*_deltaM5*_deltaM5;
             m5(i) = icdf_gamma(w5_shino(i),alpha,beta);
             
         }
-        
-        compute_mean_cauchy_stress(*solution, filename, true, true);
-        
+        compute_center_von_mises(*solution, filename, true, true);
     }
     
     void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix){
@@ -372,9 +377,7 @@ public:
             tangent_matrix(3,4) = -tangent_matrix(3,4);
             tangent_matrix(4,3) = -tangent_matrix(4,3);
         }
-        
         tangent_matrix.Scale(1.0/(1.0+epsilon));
-        
     }
     
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
@@ -439,23 +442,6 @@ public:
         return error;
         
     }
-    
-    Epetra_Vector * solution;
-    Teuchos::ParameterList * Krylov;
-    Teuchos::RCP<shinozuka_layeredcomp> GRF_Generator;
-
-    Epetra_SerialDenseVector m1;
-    Epetra_SerialDenseVector m2;
-    Epetra_SerialDenseVector m3;
-    Epetra_SerialDenseVector m4;
-    Epetra_SerialDenseVector m5;
-    
-    std::vector<int> phase;
-    
-    double _deltaN;
-    double _deltaM4;
-    double _deltaM5;
-    
 };
 
 
