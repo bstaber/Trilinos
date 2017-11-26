@@ -247,7 +247,7 @@ void gauss_points_hexa8(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVec
 void gauss_points_hexa27(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(27); xi.Resize(27); eta.Resize(27); zeta.Resize(27);
     
-    double a = std::sqrt(3.0/5.0); double c1 = 5.0/9.0l double c2 = 8.0/9.0;
+    double a = std::sqrt(3.0/5.0); double c1 = 5.0/9.0; double c2 = 8.0/9.0;
     xi(0) =   -a;  eta(0) =  -a;  zeta(0) =  -a;  weight(0) = c1*c1*c1;
     xi(1) =   -a;  eta(1) =  -a;  zeta(1) = 0.0;  weight(1) = c1*c1*c2;
     xi(2) =   -a;  eta(2) =  -a;  zeta(2) =   a;  weight(2) = c1*c1*c1;
