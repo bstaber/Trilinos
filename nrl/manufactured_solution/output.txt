@@ -13,3 +13,10 @@ manufactured2.msh    2     0.00895194
 manufactured0.msh    2       0.965621
 manufactured2.msh    2        32.0112
 manufactured2.msh    2       0.147215
+manufactured0.msh    2        1.00119
+manufactured1.msh    2       0.361588
+manufactured1.msh    2       0.361588
+manufactured0.msh    2        1.00119
+manufactured0.msh    2       0.965621
+manufactured0.msh    1       0.965621
+manufactured0.msh    1        1.00119

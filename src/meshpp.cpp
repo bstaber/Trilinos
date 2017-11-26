@@ -552,6 +552,7 @@ void mesh::store_feinterp_cells(){
             }
             break;
     };
+    //double volume = 0.0;
     for (unsigned int eloc=0; eloc<n_local_cells; ++eloc){
         eglob = local_cells[eloc];
         for (unsigned int inode=0; inode<el_type; ++inode){
@@ -587,7 +588,9 @@ void mesh::store_feinterp_cells(){
                 DZ_N_cells(gp+n_gauss_cells*inode,eloc) = DX(inode,2);
             }
         }
+        //volume += vol_cells(eloc);
     }
+    //std::cout << "VOLUME = " << volume << "\n";
 }
 
 
