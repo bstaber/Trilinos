@@ -20,10 +20,10 @@ var hierarchy =
       [ "Linear_Finite_Element_Problem", "d3/d9f/class_linear___finite___element___problem.html", [
         [ "laplace", "d7/d76/classlaplace.html", null ],
         [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", [
+          [ "ASMESBVP", "da/d18/class_a_s_m_e_s_b_v_p.html", null ],
           [ "CEESBVP", "de/dcc/class_c_e_e_s_b_v_p.html", null ],
           [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],
-          [ "manufactured", "d7/da3/classmanufactured.html", null ],
-          [ "OrthotropicRF_Laminate", "d0/daf/class_orthotropic_r_f___laminate.html", null ]
+          [ "manufactured", "d7/da3/classmanufactured.html", null ]
         ] ]
       ] ]
     ] ],

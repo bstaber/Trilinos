@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "ASMESBVP", "da/d18/class_a_s_m_e_s_b_v_p.html", "da/d18/class_a_s_m_e_s_b_v_p" ],
     [ "BaseClassFEM", "d2/d97/class_base_class_f_e_m.html", "d2/d97/class_base_class_f_e_m" ],
     [ "CEESBVP", "de/dcc/class_c_e_e_s_b_v_p.html", "de/dcc/class_c_e_e_s_b_v_p" ],
     [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", "d1/d5c/classcompressible_hyperelasticity" ],
@@ -20,7 +21,6 @@ var annotated_dup =
     [ "NeumannInnerSurface_PolyconvexHGO", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o" ],
     [ "NeumannInnerSurface_StochasticPolyconvexHGO", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o" ],
     [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", "d0/d9d/class_newton___raphson" ],
-    [ "OrthotropicRF_Laminate", "d0/daf/class_orthotropic_r_f___laminate.html", "d0/daf/class_orthotropic_r_f___laminate" ],
     [ "RandomSearch_DeterministicModel", "dd/d4c/class_random_search___deterministic_model.html", "dd/d4c/class_random_search___deterministic_model" ],
     [ "readnrldata", "dd/de7/classreadnrldata.html", "dd/de7/classreadnrldata" ],
     [ "rubberblock", "dd/d20/classrubberblock.html", "dd/d20/classrubberblock" ],

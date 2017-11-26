@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 1890;
+var viewWidth = 1918;
 var viewHeight = 232;
 var sectionId = 'dynsection-1';
 </script>
@@ -54,377 +54,377 @@ var sectionId = 'dynsection-1';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>src/Linear_Finite_Element_Problem.hpp</title>
-<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-228 1886.1177,-228 1886.1177,4 -4,4"/>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-228 1914.0044,-228 1914.0044,4 -4,4"/>
 <!-- Node34 -->
 <g id="node1" class="node">
 <title>Node34</title>
-<polygon fill="#bfbfbf" stroke="#000000" points="878.2808,-195.5 878.2808,-223.5 1010.4478,-223.5 1010.4478,-195.5 878.2808,-195.5"/>
-<text text-anchor="start" x="886.2808" y="-211.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/Linear_Finite_Element</text>
-<text text-anchor="middle" x="944.3643" y="-201.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_Problem.hpp</text>
+<polygon fill="#bfbfbf" stroke="#000000" points="636.229,-195.5 636.229,-223.5 768.396,-223.5 768.396,-195.5 636.229,-195.5"/>
+<text text-anchor="start" x="644.229" y="-211.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/Linear_Finite_Element</text>
+<text text-anchor="middle" x="702.3125" y="-201.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_Problem.hpp</text>
 </g>
 <!-- Node35 -->
 <g id="node2" class="node">
 <title>Node35</title>
-<g id="a_node2"><a xlink:href="../../d5/d3f/laplacepp_8hpp.html" target="_top" xlink:title="src/laplacepp.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="545.1724,-135.5 545.1724,-153.5 639.5562,-153.5 639.5562,-135.5 545.1724,-135.5"/>
-<text text-anchor="middle" x="592.3643" y="-141.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/laplacepp.hpp</text>
+<g id="a_node2"><a xlink:href="../../d4/d4c/linearelasticity__setup__pp_8hpp.html" target="_top" xlink:title="src/linearelasticity\l_setup_pp.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="381.8569,-130.5 381.8569,-158.5 476.7681,-158.5 476.7681,-130.5 381.8569,-130.5"/>
+<text text-anchor="start" x="389.8569" y="-146.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/linearelasticity</text>
+<text text-anchor="middle" x="429.3125" y="-136.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_setup_pp.hpp</text>
 </a>
 </g>
 </g>
 <!-- Node34&#45;&gt;Node35 -->
 <g id="edge1" class="edge">
 <title>Node34&#45;&gt;Node35</title>
-<path fill="none" stroke="#191970" d="M868.1397,-195.4244C798.6713,-182.5965 698.2334,-164.0497 639.6852,-153.2382"/>
-<polygon fill="#191970" stroke="#191970" points="867.6864,-198.8998 878.1558,-197.274 868.9576,-192.0162 867.6864,-198.8998"/>
+<path fill="none" stroke="#191970" d="M633.5598,-193.1303C584.769,-181.5134 520.5075,-166.2131 477.2017,-155.9022"/>
+<polygon fill="#191970" stroke="#191970" points="632.8729,-196.5645 643.4117,-195.476 634.4943,-189.7549 632.8729,-196.5645"/>
 </g>
-<!-- Node49 -->
-<g id="node16" class="node">
-<title>Node49</title>
-<g id="a_node16"><a xlink:href="../../d4/d4c/linearelasticity__setup__pp_8hpp.html" target="_top" xlink:title="src/linearelasticity\l_setup_pp.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1399.9087,-130.5 1399.9087,-158.5 1494.8198,-158.5 1494.8198,-130.5 1399.9087,-130.5"/>
-<text text-anchor="start" x="1407.9087" y="-146.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/linearelasticity</text>
-<text text-anchor="middle" x="1447.3643" y="-136.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_setup_pp.hpp</text>
+<!-- Node44 -->
+<g id="node11" class="node">
+<title>Node44</title>
+<g id="a_node11"><a xlink:href="../../d5/d3f/laplacepp_8hpp.html" target="_top" xlink:title="src/laplacepp.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="1077.1206,-135.5 1077.1206,-153.5 1171.5044,-153.5 1171.5044,-135.5 1077.1206,-135.5"/>
+<text text-anchor="middle" x="1124.3125" y="-141.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/laplacepp.hpp</text>
 </a>
 </g>
 </g>
-<!-- Node34&#45;&gt;Node49 -->
-<g id="edge15" class="edge">
-<title>Node34&#45;&gt;Node49</title>
-<path fill="none" stroke="#191970" d="M1020.56,-199.6536C1125.7557,-186.0598 1312.3638,-161.9454 1399.7441,-150.6537"/>
-<polygon fill="#191970" stroke="#191970" points="1020.1089,-196.1827 1010.64,-200.9355 1021.0061,-203.125 1020.1089,-196.1827"/>
+<!-- Node34&#45;&gt;Node44 -->
+<g id="edge10" class="edge">
+<title>Node34&#45;&gt;Node44</title>
+<path fill="none" stroke="#191970" d="M778.7734,-197.7228C865.586,-184.3512 1004.525,-162.9507 1076.9398,-151.7967"/>
+<polygon fill="#191970" stroke="#191970" points="778.0648,-194.2906 768.7142,-199.2722 779.1305,-201.209 778.0648,-194.2906"/>
 </g>
 <!-- Node36 -->
 <g id="node3" class="node">
 <title>Node36</title>
-<g id="a_node3"><a xlink:href="../../d4/d0f/examples_2laplace__aztec_2main_8cpp.html" target="_top" xlink:title="examples/laplace_aztec\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="0,-65.5 0,-93.5 122.7285,-93.5 122.7285,-65.5 0,-65.5"/>
-<text text-anchor="start" x="8" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">examples/laplace_aztec</text>
-<text text-anchor="middle" x="61.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
+<g id="a_node3"><a xlink:href="../../de/d5d/linear_patch_test_8hpp.html" target="_top" xlink:title="cee530/linearpatchtest\l/linearPatchTest.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="0,-65.5 0,-93.5 116.625,-93.5 116.625,-65.5 0,-65.5"/>
+<text text-anchor="start" x="8" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/linearpatchtest</text>
+<text text-anchor="middle" x="58.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/linearPatchTest.hpp</text>
 </a>
 </g>
 </g>
 <!-- Node35&#45;&gt;Node36 -->
 <g id="edge2" class="edge">
 <title>Node35&#45;&gt;Node36</title>
-<path fill="none" stroke="#191970" d="M534.9372,-139.9071C447.6565,-132.5408 276.5189,-116.5837 132.3643,-94 129.257,-93.5132 126.0794,-92.9832 122.8751,-92.4231"/>
-<polygon fill="#191970" stroke="#191970" points="534.9009,-143.4162 545.158,-140.7627 535.4849,-136.4406 534.9009,-143.4162"/>
-</g>
-<!-- Node37 -->
-<g id="node4" class="node">
-<title>Node37</title>
-<g id="a_node4"><a xlink:href="../../d8/d16/examples_2laplace__stratimikos_2main_8cpp.html" target="_top" xlink:title="examples/laplace_stratimikos\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="141.0591,-65.5 141.0591,-93.5 287.6694,-93.5 287.6694,-65.5 141.0591,-65.5"/>
-<text text-anchor="start" x="149.0591" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">examples/laplace_stratimikos</text>
-<text text-anchor="middle" x="214.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
-</a>
-</g>
-</g>
-<!-- Node35&#45;&gt;Node37 -->
-<g id="edge3" class="edge">
-<title>Node35&#45;&gt;Node37</title>
-<path fill="none" stroke="#191970" d="M535.1529,-134.7656C475.7125,-124.638 380.0077,-108.2925 297.3643,-94 294.1932,-93.4516 290.9542,-92.8903 287.6823,-92.3225"/>
-<polygon fill="#191970" stroke="#191970" points="534.6496,-138.2302 545.0954,-136.4593 535.8251,-131.3296 534.6496,-138.2302"/>
+<path fill="none" stroke="#191970" d="M371.5568,-135.76C310.2942,-126.2897 210.7549,-110.3324 125.3125,-94 122.507,-93.4637 119.6387,-92.9006 116.7439,-92.3203"/>
+<polygon fill="#191970" stroke="#191970" points="371.3784,-139.2737 381.7947,-137.3372 372.4443,-132.3553 371.3784,-139.2737"/>
 </g>
 <!-- Node38 -->
 <g id="node5" class="node">
 <title>Node38</title>
-<g id="a_node5"><a xlink:href="../../de/db1/_dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/DirichletInletOutlet\l_PolyconvexHGO.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="305.894,-65.5 305.894,-93.5 420.8345,-93.5 420.8345,-65.5 305.894,-65.5"/>
-<text text-anchor="start" x="313.894" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/DirichletInletOutlet</text>
-<text text-anchor="middle" x="363.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_PolyconvexHGO.hpp</text>
+<g id="a_node5"><a xlink:href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp.html" target="_top" xlink:title="cee530/manufactured\l/manufacturedSolution.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="134.5493,-65.5 134.5493,-93.5 270.0757,-93.5 270.0757,-65.5 134.5493,-65.5"/>
+<text text-anchor="start" x="142.5493" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/manufactured</text>
+<text text-anchor="middle" x="202.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/manufacturedSolution.hpp</text>
 </a>
 </g>
 </g>
 <!-- Node35&#45;&gt;Node38 -->
 <g id="edge4" class="edge">
 <title>Node35&#45;&gt;Node38</title>
-<path fill="none" stroke="#191970" d="M550.6112,-132.6487C511.8476,-121.6459 454.0965,-105.2537 412.9921,-93.5865"/>
-<polygon fill="#191970" stroke="#191970" points="549.9471,-136.0984 560.5228,-135.462 551.8585,-129.3644 549.9471,-136.0984"/>
+<path fill="none" stroke="#191970" d="M372.0282,-128.097C334.8291,-117.4453 286.8522,-103.7074 251.4043,-93.5571"/>
+<polygon fill="#191970" stroke="#191970" points="371.1487,-131.4858 381.7259,-130.8739 373.0757,-124.7562 371.1487,-131.4858"/>
 </g>
 <!-- Node40 -->
 <g id="node7" class="node">
 <title>Node40</title>
-<g id="a_node7"><a xlink:href="../../d5/d6a/_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/DirichletStripElongation\l_StochasticPolyconvexHGO.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="438.8276,-65.5 438.8276,-93.5 599.9009,-93.5 599.9009,-65.5 438.8276,-65.5"/>
-<text text-anchor="start" x="446.8276" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/DirichletStripElongation</text>
-<text text-anchor="middle" x="519.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO.hpp</text>
+<g id="a_node7"><a xlink:href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp.html" target="_top" xlink:title="cee530/sbvp/CEESBVP.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="287.8613,-70.5 287.8613,-88.5 428.7637,-88.5 428.7637,-70.5 287.8613,-70.5"/>
+<text text-anchor="middle" x="358.3125" y="-76.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/sbvp/CEESBVP.hpp</text>
 </a>
 </g>
 </g>
 <!-- Node35&#45;&gt;Node40 -->
 <g id="edge6" class="edge">
 <title>Node35&#45;&gt;Node40</title>
-<path fill="none" stroke="#191970" d="M574.5994,-128.682C562.6081,-118.0048 546.9154,-104.0319 535.3224,-93.7093"/>
-<polygon fill="#191970" stroke="#191970" points="572.4179,-131.426 582.2139,-135.462 577.073,-126.198 572.4179,-131.426"/>
+<path fill="none" stroke="#191970" d="M406.2882,-123.4214C393.4163,-111.6373 378.0374,-97.558 368.2244,-88.5743"/>
+<polygon fill="#191970" stroke="#191970" points="404.1673,-126.225 413.9066,-130.396 408.8941,-121.0618 404.1673,-126.225"/>
 </g>
-<!-- Node42 -->
-<g id="node9" class="node">
-<title>Node42</title>
-<g id="a_node9"><a xlink:href="../../dc/d31/laplacepp_8cpp.html" target="_top" xlink:title="src/laplacepp.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="617.4531,-70.5 617.4531,-88.5 711.2754,-88.5 711.2754,-70.5 617.4531,-70.5"/>
-<text text-anchor="middle" x="664.3643" y="-76.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/laplacepp.cpp</text>
+<!-- Node41 -->
+<g id="node8" class="node">
+<title>Node41</title>
+<g id="a_node8"><a xlink:href="../../d3/df7/_a_s_m_e_s_b_v_p_8hpp.html" target="_top" xlink:title="src/ASMESBVP.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="446.6616,-70.5 446.6616,-88.5 551.9634,-88.5 551.9634,-70.5 446.6616,-70.5"/>
+<text text-anchor="middle" x="499.3125" y="-76.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/ASMESBVP.hpp</text>
 </a>
 </g>
 </g>
-<!-- Node35&#45;&gt;Node42 -->
-<g id="edge8" class="edge">
-<title>Node35&#45;&gt;Node42</title>
-<path fill="none" stroke="#191970" d="M609.8329,-128.7297C623.637,-116.2676 642.4391,-99.2936 653.9717,-88.8821"/>
-<polygon fill="#191970" stroke="#191970" points="607.4529,-126.163 602.3755,-135.462 612.1436,-131.3589 607.4529,-126.163"/>
+<!-- Node35&#45;&gt;Node41 -->
+<g id="edge7" class="edge">
+<title>Node35&#45;&gt;Node41</title>
+<path fill="none" stroke="#191970" d="M452.0125,-123.4214C464.7031,-111.6373 479.8654,-97.558 489.5402,-88.5743"/>
+<polygon fill="#191970" stroke="#191970" points="449.4478,-121.0266 444.5015,-130.396 454.211,-126.1562 449.4478,-121.0266"/>
 </g>
 <!-- Node43 -->
 <g id="node10" class="node">
 <title>Node43</title>
-<g id="a_node10"><a xlink:href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/NeumannInnerSurface\l_PolyconvexHGO.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="729.0024,-65.5 729.0024,-93.5 861.7261,-93.5 861.7261,-65.5 729.0024,-65.5"/>
-<text text-anchor="start" x="737.0024" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/NeumannInnerSurface</text>
-<text text-anchor="middle" x="795.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_PolyconvexHGO.hpp</text>
+<g id="a_node10"><a xlink:href="../../d4/d89/linearelasticity__setup__pp_8cpp.html" target="_top" xlink:title="src/linearelasticity\l_setup_pp.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="569.8569,-65.5 569.8569,-93.5 664.7681,-93.5 664.7681,-65.5 569.8569,-65.5"/>
+<text text-anchor="start" x="577.8569" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/linearelasticity</text>
+<text text-anchor="middle" x="617.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_setup_pp.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node35&#45;&gt;Node43 -->
 <g id="edge9" class="edge">
 <title>Node35&#45;&gt;Node43</title>
-<path fill="none" stroke="#191970" d="M630.2578,-132.3666C664.6096,-121.3673 715.2436,-105.1544 751.371,-93.5865"/>
-<polygon fill="#191970" stroke="#191970" points="629.0469,-129.0792 620.5905,-135.462 631.1816,-135.7458 629.0469,-129.0792"/>
+<path fill="none" stroke="#191970" d="M479.6627,-127.0917C510.0113,-116.5988 548.1626,-103.4082 576.5989,-93.5765"/>
+<polygon fill="#191970" stroke="#191970" points="478.4131,-123.8204 470.1057,-130.396 480.7005,-130.4361 478.4131,-123.8204"/>
 </g>
-<!-- Node45 -->
-<g id="node12" class="node">
-<title>Node45</title>
-<g id="a_node12"><a xlink:href="../../da/d42/_neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/NeumannInnerSurface\l_StochasticPolyconvexHGO.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="879.8276,-65.5 879.8276,-93.5 1040.9009,-93.5 1040.9009,-65.5 879.8276,-65.5"/>
-<text text-anchor="start" x="887.8276" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/NeumannInnerSurface</text>
-<text text-anchor="middle" x="960.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO.hpp</text>
+<!-- Node37 -->
+<g id="node4" class="node">
+<title>Node37</title>
+<g id="a_node4"><a xlink:href="../../d0/d30/cee530_2linearpatchtest_2main_8cpp.html" target="_top" xlink:title="cee530/linearpatchtest\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="0,-.5 0,-28.5 116.625,-28.5 116.625,-.5 0,-.5"/>
+<text text-anchor="start" x="8" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/linearpatchtest</text>
+<text text-anchor="middle" x="58.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node35&#45;&gt;Node45 -->
-<g id="edge11" class="edge">
-<title>Node35&#45;&gt;Node45</title>
-<path fill="none" stroke="#191970" d="M649.7344,-134.3667C711.8453,-123.396 811.3385,-105.8225 880.942,-93.5284"/>
-<polygon fill="#191970" stroke="#191970" points="648.9592,-130.9493 639.7205,-136.1355 650.1768,-137.8426 648.9592,-130.9493"/>
+<!-- Node36&#45;&gt;Node37 -->
+<g id="edge3" class="edge">
+<title>Node36&#45;&gt;Node37</title>
+<path fill="none" stroke="#191970" d="M58.3125,-55.1081C58.3125,-46.1539 58.3125,-36.3227 58.3125,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="54.8126,-55.3959 58.3125,-65.396 61.8126,-55.396 54.8126,-55.3959"/>
 </g>
 <!-- Node39 -->
 <g id="node6" class="node">
 <title>Node39</title>
-<g id="a_node6"><a xlink:href="../../de/da1/arteries_2deterministic__dirichlet_2main_8cpp.html" target="_top" xlink:title="arteries/deterministic\l_dirichlet/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="309.2388,-.5 309.2388,-28.5 417.4897,-28.5 417.4897,-.5 309.2388,-.5"/>
-<text text-anchor="start" x="317.2388" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/deterministic</text>
-<text text-anchor="middle" x="363.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_dirichlet/main.cpp</text>
+<g id="a_node6"><a xlink:href="../../d8/d17/cee530_2manufactured_2main_8cpp.html" target="_top" xlink:title="cee530/manufactured\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="145.9458,-.5 145.9458,-28.5 258.6792,-28.5 258.6792,-.5 145.9458,-.5"/>
+<text text-anchor="start" x="153.9458" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/manufactured</text>
+<text text-anchor="middle" x="202.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node38&#45;&gt;Node39 -->
 <g id="edge5" class="edge">
 <title>Node38&#45;&gt;Node39</title>
-<path fill="none" stroke="#191970" d="M363.3643,-55.1081C363.3643,-46.1539 363.3643,-36.3227 363.3643,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="359.8644,-55.3959 363.3643,-65.396 366.8644,-55.396 359.8644,-55.3959"/>
+<path fill="none" stroke="#191970" d="M202.3125,-55.1081C202.3125,-46.1539 202.3125,-36.3227 202.3125,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="198.8126,-55.3959 202.3125,-65.396 205.8126,-55.396 198.8126,-55.3959"/>
 </g>
-<!-- Node41 -->
-<g id="node8" class="node">
-<title>Node41</title>
-<g id="a_node8"><a xlink:href="../../dc/dba/arteries_2strip__dirichlet_2main_8cpp.html" target="_top" xlink:title="arteries/strip_dirichlet\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="463.8472,-.5 463.8472,-28.5 574.8813,-28.5 574.8813,-.5 463.8472,-.5"/>
-<text text-anchor="start" x="471.8472" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/strip_dirichlet</text>
-<text text-anchor="middle" x="519.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
+<!-- Node42 -->
+<g id="node9" class="node">
+<title>Node42</title>
+<g id="a_node9"><a xlink:href="../../d2/ded/asme_2linearelaslam_2main_8cpp.html" target="_top" xlink:title="asme/linearelaslam\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="448.2388,-.5 448.2388,-28.5 550.3862,-28.5 550.3862,-.5 448.2388,-.5"/>
+<text text-anchor="start" x="456.2388" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">asme/linearelaslam</text>
+<text text-anchor="middle" x="499.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node40&#45;&gt;Node41 -->
-<g id="edge7" class="edge">
-<title>Node40&#45;&gt;Node41</title>
-<path fill="none" stroke="#191970" d="M519.3643,-55.1081C519.3643,-46.1539 519.3643,-36.3227 519.3643,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="515.8644,-55.3959 519.3643,-65.396 522.8644,-55.396 515.8644,-55.3959"/>
+<!-- Node41&#45;&gt;Node42 -->
+<g id="edge8" class="edge">
+<title>Node41&#45;&gt;Node42</title>
+<path fill="none" stroke="#191970" d="M499.3125,-60.2652C499.3125,-50.2384 499.3125,-38.1782 499.3125,-28.9559"/>
+<polygon fill="#191970" stroke="#191970" points="495.8126,-60.462 499.3125,-70.462 502.8126,-60.4621 495.8126,-60.462"/>
 </g>
-<!-- Node44 -->
-<g id="node11" class="node">
-<title>Node44</title>
-<g id="a_node11"><a xlink:href="../../d9/d81/arteries_2deterministic__neumann_2main_8cpp.html" target="_top" xlink:title="arteries/deterministic\l_neumann/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="644.2388,-.5 644.2388,-28.5 752.4897,-28.5 752.4897,-.5 644.2388,-.5"/>
-<text text-anchor="start" x="652.2388" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/deterministic</text>
-<text text-anchor="middle" x="698.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_neumann/main.cpp</text>
+<!-- Node45 -->
+<g id="node12" class="node">
+<title>Node45</title>
+<g id="a_node12"><a xlink:href="../../d4/d0f/examples_2laplace__aztec_2main_8cpp.html" target="_top" xlink:title="examples/laplace_aztec\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="682.9482,-65.5 682.9482,-93.5 805.6768,-93.5 805.6768,-65.5 682.9482,-65.5"/>
+<text text-anchor="start" x="690.9482" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">examples/laplace_aztec</text>
+<text text-anchor="middle" x="744.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node43&#45;&gt;Node44 -->
-<g id="edge10" class="edge">
-<title>Node43&#45;&gt;Node44</title>
-<path fill="none" stroke="#191970" d="M765.8668,-59.7337C750.857,-49.6755 732.9629,-37.6847 719.3707,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="764.061,-62.7367 774.3167,-65.396 767.9578,-56.9216 764.061,-62.7367"/>
+<!-- Node44&#45;&gt;Node45 -->
+<g id="edge11" class="edge">
+<title>Node44&#45;&gt;Node45</title>
+<path fill="none" stroke="#191970" d="M1067.1048,-135.8423C1004.9918,-126.2809 902.9251,-110.0992 815.3125,-94 812.2191,-93.4316 809.0527,-92.8359 805.8572,-92.2237"/>
+<polygon fill="#191970" stroke="#191970" points="1066.6822,-139.3183 1077.0975,-137.3764 1067.7445,-132.3994 1066.6822,-139.3183"/>
 </g>
 <!-- Node46 -->
 <g id="node13" class="node">
 <title>Node46</title>
-<g id="a_node13"><a xlink:href="../../d5/da5/arteries_2boost__gmrf_2gmrf__gauss_2main_8cpp.html" target="_top" xlink:title="arteries/boost_gmrf\l/gmrf_gauss/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="770.1748,-.5 770.1748,-28.5 884.5537,-28.5 884.5537,-.5 770.1748,-.5"/>
-<text text-anchor="start" x="778.1748" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/boost_gmrf</text>
-<text text-anchor="middle" x="827.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/gmrf_gauss/main.cpp</text>
+<g id="a_node13"><a xlink:href="../../d8/d16/examples_2laplace__stratimikos_2main_8cpp.html" target="_top" xlink:title="examples/laplace_stratimikos\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="824.0073,-65.5 824.0073,-93.5 970.6177,-93.5 970.6177,-65.5 824.0073,-65.5"/>
+<text text-anchor="start" x="832.0073" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">examples/laplace_stratimikos</text>
+<text text-anchor="middle" x="897.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node45&#45;&gt;Node46 -->
+<!-- Node44&#45;&gt;Node46 -->
 <g id="edge12" class="edge">
-<title>Node45&#45;&gt;Node46</title>
-<path fill="none" stroke="#191970" d="M922.4942,-60.9921C901.413,-50.6892 875.5874,-38.0677 856.167,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="920.984,-64.1496 931.5052,-65.396 924.0576,-57.8605 920.984,-64.1496"/>
+<title>Node44&#45;&gt;Node46</title>
+<path fill="none" stroke="#191970" d="M1082.9241,-132.6487C1044.4991,-121.6459 987.2523,-105.2537 946.5069,-93.5865"/>
+<polygon fill="#191970" stroke="#191970" points="1082.172,-136.0739 1092.7491,-135.462 1084.099,-129.3444 1082.172,-136.0739"/>
 </g>
 <!-- Node47 -->
 <g id="node14" class="node">
 <title>Node47</title>
-<g id="a_node14"><a xlink:href="../../d2/dbe/arteries_2boost__gmrf_2gmrf__nodes_2main_8cpp.html" target="_top" xlink:title="arteries/boost_gmrf\l/gmrf_nodes/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="902.894,-.5 902.894,-28.5 1017.8345,-28.5 1017.8345,-.5 902.894,-.5"/>
-<text text-anchor="start" x="910.894" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/boost_gmrf</text>
-<text text-anchor="middle" x="960.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/gmrf_nodes/main.cpp</text>
+<g id="a_node14"><a xlink:href="../../de/db1/_dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/DirichletInletOutlet\l_PolyconvexHGO.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="988.8423,-65.5 988.8423,-93.5 1103.7827,-93.5 1103.7827,-65.5 988.8423,-65.5"/>
+<text text-anchor="start" x="996.8423" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/DirichletInletOutlet</text>
+<text text-anchor="middle" x="1046.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_PolyconvexHGO.hpp</text>
 </a>
 </g>
 </g>
-<!-- Node45&#45;&gt;Node47 -->
+<!-- Node44&#45;&gt;Node47 -->
 <g id="edge13" class="edge">
-<title>Node45&#45;&gt;Node47</title>
-<path fill="none" stroke="#191970" d="M960.3643,-55.1081C960.3643,-46.1539 960.3643,-36.3227 960.3643,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="956.8644,-55.3959 960.3643,-65.396 963.8644,-55.396 956.8644,-55.3959"/>
+<title>Node44&#45;&gt;Node47</title>
+<path fill="none" stroke="#191970" d="M1105.6994,-128.9891C1092.8411,-118.2738 1075.8699,-104.1311 1063.3636,-93.7093"/>
+<polygon fill="#191970" stroke="#191970" points="1103.544,-131.7489 1113.4669,-135.462 1108.0254,-126.3714 1103.544,-131.7489"/>
+</g>
+<!-- Node49 -->
+<g id="node16" class="node">
+<title>Node49</title>
+<g id="a_node16"><a xlink:href="../../d5/d6a/_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/DirichletStripElongation\l_StochasticPolyconvexHGO.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="1121.7759,-65.5 1121.7759,-93.5 1282.8491,-93.5 1282.8491,-65.5 1121.7759,-65.5"/>
+<text text-anchor="start" x="1129.7759" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/DirichletStripElongation</text>
+<text text-anchor="middle" x="1202.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO.hpp</text>
+</a>
+</g>
+</g>
+<!-- Node44&#45;&gt;Node49 -->
+<g id="edge15" class="edge">
+<title>Node44&#45;&gt;Node49</title>
+<path fill="none" stroke="#191970" d="M1142.9256,-128.9891C1155.7839,-118.2738 1172.7551,-104.1311 1185.2614,-93.7093"/>
+<polygon fill="#191970" stroke="#191970" points="1140.5996,-126.3714 1135.1581,-135.462 1145.081,-131.7489 1140.5996,-126.3714"/>
+</g>
+<!-- Node51 -->
+<g id="node18" class="node">
+<title>Node51</title>
+<g id="a_node18"><a xlink:href="../../dc/d31/laplacepp_8cpp.html" target="_top" xlink:title="src/laplacepp.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="1300.4014,-70.5 1300.4014,-88.5 1394.2236,-88.5 1394.2236,-70.5 1300.4014,-70.5"/>
+<text text-anchor="middle" x="1347.3125" y="-76.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/laplacepp.cpp</text>
+</a>
+</g>
+</g>
+<!-- Node44&#45;&gt;Node51 -->
+<g id="edge17" class="edge">
+<title>Node44&#45;&gt;Node51</title>
+<path fill="none" stroke="#191970" d="M1165.0282,-132.6322C1208.5963,-119.933 1276.7488,-100.0679 1316.21,-88.5658"/>
+<polygon fill="#191970" stroke="#191970" points="1163.9407,-129.3034 1155.3197,-135.462 1165.8996,-136.0238 1163.9407,-129.3034"/>
+</g>
+<!-- Node52 -->
+<g id="node19" class="node">
+<title>Node52</title>
+<g id="a_node19"><a xlink:href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/NeumannInnerSurface\l_PolyconvexHGO.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="1411.9507,-65.5 1411.9507,-93.5 1544.6743,-93.5 1544.6743,-65.5 1411.9507,-65.5"/>
+<text text-anchor="start" x="1419.9507" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/NeumannInnerSurface</text>
+<text text-anchor="middle" x="1478.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_PolyconvexHGO.hpp</text>
+</a>
+</g>
+</g>
+<!-- Node44&#45;&gt;Node52 -->
+<g id="edge18" class="edge">
+<title>Node44&#45;&gt;Node52</title>
+<path fill="none" stroke="#191970" d="M1181.8911,-134.2846C1238.3309,-124.2225 1326.7895,-108.3222 1403.3125,-94 1406.05,-93.4876 1408.843,-92.9618 1411.6641,-92.4281"/>
+<polygon fill="#191970" stroke="#191970" points="1180.9664,-130.8941 1171.7353,-136.0937 1182.1942,-137.7856 1180.9664,-130.8941"/>
+</g>
+<!-- Node54 -->
+<g id="node21" class="node">
+<title>Node54</title>
+<g id="a_node21"><a xlink:href="../../da/d42/_neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/NeumannInnerSurface\l_StochasticPolyconvexHGO.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="1610.7759,-65.5 1610.7759,-93.5 1771.8491,-93.5 1771.8491,-65.5 1610.7759,-65.5"/>
+<text text-anchor="start" x="1618.7759" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/NeumannInnerSurface</text>
+<text text-anchor="middle" x="1691.3125" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO.hpp</text>
+</a>
+</g>
+</g>
+<!-- Node44&#45;&gt;Node54 -->
+<g id="edge20" class="edge">
+<title>Node44&#45;&gt;Node54</title>
+<path fill="none" stroke="#191970" d="M1181.7344,-137.9172C1283.1754,-126.2882 1494.3163,-102.0833 1610.4424,-88.7708"/>
+<polygon fill="#191970" stroke="#191970" points="1181.2156,-134.4537 1171.6794,-139.0699 1182.0129,-141.4081 1181.2156,-134.4537"/>
 </g>
 <!-- Node48 -->
 <g id="node15" class="node">
 <title>Node48</title>
-<g id="a_node15"><a xlink:href="../../da/df3/arteries_2gmrf__neumann_2main_8cpp.html" target="_top" xlink:title="arteries/gmrf_neumann\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1035.6724,-.5 1035.6724,-28.5 1155.0562,-28.5 1155.0562,-.5 1035.6724,-.5"/>
-<text text-anchor="start" x="1043.6724" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/gmrf_neumann</text>
-<text text-anchor="middle" x="1095.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
+<g id="a_node15"><a xlink:href="../../de/da1/arteries_2deterministic__dirichlet_2main_8cpp.html" target="_top" xlink:title="arteries/deterministic\l_dirichlet/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="992.187,-.5 992.187,-28.5 1100.438,-28.5 1100.438,-.5 992.187,-.5"/>
+<text text-anchor="start" x="1000.187" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/deterministic</text>
+<text text-anchor="middle" x="1046.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_dirichlet/main.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node45&#45;&gt;Node48 -->
+<!-- Node47&#45;&gt;Node48 -->
 <g id="edge14" class="edge">
-<title>Node45&#45;&gt;Node48</title>
-<path fill="none" stroke="#191970" d="M998.8038,-60.9921C1020.202,-50.6892 1046.4159,-38.0677 1066.1284,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="997.1489,-57.9042 989.6572,-65.396 1000.1856,-64.2113 997.1489,-57.9042"/>
+<title>Node47&#45;&gt;Node48</title>
+<path fill="none" stroke="#191970" d="M1046.3125,-55.1081C1046.3125,-46.1539 1046.3125,-36.3227 1046.3125,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="1042.8126,-55.3959 1046.3125,-65.396 1049.8126,-55.396 1042.8126,-55.3959"/>
 </g>
 <!-- Node50 -->
 <g id="node17" class="node">
 <title>Node50</title>
-<g id="a_node17"><a xlink:href="../../de/d5d/linear_patch_test_8hpp.html" target="_top" xlink:title="cee530/linearpatchtest\l/linearPatchTest.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1167.0518,-65.5 1167.0518,-93.5 1283.6768,-93.5 1283.6768,-65.5 1167.0518,-65.5"/>
-<text text-anchor="start" x="1175.0518" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/linearpatchtest</text>
-<text text-anchor="middle" x="1225.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/linearPatchTest.hpp</text>
+<g id="a_node17"><a xlink:href="../../dc/dba/arteries_2strip__dirichlet_2main_8cpp.html" target="_top" xlink:title="arteries/strip_dirichlet\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="1146.7954,-.5 1146.7954,-28.5 1257.8296,-28.5 1257.8296,-.5 1146.7954,-.5"/>
+<text text-anchor="start" x="1154.7954" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/strip_dirichlet</text>
+<text text-anchor="middle" x="1202.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node49&#45;&gt;Node50 -->
 <g id="edge16" class="edge">
 <title>Node49&#45;&gt;Node50</title>
-<path fill="none" stroke="#191970" d="M1389.8153,-127.6501C1353.6282,-117.0547 1307.485,-103.5444 1273.2926,-93.5331"/>
-<polygon fill="#191970" stroke="#191970" points="1389.1591,-131.1048 1399.7397,-130.5559 1391.1261,-124.3869 1389.1591,-131.1048"/>
-</g>
-<!-- Node52 -->
-<g id="node19" class="node">
-<title>Node52</title>
-<g id="a_node19"><a xlink:href="../../d4/d56/cee530_2manufactured_2manufactured_solution_8hpp.html" target="_top" xlink:title="cee530/manufactured\l/manufacturedSolution.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1301.6011,-65.5 1301.6011,-93.5 1437.1274,-93.5 1437.1274,-65.5 1301.6011,-65.5"/>
-<text text-anchor="start" x="1309.6011" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/manufactured</text>
-<text text-anchor="middle" x="1369.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/manufacturedSolution.hpp</text>
-</a>
-</g>
-</g>
-<!-- Node49&#45;&gt;Node52 -->
-<g id="edge18" class="edge">
-<title>Node49&#45;&gt;Node52</title>
-<path fill="none" stroke="#191970" d="M1422.6241,-123.8832C1410.7708,-114.0054 1396.8794,-102.4293 1386.2561,-93.5765"/>
-<polygon fill="#191970" stroke="#191970" points="1420.5165,-126.6829 1430.4394,-130.396 1424.9978,-121.3053 1420.5165,-126.6829"/>
-</g>
-<!-- Node54 -->
-<g id="node21" class="node">
-<title>Node54</title>
-<g id="a_node21"><a xlink:href="../../d9/d6b/_c_e_e_s_b_v_p_8hpp.html" target="_top" xlink:title="cee530/sbvp/CEESBVP.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1454.9131,-70.5 1454.9131,-88.5 1595.8154,-88.5 1595.8154,-70.5 1454.9131,-70.5"/>
-<text text-anchor="middle" x="1525.3643" y="-76.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/sbvp/CEESBVP.hpp</text>
-</a>
-</g>
-</g>
-<!-- Node49&#45;&gt;Node54 -->
-<g id="edge20" class="edge">
-<title>Node49&#45;&gt;Node54</title>
-<path fill="none" stroke="#191970" d="M1472.2591,-123.7543C1486.4802,-111.9034 1503.593,-97.6427 1514.4751,-88.5743"/>
-<polygon fill="#191970" stroke="#191970" points="1469.7307,-121.3053 1464.2891,-130.396 1474.212,-126.6829 1469.7307,-121.3053"/>
-</g>
-<!-- Node55 -->
-<g id="node22" class="node">
-<title>Node55</title>
-<g id="a_node22"><a xlink:href="../../d4/d89/linearelasticity__setup__pp_8cpp.html" target="_top" xlink:title="src/linearelasticity\l_setup_pp.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1613.9087,-65.5 1613.9087,-93.5 1708.8198,-93.5 1708.8198,-65.5 1613.9087,-65.5"/>
-<text text-anchor="start" x="1621.9087" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/linearelasticity</text>
-<text text-anchor="middle" x="1661.3643" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_setup_pp.cpp</text>
-</a>
-</g>
-</g>
-<!-- Node49&#45;&gt;Node55 -->
-<g id="edge21" class="edge">
-<title>Node49&#45;&gt;Node55</title>
-<path fill="none" stroke="#191970" d="M1503.5171,-127.4442C1538.2064,-116.9078 1582.1859,-103.5495 1614.9068,-93.6109"/>
-<polygon fill="#191970" stroke="#191970" points="1502.0867,-124.2207 1493.5356,-130.476 1504.1212,-130.9186 1502.0867,-124.2207"/>
-</g>
-<!-- Node56 -->
-<g id="node23" class="node">
-<title>Node56</title>
-<g id="a_node23"><a xlink:href="../../dd/d0f/orthotropic_r_f__laminate_8hpp.html" target="_top" xlink:title="src/orthotropicRF_laminate.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1726.6108,-70.5 1726.6108,-88.5 1882.1177,-88.5 1882.1177,-70.5 1726.6108,-70.5"/>
-<text text-anchor="middle" x="1804.3643" y="-76.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/orthotropicRF_laminate.hpp</text>
-</a>
-</g>
-</g>
-<!-- Node49&#45;&gt;Node56 -->
-<g id="edge22" class="edge">
-<title>Node49&#45;&gt;Node56</title>
-<path fill="none" stroke="#191970" d="M1505.0207,-134.0023C1574.3166,-121.3854 1689.4198,-100.4283 1754.8645,-88.5126"/>
-<polygon fill="#191970" stroke="#191970" points="1504.3517,-130.5665 1495.1404,-135.8013 1505.6057,-137.4533 1504.3517,-130.5665"/>
-</g>
-<!-- Node51 -->
-<g id="node18" class="node">
-<title>Node51</title>
-<g id="a_node18"><a xlink:href="../../d0/d30/cee530_2linearpatchtest_2main_8cpp.html" target="_top" xlink:title="cee530/linearpatchtest\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1173.0518,-.5 1173.0518,-28.5 1289.6768,-28.5 1289.6768,-.5 1173.0518,-.5"/>
-<text text-anchor="start" x="1181.0518" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/linearpatchtest</text>
-<text text-anchor="middle" x="1231.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
-</a>
-</g>
-</g>
-<!-- Node50&#45;&gt;Node51 -->
-<g id="edge17" class="edge">
-<title>Node50&#45;&gt;Node51</title>
-<path fill="none" stroke="#191970" d="M1227.5886,-55.4029C1228.4224,-46.3703 1229.342,-36.4078 1230.0649,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="1224.1002,-55.1166 1226.6662,-65.396 1231.0706,-55.76 1224.1002,-55.1166"/>
+<path fill="none" stroke="#191970" d="M1202.3125,-55.1081C1202.3125,-46.1539 1202.3125,-36.3227 1202.3125,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="1198.8126,-55.3959 1202.3125,-65.396 1205.8126,-55.396 1198.8126,-55.3959"/>
 </g>
 <!-- Node53 -->
 <g id="node20" class="node">
 <title>Node53</title>
-<g id="a_node20"><a xlink:href="../../d8/d17/cee530_2manufactured_2main_8cpp.html" target="_top" xlink:title="cee530/manufactured\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1312.9976,-.5 1312.9976,-28.5 1425.731,-28.5 1425.731,-.5 1312.9976,-.5"/>
-<text text-anchor="start" x="1320.9976" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">cee530/manufactured</text>
-<text text-anchor="middle" x="1369.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
+<g id="a_node20"><a xlink:href="../../d9/d81/arteries_2deterministic__neumann_2main_8cpp.html" target="_top" xlink:title="arteries/deterministic\l_neumann/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="1399.187,-.5 1399.187,-28.5 1507.438,-28.5 1507.438,-.5 1399.187,-.5"/>
+<text text-anchor="start" x="1407.187" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/deterministic</text>
+<text text-anchor="middle" x="1453.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_neumann/main.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node52&#45;&gt;Node53 -->
 <g id="edge19" class="edge">
 <title>Node52&#45;&gt;Node53</title>
-<path fill="none" stroke="#191970" d="M1369.3643,-55.1081C1369.3643,-46.1539 1369.3643,-36.3227 1369.3643,-28.5765"/>
-<polygon fill="#191970" stroke="#191970" points="1365.8644,-55.3959 1369.3643,-65.396 1372.8644,-55.396 1365.8644,-55.3959"/>
+<path fill="none" stroke="#191970" d="M1469.2704,-55.9907C1465.7373,-46.8044 1461.8041,-36.5781 1458.7265,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="1466.0313,-57.319 1472.8879,-65.396 1472.5647,-54.8061 1466.0313,-57.319"/>
+</g>
+<!-- Node55 -->
+<g id="node22" class="node">
+<title>Node55</title>
+<g id="a_node22"><a xlink:href="../../d5/da5/arteries_2boost__gmrf_2gmrf__gauss_2main_8cpp.html" target="_top" xlink:title="arteries/boost_gmrf\l/gmrf_gauss/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="1525.123,-.5 1525.123,-28.5 1639.502,-28.5 1639.502,-.5 1525.123,-.5"/>
+<text text-anchor="start" x="1533.123" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/boost_gmrf</text>
+<text text-anchor="middle" x="1582.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/gmrf_gauss/main.cpp</text>
+</a>
+</g>
+</g>
+<!-- Node54&#45;&gt;Node55 -->
+<g id="edge21" class="edge">
+<title>Node54&#45;&gt;Node55</title>
+<path fill="none" stroke="#191970" d="M1658.6379,-60.0151C1641.6755,-49.8999 1621.3341,-37.7698 1605.9177,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="1657.2797,-63.2802 1667.6611,-65.396 1660.8649,-57.2681 1657.2797,-63.2802"/>
+</g>
+<!-- Node56 -->
+<g id="node23" class="node">
+<title>Node56</title>
+<g id="a_node23"><a xlink:href="../../d2/dbe/arteries_2boost__gmrf_2gmrf__nodes_2main_8cpp.html" target="_top" xlink:title="arteries/boost_gmrf\l/gmrf_nodes/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="1657.8423,-.5 1657.8423,-28.5 1772.7827,-28.5 1772.7827,-.5 1657.8423,-.5"/>
+<text text-anchor="start" x="1665.8423" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/boost_gmrf</text>
+<text text-anchor="middle" x="1715.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/gmrf_nodes/main.cpp</text>
+</a>
+</g>
+</g>
+<!-- Node54&#45;&gt;Node56 -->
+<g id="edge22" class="edge">
+<title>Node54&#45;&gt;Node56</title>
+<path fill="none" stroke="#191970" d="M1699.9929,-55.9907C1703.3847,-46.8044 1707.1606,-36.5781 1710.115,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="1696.7006,-54.8027 1696.5201,-65.396 1703.2673,-57.2273 1696.7006,-54.8027"/>
 </g>
 <!-- Node57 -->
 <g id="node24" class="node">
 <title>Node57</title>
-<g id="a_node24"><a xlink:href="../../d2/ded/asme_2linearelaslam_2main_8cpp.html" target="_top" xlink:title="asme/linearelaslam\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1753.2905,-.5 1753.2905,-28.5 1855.438,-28.5 1855.438,-.5 1753.2905,-.5"/>
-<text text-anchor="start" x="1761.2905" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">asme/linearelaslam</text>
-<text text-anchor="middle" x="1804.3643" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
+<g id="a_node24"><a xlink:href="../../da/df3/arteries_2gmrf__neumann_2main_8cpp.html" target="_top" xlink:title="arteries/gmrf_neumann\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="1790.6206,-.5 1790.6206,-28.5 1910.0044,-28.5 1910.0044,-.5 1790.6206,-.5"/>
+<text text-anchor="start" x="1798.6206" y="-16.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/gmrf_neumann</text>
+<text text-anchor="middle" x="1850.3125" y="-6.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node56&#45;&gt;Node57 -->
+<!-- Node54&#45;&gt;Node57 -->
 <g id="edge23" class="edge">
-<title>Node56&#45;&gt;Node57</title>
-<path fill="none" stroke="#191970" d="M1804.3643,-60.2652C1804.3643,-50.2384 1804.3643,-38.1782 1804.3643,-28.9559"/>
-<polygon fill="#191970" stroke="#191970" points="1800.8644,-60.462 1804.3643,-70.462 1807.8644,-60.4621 1800.8644,-60.462"/>
+<title>Node54&#45;&gt;Node57</title>
+<path fill="none" stroke="#191970" d="M1735.2352,-61.5442C1760.678,-51.143 1792.2458,-38.238 1815.8792,-28.5765"/>
+<polygon fill="#191970" stroke="#191970" points="1733.7451,-58.3721 1725.8131,-65.396 1736.394,-64.8516 1733.7451,-58.3721"/>
 </g>
 </g>
 </svg>
