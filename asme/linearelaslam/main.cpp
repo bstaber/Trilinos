@@ -18,7 +18,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "Stratimikos_DefaultLinearSolverBuilder.hpp"
-#include "orthotropicRF_laminate.hpp"
+#include "ASMESBVP.hpp"
 
 int main(int argc, char *argv[]){
     
