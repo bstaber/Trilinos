@@ -1,7 +1,7 @@
 #ifndef CEESBVP_HPP
 #define CEESBVP_HPP
 
-#include "shinozukapp_layeredcomp.hpp"
+#include "shinozukapp_layeredcomp_2d.hpp"
 #include "tensor_calculus.hpp"
 #include "linearelasticity_setup_pp.hpp"
 
@@ -11,7 +11,7 @@ public:
     
     Epetra_Vector * solution;
     Teuchos::ParameterList * Krylov;
-    Teuchos::RCP<shinozuka_layeredcomp> GRF_Generator;
+    Teuchos::RCP<shinozuka_layeredcomp_2d> GRF_Generator;
     
     Epetra_SerialDenseVector m1, m2, m3, m4, m5;
     std::vector<int> phase;
@@ -41,12 +41,11 @@ public:
         int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"),    "order");
         double L1 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
         double L2 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
-        double L3 = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lz");
         _deltaN   = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaN");
         _deltaM4  = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaM4");
         _deltaM5  = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaM5");
         
-        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp(order,L1,L2,L3));
+        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp(order,L1,L2));
         
         solution = new Epetra_Vector(*StandardMap);
     }
