@@ -45,7 +45,7 @@ public:
         _deltaM4  = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaM4");
         _deltaM5  = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "deltaM5");
         
-        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp(order,L1,L2));
+        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
         
         solution = new Epetra_Vector(*StandardMap);
     }
