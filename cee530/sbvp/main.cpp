@@ -66,6 +66,9 @@ MPI_Init(&argc, &argv);
         interface->print_solution(pathu);
         interface->recover_cauchy_stress(pathf,seed);
         interface->compute_deformation(*interface->solution,pathf,false,true);
+        if (Comm.MyPID()==0){
+            std::cout << pathu << "\n";
+        }
     }
     
 #ifdef HAVE_MPI
