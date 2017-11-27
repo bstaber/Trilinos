@@ -56,9 +56,9 @@ MPI_Init(&argc, &argv);
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path");
     
     int * seed = new int [5];
-    double displacement = 1.0;
+    double displacement = 0.5;
     
-    for (unsigned int j=0; j<5000; ++j){
+    for (unsigned int j=0; j<10; ++j){
         seed[0] = 5*j; seed[1] = 5*j+1; seed[2] = 5*j+2; seed[3] = 5*j+3; seed[4] = 5*j+4;
         interface->solveOneRealization(displacement,seed);
         std::string pathu = path + std::to_string(j) + "_u.mtx";

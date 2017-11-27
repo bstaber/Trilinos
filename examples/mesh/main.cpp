@@ -17,8 +17,9 @@ Epetra_MpiComm Comm(MPI_COMM_WORLD);
 Epetra_SerialComm Comm;
 #endif
     
-    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured1.msh";
+    //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured1.msh";
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/arteries/mesh/media_flatboundaries.msh";
+    std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
     mesh Mesh(Comm, mesh_file);
     
     /*Comm.Barrier();
@@ -32,6 +33,22 @@ Epetra_SerialComm Comm;
             std::cout << Mesh.local_faces[i] << "\n";
         }
     }*/
+    
+    std::vector<int> phase;
+    for (unsigned int e=0; e<Mesh.n_cells/32; ++e){
+        for (unsigned int j=0; j<32; ++j){
+            phase.push_back(j);
+        }
+    }
+    
+    for (unsigned int e_gid=0; e_gid<32; ++e_gid){
+        if (phase[e_gid] % 2){
+            std::cout << e_gid << std::setw(15) << phase[e_gid] << std::setw(15) << "true\n";
+        }
+        else{
+            std::cout << e_gid << std::setw(15) << phase[e_gid] << std::setw(15) << "false\n";
+        }
+    }
     
 #ifdef HAVE_MPI
 MPI_Finalize();
