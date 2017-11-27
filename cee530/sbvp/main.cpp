@@ -58,7 +58,7 @@ MPI_Init(&argc, &argv);
     int * seed = new int [5];
     double displacement = 0.5;
     
-    for (unsigned int j=0; j<3; ++j){
+    for (unsigned int j=0; j<1000; ++j){
         seed[0] = 5*j; seed[1] = 5*j+1; seed[2] = 5*j+2; seed[3] = 5*j+3; seed[4] = 5*j+4;
         interface->solveOneRealization(displacement,seed);
         std::string pathu = path + std::to_string(j) + "_u.mtx";
