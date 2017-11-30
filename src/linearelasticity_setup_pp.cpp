@@ -44,7 +44,9 @@ void LinearizedElasticity::aztecSolver(Epetra_FECrsMatrix & A, Epetra_FEVector &
     problem.SetRHS(&b);
     solver.SetProblem(problem);
     solver.SetParameters(paramList);
-    solver.Iterate(2000,1e-6);
+    double tol  = Teuchos::getParameter<double>(paramList,"AZ_tol");
+    int maxIter = Teuchos::getParameter<int>(paramList,"AZ_max_iter");
+    solver.Iterate(maxIter,tol);
 }
 
 void LinearizedElasticity::assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K){

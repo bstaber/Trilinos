@@ -39,7 +39,7 @@ public:
         return f;
     }
     
-    void solve(bool doprint){
+    double solve(bool doprint){
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
         Epetra_Vector      lhs(*StandardMap);
@@ -51,6 +51,68 @@ public:
         if (doprint){
             print_solution(lhs,"/Users/brian/Documents/GitHub/Trilinos_results/cee530/linearpatchtest/linearPatchTest.mtx");
         }
+        double error = errorL2(lhs);
+        return error;
+    }
+    
+    double errorL2(Epetra_Vector & uStandardMap){
+        
+        Epetra_Vector u(*OverlapMap);
+        u.Import(uStandardMap, *ImportToOverlapMap, Insert);
+        double totalError;
+        double error = 0.0;
+        double normVH;
+        double gauss_weight;
+        int n_gauss_points = Mesh->n_gauss_cells;
+        int e_gid, node;
+        
+        //Epetra_SerialDenseVector epsilon(6);
+        //Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+        Epetra_SerialDenseVector uExact(3), vH(3);
+        Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), X_I(3,Mesh->el_type), u_I(3,Mesh->el_type);
+        Epetra_SerialDenseMatrix u_G(3,n_gauss_points), x_G(3,n_gauss_points);
+        
+        for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+            e_gid = Mesh->local_cells[e_lid];
+            for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+                X_I(0,inode) = Mesh->nodes_coord[3*node+0];
+                X_I(1,inode) = Mesh->nodes_coord[3*node+1];
+                X_I(2,inode) = Mesh->nodes_coord[3*node+2];
+                u_I(0,inode) = u[OverlapMap->LID(3*node+0)];
+                u_I(1,inode) = u[OverlapMap->LID(3*node+1)];
+                u_I(2,inode) = u[OverlapMap->LID(3*node+2)];
+            }
+            x_G.Multiply('N','N',1.0,X_I,Mesh->N_cells,0.0);
+            u_G.Multiply('N','N',1.0,u_I,Mesh->N_cells,0.0);
+            for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+                gauss_weight = Mesh->gauss_weight_cells(gp);
+                uExact = exactSolution(x_G(0,gp),x_G(1,gp),x_G(2,gp));
+                vH(0) = uExact(0) - u_G(0,gp);
+                vH(1) = uExact(1) - u_G(1,gp);
+                vH(2) = uExact(2) - u_G(2,gp);
+                normVH = vH.Norm2();
+                /*for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+                 dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+                 dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+                 dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
+                 }
+                 compute_B_matrices(dx_shape_functions,matrix_B);
+                 epsilon.Multiply('N','N',1.0,matrix_B,vector_u,0.0);*/
+                error += gauss_weight*normVH*normVH*Mesh->detJac_cells(e_lid,gp);
+            }
+        }
+        Comm->SumAll(&error,&totalError,1);
+        totalError = std::sqrt(totalError);
+        return totalError;
+    }
+    
+    Epetra_SerialDenseVector exactSolution(double & x1, double & x2, double & x3){
+        Epetra_SerialDenseVector u(3);
+        u(0) = 0.1*x1+0.2*x2+0.4*x3;
+        u(1) = 0.4*x1+0.5*x2+0.1*x3;
+        u(2) = 0.05*x1+0.25*x2+0.65*x3;
+        return u;
     }
     
     void setup_dirichlet_conditions(){
@@ -95,9 +157,11 @@ public:
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
             if (x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
-                v[0][StandardMap->LID(3*node+0)] = x; //0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
-                v[0][StandardMap->LID(3*node+1)] = y*x; //0.1*(0.05*x + 0.04*y + 0.1*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
-                v[0][StandardMap->LID(3*node+2)] = x*y*z; //0.1*(0.75*x + 0.09*y + 0.06*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
+                Epetra_SerialDenseVector u(3);
+                u = exactSolution(x,y,z);
+                v[0][StandardMap->LID(3*node+0)] = u(0); //0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
+                v[0][StandardMap->LID(3*node+1)] = u(1); //x*y; //y*x; //0.1*(0.05*x + 0.04*y + 0.1*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
+                v[0][StandardMap->LID(3*node+2)] = u(2); //x*y*z; //x*y*z; //0.1*(0.75*x + 0.09*y + 0.06*z + 0.07*x*y + 0.03*y*z + 0.08*z*x);
             }
         }
         
@@ -122,11 +186,11 @@ public:
     void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix){
         int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
-        double c1 = 144.8969*1.0e9;
-        double c2 = 14.2500*1.0e9;
-        double c3 = 5.8442*1.0e9;
-        double c4 = 7.5462*1.0e9;
-        double c5 = 12.5580*1.0e9;
+        double c1 = 144.8969*1.0e3;
+        double c2 = 14.2500*1.0e3;
+        double c3 = 5.8442*1.0e3;
+        double c4 = 7.5462*1.0e3;
+        double c5 = 12.5580*1.0e3;
         transverse_isotropic_matrix(tangent_matrix,c1,c2,c3,c4,c5);
     }
     
