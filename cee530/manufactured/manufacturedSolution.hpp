@@ -32,7 +32,7 @@ public:
     
     Epetra_SerialDenseVector manufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
-        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
+        double c1 = 2.0e-5; double c2 = 1.0e-5; double c3 = 2.0e-5; double topcoord = 25.0;
         u(0) = -c1*x2*(topcoord-x1)*(topcoord - x2);
         u(1) = c2*x2*(topcoord/2.0-x2);
         u(2) = std::sin(c1*x3);
@@ -41,13 +41,13 @@ public:
     
     Epetra_SerialDenseMatrix manufacturedDeformation(double & x1, double & x2, double & x3){
         Epetra_SerialDenseMatrix epsilon(3,3);
-        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
+        double c1 = 2.0e-5; double c2 = 1.0e-5; double c3 = 2.0e-5; double topcoord = 25.0;
         epsilon(0,0) = c1*x2*(topcoord - x2);
         epsilon(1,1) = c2*(topcoord/2 - x2) - c2*x2;
-        epsilon(2,2) = c1*cos(c1*x3);
-        epsilon(1,2) = 0.0;
-        epsilon(0,2) = 0.0;
-        epsilon(0,1) = (c1*x2*(topcoord-x1))/2.0 - (c1*(topcoord-x1)*(topcoord-x2))/2.0;
+        epsilon(2,2) = c1*std::cos(c1*x3);
+        epsilon(1,2) = 0.0; epsilon(2,1) = 0.0;
+        epsilon(0,2) = 0.0; epsilon(2,0) = 0.0;
+        epsilon(0,1) = (c1*x2*(topcoord-x1))/2.0 - (c1*(topcoord-x1)*(topcoord-x2))/2.0; epsilon(1,0) = epsilon(0,1);
         return epsilon;
     }
     
@@ -96,10 +96,7 @@ public:
                                                                        double C44 = C(3,3); double C45 = C(3,4); double C46 = C(3,5);
                                                                                             double C55 = C(4,4); double C56 = C(4,5);
                                                                                                                  double C66 = C(5,5);
-        /*f(0) = 1200*C11*x1*x1 + 600*k*C26*x2*x2 + 30*C56 + 10*k*C14 + k*C15;
-        f(1) = 600*k*C16*x1*x1 + 1200*C22*x2*x2 + 30*C46 + C56 + 10*k*C25;
-        f(2) = 600*k*C15*x1*x1 + 600*k*C24*x2*x2 + 20*C45 + C55 + 20*k*C36;*/
-        double c1 = 2.0e-4; double c2 = 1.0e-4; double c3 = 2.0e-4; double topcoord = 25.0;
+        double c1 = 2.0e-5; double c2 = 1.0e-5; double c3 = 2.0e-5; double topcoord = 25.0;
         f(0) = C66*c1*topcoord - k*C26*c2 - C66*c1*x1 - (k*C35*c1*c1*std::sin(c1*x3))/2 + k*C16*c1*topcoord - 2*k*C16*c1*x2;
         f(1) = C12*c1*(topcoord - x2) - C66*((c1*x2)/2 - (c1*(topcoord - x2))/2) - C12*c1*x2 - 2*C22*c2 + k*C26*c1*(topcoord - x1) - (k*C34*c1*c1*std::sin(c1*x3))/2;
         f(2) = - (k*(2*C24*c2 + C14*c1*x2 - C14*c1*(topcoord - x2) - k*C46*c1*(topcoord - x1)))/2 - C56*((c1*x2)/2 - (c1*(topcoord - x2))/2) - C33*c1*c1*std::sin(c1*x3);

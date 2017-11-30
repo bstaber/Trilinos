@@ -7,17 +7,10 @@
 #endif
 
 #include "Teuchos_RCP.hpp"
-#include "Ifpack.h"
-#include "Ifpack_AdditiveSchwarz.h"
 #include "BelosLinearProblem.hpp"
-#include "BelosBlockGmresSolMgr.hpp"
-#include "BelosEpetraAdapter.hpp"
-#include <BelosSolverFactory.hpp>
-#include "BelosBlockGmresSolMgr.hpp"
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "Stratimikos_DefaultLinearSolverBuilder.hpp"
 #include "CEESBVP.hpp"
 
 int main(int argc, char *argv[]){
@@ -46,13 +39,11 @@ MPI_Init(&argc, &argv);
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
-    
     if (Comm.MyPID()==0){
         paramList->print(std::cout,2,true,true);
     }
     
     Teuchos::RCP<CEESBVP> interface = Teuchos::rcp(new CEESBVP(Comm,*paramList));
-    
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path");
     
     int * seed = new int [5];
@@ -66,9 +57,6 @@ MPI_Init(&argc, &argv);
         interface->print_solution(pathu);
         interface->recover_cauchy_stress(pathf,seed);
         interface->compute_deformation(*interface->solution,pathf,false,true);
-        if (Comm.MyPID()==0){
-            std::cout << pathu << "\n";
-        }
     }
     
 #ifdef HAVE_MPI
