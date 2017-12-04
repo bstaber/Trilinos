@@ -1,4 +1,5 @@
 *.o
 *.vtk
 trilinos_mpi
-
+deprec/
+xml/
