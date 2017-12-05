@@ -330,8 +330,6 @@ int Newton_Raphson::Solve_with_Aztec(bool print){
             }
         }
     }
-    
-    //print_newton_solution("Newton_solution.mtx");
     return 0;
 }
 

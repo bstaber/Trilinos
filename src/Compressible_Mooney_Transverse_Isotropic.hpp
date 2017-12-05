@@ -156,7 +156,7 @@ public:
         }
         else{
             cos_plyagl = std::cos(plyagl);
-            sin_plyagl = std::sin(plyagl);
+            sin_plyagl = -std::sin(plyagl);
         }
     }
     
