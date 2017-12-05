@@ -78,7 +78,7 @@ MPI_Init(&argc, &argv);
                 for (int k=0; k<5; ++k){
                     seeds(k) = 5*j+k;
                 }
-                double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,true);
+                double value = costFunction->value(parameters,exponents,hyperParameters,id,seeds,false);
                 std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
                 std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(I) + "_L" + std::to_string(J) + "_nmc" + std::to_string(j) + ".mtx";
                 costFunction->print_newton_solution(path1);
