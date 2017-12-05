@@ -12,10 +12,12 @@ class forwardCostfunction
 private:
     
     Teuchos::ParameterList _paramList;
-    Epetra_Comm * comm;
-    Teuchos::RCP<Newton_Raphson> newton;
+    
     Teuchos::RCP<TIMooney_RandomField> interface;
-    Teuchos::RCP<distributenrldata> nrldata;
+    Teuchos::RCP<distributenrldata>    nrldata;
+    Teuchos::RCP<Newton_Raphson>       newton;
+    
+    Epetra_Comm * comm;
     Epetra_SerialDenseVector lb, ub;
     
 public:
