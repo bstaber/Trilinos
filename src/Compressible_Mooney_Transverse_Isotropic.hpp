@@ -104,7 +104,7 @@ public:
             }
             if (y==topcoord){
                 dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc+1] = 3*inode+dof;
+                dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
