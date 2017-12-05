@@ -66,8 +66,8 @@ MPI_Init(&argc, &argv);
     int nmc = 1;
     double length = 50.0;
     double width  = 25.0;
-    for (int I=1; I<=1; ++I){
-        for (int J=1; J<=1; ++J){
+    for (int I=1; I<=5; ++I){
+        for (int J=1; J<=5; ++J){
             hyperParameters(0) = I/10.0;
             hyperParameters(1) = I/10.0;
             hyperParameters(2) = I/10.0;
