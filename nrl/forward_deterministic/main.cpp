@@ -64,15 +64,17 @@ MPI_Init(&argc, &argv);
     interface->set_plyagl(plyagl);
     
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
-    
-    std::cout << nrldata->boundaryconditions;
-    
     double xi = 0.0;
     
     Newton->Initialization();
     for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
         Newton->setParameters(*paramList);
-        Newton->bc_disp = nrldata->boundaryconditions(i);
+        if (i==0){
+            Newton->bc_disp = nrldata->boundaryconditions(i);
+        }
+        else{
+            Newton->bc_disp = nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
+        }
         int error = Newton->Solve_with_Aztec(true);
         std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/displacement_" + std::to_string(i) + ".mtx";
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/greenlag_" + std::to_string(i) + ".mtx";

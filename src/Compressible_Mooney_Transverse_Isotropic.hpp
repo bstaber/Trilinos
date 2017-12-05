@@ -117,13 +117,12 @@ public:
         v.PutScalar(0.0);
         
         int node;
-        int dof = 1;
         double coord;
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
             if (coord==topcoord){
-                v[0][StandardMap->LID(3*node+dof)] = displacement;
+                v[0][StandardMap->LID(3*node+1)] = displacement;
             }
         }
         
@@ -135,14 +134,14 @@ public:
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
             if (coord==0.0){
-                F[0][StandardMap->LID(3*node+0)] = 0.0;
-                F[0][StandardMap->LID(3*node+1)] = 0.0;
-                F[0][StandardMap->LID(3*node+2)] = 0.0;
+                F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+                F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+                F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
             if (coord==topcoord){
-                F[0][StandardMap->LID(3*node+0)]   = 0.0;
-                F[0][StandardMap->LID(3*node+dof)] = displacement;
-                F[0][StandardMap->LID(3*node+2)]   = 0.0;
+                F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+                F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+                F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
         }
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
