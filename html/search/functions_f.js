@@ -16,7 +16,7 @@ var searchData=
   ['shinozuka_5flayeredcomp',['shinozuka_layeredcomp',['../da/dd9/classshinozuka__layeredcomp.html#aa070d731946a1bc57512e70100646d4a',1,'shinozuka_layeredcomp::shinozuka_layeredcomp()'],['../da/dd9/classshinozuka__layeredcomp.html#a8c266ed5a34783e91c39614d86af798d',1,'shinozuka_layeredcomp::shinozuka_layeredcomp(int &amp;nu, double &amp;L1, double &amp;L2, double &amp;L3)']]],
   ['shinozuka_5flayeredcomp_5f2d',['shinozuka_layeredcomp_2d',['../d6/db3/classshinozuka__layeredcomp__2d.html#af6b261c5948395f390f7d734460a5600',1,'shinozuka_layeredcomp_2d::shinozuka_layeredcomp_2d()'],['../d6/db3/classshinozuka__layeredcomp__2d.html#a868196eba54f57f98d512e468b20b7bb',1,'shinozuka_layeredcomp_2d::shinozuka_layeredcomp_2d(int &amp;nu, double &amp;L1, double &amp;L2)']]],
   ['sign',['sign',['../d1/dbe/classmanufactured_solution.html#abb6a15f8b19689e82898b326a6640d7d',1,'manufacturedSolution']]],
-  ['solve',['solve',['../d2/d69/classlinear_patch_test.html#a3ea3d2e1d47ce591e86729892133f326',1,'linearPatchTest::solve()'],['../d7/da3/classmanufactured.html#adadccb74cbad86c0faa9bf7b8adae9fc',1,'manufactured::solve()']]],
+  ['solve',['solve',['../d2/d69/classlinear_patch_test.html#a01199ee9a16049fc602351cc4842107b',1,'linearPatchTest::solve()'],['../d7/da3/classmanufactured.html#adadccb74cbad86c0faa9bf7b8adae9fc',1,'manufactured::solve()']]],
   ['solve_5famesos',['solve_amesos',['../d7/d76/classlaplace.html#a4ff0db201265ee41ea6620757ceba9fc',1,'laplace']]],
   ['solve_5faztec',['solve_aztec',['../d7/d76/classlaplace.html#af2a1cb5a85d603bb2b616e196899964f',1,'laplace']]],
   ['solve_5fwith_5faztec',['Solve_with_Aztec',['../d0/d9d/class_newton___raphson.html#ad94282360b1e26d9e0dd3c55a4634919',1,'Newton_Raphson']]],

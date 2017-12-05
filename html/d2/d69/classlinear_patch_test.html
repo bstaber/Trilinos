@@ -119,8 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a37e8208e6403e8571bbc54ae226f515b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab24f0699b64afb6e75abf16f6cbfdfc"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d69/classlinear_patch_test.html#aab24f0699b64afb6e75abf16f6cbfdfc">get_forcing</a> (double &amp;x1, double &amp;x2, double &amp;x3, unsigned int &amp;e_lid, unsigned int &amp;gp)</td></tr>
 <tr class="separator:aab24f0699b64afb6e75abf16f6cbfdfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ea3d2e1d47ce591e86729892133f326"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d69/classlinear_patch_test.html#a3ea3d2e1d47ce591e86729892133f326">solve</a> (bool doprint)</td></tr>
-<tr class="separator:a3ea3d2e1d47ce591e86729892133f326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01199ee9a16049fc602351cc4842107b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d69/classlinear_patch_test.html#a01199ee9a16049fc602351cc4842107b">solve</a> (bool doprint)</td></tr>
+<tr class="separator:a01199ee9a16049fc602351cc4842107b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9603affc0b054dfc7f4b5ed1cd9e845c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d69/classlinear_patch_test.html#a9603affc0b054dfc7f4b5ed1cd9e845c">errorL2</a> (Epetra_Vector &amp;uStandardMap)</td></tr>
+<tr class="separator:a9603affc0b054dfc7f4b5ed1cd9e845c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68871fe52f6699263e2496ee8335e767"><td class="memItemLeft" align="right" valign="top">Epetra_SerialDenseVector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d69/classlinear_patch_test.html#a68871fe52f6699263e2496ee8335e767">exactSolution</a> (double &amp;x1, double &amp;x2, double &amp;x3)</td></tr>
+<tr class="separator:a68871fe52f6699263e2496ee8335e767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa80f99e03d55a5ebeab86d18f827d376"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d69/classlinear_patch_test.html#aa80f99e03d55a5ebeab86d18f827d376">setup_dirichlet_conditions</a> ()</td></tr>
 <tr class="separator:aa80f99e03d55a5ebeab86d18f827d376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a336b80d2db51822c83a43b0f5a7ba2e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d69/classlinear_patch_test.html#a336b80d2db51822c83a43b0f5a7ba2e2">apply_dirichlet_conditions</a> (Epetra_FECrsMatrix &amp;K, Epetra_FEVector &amp;<a class="el" href="../../d3/d79/manufactured_8m.html#a6b48718ab00d0b39349b30d2d3db3a69">F</a>, double &amp;displacement)</td></tr>
@@ -306,7 +310,79 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#ab4bbdba423977cef810b6919817429a2">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00086">86</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00148">148</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9603affc0b054dfc7f4b5ed1cd9e845c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9603affc0b054dfc7f4b5ed1cd9e845c">&#9670;&nbsp;</a></span>errorL2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double linearPatchTest::errorL2 </td>
+          <td>(</td>
+          <td class="paramtype">Epetra_Vector &amp;&#160;</td>
+          <td class="paramname"><em>uStandardMap</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00058">58</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a68871fe52f6699263e2496ee8335e767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68871fe52f6699263e2496ee8335e767">&#9670;&nbsp;</a></span>exactSolution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Epetra_SerialDenseVector linearPatchTest::exactSolution </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>x3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00110">110</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +428,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#ae6e37199b1afeff489561279b0b0cb47">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00122">122</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00186">186</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
 
 </div>
 </div>
@@ -392,7 +468,7 @@ Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d9/df7/class_linearized_elasticity.html#aab7312e665f248382e1f6bd4bd285478">LinearizedElasticity</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00177">177</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00241">241</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
 
 </div>
 </div>
@@ -525,12 +601,12 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="../../d3/d9f/class_linear___finite___element___problem.html#a5d9ac651a1e9cd308cc47a4c60e7cf95">Linear_Finite_Element_Problem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00056">56</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00118">118</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a3ea3d2e1d47ce591e86729892133f326"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea3d2e1d47ce591e86729892133f326">&#9670;&nbsp;</a></span>solve()</h2>
+<a id="a01199ee9a16049fc602351cc4842107b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01199ee9a16049fc602351cc4842107b">&#9670;&nbsp;</a></span>solve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -539,7 +615,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void linearPatchTest::solve </td>
+          <td class="memname">double linearPatchTest::solve </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>doprint</em></td><td>)</td>
@@ -615,7 +691,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00133">133</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html#l00197">197</a> of file <a class="el" href="../../de/d5d/linear_patch_test_8hpp_source.html">linearPatchTest.hpp</a>.</p>
 
 </div>
 </div>
