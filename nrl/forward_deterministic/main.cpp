@@ -69,9 +69,9 @@ MPI_Init(&argc, &argv);
     double xi = 0.0;
     
     Newton->Initialization();
-    for (unsigned int i=0; i<nrldata->boundarycondtions.Length(); ++i){
+    for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
         Newton->setParameters(*paramList);
-        Newton->bc_disp = nrldata->boundarycondtions(i);
+        Newton->bc_disp = nrldata->boundaryconditions(i);
         int error = Newton->Solve_with_Aztec(true);
         std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/displacement_" + std::to_string(i) + ".mtx";
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/greenlag_" + std::to_string(i) + ".mtx";
