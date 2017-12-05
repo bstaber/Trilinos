@@ -197,7 +197,8 @@ int Newton_Raphson::Solve_with_Aztec(bool print){
     Epetra_FEVector rhs(*interface->StandardMap);
     Epetra_Vector lhs(*interface->StandardMap);
     Epetra_Vector y(*interface->StandardMap);
-     
+    lhs.PutScalar(0.0);
+    
     double Assemble_time;
     double Aztec_time;
     double displacement;
@@ -311,7 +312,6 @@ int Newton_Raphson::Solve_with_Aztec(bool print){
                     
                 }
                 
-                lhs.PutScalar(0.0);
                 problem.SetOperator(&stiffness);
                 problem.SetLHS(&lhs);
                 problem.SetRHS(&rhs);
