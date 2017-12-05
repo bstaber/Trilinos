@@ -81,8 +81,8 @@ public:
             comm->SumAll(&partialEnergy,&totalEnergy,1);
             val += totalEnergy;
         }
-        //val = val - nrldata->energy(id);
-        //val = fabs(val);
+        val = val - nrldata->energy(id);
+        val = fabs(val);
         return val;
     }
     
