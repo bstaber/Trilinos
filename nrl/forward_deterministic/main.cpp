@@ -65,6 +65,7 @@ MPI_Init(&argc, &argv);
     
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
     
+    std::cout << nrldata->boundaryconditions;
     
     double xi = 0.0;
     
