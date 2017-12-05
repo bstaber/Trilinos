@@ -49,7 +49,12 @@ public:
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
-            newton->bc_disp=nrldata->boundaryconditions(i);
+            if(i==0){
+                newton->bc_disp=nrldata->boundaryconditions(i);
+            }
+            else{
+                newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
+            }
             int error = newton->Solve_with_Aztec(newtonPrint);
             
             std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + "mtx";
