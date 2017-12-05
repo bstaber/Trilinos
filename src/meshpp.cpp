@@ -111,7 +111,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         meshfile >> xyz[0];
         meshfile >> xyz[1];
         meshfile >> xyz[2];
-        nodes_coord[3*i] = xyz[0];
+        nodes_coord[3*i+0] = xyz[0];
         nodes_coord[3*i+1] = xyz[1];
         nodes_coord[3*i+2] = xyz[2];
     }
@@ -288,11 +288,6 @@ int mesh::read_boundary_file(std::string & fileName_bc, unsigned int & number_ph
     file_bc.close();
     return 0;
     
-}
-
-void mesh::print_info(){
-    std::cout << "n_cells" << "\t\t" << "el_type" << "\t\t" << "n_nodes" << "\t\t" << "n_faces" << "\n";
-    std::cout << n_cells << "\t\t" << el_type << "\t\t" << n_nodes << "\t\t" << n_faces << "\n";
 }
 
 int mesh::metis_part_mesh(int & NumProc){

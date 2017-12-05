@@ -226,10 +226,7 @@ void gauss_points_hexa4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVec
     xi(2) = alpha; eta(2) = 0.0; zeta(2) = beta;
     xi(3)= -alpha; eta(3) = 0.0; zeta(3) = beta;
 }
-void gauss_points_hexa6(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
-    weight.Resize(6); xi.Resize(6); eta.Resize(6); zeta.Resize(6);
-    //TODO
-}
+
 void gauss_points_hexa8(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(8); xi.Resize(8); eta.Resize(8); zeta.Resize(8);
     

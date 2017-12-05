@@ -54,7 +54,6 @@ public:
     int read_gmsh(std::string & fileName_mesh);
     int read_boundary_file(std::string & fileName_bc, unsigned int & number_physical_groups);
     int metis_part_mesh(int & NumProc);
-    void print_info();
     void get_local_nodes(int & MyPID);
     void get_cells_and_ghosts(int & MyPID);
     
@@ -63,29 +62,17 @@ public:
     
     Epetra_Comm* Comm;
     
-    Epetra_SerialDenseMatrix N_faces;
-    Epetra_SerialDenseMatrix D1_N_faces;
-    Epetra_SerialDenseMatrix D2_N_faces;
+    Epetra_SerialDenseMatrix N_faces, D1_N_faces, D2_N_faces;
     
-    Epetra_SerialDenseVector local_rows;
-    Epetra_SerialDenseVector vol_cells;
-    Epetra_SerialDenseMatrix N_cells;
-    Epetra_SerialDenseMatrix detJac_cells;
-    Epetra_SerialDenseMatrix DX_N_cells;
-    Epetra_SerialDenseMatrix DY_N_cells;
-    Epetra_SerialDenseMatrix DZ_N_cells;
+    Epetra_SerialDenseVector local_rows, vol_cells, N_cells, detJac_cells, DX_N_cells, DY_N_cells, DZ_N_cells;
     
     Epetra_IntSerialDenseMatrix nodes_to_boundaries;
     
     std::vector<double> nodes_coord;
-    std::vector<int> cells_nodes;
-    std::vector<int> faces_nodes;
-    std::vector<int> local_nodes_without_ghosts;
-    std::vector<int> local_dof_without_ghosts;
-    std::vector<int> local_nodes;
-    std::vector<int> local_dof;
-    std::vector<int> local_cells;
-    std::vector<int> local_faces;
+    std::vector<int> cells_nodes, faces_nodes;
+    std::vector<int> local_nodes_without_ghosts, local_dof_without_ghosts;
+    std::vector<int> local_nodes, local_dof;
+    std::vector<int> local_cells, local_faces;
     
     idx_t * epart;
     idx_t * npart;
@@ -103,13 +90,9 @@ public:
     
     unsigned int n_gauss_faces;
     unsigned int n_gauss_cells;
-    Epetra_SerialDenseVector gauss_weight_cells;
-    Epetra_SerialDenseVector gauss_weight_faces;
-    Epetra_SerialDenseVector xi_cells;
-    Epetra_SerialDenseVector eta_cells;
-    Epetra_SerialDenseVector zeta_cells;
-    Epetra_SerialDenseVector xi_faces;
-    Epetra_SerialDenseVector eta_faces;
+    Epetra_SerialDenseVector gauss_weight_cells, gauss_weight_faces;
+    Epetra_SerialDenseVector xi_cells, eta_cells, zeta_cells;
+    Epetra_SerialDenseVector xi_faces, eta_faces;
 };
 
 #endif

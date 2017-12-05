@@ -55,6 +55,10 @@ public:
         ptrmbeta5 = std::pow(trm,beta5);
     }
     
+    void set_plyagl(double & Plyagl){
+        plyagl = Plyagl;
+    }
+    
     void findtop(){
         topcoord = 0.0;
         if (Comm->MyPID()==0){
@@ -66,10 +70,6 @@ public:
         }
         Comm->Broadcast(&topcoord,1,0);
         Comm->Barrier();
-    }
-    
-    void set_plyagl(double & Plyagl){
-        plyagl = Plyagl;
     }
     
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
@@ -202,13 +202,13 @@ public:
         
         eye(0) = 1.0; eye(1) = 1.0; eye(2) = 1.0; eye(3) = 0.0; eye(4) = 0.0; eye(5) = 0.0;
         
-        double I1 = C(0,0) + C(1,1) + C(2,2);
+        double I1  = C(0,0) + C(1,1) + C(2,2);
         double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
-        double I2 = (1.0/2.0)*(I1*I1-II1);
-        double I3 = det*det;
-        double I4 = C(0,0)*M(0) + C(1,1)*M(1) + C(2,2)*M(2) + 2.0*C(0,1)*M(5) + 2.0*C(0,2)*M(4) + 2.0*C(1,2)*M(3);
-        double I5 = CC(0,0)*M(0) + CC(1,1)*M(1) + CC(2,2)*M(2) + 2.0*CC(0,1)*M(5) + 2.0*CC(0,2)*M(4) + 2.0*CC(1,2)*M(3);
-        double J5 = I5 - I1*I4 + I2*trm;
+        double I2  = (1.0/2.0)*(I1*I1-II1);
+        double I3  = det*det;
+        double I4  = C(0,0)*M(0) + C(1,1)*M(1) + C(2,2)*M(2) + 2.0*C(0,1)*M(5) + 2.0*C(0,2)*M(4) + 2.0*C(1,2)*M(3);
+        double I5  = CC(0,0)*M(0) + CC(1,1)*M(1) + CC(2,2)*M(2) + 2.0*CC(0,1)*M(5) + 2.0*CC(0,2)*M(4) + 2.0*CC(1,2)*M(3);
+        double J5  = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
         double pI4 = std::pow(I4,beta4);
         double pJ5 = std::pow(J5,beta5);
