@@ -99,7 +99,7 @@ public:
     void printStatus(int eval, double value, Epetra_SerialDenseVector & x){
         comm->Barrier();
         if (comm->MyPID()==0){
-            std::cout << eval << std::setw(15) << std::scientific << value;
+            std::cout << eval << std::setw(15) << std::scientific << value << std::setw(15);
             for (unsigned int j=0; j<x.Length(); ++j){
                 std::cout << std::setw(15) << x(j);
             }

@@ -57,11 +57,17 @@ int main(int argc, char *argv[]){
         x(i) = 1.0e3*x(i);
     }
     
-    int id = 0;
-    int niter = 1000;
-    double tol = 1.0e-6;
-    double fval = obj->randomsearch(x,id,niter,tol);
-    x = obj->solution;
+    int id      = 0;
+    int niter   = 1000;
+    double tol  = 1.0e-6;
+    
+    for (int id=0; id<8; id++){
+        if (Comm.MyPID()==0){
+            std::cout << "************************" << std::setw(10) << "ID = " << id << std::setw(10) << "************************" << "\n";
+        }
+        double fval = obj->randomsearch(x,id,niter,tol);
+        std::cout << "SOLUTION = \n" << obj->solution << "\n";
+    }
 
 #ifdef HAVE_MPI
     MPI_Finalize();
