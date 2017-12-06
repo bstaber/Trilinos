@@ -49,7 +49,7 @@ public:
     ~RandomSearch_DeterministicModel(){
     }
     
-    double randomsearch(Epetra_SerialDenseVector & x, int & id, int & niter){
+    double randomsearch(Epetra_SerialDenseVector & x, int & id, int & niter, double & tol){
         int eval = 1;
         double fval = value(x,id);
         printHeader();
@@ -88,6 +88,9 @@ public:
                 eval++;
             }
             afval = fval;
+            if (fval<=tol){
+                break;
+            }
         }
         solution = x;
         return fval;
@@ -167,7 +170,7 @@ public:
             val += totalEnergy;
         }
         val = val - nrldata->energy(id);
-        val = fabs(val);
+        val = fabs(val)/fabs(nrldata->energy(id));
         return val;
     }
     
