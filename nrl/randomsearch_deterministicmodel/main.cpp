@@ -63,7 +63,8 @@ int main(int argc, char *argv[]){
     
     for (int id=0; id<8; id++){
         if (Comm.MyPID()==0){
-            std::cout << "************************" << std::setw(10) << "ID = " << id << std::setw(10) << "************************" << "\n";
+            std::cout << "************************" << std::setw(10) << "ID = " << id;
+            std::cout << std::setw(10) << "************************" << "\n";
         }
         double fval = obj->randomsearch(x,id,niter,tol);
         std::cout << "SOLUTION = \n" << obj->solution << "\n";
