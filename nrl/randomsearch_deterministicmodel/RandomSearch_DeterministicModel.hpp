@@ -54,6 +54,7 @@ public:
         double fval = value(x,id);
         printHeader();
         printStatus(eval,fval,x);
+        std::cout << "HERE\n";
         
         int n = x.Length();
         Epetra_SerialDenseMatrix L(n,n);
