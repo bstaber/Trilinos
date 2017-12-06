@@ -25,9 +25,9 @@ public:
     RandomSearch_DeterministicModel(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         comm = &Comm;
         _paramList = paramList;
-        interface = Teuchos::rcp(new TIMooney(Comm,paramList));
-        newton = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
-        nrldata = Teuchos::rcp(new distributenrldata(*interface->Mesh));
+        interface  = Teuchos::rcp(new TIMooney(Comm,paramList));
+        newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
+        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh));
         
         solution.Resize(7); lb.Resize(7); ub.Resize(7);
         lb(0) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu1_inf");
@@ -139,7 +139,12 @@ public:
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
-            newton->bc_disp=nrldata->boundaryconditions(i);
+            if(i==0){
+                newton->bc_disp=nrldata->boundaryconditions(i);
+            }
+            else{
+                newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
+            }
             int error = newton->Solve_with_Aztec(false);
             
             Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
@@ -153,7 +158,7 @@ public:
                 }
             }
         
-            double totalEnergy = 0.0;
+            double totalEnergy   = 0.0;
             double partialEnergy = 0.0;
             for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
