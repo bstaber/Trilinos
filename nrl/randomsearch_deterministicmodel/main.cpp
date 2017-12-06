@@ -59,6 +59,7 @@ int main(int argc, char *argv[]){
     
     int id = 0;
     int niter = 1000;
+    std::cout << "DEBUG\n";
     double fval = obj->randomsearch(x,id,niter);
     x = obj->solution;
 
