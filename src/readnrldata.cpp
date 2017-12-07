@@ -44,7 +44,7 @@ void readnrldata::import_expenergy(){
     if (file.is_open()){
         energy.Reshape(8,nloads);
         for (unsigned int i=0; i<8; ++i){
-            for (unsigned int j=0; j<8; ++j){
+            for (unsigned int j=0; j<nloads; ++j){
                 file >> gen;
                 energy(i,j) = gen;
             }
