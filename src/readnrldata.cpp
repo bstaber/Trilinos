@@ -42,10 +42,12 @@ void readnrldata::import_expenergy(){
     double gen;
     file.open(path);
     if (file.is_open()){
-        energy.Resize(8);
+        energy.Reshape(8,nloads);
         for (unsigned int i=0; i<8; ++i){
-            file >> gen;
-            energy(i) = gen;
+            for (unsigned int j=0; j<8; ++j){
+                file >> gen;
+                energy(i,j) = gen;
+            }
         }
         file.close();
     }

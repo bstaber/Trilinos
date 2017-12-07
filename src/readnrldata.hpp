@@ -17,8 +17,8 @@ class readnrldata
 public:
     
     int npoints, nloads;
-    Epetra_SerialDenseMatrix points, exx, eyy, exy;
-    Epetra_SerialDenseVector boundaryconditions, energy, angles;
+    Epetra_SerialDenseMatrix points, exx, eyy, exy, energy;
+    Epetra_SerialDenseVector boundaryconditions, angles;
     
     readnrldata(bool load);
     ~readnrldata();
