@@ -167,10 +167,8 @@ public:
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
-            val += totalEnergy;
+            val += (totalEnergy-nrldata->energy(id,i))*(totalEnergy-nrldata->energy(id,i))/(nrldata->energy(id,i)*nrldata->energy(id,i));
         }
-        val = val - nrldata->energy(id);
-        val = fabs(val)/fabs(nrldata->energy(id));
         return val;
     }
     
