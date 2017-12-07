@@ -57,15 +57,14 @@ int main(int argc, char *argv[]){
         x(i) = 1.0e3*x(i);
     }
     
-    int id      = 0;
-    int niter   = 1000;
+    int niter   = 100;
     double tol  = 1.0e-6;
     
     for (int id=0; id<8; id++){
         if (Comm.MyPID()==0){
             std::cout << "************************ ID = " << id << " ************************" << "\n";
         }
-        double fval = obj->randomsearch(x,id,niter,tol);
+        double fval = obj->randomsearch(x,niter,tol);
         std::cout << "SOLUTION = \n" << obj->solution << "\n";
     }
 

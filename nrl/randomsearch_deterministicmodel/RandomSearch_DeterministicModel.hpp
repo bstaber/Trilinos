@@ -49,7 +49,7 @@ public:
     ~RandomSearch_DeterministicModel(){
     }
     
-    double randomsearch(Epetra_SerialDenseVector & x, int & id, int & niter, double & tol){
+    double randomsearch(Epetra_SerialDenseVector & x, int & niter, double & tol){
         int eval = 1;
         double fval = value(x,id);
         printHeader();
@@ -83,7 +83,7 @@ public:
                 }
                 comm->Broadcast(x.Values(),n,0);
                 comm->Barrier();
-                fval = value(x,id);
+                fval = value(x);
                 printStatus(eval,fval,x);
                 eval++;
             }
