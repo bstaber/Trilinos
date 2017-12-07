@@ -55,7 +55,8 @@ MPI_Init(&argc, &argv);
         parameters(i) = 1.0e3*parameters(i);
     }
     
-    Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata(true));
+    std::string pathnrl = Teuchos::getParameter<std::string>(paramList->sublist("nrldata"),"pathrnl");
+    Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata(true,pathnrl));
     
     double plyagldeg = nrldata->angles(0);
     double plyagl    = 2.0*M_PI*plyagldeg/360.0;

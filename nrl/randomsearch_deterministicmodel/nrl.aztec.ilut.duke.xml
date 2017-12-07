@@ -6,6 +6,10 @@
         <Parameter name="nb_phys_groups" type="unsigned int" value="32"/>
     </ParameterList>
     
+    <ParameterList name="nrldata">
+        <Parameter name="pathnrl" type="string" value="/home/bms55/Trilinos_results/nrl/data/"/>
+    </ParameterList>
+    
     <ParameterList name="Data">
         <Parameter name="path_to_pts" type="string" value="/home/bms55/Trilinos_results/nrl/data/xyz.txt"/>
         <Parameter name="path_to_def" type="string" value="/home/bms55/Trilinos_results/nrl/data/"/>

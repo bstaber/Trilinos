@@ -20,7 +20,7 @@ public:
     Epetra_SerialDenseMatrix points, exx, eyy, exy, energy;
     Epetra_SerialDenseVector boundaryconditions, angles;
     
-    readnrldata(bool load);
+    readnrldata(bool load, std::string & path);
     ~readnrldata();
     
     void import_boundaryconditions();

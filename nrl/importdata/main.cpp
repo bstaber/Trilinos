@@ -21,7 +21,8 @@ int main(int argc, char *argv[]){
     //std::string filemesh = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
     std::string filemesh = "/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh";
     mesh Mesh(Comm,filemesh);
-    Teuchos::RCP<distributenrldata> nrldata = Teuchos::rcp(new distributenrldata(Mesh));
+    std::string pathnrl = "/home/s/staber/Trilinos_results/nrl/data/";
+    Teuchos::RCP<distributenrldata> nrldata = Teuchos::rcp(new distributenrldata(Mesh,pathnrl));
     
     if (Comm.MyPID()==0){
         std::cout << "MyPID" << std::setw(10) << "ncells" << std::setw(10) << "npoints" << "\n";

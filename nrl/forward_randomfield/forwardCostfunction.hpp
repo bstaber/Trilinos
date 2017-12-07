@@ -27,9 +27,10 @@ public:
     forwardCostfunction(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         comm = &Comm;
         _paramList = paramList;
+        std::string pathnrl = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
         newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
-        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh));
+        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh),pathnrl);
     }
     
     ~forwardCostfunction(){

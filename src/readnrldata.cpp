@@ -1,12 +1,12 @@
 #include "readnrldata.hpp"
 #include <math.h>
 
-readnrldata::readnrldata(bool load){
+readnrldata::readnrldata(bool load, std::string & path){
     if(load){
-        import_boundaryconditions();
-        import_exp_points();
-        import_expenergy();
-        import_exp_def();
+        import_boundaryconditions(path);
+        import_exp_points(path);
+        import_expenergy(path);
+        import_exp_def(path);
         angles.Resize(8);
         angles(0) = 30.0; angles(1) = 60.0; angles(2) = 60.0; angles(3) = 30.0; angles(4) = 15.0; angles(5) = 15.0; angles(6) = 75.0; angles(7) = 75.0;
     }
@@ -15,10 +15,10 @@ readnrldata::readnrldata(bool load){
 readnrldata::~readnrldata(){
 }
 
-void readnrldata::import_boundaryconditions(){
+void readnrldata::import_boundaryconditions(path){
     //std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/dirichletbcs.txt";
     //std::string filename = "/home/s/staber/Trilinos_results/nrl/data/dirichletbcs.txt";
-    std::string filename = "/home/bms55/Trilinos_results/nrl/data/dirichletbcs.txt";
+    std::string filename = path + "dirichletbcs.txt";
     std::ifstream file;
     double gbc;
     file.open(filename);
@@ -36,13 +36,13 @@ void readnrldata::import_boundaryconditions(){
     }
 }
 
-void readnrldata::import_expenergy(){
+void readnrldata::import_expenergy(std::string & path){
     //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/expenergy.txt";
     //std::string path = "/home/s/staber/Trilinos_results/nrl/data/expenergy.txt";
-    std::string path = "/home/bms55/Trilinos_results/nrl/data/expenergy.txt";
+    std::string filename = path + "expenergy.txt";
     std::ifstream file;
     double gen;
-    file.open(path);
+    file.open(filename);
     if (file.is_open()){
         energy.Reshape(8,nloads);
         for (unsigned int i=0; i<8; ++i){
@@ -58,11 +58,11 @@ void readnrldata::import_expenergy(){
     }
 }
 
-void readnrldata::import_exp_points(){
+void readnrldata::import_exp_points(std::string & path){
     double x,y,z;
     //std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/xyz.txt";
     //std::string filename = "/home/s/staber/Trilinos_results/nrl/data/xyz.txt";
-    std::string filename = "/home/bms55/Trilinos_results/nrl/data/xyz.txt";
+    std::string filename = path + "xyz.txt";
     std::ifstream file;
     file.open(filename);
     if (file.is_open()){
@@ -83,10 +83,9 @@ void readnrldata::import_exp_points(){
     }
 }
 
-void readnrldata::import_exp_def(){
+void readnrldata::import_exp_def(std::string & path){
     //std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/";
     //std::string path = "/home/s/staber/Trilinos_results/nrl/data/";
-    std::string path = "/home/bms55/Trilinos_results/nrl/data/";
     double gexx,geyy,gexy;
     for (unsigned int id=0; id<8; ++id){
         std::string path_exx = path + "exx_id" + std::to_string(id+1) + ".txt";

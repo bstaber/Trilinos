@@ -1,14 +1,14 @@
 #include "distributenrldata.hpp"
 #include <math.h>
 
-distributenrldata::distributenrldata(mesh & Mesh){
-    retrieve_data(Mesh);
+distributenrldata::distributenrldata(mesh & Mesh, std::string & path){
+    retrieve_data(Mesh,path);
 }
 
 distributenrldata::~distributenrldata(){
 }
 
-void distributenrldata::retrieve_data(mesh & Mesh){
+void distributenrldata::retrieve_data(mesh & Mesh, std::string & path){
     
     double testx, testy, testz, xi, eta, residual;
     unsigned int n_local_faces = Mesh.n_local_faces;
@@ -20,7 +20,7 @@ void distributenrldata::retrieve_data(mesh & Mesh){
     std::vector<double> data_xyz;
     std::vector<double> data_exx, data_eyy, data_exy;
     
-    Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata(true));
+    Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata(true,path));
     npoints = nrldata->npoints;
     nloads  = nrldata->nloads;
     boundaryconditions = nrldata->boundaryconditions;
