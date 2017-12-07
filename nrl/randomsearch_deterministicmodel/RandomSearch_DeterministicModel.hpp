@@ -66,7 +66,7 @@ public:
         double afval = fval;
         while(eval<=niter){
             for (unsigned int i=0; i<n; ++i){
-                L(i,i) = 1.0;
+                L(i,i) = 0.05*x(i);
             }
             v = x;
             while(fval>=afval){
