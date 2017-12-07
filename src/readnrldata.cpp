@@ -15,7 +15,7 @@ readnrldata::readnrldata(bool load, std::string & path){
 readnrldata::~readnrldata(){
 }
 
-void readnrldata::import_boundaryconditions(path){
+void readnrldata::import_boundaryconditions(std::string & path){
     //std::string filename = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/dirichletbcs.txt";
     //std::string filename = "/home/s/staber/Trilinos_results/nrl/data/dirichletbcs.txt";
     std::string filename = path + "dirichletbcs.txt";
