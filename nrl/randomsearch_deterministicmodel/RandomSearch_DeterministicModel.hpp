@@ -51,7 +51,7 @@ public:
     
     double randomsearch(Epetra_SerialDenseVector & x, int & niter, double & tol){
         int eval = 1;
-        double fval = value(x,id);
+        double fval = value(x);
         printHeader();
         printStatus(eval,fval,x);
         
@@ -136,7 +136,7 @@ public:
     double value(Epetra_SerialDenseVector & x){
         double valid = 0.0;
         double val   = 0.0;
-        for (int id=0; id<8; ++i){
+        for (int id=0; id<8; ++id){
             valid = value_id(x,id);
             val += valid;
         }
