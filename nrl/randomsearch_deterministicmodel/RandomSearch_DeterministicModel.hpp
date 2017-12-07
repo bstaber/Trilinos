@@ -28,7 +28,7 @@ public:
         std::string pathnrl = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         interface  = Teuchos::rcp(new TIMooney(Comm,paramList));
         newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
-        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh),path);
+        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh),pathnrl);
         
         solution.Resize(7); lb.Resize(7); ub.Resize(7);
         lb(0) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu1_inf");
