@@ -59,7 +59,7 @@ public:
         Epetra_SerialDenseMatrix L(n,n);
         Epetra_SerialDenseVector v(n);
         
-        boost::random::mt19937 rng(std::time(1));
+        boost::random::mt19937 rng(std::time(0));
         boost::random::normal_distribution<double> randn(0.0,1.0);
         boost::random::uniform_real_distribution<double> rand(0.0,1.0);
         
