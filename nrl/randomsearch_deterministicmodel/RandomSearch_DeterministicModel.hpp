@@ -158,7 +158,7 @@ public:
             else{
                 newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
             }
-            int error = newton->Solve_with_Aztec(false);
+            int error = newton->Solve_with_Aztec(true);
             
             Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
             
