@@ -133,7 +133,17 @@ public:
         return g;
     }
     
-    double value(Epetra_SerialDenseVector & x, int & id){
+    double value(Epetra_SerialDenseVector & x){
+        double valid = 0.0;
+        double val   = 0.0;
+        for (int id=0; id<8; ++i){
+            valid = value_id(x,id);
+            val += valid;
+        }
+        return val;
+    }
+    
+    double value_id(Epetra_SerialDenseVector & x, int & id){
         double plyagl = nrldata->angles(id)*2.0*M_PI/360.0;
         interface->set_parameters(x);
         interface->set_plyagl(plyagl);
