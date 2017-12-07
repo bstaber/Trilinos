@@ -23,10 +23,10 @@ public:
     readnrldata(bool load, std::string & path);
     ~readnrldata();
     
-    void import_boundaryconditions();
-    void import_exp_points();
-    void import_expenergy();
-    void import_exp_def();
+    void import_boundaryconditions(std::string & path);
+    void import_exp_points(std::string & path);
+    void import_expenergy(std::string & path);
+    void import_exp_def(std::string & path);
     
 };
 #endif
