@@ -34,23 +34,12 @@ public:
     ~forwardDeterministicCostFunction(){
     }
     
-    double value(Epetra_SerialDenseVector & x){
-        double valid = 0.0;
-        double val   = 0.0;
-        for (int id=0; id<8; ++id){
-            valid = value_id(x,id);
-            val  += valid;
-        }
-        return val;
-    }
-    
-    double value_id(Epetra_SerialDenseVector & x, int & id){
+    Epetra_SerialDenseVector value_id(Epetra_SerialDenseVector & x, int & id){
         double plyagl = nrldata->angles(id)*2.0*M_PI/360.0;
         interface->set_parameters(x);
         interface->set_plyagl(plyagl);
         
-        double val = 0.0;
-        double valref = 0.0;
+        Epetra_SerialDenseVector val(nrldata->boundaryconditions.Length());
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
@@ -79,10 +68,8 @@ public:
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
-            val    += (totalEnergy-nrldata->energy(id,i))*(totalEnergy-nrldata->energy(id,i));
-            valref += nrldata->energy(id,i)*nrldata->energy(id,i);
+            val(i)  = totalEnergy;
         }
-        val = val/valref;
         return val;
     }
     
