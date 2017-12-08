@@ -152,7 +152,8 @@ public:
         interface->set_parameters(x);
         interface->set_plyagl(plyagl);
         
-        double val = 0.0;
+        double val    = 0.0;
+        double valref = 0.0;
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
@@ -181,8 +182,10 @@ public:
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
-            val += (totalEnergy-nrldata->energy(id,i))*(totalEnergy-nrldata->energy(id,i))/(nrldata->energy(id,i)*nrldata->energy(id,i));
+            val    += (totalEnergy-nrldata->energy(id,i))*(totalEnergy-nrldata->energy(id,i));
+            valref += nrldata->energy(id,i)*nrldata->energy(id,i);
         }
+        val = val/valref;
         return val;
     }
     
