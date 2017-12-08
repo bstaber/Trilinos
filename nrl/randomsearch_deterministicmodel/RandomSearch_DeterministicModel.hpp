@@ -67,7 +67,7 @@ public:
         double afval = fval;
         while(eval<=niter){
             for (unsigned int i=0; i<n; ++i){
-                L(i,i) = 0.05*x(i);
+                L(i,i) = 0.10*x(i);
             }
             v = x;
             while(fval>=afval){
@@ -85,9 +85,9 @@ public:
                 comm->Broadcast(x.Values(),n,0);
                 comm->Barrier();
                 fval = value(x);
-                printStatus(eval,fval,x);
                 eval++;
             }
+            printStatus(eval,fval,x);
             afval = fval;
             if (fval<=tol){
                 break;
