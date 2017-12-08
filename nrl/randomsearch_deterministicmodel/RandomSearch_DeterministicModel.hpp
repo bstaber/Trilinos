@@ -1,3 +1,6 @@
+#ifndef RANDOMSEARCH_DETERMINSITICMODEL_HPP
+#define RANDOMSEARCH_DETERMINSITICMODEL_HPP
+
 #include  <math.h>
 #include "Compressible_Mooney_Transverse_Isotropic.hpp"
 #include "Newton_Raphsonpp.hpp"
@@ -11,12 +14,12 @@ class RandomSearch_DeterministicModel
 {
 private:
     
-    Teuchos::ParameterList _paramList;
-    Epetra_Comm * comm;
-    Teuchos::RCP<Newton_Raphson> newton;
-    Teuchos::RCP<TIMooney> interface;
+    Teuchos::ParameterList          _paramList;
+    Epetra_Comm *                   comm;
+    Teuchos::RCP<Newton_Raphson>    newton;
+    Teuchos::RCP<TIMooney>          interface;
     Teuchos::RCP<distributenrldata> nrldata;
-    Epetra_SerialDenseVector lb, ub;
+    Epetra_SerialDenseVector        lb, ub;
     
 public:
     
@@ -239,3 +242,4 @@ public:
     
     
 };
+#endif
