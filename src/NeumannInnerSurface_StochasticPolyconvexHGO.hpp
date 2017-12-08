@@ -16,6 +16,30 @@ class NeumannInnerSurface_StochasticPolyconvexHGO : public nearlyIncompressibleH
 {
 public:
     
+    laplace * Laplace;
+    
+    double w1, w2, w3, w4;
+    double mean_c1, c1, deltaC1;
+    double mean_c2, c2, deltaC2;
+    double mean_u1, u1, deltaU1;
+    double mean_mu4, mu4, deltaG4;
+    double mean_mu1, mu1;
+    double mean_mu2, mu2;
+    double mean_mu3, mu3;
+    double alpha1, alpha2;
+    double alpha3, alpha4;
+    double tau1, tau2;
+    double alpha5, alpha6;
+    double beta3, beta4;
+    double theta;
+    double epsilon = 1e-6;
+    
+    Epetra_IntSerialDenseVector cells_nodes_p1_med;
+    Epetra_SerialDenseVector w1_gmrf, w2_gmrf, w3_gmrf, w4_gmrf;
+    Epetra_SerialDenseVector a, b;
+    Epetra_SerialDenseVector E1,E2,E3;
+    Epetra_SerialDenseVector N;
+    
     NeumannInnerSurface_StochasticPolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
@@ -850,35 +874,6 @@ public:
             sym_tensor_product(scalarAB,eye,M2,tangent_piola_isc,1.0);
         }
     }
-    
-    laplace * Laplace;
-    
-    double w1, w2, w3, w4;
-    double mean_c1, c1, deltaC1;
-    double mean_c2, c2, deltaC2;
-    double mean_u1, u1, deltaU1;
-    double mean_mu4, mu4, deltaG4;
-    double mean_mu1, mu1;
-    double mean_mu2, mu2;
-    double mean_mu3, mu3;
-    double alpha1, alpha2;
-    double alpha3, alpha4;
-    double tau1, tau2;
-    double alpha5, alpha6;
-    double beta3, beta4;
-    double theta;
-    double epsilon = 1e-6;
-    
-    Epetra_IntSerialDenseVector cells_nodes_p1_med;
-    Epetra_SerialDenseVector w1_gmrf;
-    Epetra_SerialDenseVector w2_gmrf;
-    Epetra_SerialDenseVector w3_gmrf;
-    Epetra_SerialDenseVector w4_gmrf;
-    
-    Epetra_SerialDenseVector a;
-    Epetra_SerialDenseVector b;
-    Epetra_SerialDenseVector E1,E2,E3;
-    Epetra_SerialDenseVector N;
     
 };
 

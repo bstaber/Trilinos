@@ -9,6 +9,14 @@ class DirichletInletOutlet_PolyconvexHGO : public nearlyIncompressibleHyperelast
 {
 public:
     
+    laplace * Laplace;
+    
+    double mu1, mu2, mu3, mu4, beta3, beta4, theta, xxmax;
+    int fixed = 2;
+    int moved = 3;
+    
+    Epetra_SerialDenseVector a, b;
+    
     DirichletInletOutlet_PolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
@@ -264,23 +272,6 @@ public:
     
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
-    
-    laplace * Laplace;
-    
-    double mu1;
-    double mu2;
-    double mu3;
-    double mu4;
-    double beta3;
-    double beta4;
-    double theta;
-    double xxmax;
-    
-    int fixed = 2;
-    int moved = 3;
-    
-    Epetra_SerialDenseVector a;
-    Epetra_SerialDenseVector b;
     
 };
 

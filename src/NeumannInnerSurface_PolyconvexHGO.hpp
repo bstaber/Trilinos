@@ -9,6 +9,11 @@ class NeumannInnerSurface_PolyconvexHGO : public nearlyIncompressibleHyperelasti
 {
 public:
     
+    laplace * Laplace;
+    
+    double mu1, mu2, mu3, mu4, beta3, beta4, theta;
+    Epetra_SerialDenseVector a, b;
+    
     NeumannInnerSurface_PolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
@@ -746,19 +751,6 @@ public:
             sym_tensor_product(scalarAB,eye,M2,tangent_piola_isc,1.0);
         }
     }
-    
-    laplace * Laplace;
-    
-    double mu1;
-    double mu2;
-    double mu3;
-    double mu4;
-    double beta3;
-    double beta4;
-    double theta;
-    
-    Epetra_SerialDenseVector a;
-    Epetra_SerialDenseVector b;
     
 };
 
