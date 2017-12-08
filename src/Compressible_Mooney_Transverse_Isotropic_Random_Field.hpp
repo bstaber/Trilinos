@@ -24,15 +24,16 @@ public:
     TIMooney_RandomField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        Mesh = new mesh(comm, mesh_file);
-        Comm = Mesh->Comm;
-        findtop();
+        Mesh                  = new mesh(comm, mesh_file);
+        Comm                  = Mesh->Comm;
         
-        StandardMap        = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
-        OverlapMap         = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
-        ImportToOverlapMap = new Epetra_Import(*OverlapMap,*StandardMap);
+        StandardMap           = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
+        OverlapMap            = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
+        ImportToOverlapMap    = new Epetra_Import(*OverlapMap,*StandardMap);
+        
         create_FECrsGraph();
         
+        findtop();
         setup_dirichlet_conditions();
         for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
             for (unsigned int j=0; j<32; ++j){
