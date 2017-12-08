@@ -139,7 +139,7 @@ public:
         double val   = 0.0;
         for (int id=0; id<8; ++id){
             valid = value_id(x,id);
-            val += valid;
+            val  += valid;
         }
         return val;
     }
