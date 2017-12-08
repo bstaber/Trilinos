@@ -114,7 +114,7 @@ public:
     void printHeader(){
         comm->Barrier();
         if (comm->MyPID()==0){
-            std::cout << "Direct Random Search Algorithm\n";
+            std::cout << "Direct Random Search Algorithm: " << nrldata->boundaryconditions.Length() << " loads and " << nrldata->angles.Length() << " experimental tests.\n";
             std::cout << "#eval" << std::setw(15) << "value";
             for (unsigned int i=0; i<8; ++i){
                 std::cout << std::setw(15) << "x(" << i << ")";
