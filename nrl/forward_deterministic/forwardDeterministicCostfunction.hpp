@@ -50,6 +50,7 @@ public:
         interface->set_plyagl(plyagl);
         
         double val = 0.0;
+        double valref = 0.0;
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
