@@ -56,9 +56,11 @@ MPI_Init(&argc, &argv);
     Epetra_SerialDenseVector value(10);
     for (int id=0; id<8; ++id){
         value = obj->value_id(x,id);
-        std::cout << "************ ID = " << id << " ************\n";
-        std::cout << value << "\n";
-        std::cout << "\n";
+        if (Comm.MyPID()==0){
+            std::cout << "************ ID = " << id << " ************\n";
+            std::cout << value << "\n";
+            std::cout << "\n";
+        }
     }
     
     /*Epetra_SerialDenseVector parameters(7);
