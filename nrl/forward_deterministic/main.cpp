@@ -6,9 +6,7 @@
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "Compressible_Mooney_Transverse_Isotropic.hpp"
-#include "readnrldata.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "forwardDeterministicCostFunction.hpp"
 
 int main(int argc, char *argv[]){
     
@@ -41,7 +39,29 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Epetra_SerialDenseVector parameters(7);
+    Teuchos::RCP<forwardDeterministicCostFunction> obj = Teuchos::rcp(new forwardDeterministicCostFunction(Comm,*paramList));
+    
+    Epetra_SerialDenseVector x(7);
+    x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+    x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+    x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+    x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+    x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+    x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    for (unsigned int i=0; i<5; i++){
+        x(i) = 1.0e3*x(i);
+    }
+    
+    Epetra_SerialDenseVector value(10);
+    for (int id=0; id<8; ++id){
+        value = obj->value_id(x,id);
+        std::cout << "************ ID = " << id << " ************\n";
+        std::cout << value << "\n";
+        std::cout << "\n";
+    }
+    
+    /*Epetra_SerialDenseVector parameters(7);
     Teuchos::RCP<TIMooney> interface = Teuchos::rcp(new TIMooney(Comm,*paramList));
     
     parameters(0)    = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
@@ -81,7 +101,7 @@ MPI_Init(&argc, &argv);
         std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/greenlag_" + std::to_string(i) + ".mtx";
         Newton->print_newton_solution(path1);
         interface->compute_green_lagrange(*Newton->x,xi,xi,xi,path2);
-    }
+    }*/
     
 #ifdef HAVE_MPI
     MPI_Finalize();
