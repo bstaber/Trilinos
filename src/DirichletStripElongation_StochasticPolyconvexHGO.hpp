@@ -65,11 +65,11 @@ public:
         tau1 = (2.0*mean_mu1/(std::sqrt(3.0)*3.0*mean_mu2))*tau2;
         
         alpha1 = 1.0/(deltaC1*deltaC1);
-        alpha2  = mean_c1*deltaC1*deltaC1;
+        alpha2 = mean_c1*deltaC1*deltaC1;
         alpha3 = 1.0/(deltaC2*deltaC2);
-        alpha4  = mean_c2*deltaC2*deltaC2;
+        alpha4 = mean_c2*deltaC2*deltaC2;
         alpha5 = 1.0/(deltaG4*deltaG4);
-        alpha6  = mean_mu4*deltaG4*deltaG4;
+        alpha6 = mean_mu4*deltaG4*deltaG4;
         
         Mesh = new mesh(comm, mesh_file);
         //Mesh->read_boundary_file(boundary_file,number_physical_groups);

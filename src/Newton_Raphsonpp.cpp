@@ -14,16 +14,16 @@ Newton_Raphson::Newton_Raphson(Finite_Element_Problem & Interface, Teuchos::Para
 
 void Newton_Raphson::setParameters(Teuchos::ParameterList & Parameters){
 
-    delta = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "delta");
-    iter_min = Teuchos::getParameter<int>(Parameters.sublist("Newton"), "iterMin");
-    iter_max = Teuchos::getParameter<int>(Parameters.sublist("Newton"), "iterMax");
-    nb_bis_max = Teuchos::getParameter<int>(Parameters.sublist("Newton"), "nbBisMax");
-    norm_inf_tol = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "NormFTol");
-    norm_inf_max = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "NormFMax");
-    eps = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "eps");
-    success = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "success_parameter");
-    failure = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "failure_parameter");
-    bc_disp = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "bc_disp");
+    delta         = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "delta");
+    iter_min      = Teuchos::getParameter<int>(Parameters.sublist("Newton"), "iterMin");
+    iter_max      = Teuchos::getParameter<int>(Parameters.sublist("Newton"), "iterMax");
+    nb_bis_max    = Teuchos::getParameter<int>(Parameters.sublist("Newton"), "nbBisMax");
+    norm_inf_tol  = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "NormFTol");
+    norm_inf_max  = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "NormFMax");
+    eps           = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "eps");
+    success       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "success_parameter");
+    failure       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "failure_parameter");
+    bc_disp       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "bc_disp");
     pressure_load = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "pressure_load");
         
 }
@@ -33,8 +33,8 @@ int Newton_Raphson::Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> 
     double assemble_time,displacement, norm_inf_rhs, time_init, time_max, krylov_res;
     int FLAG1, FLAG2, FLAG3, nb_bis, iter, krylov_its;
     time_init = delta;
-    time_max = 1.0;
-    time = 0.0;
+    time_max  = 1.0;
+    time      = 0.0;
     
     std::string solver_its = "krylov_its";
     std::string solver_res = "krylov_res";

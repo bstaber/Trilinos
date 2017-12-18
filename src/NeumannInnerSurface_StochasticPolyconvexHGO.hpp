@@ -42,10 +42,10 @@ public:
     
     NeumannInnerSurface_StochasticPolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
-        std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
+        std::string mesh_file               = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"),  "mesh_file");
+        std::string boundary_file           = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"),  "boundary_file");
         unsigned int number_physical_groups = Teuchos::getParameter<unsigned int>(Parameters.sublist("Mesh"), "nb_phys_groups");
-        std::string select_model = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "model");
+        std::string select_model            = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"),  "model");
         
         mean_mu1   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu1");
         mean_mu2   = Teuchos::getParameter<double>(Parameters.sublist(select_model), "mu2");
@@ -64,15 +64,15 @@ public:
         mean_u1 = 2.0*mean_mu1/mean_c2;
         
         double gamma = 2.0*mean_mu1/(std::sqrt(3.0)*3.0*mean_mu2);
-        tau2 = (1.0 - deltaU1*deltaU1)/(deltaU1*deltaU1*gamma*(gamma+1.0));
-        tau1 = (2.0*mean_mu1/(std::sqrt(3.0)*3.0*mean_mu2))*tau2;
+        tau2         = (1.0 - deltaU1*deltaU1)/(deltaU1*deltaU1*gamma*(gamma+1.0));
+        tau1         = (2.0*mean_mu1/(std::sqrt(3.0)*3.0*mean_mu2))*tau2;
         
         alpha1 = 1.0/(deltaC1*deltaC1);
-        alpha2  = mean_c1*deltaC1*deltaC1;
+        alpha2 = mean_c1*deltaC1*deltaC1;
         alpha3 = 1.0/(deltaC2*deltaC2);
-        alpha4  = mean_c2*deltaC2*deltaC2;
+        alpha4 = mean_c2*deltaC2*deltaC2;
         alpha5 = 1.0/(deltaG4*deltaG4);
-        alpha6  = mean_mu4*deltaG4*deltaG4;
+        alpha6 = mean_mu4*deltaG4*deltaG4;
         
         Mesh = new mesh(comm, mesh_file);
         Mesh->read_boundary_file(boundary_file,number_physical_groups);
@@ -216,7 +216,7 @@ public:
     
     void get_internal_pressure(double & theta, double & pressure, double & dpressure){
         double ptheta = std::pow(theta,beta3);
-        pressure = beta3*( (ptheta/theta) - (1.0/(ptheta*theta)) );
+        pressure  = beta3*( (ptheta/theta) - (1.0/(ptheta*theta)) );
         dpressure = beta3*( (beta3-1.0)*(ptheta/(theta*theta)) + (beta3+1.0)/(ptheta*theta*theta) );
     }
     
