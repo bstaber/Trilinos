@@ -42,11 +42,11 @@ public:
     }
     
     void set_parameters(Epetra_SerialDenseVector & x){
-        mu1 = x(0);
-        mu2 = x(1);
-        mu3 = x(2);
-        mu4 = x(3);
-        mu5 = x(4);
+        mu1   = x(0);
+        mu2   = x(1);
+        mu3   = x(2);
+        mu4   = x(3);
+        mu5   = x(4);
         beta3 = -0.5;
         beta4 = x(5);
         beta5 = x(6);
@@ -209,12 +209,13 @@ public:
         double I5  = CC(0,0)*M(0) + CC(1,1)*M(1) + CC(2,2)*M(2) + 2.0*CC(0,1)*M(5) + 2.0*CC(0,2)*M(4) + 2.0*CC(1,2)*M(3);
         double J5  = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
-        double pI4 = std::pow(I4,beta4);
-        double pJ5 = std::pow(J5,beta5);
+        double pI4 = std::pow(I4, beta4);
+        double pJ5 = std::pow(J5, beta5);
         
         for (unsigned int i=0; i<6; ++i){
             dJ5(i) = J5*L(i) - I3*LML(i);
-            piola_stress(i) = 2.0*mu1*eye(i) + 2.0*mu2*(I1*eye(i)-c(i)) + (2.0*mu3*det*det-mu)*L(i) + (2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
+            piola_stress(i) = 2.0*mu1*eye(i) + 2.0*mu2*(I1*eye(i)-c(i)) + (2.0*mu3*det*det-mu)*L(i)
+                            + (2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
         }
         
         double scalarAB = 4.0*mu2;
