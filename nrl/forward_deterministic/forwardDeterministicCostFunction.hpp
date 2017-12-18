@@ -39,15 +39,15 @@ public:
         interface->set_parameters(x);
         interface->set_plyagl(plyagl);
         
-        Epetra_SerialDenseVector val(nrldata->boundaryconditions.Length());
+        Epetra_SerialDenseVector val(nrldata->boundaryconditions.M());
         newton->Initialization();
-        for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
+        for (unsigned int i=0; i<nrldata->boundaryconditions.M(); ++i){
             newton->setParameters(_paramList);
             if(i==0){
-                newton->bc_disp=nrldata->boundaryconditions(i);
+                newton->bc_disp=nrldata->boundaryconditions(i,id);
             }
             else{
-                newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
+                newton->bc_disp=nrldata->boundaryconditions(i,id)-nrldata->boundaryconditions(i-1,id);
             }
             int error = newton->Solve_with_Aztec(false);
             
@@ -68,7 +68,7 @@ public:
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
-            val(i)  = totalEnergy;
+            val(i) = totalEnergy;
         }
         return val;
     }
