@@ -16,8 +16,8 @@ class distributenrldata
 public:
     
     int npoints,nloads;
-    Epetra_SerialDenseMatrix points,exx,eyy,exy,energy;
-    Epetra_SerialDenseVector boundaryconditions, angles;
+    Epetra_SerialDenseMatrix boundaryconditions,points,exx,eyy,exy,energy;
+    Epetra_SerialDenseVector angles;
     
     std::vector<int> local_cells;
     std::vector<double> local_xi;

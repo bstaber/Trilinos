@@ -8,7 +8,14 @@ readnrldata::readnrldata(bool load, std::string & path){
         import_expenergy(path);
         import_exp_def(path);
         angles.Resize(8);
-        angles(0) = 30.0; angles(1) = 60.0; angles(2) = 60.0; angles(3) = 30.0; angles(4) = 15.0; angles(5) = 15.0; angles(6) = 75.0; angles(7) = 75.0;
+        angles(0) = 30.0;
+        angles(1) = 60.0;
+        angles(2) = 60.0;
+        angles(3) = 30.0;
+        angles(4) = 15.0;
+        angles(5) = 15.0;
+        angles(6) = 75.0;
+        angles(7) = 75.0;
     }
 }
 
@@ -24,10 +31,12 @@ void readnrldata::import_boundaryconditions(std::string & path){
     file.open(filename);
     if (file.is_open()){
         file >> nloads;
-        boundaryconditions.Resize(nloads);
-        for (unsigned int i=0; i<nloads; ++i){
-            file >> gbc;
-            boundaryconditions(i) = gbc;
+        boundaryconditions.Reshape(nloads,8);
+        for (unsigned int i=0; i<8; ++i){
+            for (unsigned int j=0; j<nloads; ++j){
+                file >> gbc;
+                boundaryconditions(j,i) = gbc;
+            }
         }
         file.close();
     }
@@ -44,11 +53,11 @@ void readnrldata::import_expenergy(std::string & path){
     double gen;
     file.open(filename);
     if (file.is_open()){
-        energy.Reshape(8,nloads);
+        energy.Reshape(nloads,8);
         for (unsigned int i=0; i<8; ++i){
             for (unsigned int j=0; j<nloads; ++j){
                 file >> gen;
-                energy(i,j) = gen;
+                energy(j,i) = gen;
             }
         }
         file.close();
