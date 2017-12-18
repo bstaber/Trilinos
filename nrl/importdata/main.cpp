@@ -30,12 +30,13 @@ int main(int argc, char *argv[]){
     Comm.Barrier();
     std::cout << Comm.MyPID() << std::setw(10) << nrldata->local_cells.size() << std::setw(10) << nrldata->local_xi.size() << "\n";
     Comm.Barrier();
-    if (Comm.MyPID()==1){
+    /*if (Comm.MyPID()==1){
         for (unsigned int i=0; i<nrldata->local_cells.size(); ++i){
             std::cout << nrldata->local_xi[i] << std::setw(10) << nrldata->local_eta[i] << "\n";
         }
     }
     Comm.Barrier();
+    */
     if (Comm.MyPID()==0){
         std::cout << nrldata->boundaryconditions << "\n";
         std::cout << nrldata->energy << "\n";
