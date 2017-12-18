@@ -32,10 +32,10 @@ void readnrldata::import_boundaryconditions(std::string & path){
     if (file.is_open()){
         file >> nloads;
         boundaryconditions.Reshape(nloads,8);
-        for (unsigned int i=0; i<8; ++i){
-            for (unsigned int j=0; j<nloads; ++j){
+        for (unsigned int i=0; i<nloads; ++i){
+            for (unsigned int j=0; j<8; ++j){
                 file >> gbc;
-                boundaryconditions(j,i) = gbc;
+                boundaryconditions(i,j) = gbc;
             }
         }
         file.close();
@@ -54,10 +54,10 @@ void readnrldata::import_expenergy(std::string & path){
     file.open(filename);
     if (file.is_open()){
         energy.Reshape(nloads,8);
-        for (unsigned int i=0; i<8; ++i){
-            for (unsigned int j=0; j<nloads; ++j){
+        for (unsigned int i=0; i<nloads; ++i){
+            for (unsigned int j=0; j<8; ++j){
                 file >> gen;
-                energy(j,i) = gen;
+                energy(i,j) = gen;
             }
         }
         file.close();
