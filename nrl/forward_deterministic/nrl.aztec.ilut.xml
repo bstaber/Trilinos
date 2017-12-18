@@ -39,13 +39,13 @@
     </ParameterList>
     
     <ParameterList name="TIMooney">
-        <Parameter name="mu1" type="double" value="1.7212"/>
-        <Parameter name="mu2" type="double" value="0.0426"/>
-        <Parameter name="mu3" type="double" value="0.0429"/>
-        <Parameter name="mu4" type="double" value="1.3138"/>
-        <Parameter name="mu5" type="double" value="0.0609"/>
-        <Parameter name="beta4" type="double" value="27.9535"/>
-        <Parameter name="beta5" type="double" value="0.0306"/>
+        <Parameter name="mu1" type="double" value="1.7073"/>
+        <Parameter name="mu2" type="double" value="0.0564"/>
+        <Parameter name="mu3" type="double" value="0.0584"/>
+        <Parameter name="mu4" type="double" value="1.3133"/>
+        <Parameter name="mu5" type="double" value="0.0614"/>
+        <Parameter name="beta4" type="double" value="27.9742"/>
+        <Parameter name="beta5" type="double" value="0.0410"/>
     </ParameterList>
     
 </ParameterList>
