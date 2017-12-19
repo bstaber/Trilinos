@@ -248,7 +248,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         cells_nodes.reserve(hexa8_nodes.size());
         cells_nodes = hexa8_nodes;
         
-        gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
     if (n_cells10>0){
