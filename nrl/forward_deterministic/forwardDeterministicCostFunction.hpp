@@ -16,7 +16,6 @@ private:
     
     Teuchos::ParameterList          _paramList;
     Epetra_Comm *                   comm;
-    //Teuchos::RCP<Newton_Raphson>    newton;
     Teuchos::RCP<TIMooney>          interface;
     Teuchos::RCP<distributenrldata> nrldata;
     
@@ -27,7 +26,6 @@ public:
         _paramList = paramList;
         std::string pathnrl = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         interface  = Teuchos::rcp(new TIMooney(Comm,paramList));
-        //newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
     }
     
