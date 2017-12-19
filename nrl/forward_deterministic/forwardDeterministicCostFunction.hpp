@@ -125,8 +125,5 @@ public:
             eij(e,2) = (1.0/2.0)*right_cauchy(0,1);
         }
     }
-    
-    
-    
 };
 #endif
