@@ -71,8 +71,10 @@ public:
             val(i) = totalEnergy;
         }
         double xi = 0.0;
-        std::string filename = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/e22_id" + std::to_string(id) + ".mtx";
-        interface->compute_green_lagrange(*newton->x, xi, xi, xi, filename);
+        std::string filenameE = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/e22_id" + std::to_string(id) + ".mtx";
+        std::string filenameU = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/u_id" + std::to_string(id) + ".mtx";
+        interface->compute_green_lagrange(*newton->x, xi, xi, xi, filenameE);
+        newton->print_newton_solution(filenameU);
         return val;
     }
     
