@@ -71,7 +71,7 @@ public:
     
     void setParameters(Epetra_SerialDenseVector & parameters, Epetra_SerialDenseVector & exponents, Epetra_SerialDenseVector & hyperParameters){
         mean_mu = parameters;
-        beta3   = -1.0/2.0;
+        beta3   = -0.5;
         beta4   = exponents(0);
         beta5   = exponents(1);
         omega   = hyperParameters;
@@ -272,47 +272,35 @@ public:
         double I5  = CC(0,0)*M(0) + CC(1,1)*M(1) + CC(2,2)*M(2) + 2.0*CC(0,1)*M(5) + 2.0*CC(0,2)*M(4) + 2.0*CC(1,2)*M(3);
         double J5  = I5 - I1*I4 + I2*trm;
         double pI3 = std::pow(I3,-beta3);
-        double pI4 = std::pow(I4,beta4);
-        double pJ5 = std::pow(J5,beta5);
+        double pI4 = std::pow(I4, beta4);
+        double pJ5 = std::pow(J5, beta5);
         
         for (unsigned int i=0; i<6; ++i){
             dJ5(i) = J5*L(i) - I3*LML(i);
-            piola_stress(i) = 2.0*mu1*eye(i) + 2.0*mu2*(I1*eye(i)-c(i)) + (2.0*mu3*det*det-mu)*L(i) + (2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
+            piola_stress(i) = 2.0*mu1*eye(i) + 2.0*mu2*(I1*eye(i)-c(i)) + (2.0*mu3*det*det-mu)*L(i)
+                            + (2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
         }
         
-        double scalarAB = 4.0*mu2;
-        tensor_product(scalarAB,eye,eye,tangent_piola,0.0);
+        tensor_product(4.0*mu2,eye,eye,tangent_piola,0.0);
+        sym_tensor_product(-4.0*mu2,eye,eye,tangent_piola,1.0);
         
-        scalarAB = -4.0*mu2;
-        sym_tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
+        tensor_product(4.0*mu3*det*det,L,L,tangent_piola,1.0);
+        sym_tensor_product(-4.0*mu3*det*det+2.0*mu,L,L,tangent_piola,1.0);
         
-        scalarAB = 4.0*mu3*det*det;
-        tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        tensor_product(J5,L,L,ddJ5,0.0);
+        sym_tensor_product(-J5,L,L,ddJ5,1.0);
         
-        scalarAB = -4.0*mu3*det*det+2.0*mu;
-        sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        tensor_product(-I3,L,LML,ddJ5,1.0);
+        tensor_product(-I3,LML,L,ddJ5,1.0);
         
-        scalarAB = J5;
-        tensor_product(scalarAB,L,L,ddJ5,0.0);
-        scalarAB = -J5;
-        sym_tensor_product(scalarAB,L,L,ddJ5,1.0);
-        scalarAB = -I3;
-        tensor_product(scalarAB,L,LML,ddJ5,1.0);
-        tensor_product(scalarAB,LML,L,ddJ5,1.0);
-        scalarAB = I3;
-        sym_tensor_product(scalarAB,L,LML,ddJ5,1.0);
-        sym_tensor_product(scalarAB,LML,L,ddJ5,1.0);
+        sym_tensor_product(I3,L,LML,ddJ5,1.0);
+        sym_tensor_product(I3,LML,L,ddJ5,1.0);
         
-        scalarAB = 4.0*beta4*pI4/(I4*ptrmbeta4);
-        tensor_product(scalarAB,M,M,tangent_piola,1.0);
+        tensor_product(4.0*beta4*pI4/(I4*ptrmbeta4),M,M,tangent_piola,1.0);
+        tensor_product(4.0*beta5*pJ5/(J5*ptrmbeta5),dJ5,dJ5,tangent_piola,1.0);
         
-        scalarAB = 4.0*beta5*pJ5/(J5*ptrmbeta5);
-        tensor_product(scalarAB,dJ5,dJ5,tangent_piola,1.0);
-        
-        scalarAB = 4.0*trm*beta3*pI3;
-        tensor_product(scalarAB,L,L,tangent_piola,1.0);
-        scalarAB = 4.0*trm*pI3;
-        sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        tensor_product(4.0*trm*beta3*pI3,L,L,tangent_piola,1.0);
+        sym_tensor_product(4.0*trm*pI3,L,L,tangent_piola,1.0);
         
         ddJ5.Scale(4.0*pJ5/ptrmbeta5);
         tangent_piola += ddJ5;

@@ -16,7 +16,7 @@ private:
     
     Teuchos::ParameterList          _paramList;
     Epetra_Comm *                   comm;
-    Teuchos::RCP<Newton_Raphson>    newton;
+    //Teuchos::RCP<Newton_Raphson>    newton;
     Teuchos::RCP<TIMooney>          interface;
     Teuchos::RCP<distributenrldata> nrldata;
     
@@ -27,7 +27,7 @@ public:
         _paramList = paramList;
         std::string pathnrl = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         interface  = Teuchos::rcp(new TIMooney(Comm,paramList));
-        newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
+        //newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
     }
     
@@ -38,6 +38,8 @@ public:
         double plyagl = nrldata->angles(id)*2.0*M_PI/360.0;
         interface->set_parameters(x);
         interface->set_plyagl(plyagl);
+        
+        Teuchos::RCP<Newton_Raphson> newton = Teuchos::rcp(new Newton_Raphson(*interface,_paramList));
         
         Epetra_SerialDenseVector val(nrldata->boundaryconditions.M());
         newton->Initialization();

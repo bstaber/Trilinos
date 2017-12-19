@@ -216,39 +216,27 @@ public:
                             + (2.0/ptrmbeta4)*pI4*M(i) + (2.0/ptrmbeta5)*pJ5*dJ5(i) - 2.0*trm*pI3*L(i);
         }
         
-        double scalarAB = 4.0*mu2;
-        tensor_product(scalarAB,eye,eye,tangent_piola,0.0);
+        tensor_product(4.0*mu2,eye,eye,tangent_piola,0.0);
+        sym_tensor_product(-4.0*mu2,eye,eye,tangent_piola,1.0);
         
-        scalarAB = -4.0*mu2;
-        sym_tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
+        tensor_product(4.0*mu3*det*det,L,L,tangent_piola,1.0);
         
-        scalarAB = 4.0*mu3*det*det;
-        tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        sym_tensor_product(-4.0*mu3*det*det+2.0*mu,L,L,tangent_piola,1.0);
         
-        scalarAB = -4.0*mu3*det*det+2.0*mu;
-        sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        tensor_product(J5,L,L,ddJ5,0.0);
+        sym_tensor_product(-J5,L,L,ddJ5,1.0);
         
-        scalarAB = J5;
-        tensor_product(scalarAB,L,L,ddJ5,0.0);
-        scalarAB = -J5;
-        sym_tensor_product(scalarAB,L,L,ddJ5,1.0);
-        scalarAB = -I3;
-        tensor_product(scalarAB,L,LML,ddJ5,1.0);
-        tensor_product(scalarAB,LML,L,ddJ5,1.0);
-        scalarAB = I3;
-        sym_tensor_product(scalarAB,L,LML,ddJ5,1.0);
-        sym_tensor_product(scalarAB,LML,L,ddJ5,1.0);
+        tensor_product(-I3,L,LML,ddJ5,1.0);
+        tensor_product(-I3,LML,L,ddJ5,1.0);
         
-        scalarAB = 4.0*beta4*pI4/(I4*ptrmbeta4);
-        tensor_product(scalarAB,M,M,tangent_piola,1.0);
+        sym_tensor_product(I3,L,LML,ddJ5,1.0);
+        sym_tensor_product(I3,LML,L,ddJ5,1.0);
         
-        scalarAB = 4.0*beta5*pJ5/(J5*ptrmbeta5);
-        tensor_product(scalarAB,dJ5,dJ5,tangent_piola,1.0);
+        tensor_product(4.0*beta4*pI4/(I4*ptrmbeta4),M,M,tangent_piola,1.0);
+        tensor_product(4.0*beta5*pJ5/(J5*ptrmbeta5),dJ5,dJ5,tangent_piola,1.0);
         
-        scalarAB = 4.0*trm*beta3*pI3;
-        tensor_product(scalarAB,L,L,tangent_piola,1.0);
-        scalarAB = 4.0*trm*pI3;
-        sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
+        tensor_product(4.0*trm*beta3*pI3,L,L,tangent_piola,1.0);
+        sym_tensor_product(4.0*trm*pI3,L,L,tangent_piola,1.0);
         
         ddJ5.Scale(4.0*pJ5/ptrmbeta5);
         tangent_piola += ddJ5;
