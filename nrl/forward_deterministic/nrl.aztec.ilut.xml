@@ -21,6 +21,7 @@
         <Parameter name="number_of_loads"   type="int"    value="1"/>
         <Parameter name="bc_disp"           type="double" value="0.0"/>
         <Parameter name="pressure_load"     type="double" value="0.0"/>
+        <Parameter name="tol"               type="double" value="1e-10"/>
     </ParameterList>
     
     <ParameterList name="Krylov">
@@ -29,7 +30,6 @@
         <Parameter name="subdomain_solve" type="string" value="icc"/>
         <Parameter name="overlap"         type="int"    value="0"/>
         <Parameter name="graph_fill"      type="int"    value="0"/>
-        <Parameter name="tol"             type="double" value="1e-10"/>
         <Parameter name="AZ_output"       type="string" value="summary"/>
         <Parameter name="AZ_diagnostics"  type="string" value="all"/>
         <Parameter name="AZ_reorder"      type="int"    value="1"/>
