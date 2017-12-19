@@ -41,6 +41,7 @@ public:
     double umax;
     double bc_disp;
     double pressure_load;
+    double tol;
     
     Epetra_Comm * Comm;
     Epetra_Vector * x;

@@ -25,7 +25,7 @@ void Newton_Raphson::setParameters(Teuchos::ParameterList & Parameters){
     failure       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "failure_parameter");
     bc_disp       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "bc_disp");
     pressure_load = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "pressure_load");
-        
+    tol           = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "tol");
 }
 
 int Newton_Raphson::Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL){
@@ -319,7 +319,7 @@ int Newton_Raphson::Solve_with_Aztec(bool print){
                 solver.SetParameters(*Krylov);
                 
                 Time.ResetStartTime();
-                solver.Iterate(2000,1e-6);
+                solver.Iterate(2000,tol);
                 Aztec_time = Time.ElapsedTime();
                 Krylov_its = solver.NumIters();
                 Krylov_res = solver.TrueResidual();
