@@ -54,7 +54,7 @@ public:
             Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
             
             if (!error){
-                compute_green_lagrange(*newton->x,eij);
+                get_green_lagrange(*newton->x,eij);
             }
             else{
                 if (comm->MyPID()==0){
@@ -70,10 +70,13 @@ public:
             comm->SumAll(&partialEnergy,&totalEnergy,1);
             val(i) = totalEnergy;
         }
+        double xi = 0.0;
+        std::string filename = "/home/s/staber/Trilinos_results/nrl/forward_deterministic/e22_id" + std::to_string(id) + ".mtx";
+        interface->compute_green_lagrange(*newton->x, xi, xi, xi, filename);
         return val;
     }
     
-    void compute_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseMatrix & eij){
+    void get_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseMatrix & eij){
         Epetra_Vector u(*(interface->OverlapMap));
         u.Import(x, *(interface->ImportToOverlapMap), Insert);
         
