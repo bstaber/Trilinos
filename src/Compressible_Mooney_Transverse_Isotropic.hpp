@@ -13,13 +13,11 @@ public:
     double trm, beta3, beta4, beta5;
     double ptrmbeta4, ptrmbeta5;
     double plyagl, cos_plyagl, sin_plyagl;
-    int n_ply;
     std::vector<int> phase;
     
     TIMooney(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
         
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        n_ply                 = Teuchos::getParameter<int>(Parameters.sublist("Mesh"), "n_ply");
         Mesh                  = new mesh(comm, mesh_file);
         Comm                  = Mesh->Comm;
         
@@ -154,7 +152,7 @@ public:
             sin_plyagl = std::sin(plyagl);
         }
         else{
-            cos_plyagl = std::cos(plyagl);
+            cos_plyagl =  std::cos(plyagl);
             sin_plyagl = -std::sin(plyagl);
         }
     }
