@@ -138,30 +138,46 @@ public:
     }
     
     double value(Epetra_SerialDenseVector & x){
-        double valid = 0.0;
-        double val   = 0.0;
-        for (int id=0; id<8; ++id){
-            valid = value_id(x,id);
-            val  += valid;
+        double vali = 0.0;
+        double val  = 0.0;
+        Epetra_SerialDenseVector angles(4);
+        Epetra_IntSerialDenseMatrix angleToID(4,2);
+        angles(0) = 2.0*M_PI*15.0/360.0;
+        angles(1) = 2.0*M_PI*30.0/360.0;
+        angles(2) = 2.0*M_PI*60.0/360.0;
+        angles(3) = 2.0*M_PI*75.0/360.0;
+        angleToID(0,0) = 4; angleToID(0,1) = 5;
+        angleToID(1,0) = 0; angleToID(1,1) = 3;
+        angleToID(2,0) = 1; angleToID(2,1) = 2;
+        angleToID(3,0) = 6; angleToID(3,1) = 7;
+        
+        for (int i=0; i<4; ++i){
+            vali = value_angle(x,angles(i),angleToID(i,0),angleToID(i,1));
+            val += vali;
         }
         return val;
     }
     
-    double value_id(Epetra_SerialDenseVector & x, int & id){
-        double plyagl = nrldata->angles(id)*2.0*M_PI/360.0;
+    double value_angle(Epetra_SerialDenseVector & x, double & plyagl, int & id1, int & id2){
+        //double plyagl = nrldata->angles(id)*2.0*M_PI/360.0;
         interface->set_parameters(x);
         interface->set_plyagl(plyagl);
+        
+        Epetra_SerialDenseVector meanEnergy(nrldata->boundaryconditions.Length());
+        for (unsigned int i=0; i<meanEnergy.Length(); ++i){
+            meanEnergy(i) = 0.5*(nrldata->energy(i,id1) + nrldata->energy(i,id2));
+        }
         
         double val    = 0.0;
         double valref = 0.0;
         newton->Initialization();
-        for (unsigned int i=0; i<nrldata->boundaryconditions.M(); ++i){
+        for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
             if(i==0){
-                newton->bc_disp=nrldata->boundaryconditions(i,id);
+                newton->bc_disp=nrldata->boundaryconditions(i);
             }
             else{
-                newton->bc_disp=nrldata->boundaryconditions(i,id)-nrldata->boundaryconditions(i-1,id);
+                newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
             }
             int error = newton->Solve_with_Aztec(false);
             
@@ -182,8 +198,8 @@ public:
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
-            val    += (totalEnergy-nrldata->energy(i,id))*(totalEnergy-nrldata->energy(i,id));
-            valref += nrldata->energy(i,id)*nrldata->energy(i,id);
+            val    += (totalEnergy-meanEnergy(i))*(totalEnergy-meanEnergy(i));
+            valref += meanEnergy(i)*meanEnergy(i);
         }
         val = val/valref;
         return val;

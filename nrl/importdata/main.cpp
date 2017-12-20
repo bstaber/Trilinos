@@ -57,8 +57,6 @@ int main(int argc, char *argv[]){
         }
     }*/
     
-    
-    
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
