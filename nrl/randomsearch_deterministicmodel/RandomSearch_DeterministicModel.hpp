@@ -19,7 +19,6 @@ private:
     Teuchos::RCP<Newton_Raphson>    newton;
     Teuchos::RCP<TIMooney>          interface;
     Teuchos::RCP<distributenrldata> nrldata;
-    Epetra_SerialDenseVector        lb, ub;
     
 public:
     
@@ -33,21 +32,7 @@ public:
         newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
         
-        solution.Resize(7); lb.Resize(7); ub.Resize(7);
-        lb(0) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu1_inf");
-        ub(0) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu1_sup");
-        lb(1) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu2_inf");
-        ub(1) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu2_sup");
-        lb(2) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu3_inf");
-        ub(2) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu3_sup");
-        lb(3) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu4_inf");
-        ub(3) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu4_sup");
-        lb(4) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu5_inf");
-        ub(4) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"mu5_sup");
-        lb(5) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"beta4_inf");
-        ub(5) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"beta4_sup");
-        lb(6) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"beta5_inf");
-        ub(6) = Teuchos::getParameter<double>(paramList.sublist("TIMooney"),"beta5_sup");
+        solution.Resize(7);
     }
     
     ~RandomSearch_DeterministicModel(){
@@ -61,7 +46,12 @@ public:
         
         int n = x.Length();
         Epetra_SerialDenseMatrix L(n,n);
-        Epetra_SerialDenseVector v(n);
+        Epetra_SerialDenseVector v(n), lb(n), ub(n);
+        
+        for (unsigned int i=0; i<n; ++i){
+            lb(i) = 0.60*x(i);
+            ub(i) = 1.40*x(i);
+        }
         
         boost::random::mt19937 rng(std::time(0));
         boost::random::normal_distribution<double>       randn(0.0,1.0);
@@ -75,13 +65,15 @@ public:
             v = x;
             while(fval>=afval){
                 if (comm->MyPID()==0){
-                    x = mvrandn(v,L,randn,rng);
-                    for (unsigned int j=0; j<n; ++j){
-                        if (x(j)<lb(j)){
-                            x(j)=lb(j);
-                        }
-                        if (x(j)>ub(j)){
-                            x(j)=ub(j);
+                    int flag = 1;
+                    while (flag==1){
+                        flag = 0;
+                        x = mvrandn(v,L,randn,rng);
+                        for (unsigned int j=0; j<n; ++j){
+                            if (x(j)<lb(j) || x(j)>ub(j)){
+                                flag = 1;
+                                break;
+                            }
                         }
                     }
                 }
