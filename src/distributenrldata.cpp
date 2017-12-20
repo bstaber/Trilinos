@@ -24,6 +24,7 @@ void distributenrldata::retrieve_data(mesh & Mesh, std::string & path){
     npoints = nrldata->npoints;
     nloads  = nrldata->nloads;
     boundaryconditions = nrldata->boundaryconditions;
+    linspace           = nrldata->linspace;
     energy = nrldata->energy;
     angles = nrldata->angles;
     

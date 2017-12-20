@@ -43,6 +43,16 @@ void readnrldata::import_boundaryconditions(std::string & path){
     else{
         std::cout << "Couldn't open the file containing the boundary conditions.\n";
     }
+    
+    filename = path + "linspace.txt";
+    file.open(filename);
+    if (file.is_open()){
+        linspace.Resize(nloads);
+        for (unsigned int i=0; i<nloads; ++i){
+            file >> gbc;
+            linspace(i) = gbc;
+        }
+    }
 }
 
 void readnrldata::import_expenergy(std::string & path){

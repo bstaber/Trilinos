@@ -114,7 +114,7 @@ public:
     void printHeader(){
         comm->Barrier();
         if (comm->MyPID()==0){
-            std::cout << "Direct Random Search Algorithm: " << nrldata->boundaryconditions.Length() << " loads and " << nrldata->angles.Length() << " experimental tests.\n";
+            std::cout << "Direct Random Search Algorithm: " << nrldata->boundaryconditions.M() << " loads and " << nrldata->angles.Length() << " experimental tests.\n";
             std::cout << "#eval" << std::setw(15) << "value";
             for (unsigned int i=0; i<8; ++i){
                 std::cout << std::setw(15) << "x(" << i << ")";
@@ -155,13 +155,13 @@ public:
         double val    = 0.0;
         double valref = 0.0;
         newton->Initialization();
-        for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
+        for (unsigned int i=0; i<nrldata->boundaryconditions.M(); ++i){
             newton->setParameters(_paramList);
             if(i==0){
-                newton->bc_disp=nrldata->boundaryconditions(i);
+                newton->bc_disp=nrldata->boundaryconditions(i,id);
             }
             else{
-                newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
+                newton->bc_disp=nrldata->boundaryconditions(i,id)-nrldata->boundaryconditions(i-1,id);
             }
             int error = newton->Solve_with_Aztec(false);
             
@@ -182,8 +182,8 @@ public:
                 partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
-            val    += (totalEnergy-nrldata->energy(id,i))*(totalEnergy-nrldata->energy(id,i));
-            valref += nrldata->energy(id,i)*nrldata->energy(id,i);
+            val    += (totalEnergy-nrldata->energy(i,id))*(totalEnergy-nrldata->energy(i,id));
+            valref += nrldata->energy(i,id)*nrldata->energy(i,id);
         }
         val = val/valref;
         return val;
