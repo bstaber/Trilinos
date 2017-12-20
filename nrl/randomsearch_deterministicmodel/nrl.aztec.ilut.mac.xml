@@ -35,6 +35,7 @@
         <Parameter name="number_of_loads" type="int" value="1"/>
         <Parameter name="bc_disp" type="double" value="0.010"/>
         <Parameter name="pressure_load" type="double" value="0.0"/>
+        <Parameter name="tol"               type="double" value="1e-8"/>
     </ParameterList>
     
     <ParameterList name="Krylov">
