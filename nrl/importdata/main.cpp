@@ -40,7 +40,6 @@ int main(int argc, char *argv[]){
     if (Comm.MyPID()==0){
         std::cout << nrldata->boundaryconditions << "\n";
         std::cout << nrldata->energy << "\n";
-        std::cout << nrldata->boundaryconditions << "\n";
     }
     
     //Teuchos::RCP<readnrldata> nrldata = Teuchos::rcp(new readnrldata());
