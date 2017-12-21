@@ -2,6 +2,7 @@
 #define RANDOMSEARCH_DETERMINSITICMODEL_HPP
 
 #include  <math.h>
+#include  <random>
 #include "Compressible_Mooney_Transverse_Isotropic.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include "distributenrldata.hpp"
@@ -49,11 +50,12 @@ public:
         Epetra_SerialDenseVector v(n), lb(n), ub(n);
         
         for (unsigned int i=0; i<n; ++i){
-            lb(i) = 0.60*x(i);
-            ub(i) = 1.40*x(i);
+            lb(i) = 0.10*x(i);
+            ub(i) = 1.90*x(i);
         }
         
-        boost::random::mt19937 rng(std::time(0));
+        static std::random_device rd;
+        boost::random::mt19937 rng(rd());
         boost::random::normal_distribution<double>       randn(0.0,1.0);
         boost::random::uniform_real_distribution<double> rand(0.0,1.0);
         
