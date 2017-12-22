@@ -15,55 +15,55 @@
 #include <boost/math/special_functions/gamma.hpp>
 
 int main(int argc, char *argv[]){
-    
+
     std::string    xmlInFileName = "";
     std::string    extraXmlFile = "";
     std::string    xmlOutFileName = "paramList.out";
-    
+
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
     clp.setDocString("TO DO.");
-    
+
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
     parse_return = clp.parse(argc,argv);
     if( parse_return != Teuchos::CommandLineProcessor::PARSE_SUCCESSFUL ) {
         std::cout << "\nEnd Result: TEST FAILED" << std::endl;
         return parse_return;
     }
-	
+
 #ifdef HAVE_MPI
     MPI_Init(&argc, &argv);
     Epetra_MpiComm Comm(MPI_COMM_WORLD);
 #else
     Epetra_SerialComm Comm;
 #endif
-    
+
     Teuchos::RCP<Teuchos::ParameterList> paramList = Teuchos::rcp(new Teuchos::ParameterList);
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
-    
+
     if (Comm.MyPID()==0){
         paramList->print(std::cout,2,true,true);
     }
- 
+
     Teuchos::RCP<NeumannInnerSurface_StochasticPolyconvexHGO> my_interface = Teuchos::rcp(new NeumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
-    
+
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_gmrf");
     parameters_file_1.open(path+"w1.txt");
     parameters_file_2.open(path+"w2.txt");
     parameters_file_3.open(path+"w3.txt");
     parameters_file_4.open(path+"w4.txt");
-    
+
     unsigned int n_cells_p1_med = 297828;
     unsigned int n_nodes_p1_med = 58464;
-    
+
     int error;
     std::string path_p1 = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_p1_connectivity");
     my_interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);
     if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
-        
+
         for (unsigned nmc=0; nmc<500; ++nmc){
             for (int i=0; i<n_nodes_p1_med; ++i){
                 parameters_file_1 >> my_interface->w1_gmrf(i);
@@ -71,7 +71,6 @@ int main(int argc, char *argv[]){
                 parameters_file_3 >> my_interface->w3_gmrf(i);
                 parameters_file_4 >> my_interface->w4_gmrf(i);
             }
-            if (nmc==60){
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
             Newton->setParameters(*paramList);
             Newton->Initialization();
@@ -81,7 +80,6 @@ int main(int argc, char *argv[]){
                 Newton->print_newton_solution(filename1);
                 std::string filename2 = path + "stress_realization" + std::to_string(nmc);
                 my_interface->compute_mean_cauchy_stress(*Newton->x,filename2);
-            }
             }
         }
         Comm.Barrier();
@@ -93,10 +91,10 @@ int main(int argc, char *argv[]){
     else{
         std::cout << "Couldn't open one of the parameters_file.\n";
     }
-    
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
 return 0;
-    
+
 }
