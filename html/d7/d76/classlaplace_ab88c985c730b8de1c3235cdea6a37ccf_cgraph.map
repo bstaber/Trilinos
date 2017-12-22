@@ -1,4 +1,0 @@
-<map id="laplace::laplace" name="laplace::laplace">
-<area shape="rect" id="node2" href="$d6/d6b/classmesh.html#a78a2b4feca50c441f0f4306b1bec05aa" title="mesh::read_boundary_file" alt="" coords="174,5,349,31"/>
-<area shape="rect" id="node3" href="$d7/d76/classlaplace.html#a2b27c28c4f7c39936d6a328663f14595" title="laplace::create_FECrsGraph" alt="" coords="167,55,357,80"/>
-</map>

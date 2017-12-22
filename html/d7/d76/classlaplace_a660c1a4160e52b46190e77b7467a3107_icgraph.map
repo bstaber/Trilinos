@@ -1,6 +1,0 @@
-<map id="laplace::assembling" name="laplace::assembling">
-<area shape="rect" id="node2" href="$d7/d76/classlaplace.html#a0d9e17e307504c53daa627eaebd63827" title="laplace::assembling_OAZ" alt="" coords="192,37,365,63"/>
-<area shape="rect" id="node3" href="$d7/d76/classlaplace.html#af2a1cb5a85d603bb2b616e196899964f" title="laplace::solve_aztec" alt="" coords="420,12,562,37"/>
-<area shape="rect" id="node5" href="$d7/d76/classlaplace.html#a4ff0db201265ee41ea6620757ceba9fc" title="laplace::solve_amesos" alt="" coords="413,61,569,87"/>
-<area shape="rect" id="node4" href="$d6/daf/class_interface__arteries.html#a6262b35a1c8a29e2690a1b79795e16ee" title="Interface_arteries\l::Interface_arteries" alt="" coords="617,5,750,44"/>
-</map>

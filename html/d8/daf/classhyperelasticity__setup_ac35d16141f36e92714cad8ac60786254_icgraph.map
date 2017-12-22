@@ -1,4 +1,0 @@
-<map id="hyperelasticity_setup::force_dead_pressure" name="hyperelasticity_setup::force_dead_pressure">
-<area shape="rect" id="node2" href="$d8/daf/classhyperelasticity__setup.html#afce0fbd554a28cfe88e65cdbb725aad7" title="hyperelasticity_setup\l::assemble_dirichlet\l_dead_neumann_static_condensation" alt="" coords="208,5,455,57"/>
-<area shape="rect" id="node3" href="$d8/daf/classhyperelasticity__setup.html#a99efe531e6fbb9832129f25104c0e444" title="hyperelasticity_setup\l::assemble_dirichlet\l_dead_neumann" alt="" coords="259,81,404,133"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="shinozuka_layeredcomp::generator_gauss_points" name="shinozuka_layeredcomp::generator_gauss_points">
-<area shape="rect" id="node2" href="$d5/d11/namespacetri3.html#aceaae63322465b0658dd661035eeb8c4" title="tri3::shape_functions" alt="" coords="237,5,381,31"/>
-<area shape="rect" id="node3" href="$da/dd9/classshinozuka__layeredcomp.html#a4edda9c1745d4e2ea92912dd8828f479" title="shinozuka_layeredcomp\l::s_tau" alt="" coords="226,55,391,93"/>
-<area shape="rect" id="node4" href="$d8/dd3/namespacetetra4.html#ae8cecd87bfbcfde8b3a4f8f8cce4561a" title="tetra4::shape_functions" alt="" coords="229,117,389,143"/>
-<area shape="rect" id="node5" href="$d8/d94/namespacehexa8.html#a57945e1da292f5b506c03833a497e1a9" title="hexa8::shape_functions" alt="" coords="228,167,390,192"/>
-<area shape="rect" id="node6" href="$da/da9/namespacetetra10.html#a371554180a96cf9e148a8079b4e10359" title="tetra10::shape_functions" alt="" coords="225,216,393,241"/>
-</map>

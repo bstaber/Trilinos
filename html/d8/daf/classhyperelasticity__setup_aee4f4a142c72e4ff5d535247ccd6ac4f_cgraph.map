@@ -1,6 +1,0 @@
-<map id="hyperelasticity_setup::assemble_dirichlet" name="hyperelasticity_setup::assemble_dirichlet">
-<area shape="rect" id="node2" href="$d8/daf/classhyperelasticity__setup.html#aa73bd87de424f1bdf9db00186872a69f" title="hyperelasticity_setup\l::material_stiffness\l_and_rhs_dirichlet" alt="" coords="199,61,345,113"/>
-<area shape="rect" id="node3" href="$d8/daf/classhyperelasticity__setup.html#a7050c638e04f1516548172ee9a02fc93" title="hyperelasticity_setup\l::compute_B_matrices" alt="" coords="405,5,558,44"/>
-<area shape="rect" id="node4" href="$d8/daf/classhyperelasticity__setup.html#aa5a05e262adae7bda067f022ad9b2908" title="hyperelasticity_setup\l::get_material_parameters" alt="" coords="393,68,570,107"/>
-<area shape="rect" id="node5" href="$d8/daf/classhyperelasticity__setup.html#a9cca717b6ef0662c83cfb6ee117a0ded" title="hyperelasticity_setup\l::get_constitutive_tensors" alt="" coords="395,131,568,169"/>
-</map>

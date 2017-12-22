@@ -1,5 +1,0 @@
-<map id="Interface_arteries::get_constitutive_tensors_static_condensation" name="Interface_arteries::get_constitutive_tensors_static_condensation">
-<area shape="rect" id="node2" href="$d6/daf/class_interface__arteries.html#a91ad1a74818c6b3cf6e319fb841d6a08" title="Interface_arteries\l::model_C" alt="" coords="226,24,351,63"/>
-<area shape="rect" id="node3" href="$de/d49/tensor__calculus_8hpp.html#a83328513d7280ef443df4e146aa67298" title="tensor_product" alt="" coords="415,5,525,31"/>
-<area shape="rect" id="node4" href="$de/d49/tensor__calculus_8hpp.html#a5b2bffd63a9471bf0196305afae53b10" title="sym_tensor_product" alt="" coords="399,55,541,80"/>
-</map>
