@@ -81,6 +81,10 @@ int main(int argc, char *argv[]){
                 std::string filename2 = path + "stress_realization" + std::to_string(nmc);
                 my_interface->compute_mean_cauchy_stress(*Newton->x,filename2);
             }
+            else{
+              if (Comm.MyPID()==0){
+                std::cout << "Newton failed | realization nb. " << nmc << "\n";
+            }
         }
         Comm.Barrier();
         parameters_file_1.close();
