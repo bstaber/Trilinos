@@ -15,7 +15,7 @@
 
 int main(int argc, char *argv[]){
 
-    std::string    xmlInFileName = "";
+    std::string xmlInFileName = "";
 
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
     }
 
     Teuchos::RCP<RandomSearch_DeterministicModel> obj = Teuchos::rcp(new RandomSearch_DeterministicModel(Comm,*paramList));
-    
+
     Epetra_SerialDenseVector x(7);
     x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
     x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
@@ -56,10 +56,10 @@ int main(int argc, char *argv[]){
     for (unsigned int i=0; i<5; i++){
         x(i) = 1.0e3*x(i);
     }
-    
+
     int niter   = 100;
     double tol  = 1.0e-6;
-    
+
     double fval = obj->randomsearch(x,niter,tol);
     std::cout << "SOLUTION = \n" << obj->solution << "\n";
 
@@ -68,4 +68,3 @@ int main(int argc, char *argv[]){
 #endif
 return 0;
 }
-
