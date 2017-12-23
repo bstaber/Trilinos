@@ -43,25 +43,27 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    Teuchos::RCP<RandomSearch_DeterministicModel> obj = Teuchos::rcp(new RandomSearch_DeterministicModel(Comm,*paramList));
+    for (unsigned int test=0; test<10; ++test){
+      Teuchos::RCP<RandomSearch_DeterministicModel> obj = Teuchos::rcp(new RandomSearch_DeterministicModel(Comm,*paramList));
 
-    Epetra_SerialDenseVector x(7);
-    x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
-    x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
-    x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
-    x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
-    x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
-    x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
-    x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
-    for (unsigned int i=0; i<5; i++){
-        x(i) = 1.0e3*x(i);
+      Epetra_SerialDenseVector x(7);
+      x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+      x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+      x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+      x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+      x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+      x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+      x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+      for (unsigned int i=0; i<5; i++){
+          x(i) = 1.0e3*x(i);
+      }
+
+      int niter   = 100;
+      double tol  = 1.0e-6;
+
+      double fval = obj->randomsearch(x,niter,tol);
+      std::cout << "SOLUTION = \n" << obj->solution << "\n";
     }
-
-    int niter   = 100;
-    double tol  = 1.0e-6;
-
-    double fval = obj->randomsearch(x,niter,tol);
-    std::cout << "SOLUTION = \n" << obj->solution << "\n";
 
 #ifdef HAVE_MPI
     MPI_Finalize();
