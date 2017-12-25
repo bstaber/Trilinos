@@ -86,7 +86,7 @@ public:
             if (test<fval){
               printStatus(eval,fval,x);
               fval      = test;
-              solution = x;
+              solution  = x;
             }
           }
         return fval;
