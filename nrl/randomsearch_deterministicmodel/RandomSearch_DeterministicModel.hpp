@@ -40,7 +40,7 @@ public:
     }
 
     double randomsearch(Epetra_SerialDenseVector & x, int & niter, double & tol){
-        int eval = 1;
+        
         double fval = value(x);
         printHeader();
         printStatus(eval,fval,x);
