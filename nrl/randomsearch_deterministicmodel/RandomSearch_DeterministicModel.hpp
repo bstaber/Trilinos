@@ -84,9 +84,9 @@ public:
             comm->Barrier();
             test = value(x);
             if (test<fval){
-              printStatus(eval,fval,x);
               fval      = test;
               solution  = x;
+              printStatus(eval,fval,x);
             }
           }
         return fval;
