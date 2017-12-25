@@ -59,12 +59,19 @@ public:
         boost::random::normal_distribution<double>       randn(0.0,1.0);
         boost::random::uniform_real_distribution<double> rand(0.0,1.0);
 
-        double afval = fval;
+        double afval;
         while(eval<=niter){
             for (unsigned int i=0; i<n; ++i){
                 L(i,i) = 0.10*x(i);
             }
             v = x;
+
+            afval = fval;
+            solution = x;
+            if (fval<=tol){
+                solution = x;
+                break;
+            }
             while(fval>=afval){
                 if (comm->MyPID()==0){
                     int flag = 1;
@@ -85,12 +92,6 @@ public:
                 eval++;
             }
             printStatus(eval,fval,x);
-            afval = fval;
-            solution = x;
-            if (fval<=tol){
-                solution = x;
-                break;
-            }
         }
         return fval;
     }
