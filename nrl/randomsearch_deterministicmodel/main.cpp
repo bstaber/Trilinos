@@ -62,7 +62,6 @@ int main(int argc, char *argv[]){
       double tol  = 1.0e-6;
 
       double fval = obj->randomsearch(x,niter,tol);
-      std::cout << "SOLUTION = \n" << obj->solution << "\n";
     }
 
 #ifdef HAVE_MPI
