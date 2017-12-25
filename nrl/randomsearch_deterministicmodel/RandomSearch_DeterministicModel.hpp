@@ -1,8 +1,8 @@
 #ifndef RANDOMSEARCH_DETERMINSITICMODEL_HPP
 #define RANDOMSEARCH_DETERMINSITICMODEL_HPP
 
-#include  <math.h>
-#include  <random>
+#include <math.h>
+#include <random>
 #include "Compressible_Mooney_Transverse_Isotropic.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include "distributenrldata.hpp"
