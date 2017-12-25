@@ -1,5 +1,5 @@
 <ParameterList>
-    
+
     <ParameterList name="Mesh">
         <Parameter name="mesh_file"     type="string" value="/home/s/staber/Trilinos/arteries/mesh/media_flatboundaries.msh"/>
         <Parameter name="boundary_file" type="string" value="/home/s/staber/Trilinos/arteries/mesh/nodes_to_boundaries_media.txt"/>
@@ -8,7 +8,7 @@
         <Parameter name="nb_phys_groups" type="unsigned int" value="4"/>
         <Parameter name="model"          type="string"       value="ModelC"/>
     </ParameterList>
-    
+
     <ParameterList name="Laplace">
         <Parameter name="solver"          type="string" value="cg"/>
         <Parameter name="precond"         type="string" value="dom_decomp"/>
@@ -20,7 +20,7 @@
         <Parameter name="AZ_diagnostics"  type="int"    value="0"/>
         <Parameter name="AZ_reorder"      type="int"    value="1"/>
     </ParameterList>
-    
+
     <ParameterList name="Newton">
         <Parameter name="delta"             type="double" value="0.0015"/>
         <Parameter name="iterMin"           type="int"    value="3"/>
@@ -34,8 +34,9 @@
         <Parameter name="number_of_loads"   type="int"    value="1"/>
         <Parameter name="bc_disp"           type="double" value="0.0"/>
         <Parameter name="pressure_load"     type="double" value="12000.0"/>
+        <Parameter name="tol"               type="double" value="1e-8"/>
     </ParameterList>
-    
+
     <ParameterList name="Krylov">
         <Parameter name="solver"          type="string" value="gmres"/>
         <Parameter name="kspace"          type="int"    value="500"/>
