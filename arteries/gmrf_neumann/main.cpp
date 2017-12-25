@@ -95,7 +95,7 @@ int main(int argc, char *argv[]){
     else{
         std::cout << "Couldn't open one of the parameters_file.\n";
     }
-
+}
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
