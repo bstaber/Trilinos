@@ -59,7 +59,7 @@ public:
         boost::random::normal_distribution<double>       randn(0.0,1.0);
         boost::random::uniform_real_distribution<double> rand(0.0,1.0);
 
-        double fval, test;
+        double test;
         for (unsigned int eval=0; eval<niter; ++eval){
 
             for (unsigned int i=0; i<n; ++i){
