@@ -40,10 +40,10 @@ public:
     }
 
     double randomsearch(Epetra_SerialDenseVector & x, int & niter, double & tol){
-        
+
         double fval = value(x);
         printHeader();
-        printStatus(eval,fval,x);
+        printStatus(0,fval,x);
 
         int n = x.Length();
         Epetra_SerialDenseMatrix L(n,n);
@@ -60,7 +60,7 @@ public:
         boost::random::uniform_real_distribution<double> rand(0.0,1.0);
 
         double test;
-        for (unsigned int eval=0; eval<niter; ++eval){
+        for (unsigned int eval=1; eval<niter; eval++){
 
             for (unsigned int i=0; i<n; ++i){
                 L(i,i) = 0.10*x(i);
