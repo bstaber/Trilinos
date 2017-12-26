@@ -59,36 +59,42 @@ public:
         boost::random::normal_distribution<double>       randn(0.0,1.0);
         boost::random::uniform_real_distribution<double> rand(0.0,1.0);
 
-        double test;
-        for (unsigned int eval=1; eval<niter; eval++){
+        double test = fval;
+        int eval = 0;
+
+        while (eval<=niter || fval>=tol){
 
             for (unsigned int i=0; i<n; ++i){
                 L(i,i) = 0.10*x(i);
             }
             v = x;
 
-            if (comm->MyPID()==0){
-              int flag = 1;
-              while (flag==1){
-                flag = 0;
-                x = mvrandn(v,L,randn,rng);
-                for (unsigned int j=0; j<n; ++j){
-                  if (x(j)<lb(j) || x(j)>ub(j)){
-                    flag = 1;
-                    break;
+            while (test>=fval){
+
+              if (comm->MyPID()==0){
+                int flag = 1;
+                while (flag==1){
+                  flag = 0;
+                  x = mvrandn(v,L,randn,rng);
+                  for (unsigned int j=0; j<n; ++j){
+                    if (x(j)<lb(j) || x(j)>ub(j)){
+                      flag = 1;
+                      break;
+                    }
                   }
                 }
               }
+              comm->Broadcast(x.Values(),n,0);
+              comm->Barrier();
+              test = value(x);
+              eval++;
             }
-            comm->Broadcast(x.Values(),n,0);
-            comm->Barrier();
-            test = value(x);
-            if (test<fval){
-              fval      = test;
-              solution  = x;
-              printStatus(eval,fval,x);
-            }
+            fval      = test;
+            solution  = x;
+            printStatus(eval,fval,x);
+
           }
+
         return fval;
     }
 
