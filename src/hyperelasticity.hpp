@@ -20,6 +20,7 @@ public:
     int * dof_on_boundary;
 
     virtual void get_material_parameters(unsigned int & e_lid, unsigned int & gp) = 0;
+    virtual void get_material_parameters_for_recover(unsigned int & e_lid) = 0;
     virtual void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress) = 0;
 };
 #endif

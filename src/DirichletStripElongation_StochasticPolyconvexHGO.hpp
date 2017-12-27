@@ -250,6 +250,34 @@ public:
         dpressure = beta3*( (beta3-1.0)*(ptheta/(theta*theta)) + (beta3+1.0)/(ptheta*theta*theta) );
     }
 
+    void get_material_parameters_for_recover(unsigned int & e_lid){
+
+        int e_gid = Mesh->local_cells[e_lid];
+        double xi = 0.0; double eta = 0.0; double zeta = 0.0;
+        Epetra_SerialDenseVector N(4);
+        tetra4::shape_functions(N,xi,eta,zeta);
+
+        w1 = 0.0; w2 = 0.0; w3 = 0.0; w4 = 0.0;
+        for (unsigned int j=0; j<4; ++j){
+            int node = cells_nodes_p1_med(4*e_gid+j);
+            w1 += N(j)*w1_gmrf(node);
+            w2 += N(j)*w2_gmrf(node);
+            w3 += N(j)*w3_gmrf(node);
+            w4 += N(j)*w4_gmrf(node);
+        }
+
+        c1  = icdf_gamma(w1,alpha1,alpha2);
+        c2  = icdf_gamma(w2,alpha3,alpha4);
+        u1  = icdf_beta (w3,tau1,tau2);
+        mu4 = icdf_gamma(w4,alpha5,alpha6);
+
+        mu1 = ( epsilon*mean_mu1 + (1.0/2.0)*c2*u1 )/( 1.0+epsilon );
+        mu2 = ( epsilon*mean_mu2 + (1.0/(std::sqrt(3.0)*3.0))*c2*(1.0-u1) )/( 1.0+epsilon );
+        mu3 = ( epsilon*mean_mu3 + c1/(2.0*beta3*beta3) )/( 1.0+epsilon );
+        mu4 = ( epsilon*mean_mu4 + mu4 )/( 1.0+epsilon );
+
+    }
+
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
 
         det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
@@ -278,12 +306,12 @@ public:
         L(0,1) = (1.0/(det*det))*(C(0,2)*C(2,1)-C(0,1)*C(2,2));
         L(2,1) = L(1,2); L(2,0) = L(0,2); L(1,0) = L(0,1);
 
-        double I1 = C(0,0) + C(1,1) + C(2,2);
-        double II1 = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
-        double I2 = (1.0/2.0)*(I1*I1-II1);
+        double I1   = C(0,0) + C(1,1) + C(2,2);
+        double II1  = C(0,0)*C(0,0) + C(1,1)*C(1,1) + C(2,2)*C(2,2) + 2.0*C(1,2)*C(1,2) + 2.0*C(0,2)*C(0,2) + 2.0*C(0,1)*C(0,1);
+        double I2   = (1.0/2.0)*(I1*I1-II1);
         double I4_1 = C(0,0)*M1(0,0) + C(1,1)*M1(1,1) + C(2,2)*M1(2,2) + 2.0*C(0,1)*M1(0,1) + 2.0*C(0,2)*M1(0,2) + 2.0*C(1,2)*M1(1,2);
         double I4_2 = C(0,0)*M2(0,0) + C(1,1)*M2(1,1) + C(2,2)*M2(2,2) + 2.0*C(0,1)*M2(0,1) + 2.0*C(0,2)*M2(0,2) + 2.0*C(1,2)*M2(1,2);
-        double pI2 = std::sqrt(I2);
+        double pI2  = std::sqrt(I2);
 
         double S4_1 = (I4_1-1.0)*(I4_1-1.0);
         double S4_2 = (I4_2-1.0)*(I4_2-1.0);

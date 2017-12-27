@@ -370,8 +370,12 @@ public:
     template <typename T>
     int sign (const T &val) { return (val > 0) - (val < 0); }
 
+    void get_material_parameters_for_recover(unsigned int & e_lid){
+      std::cout << "**Err: Not using that method in this example!\n";
+    }
+
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
-        std::cout << "**Err: Not using that method in this example!\n";
+      std::cout << "**Err: Not using that method in this example!\n";
     }
 
     double errorL2(Epetra_Vector & uStandardMap){

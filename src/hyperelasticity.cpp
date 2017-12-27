@@ -154,6 +154,7 @@ void hyperelasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::strin
         dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
 
         deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
+        get_material_parameters_for_recover(e_lid);
         get_stress_for_recover(deformation_gradient, det, piola_stress);
         dg_times_ps.Multiply('N','N',1.0,deformation_gradient,piola_stress,0.0);
         cauchy_stress.Multiply('N','T',1.0,dg_times_ps,deformation_gradient,0.0);

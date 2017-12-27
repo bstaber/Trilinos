@@ -254,6 +254,9 @@ public:
         return f;
     }
 
+    void get_material_parameters_for_recover(unsigned int & e_lid){
+    }
+
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
     }
 
