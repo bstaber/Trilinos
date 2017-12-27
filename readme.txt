@@ -6,3 +6,7 @@ Things that need to be improved:
 5. Need to add the line:
         <Parameter name="tol"               type="double" value="1e-8"/>
 to all xml files with a Newton parameter list.
+
+/!\ IMPORTANT /!\
+6. Need to check the influence of AZ_tol (set to 1e-6 in the draft): try out 1e-8 and 1-10 for instance.
+7. There was a tiny mistake in the tangent operator of gmrf_neumann and strips: not a big deal but it has been corrected.
