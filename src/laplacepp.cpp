@@ -302,6 +302,96 @@ void laplace::compute_local_directions(Epetra_Vector & laplace_one, Epetra_Vecto
     }
 }
 
+void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetra_Vector & laplace_two){
+
+    ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
+
+    Epetra_Vector u_phi(*OverlapMap);
+    u_phi.Import(laplace_one, *ImportToOverlapMap, Insert);
+
+    Epetra_Vector u_psi(*OverlapMap);
+    u_psi.Import(laplace_two, *ImportToOverlapMap, Insert);
+
+    int node;
+    unsigned int e_gid;
+    double norm_phi, norm_psi;
+    Epetra_SerialDenseMatrix matrix_B(3,Mesh->el_type);
+    Epetra_SerialDenseVector phi_nodes(Mesh->el_type);
+    Epetra_SerialDenseVector psi_nodes(Mesh->el_type);
+    Epetra_SerialDenseVector grad_psi(3);
+    Epetra_SerialDenseVector grad_phi(3);
+    Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
+    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), D(Mesh->el_type,3);
+    Epetra_SerialDenseMatrix JacobianMatrix(3,3);
+
+    Epetra_SerialDenseVector e0(3);
+    Epetra_SerialDenseVector e1(3);
+    Epetra_SerialDenseVector e2(3);
+
+    int n_gauss_points = Mesh->n_gauss_cells;
+    laplace_direction_one.Reshape(Mesh->n_local_cells,3);
+    laplace_direction_two.Reshape(Mesh->n_local_cells,3);
+    laplace_direction_two_cross_one.Reshape(Mesh->n_local_cells,3);
+
+    double xi = 0.0; double det_jac_cells;
+    for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+        e_gid = Mesh->local_cells[e_lid];
+        for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+            node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+            phi_nodes(inode) = u_phi[OverlapMap->LID(node)];
+            psi_nodes(inode) = u_psi[OverlapMap->LID(node)];
+            matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+            matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+            matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
+        }
+
+        switch (Mesh->el_type){
+            case 4:
+                tetra4::d_shape_functions(D, xi, xi, xi);
+                break;
+            case 8:
+                hexa8::d_shape_functions(D, xi, xi, xi);
+                break;
+            case 10:
+                tetra10::d_shape_functions(D, xi, xi, xi);
+                break;
+        };
+        jacobian_matrix(matrix_X,D,JacobianMatrix);
+        jacobian_det(JacobianMatrix,det_jac_cells);
+        dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
+
+        grad_phi.Multiply('N','T',1.0,dx_shape_functions,phi_nodes,0.0);
+        grad_psi.Multiply('N','T',1.0,dx_shape_functions,psi_nodes,0.0);
+
+        norm_phi = grad_phi.Norm2();
+        norm_psi = grad_psi.Norm2();
+
+        e0(0) = grad_phi(0)/norm_phi;
+        e0(1) = grad_phi(1)/norm_phi;
+        e0(2) = grad_phi(2)/norm_phi;
+
+        e2(0) = grad_psi(0)/norm_psi;
+        e2(1) = grad_psi(1)/norm_psi;
+        e2(2) = grad_psi(2)/norm_psi;
+
+        e1(0) = e2(1)*e0(2) - e2(2)*e0(1);
+        e1(1) = e2(2)*e0(0) - e2(0)*e0(2);
+        e1(2) = e2(0)*e0(1) - e2(1)*e0(0);
+
+        laplace_direction_one_center(e_lid,0) = e0(0);
+        laplace_direction_one_center(e_lid,1) = e0(1);
+        laplace_direction_one_center(e_lid,2) = e0(2);
+
+        laplace_direction_two_center(e_lid,0) = e2(0);
+        laplace_direction_two_center(e_lid,1) = e2(1);
+        laplace_direction_two_center(e_lid,2) = e2(2);
+
+        laplace_direction_two_cross_one_center(e_lid,0) = e1(0);
+        laplace_direction_two_cross_one_center(e_lid,1) = e1(1);
+        laplace_direction_two_cross_one_center(e_lid,2) = e1(2);
+    }
+}
+
 int laplace::print_solution(Epetra_Vector & lhs, std::string fileName){
     int NumTargetElements = 0;
     if (Comm->MyPID()==0){

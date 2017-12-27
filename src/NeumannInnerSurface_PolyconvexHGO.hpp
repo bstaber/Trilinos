@@ -53,6 +53,7 @@ public:
         Laplace->print_solution(psi, "laplace_inner_to_outer_aztec.mtx");
         //Get local directions
         Laplace->compute_local_directions(phi, psi);
+        Laplace->compute_center_local_directions(phi, psi);
         //$$End
 
         StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);

@@ -18,10 +18,11 @@ public:
     void solve_aztec(Teuchos::ParameterList & Parameters,  Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs, int * bc_indx, double * bc_val);
     void solve_amesos(Teuchos::ParameterList & Parameters, Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs, int * bc_indx, double * bc_val);
     void compute_local_directions(Epetra_Vector & laplace_one, Epetra_Vector & laplace_two);
+    void compute_center_local_directions(Epetra_Vector & laplace_one, Epetra_Vector & laplace_two);
     int print_solution(Epetra_Vector & lhs, std::string fileName);
-    
-    Epetra_SerialDenseMatrix laplace_direction_one;
-    Epetra_SerialDenseMatrix laplace_direction_two;
-    Epetra_SerialDenseMatrix laplace_direction_two_cross_one;
+
+    Epetra_SerialDenseMatrix laplace_direction_one, laplace_direction_one_center;
+    Epetra_SerialDenseMatrix laplace_direction_two, laplace_direction_two_center;
+    Epetra_SerialDenseMatrix laplace_direction_two_cross_one, laplace_direction_two_cross_one_center;
 };
 #endif
