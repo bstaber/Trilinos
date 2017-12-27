@@ -10,65 +10,65 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "Arteries_ModelC_deterministic_neumann.hpp"
+#include "NeumannInnerSurface_PolyconvexHGO.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
 int load_solution(std::string & filesolution, Epetra_Vector * x);
 
 int main(int argc, char *argv[]){
-    
+
     std::string    xmlInFileName = "";
     std::string    extraXmlFile = "";
     std::string    xmlOutFileName = "paramList.out";
-    
+
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
     clp.setDocString("TO DO.");
-    
+
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
     parse_return = clp.parse(argc,argv);
     if( parse_return != Teuchos::CommandLineProcessor::PARSE_SUCCESSFUL ) {
         std::cout << "\nEnd Result: TEST FAILED" << std::endl;
         return parse_return;
     }
-    
+
 #ifdef HAVE_MPI
     MPI_Init(&argc, &argv);
     Epetra_MpiComm Comm(MPI_COMM_WORLD);
 #else
     Epetra_SerialComm Comm;
 #endif
-    
+
     Teuchos::RCP<Teuchos::ParameterList> paramList = Teuchos::rcp(new Teuchos::ParameterList);
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
-    
+
     if (Comm.MyPID()==0){
         paramList->print(std::cout,2,true,true);
     }
-    
+
     Teuchos::RCP<NeumannInnerSurface_PolyconvexHGO> interface = Teuchos::rcp(new NeumannInnerSurface_PolyconvexHGO(Comm,*paramList));
-    
+
     /*std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_gmrf");
     parameters_file_1.open(path+"w1.txt");
     parameters_file_2.open(path+"w2.txt");
     parameters_file_3.open(path+"w3.txt");
     parameters_file_4.open(path+"w4.txt");
-    
+
     unsigned int n_cells_p1_med = 297828;
     unsigned int n_nodes_p1_med = 58464;
-    
+
     int error;
     std::string path_p1 = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_p1_connectivity");
     interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);*/
-    
+
     Epetra_Vector * x = new Epetra_Vector(*interface->StandardMap);
-    
+
     //if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
-        
+
         /*for (unsigned nmc=0; nmc<1; ++nmc){
             for (int i=0; i<n_nodes_p1_med; ++i){
                 parameters_file_1 >> interface->w1_gmrf(i);
@@ -78,11 +78,11 @@ int main(int argc, char *argv[]){
             }*/
             Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
             Newton->setParameters(*paramList);
-            
+
             std::string filesolution = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/disp_mean_model.mtx";
             int error = load_solution(filesolution,x);
             std::string filestress = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/stress_mean_model";
-            interface->compute_mean_cauchy_stress(*x,filestress);
+            interface->compute_center_cauchy_stress(*x,filestress);
             /*if (!error){
             }
             else{
@@ -100,21 +100,21 @@ int main(int argc, char *argv[]){
     else{
         std::cout << "Couldn't open one of the parameters_file.\n";
     }*/
-    
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
     return 0;
-    
+
 }
 
 int load_solution(std::string & filesolution, Epetra_Vector * x){
-    
+
     int LID;
     int error = 0;
     double data;
     x->PutScalar(0.0);
-    
+
     std::ifstream file;
     file.open(filesolution);
     if (file.is_open()){
@@ -125,10 +125,10 @@ int load_solution(std::string & filesolution, Epetra_Vector * x){
                 x->ReplaceMyValues(1,&data,&LID);
             }
         }
-        
+
         std::cout << std::setw(10) << x->GlobalLength() << std::setw(10) << x->MyLength() << "\n";
-        
-        
+
+
     }
     else{
         std::cout << "Couldn't open the file: " << filesolution << "\n";

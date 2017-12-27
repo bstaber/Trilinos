@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
                 std::string filename1 = path + "disp_realization" + std::to_string(nmc) + ".mtx";
                 Newton->print_newton_solution(filename1);
                 std::string filename2 = path + "stress_realization" + std::to_string(nmc);
-                my_interface->compute_mean_cauchy_stress(*Newton->x,filename2);
+                my_interface->compute_center_cauchy_stress(*Newton->x,filename2);
             }
             else{
               if (Comm.MyPID()==0){
