@@ -62,7 +62,7 @@ public:
         double test = fval;
         int eval = 0;
 
-        while (eval<=niter || fval>=tol){
+        while (fval>=tol){
 
             for (unsigned int i=0; i<n; ++i){
                 L(i,i) = 0.10*x(i);
@@ -92,7 +92,9 @@ public:
             fval      = test;
             solution  = x;
             printStatus(eval,fval,x);
-
+            if (eval>=niter){
+              break;  
+            }
           }
 
         return fval;
