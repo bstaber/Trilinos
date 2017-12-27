@@ -119,6 +119,14 @@ public:
     }
 
     void get_material_parameters_for_recover(unsigned int & e_lid){
+
+      for (int i=0; i<3; ++i){
+          a(i) = cos(theta)*Laplace->laplace_direction_one_center(e_lid,i)
+               + sin(theta)*Laplace->laplace_direction_two_cross_one_center(e_lid,i);
+          b(i) = cos(theta)*Laplace->laplace_direction_one_center(e_lid,i)
+               - sin(theta)*Laplace->laplace_direction_two_cross_one_center(e_lid,i);
+      }
+
     }
 
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){

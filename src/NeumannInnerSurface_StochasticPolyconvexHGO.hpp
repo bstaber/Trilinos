@@ -222,6 +222,38 @@ public:
     }
 
     void get_material_parameters_for_recover(unsigned int & e_lid){
+
+      int e_gid = Mesh->local_cells[e_lid];
+      double xi = 1.0/3.0; double eta = 1.0/3.0; double zeta = 1.0/3.0;
+      tetra4::shape_functions(N,xi,eta,zeta);
+
+      w1 = 0.0; w2 = 0.0; w3 = 0.0; w4 = 0.0;
+      for (unsigned int j=0; j<4; ++j){
+          int node = cells_nodes_p1_med(4*e_gid+j);
+          w1 += N(j)*w1_gmrf(node);
+          w2 += N(j)*w2_gmrf(node);
+          w3 += N(j)*w3_gmrf(node);
+          w4 += N(j)*w4_gmrf(node);
+      }
+
+      c1  = icdf_gamma(w1,alpha1,alpha2);
+      c2  = icdf_gamma(w2,alpha3,alpha4);
+      u1  = icdf_beta (w3,tau1,tau2);
+      mu4 = icdf_gamma(w4,alpha5,alpha6);
+
+      mu1 = ( epsilon*mean_mu1 + (1.0/2.0)*c2*u1 )/( 1.0+epsilon );
+      mu2 = ( epsilon*mean_mu2 + (1.0/(std::sqrt(3.0)*3.0))*c2*(1.0-u1) )/( 1.0+epsilon );
+      mu3 = ( epsilon*mean_mu3 + c1/(2.0*beta3*beta3) )/( 1.0+epsilon );
+      mu4 = ( epsilon*mean_mu4 + mu4 )/( 1.0+epsilon );
+
+      for (int i=0; i<3; ++i){
+          E1(i) = Laplace->laplace_direction_one_center(e_lid,i);
+          E2(i) = Laplace->laplace_direction_two_cross_one_center(e_lid,i);
+          E3(i) = Laplace->laplace_direction_two_center(e_lid,i);
+          a(i) = cos(theta)*E1(i) + sin(theta)*E2(i);
+          b(i) = cos(theta)*E1(i) - sin(theta)*E2(i);
+      }
+
     }
 
     void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){

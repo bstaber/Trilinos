@@ -333,7 +333,7 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
     laplace_direction_two.Reshape(Mesh->n_local_cells,3);
     laplace_direction_two_cross_one.Reshape(Mesh->n_local_cells,3);
 
-    double xi = 0.0; double det_jac_cells;
+    double xi; double det_jac_cells;
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
@@ -347,12 +347,15 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
 
         switch (Mesh->el_type){
             case 4:
+                xi = 1.0/3.0;
                 tetra4::d_shape_functions(D, xi, xi, xi);
                 break;
             case 8:
+                xi = 0.0;
                 hexa8::d_shape_functions(D, xi, xi, xi);
                 break;
             case 10:
+                xi = 1.0/3.0;
                 tetra10::d_shape_functions(D, xi, xi, xi);
                 break;
         };

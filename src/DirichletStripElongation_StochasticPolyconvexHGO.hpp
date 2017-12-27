@@ -253,7 +253,7 @@ public:
     void get_material_parameters_for_recover(unsigned int & e_lid){
 
         int e_gid = Mesh->local_cells[e_lid];
-        double xi = 0.0; double eta = 0.0; double zeta = 0.0;
+        double xi = 1.0/3.0; double eta = 1.0/3.0; double zeta = 1.0/3.0;
         Epetra_SerialDenseVector N(4);
         tetra4::shape_functions(N,xi,eta,zeta);
 
