@@ -113,7 +113,7 @@ public:
 
     void get_internal_pressure(double & theta, double & pressure, double & dpressure){
         double ptheta = std::pow(theta,beta3);
-        pressure = mu3*beta3*( (ptheta/theta) - (1.0/(ptheta*theta)) );
+        pressure  = mu3*beta3*( (ptheta/theta) - (1.0/(ptheta*theta)) );
         dpressure = mu3*beta3*( (beta3-1.0)*(ptheta/(theta*theta)) + (beta3+1.0)/(ptheta*theta*theta) );
     }
 

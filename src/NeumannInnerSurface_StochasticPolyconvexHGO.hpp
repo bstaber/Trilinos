@@ -594,7 +594,7 @@ public:
         double scalarAB;
 
         scalarAB = mu3*det;
-        tensor_product(det,L,L,tangent_piola_vol,0.0);
+        tensor_product(det,L,L,tangent_piola_vol,0.0); // I think it should be mu3*det
         scalarAB = -2.0*mu3*det;
         sym_tensor_product(scalarAB,L,L,tangent_piola_vol,1.0);
 
