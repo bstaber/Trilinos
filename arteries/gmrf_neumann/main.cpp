@@ -87,11 +87,11 @@ int main(int argc, char *argv[]){
             }
         }
         Comm.Barrier();
+      }
         parameters_file_1.close();
         parameters_file_2.close();
         parameters_file_3.close();
         parameters_file_4.close();
-    }
   }
   else{
     std::cout << "Couldn't open one of the parameters_file.\n";
