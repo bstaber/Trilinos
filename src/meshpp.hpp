@@ -44,40 +44,40 @@
 
 class mesh
 {
-    
+
 public:
     mesh();
-    mesh(std::string & fileName_mesh);
-    mesh(Epetra_Comm & comm, std::string & fileName_mesh);
+    mesh(std::string & fileName_mesh, double scaling);
+    mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling);
     ~mesh();
-    
-    int read_gmsh(std::string & fileName_mesh);
+
+    int read_gmsh(std::string & fileName_mesh, double scaling);
     int read_boundary_file(std::string & fileName_bc, unsigned int & number_physical_groups);
     int metis_part_mesh(int & NumProc);
     void get_local_nodes(int & MyPID);
     void get_cells_and_ghosts(int & MyPID);
-    
+
     void store_feinterp_faces();
     void store_feinterp_cells();
-    
+
     Epetra_Comm* Comm;
-    
+
     Epetra_SerialDenseMatrix N_faces, D1_N_faces, D2_N_faces;
-    
+
     Epetra_SerialDenseVector local_rows, vol_cells, N_cells, detJac_cells, DX_N_cells, DY_N_cells, DZ_N_cells;
-    
+
     Epetra_IntSerialDenseMatrix nodes_to_boundaries;
-    
+
     std::vector<double> nodes_coord;
     std::vector<int> cells_nodes, faces_nodes;
     std::vector<int> local_nodes_without_ghosts, local_dof_without_ghosts;
     std::vector<int> local_nodes, local_dof;
     std::vector<int> local_cells, local_faces;
-    
+
     idx_t * epart;
     idx_t * npart;
     int * NumIndicesPerRow;
-    
+
     int n_nodes = 0;
     int n_cells = 0;
     int n_faces = 0;
@@ -87,7 +87,7 @@ public:
     int n_local_nodes = 0;
     int n_local_cells = 0;
     int n_local_faces = 0;
-    
+
     unsigned int n_gauss_faces;
     unsigned int n_gauss_cells;
     Epetra_SerialDenseVector gauss_weight_cells, gauss_weight_faces;

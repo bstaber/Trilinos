@@ -29,7 +29,7 @@ public:
         beta4 = Teuchos::getParameter<double>(Parameters.sublist(select_model), "beta4");
         theta = Teuchos::getParameter<double>(Parameters.sublist(select_model), "theta");
 
-        Mesh = new mesh(comm, mesh_file);
+        Mesh = new mesh(comm, mesh_file, 1000.0);
         Mesh->read_boundary_file(boundary_file,number_physical_groups);
         Comm = Mesh->Comm;
 

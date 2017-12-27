@@ -10,32 +10,32 @@
 class forwardCostfunction
 {
 private:
-    
+
     Teuchos::ParameterList _paramList;
-    
+
     Teuchos::RCP<TIMooney_RandomField> interface;
     Teuchos::RCP<distributenrldata>    nrldata;
     Teuchos::RCP<Newton_Raphson>       newton;
-    
+
     Epetra_Comm * comm;
     Epetra_SerialDenseVector lb, ub;
-    
+
 public:
-    
+
     Epetra_SerialDenseVector solution;
-        
+
     forwardCostfunction(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         comm = &Comm;
         _paramList = paramList;
         std::string pathnrl = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
         newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
-        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh),pathnrl);
+        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
     }
-    
+
     ~forwardCostfunction(){
     }
-    
+
     double value(Epetra_SerialDenseVector & parameters,
                  Epetra_SerialDenseVector & exponents,
                  Epetra_SerialDenseVector & omega,
@@ -47,7 +47,7 @@ public:
         interface->setParameters(parameters,exponents,omega);
         interface->set_plyagl(plyagl);
         interface->RandomFieldGenerator(seeds);
-        
+
         double val = 0.0;
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
@@ -59,14 +59,14 @@ public:
                 newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
             }
             int error = newton->Solve_with_Aztec(newtonPrint);
-            
+
             std::string path1 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/u_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + ".mtx";
             std::string path2 = "/home/s/staber/Trilinos_results/nrl/forward_randomfield/e_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + ".mtx";
             print_newton_solution(path1);
             print_green_lagrange(path2);
-            
+
             Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
-            
+
             if (!error){
                 compute_green_lagrange(*newton->x,eij);
             }
@@ -75,7 +75,7 @@ public:
                     std::cout << "Newton failed.\n";
                 }
             }
-        
+
             double totalEnergy   = 0.0;
             double partialEnergy = 0.0;
             for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
@@ -88,7 +88,7 @@ public:
         val = fabs(val);
         return val;
     }
-    
+
     void print_newton_solution(std::string & path){
         newton->print_newton_solution(path);
     }
@@ -96,11 +96,11 @@ public:
         double xi = 0.0;
         interface->compute_green_lagrange(*newton->x,xi,xi,xi,path);
     }
-    
+
     void compute_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseMatrix & eij){
         Epetra_Vector u(*(interface->OverlapMap));
         u.Import(x, *(interface->ImportToOverlapMap), Insert);
-        
+
         int e_gid, node;
         double det_jac;
         Epetra_SerialDenseMatrix matrix_X(2,interface->Mesh->face_type);
@@ -112,7 +112,7 @@ public:
         Epetra_SerialDenseMatrix JacobianMatrix(2,2);
         Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
         Epetra_SerialDenseMatrix right_cauchy(2,2);
-        
+
         for (unsigned e=0; e<nrldata->local_cells.size(); ++e){
             e_gid = interface->Mesh->local_faces[nrldata->local_cells[e]];
             for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
@@ -140,14 +140,14 @@ public:
             InverseJacobianMatrix(0,1) = -(1.0/det_jac)*JacobianMatrix(0,1);
             InverseJacobianMatrix(1,0) = -(1.0/det_jac)*JacobianMatrix(1,0);
             dx_shape_functions.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
-            
+
             deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
             right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
-            
+
             eij(e,0) = (1.0/2.0)*(right_cauchy(0,0)-1.0);
             eij(e,1) = (1.0/2.0)*(right_cauchy(1,1)-1.0);
             eij(e,2) = (1.0/2.0)*right_cauchy(0,1);
         }
     }
-    
+
 };

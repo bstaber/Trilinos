@@ -3,20 +3,20 @@
 mesh::mesh(){
 }
 
-mesh::mesh(std::string & fileName_mesh){
-    read_gmsh(fileName_mesh);
+mesh::mesh(std::string & fileName_mesh, double scaling){
+    read_gmsh(fileName_mesh, scaling);
 }
 
-mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
+mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling){
     Comm = &comm;
     int MyPID = Comm->MyPID();
     int NumProc = Comm->NumProc();
-    
-    read_gmsh(fileName_mesh);
-    
+
+    read_gmsh(fileName_mesh, scaling);
+
     epart = new idx_t[n_cells];
     npart = new idx_t[n_nodes];
-    
+
     Comm->Barrier();
     if (Comm->NumProc()>1){
         if (MyPID==0){
@@ -31,13 +31,13 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
             npart[n] = 0;
         }
     }
-    
+
     Comm->Broadcast(epart,n_cells,0);
     Comm->Broadcast(npart,n_nodes,0);
     Comm->Barrier();
     get_local_nodes(MyPID);
     get_cells_and_ghosts(MyPID);
-    
+
     if (MyPID==0){
         std::cout << std::setw(5) << "MyPID" << std::setw(20) << "n_cells" << std::setw(20) << "el_type" << std::setw(20) << "face_type" << std::setw(20) << "n_nodes" << std::setw(20) << "n_faces" << std::setw(20) << "processors\n";
         std::cout << std::setw(5) << MyPID << std::setw(20) << n_cells << std::setw(20) << el_type << std::setw(20) << face_type << std::setw(20) << n_nodes << std::setw(20) << n_faces << std::setw(20) << Comm->NumProc() << "\n";
@@ -45,7 +45,7 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh){
     }
     Comm->Barrier();
     std::cout << std::setw(5) << MyPID << std::setw(20) << n_local_cells << std::setw(20) << n_local_nodes_without_ghosts << std::setw(20) << n_local_faces << "\n";
-    
+
     if (n_local_faces>0 && (face_type==3 || face_type==4 || face_type==6)){
         store_feinterp_faces();
     }
@@ -57,17 +57,17 @@ mesh::~mesh(){
     delete[] npart;
 }
 
-int mesh::read_gmsh(std::string & fileName_mesh){
+int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
     int error = 0;
     std::ifstream meshfile;
     meshfile.open(fileName_mesh.c_str());
-    
+
     if (!meshfile){
         std::cout << "*ERR* Can't open the input file\n ";
         error = 1;
         return error;
     }
-    
+
     char buf[100],c;
     double xyz[3];
     unsigned int n_total_cells;
@@ -89,46 +89,46 @@ int mesh::read_gmsh(std::string & fileName_mesh){
     unsigned int nodes_cells4[4];
     unsigned int nodes_hexa8[8];
     unsigned int nodes_cells10[10];
-    
+
     std::vector<int> tri3_nodes;
     std::vector<int> quad4_nodes;
     std::vector<int> tri6_nodes;
     std::vector<int> tetra4_nodes;
     std::vector<int> hexa8_nodes;
     std::vector<int> tetra10_nodes;
-    
+
     meshfile.getline(buf,100);
     meshfile.getline(buf,100);
     meshfile.getline(buf,100);
     meshfile.getline(buf,100);
     meshfile >> n_nodes;
     meshfile.get(c);
-    
+
     nodes_coord.reserve(3*n_nodes);
-    
+
     for (int i=0; i<n_nodes; ++i){
         meshfile >> num;
         meshfile >> xyz[0];
         meshfile >> xyz[1];
         meshfile >> xyz[2];
-        nodes_coord[3*i+0] = xyz[0];
-        nodes_coord[3*i+1] = xyz[1];
-        nodes_coord[3*i+2] = xyz[2];
+        nodes_coord[3*i+0] = xyz[0]/scaling;
+        nodes_coord[3*i+1] = xyz[1]/scaling;
+        nodes_coord[3*i+2] = xyz[2]/scaling;
     }
-    
+
     meshfile.getline(buf,100);
     meshfile.getline(buf,100);
     meshfile.getline(buf,100);
     meshfile >> n_total_cells;
     meshfile.getline(buf,100);
-    
+
     for (int i=0; i<n_total_cells; ++i){
         meshfile >> num;
         meshfile >> el_info;
         meshfile >> nbtag;
         meshfile >> tag1;
         meshfile >> tag2;
-        
+
         switch (el_info) {
             case 1:
                 for (unsigned int inode=0; inode<2; ++inode){
@@ -186,14 +186,14 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         };
     }
     meshfile.close();
-    
+
     n_faces3 = tri3_nodes.size()/3;
     n_quad4 = quad4_nodes.size()/4;
     n_faces6 = tri6_nodes.size()/6;
     n_cells4 = tetra4_nodes.size()/4;
     n_hexa8 = hexa8_nodes.size()/8;
     n_cells10 = tetra10_nodes.size()/10;
-    
+
     if (n_cells4==0 && n_cells10==0 && n_hexa8==0){
         std::cerr << "Your mesh is empty!\n";}
     if ( (n_cells4>0 && n_cells10>0) || (n_cells4>0 && n_hexa8>0) || (n_cells10>0 && n_hexa8>0) ){
@@ -211,7 +211,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         n_faces = n_faces3;
         faces_nodes.reserve(tri3_nodes.size());
         faces_nodes = tri3_nodes;
-        
+
         gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
@@ -220,7 +220,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         n_faces = n_faces6;
         faces_nodes.reserve(tri6_nodes.size());
         faces_nodes = tri6_nodes;
-        
+
         gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
@@ -229,7 +229,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         n_faces = n_quad4;
         faces_nodes.reserve(quad4_nodes.size());
         faces_nodes = quad4_nodes;
-        
+
         gauss_points_quad4(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();
     }
@@ -238,7 +238,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         el_type = 4;
         cells_nodes.reserve(tetra4_nodes.size());
         cells_nodes = tetra4_nodes;
-        
+
         gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
@@ -247,7 +247,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         el_type = 8;
         cells_nodes.reserve(hexa8_nodes.size());
         cells_nodes = hexa8_nodes;
-        
+
         gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
@@ -256,7 +256,7 @@ int mesh::read_gmsh(std::string & fileName_mesh){
         el_type= 10;
         cells_nodes.reserve(tetra10_nodes.size());
         cells_nodes = tetra10_nodes;
-                
+
         gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
@@ -264,19 +264,19 @@ int mesh::read_gmsh(std::string & fileName_mesh){
 }
 
 int mesh::read_boundary_file(std::string & fileName_bc, unsigned int & number_physical_groups){
-    
+
     std::ifstream file_bc;
     file_bc.open(fileName_bc.c_str());
     if (!file_bc){
         std::cout << "*ERR* Can't open the input file called " << fileName_bc.c_str()  << "\n";
         return 1;
     }
-    
+
     Epetra_IntSerialDenseVector input(number_physical_groups*n_nodes);
     for (unsigned int i=0; i<number_physical_groups*n_nodes; ++i){
         file_bc >> input(i);
     }
-    
+
     nodes_to_boundaries.Reshape(n_local_nodes_without_ghosts,number_physical_groups);
     int node;
     for (unsigned int inode=0; inode<n_local_nodes_without_ghosts; ++inode){
@@ -287,18 +287,18 @@ int mesh::read_boundary_file(std::string & fileName_bc, unsigned int & number_ph
     }
     file_bc.close();
     return 0;
-    
+
 }
 
 int mesh::metis_part_mesh(int & NumProc){
     int check_PartMeshDual;
-    
+
     idx_t ne = n_cells;
     idx_t nn = n_nodes;
     idx_t *eptr, *eind;
     eptr = new idx_t[n_cells+1];
     eind = new idx_t[el_type*n_cells];
-    
+
     for (unsigned int i=0; i<n_cells; ++i){
         for (unsigned int inode=0; inode<el_type; ++inode){
             eind[el_type*i+inode] = cells_nodes[el_type*i+inode];
@@ -306,7 +306,7 @@ int mesh::metis_part_mesh(int & NumProc){
         eptr[i] = el_type*i;
     }
     eptr[n_cells] = el_type*n_cells;
-    
+
     idx_t *vwgt=NULL;
     idx_t *vsize=NULL;
     idx_t common;
@@ -326,7 +326,7 @@ int mesh::metis_part_mesh(int & NumProc){
     idx_t *options=NULL;
     idx_t objval;
     check_PartMeshDual = METIS_PartMeshDual(&ne, &nn, eptr, eind, vwgt, vsize, &common, &nparts, tpwgts, options, &objval, epart, npart);
-    
+
     if (check_PartMeshDual==0){
         std::cout << "*ERR* An error occured with METIS.\n";
     }
@@ -336,7 +336,7 @@ int mesh::metis_part_mesh(int & NumProc){
     delete [] vsize;
     delete [] tpwgts;
     delete [] options;
-    
+
     return check_PartMeshDual;
 }
 
@@ -353,12 +353,12 @@ void mesh::get_local_nodes(int & MyPID){
 }
 
 void mesh::get_cells_and_ghosts(int & MyPID){
-    
+
     Epetra_IntSerialDenseVector mynpart(Copy,npart,n_nodes);
     local_nodes = local_nodes_without_ghosts;
     local_dof = local_dof_without_ghosts;
     int node;
-    
+
     for (unsigned int i=0; i<n_cells; ++i){
         if (epart[i]==MyPID){
             local_cells.push_back(i);
@@ -374,10 +374,10 @@ void mesh::get_cells_and_ghosts(int & MyPID){
             }
         }
     }
-    
+
     n_local_nodes = local_nodes.size();
     n_local_cells = local_cells.size();
-    
+
     if (n_faces>0){
     int nodes[face_type];
     for (unsigned int i=0; i<n_faces; ++i){
@@ -421,15 +421,15 @@ void mesh::get_cells_and_ghosts(int & MyPID){
 }
 
 void mesh::store_feinterp_faces(){
-    
+
     int node, eglob;
     Epetra_SerialDenseVector N(face_type);
     Epetra_SerialDenseMatrix D(face_type,2);
-    
+
     N_faces.Reshape(n_gauss_faces,face_type);
     D1_N_faces.Reshape(n_gauss_faces,face_type);
     D2_N_faces.Reshape(n_gauss_faces,face_type);
-    
+
     switch (face_type){
         case 3:
             for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
@@ -474,7 +474,7 @@ void mesh::store_feinterp_faces(){
             D2_N_faces(gp,inode) = D(inode,1);
         }
     }
-    
+
     /*for (unsigned int eloc=0; eloc<n_local_faces; ++eloc){
         eglob = local_faces[eloc];
         for (unsigned int inode=0; inode<face_type; inode++){
@@ -482,7 +482,7 @@ void mesh::store_feinterp_faces(){
             X(0,inode) = nodes_coord[3*node+0];
             X(1,inode) = nodes_coord[3*node+1];
         }
-        
+
         for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
             switch (face_type){
                 case 3:
@@ -499,7 +499,7 @@ void mesh::store_feinterp_faces(){
                 D1_N_faces(gp,inode) = D(inode,0);
                 D2_N_faces(gp,inode) = D(inode,1);
             }
-            
+
             JacobianMatrix.Multiply('N','N',1.0,X,D,0.0);
             detJac_faces(eloc,gp) = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
         }
@@ -507,12 +507,12 @@ void mesh::store_feinterp_faces(){
 }
 
 void mesh::store_feinterp_cells(){
-    
+
     int node, eglob;
     double alpha, beta;
     Epetra_SerialDenseVector N(el_type);
     Epetra_SerialDenseMatrix JacobianMatrix(3,3), InverseJacobianMatrix(3,3), X(3,el_type), D(el_type,3), DX(el_type,3);
-    
+
     local_rows.Resize(3*el_type*n_local_cells);
     vol_cells.Resize(n_local_cells);
     N_cells.Reshape(el_type,n_gauss_cells);
@@ -520,7 +520,7 @@ void mesh::store_feinterp_cells(){
     DX_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
     DY_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
     DZ_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
-    
+
     switch (el_type){
         case 4:
             for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
@@ -559,7 +559,7 @@ void mesh::store_feinterp_cells(){
             local_rows(3*el_type*eloc+3*inode+1) = 3*node+1;
             local_rows(3*el_type*eloc+3*inode+2) = 3*node+2;
         }
-        
+
         vol_cells(eloc) = 0.0;
         for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
             switch (el_type){
@@ -587,5 +587,3 @@ void mesh::store_feinterp_cells(){
     }
     //std::cout << "VOLUME = " << volume << "\n";
 }
-
-

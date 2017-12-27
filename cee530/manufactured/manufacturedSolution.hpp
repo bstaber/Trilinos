@@ -7,29 +7,29 @@
 class manufactured : public LinearizedElasticity
 {
 public:
-    
+
     Teuchos::ParameterList * Krylov;
     Epetra_Vector * uh;
-    
+
     manufactured(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, std::string & mesh_file){
-        
+
         Krylov = &Parameters.sublist("Krylov");
-        
-        Mesh = new mesh(comm, mesh_file);
+
+        Mesh = new mesh(comm, mesh_file, 1.0);
         Comm = Mesh->Comm;
-        
+
         StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
         OverlapMap = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
         ImportToOverlapMap = new Epetra_Import(*OverlapMap,*StandardMap);
         create_FECrsGraph();
-        
+
         setup_dirichlet_conditions();
         uh = new Epetra_Vector(*StandardMap);
     }
-    
+
     ~manufactured(){
     }
-    
+
     Epetra_SerialDenseVector manufacturedSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
         double c1 = 2.0e-5; double c2 = 1.0e-5; double c3 = 2.0e-5; double topcoord = 25.0;
@@ -38,7 +38,7 @@ public:
         u(2) = std::sin(c1*x3);
         return u;
     }
-    
+
     Epetra_SerialDenseMatrix manufacturedDeformation(double & x1, double & x2, double & x3){
         Epetra_SerialDenseMatrix epsilon(3,3);
         double c1 = 2.0e-5; double c2 = 1.0e-5; double c3 = 2.0e-5; double topcoord = 25.0;
@@ -50,7 +50,7 @@ public:
         epsilon(0,1) = (c1*x2*(topcoord-x1))/2.0 - (c1*(topcoord-x1)*(topcoord-x2))/2.0; epsilon(1,0) = epsilon(0,1);
         return epsilon;
     }
-    
+
     Epetra_SerialDenseMatrix manufacturedStress(double & x1, double & x2, double & x3){
         Epetra_SerialDenseMatrix sigma(3,3), epsilon(3,3), elasticity(6,6);
         Epetra_SerialDenseVector sigma_voigt(6), epsilon_voigt(6);
@@ -66,7 +66,7 @@ public:
         sigma(2,0) = sigma_voigt(4)/std::sqrt(2.0); sigma(2,1) = sigma_voigt(3)/std::sqrt(2.0); sigma(2,2) = sigma_voigt(2);
         return sigma;
     }
-    
+
     Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
         Epetra_SerialDenseVector t(3), normal(3);
         Epetra_SerialDenseMatrix sigma(3,3), d_shape_functions(Mesh->face_type,2), dxi_matrix_x(3,2);
@@ -103,7 +103,7 @@ public:
         f.Scale(-1.0);
         return f;
     }
-    
+
     double solve(std::string & outPath){
         Epetra_FECrsMatrix linearOperator(Copy,*FEGraph);
         Epetra_FEVector    rhs(*StandardMap);
@@ -113,13 +113,13 @@ public:
         apply_dirichlet_conditions(linearOperator,rhs,dummy);
         aztecSolver(linearOperator,rhs,*uh,*Krylov);
         print_solution(*uh,outPath);
-        
+
         double totalError = errorL2(*uh);
         return totalError;
     }
-    
+
     double errorL2(Epetra_Vector & uStandardMap){
-        
+
         Epetra_Vector u(*OverlapMap);
         u.Import(uStandardMap, *ImportToOverlapMap, Insert);
         double totalError;
@@ -128,13 +128,13 @@ public:
         double gauss_weight;
         int n_gauss_points = Mesh->n_gauss_cells;
         int e_gid, node;
-        
+
         //Epetra_SerialDenseVector epsilon(6);
         //Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
         Epetra_SerialDenseVector uExact(3), vH(3);
         Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3), X_I(3,Mesh->el_type), u_I(3,Mesh->el_type);
         Epetra_SerialDenseMatrix u_G(3,n_gauss_points), x_G(3,n_gauss_points);
-        
+
         for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
             e_gid = Mesh->local_cells[e_lid];
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
@@ -169,7 +169,7 @@ public:
         totalError = std::sqrt(totalError);
         return totalError;
     }
-    
+
     void setup_dirichlet_conditions(){
         n_bc_dof = 0;
         double x;
@@ -181,7 +181,7 @@ public:
                 n_bc_dof+=3;
             }
         }
-        
+
         int indbc = 0;
         dof_on_boundary = new int [n_bc_dof];
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
@@ -195,11 +195,11 @@ public:
             }
         }
     }
-    
+
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
-        
+
         int node;
         double x, y, z;
         Epetra_SerialDenseVector u(3);
@@ -215,11 +215,11 @@ public:
                 v[0][StandardMap->LID(3*node+2)] = u(2);
             }
         }
-        
+
         Epetra_MultiVector rhs_dir(*StandardMap,true);
         K.Apply(v,rhs_dir);
         F.Update(-1.0,rhs_dir,1.0);
-        
+
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             x = Mesh->nodes_coord[3*node+0];
@@ -233,7 +233,7 @@ public:
         }
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
-    
+
     void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix){
         int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
@@ -244,7 +244,7 @@ public:
         double c5 = 12.5580e3;
         transverse_isotropic_matrix(tangent_matrix,c1,c2,c3,c4,c5);
     }
-    
+
     void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
         C(0,0) = c1/16.0 + (9.0*c2)/32.0 + (9.0*c4)/32.0 + (3.0*c5)/8.0 + (3.0*std::sqrt(2.0)*c3)/16.0;
         C(0,1) = (3.0*c1)/16.0 + (3.0*c2)/32.0 + (3.0*c4)/32.0 - (3.0*c5)/8.0 + (5.0*std::sqrt(2.0)*c3)/16.0;
@@ -259,28 +259,28 @@ public:
         C(1,3) = 0.0;
         C(1,4) = 0.0;
         C(1,5) = -std::sqrt(6.0)*(c2/32.0 - (3.0*c1)/16.0 + c4/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
-        
+
         C(2,0) = (3.0*c2)/8.0 - (3.0*c4)/8.0 + std::sqrt(2.0)*c3/8.0;
         C(2,1) = c2/8.0 - c4/8.0 + (3.0*std::sqrt(2.0)*c3)/8.0;
         C(2,2) = c2/2.0 + c4/2.0;
         C(2,3) = 0.0;
         C(2,4) = 0.0;
         C(2,5) = (std::sqrt(3.0)*(2.0*c3 - std::sqrt(2.0)*c2 + std::sqrt(2.0)*c4))/8.0;
-        
+
         C(3,0) = 0.0;
         C(3,1) = 0.0;
         C(3,2) = 0.0;
         C(3,3) = c4/4.0 + (3.0*c5)/4.0;
         C(3,4) = -(std::sqrt(3.0)*(c4 - c5))/4.0;
         C(3,5) = 0.0;
-        
+
         C(4,0) = 0.0;
         C(4,1) = 0.0;
         C(4,2) = 0.0;
         C(4,3) = -(std::sqrt(3.0)*(c4 - c5))/4.0;
         C(4,4) = (3.0*c4)/4.0 + c5/4.0;
         C(4,5) = 0.0;
-        
+
         C(5,0) = std::sqrt(6.0)*(c1/16.0 - (3.0*c2)/32.0 - (3.0*c4)/32.0 + c5/8.0 + std::sqrt(2.0)*c3/16.0);
         C(5,1) = -std::sqrt(6.0)*(c2/32.0 - (3.0*c1)/16.0 + c4/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
         C(5,2) = (std::sqrt(3.0)*(2.0*c3 - std::sqrt(2.0)*c2 + std::sqrt(2.0)*c4))/8.0;
@@ -288,7 +288,7 @@ public:
         C(5,4) = 0.0;
         C(5,5) = (3.0*c1)/8.0 + (3.0*c2)/16.0 + (3.0*c4)/16.0 + c5/4.0 - (3.0*std::sqrt(2.0)*c3)/8.0;
     }
-    
+
     void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix){
     }
 };

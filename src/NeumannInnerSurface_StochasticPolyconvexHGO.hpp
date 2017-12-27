@@ -74,7 +74,7 @@ public:
         alpha5 = 1.0/(deltaG4*deltaG4);
         alpha6 = mean_mu4*deltaG4*deltaG4;
 
-        Mesh = new mesh(comm, mesh_file);
+        Mesh = new mesh(comm, mesh_file, 1000.0);
         Mesh->read_boundary_file(boundary_file,number_physical_groups);
         Comm = Mesh->Comm;
 
