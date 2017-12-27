@@ -9,42 +9,42 @@
 #include "forwardCostfunction.hpp"
 
 int main(int argc, char *argv[]){
-    
+
     std::string    xmlInFileName = "";
-    
+
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
     clp.setDocString("TO DO.");
-    
+
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
     parse_return = clp.parse(argc,argv);
     if( parse_return != Teuchos::CommandLineProcessor::PARSE_SUCCESSFUL ) {
         std::cout << "\nEnd Result: TEST FAILED" << std::endl;
         return parse_return;
     }
-	
+
 #ifdef HAVE_MPI
 MPI_Init(&argc, &argv);
     Epetra_MpiComm Comm(MPI_COMM_WORLD);
 #else
     Epetra_SerialComm Comm;
 #endif
-    
+
     Teuchos::RCP<Teuchos::ParameterList> paramList = Teuchos::rcp(new Teuchos::ParameterList);
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
-    
+
     if (Comm.MyPID()==0){
         paramList->print(std::cout,2,true,true);
     }
-    
+
     Teuchos::RCP<forwardCostfunction> costFunction = Teuchos::rcp(new forwardCostfunction(Comm,*paramList));
-    Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(true));
+    /*Teuchos::RCP<readnrldata> data = Teuchos::rcp(new readnrldata(true));
     data->import_boundaryconditions();
-    
+
     Epetra_IntSerialDenseVector seeds(5);
-    
+
     int id = 0;
     Epetra_SerialDenseVector parameters(5), exponents(2), hyperParameters(6);
     parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
@@ -57,12 +57,12 @@ MPI_Init(&argc, &argv);
     for (unsigned int i=0; i<5; i++){
         parameters(i) = 1.0e3*parameters(i);
     }
-    
+
     if (Comm.MyPID()==0){
         std::cout << "\n";
         std::cout << "Value" << std::setw(10) << "Delta" << std::setw(10) << "lx" << std::setw(10) << "ly" << "\n";
     }
-    
+
     int nmc = 1;
     double length = 50.0;
     double width  = 25.0;
@@ -88,11 +88,11 @@ MPI_Init(&argc, &argv);
                 }
             }
         }
-    }
-    
+    }*/
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
 return 0;
-    
+
 }
