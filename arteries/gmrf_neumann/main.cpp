@@ -17,8 +17,6 @@
 int main(int argc, char *argv[]){
 
     std::string    xmlInFileName = "";
-    std::string    extraXmlFile = "";
-    std::string    xmlOutFileName = "paramList.out";
 
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
@@ -47,7 +45,8 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    Teuchos::RCP<NeumannInnerSurface_StochasticPolyconvexHGO> my_interface = Teuchos::rcp(new NeumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
+    Teuchos::RCP<NeumannInnerSurface_StochasticPolyconvexHGO> my_interface =
+    Teuchos::rcp(new NeumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
 
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_gmrf");
@@ -61,9 +60,10 @@ int main(int argc, char *argv[]){
 
     int error;
     std::string path_p1 = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_p1_connectivity");
-    my_interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);
-    if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
 
+    my_interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);
+
+    if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
         for (unsigned nmc=0; nmc<500; ++nmc){
             for (int i=0; i<n_nodes_p1_med; ++i){
                 parameters_file_1 >> my_interface->w1_gmrf(i);
