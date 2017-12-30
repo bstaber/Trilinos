@@ -69,6 +69,7 @@ public:
             }
             v = x;
 
+            int flag;
             while (test>=fval){
 
               if (comm->MyPID()==0){
@@ -88,12 +89,19 @@ public:
               comm->Barrier();
               test = value(x);
               eval++;
+              if (eval>=niter){
+                flag = 1;
+                break;
+              }
+              flag = 0;
             }
-            fval      = test;
-            solution  = x;
-            printStatus(eval,fval,x);
-            if (eval>=niter){
-              break;  
+            if (flag==0){
+              fval      = test;
+              solution  = x;
+              printStatus(eval,fval,x);
+            }
+            else{
+              break;
             }
           }
 
