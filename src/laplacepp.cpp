@@ -315,7 +315,6 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
     int node;
     unsigned int e_gid;
     double norm_phi, norm_psi;
-    Epetra_SerialDenseMatrix matrix_B(3,Mesh->el_type);
     Epetra_SerialDenseVector phi_nodes(Mesh->el_type);
     Epetra_SerialDenseVector psi_nodes(Mesh->el_type);
     Epetra_SerialDenseVector grad_psi(3);
@@ -363,8 +362,8 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
         jacobian_det(JacobianMatrix,det_jac_cells);
         dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
 
-        grad_phi.Multiply('N','T',1.0,dx_shape_functions,phi_nodes,0.0);
-        grad_psi.Multiply('N','T',1.0,dx_shape_functions,psi_nodes,0.0);
+        grad_phi.Multiply('T','N',1.0,dx_shape_functions,phi_nodes,0.0);
+        grad_psi.Multiply('T','N',1.0,dx_shape_functions,psi_nodes,0.0);
 
         norm_phi = grad_phi.Norm2();
         norm_psi = grad_psi.Norm2();
