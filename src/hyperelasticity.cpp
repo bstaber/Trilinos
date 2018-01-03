@@ -52,6 +52,18 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
     Epetra_SerialDenseMatrix D(Mesh->el_type,3), DX(Mesh->el_type,3);
     Epetra_SerialDenseMatrix JacobianMatrix(3,3);
 
+    switch (Mesh->el_type){
+        case 4:
+            tetra4::d_shape_functions(D, xi, eta, zeta);
+            break;
+        case 8:
+            hexa8::d_shape_functions(D, xi, eta, zeta);
+            break;
+        case 10:
+            tetra10::d_shape_functions(D, xi, eta, zeta);
+            break;
+    };
+
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
 
@@ -65,17 +77,6 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
             matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
         }
 
-        switch (Mesh->el_type){
-            case 4:
-                tetra4::d_shape_functions(D, xi, eta, zeta);
-                break;
-            case 8:
-                hexa8::d_shape_functions(D, xi, eta, zeta);
-                break;
-            case 10:
-                tetra10::d_shape_functions(D, xi, eta, zeta);
-                break;
-        };
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_cells);
         dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
@@ -123,7 +124,21 @@ void hyperelasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::strin
     Epetra_SerialDenseMatrix cauchy_stress(3,3);
     Epetra_SerialDenseMatrix dg_times_ps(3,3);
 
-    double xi;
+    switch (Mesh->el_type){
+      case 4:
+          double xi; = 1.0/3.0;
+          tetra4::d_shape_functions(D, xi, xi, xi);
+          break;
+      case 8:
+          double xi = 0.0;
+          hexa8::d_shape_functions(D, xi, xi, xi);
+          break;
+      case 10:
+          double xi = 1.0/3.0;
+          tetra10::d_shape_functions(D, xi, xi, xi);
+          break;
+    };
+    
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
 
@@ -136,21 +151,6 @@ void hyperelasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::strin
             matrix_x(1,inode) = u[OverlapMap->LID(3*node+1)] + Mesh->nodes_coord[3*node+1];
             matrix_x(2,inode) = u[OverlapMap->LID(3*node+2)] + Mesh->nodes_coord[3*node+2];
         }
-
-        switch (Mesh->el_type){
-          case 4:
-              xi = 1.0/3.0;
-              tetra4::d_shape_functions(D, xi, xi, xi);
-              break;
-          case 8:
-              xi = 0.0;
-              hexa8::d_shape_functions(D, xi, xi, xi);
-              break;
-          case 10:
-              xi = 1.0/3.0;
-              tetra10::d_shape_functions(D, xi, xi, xi);
-              break;
-        };
 
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_cells);
