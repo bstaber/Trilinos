@@ -84,7 +84,7 @@ int main(int argc, char *argv[]){
             else{
               if (Comm.MyPID()==0){
                 std::cout << "Newton failed | realization nb. " << nmc << "\n";
-            }
+              }
         }
         Comm.Barrier();
       }
