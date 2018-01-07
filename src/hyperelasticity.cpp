@@ -125,20 +125,21 @@ void hyperelasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::strin
     Epetra_SerialDenseMatrix dg_times_ps(3,3);
 
     switch (Mesh->el_type){
+      double xi;
       case 4:
-          double xi; = 1.0/3.0;
+          xi = 1.0/3.0;
           tetra4::d_shape_functions(D, xi, xi, xi);
           break;
       case 8:
-          double xi = 0.0;
+          xi = 0.0;
           hexa8::d_shape_functions(D, xi, xi, xi);
           break;
       case 10:
-          double xi = 1.0/3.0;
+          xi = 1.0/3.0;
           tetra10::d_shape_functions(D, xi, xi, xi);
           break;
     };
-    
+
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
 
