@@ -49,6 +49,7 @@ MPI_Init(&argc, &argv);
     for (unsigned int i=0; i<5; i++){
         x(i) = 1.0e3*x(i);
     }*/
+    Epetra_SerialDenseVector x(7);
     x(0) = 3.208084e+03;
     x(1) = 4.516888e+01;
     x(2) = 4.024262e+01;
@@ -60,7 +61,6 @@ MPI_Init(&argc, &argv);
 {
     Teuchos::RCP<forwardDeterministicCostFunction> obj =
     Teuchos::rcp(new forwardDeterministicCostFunction(Comm,*paramList));
-    Epetra_SerialDenseVector x(7);
     Epetra_SerialDenseVector value(10);
     int id = 0;
     value = obj->value_id(x,id);
