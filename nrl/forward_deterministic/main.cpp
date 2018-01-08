@@ -50,58 +50,19 @@ MPI_Init(&argc, &argv);
         x(i) = 1.0e3*x(i);
     }*/
     Epetra_SerialDenseVector x(7);
-    x(0) = 3.208084e+03;
-    x(1) = 4.516888e+01;
-    x(2) = 4.024262e+01;
-    x(3) = 1.587065e+03;
-    x(4) = 2.603703e+01;
-    x(5) = 1.335553e+01;
-    x(6) = 3.304965e-02;
-
-{
-    Teuchos::RCP<forwardDeterministicCostFunction> obj =
-    Teuchos::rcp(new forwardDeterministicCostFunction(Comm,*paramList));
-    Epetra_SerialDenseVector value(10);
-    int id = 0;
-    value = obj->value_id(x,id);
-    if (Comm.MyPID()==0){
-      std::cout << "************ ID = " << id << " ************\n";
-      std::cout << value << "\n";
-      std::cout << "\n";
-    }
-}
-
-{
-    Teuchos::RCP<forwardDeterministicCostFunction> obj =
-    Teuchos::rcp(new forwardDeterministicCostFunction(Comm,*paramList));
-    Epetra_SerialDenseVector value(10);
-    int id = 1;
-    value = obj->value_id(x,id);
-    if (Comm.MyPID()==0){
-      std::cout << "************ ID = " << id << " ************\n";
-      std::cout << value << "\n";
-      std::cout << "\n";
-    }
-}
+    x(0) = 3.189704e+03;
+    x(1) = 8.441733e+00;
+    x(2) = 2.378051e+01;
+    x(3) = 3.325157e+02;
+    x(4) = 5.315200e+01;
+    x(5) = 2.951202e+00;
+    x(6) = 3.604109e-02;
 
 {
     Teuchos::RCP<forwardDeterministicCostFunction> obj =
     Teuchos::rcp(new forwardDeterministicCostFunction(Comm,*paramList));
     Epetra_SerialDenseVector value(10);
     int id = 4;
-    value = obj->value_id(x,id);
-    if (Comm.MyPID()==0){
-      std::cout << "************ ID = " << id << " ************\n";
-      std::cout << value << "\n";
-      std::cout << "\n";
-    }
-}
-
-{
-    Teuchos::RCP<forwardDeterministicCostFunction> obj =
-    Teuchos::rcp(new forwardDeterministicCostFunction(Comm,*paramList));
-    Epetra_SerialDenseVector value(10);
-    int id = 6;
     value = obj->value_id(x,id);
     if (Comm.MyPID()==0){
       std::cout << "************ ID = " << id << " ************\n";
