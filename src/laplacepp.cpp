@@ -328,7 +328,22 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
     laplace_direction_two.Reshape(Mesh->n_local_cells,3);
     laplace_direction_two_cross_one.Reshape(Mesh->n_local_cells,3);
 
-    double xi; double det_jac_cells;
+    double det_jac_cells;
+    switch (Mesh->el_type){
+        double xi;
+        case 4:
+            xi = 1.0/3.0;
+            tetra4::d_shape_functions(D, xi, xi, xi);
+            break;
+        case 8:
+            xi = 0.0;
+            hexa8::d_shape_functions(D, xi, xi, xi);
+            break;
+        case 10:
+            xi = 1.0/3.0;
+            tetra10::d_shape_functions(D, xi, xi, xi);
+            break;
+    };
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
@@ -340,20 +355,6 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
             matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
         }
 
-        switch (Mesh->el_type){
-            case 4:
-                xi = 1.0/3.0;
-                tetra4::d_shape_functions(D, xi, xi, xi);
-                break;
-            case 8:
-                xi = 0.0;
-                hexa8::d_shape_functions(D, xi, xi, xi);
-                break;
-            case 10:
-                xi = 1.0/3.0;
-                tetra10::d_shape_functions(D, xi, xi, xi);
-                break;
-        };
         jacobian_matrix(matrix_X,D,JacobianMatrix);
         jacobian_det(JacobianMatrix,det_jac_cells);
         dX_shape_functions(D,JacobianMatrix,det_jac_cells,dx_shape_functions);
@@ -389,7 +390,6 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
         laplace_direction_two_cross_one_center(e_lid,2) = e1(2);
     }
 
-    std::cout << "I'm here\n";
 }
 
 int laplace::print_solution(Epetra_Vector & lhs, std::string fileName){
