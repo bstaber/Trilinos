@@ -6,9 +6,9 @@ laplace::laplace(){
 laplace::laplace(mesh & mesh){
     Mesh = &mesh;
     Comm = Mesh->Comm;
-    StandardMap = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
-    OverlapMap = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
-
+    StandardMap        = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
+    OverlapMap         = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
+    ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
     create_FECrsGraph();
 }
 
@@ -20,9 +20,9 @@ laplace::laplace(mesh & mesh, Teuchos::ParameterList & Parameters){
 
     Mesh->read_boundary_file(boundary_file,number_physical_groups);
 
-    StandardMap = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
-    OverlapMap = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
-
+    StandardMap        = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
+    OverlapMap         = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
+    ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
     create_FECrsGraph();
 }
 
@@ -35,9 +35,9 @@ laplace::laplace(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
     Mesh->read_boundary_file(boundary_file,number_physical_groups);
     Comm = Mesh->Comm;
 
-    StandardMap = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
-    OverlapMap = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
-
+    StandardMap        = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
+    OverlapMap         = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
+    ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
     create_FECrsGraph();
 }
 
@@ -224,8 +224,6 @@ void laplace::assembling(Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs){
 
 void laplace::compute_local_directions(Epetra_Vector & laplace_one, Epetra_Vector & laplace_two){
 
-    ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
-
     Epetra_Vector u_phi(*OverlapMap);
     u_phi.Import(laplace_one, *ImportToOverlapMap, Insert);
 
@@ -303,8 +301,6 @@ void laplace::compute_local_directions(Epetra_Vector & laplace_one, Epetra_Vecto
 }
 
 void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetra_Vector & laplace_two){
-
-    ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
 
     Epetra_Vector u_phi(*OverlapMap);
     u_phi.Import(laplace_one, *ImportToOverlapMap, Insert);
