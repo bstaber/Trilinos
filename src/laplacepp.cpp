@@ -308,8 +308,6 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
     Epetra_Vector u_psi(*OverlapMap);
     u_psi.Import(laplace_two, *ImportToOverlapMap, Insert);
 
-    std::cout << "I'm here\n";
-
     int node;
     unsigned int e_gid;
     double norm_phi, norm_psi;
@@ -390,6 +388,8 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
         laplace_direction_two_cross_one_center(e_lid,1) = e1(1);
         laplace_direction_two_cross_one_center(e_lid,2) = e1(2);
     }
+
+    std::cout << "I'm here\n";
 }
 
 int laplace::print_solution(Epetra_Vector & lhs, std::string fileName){
