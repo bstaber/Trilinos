@@ -159,11 +159,10 @@ public:
         angleToID(2,0) = 1; angleToID(2,1) = 2;
         angleToID(3,0) = 6; angleToID(3,1) = 7;
 
-        //for (int i=0; i<4; ++i){
-            int i = 0;
+        for (int i=0; i<4; ++i){
             vali = value_angle(x,angles(i),angleToID(i,0),angleToID(i,1));
             val += vali;
-        //}
+        }
         return val;
     }
 
