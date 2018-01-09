@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
     my_interface->get_media(n_cells_p1_med,n_nodes_p1_med,path_p1);
 
     if (parameters_file_1.is_open() && parameters_file_2.is_open() && parameters_file_3.is_open() && parameters_file_4.is_open()){
-        for (unsigned nmc=0; nmc<500; ++nmc){
+        for (unsigned nmc=0; nmc<3; ++nmc){
             for (int i=0; i<n_nodes_p1_med; ++i){
                 parameters_file_1 >> my_interface->w1_gmrf(i);
                 parameters_file_2 >> my_interface->w2_gmrf(i);
@@ -76,9 +76,9 @@ int main(int argc, char *argv[]){
             Newton->Initialization();
             error = Newton->Solve_with_Aztec(true);
             if (!error){
-                std::string filename1 = path + "disp_realization" + std::to_string(nmc) + ".mtx";
+                std::string filename1 = path + "/review/disp_realization" + std::to_string(nmc) + ".mtx";
                 Newton->print_newton_solution(filename1);
-                std::string filename2 = path + "stress_realization" + std::to_string(nmc);
+                std::string filename2 = path + "/review/stress_realization" + std::to_string(nmc);
                 my_interface->compute_center_cauchy_stress(*Newton->x,filename2);
             }
             else{
