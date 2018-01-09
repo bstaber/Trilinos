@@ -324,9 +324,9 @@ void laplace::compute_center_local_directions(Epetra_Vector & laplace_one, Epetr
     Epetra_SerialDenseVector e2(3);
 
     int n_gauss_points = Mesh->n_gauss_cells;
-    laplace_direction_one.Reshape(Mesh->n_local_cells,3);
-    laplace_direction_two.Reshape(Mesh->n_local_cells,3);
-    laplace_direction_two_cross_one.Reshape(Mesh->n_local_cells,3);
+    laplace_direction_one_center.Reshape(Mesh->n_local_cells,3);
+    laplace_direction_two_center.Reshape(Mesh->n_local_cells,3);
+    laplace_direction_two_cross_one_center.Reshape(Mesh->n_local_cells,3);
 
     double det_jac_cells;
     switch (Mesh->el_type){
