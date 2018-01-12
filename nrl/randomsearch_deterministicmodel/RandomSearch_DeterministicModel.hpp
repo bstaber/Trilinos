@@ -211,7 +211,7 @@ public:
             val    += totalEnergy*totalEnergy;
             valref += meanEnergy(i)*meanEnergy(i);
         }
-        val = fabs(val-valref)/valref;
+        val = fabs(val-valref);
         return val;
     }
 
