@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
           x(i) = 1.0e3*x(i);
       }
 
-      int niter   = 100;
+      int niter   = 200;
       double tol  = 1.0e-6;
 
       double fval = obj->randomsearch(x,niter,tol);
