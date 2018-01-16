@@ -203,15 +203,15 @@ public:
             double totalEnergy   = 0.0;
             double partialEnergy = 0.0;
             for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
-                partialEnergy += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
+                partialEnergy += std::sqrt(eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2));
             }
             comm->SumAll(&partialEnergy,&totalEnergy,1);
             //val    += (totalEnergy-meanEnergy(i))*(totalEnergy-meanEnergy(i));
             //valref += meanEnergy(i)*meanEnergy(i);
-            val    += totalEnergy*totalEnergy;
-            valref += meanEnergy(i)*meanEnergy(i);
+            val    += totalEnergy;
+            valref += meanEnergy(i);
         }
-        val = fabs(val-valref);
+        val = fabs(val-valref)/valref;
         return val;
     }
 
