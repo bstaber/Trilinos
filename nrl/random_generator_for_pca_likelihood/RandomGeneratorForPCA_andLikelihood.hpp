@@ -40,7 +40,8 @@ public:
     RandomGeneratorForPCA_andLikelihood(){
     }
 
-    Epetra_SerialDenseVector rnd(Epetra_IntSerialDenseVector & seeds,
+    Epetra_SerialDenseVector rnd(unsigned int                & nmc,
+                                 Epetra_IntSerialDenseVector & seeds,
                                  Epetra_SerialDenseVector    & mean_parameters,
                                  Epetra_SerialDenseVector    & exponents,
                                  Epetra_SerialDenseVector    & correlation_lengths,
@@ -80,7 +81,7 @@ public:
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
 
                 if (printDisplacements){
-                  std::string path = "/home/s/staber/Trilinos_results/nrl/randomGeneratorForPCA_andLikelihood/u_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + ".mtx";
+                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(plyagl) + "_k=" + std::to_string(i) + ".mtx";
                   int flag = newton->print_newton_solution(path);
                   if (flag){
                     if (comm->MyPID()==0){
@@ -90,7 +91,7 @@ public:
                 }
 
                 if (printDeformations){
-                  std::string path = "/home/s/staber/Trilinos_results/nrl/randomGeneratorForPCA_andLikelihood/e_delta" + std::to_string(omega(0)) + "_L" + std::to_string(omega(4)) + "_increment_" + std::to_string(i) + ".mtx";
+                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/e_nmc" + std::to_string(nmc) + "_angle=" + std::to_string(plyagl) + "_k=" + std::to_string(i) + ".mtx";
                   double xi = 0.0;
                   int flag = interface->compute_green_lagrange(*newton->x,xi,xi,xi,path);
                   if (flag){

@@ -91,15 +91,16 @@ int main(int argc, char *argv[]){
           seeds(2) = 5*k+2;
           seeds(3) = 5*k+3;
           seeds(4) = 5*k+4;
-          QoI = RG->rnd(seeds,
+          QoI = RG->rnd(nmc,
+                        seeds,
                         mean_parameters,
                         exponents,
                         correlation_lengths,
                         coeff_of_variation,
                         plyagls(i),
-                        true,
                         false,
-                        false);
+                        true,
+                        true);
           for (unsigned int l=0; l<QoI.Length(); ++l){
             Z(l,j+i*nmc) = std::log(QoI(l));
           }
