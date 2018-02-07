@@ -19,8 +19,8 @@ int main(int argc, char *argv[]){
 
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
-    clp.setDocString("Compilation: make -f Makefile.os \n
-                      Run: mpirun -np 28 ./trilinos_mpi --xml-in-file='nrl.aztec.linux.xml'");
+    clp.setDocString("Compilation: make -f Makefile.os\n"
+                     "Run: mpirun -np 28 ./trilinos_mpi --xml-in-file='nrl.aztec.linux.xml'");
 
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
     parse_return = clp.parse(argc,argv);
