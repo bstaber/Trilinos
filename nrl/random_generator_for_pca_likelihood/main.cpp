@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
       Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
       Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
 
-      /*int k = -1;
+      int k = -1;
       for (unsigned int i=0; i<4; ++i){
         for (unsigned int j=0; j<nmc; ++j){
           k++;
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
           seeds(2) = 5*k+2;
           seeds(3) = 5*k+3;
           seeds(4) = 5*k+4;
-          QoI = RG->rnd(seeds,
+          /*QoI = RG->rnd(seeds,
                   mean_parameters,
                   exponents,
                   correlation_lengths,
@@ -99,18 +99,17 @@ int main(int argc, char *argv[]){
                   plyagls(i),
                   false,
                   false,
-                  false);
-
+                  false);*/
           for (unsigned int l=0; l<QoI.Length(); ++l){
-            Z(l,j+i*nmc) = std::log(QoI(l));
+            //Z(l,j+i*nmc) = std::log(QoI(l));
           }
         }
       }
-      */
+
       if (Comm.MyPID()==0){
         std::ofstream output("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/output.txt");
         if (output.is_open()){
-          output << 2.0;
+          output << Z;
           output.close();
         }
       }
