@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
 
       int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
       Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
-      /*Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
+      Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
 
       int k = -1;
       for (unsigned int i=0; i<4; ++i){
@@ -105,16 +105,15 @@ int main(int argc, char *argv[]){
             Z(l,j+i*nmc) = std::log(QoI(l));
           }
         }
-      }*/
+      }
 
-      Epetra_SerialDenseMatrix Z(3,10);
-      if (Comm.MyPID()==0){
+      /*if (Comm.MyPID()==0){
         std::ofstream output("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/output.txt");
         if (output.is_open()){
-          output << Z;
+          output << 1.0;
           output.close();
         }
-      }
+      }*/
 
 #ifdef HAVE_MPI
     MPI_Finalize();
