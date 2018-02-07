@@ -25,8 +25,8 @@ private:
 
 public:
 
-    Teuchos::RCP<distributenrldata>    nrldata;
-    Epetra_SerialDenseVector solution;
+    Teuchos::RCP<distributenrldata> nrldata;
+    Epetra_SerialDenseVector        solution;
 
     RandomGeneratorForPCA_andLikelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         comm = &Comm;
