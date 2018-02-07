@@ -65,7 +65,7 @@ public:
         Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
         newton->Initialization();
 
-        /*for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
+        for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
             if(i==0){
                 newton->bc_disp=nrldata->boundaryconditions(i);
@@ -115,7 +115,7 @@ public:
                 GIndicator(i) = 0.0;
             }
 
-        }*/
+        }
         return GIndicator;
     }
 
