@@ -50,13 +50,13 @@ public:
                                  bool                          printDisplacements,
                                  bool                          printDeformations)
     {
-        Epetra_SerialDenseVector omega(5);
+        /*Epetra_SerialDenseVector omega(5);
         omega(0) = coeff_of_variation(0);
         omega(1) = coeff_of_variation(1);
         omega(2) = coeff_of_variation(2);
         omega(3) = coeff_of_variation(3);
         omega(4) = correlation_lengths(0);
-        omega(5) = correlation_lengths(1);
+        omega(5) = correlation_lengths(1);*/
 
         Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
 
