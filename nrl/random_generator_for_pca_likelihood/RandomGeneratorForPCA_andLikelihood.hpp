@@ -58,9 +58,9 @@ public:
         omega(4) = correlation_lengths(0);
         omega(5) = correlation_lengths(1);
 
-        /*Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
+        Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
 
-        interface->RandomFieldGenerator(seeds);
+        /*interface->RandomFieldGenerator(seeds);
         interface->setParameters(mean_parameters,exponents,omega);
         interface->set_plyagl(plyagl);
 
