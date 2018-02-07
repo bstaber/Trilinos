@@ -96,7 +96,7 @@ int main(int argc, char *argv[]){
                   exponents,
                   correlation_lengths,
                   coeff_of_variation,
-                  plyagl(i),
+                  plyagls(i),
                   false,
                   false,
                   false);
