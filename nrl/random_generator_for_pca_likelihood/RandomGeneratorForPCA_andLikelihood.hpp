@@ -60,7 +60,7 @@ public:
 
         Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
 
-        /*interface->RandomFieldGenerator(seeds);
+        interface->RandomFieldGenerator(seeds);
         interface->setParameters(mean_parameters,exponents,omega);
         interface->set_plyagl(plyagl);
 
@@ -115,7 +115,7 @@ public:
                 GIndicator(i) = 0.0;
             }
 
-        }*/
+        }
         return GIndicator;
     }
 

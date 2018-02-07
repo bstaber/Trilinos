@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
                         correlation_lengths,
                         coeff_of_variation,
                         plyagls(i),
-                        false,
+                        true,
                         false,
                         false);
           for (unsigned int l=0; l<QoI.Length(); ++l){
