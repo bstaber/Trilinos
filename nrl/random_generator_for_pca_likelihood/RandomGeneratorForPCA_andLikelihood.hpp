@@ -17,7 +17,6 @@ private:
     Teuchos::ParameterList _paramList;
 
     Teuchos::RCP<TIMooney_RandomField> interface;
-    Teuchos::RCP<distributenrldata>    nrldata;
     Teuchos::RCP<Newton_Raphson>       newton;
 
     Epetra_Comm * comm;
@@ -26,6 +25,7 @@ private:
 
 public:
 
+    Teuchos::RCP<distributenrldata>    nrldata;
     Epetra_SerialDenseVector solution;
 
     RandomGeneratorForPCA_andLikelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
