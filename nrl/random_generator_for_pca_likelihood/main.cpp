@@ -43,27 +43,48 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    //for (unsigned int test=0; test<10; ++test){
-      Teuchos::RCP<RandomGeneratorForPCA_andLikelihood> obj =
+      Teuchos::RCP<RandomGeneratorForPCA_andLikelihood> RG =
       Teuchos::rcp(new RandomGeneratorForPCA_andLikelihood(Comm,*paramList));
 
-      /*Epetra_SerialDenseVector x(7);
-      x(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
-      x(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
-      x(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
-      x(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
-      x(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
-      x(5) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
-      x(6) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
-      for (unsigned int i=0; i<5; i++){
-          x(i) = 1.0e3*x(i);
-      }
+      Epetra_IntSerialDenseVector seeds(5);
+      Epetra_SerialDenseVector    mean_parameters(5);
+      Epetra_SerialDenseVector    exponents(2);
+      Epetra_SerialDenseVector    correlation_lengths(2);
+      Epetra_SerialDenseVector    coeff_of_variation(4);
 
-      int niter   = 200;
-      double tol  = 1.0e-6;
+      //mean values of the random parameters G_1(x),...,G_5(x)
+      mean_parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+      mean_parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+      mean_parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+      mean_parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+      mean_parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+      mean_parameters.Scale(1.0e3);
+      //deterministic exponents beta_4 and beta_5
+      exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+      exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+      //correlation lengths of the Gaussian random field
+      correlation_lengths(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
+      correlation_lengths(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
+      //coefficients of variation of the random parameters G_1(x),...,G_4(x)
+      coeff_of_variation(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
+      coeff_of_variation(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
+      coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
+      coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
+      //ply angle
+      double plyagl = 15.0*2.0*M_PI/360.0;
 
-      double fval = obj->randomsearch(x,niter,tol);
-    }*/
+      //seeds for the Gaussian random field
+      seeds(0) = 0; seeds(1) = 1; seeds(2) = 2; seeds(3) = 3; seeds(4) = 4;
+
+      /*RG->rnd(seeds,
+              mean_parameters,
+              exponents,
+              correlation_lengths,
+              coeff_of_variation,
+              false,
+              false,
+              false
+            );*/
 
 #ifdef HAVE_MPI
     MPI_Finalize();
