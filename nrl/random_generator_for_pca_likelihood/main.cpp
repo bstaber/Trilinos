@@ -114,6 +114,7 @@ int main(int argc, char *argv[]){
           output.close();
         }
       }
+      
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
