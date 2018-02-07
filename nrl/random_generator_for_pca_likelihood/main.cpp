@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
       Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
       Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
 
-      int k = -1;
+      /*int k = -1;
       for (unsigned int i=0; i<4; ++i){
         for (unsigned int j=0; j<nmc; ++j){
           k++;
@@ -105,11 +105,12 @@ int main(int argc, char *argv[]){
             Z(l,j+i*nmc) = std::log(QoI(l));
           }
         }
-      }
+      }*/
 
+      Epetra_SerialDenseMatrix Z(3,10);
       std::ofstream output("../Trilinos_results/nrl/random_generator_for_pca_likelihood/output.txt");
       if (output.is_open()){
-        output << Z;  
+        output << Z;
       }
       output.close();
 
