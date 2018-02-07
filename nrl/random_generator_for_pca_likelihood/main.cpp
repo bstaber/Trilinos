@@ -111,7 +111,7 @@ int main(int argc, char *argv[]){
       if (Comm.MyPID()==0){
         std::ofstream output("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/output.txt");
         if (output.is_open()){
-          output << 1.0;
+          output << Z;
           output.close();
         }
       }
