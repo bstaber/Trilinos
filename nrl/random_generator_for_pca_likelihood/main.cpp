@@ -111,8 +111,8 @@ int main(int argc, char *argv[]){
       std::ofstream output("../Trilinos_results/nrl/random_generator_for_pca_likelihood/output.txt");
       if (output.is_open()){
         output << Z;
+        output.close();
       }
-      output.close();
 
 #ifdef HAVE_MPI
     MPI_Finalize();
