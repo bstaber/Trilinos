@@ -19,7 +19,8 @@ int main(int argc, char *argv[]){
 
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
-    clp.setDocString("Run: mpirun -np 28 ./trilinos_mpi --xml-in-file='nrl.aztec.linux.xml'");
+    clp.setDocString("Compilation: make -f Makefile.os \n
+                      Run: mpirun -np 28 ./trilinos_mpi --xml-in-file='nrl.aztec.linux.xml'");
 
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
     parse_return = clp.parse(argc,argv);
@@ -51,6 +52,7 @@ int main(int argc, char *argv[]){
       Epetra_SerialDenseVector    exponents(2);
       Epetra_SerialDenseVector    correlation_lengths(2);
       Epetra_SerialDenseVector    coeff_of_variation(4);
+      Epetra_SerialDenseVector    plyagls(4);
 
       //mean values of the random parameters G_1(x),...,G_5(x)
       mean_parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
@@ -71,12 +73,40 @@ int main(int argc, char *argv[]){
       coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
       coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
       //ply angle
-      double plyagl = 15.0*2.0*M_PI/360.0;
+      plyagls(0) = plyagl = 15.0*2.0*M_PI/360.0;
+      plyagls(1) = plyagl = 30.0*2.0*M_PI/360.0;
+      plyagls(2) = plyagl = 60.0*2.0*M_PI/360.0;
+      plyagls(3) = plyagl = 75.0*2.0*M_PI/360.0;
 
-      //seeds for the Gaussian random field
-      seeds(0) = 0; seeds(1) = 1; seeds(2) = 2; seeds(3) = 3; seeds(4) = 4;
+      int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
+      Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
+      Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
 
-      /*RG->rnd(seeds,
+      int k = -1;
+      for (unsigned int i=0; i<4; ++i){
+        for (unsigned int j=0; j<nmc; ++j){
+          k++;
+          seeds(0) = 5*k+0;
+          seeds(1) = 5*k+1;
+          seeds(2) = 5*k+2;
+          seeds(3) = 5*k+3;
+          seeds(4) = 5*k+4;
+          QoI = RG->rnd(seeds,
+                  mean_parameters,
+                  exponents,
+                  correlation_lengths,
+                  coeff_of_variation,
+                  false,
+                  false,
+                  false);
+        }
+        for (unsigned int l=0; l<RG.Length(); ++l){
+          Z(l,j+i*nmc) = QoI(l);
+        }
+      }
+
+      /*Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
+      QoI = RG->rnd(seeds,
               mean_parameters,
               exponents,
               correlation_lengths,
