@@ -50,7 +50,7 @@ public:
                                  bool                          printDisplacements,
                                  bool                          printDeformations)
     {
-        Epetra_SerialDenseVector omega(3);
+        Epetra_SerialDenseVector omega(5);
         omega(0) = coeff_of_variation(0);
         omega(1) = coeff_of_variation(1);
         omega(2) = coeff_of_variation(2);
