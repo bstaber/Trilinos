@@ -102,10 +102,16 @@ int main(int argc, char *argv[]){
                   false);
 
           for (unsigned int l=0; l<QoI.Length(); ++l){
-            Z(l,j+i*nmc) = QoI(l);
+            Z(l,j+i*nmc) = std::log(QoI(l));
           }
         }
       }
+
+      std::ofstream output("../Trilinos_results/nrl/random_generator_for_pca_likelihood/output.txt");
+      if (output.is_open()){
+        output << Z;  
+      }
+      output.close();
 
 #ifdef HAVE_MPI
     MPI_Finalize();
