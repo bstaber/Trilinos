@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
           seeds(2) = 5*k+2;
           seeds(3) = 5*k+3;
           seeds(4) = 5*k+4;
-          QoI = RG->rnd(nmc,
+          QoI = RG->rnd(j,
                         seeds,
                         mean_parameters,
                         exponents,
