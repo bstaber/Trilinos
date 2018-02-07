@@ -33,7 +33,7 @@ void hyperelasticity::create_FECrsGraph(){
     delete[] index;
 }
 
-void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta, std::string & filename){
+int hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta, std::string & filename){
 
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
@@ -96,6 +96,7 @@ void hyperelasticity::compute_green_lagrange(Epetra_Vector & x, double & xi, dou
     lhs_root.Export(green_lagrange,ExportOnRoot,Insert);
 
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+    return error;
 }
 
 void hyperelasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::string & filename){
