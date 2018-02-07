@@ -99,9 +99,10 @@ int main(int argc, char *argv[]){
                   false,
                   false,
                   false);
-        }
-        for (unsigned int l=0; l<RG.Length(); ++l){
-          Z(l,j+i*nmc) = QoI(l);
+
+          for (unsigned int l=0; l<QoI.Length(); ++l){
+            Z(l,j+i*nmc) = QoI(l);
+          }
         }
       }
 
