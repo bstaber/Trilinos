@@ -64,7 +64,7 @@ public:
         interface->setParameters(mean_parameters,exponents,omega);
         interface->set_plyagl(plyagl);
 
-        newton->Initialization();
+        /*newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
             if(i==0){
@@ -76,7 +76,7 @@ public:
 
             int error = newton->Solve_with_Aztec(printNewtonIterations);
 
-            /*if (!error){
+            if (!error){
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
 
                 if (printDisplacements){
@@ -113,9 +113,9 @@ public:
                     std::cout << "GIndicator(" << i << ") set to 0.0.\n";
                 }
                 GIndicator(i) = 0.0;
-            }*/
+            }
 
-        }
+        }*/
         return GIndicator;
     }
 
