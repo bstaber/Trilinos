@@ -73,7 +73,7 @@ public:
                 newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
             }
 
-            int error = newton->Solve_with_Aztec(newtonPrint);
+            int error = newton->Solve_with_Aztec(printNewtonIterations);
 
             if (!error){
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
@@ -83,7 +83,7 @@ public:
                   int flag = newton->print_newton_solution(path);
                   if (flag){
                     if (comm->MyPID()==0){
-                      std::cout << "Failed printing displacements."
+                      std::cout << "Failed printing displacements.";
                     }
                   }
                 }
@@ -94,7 +94,7 @@ public:
                   int flag = interface->compute_green_lagrange(*newton->x,xi,xi,xi,path);
                   if (flag){
                     if (comm->MyPID()==0){
-                      std::cout << "Failed printing deformations."
+                      std::cout << "Failed printing deformations.";
                     }
                   }
                 }
