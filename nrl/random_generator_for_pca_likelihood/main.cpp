@@ -105,17 +105,6 @@ int main(int argc, char *argv[]){
         }
       }
 
-      /*Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
-      QoI = RG->rnd(seeds,
-              mean_parameters,
-              exponents,
-              correlation_lengths,
-              coeff_of_variation,
-              false,
-              false,
-              false
-            );*/
-
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
