@@ -58,13 +58,13 @@ public:
         omega(4) = correlation_lengths(0);
         omega(5) = correlation_lengths(1);
 
-        Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
+        /*Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
 
         interface->RandomFieldGenerator(seeds);
         interface->setParameters(mean_parameters,exponents,omega);
         interface->set_plyagl(plyagl);
 
-        /*newton->Initialization();
+        newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
             if(i==0){
