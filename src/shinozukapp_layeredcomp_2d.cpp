@@ -22,7 +22,9 @@ double shinozuka_layeredcomp_2d::s_tau(double & tau){
     return s;
 }
 
-void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh, std::vector<int> & phase){
+void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector & v,
+                                                      mesh & Mesh,
+                                                      std::vector<int> & phase){
 
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
