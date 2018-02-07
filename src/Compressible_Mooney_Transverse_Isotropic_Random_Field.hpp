@@ -42,11 +42,9 @@ public:
         }
         mean_mu.Resize(5);
         omega.Resize(6);
-        int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
-        omega(4) = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "lx");
-        omega(5) = Teuchos::getParameter<double>(Parameters.sublist("Shinozuka"), "ly");
 
-        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,omega(4),omega(5)));
+        int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
+        GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order));
     }
 
     ~TIMooney_RandomField(){
@@ -123,7 +121,7 @@ public:
             alpha = 1.0/(omega(3)*omega(3)); beta = mean_mu(3)*omega(3)*omega(3);
             mu4rf(i) = icdf_gamma(w4_shino(i),alpha,beta);
 
-            alpha = (2.0*alpha)-1.0; beta = mean_mu(4)/alpha;
+            alpha = (2.0*alpha)-1.0;         beta = mean_mu(4)/alpha;
             mu5rf(i) = icdf_gamma(w5_shino(i),alpha,beta);
         }
 
