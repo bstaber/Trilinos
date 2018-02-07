@@ -1,0 +1,55 @@
+<ParameterList>
+
+    <ParameterList name="Mesh">
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh"/>
+    </ParameterList>
+
+    <ParameterList name="nrldata">
+        <Parameter name="pathnrl" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>
+    </ParameterList>
+
+    <ParameterList name="Data">
+        <Parameter name="path_to_pts" type="string" value="/home/s/staber/Trilinos_results/nrl/data/xyz.txt"/>
+        <Parameter name="path_to_def" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>
+    </ParameterList>
+
+    <ParameterList name="Newton">
+        <Parameter name="delta"             type="double" value="1.0"/>
+        <Parameter name="iterMin"           type="int"    value="2"/>
+        <Parameter name="iterMax"           type="int"    value="10"/>
+        <Parameter name="nbBisMax"          type="int"    value="5"/>
+        <Parameter name="NormFTol"          type="double" value="1e-6"/>
+        <Parameter name="NormFMax"          type="double" value="1e7"/>
+        <Parameter name="eps"               type="double" value="1e-8"/>
+        <Parameter name="success_parameter" type="double" value="2.0"/>
+        <Parameter name="failure_parameter" type="double" value="2.0"/>
+        <Parameter name="number_of_loads"   type="int"    value="1"/>
+        <Parameter name="bc_disp"           type="double" value="1.0"/>
+        <Parameter name="pressure_load"     type="double" value="0.0"/>
+        <Parameter name="tol"               type="double" value="1e-8"/>
+    </ParameterList>
+
+    <ParameterList name="Krylov">
+        <Parameter name="solver"          type="string" value="cg"/>
+        <Parameter name="precond"         type="string" value="dom_decomp"/>
+        <Parameter name="subdomain_solve" type="string" value="icc"/>
+        <Parameter name="overlap"         type="int"    value="0"/>
+        <Parameter name="graph_fill"      type="int"    value="0"/>
+        <Parameter name="AZ_tol"          type="double" value="1e-6"/>
+        <Parameter name="AZ_output"       type="int"    value="0"/>
+        <Parameter name="AZ_diagnostics"  type="string" value="all"/>
+        <Parameter name="AZ_reorder"      type="int"    value="1"/>
+        <Parameter name="AZ_conv"         type="string" value="noscaled"/>
+    </ParameterList>
+
+    <ParameterList name="TIMooney">
+        <Parameter name="mu1"   type="double" value="1.7212"/>
+        <Parameter name="mu2"   type="double" value="0.0426"/>
+        <Parameter name="mu3"   type="double" value="0.0429"/>
+        <Parameter name="mu4"   type="double" value="1.3138"/>
+        <Parameter name="mu5"   type="double" value="0.0609"/>
+        <Parameter name="beta4" type="double" value="27.9535"/>
+        <Parameter name="beta5" type="double" value="0.0306"/>
+    </ParameterList>
+
+</ParameterList>
