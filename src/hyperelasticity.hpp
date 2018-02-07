@@ -12,7 +12,7 @@ public:
     void create_FECrsGraph();
     void compute_B_matrices(Epetra_SerialDenseMatrix & F, Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B, Epetra_SerialDenseMatrix & BG);
 
-    void compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta, std::string & filename);
+    int compute_green_lagrange(Epetra_Vector & x, double & xi, double & eta, double & zeta, std::string & filename);
     void compute_center_cauchy_stress(Epetra_Vector & x, std::string & filename);
     void compute_gauss_vonmises(Epetra_Vector & x, std::string & filename);
 
