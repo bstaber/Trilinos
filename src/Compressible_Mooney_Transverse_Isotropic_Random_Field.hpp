@@ -21,7 +21,8 @@ public:
     double topcoord;
     std::vector<int> phase;
 
-    TIMooney_RandomField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    TIMooney_RandomField(Epetra_Comm            & comm, 
+                         Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         Mesh                  = new mesh(comm, mesh_file, 1.0);
@@ -67,7 +68,9 @@ public:
         plyagl = Plyagl;
     }
 
-    void setParameters(Epetra_SerialDenseVector & parameters, Epetra_SerialDenseVector & exponents, Epetra_SerialDenseVector & hyperParameters){
+    void setParameters(Epetra_SerialDenseVector & parameters,
+                       Epetra_SerialDenseVector & exponents,
+                       Epetra_SerialDenseVector & hyperParameters){
         mean_mu = parameters;
         beta3   = -0.5;
         beta4   = exponents(0);
@@ -127,7 +130,9 @@ public:
 
     }
 
-    double icdf_gamma(double & w, double & alpha, double & beta){
+    double icdf_gamma(double & w,
+                      double & alpha,
+                      double & beta){
         double erfx = boost::math::erf<double>(w);
         double y = (1.0/2.0)*(1.0 + erfx);
         double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
@@ -135,7 +140,9 @@ public:
         return z;
     }
 
-    void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+    void get_matrix_and_rhs(Epetra_Vector      & x,
+                            Epetra_FECrsMatrix & K,
+                            Epetra_FEVector    & F){
         assemblePureDirichlet_homogeneousForcing(x,K,F);
     }
 
@@ -174,7 +181,9 @@ public:
         }
     }
 
-    void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
+    void apply_dirichlet_conditions(Epetra_FECrsMatrix & K,
+                                    Epetra_FEVector    & F,
+                                    double             & displacement){
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
 
@@ -209,10 +218,15 @@ public:
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
 
-    void get_material_parameters(unsigned int & e_lid, unsigned int & gp){
+    void get_material_parameters(unsigned int & e_lid,
+                                 unsigned int & gp){
         int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
-        mu1 = mu1rf(e_lid*n_gauss_cells+gp); mu2 = mu2rf(e_lid*n_gauss_cells+gp); mu3 = mu3rf(e_lid*n_gauss_cells+gp); mu4 = mu4rf(e_lid*n_gauss_cells+gp); mu5 = mu5rf(e_lid*n_gauss_cells+gp);
+        mu1 = mu1rf(e_lid*n_gauss_cells+gp);
+        mu2 = mu2rf(e_lid*n_gauss_cells+gp);
+        mu3 = mu3rf(e_lid*n_gauss_cells+gp);
+        mu4 = mu4rf(e_lid*n_gauss_cells+gp);
+        mu5 = mu5rf(e_lid*n_gauss_cells+gp);
         mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
         trm = mu4 + 2.0*mu5;
         ptrmbeta4 = std::pow(trm,beta4);
@@ -227,7 +241,9 @@ public:
         }
     }
 
-    void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient, Epetra_SerialDenseVector & piola_stress, Epetra_SerialDenseMatrix & tangent_piola){
+    void get_constitutive_tensors(Epetra_SerialDenseMatrix & deformation_gradient,
+                                  Epetra_SerialDenseVector & piola_stress,
+                                  Epetra_SerialDenseMatrix & tangent_piola){
 
         double det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
 
@@ -304,22 +320,32 @@ public:
         tangent_piola += ddJ5;
     }
 
-    Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
+    Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X,
+                                           Epetra_SerialDenseMatrix & xg,
+                                           unsigned int             & gp){
         Epetra_SerialDenseVector h(3);
         std::cout << "**Err: Not using that method in this example!\n";
         return h;
     }
 
-    Epetra_SerialDenseVector get_forcing(double & x1, double & x2, double & x3, unsigned int & e_lid, unsigned int & gp){
+    Epetra_SerialDenseVector get_forcing(double       & x1,
+                                         double       & x2,
+                                         double       & x3,
+                                         unsigned int & e_lid,
+                                         unsigned int & gp){
         Epetra_SerialDenseVector f(3);
         std::cout << "**Err: Not using that method in this example!\n";
         return f;
     }
 
     void get_material_parameters_for_recover(unsigned int & e_lid){
+      std::cout << "**Err: Not using that method in this example!\n";
     }
 
-    void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient, double & det, Epetra_SerialDenseMatrix & piola_stress){
+    void get_stress_for_recover(Epetra_SerialDenseMatrix & deformation_gradient,
+                                double                   & det,
+                                Epetra_SerialDenseMatrix & piola_stress){
+      std::cout << "**Err: Not using that method in this example!\n";
     }
 
 };

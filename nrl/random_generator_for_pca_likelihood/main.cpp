@@ -86,11 +86,11 @@ int main(int argc, char *argv[]){
       for (unsigned int i=0; i<4; ++i){
         for (unsigned int j=0; j<nmc; ++j){
           k++;
-          seeds(0) = 5*k+0;
-          seeds(1) = 5*k+1;
-          seeds(2) = 5*k+2;
-          seeds(3) = 5*k+3;
-          seeds(4) = 5*k+4;
+          seeds(0) = 5*(j+i*nmc)+0;
+          seeds(1) = 5*(j+i*nmc)+1;
+          seeds(2) = 5*(j+i*nmc)+2;
+          seeds(3) = 5*(j+i*nmc)+3;
+          seeds(4) = 5*(j+i*nmc)+4;
           QoI = RG->rnd(j,
                         seeds,
                         mean_parameters,
