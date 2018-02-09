@@ -83,8 +83,8 @@ int main(int argc, char *argv[]){
     interface->RandomFieldGenerator(seeds);
 
     unsigned int e_gid;
-    unsigned int ne = interface->Mesh->n_local_cells;
-    int          n_gauss_cells = Mesh->n_gauss_cells;
+    unsigned int ne            = interface->Mesh->n_local_cells;
+    int          n_gauss_cells = interface->Mesh->n_gauss_cells;
     double       mu1, mu2, mu3, mu4, mu5;
 
     for (unsigned int e_lid=0; e_lid<ne; ++e_lid){
