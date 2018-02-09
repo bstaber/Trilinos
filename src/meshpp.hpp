@@ -56,7 +56,7 @@ public:
     int metis_part_mesh(int & NumProc);
     void get_local_nodes(int & MyPID);
     void get_cells_and_ghosts(int & MyPID);
-    void get_cartesian_coordinate(unsigned int & e_gid, unsigned int & gp);
+    Epetra_SerialDenseVector get_cartesian_coordinate(unsigned int & e_gid, unsigned int & gp);
 
     void store_feinterp_faces();
     void store_feinterp_cells();
