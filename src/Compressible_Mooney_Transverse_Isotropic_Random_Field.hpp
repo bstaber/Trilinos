@@ -46,7 +46,6 @@ public:
 
         int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
         GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order));
-        GRF_Generator->construct_map(*Mesh);
     }
 
     ~TIMooney_RandomField(){

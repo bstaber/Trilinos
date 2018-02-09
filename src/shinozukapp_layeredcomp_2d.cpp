@@ -22,22 +22,9 @@ double shinozuka_layeredcomp_2d::s_tau(double & tau){
     return s;
 }
 
-void shinozuka_layeredcomp_2d::construct_map(mesh & Mesh){
-  int e_gid;
-  std::vector<int> local_gauss_points;
-
-  for (unsigned int e_lid=0; e_lid<Mesh.n_local_cells; ++e_lid){
-      e_gid = Mesh.local_cells[e_lid];
-      for (unsigned int j=0; j<Mesh.n_gauss_cells; ++j){
-          local_gauss_points.push_back(Mesh.n_gauss_cells*e_gid+j);
-      }
-  }
-  CellsMap   = new Epetra_Map(-1,Mesh.n_gauss_cells*Mesh.n_local_cells,&local_gauss_points[0],0,*Mesh.Comm);
-  GaussianRF = new Epetra_Vector(*CellsMap);
-
-}
-void shinozuka_layeredcomp_2d::generator_gauss_points(mesh             & Mesh,
-                                                      std::vector<int> & phase){
+void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector & v,
+                                                      mesh                     & Mesh,
+                                                      std::vector<int>         & phase){
 
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
@@ -85,9 +72,7 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(mesh             & Mesh,
                                 }
                                 vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
                                 arg = 2.0*M_PI*phi + (M_PI/l1)*ti*vector_x(0) + (M_PI/l2)*tj*vector_x(1);
-                                //v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj)*w*std::cos(arg);
-                                GaussianRF->SumIntoMyValue(CellsMap->LID(e_gid*n_gauss_cells+gp),0,std::sqrt(2.0*si*sj)*w*std::cos(arg));
-                                //(*GaussianRF)[CellsMap->LID(e_gid*n_gauss_cells+gp)] += std::sqrt(2.0*si*sj)*w*std::cos(arg);
+                                v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                             }
                         }
                     }
