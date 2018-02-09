@@ -34,9 +34,9 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
     double si, sj;
     double psi, phi, w, arg;
 
-    Epetra_SerialDenseVector vector_x(2);
+    Epetra_SerialDenseVector vector_x(3);
     Epetra_SerialDenseVector shape_functions(Mesh.el_type);
-    Epetra_SerialDenseMatrix matrix_X(2,Mesh.el_type);
+    Epetra_SerialDenseMatrix matrix_X(3,Mesh.el_type);
 
     for (int il=0; il<32; ++il){
         for (int i=1; i<=order; ++i){
@@ -56,6 +56,7 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
                                 node = Mesh.cells_nodes[Mesh.el_type*e_gid+inode];
                                 matrix_X(0,inode) = Mesh.nodes_coord[3*node+0];
                                 matrix_X(1,inode) = Mesh.nodes_coord[3*node+1];
+                                matrix_X(2,inode) = Mesh.nodes_coord[3*node+2];
                             }
                             for (int gp=0; gp<n_gauss_cells; ++gp){
                                 xi = Mesh.xi_cells(gp); eta = Mesh.eta_cells(gp); zeta = Mesh.zeta_cells(gp);

@@ -427,9 +427,9 @@ Epetra_SerialDenseVector mesh::get_cartesian_coordinate(unsigned int & e_gid, un
   int n_gauss_cells = n_gauss_cells;
   double xi, eta, zeta;
 
-  Epetra_SerialDenseVector vector_x(2);
+  Epetra_SerialDenseVector vector_x(3);
   Epetra_SerialDenseVector shape_functions(el_type);
-  Epetra_SerialDenseMatrix matrix_X(2,el_type);
+  Epetra_SerialDenseMatrix matrix_X(3,el_type);
 
   for (unsigned inode=0; inode<el_type; ++inode){
       node = cells_nodes[el_type*e_gid+inode];
