@@ -15,9 +15,7 @@ class RandomGeneratorForPCA_andLikelihood
 private:
 
     Teuchos::ParameterList _paramList;
-
-    Teuchos::RCP<TIMooney_RandomField> interface;
-    Teuchos::RCP<Newton_Raphson>       newton;
+    Teuchos::RCP<Newton_Raphson> newton;
 
     Epetra_Comm * comm;
     Epetra_Map  * MapExpPoints;
@@ -25,8 +23,8 @@ private:
 
 public:
 
-    Teuchos::RCP<distributenrldata> nrldata;
-    Epetra_SerialDenseVector        solution;
+    Teuchos::RCP<TIMooney_RandomField> interface;
+    Teuchos::RCP<distributenrldata>    nrldata;
 
     RandomGeneratorForPCA_andLikelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         comm = &Comm;
