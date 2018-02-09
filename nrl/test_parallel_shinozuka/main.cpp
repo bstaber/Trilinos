@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
     double       mu1, mu2, mu3, mu4, mu5;
 
     for (unsigned int e_lid=0; e_lid<ne; ++e_lid){
-      e_gid = Mesh->local_cells[e_lid];
+      e_gid = interface->Mesh->local_cells[e_lid];
       for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
         mu1   = interface->mu1rf(e_lid*n_gauss_cells+gp);
         mu2   = interface->mu2rf(e_lid*n_gauss_cells+gp);
