@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
     double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
 
-    mesh Mesh(Comm,mesh_file);
+    mesh Mesh(Comm,mesh_file,1.0);
 
     Teuchos::RCP<shinozuka_layeredcomp_2d> Generator_Shinozuka =
     Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
