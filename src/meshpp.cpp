@@ -420,7 +420,7 @@ void mesh::get_cells_and_ghosts(int & MyPID){
     }
 }
 
-Epetra_SerialDenseVector mesh::get_cartesian_coordinate(unsigned int & e_gid, unsigned int & e_lid){
+Epetra_SerialDenseVector mesh::get_cartesian_coordinate(unsigned int & e_gid, unsigned int & gp){
 
   int node, e_gid;
   int n_local_cells = Mesh.n_local_cells;
