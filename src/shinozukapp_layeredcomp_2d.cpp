@@ -33,7 +33,7 @@ void shinozuka_layeredcomp_2d::construct_map(mesh & Mesh){
       }
   }
   CellsMap   = new Epetra_Map(-1,Mesh.n_gauss_cells*Mesh.n_local_cells,&local_gauss_points[0],0,*Mesh.Comm);
-  GaussianRF = new Epetra_Vector(CellsMap);
+  GaussianRF = new Epetra_Vector(*CellsMap);
 
 }
 void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector & v,
