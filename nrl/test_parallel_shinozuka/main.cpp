@@ -44,14 +44,13 @@ int main(int argc, char *argv[]){
         }
     }
 
-    Teuchos::RCP<TIMooney_RandomField> Interface =
+    Teuchos::RCP<TIMooney_RandomField> interface =
     Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
 
     Epetra_IntSerialDenseVector seeds(5);
     Epetra_SerialDenseVector    mean_parameters(5);
     Epetra_SerialDenseVector    exponents(2);
-    Epetra_SerialDenseVector    correlation_lengths(2);
-    Epetra_SerialDenseVector    coeff_of_variation(4);
+    Epetra_SerialDenseVector    omega(6);
     Epetra_SerialDenseVector    plyagls(4);
 
     //mean values of the random parameters G_1(x),...,G_5(x)
@@ -80,7 +79,7 @@ int main(int argc, char *argv[]){
 
     for (unsigned int i=0; i<5; ++i){ seeds(i) = i;};
     interface->setParameters(mean_parameters,exponents,omega);
-    interface->set_plyagl(plyagl);
+    interface->set_plyagl(plyagl(0));
     interface->RandomFieldGenerator(seeds);
 
 #ifdef HAVE_MPI
