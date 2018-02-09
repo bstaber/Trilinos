@@ -81,8 +81,8 @@ public:
 
     void TestParallelShinozuka(int seed){
       Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
-      GRF_Generator->l1 = omega(4);
-      GRF_Generator->l2 = omega(5);
+      GRF_Generator->l1 = 5.0;
+      GRF_Generator->l2 = 2.5;
       GRF_Generator->rng.seed(seed);
       GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
     }
