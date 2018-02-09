@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
 
     if (Comm.MyPID()==0){
       for (unsigned int i=0; i<Generator_Shinozuka->GaussianRF->MyLength(); ++i){
-        std::cout << (*GaussianRF)[i] << "\n";
+        std::cout << Generator_Shinozuka->(*GaussianRF)[i] << "\n";
       }
     }
 
