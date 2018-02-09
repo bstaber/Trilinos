@@ -82,17 +82,20 @@ int main(int argc, char *argv[]){
     interface->set_plyagl(plyagls(0));
     interface->RandomFieldGenerator(seeds);
 
-    unsigned int ne = interface->Mesh->n_local_cells;
-    int n_gauss_cells = Mesh->n_gauss_cells;
     unsigned int e_gid;
+    unsigned int ne = interface->Mesh->n_local_cells;
+    int          n_gauss_cells = Mesh->n_gauss_cells;
+    double       mu1, mu2, mu3, mu4, mu5;
 
-    for (unsigned int e_lid; e_lid<ne; ++e_lid){
+    for (unsigned int e_lid=0; e_lid<ne; ++e_lid){
       e_gid = Mesh->local_cells[e_lid];
-      mu1   = interface->mu1rf(e_lid*n_gauss_cells+gp);
-      mu2   = interface->mu2rf(e_lid*n_gauss_cells+gp);
-      mu3   = interface->mu3rf(e_lid*n_gauss_cells+gp);
-      mu4   = interface->mu4rf(e_lid*n_gauss_cells+gp);
-      mu5   = interface->mu5rf(e_lid*n_gauss_cells+gp);
+      for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+        mu1   = interface->mu1rf(e_lid*n_gauss_cells+gp);
+        mu2   = interface->mu2rf(e_lid*n_gauss_cells+gp);
+        mu3   = interface->mu3rf(e_lid*n_gauss_cells+gp);
+        mu4   = interface->mu4rf(e_lid*n_gauss_cells+gp);
+        mu5   = interface->mu5rf(e_lid*n_gauss_cells+gp);
+      }
     }
 
 #ifdef HAVE_MPI
