@@ -32,7 +32,8 @@ void shinozuka_layeredcomp_2d::construct_map(mesh & Mesh){
           local_gauss_points.push_back(Mesh.n_gauss_cells*e_gid+j);
       }
   }
-  CellsMap = new Epetra_Map(-1,Mesh.n_gauss_cells*Mesh.n_local_cells,&local_gauss_points[0],0,*Mesh.Comm);
+  CellsMap   = new Epetra_Map(-1,Mesh.n_gauss_cells*Mesh.n_local_cells,&local_gauss_points[0],0,*Mesh.Comm);
+  GaussianRF = new Epetra_Vector(CellsMap);
 
 }
 void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector & v,
@@ -88,7 +89,6 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
                                 //v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                                 //CellsMap->LID(e_gid*n_gauss_cells+gp)
                                 //std::sqrt(2.0*si*sj)*w*std::cos(arg)
-                                int error = GaussianRF->ReplaceMyValue(0,0,0);
                             }
                         }
                     }
