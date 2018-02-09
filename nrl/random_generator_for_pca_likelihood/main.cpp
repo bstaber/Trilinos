@@ -82,6 +82,8 @@ int main(int argc, char *argv[]){
       Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
       Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
 
+      Epetra_Vector X(*RG->interface->GRF_Generator->CellsMaps);
+
       /*int k = -1;
       for (unsigned int i=0; i<4; ++i){
         for (unsigned int j=0; j<nmc; ++j){
