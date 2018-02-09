@@ -79,7 +79,7 @@ public:
         omega   = hyperParameters;
     }
 
-    void TestParallelShinozuka(int & seed){
+    void TestParallelShinozuka(int seed){
       Epetra_SerialDenseVector w1_shino(Mesh->n_local_cells*Mesh->n_gauss_cells);
       GRF_Generator->l1 = omega(4);
       GRF_Generator->l2 = omega(5);
