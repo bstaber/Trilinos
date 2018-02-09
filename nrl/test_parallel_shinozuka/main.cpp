@@ -61,6 +61,9 @@ int main(int argc, char *argv[]){
         }
     }
 
+    Epetra_SerialDenseVector v(Mesh.n_gauss_points*Mesh.n_local_cells);
+    Generator_Shinozuka->generator_gauss_points(v,Mesh,phase);
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
