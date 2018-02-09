@@ -84,7 +84,7 @@ public:
       GRF_Generator->l1 = omega(4);
       GRF_Generator->l2 = omega(5);
       GRF_Generator->rng.seed(seed);
-      //GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
+      GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
     }
 
     void RandomFieldGenerator(Epetra_IntSerialDenseVector & seeds){
