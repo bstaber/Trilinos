@@ -64,6 +64,12 @@ int main(int argc, char *argv[]){
     Generator_Shinozuka->construct_map(Mesh);
     Generator_Shinozuka->generator_gauss_points(Mesh,phase);
 
+    if (Comm.MyPID()==0){
+      for (unsigned int i=0; i<Generator_Shinozuka->GaussianRF->MyLength(); ++i){
+        std::cout << (*GaussianRF)[i] << "\n";
+      }
+    }
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
