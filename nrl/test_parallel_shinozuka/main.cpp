@@ -10,7 +10,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "shinozukapp_2d.hpp"
+#include "shinozukapp_layeredcomp_2d.hpp"
 
 int main(int argc, char *argv[]){
 
@@ -50,8 +50,9 @@ int main(int argc, char *argv[]){
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
 
     mesh Mesh(Comm,mesh_file);
-    
-    Teuchos::RCP<shinozuka_layeredcomp_2d> Generator_Shinozuka = Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
+
+    Teuchos::RCP<shinozuka_layeredcomp_2d> Generator_Shinozuka =
+    Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
 
 #ifdef HAVE_MPI
     MPI_Finalize();
