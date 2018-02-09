@@ -22,6 +22,19 @@ double shinozuka_layeredcomp_2d::s_tau(double & tau){
     return s;
 }
 
+void shinozuka_layeredcomp_2d::construct_map(mesh & Mesh){
+  int e_gid;
+  std::vector<int> local_gauss_points;
+
+  for (unsigned int e_lid=0; e_lid<Mesh.n_local_cells; ++e_lid){
+      e_gid = Mesh.local_cells[e_lid];
+      for (unsigned int j=0; j<Mesh.n_gauss_cells; ++j){
+          local_gauss_points.push_back(Mesh.n_gauss_cells*e_gid+j);
+      }
+  }
+  CellsMap = new Epetra_Map(-1,Mesh.*n_gauss_cells*Mesh.n_local_cells,&local_gauss_points[0],0,*Mesh.Comm);
+
+}
 void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector & v,
                                                       mesh & Mesh,
                                                       std::vector<int> & phase){
