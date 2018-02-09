@@ -422,14 +422,14 @@ void mesh::get_cells_and_ghosts(int & MyPID){
 
 Epetra_SerialDenseVector mesh::get_cartesian_coordinate(unsigned int & e_gid, unsigned int & gp){
 
-  int node, e_gid;
+  int node;
   int n_local_cells = Mesh.n_local_cells;
   int n_gauss_cells = Mesh.n_gauss_cells;
   double xi, eta, zeta;
 
   Epetra_SerialDenseVector vector_x(2);
-  Epetra_SerialDenseVector shape_functions(Mesh.el_type);
-  Epetra_SerialDenseMatrix matrix_X(2,Mesh.el_type);
+  Epetra_SerialDenseVector shape_functions(el_type);
+  Epetra_SerialDenseMatrix matrix_X(2,el_type);
 
   for (unsigned inode=0; inode<el_type; ++inode){
       node = cells_nodes[el_type*e_gid+inode];
@@ -450,7 +450,7 @@ Epetra_SerialDenseVector mesh::get_cartesian_coordinate(unsigned int & e_gid, un
               tetra10::shape_functions(shape_functions, xi, eta, zeta);
               break;
       }
-      vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0)
+      vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
     }
     return vector_x;
 }
