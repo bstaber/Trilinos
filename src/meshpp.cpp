@@ -420,6 +420,41 @@ void mesh::get_cells_and_ghosts(int & MyPID){
     }
 }
 
+Epetra_SerialDenseVector mesh::get_cartesian_coordinate(unsigned int & e_gid, unsigned int & e_lid){
+
+  int node, e_gid;
+  int n_local_cells = Mesh.n_local_cells;
+  int n_gauss_cells = Mesh.n_gauss_cells;
+  double xi, eta, zeta;
+
+  Epetra_SerialDenseVector vector_x(2);
+  Epetra_SerialDenseVector shape_functions(Mesh.el_type);
+  Epetra_SerialDenseMatrix matrix_X(2,Mesh.el_type);
+
+  for (unsigned inode=0; inode<el_type; ++inode){
+      node = cells_nodes[el_type*e_gid+inode];
+      matrix_X(0,inode) = nodes_coord[3*node+0];
+      matrix_X(1,inode) = nodes_coord[3*node+1];
+      matrix_X(2,inode) = nodes_coord[3*node+2];
+  }
+  for (int gp=0; gp<n_gauss_cells; ++gp){
+      xi = xi_cells(gp); eta = eta_cells(gp); zeta = zeta_cells(gp);
+      switch (el_type){
+          case 4:
+              tetra4::shape_functions(shape_functions, xi, eta, zeta);
+              break;
+          case 8:
+              hexa8::shape_functions(shape_functions, xi, eta, zeta);
+              break;
+          case 10:
+              tetra10::shape_functions(shape_functions, xi, eta, zeta);
+              break;
+      }
+      vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0)
+    }
+    return vector_x;
+}
+
 void mesh::store_feinterp_faces(){
 
     int node, eglob;

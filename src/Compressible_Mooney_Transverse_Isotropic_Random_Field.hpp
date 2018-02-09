@@ -220,7 +220,7 @@ public:
 
     void get_material_parameters(unsigned int & e_lid,
                                  unsigned int & gp){
-        int e_gid = Mesh->local_cells[e_lid];
+        unsigned int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
         mu1 = mu1rf(e_lid*n_gauss_cells+gp);
         mu2 = mu2rf(e_lid*n_gauss_cells+gp);
