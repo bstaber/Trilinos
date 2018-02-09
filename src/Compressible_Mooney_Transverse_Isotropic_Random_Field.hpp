@@ -21,7 +21,7 @@ public:
     double topcoord;
     std::vector<int> phase;
 
-    TIMooney_RandomField(Epetra_Comm            & comm, 
+    TIMooney_RandomField(Epetra_Comm            & comm,
                          Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
@@ -46,6 +46,7 @@ public:
 
         int order = Teuchos::getParameter<int>(Parameters.sublist("Shinozuka"), "order");
         GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order));
+        GRF_Generator->construct_map(*Mesh);
     }
 
     ~TIMooney_RandomField(){
