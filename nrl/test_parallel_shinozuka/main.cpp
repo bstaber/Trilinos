@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
         mu4   = interface->mu4rf(e_lid*n_gauss_cells+gp);
         mu5   = interface->mu5rf(e_lid*n_gauss_cells+gp);
         x = interface->Mesh->get_cartesian_coordinate(e_gid,gp);
-        std::cout << std::setprecisio(16) << x(0) << std::setw(20) << x(1) << std::setw(20) << x(2) << std::setw(20) << mu1 << "\n";
+        std::cout << std::setprecision(16) << x(0) << std::setw(20) << x(1) << std::setw(20) << x(2) << std::setw(20) << mu1 << "\n";
       }
     }
 
