@@ -89,6 +89,7 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
                                 //v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                                 //CellsMap->LID(e_gid*n_gauss_cells+gp)
                                 //std::sqrt(2.0*si*sj)*w*std::cos(arg)
+                                GaussianRF->ReplaceMyValue(CellsMap->LID(e_gid*n_gauss_cells+gp),0,std::sqrt(2.0*si*sj)*w*std::cos(arg));
                             }
                         }
                     }
