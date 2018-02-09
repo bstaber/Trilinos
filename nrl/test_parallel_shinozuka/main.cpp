@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
     }
 
     Teuchos::RCP<TIMooney_RandomField> Interface =
-    Teuchos::rcp(new TIMooney_RandomField(order,L1,L2));
+    Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList);
 
 #ifdef HAVE_MPI
     MPI_Finalize();
