@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
     Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
 
     std::vector<int> phase;
-    for (unsigned int e=0; e<Mesh->n_cells/32; ++e){
+    for (unsigned int e=0; e<Mesh.n_cells/32; ++e){
         for (unsigned int j=0; j<32; ++j){
             phase.push_back(j);
         }
