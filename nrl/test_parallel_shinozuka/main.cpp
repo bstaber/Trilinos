@@ -86,6 +86,7 @@ int main(int argc, char *argv[]){
     unsigned int ne            = interface->Mesh->n_local_cells;
     int          n_gauss_cells = interface->Mesh->n_gauss_cells;
     double       mu1, mu2, mu3, mu4, mu5;
+    Epetra_SerialDenseVector x(3);
 
     for (unsigned int e_lid=0; e_lid<ne; ++e_lid){
       e_gid = interface->Mesh->local_cells[e_lid];
@@ -95,6 +96,8 @@ int main(int argc, char *argv[]){
         mu3   = interface->mu3rf(e_lid*n_gauss_cells+gp);
         mu4   = interface->mu4rf(e_lid*n_gauss_cells+gp);
         mu5   = interface->mu5rf(e_lid*n_gauss_cells+gp);
+        x = interface->Mesh->get_cartesian_coordinate(e_gid,gp);
+        std::cout << x(0) << std::setw(20) << x(1) << std::setw(20) << x(2) << std::setw(20) << mu1 << "\n";
       }
     }
 
