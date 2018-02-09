@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
 
     for (unsigned int i=0; i<5; ++i){ seeds(i) = i;};
     interface->setParameters(mean_parameters,exponents,omega);
-    interface->set_plyagl(plyagl(0));
+    interface->set_plyagl(plyagls(0));
     interface->RandomFieldGenerator(seeds);
 
 #ifdef HAVE_MPI
