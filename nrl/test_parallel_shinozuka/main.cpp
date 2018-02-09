@@ -10,7 +10,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "shinozukapp_layeredcomp_2d.hpp"
+#include "Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
 
 int main(int argc, char *argv[]){
 
@@ -44,25 +44,8 @@ int main(int argc, char *argv[]){
         }
     }
 
-    std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Shinozuka"),"mesh_file");
-    int order = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
-    double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
-    double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
-
-    mesh Mesh(Comm,mesh_file,1.0);
-
-    Teuchos::RCP<shinozuka_layeredcomp_2d> Generator_Shinozuka =
-    Teuchos::rcp(new shinozuka_layeredcomp_2d(order,L1,L2));
-
-    std::vector<int> phase;
-    for (unsigned int e=0; e<Mesh.n_cells/32; ++e){
-        for (unsigned int j=0; j<32; ++j){
-            phase.push_back(j);
-        }
-    }
-
-    Epetra_SerialDenseVector v(Mesh.n_gauss_cells*Mesh.n_local_cells);
-    Generator_Shinozuka->generator_gauss_points(v,Mesh,phase);
+    Teuchos::RCP<TIMooney_RandomField> Interface =
+    Teuchos::rcp(new TIMooney_RandomField(order,L1,L2));
 
 #ifdef HAVE_MPI
     MPI_Finalize();
