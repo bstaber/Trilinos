@@ -31,7 +31,7 @@ public:
     double s_tau(double & tau);
 
     void construct_map(mesh & Mesh);
-    void generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh, std::vector<int> & phase);
+    void generator_gauss_points(mesh & Mesh, std::vector<int> & phase);
     void generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, std::vector<int> & phase, double & xi, double & eta, double & zeta);
 
     void icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta);
