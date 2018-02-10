@@ -34,7 +34,7 @@ public:
         newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
-        MapExpPoints = new Epetra_Map(-1,nrldata->local_cells.size(),&local_cells[0],0,Comm);
+        MapExpPoints = new Epetra_Map(-1,nrldata->local_cells.size(),(&nrl->local_cells)[0],0,Comm);
     }
 
     RandomGeneratorForPCA_andLikelihood(){
@@ -63,6 +63,7 @@ public:
         interface->set_plyagl(plyagl);
         interface->RandomFieldGenerator(seeds);
 
+        Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
@@ -99,7 +100,6 @@ public:
                 }
 
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
-                Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
                 double LIndicatorZ = 0.0;
 
                 compute_green_lagrange(*newton->x,eij);
