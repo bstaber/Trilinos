@@ -129,7 +129,7 @@ public:
         return GIndicatorZ;
     }
 
-    int printIndicatorY(std::strinf filename, Epetra_Vector & X){
+    int printIndicatorY(std::string filename, Epetra_Vector & X){
       int NumTargetElements = 0;
       if (MyPID==0){
           NumTargetElements = nrldata->npoints;
