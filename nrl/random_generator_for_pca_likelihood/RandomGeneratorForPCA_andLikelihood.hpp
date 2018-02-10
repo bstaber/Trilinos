@@ -131,7 +131,7 @@ public:
 
     int printIndicatorY(std::string filename, Epetra_Vector & X){
       int NumTargetElements = 0;
-      if (comm->MyPID==0){
+      if (comm->MyPID()==0){
           NumTargetElements = nrldata->npoints;
       }
       Epetra_Map         MapOnRoot(-1,NumTargetElements,0,*comm);
