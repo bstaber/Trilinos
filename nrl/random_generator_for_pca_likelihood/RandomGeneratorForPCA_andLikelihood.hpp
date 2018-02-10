@@ -76,7 +76,6 @@ public:
             int error = newton->Solve_with_Aztec(printNewtonIterations);
 
             if (!error){
-                Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
 
                 if (printDisplacements){
                   std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(plyagl) + "_k=" + std::to_string(i) + ".mtx";
@@ -99,6 +98,7 @@ public:
                   }
                 }
 
+                Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
                 compute_green_lagrange(*newton->x,eij);
                 double LIndicator = 0.0;
                 for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
