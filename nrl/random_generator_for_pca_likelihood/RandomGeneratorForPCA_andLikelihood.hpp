@@ -33,6 +33,8 @@ public:
         interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
         newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
+
+        MapExpPoints = new Epetra_Map(-1,nrldata->local_cells.size(),&local_cells[0],0,Comm);
     }
 
     RandomGeneratorForPCA_andLikelihood(){
@@ -56,8 +58,6 @@ public:
         omega(3) = coeff_of_variation(3);
         omega(4) = correlation_lengths(0);
         omega(5) = correlation_lengths(1);
-
-        Epetra_SerialDenseVector GIndicator(nrldata->boundaryconditions.Length());
 
         interface->setParameters(mean_parameters,exponents,omega);
         interface->set_plyagl(plyagl);
@@ -99,23 +99,26 @@ public:
                 }
 
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
+                Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
+                double LIndicatorZ = 0.0;
+
                 compute_green_lagrange(*newton->x,eij);
-                double LIndicator = 0.0;
                 for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
-                    LIndicator += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
+                    LIndicatorZ += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
-                comm->SumAll(&LIndicator,&GIndicator(i),1);
+                comm->SumAll(&LIndicatorZ,&GIndicatorZ(i),1);
+
             }
             else{
                 if (comm->MyPID()==0){
                     std::cout << "Newton failed at loading " << i << ".\n";
                     std::cout << "GIndicator(" << i << ") set to 0.0.\n";
                 }
-                GIndicator(i) = 0.0;
+                GIndicatorZ(i) = -1.0;
             }
 
         }
-        return GIndicator;
+        return GIndicatorZ;
     }
 
     void compute_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseMatrix & eij){
