@@ -99,8 +99,8 @@ int main(int argc, char *argv[]){
                         coeff_of_variation,
                         plyagls(i),
                         false,
-                        false,
-                        false);
+                        true,
+                        true);
           for (unsigned int l=0; l<QoI.Length(); ++l){
             Z(l,j+i*nmc) = std::log(QoI(l));
           }
