@@ -63,7 +63,9 @@ public:
         interface->set_plyagl(plyagl);
         interface->RandomFieldGenerator(seeds);
 
+        Epetra_Vector            GIndicatorY(*MapExpPoints);
         Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
+
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
