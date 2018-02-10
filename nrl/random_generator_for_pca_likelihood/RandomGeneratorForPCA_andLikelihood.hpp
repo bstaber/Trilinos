@@ -66,6 +66,7 @@ public:
         Epetra_Vector            GIndicatorY(*MapExpPoints);
         Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
 
+        GIndicatorY.PutScalar(0.0);
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
@@ -105,6 +106,11 @@ public:
                 double LIndicatorZ = 0.0;
 
                 compute_green_lagrange(*newton->x,eij);
+
+                for (unsigned int i=0; i<GIndicatorY.MyLength(); ++i){
+                    GIndicatorY[MapExpPoints->LID(local_cells[i])] += eij(i,0)*eij(i,0)+eij(i,1)*eij(i,1)+2.0*eij(i,2)*eij(i,2);
+                }
+
                 for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
                     LIndicatorZ += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
@@ -116,7 +122,6 @@ public:
                     std::cout << "Newton failed at loading " << i << ".\n";
                     std::cout << "GIndicator(" << i << ") set to 0.0.\n";
                 }
-                GIndicatorZ(i) = -1.0;
             }
 
         }
