@@ -125,7 +125,7 @@ public:
             }
 
         }
-        int error = printIndicatorY("IndicatorY.mtx",GIndicatorY);
+        int error = printIndicatorY("IndicatorY_nmc=" + std::to_string(nmc) + ".mtx",GIndicatorY);
         return GIndicatorZ;
     }
 
