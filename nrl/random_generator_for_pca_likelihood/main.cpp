@@ -98,9 +98,9 @@ int main(int argc, char *argv[]){
                         correlation_lengths,
                         coeff_of_variation,
                         plyagls(i),
-                        true,
                         false,
-                        false);
+                        true,
+                        true);
           for (unsigned int l=0; l<QoI.Length(); ++l){
             Z(l,j+i*nmc) = std::log(QoI(l));
           }
