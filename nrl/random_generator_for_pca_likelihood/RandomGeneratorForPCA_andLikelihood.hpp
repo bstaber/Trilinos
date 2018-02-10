@@ -125,7 +125,22 @@ public:
             }
 
         }
+        int error = printIndicatorY("IndicatorY.mtx",GIndicatorY);
         return GIndicatorZ;
+    }
+
+    int printIndicatorY(std::strinf filename, Epetra_Vector & X){
+      int NumTargetElements = 0;
+      if (MyPID==0){
+          NumTargetElements = nrldata->npoints;
+      }
+      Epetra_Map         MapOnRoot(-1,NumTargetElements,0,*comm);
+      Epetra_Export      ExportOnRoot(*MapExpPoints,MapOnRoot);
+      Epetra_MultiVector lhs_root(MapOnRoot,true);
+      lhs_root.Export(X,ExportOnRoot,Insert);
+
+      int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+      return error;
     }
 
     void compute_green_lagrange(Epetra_Vector & x, Epetra_SerialDenseMatrix & eij){
