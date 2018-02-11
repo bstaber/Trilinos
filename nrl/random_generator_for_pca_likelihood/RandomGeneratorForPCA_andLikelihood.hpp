@@ -105,8 +105,8 @@ public:
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
                 compute_green_lagrange(*newton->x,eij);
 
-                for (unsigned int i=0; i<GIndicatorY.MyLength(); ++i){
-                    GIndicatorY[i] += eij(i,0)*eij(i,0)+eij(i,1)*eij(i,1)+2.0*eij(i,2)*eij(i,2);
+                for (unsigned int k=0; k<GIndicatorY.MyLength(); ++k){
+                    GIndicatorY[k] += eij(k,0)*eij(k,0)+eij(k,1)*eij(k,1)+2.0*eij(k,2)*eij(k,2);
                 }
 
                 double LIndicatorZ = 0.0;
