@@ -121,7 +121,6 @@ public:
             }
 
         }
-        
         std::cout << GIndicatorY;
         int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/IndicatorY_nmc=" + std::to_string(nmc) + ".mtx",GIndicatorY);
         return GIndicatorZ;
