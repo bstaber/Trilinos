@@ -105,13 +105,10 @@ public:
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
                 compute_green_lagrange(*newton->x,eij);
 
-                for (unsigned int k=0; k<GIndicatorY.MyLength(); ++k){
-                    GIndicatorY[k] += eij(k,0)*eij(k,0)+eij(k,1)*eij(k,1)+2.0*eij(k,2)*eij(k,2);
-                }
-
                 double LIndicatorZ = 0.0;
                 for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
-                    LIndicatorZ += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
+                    GIndicatorY[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
+                    LIndicatorZ    += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
                 comm->SumAll(&LIndicatorZ,&GIndicatorZ(i),1);
 
@@ -124,6 +121,7 @@ public:
             }
 
         }
+        std::cout << GIndicatorY;
         int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/IndicatorY_nmc=" + std::to_string(nmc) + ".mtx",GIndicatorY);
         return GIndicatorZ;
     }
