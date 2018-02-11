@@ -66,8 +66,6 @@ public:
         Epetra_Vector            GIndicatorY(*MapExpPoints);
         Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
 
-        std::cout << GIndicatorY.MyLength() << std::setw(20) << nrldata->local_cells.size() << "\n";
-
         GIndicatorY.PutScalar(0.0);
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
@@ -105,15 +103,13 @@ public:
                 }
 
                 Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
-                double LIndicatorZ = 0.0;
-
                 compute_green_lagrange(*newton->x,eij);
 
                 for (unsigned int i=0; i<GIndicatorY.MyLength(); ++i){
-                    GIndicatorY[MapExpPoints->LID(nrldata->local_cells[i])]
-                    += eij(i,0)*eij(i,0)+eij(i,1)*eij(i,1)+2.0*eij(i,2)*eij(i,2);
+                    GIndicatorY[i] += eij(i,0)*eij(i,0)+eij(i,1)*eij(i,1)+2.0*eij(i,2)*eij(i,2);
                 }
 
+                double LIndicatorZ = 0.0;
                 for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
                     LIndicatorZ += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
