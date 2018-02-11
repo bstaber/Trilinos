@@ -107,8 +107,11 @@ public:
 
                 compute_green_lagrange(*newton->x,eij);
 
+                std::cout << GIndicatorY.MyLength() << "\n";
+
                 for (unsigned int i=0; i<GIndicatorY.MyLength(); ++i){
-                    GIndicatorY[MapExpPoints->LID(nrldata->local_cells[i])] += eij(i,0)*eij(i,0)+eij(i,1)*eij(i,1)+2.0*eij(i,2)*eij(i,2);
+                    GIndicatorY[MapExpPoints->LID(nrldata->local_cells[i])]
+                    += eij(i,0)*eij(i,0)+eij(i,1)*eij(i,1)+2.0*eij(i,2)*eij(i,2);
                 }
 
                 for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
