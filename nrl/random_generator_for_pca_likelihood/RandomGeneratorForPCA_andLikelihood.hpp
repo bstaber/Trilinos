@@ -150,7 +150,6 @@ public:
         Epetra_SerialDenseMatrix matrix_x(2,interface->Mesh->face_type);
         Epetra_SerialDenseMatrix D(interface->Mesh->face_type,2);
         Epetra_SerialDenseMatrix dx_shape_functions(interface->Mesh->face_type,2);
-        Epetra_SerialDenseMatrix DX(interface->Mesh->face_type,2);
         Epetra_SerialDenseMatrix deformation_gradient(2,2);
         Epetra_SerialDenseMatrix JacobianMatrix(2,2);
         Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
