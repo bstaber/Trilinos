@@ -66,7 +66,7 @@ public:
         Epetra_Vector            GIndicatorY(*MapExpPoints);
         Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
 
-        std::cout << GIndicatorY.MyLength() << "\n";
+        std::cout << GIndicatorY.MyLength() << std::setw(20) << nrldata->local_cells.size() << "\n";
 
         GIndicatorY.PutScalar(0.0);
         newton->Initialization();
