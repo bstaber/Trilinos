@@ -73,10 +73,10 @@ int main(int argc, char *argv[]){
       coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
       coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
       //ply angle
-      plyagls(0) = 15.0*2.0*M_PI/360.0;
-      plyagls(1) = 30.0*2.0*M_PI/360.0;
-      plyagls(2) = 60.0*2.0*M_PI/360.0;
-      plyagls(3) = 75.0*2.0*M_PI/360.0;
+      plyagls(0) = 15.0;
+      plyagls(1) = 30.0;
+      plyagls(2) = 60.0;
+      plyagls(3) = 75.0;
 
       int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
       Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
