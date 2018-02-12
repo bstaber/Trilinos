@@ -121,7 +121,6 @@ public:
             }
 
         }
-        std::cout << GIndicatorY;
         int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/IndicatorY_nmc=" + std::to_string(nmc) + ".mtx",GIndicatorY);
         return GIndicatorZ;
     }
@@ -156,7 +155,7 @@ public:
         Epetra_SerialDenseMatrix right_cauchy(2,2);
 
         for (unsigned int e=0; e<nrldata->local_cells.size(); ++e){
-            e_gid = interface->Mesh->local_faces[nrldata->local_cells[e]];
+            e_gid = nrldata->local_cells[e];
             for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
                 node = interface->Mesh->faces_nodes[interface->Mesh->face_type*e_gid+inode];
                 matrix_X(0,inode) = interface->Mesh->nodes_coord[3*node+0];
