@@ -20,6 +20,7 @@ public:
     Epetra_SerialDenseVector boundaryconditions, angles;
 
     std::vector<int>    local_id_faces;
+    std::vector<int>    global_id_faces;
     std::vector<double> local_xi;
     std::vector<double> local_eta;
 
