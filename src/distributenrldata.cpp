@@ -44,7 +44,7 @@ void distributenrldata::retrieve_data(mesh & Mesh, std::string & path){
                 result = pnpoly(nvert,x,y,testx,testy);
             }
             if (result==1){
-                local_cells.push_back(e_gid);
+                local_cells.push_back(e_lid);
                 residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
                 local_xi.push_back(xi);
                 local_eta.push_back(eta);
@@ -114,7 +114,7 @@ double distributenrldata::inverse_isoparametric_mapping(double & testx, double &
         if (error){
             std::cout << "Inverse Isoparametric Mapping: Error with Epetra_SerialDenseSolver.\n";
         }
-        xi += dxi(0);
+        xi  += dxi(0);
         eta += dxi(1);
     }
 
