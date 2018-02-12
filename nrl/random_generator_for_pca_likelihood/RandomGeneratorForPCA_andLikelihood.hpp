@@ -34,7 +34,7 @@ public:
         newton              = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata             = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
-        MapExpPoints        = new Epetra_Map(-1,nrldata->local_id_faces.size(),0,Comm);
+        MapExpPoints        = new Epetra_Map(-1,nrldata->global_id_faces.size(),&nrldata->global_id_faces[0],0,Comm);
     }
 
     RandomGeneratorForPCA_andLikelihood(){
