@@ -27,14 +27,14 @@ public:
     Teuchos::RCP<distributenrldata>    nrldata;
 
     RandomGeneratorForPCA_andLikelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
-        comm = &Comm;
-        _paramList = paramList;
+        comm                = &Comm;
+        _paramList          = paramList;
         std::string pathnrl = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
-        interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
-        newton     = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
-        nrldata    = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
+        interface           = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
+        newton              = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
+        nrldata             = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
-        MapExpPoints = new Epetra_Map(-1,nrldata->local_cells.size(),&nrldata->local_cells[0],0,Comm);
+        MapExpPoints        = new Epetra_Map(-1,nrldata->local_cells.size(),&nrldata->local_cells[0],0,Comm);
     }
 
     RandomGeneratorForPCA_andLikelihood(){
