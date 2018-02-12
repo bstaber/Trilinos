@@ -46,7 +46,7 @@ public:
                                  Epetra_SerialDenseVector    & exponents,
                                  Epetra_SerialDenseVector    & correlation_lengths,
                                  Epetra_SerialDenseVector    & coeff_of_variation,
-                                 double                      & plyagl,
+                                 double                      & plyagl_deg,
                                  bool                          printNewtonIterations,
                                  bool                          printDisplacements,
                                  bool                          printDeformations)
@@ -59,6 +59,7 @@ public:
         omega(4) = correlation_lengths(0);
         omega(5) = correlation_lengths(1);
 
+        double plyagl = plyagl_deg*2.0*M_PI/360.0;
         interface->setParameters(mean_parameters,exponents,omega);
         interface->set_plyagl(plyagl);
         interface->RandomFieldGenerator(seeds);
@@ -82,7 +83,7 @@ public:
             if (!error){
 
                 if (printDisplacements){
-                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(plyagl) + "_k=" + std::to_string(i) + ".mtx";
+                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(plyagl_deg) + "_k=" + std::to_string(i) + ".mtx";
                   int flag = newton->print_newton_solution(path);
                   if (flag){
                     if (comm->MyPID()==0){
@@ -92,7 +93,7 @@ public:
                 }
 
                 if (printDeformations){
-                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/e_nmc" + std::to_string(nmc) + "_angle=" + std::to_string(plyagl) + "_k=" + std::to_string(i) + ".mtx";
+                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/e_nmc" + std::to_string(nmc) + "_angle=" + std::to_string(plyagl_deg) + "_k=" + std::to_string(i) + ".mtx";
                   double xi = 0.0;
                   int flag = interface->compute_green_lagrange(*newton->x,xi,xi,xi,path);
                   if (flag){
@@ -121,8 +122,7 @@ public:
             }
 
         }
-        //std::cout << GIndicatorY;
-        int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/IndicatorY_nmc=" + std::to_string(nmc) + ".mtx",GIndicatorY);
+        int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/RandomVariableY_angle=" + std::to_string(plyagl_deg) + "_nmc=" + std::to_string(nmc) + ".mtx",GIndicatorY);
         return GIndicatorZ;
     }
 
