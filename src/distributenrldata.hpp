@@ -14,12 +14,12 @@
 class distributenrldata
 {
 public:
-    
+
     int npoints,nloads;
     Epetra_SerialDenseMatrix points,exx,eyy,exy,energy;
     Epetra_SerialDenseVector boundaryconditions, angles;
-    
-    std::vector<int> local_cells;
+
+    std::vector<int>    local_id_faces;
     std::vector<double> local_xi;
     std::vector<double> local_eta;
 
@@ -27,6 +27,6 @@ public:
     ~distributenrldata();
     void retrieve_data(mesh & Mesh, std::string & path);
     double inverse_isoparametric_mapping(double & testx, double & testy, Epetra_SerialDenseVector & x, Epetra_SerialDenseVector & y, double & xi, double & eta);
-    
+
 };
 #endif

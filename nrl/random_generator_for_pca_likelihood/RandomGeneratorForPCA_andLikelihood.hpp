@@ -34,7 +34,7 @@ public:
         newton              = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata             = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
-        MapExpPoints        = new Epetra_Map(-1,nrldata->local_cells.size(),0,Comm);
+        MapExpPoints        = new Epetra_Map(-1,nrldata->local_id_faces.size(),0,Comm);
     }
 
     RandomGeneratorForPCA_andLikelihood(){
@@ -102,11 +102,11 @@ public:
                   }
                 }
 
-                Epetra_SerialDenseMatrix eij(nrldata->local_cells.size(),3);
+                Epetra_SerialDenseMatrix eij(nrldata->local_id_faces.size(),3);
                 compute_green_lagrange(*newton->x,eij);
 
                 double LIndicatorZ = 0.0;
-                for (unsigned int j=0; j<nrldata->local_cells.size(); ++j){
+                for (unsigned int j=0; j<nrldata->local_id_faces.size(); ++j){
                     GIndicatorY[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                     LIndicatorZ    += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
@@ -155,8 +155,8 @@ public:
         Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
         Epetra_SerialDenseMatrix right_cauchy(2,2);
 
-        for (unsigned e=0; e<nrldata->local_cells.size(); ++e){
-            e_gid = interface->Mesh->local_faces[nrldata->local_cells[e]];
+        for (unsigned e=0; e<nrldata->local_id_faces.size(); ++e){
+            e_gid = interface->Mesh->local_faces[nrldata->local_id_faces[e]];
             for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
                 node = interface->Mesh->faces_nodes[interface->Mesh->face_type*e_gid+inode];
                 matrix_X(0,inode) = interface->Mesh->nodes_coord[3*node+0];

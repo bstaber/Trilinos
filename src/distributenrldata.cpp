@@ -44,7 +44,7 @@ void distributenrldata::retrieve_data(mesh & Mesh, std::string & path){
                 result = pnpoly(nvert,x,y,testx,testy);
             }
             if (result==1){
-                local_cells.push_back(e_lid);
+                local_id_faces.push_back(e_lid);
                 residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
                 local_xi.push_back(xi);
                 local_eta.push_back(eta);
