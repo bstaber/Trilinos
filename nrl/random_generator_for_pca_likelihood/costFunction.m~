@@ -55,5 +55,6 @@ for i = 1:4
         etaExp{i}(l,:) = ( (Yexp - repmat(meanY,1,2))'  *L(:,l) )/sqrt(P(l));
     end
     
-    % compute the densities of eta at etaExp
+    [f(
+
 end
