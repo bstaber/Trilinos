@@ -66,6 +66,7 @@ public:
 
     void set_plyagl(double & Plyagl){
         plyagl = Plyagl;
+        GRF_Generator->rotation = plyagl;
     }
 
     void setParameters(Epetra_SerialDenseVector & parameters,
