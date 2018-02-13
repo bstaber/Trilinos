@@ -46,7 +46,6 @@ int main(int argc, char *argv[]){
         std::cout << paramList->sublist("TIMooney");
         std::cout << paramList->sublist("Shinozuka");
         std::cout << "****************\n";
-        //paramList->print(std::cout,2,true,true);
     }
 
       Teuchos::RCP<RandomGeneratorForPCA_andLikelihood> RG =
