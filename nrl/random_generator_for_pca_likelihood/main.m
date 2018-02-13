@@ -2,5 +2,4 @@ clc
 clearvars
 close all
 
-s = unix('git pull origin master');
-s = unix('make -f Makefile.linux build');
+s = unix('mpirun -np 24 ./trilinos_mpi --xml-in-file="nrl.aztec.ilut.xml');
