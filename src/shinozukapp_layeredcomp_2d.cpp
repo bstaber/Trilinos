@@ -38,10 +38,22 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
     Epetra_SerialDenseVector shape_functions(Mesh.el_type);
     Epetra_SerialDenseMatrix matrix_X(3,Mesh.el_type);
 
-    double c = std::cos(rotation);
-    double s = std::sin(rotation);
+    double crotation = std::cos(rotation);
+    double srotation = std::sin(rotation);
+    double c;
+    double s;
 
     for (int il=0; il<32; ++il){
+
+        if (il % 2){
+            c = crotation;
+            s = srotation;
+        }
+        else{
+            c =  crotation;
+            s = -srotation;
+        }
+
         for (int i=1; i<=order; ++i){
             ti = tau_beta<int>(i);
             si = s_tau(ti);
