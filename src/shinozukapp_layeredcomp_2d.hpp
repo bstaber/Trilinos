@@ -16,6 +16,7 @@ public:
     int    order;
     double l1;
     double l2;
+    double rotation = 0.0;
     boost::random::mt19937                     rng;
     boost::random::uniform_real_distribution<> phi_;
     boost::random::uniform_real_distribution<> psi_;

@@ -38,6 +38,9 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
     Epetra_SerialDenseVector shape_functions(Mesh.el_type);
     Epetra_SerialDenseMatrix matrix_X(3,Mesh.el_type);
 
+    double c = std::cos(rotation);
+    double s = std::sin(rotation);
+
     for (int il=0; il<32; ++il){
         for (int i=1; i<=order; ++i){
             ti = tau_beta<int>(i);
@@ -72,7 +75,7 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
                                         break;
                                 }
                                 vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
-                                arg = 2.0*M_PI*phi + (M_PI/l1)*ti*vector_x(0) + (M_PI/l2)*tj*vector_x(1);
+                                arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(vector_x(0)*c+vector_x(1)*s) + (M_PI/l2)*tj*(-vector_x(0)*s+vector_x(1)*c);
                                 v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                             }
                         }
