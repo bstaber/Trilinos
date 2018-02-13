@@ -44,6 +44,7 @@ int main(int argc, char *argv[]){
         std::cout << "****************\n";
         std::cout << "Hyperparameters:\n";
         std::cout << paramList->sublist("TIMooney");
+        std::cout << paramList->sublist("Shinozuka");
         std::cout << "****************\n";
         //paramList->print(std::cout,2,true,true);
     }
