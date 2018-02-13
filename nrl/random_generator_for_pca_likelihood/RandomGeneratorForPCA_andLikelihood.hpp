@@ -40,7 +40,7 @@ public:
     RandomGeneratorForPCA_andLikelihood(){
     }
 
-    Epetra_SerialDenseVector rnd(unsigned int                & nmc,
+    int rnd(unsigned int                & nmc,
                                  Epetra_IntSerialDenseVector & seeds,
                                  Epetra_SerialDenseVector    & mean_parameters,
                                  Epetra_SerialDenseVector    & exponents,
@@ -64,10 +64,9 @@ public:
         interface->set_plyagl(plyagl);
         interface->RandomFieldGenerator(seeds);
 
-        Epetra_Vector            GIndicatorY(*MapExpPoints);
-        Epetra_SerialDenseVector GIndicatorZ(nrldata->boundaryconditions.Length());
+        Epetra_Vector RandomVariableX(*MapExpPoints);
+        RandomVariableX.PutScalar(0.0);
 
-        GIndicatorY.PutScalar(0.0);
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
@@ -106,10 +105,8 @@ public:
                 Epetra_SerialDenseMatrix eij(nrldata->local_id_faces.size(),3);
                 compute_green_lagrange(*newton->x,eij);
 
-                double LIndicatorZ = 0.0;
                 for (unsigned int j=0; j<nrldata->local_id_faces.size(); ++j){
-                    GIndicatorY[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
-                    LIndicatorZ    += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
+                    RandomVariableX[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
                 comm->SumAll(&LIndicatorZ,&GIndicatorZ(i),1);
 
@@ -122,8 +119,8 @@ public:
             }
 
         }
-        int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx",GIndicatorY);
-        return GIndicatorZ;
+        int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx",RandomVariableX);
+        return error;
     }
 
     int printIndicatorY(std::string filename, Epetra_Vector & X){
