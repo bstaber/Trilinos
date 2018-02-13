@@ -56,7 +56,3 @@ for i = 1:4
     end
 
 end
-
-f = 0;
-end
-%
