@@ -1,6 +1,6 @@
-function writeXMLParameterList(mu,beta,lc,delta)
+function writeXMLParameterList(filename,mu,beta,lc,delta)
 
-fp = fopen('text.xml','w');
+fp = fopen(filename,'w');
 
 fprintf(fp, '<ParameterList>\n\n');
 
