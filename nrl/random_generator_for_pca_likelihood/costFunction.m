@@ -1,4 +1,4 @@
-function f = main(mu,beta,lc,delta)
+function f = costFunction(mu,beta,lc,delta)
 
 if (length(mu)~=5 || length(beta)~=2 || length(lc)~=2 || length(delta)~=4)
    fprintf('Check inputs.\n'); 
