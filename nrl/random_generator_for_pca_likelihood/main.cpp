@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
     if (Comm.MyPID()==0){
-        paramList->print(std::cout,2,true,true);
+        paramList->sublist("TIMooney")->print(std::cout,2,true,true);
     }
 
       Teuchos::RCP<RandomGeneratorForPCA_andLikelihood> RG =
