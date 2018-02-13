@@ -2,4 +2,5 @@ clc
 clearvars
 close all
 
-unix('git pull origin master');
+s = unix('git pull origin master');
+s = unix('make -f Makefile.linux build');

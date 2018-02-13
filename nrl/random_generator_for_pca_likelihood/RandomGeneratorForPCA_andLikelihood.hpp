@@ -108,8 +108,6 @@ public:
                 for (unsigned int j=0; j<nrldata->local_id_faces.size(); ++j){
                     RandomVariableX[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
-                comm->SumAll(&LIndicatorZ,&GIndicatorZ(i),1);
-
             }
             else{
                 if (comm->MyPID()==0){
