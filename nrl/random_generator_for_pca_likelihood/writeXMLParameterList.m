@@ -1,4 +1,4 @@
-function writeXMLParameterList(filename,mu,beta,lc,delta)
+function writeXMLParameterList(filename,mu,beta,lc,delta,nmc)
 
 fp = fopen(filename,'w');
 
@@ -57,7 +57,7 @@ fprintf(fp, '<ParameterList>\n\n');
     fprintf(fp, '\t</ParameterList>\n\n');
 
     fprintf(fp, '\t<ParameterList name="Shinozuka">\n');
-        fprintf(fp, '\t\t<Parameter name="nmc"    type="int"    value="20"/>\n');
+        fprintf(fp, '\t\t<Parameter name="nmc"    type="int"    value="%d"/>\n',nmc);
         fprintf(fp, '\t\t<Parameter name="order"  type="int"    value="10"/>\n');
         fprintf(fp, '\t\t<Parameter name="lx"     type="double" value="%f"/>\n',lc(1));
         fprintf(fp, '\t\t<Parameter name="ly"     type="double" value="%f"/>\n',lc(2));
