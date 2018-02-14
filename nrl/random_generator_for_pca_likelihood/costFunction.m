@@ -52,7 +52,10 @@ for i = 1:4
     etaExp{i} = zeros(m(i),2);
     for l = 1:m(i)         
         eta{i}(l,:)    = ( (Y    - repmat(meanY,1,nmc))'*L(:,l) )/sqrt(P(l));
+        [~,supp]       = ksdensity(eta{i}(l,:)); 
         etaExp{i}(l,:) = ( (Yexp - repmat(meanY,1,2))'  *L(:,l) )/sqrt(P(l));
+        pts            = find(etaExp{i}(l,:)>=min(supp) & etaExp{i}(l,:)<=max(supp));
+        [pdf,supp]     = ksdensity(eta{i},etaExp{i}(l,:));
     end
     
     % compute the densities of eta at etaExp
