@@ -40,16 +40,16 @@ public:
     RandomGeneratorForPCA_andLikelihood(){
     }
 
-    int rnd(unsigned int                & nmc,
-                                 Epetra_IntSerialDenseVector & seeds,
-                                 Epetra_SerialDenseVector    & mean_parameters,
-                                 Epetra_SerialDenseVector    & exponents,
-                                 Epetra_SerialDenseVector    & correlation_lengths,
-                                 Epetra_SerialDenseVector    & coeff_of_variation,
-                                 double                      & plyagl_deg,
-                                 bool                          printNewtonIterations,
-                                 bool                          printDisplacements,
-                                 bool                          printDeformations)
+    int rnd(unsigned int                & nmc                  ,
+            Epetra_IntSerialDenseVector & seeds                ,
+            Epetra_SerialDenseVector    & mean_parameters      ,
+            Epetra_SerialDenseVector    & exponents            ,
+            Epetra_SerialDenseVector    & correlation_lengths  ,
+            Epetra_SerialDenseVector    & coeff_of_variation   ,
+            double                      & plyagl_deg           ,
+            bool                          printNewtonIterations,
+            bool                          printDisplacements   ,
+            bool                          printDeformations    )
     {
         Epetra_SerialDenseVector omega(6);
         omega(0) = coeff_of_variation(0);
