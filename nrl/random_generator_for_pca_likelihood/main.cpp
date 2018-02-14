@@ -40,6 +40,7 @@ int main(int argc, char *argv[]){
     if(xmlInFileName.length()){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
+    
     if (Comm.MyPID()==0){
         std::cout << "****************\n";
         std::cout << "Hyperparameters:\n";
