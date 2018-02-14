@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
     if(xmlInFileName.length()){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
-    
+
     if (Comm.MyPID()==0){
         std::cout << "****************\n";
         std::cout << "Hyperparameters:\n";
@@ -96,16 +96,16 @@ int main(int argc, char *argv[]){
           seeds(2) = 5*(j+i*nmc)+2;
           seeds(3) = 5*(j+i*nmc)+3;
           seeds(4) = 5*(j+i*nmc)+4;
-          int flag = RG->rnd(j,
-                             seeds,
-                             mean_parameters,
-                             exponents,
+          int flag = RG->rnd(j                  ,
+                             seeds              ,
+                             mean_parameters    ,
+                             exponents          ,
                              correlation_lengths,
-                             coeff_of_variation,
-                             plyagls(i),
-                             false,
-                             false,
-                             false);
+                             coeff_of_variation ,
+                             plyagls(i)         ,
+                             false              ,
+                             false              ,
+                             false             );
         }
       }
 
