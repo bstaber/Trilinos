@@ -17,12 +17,12 @@ close all
 theta       = ['15';'30';'60';'75'];
 theta_to_id = [5,6;1,4;2,3;7,8]; 
 
-eta    = cell(4,1);
-etaExp = cell(4,1);
-m      = zeros(4,1);
-nmc    = 100;
+eta         = cell(4,1);
+etaExp      = cell(4,1);
+m           = zeros(4,1);
+nmc         = 100;
 
-loglikelihood = 0;
+output = 0;
 for i = 1:4
     Y    = zeros(2355,nmc);
     Yexp = zeros(2355,2);
@@ -49,7 +49,7 @@ for i = 1:4
     [P,idx] = sort(diag(P),'descend');
     L       = L(:,idx);
     err     = [1; 1 - cumsum(P)/sum(P)];
-    m(i)    = find(err>=1e-6,1,'last');
+    m(i)    = find(err>=1e-1,1,'last');
     
     eta{i}    = zeros(m(i),nmc);
     etaExp{i} = zeros(m(i),2);
@@ -60,7 +60,7 @@ for i = 1:4
         pts               = find(etaExp{i}(l,:)>=min(supp) & etaExp{i}(l,:)<=max(supp));
         if (isempty(pts)==0)
             [pdf,~]       = ksdensity(eta{i}(l,:),etaExp{i}(l,pts));
-            loglikelihood = loglikelihood + sum(log(pdf));
+            output = output + sum(log(pdf));
         end
     end
 end
