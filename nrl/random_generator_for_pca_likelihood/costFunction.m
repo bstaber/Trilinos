@@ -8,7 +8,6 @@ function output = costFunction(modelParameters,optimParameters)
                                          modelParameters.lc, ...
                                          modelParameters.delta, ...
                                          optimParameters.nmc);
-
     s = unix('mpirun -np 24 ./trilinos_mpi --xml-in-file="nrl.msme.xml"');
     if (s~=0)
         fprintf('Trilinos program failed.\n');
@@ -65,5 +64,5 @@ function output = costFunction(modelParameters,optimParameters)
             end
         end
     end
-
+    unix('rm /home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likeliehood/*');
 end
