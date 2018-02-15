@@ -1,6 +1,6 @@
 function output = costFunction(modelParameters,optimParameters)
 
-    if (length(mu)~=5 || length(beta)~=2 || length(lc)~=2 || length(delta)~=4)
+    if (length(modelParameters.mu)~=5 || length(modelParameters.beta)~=2 || length(modelParameters.lc)~=2 || length(modelParameters.delta)~=4)
        fprintf('Check inputs.\n'); 
     end
     writeXMLParameterList('nrl.msme.xml',modelParameters.mu, ...

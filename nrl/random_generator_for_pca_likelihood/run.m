@@ -14,10 +14,11 @@ modelParameters.beta  = [27.9525, 0.306];
 output = cell(length(ln));
 for k = 1:length(ln)    
     modelParameters.lc    = [ln(k), lt(k)];
-    modelParameters.delta = repmat(delta,1,4);
+    modelParameters.delta = repmat(delta(k),1,4);
 
     optimParameters.tol   = 1e-3;
     optimParameters.nmc   = 25;
     
     output{k} = costFunction(modelParameters,optimParameters);
+    fprintf('%f \t ?f \t %f \t %f\n',ln(k),lt(k),delta(k),output{k}.fval);
 end
