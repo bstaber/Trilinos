@@ -27,7 +27,7 @@ function output = costFunction(modelParameters,optimParameters)
         Y    = zeros(2355,optimParameters.nmc);
         Yexp = zeros(2355,2);
         for j = 0:optimParameters.nmc-1
-            path     = '/Users/brian/Documents/GitHub/Trilinos_results/nrl/random_generator_for_pca_likelihood/delta=0.2_Ln=10_Lt=2.5';
+            path     = '/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/';
             filename = strcat(path, '/RandomVariableY_angle=',num2str(theta(i,:)),'_nmc=',num2str(j),'.mtx');
             Y(:,j+1) = log(load(filename));
         end
@@ -35,11 +35,11 @@ function output = costFunction(modelParameters,optimParameters)
 
         for k = 1:2
             id = theta_to_id(i,k);
-            filename  = strcat('/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/exx_id',num2str(id),'.txt');
+            filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/exx_id',num2str(id),'.txt');
             exx       = dlmread(filename);
-            filename  = strcat('/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/eyy_id',num2str(id),'.txt');
+            filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/eyy_id',num2str(id),'.txt');
             eyy       = dlmread(filename);
-            filename  = strcat('/Users/brian/Documents/GitHub/Trilinos_results/nrl/data/exy_id',num2str(id),'.txt');
+            filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/exy_id',num2str(id),'.txt');
             exy       = dlmread(filename);
             Yexp(:,k) = log(sum(exx.^2 + eyy.^2 + 2*exy.^2,1))';
         end
