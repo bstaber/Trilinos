@@ -20,13 +20,13 @@ theta_to_id = [5,6;1,4;2,3;7,8];
 eta    = cell(4,1);
 etaExp = cell(4,1);
 m      = zeros(4,1);
-nmc    = 20;
+nmc    = 100;
 
 loglikelihood = 0;
 for i = 1:4
     Y    = zeros(2355,nmc);
     Yexp = zeros(2355,2);
-    for j = 0:19
+    for j = 0:nmc-1
         path     = '/Users/brian/Documents/GitHub/Trilinos_results/nrl/random_generator_for_pca_likelihood/delta=0.2_L=10percent';
         filename = strcat(path, '/RandomVariableY_angle=',num2str(theta(i,:)),'_nmc=',num2str(j),'.mtx');
         Y(:,j+1) = log(load(filename));
