@@ -1,6 +1,6 @@
 clc
 clearvars
-clear all
+close all
 
 % if (length(mu)~=5 || length(beta)~=2 || length(lc)~=2 || length(delta)~=4)
 %    fprintf('Check inputs.\n'); 
@@ -27,7 +27,7 @@ for i = 1:4
     Y    = zeros(2355,nmc);
     Yexp = zeros(2355,2);
     for j = 0:nmc-1
-        path     = '/Users/brian/Documents/GitHub/Trilinos_results/nrl/random_generator_for_pca_likelihood/delta=0.2_L=10percent';
+        path     = '/Users/brian/Documents/GitHub/Trilinos_results/nrl/random_generator_for_pca_likelihood/delta=0.2_Ln=10_Lt=2.5';
         filename = strcat(path, '/RandomVariableY_angle=',num2str(theta(i,:)),'_nmc=',num2str(j),'.mtx');
         Y(:,j+1) = log(load(filename));
     end
