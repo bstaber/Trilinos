@@ -65,7 +65,7 @@ int main(int argc, char *argv[]){
       mean_parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
       mean_parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
       mean_parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
-      mean_parameters.Scale(1.0e3);
+      //mean_parameters.Scale(1.0e3);
       //deterministic exponents beta_4 and beta_5
       exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
       exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");

@@ -68,7 +68,6 @@ fprintf(fp, '<ParameterList>\n\n');
     fprintf(fp, '\t</ParameterList>\n\n');
 
 fprintf(fp, '\t</ParameterList>\n');
-
 fclose(fp);
 
 end
