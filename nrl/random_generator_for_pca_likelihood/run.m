@@ -21,7 +21,7 @@ for k = 1:length(ln)
     optimParameters.tol   = 1e-3;
     optimParameters.nmc   = 25;
 
-    %output{k} = costFunction(modelParameters,optimParameters);
-    fprintf(fd,'%d \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k));
+    output{k} = costFunction(modelParameters,optimParameters);
+    fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
 end
 fclose(fd);
