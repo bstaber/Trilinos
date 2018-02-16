@@ -1,7 +1,7 @@
 function output = costFunction(modelParameters,optimParameters)
 
     if (length(modelParameters.mu)~=5 || length(modelParameters.beta)~=2 || length(modelParameters.lc)~=2 || length(modelParameters.delta)~=4)
-       fprintf('Check inputs.\n'); 
+       fprintf('Check inputs.\n');
     end
     writeXMLParameterList('nrl.msme.xml',modelParameters.mu, ...
                                          modelParameters.beta, ...
@@ -15,13 +15,13 @@ function output = costFunction(modelParameters,optimParameters)
     end
 
     theta              = ['15';'30';'60';'75'];
-    theta_to_id        = [5,6;1,4;2,3;7,8]; 
+    theta_to_id        = [5,6;1,4;2,3;7,8];
 
     output.eta         = cell(4,1);
     output.etaExp      = cell(4,1);
     output.m           = zeros(4,1);
-    output.fval = 0;
-    
+    output.fval        = 0;
+
     for i = 1:4
         Y    = zeros(2355,optimParameters.nmc);
         Yexp = zeros(2355,2);
@@ -48,13 +48,13 @@ function output = costFunction(modelParameters,optimParameters)
         [P,idx]          = sort(diag(P),'descend');
         L                = L(:,idx);
         err              = [1; 1 - cumsum(P)/sum(P)];
-        
+
         output.m(i)      = find(err>=optimParameters.tol,1,'last');
         output.eta{i}    = zeros(output.m(i),optimParameters.nmc);
         output.etaExp{i} = zeros(output.m(i),2);
-        
-        for l = 1:output.m(i)         
-            output.eta{i}(l,:)    = ( (Y    - repmat(meanY,1,optimParameters.nmc))'*L(:,l) )/sqrt(P(l)); 
+
+        for l = 1:output.m(i)
+            output.eta{i}(l,:)    = ( (Y    - repmat(meanY,1,optimParameters.nmc))'*L(:,l) )/sqrt(P(l));
             output.etaExp{i}(l,:) = ( (Yexp - repmat(meanY,1,2)                  )'*L(:,l) )/sqrt(P(l));
             [~,supp]              = ksdensity(output.eta{i}(l,:));
             pts                   = find(output.etaExp{i}(l,:)>=min(supp) & output.etaExp{i}(l,:)<=max(supp));
