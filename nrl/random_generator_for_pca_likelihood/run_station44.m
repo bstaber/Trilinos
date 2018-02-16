@@ -16,7 +16,7 @@ optimParameters.np      = 28;
 output = cell(length(ln));
 
 fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt'),'w');
-for k = 
+for k = 33:64
     modelParameters.lc    = [ln(k), lt(k)];
     modelParameters.delta = repmat(delta(k),1,4);
 
