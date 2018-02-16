@@ -3,30 +3,34 @@ function output = costFunction(modelParameters,optimParameters)
     if (length(modelParameters.mu)~=5 || length(modelParameters.beta)~=2 || length(modelParameters.lc)~=2 || length(modelParameters.delta)~=4)
        fprintf('Check inputs.\n');
     end
-    writeXMLParameterList('nrl.msme.xml',modelParameters.mu, ...
+    xmlfilename = strcat('nrl.msme.station',num2str(optimParameters.station),'.xml');
+    writeXMLParameterList(xmlfilename,   modelParameters.mu, ...
                                          modelParameters.beta, ...
                                          modelParameters.lc, ...
                                          modelParameters.delta, ...
-                                         optimParameters.nmc);
-    s = unix('mpirun -np 24 ./trilinos_mpi --xml-in-file="nrl.msme.xml"');
+                                         optimParameters.nmc, ...
+                                         optimParameters.station);
+    executable = strcat('mpirun -np', {' '}, num2str(optimParameters.np), {' '}, './trilinos_mpi_', ...
+                         num2str(optimParameters.station), {' '}, '--xml-in-file="',xmlfilename,'"');               
+    s = unix(executable);
     if (s~=0)
         fprintf('Trilinos program failed.\n');
         return;
     end
 
-    theta              = ['15';'30';'60';'75'];
-    theta_to_id        = [5,6;1,4;2,3;7,8];
+    theta         = ['15';'30';'60';'75'];
+    theta_to_id   = [5,6;1,4;2,3;7,8];
 
-    output.eta         = cell(4,1);
-    output.etaExp      = cell(4,1);
-    output.m           = zeros(4,1);
-    output.fval        = 0;
+    output.eta    = cell(4,1);
+    output.etaExp = cell(4,1);
+    output.m      = zeros(4,1);
+    output.fval   = 0;
 
     for i = 1:4
         Y    = zeros(2355,optimParameters.nmc);
         Yexp = zeros(2355,2);
         for j = 0:optimParameters.nmc-1
-            path     = '/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/';
+            path     = strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station));
             filename = strcat(path, '/RandomVariableY_angle=',num2str(theta(i,:)),'_nmc=',num2str(j),'.mtx');
             Y(:,j+1) = log(load(filename));
         end
@@ -64,5 +68,5 @@ function output = costFunction(modelParameters,optimParameters)
             end
         end
     end
-    unix('rm /home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likeliehood/*');
+    unix(strcat('rm /home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likeliehood/station',num2str(optimParameters.station),'/*'));
 end

@@ -14,11 +14,12 @@ class RandomGeneratorForPCA_andLikelihood
 {
 private:
 
-    Teuchos::ParameterList _paramList;
+    Teuchos::ParameterList       _paramList;
     Teuchos::RCP<Newton_Raphson> newton;
+    std::string                  fullOutputPath;
 
-    Epetra_Comm * comm;
-    Epetra_Map  * MapExpPoints;
+    Epetra_Comm              * comm;
+    Epetra_Map               * MapExpPoints;
     Epetra_SerialDenseVector lb, ub;
 
 public:
@@ -27,14 +28,17 @@ public:
     Teuchos::RCP<distributenrldata>    nrldata;
 
     RandomGeneratorForPCA_andLikelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
-        comm                = &Comm;
-        _paramList          = paramList;
-        std::string pathnrl = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
-        interface           = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
-        newton              = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
-        nrldata             = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
+        comm                   = &Comm;
+        _paramList             = paramList;
+        std::string pathnrl    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
+        std::string station    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"station");
+        fullOutputPath         = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/" + station + "/";
+        interface              = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
+        newton                 = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
+        nrldata                = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
-        MapExpPoints        = new Epetra_Map(-1,nrldata->global_id_faces.size(),&nrldata->global_id_faces[0],0,Comm);
+        MapExpPoints           = new Epetra_Map(-1,nrldata->global_id_faces.size(),&nrldata->global_id_faces[0],0,Comm);
+
     }
 
     RandomGeneratorForPCA_andLikelihood(){
@@ -82,7 +86,7 @@ public:
             if (!error){
 
                 if (printDisplacements){
-                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_k=" + std::to_string(i) + ".mtx";
+                  std::string path = fullOutputPath + "u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_k=" + std::to_string(i) + ".mtx";
                   int flag = newton->print_newton_solution(path);
                   if (flag){
                     if (comm->MyPID()==0){
@@ -92,7 +96,7 @@ public:
                 }
 
                 if (printDeformations){
-                  std::string path = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/e_nmc" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_k=" + std::to_string(i) + ".mtx";
+                  std::string path = fullOutputPath + "e_nmc" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_k=" + std::to_string(i) + ".mtx";
                   double xi = 0.0;
                   int flag = interface->compute_green_lagrange(*newton->x,xi,xi,xi,path);
                   if (flag){
@@ -117,7 +121,7 @@ public:
             }
 
         }
-        int error = printIndicatorY("/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx",RandomVariableX);
+        int error = printIndicatorY(fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx", RandomVariableX);
         return error;
     }
 

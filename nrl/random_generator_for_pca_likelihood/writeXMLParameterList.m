@@ -1,4 +1,4 @@
-function writeXMLParameterList(filename,mu,beta,lc,delta,nmc)
+function writeXMLParameterList(filename,mu,beta,lc,delta,nmc,station)
 
 fp = fopen(filename,'w');
 
@@ -10,6 +10,7 @@ fprintf(fp, '<ParameterList>\n\n');
 
     fprintf(fp, '\t<ParameterList name="nrldata">\n');
         fprintf(fp, '\t\t<Parameter name="pathnrl" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>\n');
+        fprintf(fp, '\t\t<Parameter name="station" type="string" value="%s"/>\n',strcat('station',num2str(station)));
     fprintf(fp, '\t</ParameterList>\n');
 
     fprintf(fp, '\t<ParameterList name="Data">\n');

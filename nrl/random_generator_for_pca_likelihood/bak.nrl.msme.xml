@@ -6,6 +6,7 @@
 
     <ParameterList name="nrldata">
         <Parameter name="pathnrl" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>
+        <Parameter name="station" type="string" value="station44"/>
     </ParameterList>
 
     <ParameterList name="Data">
