@@ -15,7 +15,7 @@ optimParameters.np      = 28;
 
 output = cell(length(ln));
 
-fd = fopen('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt','w');
+fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt'),'w');
 for k = 11:64
     modelParameters.lc    = [ln(k), lt(k)];
     modelParameters.delta = repmat(delta(k),1,4);
@@ -25,6 +25,6 @@ for k = 11:64
 
     output{k} = costFunction(modelParameters,optimParameters);
     fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
-    save('result_station',num2str(optimParameters.station),'.mat','output');
+    save(strcat('result_station',num2str(optimParameters.station),'.mat'),'output');
 end
 fclose(fd);
