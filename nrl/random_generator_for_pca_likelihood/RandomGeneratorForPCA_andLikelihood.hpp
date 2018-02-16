@@ -121,7 +121,7 @@ public:
             }
 
         }
-        std::string pathToRandomVariableX = fullOutputPath + fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
+        std::string pathToRandomVariableX = fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
         int error = printIndicatorY(pathToRandomVariableX, RandomVariableX);
         return error;
     }
