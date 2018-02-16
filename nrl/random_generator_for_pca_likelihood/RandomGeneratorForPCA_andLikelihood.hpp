@@ -33,6 +33,7 @@ public:
         std::string pathnrl    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         std::string station    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"station");
         fullOutputPath         = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/" + station + "/";
+        std::cout << fullOutputPath << "\n";
         interface              = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
         newton                 = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata                = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
