@@ -6,7 +6,6 @@
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "Newton_Raphsonpp.hpp"
 #include "RandomGeneratorForPCA_andLikelihood.hpp"
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/normal_distribution.hpp>
