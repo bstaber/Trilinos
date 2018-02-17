@@ -18,35 +18,24 @@
 class Newton_Raphson
 {
 public:
+
+    Epetra_Comm   * Comm;
+    Epetra_Vector * x;
+
+    Finite_Element_Problem * interface;
+    Teuchos::ParameterList * Krylov;
+
+    int MyPID, iter_max, iter_min, nb_bis_max;
+    double time, delta, norm_inf_tol, norm_inf_max, eps, success, failure, umax, bc_disp, pressure_load, tol;
+
     Newton_Raphson(Finite_Element_Problem & Interface, Teuchos::ParameterList & Parameters);
     ~Newton_Raphson();
-    
+
     int Solve_with_Aztec(bool print);
     int Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL);
     int print_newton_solution(std::string fileName);
     void Initialization();
     void setInitialization(Epetra_Vector & init);
     void setParameters(Teuchos::ParameterList & Parameters);
-        
-    int iter_max, iter_min;
-    int nb_bis_max;
-    int MyPID;
-    double time;
-    double delta;
-    double norm_inf_tol;
-    double norm_inf_max;
-    double eps;
-    double success;
-    double failure;
-    double umax;
-    double bc_disp;
-    double pressure_load;
-    double tol;
-    
-    Epetra_Comm * Comm;
-    Epetra_Vector * x;
-    
-    Finite_Element_Problem * interface;
-    Teuchos::ParameterList * Krylov;
 };
 #endif
