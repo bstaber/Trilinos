@@ -40,6 +40,7 @@ function output = costFunction(modelParameters,optimParameters)
             Y(:,j+1) = log(load(filename));
         end
         meanY = mean(Y,2);
+        output.Y{i} = Y;
 
         for k = 1:2
             id = theta_to_id(i,k);
@@ -51,6 +52,7 @@ function output = costFunction(modelParameters,optimParameters)
             exy       = dlmread(filename);
             Yexp(:,k) = log(sum(exx.^2 + eyy.^2 + 2*exy.^2,1))';
         end
+        output.Yexp{i} = Yexp;
 
         CovarianceMatrix = cov(Y');
         [L,P]            = eig(CovarianceMatrix);
