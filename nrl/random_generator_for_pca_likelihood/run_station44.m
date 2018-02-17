@@ -11,7 +11,7 @@ ln = ln(:); lt = lt(:); delta = delta(:);
 modelParameters.mu      = 1e3*[1.7212, 0.0426, 0.0429, 1.3138, 0.0609];
 modelParameters.beta    = [27.9525, 0.306];
 optimParameters.station = 44;
-optimParameters.np      = 28;
+optimParameters.np      = 18;
 
 output = cell(length(ln));
 
