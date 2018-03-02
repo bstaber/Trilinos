@@ -21,7 +21,7 @@ LINK_FLAGS=$(Trilinos_EXTRA_LD_FLAGS)
 #just assuming that epetra is turned on.
 DEFINES=-DMYAPP_EPETRA
 
-SRC_DIR = /home/s/staber/Trilinos/src/
+SRC_DIR = 
 CFLAG = -I$(SRC_DIR)
 SRC = $(wildcard $(SRC_DIR)*.cpp)
 OBJ = $(SRC:.cpp=.o)
@@ -52,7 +52,7 @@ print_info:
 
 #build
 build: $(OBJ) main.o
-	$(CXX) $(CXX_FLAGS) $^ -o trilinos_mpi $(CFLAG) $(LINK_FLAGS) $(INCLUDE_DIRS) $(DEFINES) $(LIBRARY_DIRS) $(LIBRARIES)
+	$(CXX) $(CXX_FLAGS) $^ -o hellompi $(CFLAG) $(LINK_FLAGS) $(INCLUDE_DIRS) $(DEFINES) $(LIBRARY_DIRS) $(LIBRARIES)
 
 $(OBJ): $(HDR)
 main.o: $(MAIN_HDR) $(HDR)
@@ -63,4 +63,3 @@ main.o: $(MAIN_HDR) $(HDR)
 .PHONY: clean
 clean:
 	rm -f *.o *.a *.exe
-	
