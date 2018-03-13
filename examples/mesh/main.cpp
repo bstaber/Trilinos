@@ -20,7 +20,7 @@ Epetra_SerialComm Comm;
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured1.msh";
     std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/arteries/mesh/media_flatboundaries.msh";
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
-    mesh Mesh(Comm, mesh_file);
+    mesh Mesh(Comm, mesh_file, 1.0);
 
     Comm.Barrier();
     if (Comm.MyPID()==0){
