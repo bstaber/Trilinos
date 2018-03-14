@@ -155,7 +155,7 @@ public:
         Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
         Epetra_SerialDenseMatrix right_cauchy(2,2);
 
-        for (unsigned e=0; e<nrldata->local_id_faces.size(); ++e){
+        for (unsigned int e=0; e<nrldata->local_id_faces.size(); ++e){
             e_gid = interface->Mesh->local_faces[nrldata->local_id_faces[e]];
             for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
                 node = interface->Mesh->faces_nodes[interface->Mesh->face_type*e_gid+inode];
