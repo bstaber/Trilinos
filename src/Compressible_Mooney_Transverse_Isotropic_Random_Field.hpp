@@ -246,7 +246,12 @@ public:
                                   Epetra_SerialDenseVector & piola_stress,
                                   Epetra_SerialDenseMatrix & tangent_piola){
 
-        double det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)-deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)-deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)+deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)+deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)-deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
+        double det = deformation_gradient(0,0)*deformation_gradient(1,1)*deformation_gradient(2,2)
+                   - deformation_gradient(0,0)*deformation_gradient(1,2)*deformation_gradient(2,1)
+                   - deformation_gradient(0,1)*deformation_gradient(1,0)*deformation_gradient(2,2)
+                   + deformation_gradient(0,1)*deformation_gradient(1,2)*deformation_gradient(2,0)
+                   + deformation_gradient(0,2)*deformation_gradient(1,0)*deformation_gradient(2,1)
+                   - deformation_gradient(0,2)*deformation_gradient(1,1)*deformation_gradient(2,0);
 
         Epetra_SerialDenseMatrix C(3,3), CC(3,3), ddJ5(6,6);
         Epetra_SerialDenseVector LML(6), eye(6), dJ5(6), M(6), L(6), c(6);
