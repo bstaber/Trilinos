@@ -13,7 +13,7 @@ X = [1.847392067433885   1.603595285597212   1.889059452191638   1.7059661084632
 optimParameters.station = 44;
 optimParameters.np      = 32;
 optimParameters.tol     = 1e-6;
-optimParameters.nmc     = 1;
+optimParameters.nmc     = 2;
 
 modelParameters.lc    = [10, 5];
 modelParameters.delta = repmat(0.1,1,4);
