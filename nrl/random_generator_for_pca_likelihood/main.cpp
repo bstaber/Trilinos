@@ -110,7 +110,7 @@ int main(int argc, char *argv[]){
                              coeff_of_variation ,
                              plyagls(i)         ,
                              false              ,
-                             false              ,
+                             true               ,
                              false             );
         }
       }
