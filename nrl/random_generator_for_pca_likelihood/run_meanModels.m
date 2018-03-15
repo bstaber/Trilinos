@@ -20,14 +20,14 @@ modelParameters.delta = repmat(0.1,1,4);
 
 output = cell(size(X,2),1);
 
-fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station', ...
-    num2str(optimParameters.station),'/output.txt'),'w');
+%fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station', ...
+%    num2str(optimParameters.station),'/output.txt'),'w');
 for k = 1:size(X,2)
     modelParameters.mu   = 1e3*[X(1,k), X(2,k), X(3,k), X(4,k), X(5,k)];
     modelParameters.beta = [X(6,k), X(7,k)];
 
     output{k} = costFunction(modelParameters,optimParameters);
-    fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
+%    fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
     save(strcat('result_meanModels_station',num2str(optimParameters.station),'.mat'),'output','-v7.3');
 end
-fclose(fd);
+%fclose(fd);
