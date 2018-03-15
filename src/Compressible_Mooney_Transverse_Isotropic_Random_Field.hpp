@@ -223,9 +223,9 @@ public:
                                  unsigned int & gp){
         unsigned int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
-        mu1 = 0.0; //mu1rf(e_lid*n_gauss_cells+gp);
-        mu2 = 0.0; //mu2rf(e_lid*n_gauss_cells+gp);
-        mu3 = 0.0; //mu3rf(e_lid*n_gauss_cells+gp);
+        mu1 = mu1rf(e_lid*n_gauss_cells+gp);
+        mu2 = mu2rf(e_lid*n_gauss_cells+gp);
+        mu3 = mu3rf(e_lid*n_gauss_cells+gp);
         mu4 = mu4rf(e_lid*n_gauss_cells+gp);
         mu5 = mu5rf(e_lid*n_gauss_cells+gp);
         mu = 2.0*mu1 + 4.0*mu2 + 2.0*mu3;
