@@ -22,7 +22,7 @@ output = cell(size(X,2),1);
 
 %fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station', ...
 %    num2str(optimParameters.station),'/output.txt'),'w');
-for k = 1:size(X,2)
+for k = size(X,2)
     modelParameters.mu   = 1e3*[X(1,k), X(2,k), X(3,k), X(4,k), X(5,k)];
     modelParameters.beta = [X(6,k), X(7,k)];
 
