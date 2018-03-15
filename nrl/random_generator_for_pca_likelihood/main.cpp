@@ -86,6 +86,13 @@ int main(int argc, char *argv[]){
       Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
       Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
 
+      if (Comm.MyPID()==0){
+        for (unsigned int i=0; i<5; ++i){
+          std::cout << mean_parameters(i) << std::setw(15);
+        }
+        std::cout << exponents(0) << std::setw(15) << exponents(1) << "\n";
+       }
+
       int k = -1;
       for (unsigned int i=0; i<4; ++i){
         for (unsigned int j=0; j<nmc; ++j){
