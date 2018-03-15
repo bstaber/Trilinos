@@ -75,5 +75,5 @@ function output = costFunction(modelParameters,optimParameters)
             end
         end
     end
-    unix(strcat('rm /home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likeliehood/station',num2str(optimParameters.station),'/*'));
+    %unix(strcat('rm /home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likeliehood/station',num2str(optimParameters.station),'/*'));
 end
