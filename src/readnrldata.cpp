@@ -5,8 +5,8 @@ readnrldata::readnrldata(bool load, std::string & path){
     if(load){
         import_boundaryconditions(path);
         import_exp_points(path);
-        import_expenergy(path);
-        import_exp_def(path);
+        //import_expenergy(path);
+        //import_exp_def(path);
         angles.Resize(8);
         angles(0) = 30.0;
         angles(1) = 60.0;
@@ -41,7 +41,7 @@ void readnrldata::import_boundaryconditions(std::string & path){
     else{
         std::cout << "Couldn't open the file containing the boundary conditions.\n";
     }
-    
+
 /*    filename = path + "linspace.txt";
     file.open(filename);
     if (file.is_open()){
@@ -119,12 +119,10 @@ void readnrldata::import_exp_def(std::string & path){
                     exx(j+t*npoints,id) = gexx; eyy(j+t*npoints,id) = geyy; exy(j+t*npoints,id) = gexy;
                 }
             }
-            
+
         }
         else{
             std::cout << "Couldn't open one or some of the eij files.\n";
         }
     }
 }
-
-
