@@ -1,4 +1,4 @@
-function output = costFunction(modelParameters,optimParameters)
+function output = costFunction(modelParameters,optimParameters, Yexpi)
 
     if (length(modelParameters.mu)~=5 || length(modelParameters.beta)~=2 || length(modelParameters.lc)~=2 || length(modelParameters.delta)~=4)
        fprintf('Check inputs.\n');
@@ -24,7 +24,7 @@ function output = costFunction(modelParameters,optimParameters)
     end
 
     theta         = ['15';'30';'60';'75'];
-    theta_to_id   = [5,6;1,4;2,3;7,8];
+%     theta_to_id   = [5,6;1,4;2,3;7,8];
 
     output.eta    = cell(4,1);
     output.etaExp = cell(4,1);
@@ -33,7 +33,8 @@ function output = costFunction(modelParameters,optimParameters)
 
     for i = 1:4
         Y    = zeros(2355,optimParameters.nmc);
-        Yexp = zeros(2355,2);
+%        Yexp = zeros(2355,2);
+        Yexp = Yexpi{i};
         for j = 0:optimParameters.nmc-1
             path     = strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station));
             filename = strcat(path, '/RandomVariableY_angle=',num2str(theta(i,:)),'_nmc=',num2str(j),'.mtx');
@@ -42,17 +43,17 @@ function output = costFunction(modelParameters,optimParameters)
         meanY = mean(Y,2);
         output.Y{i} = Y;
 
-        for k = 1:2
-            id = theta_to_id(i,k);
-            filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/exx_id',num2str(id),'.txt');
-            exx       = dlmread(filename);
-            filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/eyy_id',num2str(id),'.txt');
-            eyy       = dlmread(filename);
-            filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/exy_id',num2str(id),'.txt');
-            exy       = dlmread(filename);
-            Yexp(:,k) = log(sum(exx.^2 + eyy.^2 + 2*exy.^2,1))';
-        end
-        output.Yexp{i} = Yexp;
+%         for k = 1:2
+%             id = theta_to_id(i,k);
+%             filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/exx_id',num2str(id),'.txt');
+%             exx       = dlmread(filename);
+%             filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/eyy_id',num2str(id),'.txt');
+%             eyy       = dlmread(filename);
+%             filename  = strcat('/home/s/staber/Trilinos_results/nrl/data/exy_id',num2str(id),'.txt');
+%             exy       = dlmread(filename);
+%             Yexp(:,k) = log(sum(exx.^2 + eyy.^2 + 2*exy.^2,1))';
+%         end
+%         output.Yexp{i} = Yexp;
 
         CovarianceMatrix = cov(Y');
         [L,P]            = eig(CovarianceMatrix);
