@@ -40,7 +40,7 @@ for j = 1:4
         Exx = [exx{ID(k)}{1}, exx{ID(k)}{2}];
         Eyy = [eyy{ID(k)}{1}, eyy{ID(k)}{2}];
         Exy = [exy{ID(k)}{1}, exy{ID(k)}{2}];
-        Yexp{ij}(:,k) = log(sum(Exx.^2 + Eyy.^2 + 2*Exy.^2,1));
+        Yexp{j}(:,k) = log(sum(Exx.^2 + Eyy.^2 + 2*Exy.^2,1));
     end
 end
 
