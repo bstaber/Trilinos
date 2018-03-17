@@ -21,21 +21,35 @@ X = [1.847305797816567   1.604001927458218   1.907043912388506   1.7064861890756
 optimParameters.station = 44;
 optimParameters.np      = 32;
 optimParameters.tol     = 1e-6;
-optimParameters.nmc     = 2;
+optimParameters.nmc     = 25;
 
-modelParameters.lc    = [10, 5];
+modelParameters.lc    = [11.180339887498949, 4.472135954999580];
 modelParameters.delta = repmat(0.1,1,4);
 
 output = cell(size(X,2),1);
 
 %fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station', ...
 %    num2str(optimParameters.station),'/output.txt'),'w');
-for k = size(X,2)
+
+load('eij.mat');
+angle_to_id = [5,6; 1,4; 2,3; 7,8];
+Yexp = cell(4,1);
+for j = 1:4
+    ID = angle_to_id(j,:);
+    for k = 1:2
+        Exx = [exx{ID(k)}{1}, exx{ID(k)}{2}];
+        Eyy = [eyy{ID(k)}{1}, eyy{ID(k)}{2}];
+        Exy = [exy{ID(k)}{1}, exy{ID(k)}{2}];
+        Yexp{j}(:,k) = log(sum(Exx.^2 + Eyy.^2 + 2*Exy.^2,1));
+    end
+end
+
+for k = 1:size(X,2)
     modelParameters.mu   = 1e3*[X(1,k), X(2,k), X(3,k), X(4,k), X(5,k)];
     modelParameters.beta = [X(6,k), X(7,k)];
 
-    output{k} = costFunction(modelParameters,optimParameters);
+    output{k} = costFunction(modelParameters,optimParameters,Yexpi);
 %    fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
-    save(strcat('result_meanModels_station',num2str(optimParameters.station),'.mat'),'output','-v7.3');
+    save(strcat('result_meanModels_lnltdelta14_station',num2str(optimParameters.station),'.mat'),'output','-v7.3');
 end
 %fclose(fd);
