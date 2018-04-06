@@ -43,7 +43,7 @@ for k = 13:16
     modelParameters.delta = repmat(delta(k),1,4);
 
     optimParameters.tol   = 1e-6;
-    optimParameters.nmc   = 50;
+    optimParameters.nmc   = 25;
 
     output{k} = costFunction(modelParameters,optimParameters,Yexpi);
     fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
