@@ -13,7 +13,7 @@ ln = ln(:); lt = lt(:); delta = delta(:);
 
 % modelParameters.mu   = 1e3*[1.706486189075632, 0.057388351625262, 0.059077990032629, ...
 %                             1.314292350043600, 0.061332096908722, 27.971878357799234, 0.039848773492742];
-% modelParameters.beta = [27.971878357799234, 0.039848773492742];   
+% modelParameters.beta = [27.971878357799234, 0.039848773492742];
 
 modelParameters.mu   = 1e3*[1.7710, 0.0658, 0.0680, 1.4152, 0.0718];
 modelParameters.beta = [25.4185, 0.0432];
@@ -38,7 +38,7 @@ end
 output = cell(length(ln),1);
 
 fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt'),'w');
-for k = 1:length(ln)
+for k = 13:16
     modelParameters.lc    = [ln(k), lt(k)];
     modelParameters.delta = repmat(delta(k),1,4);
 
@@ -47,6 +47,6 @@ for k = 1:length(ln)
 
     output{k} = costFunction(modelParameters,optimParameters,Yexpi);
     fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
-    save(strcat('result_station',num2str(optimParameters.station),'_nmc=50.mat'),'output','-v7.3');
+    save(strcat('result_station',num2str(optimParameters.station),'_nmc=50_tests_13to16.mat'),'output','-v7.3');
 end
 fclose(fd);
