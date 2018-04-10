@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
 
-      Teuchos::RCP<RandomGeneratorForPCA_andLikelihood> NonLinSolver =
+      Teuchos::RCP<StochasticHomogenization> NonLinSolver =
       Teuchos::rcp(new StochasticHomogenization(Comm,*paramList));
 
 #ifdef HAVE_MPI
