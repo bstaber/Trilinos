@@ -8,13 +8,13 @@ class StochasticHomogenization : public compressibleHyperelasticity
 {
 public:
 
-    double p1m, p2m, p3m;
-    double p1f, p2f, p3f;
+    double p1m, p2m, p3m, sm;
+    double p1f, p2f, p3f, sf;
 
     StochasticHomogenization(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        Mesh = new mesh(comm, mesh_file,1.0);
+        Mesh = new mesh(comm,mesh_file,1.0);
         Comm = Mesh->Comm;
 
         StandardMap        = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
