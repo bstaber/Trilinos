@@ -45,8 +45,8 @@ int main(int argc, char *argv[]){
       Teuchos::rcp(new StochasticHomogenization(Comm,*paramList));
 
       Teuchos::RCP<Newton_Raphson> newton =
-      Teuchos::rcp(new Newton_Raphson(*interface,paramList));
-      
+      Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
+
       Epetra_SerialDenseVector x(6);
       x(0) = 1.0;
       x(1) = 1.0;
