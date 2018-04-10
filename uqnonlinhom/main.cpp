@@ -41,9 +41,12 @@ int main(int argc, char *argv[]){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
 
-      Teuchos::RCP<StochasticHomogenization> NonLinSolver =
+      Teuchos::RCP<StochasticHomogenization> interface =
       Teuchos::rcp(new StochasticHomogenization(Comm,*paramList));
 
+      Teuchos::RCP<Newton_Raphson> newton =
+      Teuchos::rcp(new Newton_Raphson(*interface,paramList));
+      
       Epetra_SerialDenseVector x(6);
       x(0) = 1.0;
       x(1) = 1.0;
@@ -51,7 +54,8 @@ int main(int argc, char *argv[]){
       x(3) = 1.0;
       x(4) = 1.0;
       x(5) = 1.0;
-      NonLinSolver->set_parameters(x);
+      interface->set_parameters(x);
+
 
 #ifdef HAVE_MPI
     MPI_Finalize();
