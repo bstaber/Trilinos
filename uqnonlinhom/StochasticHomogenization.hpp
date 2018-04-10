@@ -146,7 +146,7 @@ public:
         sym_tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
         scalarAB = p3m*det*(2.0*det-1.0);
         tensor_product(scalarAB,L,L,tangent_piola,1.0);
-        scalarAB = -2.0*J*dpressure;
+        scalarAB = -2.0*det*dpressure;
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
     }
 
