@@ -43,10 +43,10 @@ for k = 13:16
     modelParameters.delta = repmat(delta(k),1,4);
 
     optimParameters.tol   = 1e-6;
-    optimParameters.nmc   = 100;
+    optimParameters.nmc   = 200;
 
     output{k} = costFunction(modelParameters,optimParameters,Yexpi);
     fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
-    save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_tests_13to16.mat'),'output','-v7.3');
+    save(strcat('result_station',num2str(optimParameters.station),'_nmc=200_tests_13to16.mat'),'output','-v7.3');
 end
 fclose(fd);
