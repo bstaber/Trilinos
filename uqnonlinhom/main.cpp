@@ -44,6 +44,15 @@ int main(int argc, char *argv[]){
       Teuchos::RCP<StochasticHomogenization> NonLinSolver =
       Teuchos::rcp(new StochasticHomogenization(Comm,*paramList));
 
+      Epetra_SerialDenseVector x(6);
+      x(0) = 1.0;
+      x(1) = 1.0;
+      x(2) = 1.0;
+      x(3) = 1.0;
+      x(4) = 1.0;
+      x(5) = 1.0;
+      NonLinSolver->set_parameters(x);
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
