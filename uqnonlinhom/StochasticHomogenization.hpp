@@ -140,11 +140,11 @@ public:
             piola_stress(i) = 2.0*p1m*eye(i) + 2.0*p2m*(I1*eye(i)-c(i)) + det*dpressure*L(i);
         }
 
-        double scalarAB = 4.0*p2;
+        double scalarAB = 4.0*p2m;
         tensor_product(scalarAB,eye,eye,tangent_piola,0.0);
-        scalarAB = -4.0*p2;
+        scalarAB = -4.0*p2m;
         sym_tensor_product(scalarAB,eye,eye,tangent_piola,1.0);
-        scalarAB = p3*det*(2.0*det-1.0);
+        scalarAB = p3m*det*(2.0*det-1.0);
         tensor_product(scalarAB,L,L,tangent_piola,1.0);
         scalarAB = -2.0*J*dpressure;
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
