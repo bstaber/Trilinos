@@ -35,8 +35,8 @@ public:
         p1f = x(3);
         p2f = x(4);
         p3f = x(5);
-        sm = 2.0*p1m * 4.0*p2m + 2.0*p3m;
-        sf = 2.0*p1f * 4.0*p2f + 2.0*p3f;
+        sm = 2.0*p1m * 4.0*p2m;
+        sf = 2.0*p1f * 4.0*p2f;
     }
 
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
