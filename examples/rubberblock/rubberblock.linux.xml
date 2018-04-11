@@ -1,8 +1,8 @@
 <ParameterList>
 
     <ParameterList name="Mesh">
-        <!--Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/examples/rubberblock/rubberblock.msh"/-->
-        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/uqnonlinhom/mesh/rve.msh"/>
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/examples/rubberblock/rubberblock.msh"/>
+        <!--Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/uqnonlinhom/mesh/rve.msh"/-->
     </ParameterList>
 
     <ParameterList name="Linear Solver Builder">
