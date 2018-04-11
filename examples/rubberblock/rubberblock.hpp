@@ -14,7 +14,7 @@ public:
     rubberblock(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        Mesh = new mesh(comm, mesh_file);
+        Mesh = new mesh(comm, mesh_file, 1.0);
         Comm = Mesh->Comm;
         findtop();
 
