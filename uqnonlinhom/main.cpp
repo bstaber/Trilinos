@@ -48,13 +48,16 @@ int main(int argc, char *argv[]){
       Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
 
       Epetra_SerialDenseVector x(6);
-      x(0) = 1.0;
-      x(1) = 1.0;
-      x(2) = 1.0;
-      x(3) = 1.0;
-      x(4) = 1.0;
-      x(5) = 1.0;
+      x(0) = 164.0625;
+      x(1) = 10.0;
+      x(2) = 1.6953*1.0e3;
+      x(3) = 10.0*x(0);
+      x(4) = 10.0*x(1);
+      x(5) = 10.0*x(2);
       interface->set_parameters(x);
+
+      newton->Initialization();
+      int error = newton->Solve_with_Aztec(true);
 
 
 #ifdef HAVE_MPI
