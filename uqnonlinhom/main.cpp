@@ -48,9 +48,9 @@ int main(int argc, char *argv[]){
       Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
 
       Epetra_SerialDenseVector x(6);
-      x(0) = 830.0;
+      x(0) = 100.0;
       x(1) = 0.0;
-      x(2) = 50.3;
+      x(2) = 830.0;
       x(3) = 10.0*x(0);
       x(4) = 10.0*x(1);
       x(5) = 10.0*x(2);
