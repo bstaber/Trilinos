@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
       Epetra_SerialDenseVector x(6);
       x(0) = 164.0625;
       x(1) = 10.0;
-      x(2) = 1.6953*1.0e3;
+      x(2) = 169.3;
       x(3) = 10.0*x(0);
       x(4) = 10.0*x(1);
       x(5) = 10.0*x(2);
