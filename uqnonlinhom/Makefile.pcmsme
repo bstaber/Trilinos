@@ -22,7 +22,7 @@ LINK_FLAGS=$(Trilinos_EXTRA_LD_FLAGS)
 #just assuming that epetra is turned on.
 DEFINES=-DMYAPP_EPETRA
 
-SRC_DIR = /home/s/staber/Trilinos/src/
+SRC_DIR = /home/s/staber/Documents/Trilinos/src/
 CFLAG = -I$(SRC_DIR)
 SRC = $(wildcard $(SRC_DIR)*.cpp)
 OBJ = $(SRC:.cpp=.o)
