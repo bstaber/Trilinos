@@ -66,4 +66,3 @@ main.o: $(MAIN_HDR) $(HDR)
 .PHONY: clean
 clean:
 	rm -f *.o *.a *.exe
-	
