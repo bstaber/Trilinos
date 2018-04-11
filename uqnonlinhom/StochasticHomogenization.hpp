@@ -85,7 +85,7 @@ public:
             y    = Mesh->nodes_coord[3*node+1];
             z    = Mesh->nodes_coord[3*node+2];
             if(x==0.0 || y==0.0 || z==0.0 || x==1.0 || y==1.0 || z==1.0){
-                v[0][StandardMap->LID(3*node+0)] = displacement*x;
+                v[0][StandardMap->LID(3*node+0)] = 0.0;
                 v[0][StandardMap->LID(3*node+1)] = 0.0;
                 v[0][StandardMap->LID(3*node+2)] = 0.0;
             }
