@@ -1,6 +1,6 @@
 # Get Trilinos as one entity
 # MYAPP_TRILINOS_DIR = /usr/local/apps/petsc-3.7.3/gnu
-MYAPP_TRILINOS_DIR = /usr/
+MYAPP_TRILINOS_DIR = /usr
 include $(MYAPP_TRILINOS_DIR)/include/Makefile.export.Trilinos
 
 # Make sure to use same compilers and flags as Trilinos
