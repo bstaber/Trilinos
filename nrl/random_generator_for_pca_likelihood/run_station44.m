@@ -38,7 +38,7 @@ end
 output = cell(length(ln),1);
 
 fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt'),'w');
-for k = [12,17]
+for k = [1:11,18:32]
     modelParameters.lc    = [ln(k), lt(k)];
     modelParameters.delta = repmat(delta(k),1,4);
 
@@ -47,6 +47,6 @@ for k = [12,17]
 
     output{k} = costFunction(modelParameters,optimParameters,Yexpi);
     fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
-    save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_tests_12and17.mat'),'output','-v7.3');
+    save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_tests_all_except12and17.mat'),'output','-v7.3');
 end
 fclose(fd);
