@@ -47,6 +47,6 @@ for k = [1:11,18:32]
 
     output{k} = costFunction(modelParameters,optimParameters,Yexpi);
     fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
-    save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_tests_all_except12and17.mat'),'output','-v7.3');
+    save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_tests_all_except12to17.mat'),'output','-v7.3');
 end
 fclose(fd);
