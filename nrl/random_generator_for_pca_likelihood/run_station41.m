@@ -18,8 +18,8 @@ ln = ln(:); lt = lt(:); delta = delta(:);
 modelParameters.mu   = 1e3*[1.7710, 0.0658, 0.0680, 1.4152, 0.0718];
 modelParameters.beta = [25.4185, 0.0432];
 
-optimParameters.station = 44;
-optimParameters.np      = 28;
+optimParameters.station = 41;
+optimParameters.np      = 48;
 
 load('eij.mat');
 
