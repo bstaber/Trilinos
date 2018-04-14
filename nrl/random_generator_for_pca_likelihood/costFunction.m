@@ -41,6 +41,7 @@ function output = costFunction(modelParameters,optimParameters, Yexpi)
             Y(:,j+1) = log(load(filename));
         end
         meanY = mean(Y,2);
+        meanYexp = mean(Yexp,2);
         output.Y{i} = Y;
 
 %         for k = 1:2
@@ -67,7 +68,7 @@ function output = costFunction(modelParameters,optimParameters, Yexpi)
 
         for l = 1:output.m(i)
             output.eta{i}(l,:)    = ( (Y    - repmat(meanY,1,optimParameters.nmc))'*L(:,l) )/sqrt(P(l));
-            output.etaExp{i}(l,:) = ( (Yexp - repmat(meanY,1,2)                  )'*L(:,l) )/sqrt(P(l));
+            output.etaExp{i}(l,:) = ( (Yexp - repmat(meanYexp,1,2)                  )'*L(:,l) )/sqrt(P(l));
             [~,supp]              = ksdensity(output.eta{i}(l,:));
             pts                   = find(output.etaExp{i}(l,:)>=min(supp) & output.etaExp{i}(l,:)<=max(supp));
             if (isempty(pts)==0)
