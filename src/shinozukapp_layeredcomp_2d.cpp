@@ -87,7 +87,7 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
                                         break;
                                 }
                                 vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
-                                arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(vector_x(0)*c+vector_x(1)*s) + (M_PI/l2)*tj*(vector_x(0)*c-vector_x(1)*s);
+                                arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(vector_x(1)*c+vector_x(0)*s) + (M_PI/l2)*tj*(-vector_x(0)*s+vector_x(1)*c);
                                 v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                             }
                         }
