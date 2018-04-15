@@ -52,7 +52,7 @@ print_info:
 
 #build
 build: $(OBJ) main.o
-	$(CXX) $(CXX_FLAGS) $^ -o trilinos_mpi_15 $(CFLAG) $(LINK_FLAGS) $(INCLUDE_DIRS) $(DEFINES) $(LIBRARY_DIRS) $(LIBRARIES)
+	$(CXX) $(CXX_FLAGS) $^ -o trilinos_mpi_17 $(CFLAG) $(LINK_FLAGS) $(INCLUDE_DIRS) $(DEFINES) $(LIBRARY_DIRS) $(LIBRARIES)
 
 $(OBJ): $(HDR)
 main.o: $(MAIN_HDR) $(HDR)
