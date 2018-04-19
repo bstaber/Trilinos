@@ -38,15 +38,15 @@ end
 output = cell(length(ln),1);
 
 fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt'),'w');
-for k = 3:4
+for k = 4
     modelParameters.lc    = [ln(k), lt(k)];
     modelParameters.delta = repmat(delta(k),1,4);
 
     optimParameters.tol   = 1e-6;
     optimParameters.nmc   = 100;
 
-    output{k} = costFunction(modelParameters,optimParameters,Yexpi);
-    fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
-    save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_station17.mat'),'output','-v7.3');
+    %output{k} = costFunction(modelParameters,optimParameters,Yexpi);
+    %fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
+    %save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_station17.mat'),'output','-v7.3');
 end
 fclose(fd);
