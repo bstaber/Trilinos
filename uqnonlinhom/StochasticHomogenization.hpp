@@ -154,7 +154,7 @@ public:
         scalarAB = -2.0*det*dpressure;
         sym_tensor_product(scalarAB,L,L,tangent_piola,1.0);
 
-        std::cout << piola_stress << "\n\n"
+        std::cout << piola_stress << "\n\n";
         std::cout << tangent_piola << "\n\n";
         std::cout << "-----------" << "\n";
     }
