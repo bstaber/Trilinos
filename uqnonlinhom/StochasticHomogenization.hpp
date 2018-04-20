@@ -52,7 +52,7 @@ public:
             x    = Mesh->nodes_coord[3*node+0];
             y    = Mesh->nodes_coord[3*node+1];
             z    = Mesh->nodes_coord[3*node+2];
-            if(x==0.0){
+            if(x==0.0 || x==1.0){
                 n_bc_dof+=3;
             }
         }
@@ -64,7 +64,7 @@ public:
             x    = Mesh->nodes_coord[3*node+0];
             y    = Mesh->nodes_coord[3*node+1];
             z    = Mesh->nodes_coord[3*node+2];
-            if(x==0.0){
+            if(x==0.0 || x==1.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
@@ -84,8 +84,8 @@ public:
             x    = Mesh->nodes_coord[3*node+0];
             y    = Mesh->nodes_coord[3*node+1];
             z    = Mesh->nodes_coord[3*node+2];
-            if(x==0.0){
-                v[0][StandardMap->LID(3*node+0)] = 0.0;
+            if(x==0.0 || x==1.0){
+                v[0][StandardMap->LID(3*node+0)] = displacement;
                 v[0][StandardMap->LID(3*node+1)] = 0.0;
                 v[0][StandardMap->LID(3*node+2)] = 0.0;
             }
@@ -100,7 +100,7 @@ public:
             x    = Mesh->nodes_coord[3*node+0];
             y    = Mesh->nodes_coord[3*node+1];
             z    = Mesh->nodes_coord[3*node+2];
-            if(x==0.0){
+            if(x==0.0 || x==1.0){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
                 F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
                 F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
