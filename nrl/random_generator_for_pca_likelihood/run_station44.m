@@ -60,7 +60,7 @@ for l = 1:5
   optimParameters.tol   = 1e-6;
   optimParameters.nmc   = 100;
 
-  output{k} = costFunction(modelParameters,optimParameters,Yexpi);
+  output{l} = costFunction(modelParameters,optimParameters,Yexpi);
   fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
   save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=1to5_lt=5.mat'),'output','-v7.3');
 end
