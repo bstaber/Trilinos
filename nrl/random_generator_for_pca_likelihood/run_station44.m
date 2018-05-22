@@ -61,18 +61,18 @@ for l = 1:5
   optimParameters.nmc   = 100;
 
   output{l} = costFunction(modelParameters,optimParameters,Yexpi);
-  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
+  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
   save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=1to5_lt=5.mat'),'output','-v7.3');
 end
 %for l = 4:-1:1
 %  modelParameters.lc    = [ln2(l,5,1), lt2(l,5,1)];
-%  modelParameters.delta = repmat(delta2(k,l,1),1,4);
+%  modelParameters.delta = repmat(0.1,1,4);
 %
 %  optimParameters.tol   = 1e-6;
 %  optimParameters.nmc   = 100;
 %
-%  output{k} = costFunction(modelParameters,optimParameters,Yexpi);
-%  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{k}.fval);
+%  output{l} = costFunction(modelParameters,optimParameters,Yexpi);
+%  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
 %  save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=5_lt=4to1.mat'),'output','-v7.3');
 %end
 fclose(fd);
