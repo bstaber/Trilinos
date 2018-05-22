@@ -53,8 +53,19 @@ fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_
 %    fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),delta(k),output{k}.fval);
 %    save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected.mat'),'output','-v7.3');
 %end
-for l = 1:5
-  modelParameters.lc    = [ln2(1,l,1), lt2(5,l,1)];
+%for l = 1:5
+%  modelParameters.lc    = [ln2(1,l,1), lt2(5,l,1)];
+%  modelParameters.delta = repmat(0.1,1,4);
+
+%  optimParameters.tol   = 1e-6;
+%  optimParameters.nmc   = 100;
+
+%  output{l} = costFunction(modelParameters,optimParameters,Yexpi);
+%  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
+%  save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=1to5_lt=5.mat'),'output','-v7.3');
+%end
+for l = 4:-1:1
+  modelParameters.lc    = [ln2(l,5,1), lt2(l,5,1)];
   modelParameters.delta = repmat(0.1,1,4);
 
   optimParameters.tol   = 1e-6;
@@ -62,17 +73,6 @@ for l = 1:5
 
   output{l} = costFunction(modelParameters,optimParameters,Yexpi);
   fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
-  save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=1to5_lt=5.mat'),'output','-v7.3');
+  save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=5_lt=4to1.mat'),'output','-v7.3');
 end
-%for l = 4:-1:1
-%  modelParameters.lc    = [ln2(l,5,1), lt2(l,5,1)];
-%  modelParameters.delta = repmat(0.1,1,4);
-%
-%  optimParameters.tol   = 1e-6;
-%  optimParameters.nmc   = 100;
-%
-%  output{l} = costFunction(modelParameters,optimParameters,Yexpi);
-%  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
-%  save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=5_lt=4to1.mat'),'output','-v7.3');
-%end
 fclose(fd);
