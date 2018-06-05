@@ -5,7 +5,7 @@
 	</ParameterList>
 	<ParameterList name="nrldata">
 		<Parameter name="pathnrl" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>
-		<Parameter name="station" type="string" value="station44"/>
+		<Parameter name="station" type="string" value="solution2"/>
 	</ParameterList>
 	<ParameterList name="Data">
 		<Parameter name="path_to_pts" type="string" value="/home/s/staber/Trilinos_results/nrl/data/xyz.txt"/>
