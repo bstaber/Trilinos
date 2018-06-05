@@ -40,14 +40,6 @@ int main(int argc, char *argv[]){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
 
-    /*if (Comm.MyPID()==0){
-        std::cout << "****************\n";
-        std::cout << "Hyperparameters:\n";
-        std::cout << paramList->sublist("TIMooney");
-        std::cout << paramList->sublist("Shinozuka");
-        std::cout << "****************\n";
-    }*/
-
       Teuchos::RCP<RandomGeneratorForPCA_andLikelihood> RG =
       Teuchos::rcp(new RandomGeneratorForPCA_andLikelihood(Comm,*paramList));
 
@@ -83,8 +75,6 @@ int main(int argc, char *argv[]){
       plyagls(3) = 75.0;
 
       int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
-      Epetra_SerialDenseVector QoI(RG->nrldata->boundaryconditions.Length());
-      Epetra_SerialDenseMatrix Z(RG->nrldata->boundaryconditions.Length(),4*nmc);
 
       for (unsigned int i=0; i<4; ++i){
         for (unsigned int j=0; j<nmc; ++j){
