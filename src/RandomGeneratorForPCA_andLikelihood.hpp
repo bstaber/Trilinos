@@ -53,7 +53,8 @@ public:
             double                      & plyagl_deg           ,
             bool                          printNewtonIterations,
             bool                          printDisplacements   ,
-            bool                          printDeformations    )
+            bool                          printDeformations    ,
+            bool                          printRandomVariableY)
     {
         Epetra_SerialDenseVector omega(6);
         omega(0) = coeff_of_variation(0);
@@ -121,9 +122,14 @@ public:
             }
 
         }
-        std::string pathToRandomVariableX = fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
-        int error = printIndicatorY(pathToRandomVariableX, RandomVariableX);
-        return error;
+        if (printRandomVariableY){
+          std::string pathToRandomVariableX = fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
+          int error = printIndicatorY(pathToRandomVariableX, RandomVariableX);
+          return error;
+        }
+        else{
+          return 0;
+        }
     }
 
     int printIndicatorY(std::string filename, Epetra_Vector & X){
