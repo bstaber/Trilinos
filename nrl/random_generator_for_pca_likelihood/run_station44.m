@@ -2,13 +2,13 @@ clc
 clearvars
 close all
 
-[ln,lt,delta] = meshgrid(1e-2*(5:5:20)*sqrt(50^2+25^2), ...
-                         1e-2*(4:4:16)*sqrt(50^2+25^2), ...
-                         0.1:0.1:0.2);
-
-[ln2,lt2,delta2] = meshgrid(1e-2*(5:5:25)*sqrt(50^2+25^2), ...
-1e-2*(4:4:20)*sqrt(50^2+25^2), ...
-0.1:0.1:0.2);
+% [ln,lt,delta] = meshgrid(1e-2*(5:5:20)*sqrt(50^2+25^2), ...
+%                          1e-2*(4:4:16)*sqrt(50^2+25^2), ...
+%                          0.1:0.1:0.2);
+% 
+% [ln2,lt2,delta2] = meshgrid(1e-2*(5:5:25)*sqrt(50^2+25^2), ...
+% 1e-2*(4:4:20)*sqrt(50^2+25^2), ...
+% 0.1:0.1:0.2);
 
 %ln = ln(:); lt = lt(:); delta = delta(:);
 
@@ -64,15 +64,31 @@ fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_
 %  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
 %  save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=1to5_lt=5.mat'),'output','-v7.3');
 %end
-for l = 4:-1:1
-  modelParameters.lc    = [ln2(l,5,1), lt2(l,5,1)];
-  modelParameters.delta = repmat(0.1,1,4);
+% for l = 4:-1:1
+%   modelParameters.lc    = [ln2(l,5,1), lt2(l,5,1)];
+%   modelParameters.delta = repmat(0.1,1,4);
+% 
+%   optimParameters.tol   = 1e-6;
+%   optimParameters.nmc   = 100;
+% 
+%   output{l} = costFunction(modelParameters,optimParameters,Yexpi);
+%   fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
+%   save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=5_lt=4to1.mat'),'output','-v7.3');
+% end
+% fclose(fd);
 
-  optimParameters.tol   = 1e-6;
-  optimParameters.nmc   = 100;
+I = [3 5; 4 5; 5 5; 4 4];
+ln = 1e-2*(5:5:25)*sqrt(50^2+25^2);
+lt = 1e-2*(4:4:20)*sqrt(50^2+25^2);
 
-  output{l} = costFunction(modelParameters,optimParameters,Yexpi);
-  fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
-  save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_lc=5_lt=4to1.mat'),'output','-v7.3');
+for l = 1:5
+ modelParameters.lc    = [ln(I(l,1)), lt(I(l,2))];
+ modelParameters.delta = repmat(0.15,1,4);
+
+ optimParameters.tol   = 1e-6;
+ optimParameters.nmc   = 100;
+
+ output{l} = costFunction(modelParameters,optimParameters,Yexpi);
+ fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
+ save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_delta15.mat'),'output','-v7.3');
 end
-fclose(fd);
