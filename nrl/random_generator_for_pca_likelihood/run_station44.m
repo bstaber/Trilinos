@@ -39,8 +39,6 @@ for j = 1:4
     end
 end
 
-output = cell(length(ln),1);
-
 fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt'),'w');
 %for k = 16:-1:1
 %    modelParameters.lc    = [ln(k), lt(k)];
@@ -80,6 +78,7 @@ fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_
 I = [3 5; 4 5; 5 5; 4 4];
 ln = 1e-2*(5:5:25)*sqrt(50^2+25^2);
 lt = 1e-2*(4:4:20)*sqrt(50^2+25^2);
+output = cell(length(ln),1);
 
 for l = 1:5
  modelParameters.lc    = [ln(I(l,1)), lt(I(l,2))];
