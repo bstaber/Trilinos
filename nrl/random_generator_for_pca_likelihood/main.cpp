@@ -102,7 +102,8 @@ int main(int argc, char *argv[]){
                              plyagls(i)         ,
                              false              ,
                              false              ,
-                             false             );
+                             false              ,
+                             true               );
         }
       }
 
