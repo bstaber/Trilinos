@@ -94,7 +94,7 @@ fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_
 
 %I = [3 5; 4 5; 5 5; 4 4];
 ln = [repmat(1e-2*(20)*sqrt(50^2+25^2),3,1); 15; 15];
-lt = repmat(1e-2*(24)*sqrt(50^2+25^2),3,1); 0.1, 1];
+lt = repmat(1e-2*(24)*sqrt(50^2+25^2),3,1); 0.1; 1];
 delta = [0.1, 0.15, 0.20, 0.1, 0.1, 0.1, 0.1];
 output = cell(3,1);
 
