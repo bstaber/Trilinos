@@ -93,12 +93,12 @@ fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_
 %end
 
 %I = [3 5; 4 5; 5 5; 4 4];
-ln = [repmat(1e-2*(20)*sqrt(50^2+25^2),3,1); 15; 15];
-lt = repmat(1e-2*(24)*sqrt(50^2+25^2),3,1); 0.1; 1];
-delta = [0.1, 0.15, 0.20, 0.1, 0.1, 0.1, 0.1];
-output = cell(3,1);
+ln     = [repmat(1e-2*(20)*sqrt(50^2+25^2),3,1); 15; 15];
+lt     = [repmat(1e-2*(24)*sqrt(50^2+25^2),3,1); 0.1; 1];
+delta  = [0.1, 0.15, 0.20, 0.1, 0.1, 0.1, 0.1];
+output = cell(5,1);
 
-for l = 1:3
+for l = 1:5
  modelParameters.lc    = [ln(l), lt(l)];
  modelParameters.delta = repmat(delta(l),1,4);
 
