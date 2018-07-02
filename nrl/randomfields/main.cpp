@@ -80,6 +80,8 @@ int main(int argc, char *argv[]){
     seeds(0) = 3;
     seeds(0) = 4;
 
+    interface->RandomFieldGenerator(seeds);
+
     for (unsigned int e_lid=0; e_lid<n_local_cells; ++e_lid){
         e_gid = interface->Mesh->local_cells[e_lid];
         for (int inode=0; inode<interface->Mesh->el_type; ++inode){
@@ -95,7 +97,6 @@ int main(int argc, char *argv[]){
             hexa8::shape_functions(N,xi,eta,zeta);
 
             vector_X.Multiply('N','N',1.0,matrix_X,N,0.0);
-            interface->RandomFieldGenerator(seeds);
             interface->get_material_parameters(e_lid,gp);
 
             mu1_gmrf[GaussMap.LID(int(e_gid*n_gauss_cells+gp))] = interface->mu1;
