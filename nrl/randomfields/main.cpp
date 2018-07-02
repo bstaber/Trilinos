@@ -11,7 +11,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 
-#include "Compressible_Mooney_Transvere_Isotropic_Random_Field.hpp"
+#include "Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
 
 int main(int argc, char *argv[]){
 
