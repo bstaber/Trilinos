@@ -46,6 +46,53 @@ int main(int argc, char *argv[]){
 
     Teuchos::RCP<TIMooney_RandomField> interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
 
+    Epetra_SerialDenseVector mean_parameters(5);
+    mean_parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+    mean_parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+    mean_parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+    mean_parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+    mean_parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+
+    Epetra_SerialDenseVector exponents(2);
+    exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+
+    Epetra_SerialDenseVector correlation_lengthss(2);
+    correlation_lengths(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
+    correlation_lengths(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
+
+    Epetra_SerialDenseVector coeff_of_variation(4);
+    coeff_of_variation(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
+    coeff_of_variation(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
+    coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
+    coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
+
+    Epetra_SerialDenseVector plyagls(4);
+    plyagls(0) = 15.0;
+    plyagls(1) = 30.0;
+    plyagls(2) = 60.0;
+    plyagls(3) = 75.0;
+
+    Epetra_SerialDenseVector omega(6);
+    omega(0) = coeff_of_variation(0);
+    omega(1) = coeff_of_variation(1);
+    omega(2) = coeff_of_variation(2);
+    omega(3) = coeff_of_variation(3);
+    omega(4) = correlation_lengths(0);
+    omega(5) = correlation_lengths(1);
+
+    double plyagl = plyagls(2)*2.0*M_PI/360.0;
+    interface->setParameters(mean_parameters,exponents,omega);
+    interface->set_plyagl(plyagl);
+
+    Epetra_IntSerialDenseVector seeds(5);
+    seeds(0) = 0;
+    seeds(1) = 1;
+    seeds(2) = 2;
+    seeds(3) = 3;
+    seeds(4) = 4;
+    interface->RandomFieldGenerator(seeds);
+
     int e_gid;
     int n_local_cells = interface->Mesh->n_local_cells;
     int n_gauss_cells = interface->Mesh->n_gauss_cells;
@@ -73,14 +120,6 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseMatrix matrix_X(3,interface->Mesh->el_type);
     Epetra_SerialDenseVector vector_X(3);
     Epetra_SerialDenseVector N(interface->Mesh->el_type);
-    Epetra_IntSerialDenseVector seeds(5);
-    seeds(0) = 0;
-    seeds(0) = 1;
-    seeds(0) = 2;
-    seeds(0) = 3;
-    seeds(0) = 4;
-
-    interface->RandomFieldGenerator(seeds);
 
     for (unsigned int e_lid=0; e_lid<n_local_cells; ++e_lid){
         e_gid = interface->Mesh->local_cells[e_lid];
