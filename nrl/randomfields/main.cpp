@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    Teuchos::RCP<TIMooney_RandomField> interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
+    Teuchos::RCP<TIMooney_RandomField> interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
 
     int e_gid;
     int n_local_cells = interface->Mesh->n_local_cells;
