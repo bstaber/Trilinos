@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
     exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
 
-    Epetra_SerialDenseVector correlation_lengthss(2);
+    Epetra_SerialDenseVector correlation_lengths(2);
     correlation_lengths(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
     correlation_lengths(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
 
