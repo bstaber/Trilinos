@@ -54,21 +54,17 @@ int main(int argc, char *argv[]){
     double pa = 2.0*M_PI*60.0/360.0;
 
     int nmc = 10000;
-    Epetra_MultiVector MultiV(StandardMap,nmc,"true");
+    Epetra_MultiVector V(StandardMap,nmc,"true");
 
     for (int real=0; real<nmc; ++real){
 
       Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
 
       RandomField->rotation = pa;
-      Epetra_MultiVector V(StandardMap,1,"true");
+      //Epetra_MultiVector V(StandardMap,1,"true");
 
       RandomField->rng.seed(real);
-      RandomField->generator(*V(0),Mesh);
-
-      for (unsigned int i=0; i<V.MyLength(); ++i){
-        MultiV[real][i] = V[0][i];
-      }
+      RandomField->generator(*V(real),Mesh);
 
     }
 
@@ -82,7 +78,7 @@ int main(int argc, char *argv[]){
     Epetra_MultiVector lhs_root(MapOnRoot,1,true);
 
     lhs_root.PutScalar(0.0);
-    lhs_root.Export(MultiV,ExportOnRoot,Insert);
+    lhs_root.Export(V,ExportOnRoot,Insert);
     std::string filename = path + "shinozuka_2d_layer.mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
 
