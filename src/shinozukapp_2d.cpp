@@ -23,21 +23,24 @@ double shinozuka_2d::s_tau(double & tau){
 }
 
 void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
-    
+
+    double c = std::cos(rotation);
+    double s = std::sin(rotation);
+
     int node;
     double x, y;
     double ti, tj;
     double si, sj;
     double psi, phi, w, arg;
     v.PutScalar(0.0);
-    
+
     for (int i=1; i<=order; ++i){
         ti = tau_beta<int>(i);
         si = s_tau(ti);
         for (int j=1; j<=order; ++j){
             tj = tau_beta<int>(j);
             sj = s_tau(tj);
-            
+
                 psi = psi_(rng);
                 phi = phi_(rng);
                 w = std::sqrt(-std::log(psi));
@@ -45,13 +48,14 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
                     node = Mesh.local_nodes_without_ghosts[inode];
                     x = Mesh.nodes_coord[3*node+0];
                     y = Mesh.nodes_coord[3*node+1];
-                    arg = 2.0*M_PI*phi + (M_PI/l1)*ti*x + (M_PI/l2)*tj*y;
+                    //arg = 2.0*M_PI*phi + (M_PI/l1)*ti*x + (M_PI/l2)*tj*y;
+                    arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(x*s+y*c) + (M_PI/l2)*tj*(-x*c+y*s);
                     v[inode] += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                 }
-                
+
         }
     }
-    
+
 }
 
 void shinozuka_2d::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta){
@@ -73,5 +77,3 @@ void shinozuka_2d::icdf_beta(Epetra_Vector & V, Epetra_Vector & B, double & tau1
 
 shinozuka_2d::~shinozuka_2d(){
 }
-
-
