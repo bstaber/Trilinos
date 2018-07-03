@@ -70,11 +70,11 @@ int main(int argc, char *argv[]){
     std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
     int NumTargetElements = 0;
     if (Comm.MyPID()==0){
-        NumTargetElements = nmc*Mesh.n_nodes;
+        NumTargetElements = Mesh.n_nodes;
     }
     Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
     Epetra_Export ExportOnRoot(StandardMap,MapOnRoot);
-    Epetra_MultiVector lhs_root(MapOnRoot,1,true);
+    Epetra_MultiVector lhs_root(MapOnRoot,nmc,true);
 
     lhs_root.PutScalar(0.0);
     lhs_root.Export(V,ExportOnRoot,Insert);
