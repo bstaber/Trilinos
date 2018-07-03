@@ -48,21 +48,29 @@ int main(int argc, char *argv[]){
     mesh Mesh(Comm,mesh_file,1.0);
     Epetra_Map StandardMap(-1,Mesh.n_local_nodes_without_ghosts,&Mesh.local_nodes_without_ghosts[0],0,Comm);
 
-    int order = 15; //Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
+    int order = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
     double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double pa = 2.0*M_PI*60.0/360.0;
 
-    //for (int real=0; real<32; ++real){
-    int real = 0;
-    Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
+    int nmc = 10000;
+    Epetra_MultiVector MultiV(StandardMap,nmc,"true");
 
-    RandomField->rotation = pa;
+    for (int real=0; real<nmc; ++real){
 
-    Epetra_MultiVector V(StandardMap,1,"true");
+      Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
 
-    RandomField->rng.seed(real);
-    RandomField->generator(*V(0),Mesh);
+      RandomField->rotation = pa;
+      Epetra_MultiVector V(StandardMap,1,"true");
+
+      RandomField->rng.seed(real);
+      RandomField->generator(*V(0),Mesh);
+
+      for (unsigned int i=0; i<V.MyLength(); ++i){
+        MultiV[real][i] = V[0][i];        
+      }
+
+    }
 
     std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
     int NumTargetElements = 0;
@@ -77,7 +85,6 @@ int main(int argc, char *argv[]){
     lhs_root.Export(V,ExportOnRoot,Insert);
     std::string filename = path + "shinozuka_2d_layer_" + std::to_string(real) + ".mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
-    //}
 
 #ifdef HAVE_MPI
     MPI_Finalize();
