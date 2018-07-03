@@ -51,10 +51,13 @@ int main(int argc, char *argv[]){
     int order = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
     double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
+    double pa = 2.0*M_PI*60.0/360.0;
 
-    for (int real=0; real<32; ++real){
-
+    //for (int real=0; real<32; ++real){
+    int real = 0;
     Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
+
+    RandomField->rotation = pa;
 
     Epetra_MultiVector V(StandardMap,1,"true");
 
@@ -74,7 +77,7 @@ int main(int argc, char *argv[]){
     lhs_root.Export(V,ExportOnRoot,Insert);
     std::string filename = path + "shinozuka_2d_layer_" + std::to_string(real) + ".mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
-    }
+    //}
 
 #ifdef HAVE_MPI
     MPI_Finalize();
