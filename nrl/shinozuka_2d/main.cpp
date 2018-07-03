@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
     mesh Mesh(Comm,mesh_file,1.0);
     Epetra_Map StandardMap(-1,Mesh.n_local_nodes_without_ghosts,&Mesh.local_nodes_without_ghosts[0],0,Comm);
 
-    int order = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
+    int order = 15; //Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
     double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double pa = 2.0*M_PI*60.0/360.0;
