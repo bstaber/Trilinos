@@ -67,7 +67,7 @@ int main(int argc, char *argv[]){
       RandomField->generator(*V(0),Mesh);
 
       for (unsigned int i=0; i<V.MyLength(); ++i){
-        MultiV[real][i] = V[0][i];        
+        MultiV[real][i] = V[0][i];
       }
 
     }
@@ -82,8 +82,8 @@ int main(int argc, char *argv[]){
     Epetra_MultiVector lhs_root(MapOnRoot,1,true);
 
     lhs_root.PutScalar(0.0);
-    lhs_root.Export(V,ExportOnRoot,Insert);
-    std::string filename = path + "shinozuka_2d_layer_" + std::to_string(real) + ".mtx";
+    lhs_root.Export(MultiV,ExportOnRoot,Insert);
+    std::string filename = path + "shinozuka_2d_layer.mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
 
 #ifdef HAVE_MPI
