@@ -54,12 +54,11 @@ int main(int argc, char *argv[]){
     double pa = 2.0*M_PI*60.0/360.0;
 
     int nmc = 10000;
-    Epetra_MultiVector V(StandardMap,nmc,"true");
+    Epetra_MultiVector V(StandardMap,nmc);
 
     for (int real=0; real<nmc; ++real){
 
       Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
-
       RandomField->rotation = pa;
       //Epetra_MultiVector V(StandardMap,1,"true");
 
