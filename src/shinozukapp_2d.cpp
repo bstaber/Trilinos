@@ -48,8 +48,8 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
                     node = Mesh.local_nodes_without_ghosts[inode];
                     x = Mesh.nodes_coord[3*node+0];
                     y = Mesh.nodes_coord[3*node+1];
-                    arg = 2.0*M_PI*phi + (M_PI/l1)*ti*x + (M_PI/l2)*tj*y;
-                    //arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(x*s+y*c) + (M_PI/l2)*tj*(-x*c+y*s);
+                    //arg = 2.0*M_PI*phi + (M_PI/l1)*ti*x + (M_PI/l2)*tj*y;
+                    arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(x*s+y*c) + (-1.0)*(M_PI/l2)*tj*(-x*c+y*s);
                     v[inode] += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                 }
 
