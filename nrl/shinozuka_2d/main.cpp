@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double pa = 2.0*M_PI*60.0/360.0;
 
-    int nmc = 1;
+    int nmc = 2;
     Epetra_MultiVector V(StandardMap,nmc);
 
     for (int real=0; real<nmc; ++real){
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
     std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
     int NumTargetElements = 0;
     if (Comm.MyPID()==0){
-        NumTargetElements = Mesh.n_nodes;
+        NumTargetElements = nmc*Mesh.n_nodes;
     }
     Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
     Epetra_Export ExportOnRoot(StandardMap,MapOnRoot);
