@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
     RandomField->rng.seed(real);
     RandomField->generator(*V(0),Mesh);
 
-    std::string path = "/Users/brian/Documents/GitHub/Trilinos_results/nrl/shinozuka_2d/";
+    std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
     int NumTargetElements = 0;
     if (Comm.MyPID()==0){
         NumTargetElements = Mesh.n_nodes;
