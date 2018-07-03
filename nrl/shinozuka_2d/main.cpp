@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
     for (int real=0; real<nmc; ++real){
 
       Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
-      RandomField->rotation = pa;
+      RandomField->rotation = 0.0;
       //Epetra_MultiVector V(StandardMap,1,"true");
 
       RandomField->rng.seed(real);
