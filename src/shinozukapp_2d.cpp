@@ -15,10 +15,10 @@ double shinozuka_2d::tau_beta(typearg & beta){
 }
 
 double shinozuka_2d::s_tau(double & tau){
-    double s = 0.0;
-    if (tau>=-1.0 && tau<=1.0){
-        s = (2.0/double(order))*(1.0-fabs(tau));
-    }
+    //double s = 0.0;
+    //if (tau>=-1.0 && tau<=1.0){
+    s = (2.0/double(order))*(1.0-fabs(tau));
+    //}
     return s;
 }
 
