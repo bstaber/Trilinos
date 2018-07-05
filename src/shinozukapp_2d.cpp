@@ -43,7 +43,6 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
 
                 psi = psi_(rng);
                 phi = phi_(rng);
-                std::cout << psi << std::setw(15) << phi << "\n";
                 w   = std::sqrt(-std::log(psi));
                 for (int inode=0; inode<v.MyLength(); ++inode){
                     node = Mesh.local_nodes_without_ghosts[inode];
