@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
       RandomField->rotation = 0.0;
       //Epetra_MultiVector V(StandardMap,1,"true");
 
-      RandomField->rng.seed(real);
+      //RandomField->rng.seed(real);
       RandomField->generator(*V(real),Mesh);
 
     }
