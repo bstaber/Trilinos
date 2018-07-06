@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double pa = 2.0*M_PI*60.0/360.0;
 
-    int nmc = 1;
+    int nmc = 1000;
     Epetra_MultiVector V(StandardMap,nmc);
 
     for (int real=0; real<nmc; ++real){
