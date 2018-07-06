@@ -24,8 +24,6 @@ double shinozuka_2d::s_tau(double & tau){
 
 void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
 
-    std::cout << M_PI/l1 << "\n";
-
     double c = std::cos(rotation);
     double s = std::sin(rotation);
 
