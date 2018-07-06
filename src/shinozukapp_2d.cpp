@@ -24,6 +24,8 @@ double shinozuka_2d::s_tau(double & tau){
 
 void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
 
+    std::cout << "l1 = " << l1 << std::setw(10) << "1/l1 = " << 1.0/l1 << "\n";
+
     double c = std::cos(rotation);
     double s = std::sin(rotation);
 
@@ -37,7 +39,7 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
     for (int i=1; i<=order; ++i){
         ti = tau_beta<int>(i);
         si = s_tau(ti);
-        std::cout << "si == " << si << "\n";
+
         for (int j=1; j<=order; ++j){
             tj = tau_beta<int>(j);
             sj = s_tau(tj);
