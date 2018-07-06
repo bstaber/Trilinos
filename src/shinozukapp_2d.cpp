@@ -36,8 +36,8 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
 
     for (int i=1; i<=order; ++i){
         ti = tau_beta<int>(i);
-        std::cout << "tau_i = " << ti << "\n";
         si = s_tau(ti);
+        std::cout << "si = " << si << "\n";
         for (int j=1; j<=order; ++j){
             tj = tau_beta<int>(j);
             sj = s_tau(tj);
