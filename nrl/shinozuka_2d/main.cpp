@@ -55,9 +55,11 @@ int main(int argc, char *argv[]){
 
     int nmc = 10000;
 
+    Epetra_MultiVector V(StandardMap,nmc);
+
     for (int order=1; order<=1000; order+=10){
 
-    Epetra_MultiVector V(StandardMap,nmc);
+    V.PutScalar(0.0);
 
     for (int real=0; real<nmc; ++real){
 
@@ -81,7 +83,7 @@ int main(int argc, char *argv[]){
 
     lhs_root.PutScalar(0.0);
     lhs_root.Export(V,ExportOnRoot,Insert);
-    std::string filename = path + "shinozuka_2d_layer_" + std::to_string(order) + "mtx";
+    std::string filename = path + "shinozuka_2d_layer_" + std::to_string(order) + ".mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
 
     }
