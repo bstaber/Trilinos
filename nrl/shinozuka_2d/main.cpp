@@ -59,33 +59,28 @@ int main(int argc, char *argv[]){
 
     for (int order=1; order<=1000; order+=10){
 
-    V.PutScalar(0.0);
+      for (int real=0; real<nmc; ++real){
+        Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
+        RandomField->rotation = 0.0;
+        //Epetra_MultiVector V(StandardMap,1,"true");
 
-    for (int real=0; real<nmc; ++real){
-
-      Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
-      RandomField->rotation = 0.0;
-      //Epetra_MultiVector V(StandardMap,1,"true");
-
-      RandomField->rng.seed(real);
-      RandomField->generator(*V(real),Mesh);
-
+        RandomField->rng.seed(real);
+        RandomField->generator(*V(real),Mesh);
     }
 
-    std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
-    int NumTargetElements = 0;
-    if (Comm.MyPID()==0){
-        NumTargetElements = Mesh.n_nodes;
-    }
-    Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
-    Epetra_Export ExportOnRoot(StandardMap,MapOnRoot);
-    Epetra_MultiVector lhs_root(MapOnRoot,nmc,true);
+      std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
+      int NumTargetElements = 0;
+      if (Comm.MyPID()==0){
+          NumTargetElements = Mesh.n_nodes;
+      }
+      Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
+      Epetra_Export ExportOnRoot(StandardMap,MapOnRoot);
+      Epetra_MultiVector lhs_root(MapOnRoot,nmc,true);
 
-    lhs_root.PutScalar(0.0);
-    lhs_root.Export(V,ExportOnRoot,Insert);
-    std::string filename = path + "shinozuka_2d_layer_" + std::to_string(order) + ".mtx";
-    int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
-
+      lhs_root.PutScalar(0.0);
+      lhs_root.Export(V,ExportOnRoot,Insert);
+      std::string filename = path + "shinozuka_2d_layer_" + std::to_string(order) + ".mtx";
+      int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
     }
 
 #ifdef HAVE_MPI
