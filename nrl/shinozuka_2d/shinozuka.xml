@@ -9,7 +9,7 @@
         -->
         <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_1.msh"/>
         <Parameter name="order" type="int" value="100"/>
-        <Parameter name="lx" type="double" value="10.0"/>
+        <Parameter name="lx" type="double" value="2.0"/>
         <Parameter name="ly" type="double" value="2.0"/>
     </ParameterList>
 
