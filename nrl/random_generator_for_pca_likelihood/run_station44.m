@@ -40,6 +40,26 @@ for j = 1:4
 end
 
 fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/station',num2str(optimParameters.station),'/output.txt'),'w');
+[ln,lt] = meshgrid(1e-2*(5:5:25)*sqrt(50^2+25^2), 1e-2*(4:4:20)*sqrt(50^2+25^2));
+ln = ln(:);
+lt = lt(:);
+
+for k = 1:length(ln)
+    modelParameters.lc    = [ln(k), lt(k)];
+    modelParameters.delta = repmat(0.1,1,4);
+
+    optimParameters.tol   = 1e-6;
+    optimParameters.nmc   = 100;
+
+    output{k} = costFunction(modelParameters,optimParameters,Yexpi);
+    fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',k,ln(k),lt(k),0.1,output{k}.fval);
+    output{k}.ln = ln(k);
+    output{k}.lt = lt(k);
+    output{k}.delta = 0.1;
+    output{k}.nmc = 100;
+    save(strcat('result_station',num2str(optimParameters.station),'_11_07_2018.mat'),'output','-v7.3');
+end
+
 %for k = 16:-1:1
 %    modelParameters.lc    = [ln(k), lt(k)];
 %    modelParameters.delta = repmat(delta(k),1,4);
@@ -93,19 +113,18 @@ fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_
 %end
 
 %I = [3 5; 4 5; 5 5; 4 4];
-ln     = [repmat(1e-2*(20)*sqrt(50^2+25^2),3,1); 15; 15];
-lt     = [repmat(1e-2*(24)*sqrt(50^2+25^2),3,1); 0.1; 1];
-delta  = [0.1, 0.15, 0.20, 0.1, 0.1, 0.1, 0.1];
-output = cell(5,1);
+%lt     = [repmat(1e-2*(24)*sqrt(50^2+25^2),3,1); 0.1; 1];
+%delta  = [0.1, 0.15, 0.20, 0.1, 0.1, 0.1, 0.1];
+%output = cell(5,1);
 
-for l = 1:5
- modelParameters.lc    = [ln(l), lt(l)];
- modelParameters.delta = repmat(delta(l),1,4);
+%for l = 1:5
+% modelParameters.lc    = [ln(l), lt(l)];
+% modelParameters.delta = repmat(delta(l),1,4);
 
- optimParameters.tol   = 1e-6;
- optimParameters.nmc   = 100;
+% optimParameters.tol   = 1e-6;
+% optimParameters.nmc   = 100;
 
- output{l} = costFunction(modelParameters,optimParameters,Yexpi);
- fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
- save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_additionalpoints.mat'),'output','-v7.3');
-end
+% output{l} = costFunction(modelParameters,optimParameters,Yexpi);
+% fprintf(fd,'%d \t %f \t %f \t %f \t %f\n',l,modelParameters.lc(1),modelParameters.lc(2),modelParameters.delta(1),output{l}.fval);
+% save(strcat('result_station',num2str(optimParameters.station),'_nmc=100_ShinozukaCorrected_additionalpoints.mat'),'output','-v7.3');
+%end
