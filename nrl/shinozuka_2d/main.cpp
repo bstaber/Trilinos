@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
 
       lhs_root.PutScalar(0.0);
       lhs_root.Export(V,ExportOnRoot,Insert);
-      std::string filename = path + "shinozuka_2d_" + std::to_string(order) + "_" + std::to_string(L1) + "_" + std::to_string(L2) + ".mtx";
+      std::string filename = path + "shinozuka_2d_" + std::to_string(order) + "_" + std::to_string(int(L1)) + "_" + std::to_string(int(L2) + ".mtx";
       int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
     }
 
