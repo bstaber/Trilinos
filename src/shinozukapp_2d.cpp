@@ -47,8 +47,8 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
                 phi = phi_(rng);
                 w   = std::sqrt(-std::log(psi));
 
-                k1 = (M_PI/l1)*ti*c + (M_PI/l2)*tj*s;
-                k2 = (M_PI/l2)*tj*c - (M_PI/l1)*ti*s;
+                k1    = (M_PI/l1)*ti*c + (M_PI/l2)*tj*s;
+                k2    = (M_PI/l2)*tj*c - (M_PI/l1)*ti*s;
                 DELTA = l1*l2*fabs((c/l1) + (s/l2))*fabs((c/l2)-(s/l1));
                 for (int inode=0; inode<v.MyLength(); ++inode){
                     node = Mesh.local_nodes_without_ghosts[inode];
