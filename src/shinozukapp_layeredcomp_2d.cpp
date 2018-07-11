@@ -32,6 +32,7 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
     double xi, eta, zeta;
     double ti, tj;
     double si, sj;
+    double k1, k2;
     double psi, phi, w, arg;
 
     Epetra_SerialDenseVector vector_x(3);
@@ -64,6 +65,9 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
                     psi = psi_(rng);
                     phi = phi_(rng);
                     w = std::sqrt(-std::log(psi));
+                    k1    = (M_PI/l1)*ti*c + (M_PI/l2)*tj*s;
+                    k2    = (M_PI/l2)*tj*c - (M_PI/l1)*ti*s;
+
                     for (int e_lid=il; e_lid<n_local_cells; e_lid++){
                         e_gid = Mesh.local_cells[e_lid];
                         if(phase[e_gid]==il){
@@ -87,7 +91,8 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
                                         break;
                                 }
                                 vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
-                                arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(vector_x(0)*s+vector_x(1)*c) + (M_PI/l2)*tj*(-vector_x(0)*c+vector_x(1)*s);
+                                //arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(vector_x(0)*s+vector_x(1)*c) + (M_PI/l2)*tj*(-vector_x(0)*c+vector_x(1)*s);
+                                arg = 2.0*M_PI*phi + k1*vector_x(0) + k2*vector_x(1);
                                 v(e_lid*n_gauss_cells+gp) += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                             }
                         }
