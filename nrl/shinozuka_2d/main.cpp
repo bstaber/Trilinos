@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double pa = 2.0*M_PI*60.0/360.0;
 
-    int nmc = 1;
+    int nmc = 1000;
 
     Epetra_MultiVector V(StandardMap,nmc);
 
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
 
       lhs_root.PutScalar(0.0);
       lhs_root.Export(V,ExportOnRoot,Insert);
-      std::string filename = path + "shinozuka_2d_" + std::to_string(order) + "_" + std::to_string(int(L1)) + "_" + std::to_string(int(L2)) + ".mtx";
+      std::string filename = path + "shinozuka_2d_" + std::to_string(order) + "_" + std::to_string(int(L1)) + "_" + std::to_string(int(L2)) + "_" + std::to_string(nmc) + ".mtx";
       int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
     }
 
