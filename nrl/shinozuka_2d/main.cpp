@@ -53,11 +53,11 @@ int main(int argc, char *argv[]){
     double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double pa = 2.0*M_PI*60.0/360.0;
 
-    int nmc = 10000;
+    int nmc = 1000;
 
     Epetra_MultiVector V(StandardMap,nmc);
 
-    for (int order=1; order<=1000; order+=10){
+    for (int order=1; order<=100; ++order){
 
       for (int real=0; real<nmc; ++real){
         Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
