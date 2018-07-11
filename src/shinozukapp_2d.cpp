@@ -50,7 +50,6 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
                 k1 = (M_PI/l1)*ti*c + (M_PI/l2)*tj*s;
                 k2 = (M_PI/l2)*tj*c - (M_PI/l1)*ti*s;
                 DELTA = l1*l2*fabs((c/l1) + (s/l2))*fabs((c/l2)-(s/l1));
-                std::cout << "DELTA = " << DELTA << "\n";
                 for (int inode=0; inode<v.MyLength(); ++inode){
                     node = Mesh.local_nodes_without_ghosts[inode];
                     x    = Mesh.nodes_coord[3*node+0];
