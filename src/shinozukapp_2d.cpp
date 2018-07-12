@@ -47,8 +47,8 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
                 phi = phi_(rng);
                 w   = std::sqrt(-std::log(psi));
 
-                k1    = (M_PI/l1)*ti*c + (M_PI/l2)*tj*s;
-                k2    = (M_PI/l2)*tj*c - (M_PI/l1)*ti*s;
+                //k1    = (M_PI/l1)*ti*c + (M_PI/l2)*tj*s;
+                //k2    = (M_PI/l2)*tj*c - (M_PI/l1)*ti*s;
                 //DELTA = l1*l2*fabs((c/l1) + (s/l2))*fabs((c/l2)-(s/l1));
                 for (int inode=0; inode<v.MyLength(); ++inode){
                     node = Mesh.local_nodes_without_ghosts[inode];
@@ -57,7 +57,8 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
                     //arg  = 2.0*M_PI*phi + (M_PI/l1)*ti*x + (M_PI/l2)*tj*y;
                     //arg = 2.0*M_PI*phi + (M_PI/l1)*ti*(x*s+y*c) + (M_PI/l2)*tj*(x*c-y*s);
                     //arg = 2.0*M_PI*phi + (M_PI*ti*c/l1 + M_PI*tj*s/l2)*x + (-M_PI*ti*s/l1 + M_PI*tj*c/l2)*y;
-                    arg = 2.0*M_PI*phi + k1*x + k2*y;
+                    //arg = 2.0*M_PI*phi + k1*x + k2*y;
+                    arg = 2.0*M_PI*phi + (M_PI/l1)*t1*(x1*c - x2*s) + (M_PI/l2)*t2*(x1*s + x2*c);
                     v[inode] += std::sqrt(2.0*si*sj)*w*std::cos(arg);
                 }
 
