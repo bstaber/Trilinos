@@ -59,7 +59,7 @@ fprintf(fp, '<ParameterList>\n\n');
 
     fprintf(fp, '\t<ParameterList name="Shinozuka">\n');
         fprintf(fp, '\t\t<Parameter name="nmc"    type="int"    value="%d"/>\n',nmc);
-        fprintf(fp, '\t\t<Parameter name="order"  type="int"    value="128"/>\n');
+        fprintf(fp, '\t\t<Parameter name="order"  type="int"    value="32"/>\n');
         fprintf(fp, '\t\t<Parameter name="lx"     type="double" value="%f"/>\n',lc(1));
         fprintf(fp, '\t\t<Parameter name="ly"     type="double" value="%f"/>\n',lc(2));
         fprintf(fp, '\t\t<Parameter name="delta1" type="double" value="%f"/>\n',delta(1));
