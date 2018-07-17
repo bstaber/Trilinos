@@ -99,6 +99,8 @@ public:
         GRF_Generator->rng.seed(seeds(0));
         GRF_Generator->generator_gauss_points(w1_shino,*Mesh,phase);
 
+        std::cout << w1_shino << "\n";
+
         GRF_Generator->rng.seed(seeds(1));
         GRF_Generator->generator_gauss_points(w2_shino,*Mesh,phase);
 
