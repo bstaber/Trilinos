@@ -53,8 +53,8 @@
 	<ParameterList name="Shinozuka">
 		<Parameter name="nmc"    type="int"    value="1"/>
 		<Parameter name="order"  type="int"    value="10"/>
-		<Parameter name="lx"     type="double" value="15.0"/>
-		<Parameter name="ly"     type="double" value="0.1"/>
+		<Parameter name="lx"     type="double" value="2.795085"/>
+		<Parameter name="ly"     type="double" value="2.236068"/>
 		<Parameter name="delta1" type="double" value="0.100000"/>
 		<Parameter name="delta2" type="double" value="0.100000"/>
 		<Parameter name="delta3" type="double" value="0.100000"/>
