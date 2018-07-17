@@ -54,6 +54,9 @@ int main(int argc, char *argv[]){
     double b = 6.0;
     int n = 100;
     double v;
+
+    double alpha = 1.0/(0.1*0.1);
+    double beta  = 1771.0*0.1*0.1;
     for (int i=0; i<n; ++n){
        v = a + (b-a)*double(i)/double(n-1);
        double erfx = boost::math::erf<double>(v);
