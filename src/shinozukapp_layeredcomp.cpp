@@ -23,7 +23,7 @@ double shinozuka_layeredcomp::s_tau(double & tau){
 }
 
 void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v, mesh & Mesh, std::vector<int> & phase){
-    
+
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
     int n_gauss_cells = Mesh.n_gauss_cells;
@@ -32,11 +32,11 @@ void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v,
     double ti, tj, tk;
     double si, sj, sk;
     double psi, phi, w, arg;
-    
+
     Epetra_SerialDenseVector vector_x(3);
     Epetra_SerialDenseVector shape_functions(Mesh.el_type);
     Epetra_SerialDenseMatrix matrix_X(3,Mesh.el_type);
-    
+
     for (int il=0; il<32; ++il){
         for (int i=1; i<=order; ++i){
             ti = tau_beta<int>(i);
@@ -82,11 +82,11 @@ void shinozuka_layeredcomp::generator_gauss_points(Epetra_SerialDenseVector & v,
             }
         }
     }
-    
+
 }
 
 void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector & v, mesh & Mesh, std::vector<int> & phase, double & xi, double & eta, double & zeta){
-    
+
     int node, e_gid;
     int n_local_cells = Mesh.n_local_cells;
     int n_gauss_cells = Mesh.n_gauss_cells;
@@ -94,11 +94,11 @@ void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector &
     double ti, tj, tk;
     double si, sj, sk;
     double psi, phi, w, arg;
-    
+
     Epetra_SerialDenseVector vector_x(3);
     Epetra_SerialDenseVector shape_functions(Mesh.el_type);
     Epetra_SerialDenseMatrix matrix_X(3,Mesh.el_type);
-    
+
     switch (Mesh.el_type){
         case 4:
             tetra4::shape_functions(shape_functions, xi, eta, zeta);
@@ -110,7 +110,7 @@ void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector &
             tetra10::shape_functions(shape_functions, xi, eta, zeta);
             break;
     }
-    
+
     for (int il=0; il<32; ++il){
         for (int i=1; i<=order; ++i){
             ti = tau_beta<int>(i);
@@ -142,12 +142,12 @@ void shinozuka_layeredcomp::generator_one_gauss_point(Epetra_SerialDenseVector &
             }
         }
     }
-    
+
 }
 
 void shinozuka_layeredcomp::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta){
     for (unsigned int i=0; i<V.MyLength(); ++i){
-        double erfx = boost::math::erf<double>(V[i]);
+        double erfx = boost::math::erf<double>(V[i]/std::sqrt(2.0));
         double y = (1.0/2.0)*(1.0 + erfx);
         double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
         G[i] = yinv*beta;
@@ -156,7 +156,7 @@ void shinozuka_layeredcomp::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, dou
 
 void shinozuka_layeredcomp::icdf_beta(Epetra_Vector & V, Epetra_Vector & B, double & tau1, double & tau2){
     for (unsigned int i=0; i<V.MyLength(); ++i){
-        double erfx = boost::math::erf<double>(V[i]);
+        double erfx = boost::math::erf<double>(V[i]/std::sqrt(2.0));
         double y = (1.0/2.0)*(1.0 + erfx);
         B[i] = boost::math::ibeta_inv<double,double,double>(tau1,tau2,y);
     }
@@ -164,5 +164,3 @@ void shinozuka_layeredcomp::icdf_beta(Epetra_Vector & V, Epetra_Vector & B, doub
 
 shinozuka_layeredcomp::~shinozuka_layeredcomp(){
 }
-
-

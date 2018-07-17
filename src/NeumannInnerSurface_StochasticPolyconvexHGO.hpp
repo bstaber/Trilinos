@@ -197,7 +197,7 @@ public:
     }
 
     double icdf_gamma(double & w, double & alpha, double & beta){
-        double erfx = boost::math::erf<double>(w);
+        double erfx = boost::math::erf<double>(w/std::sqrt(2.0));
         double y = (1.0/2.0)*(1.0 + erfx);
         double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
         double z = yinv*beta;
@@ -205,7 +205,7 @@ public:
     }
 
     double icdf_beta(double & w, double & tau1, double & tau2){
-        double erfx = boost::math::erf<double>(w);
+        double erfx = boost::math::erf<double>(w/std::sqrt(2.0));
         double y = (1.0/2.0)*(1.0 + erfx);
         double z = boost::math::ibeta_inv<double,double,double>(tau1,tau2,y);
         return z;

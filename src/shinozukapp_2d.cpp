@@ -66,7 +66,7 @@ void shinozuka_2d::generator(Epetra_Vector & v, mesh & Mesh){
 
 void shinozuka_2d::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alpha, double & beta){
     for (unsigned int i=0; i<V.MyLength(); ++i){
-        double erfx = boost::math::erf<double>(V[i]);
+        double erfx = boost::math::erf<double>(V[i]/std::sqrt(2.0));
         double y = (1.0/2.0)*(1.0 + erfx);
         double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
         G[i] = yinv*beta;
@@ -75,7 +75,7 @@ void shinozuka_2d::icdf_gamma(Epetra_Vector & V, Epetra_Vector & G, double & alp
 
 void shinozuka_2d::icdf_beta(Epetra_Vector & V, Epetra_Vector & B, double & tau1, double & tau2){
     for (unsigned int i=0; i<V.MyLength(); ++i){
-        double erfx = boost::math::erf<double>(V[i]);
+        double erfx = boost::math::erf<double>(V[i]/std::sqrt(2.0));
         double y = (1.0/2.0)*(1.0 + erfx);
         B[i] = boost::math::ibeta_inv<double,double,double>(tau1,tau2,y);
     }
