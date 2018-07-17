@@ -19,29 +19,29 @@
 #include <boost/math/special_functions/beta.hpp>
 
 int main(int argc, char *argv[]){
-    
+
     std::string    xmlInFileName = "";
     std::string    extraXmlFile = "";
     std::string    xmlOutFileName = "paramList.out";
-    
+
     Teuchos::CommandLineProcessor  clp(false);
     clp.setOption("xml-in-file",&xmlInFileName,"The XML file to read into a parameter list");
     clp.setDocString("TO DO.");
-    
+
     Teuchos::CommandLineProcessor::EParseCommandLineReturn
     parse_return = clp.parse(argc,argv);
     if( parse_return != Teuchos::CommandLineProcessor::PARSE_SUCCESSFUL ) {
         std::cout << "\nEnd Result: TEST FAILED" << std::endl;
         return parse_return;
     }
-	
+
 #ifdef HAVE_MPI
     MPI_Init(&argc, &argv);
     Epetra_MpiComm Comm(MPI_COMM_WORLD);
 #else
     Epetra_SerialComm Comm;
 #endif
-    
+
     Teuchos::RCP<Teuchos::ParameterList> paramList = Teuchos::rcp(new Teuchos::ParameterList);
     if(xmlInFileName.length()) {
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
@@ -49,12 +49,21 @@ int main(int argc, char *argv[]){
             paramList->print(std::cout,2,true,true);
         }
     }
-    
-    
-    double mean = 0.0;
+
+    boost::random::mt19937 rng;
+    boost::random::uniform_real_distribution<> phi_(0.0,0.1);
+
+    rng.seed(0);
+    std::cout << phi_(rng) << "\n";
+    std::cout << phi_(rng) << "\n";
+    std::cout << phi_(rng) << "\n";
+    rng.seed(0);
+    std::cout << phi_(rng) << "\n";
+    std::cout << phi_(rng) << "\n";
+    std::cout << phi_(rng) << "\n";
+    /*double mean = 0.0;
     double stan = 1.0;
     boost::random::normal_distribution<> w(mean,stan);
-    
     boost::random::mt19937 rng;
     rng.seed(std::time(0));
     for (unsigned int i=0; i<10; ++i){
@@ -66,12 +75,12 @@ int main(int argc, char *argv[]){
         double z = yinv*10.0*0.1*0.1;
         double z2 = boost::math::ibeta_inv<double,double,double>(5.0,4.0,y);
         std::cout << x << std::setw(20) << y << std::setw(20) << z << std::setw(20) << z2 << "\n";
-    }
-    
- 
+    }*/
+
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
 return 0;
-    
+
 }
