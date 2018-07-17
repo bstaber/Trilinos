@@ -86,11 +86,11 @@ int main(int argc, char *argv[]){
     interface->set_plyagl(plyagl);
 
     Epetra_IntSerialDenseVector seeds(5);
-    seeds(0) = 5*(11+0*nmc)+0;
-    seeds(1) = 5*(11+0*nmc)+1;
-    seeds(2) = 5*(11+0*nmc)+2;
-    seeds(3) = 5*(11+0*nmc)+3;
-    seeds(4) = 5*(11+0*nmc)+4;
+    seeds(0) = 5*(11+0*100)+0;
+    seeds(1) = 5*(11+0*100)+1;
+    seeds(2) = 5*(11+0*100)+2;
+    seeds(3) = 5*(11+0*100)+3;
+    seeds(4) = 5*(11+0*100)+4;
     interface->RandomFieldGenerator(seeds);
 
     int e_gid;
