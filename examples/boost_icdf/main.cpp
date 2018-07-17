@@ -54,28 +54,28 @@ int main(int argc, char *argv[]){
     boost::random::uniform_real_distribution<> phi_(0.0,0.1);
 
     rng.seed(0);
-    std::cout << "Seed = 0: \n"
+    std::cout << "Seed = 0: \n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
     std::cout << "\n";
 
     rng.seed(1);
-    std::cout << "Seed = 1: \n"
+    std::cout << "Seed = 1: \n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
     std::cout << "\n";
 
     rng.seed(0);
-    std::cout << "Seed = 0: \n"
+    std::cout << "Seed = 0: \n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
     std::cout << "\n";
 
     rng.seed(1);
-    std::cout << "Seed = 1: \n"
+    std::cout << "Seed = 1: \n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
     std::cout << phi_(rng) << "\n";
