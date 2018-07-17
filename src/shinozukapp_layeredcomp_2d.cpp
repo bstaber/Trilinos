@@ -15,7 +15,7 @@ double shinozuka_layeredcomp_2d::tau_beta(typearg & beta){
 }
 
 double shinozuka_layeredcomp_2d::s_tau(double & tau){
-    s = (2.0/double(order))*(1.0-fabs(tau));
+    double s = (2.0/double(order))*(1.0-fabs(tau));
     return s;
 }
 
