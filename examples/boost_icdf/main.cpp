@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
     double beta  = 1771.0*0.1*0.1;
     for (int i=0; i<n; ++i){
        v = a + (b-a)*double(i)/double(n-1);
-       double erfx = boost::math::erf<double>(v);
+       double erfx = boost::math::erf<double>(v/std::sqrt(2.0));
        double y = (1.0/2.0)*(1.0 + erfx);
        double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
        double g = yinv;
