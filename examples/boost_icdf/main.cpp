@@ -50,36 +50,19 @@ int main(int argc, char *argv[]){
         }
     }
 
-    boost::random::mt19937 rng;
-    boost::random::uniform_real_distribution<> phi_(0.0,0.1);
+    double a = -6.0;
+    double b = 6.0;
+    int n = 100;
+    double v;
+    for (int i=0; i<n; ++n){
+       v = a + (b-a)*double(i)/double(n-1);
+       double erfx = boost::math::erf<double>(v);
+       double y = (1.0/2.0)*(1.0 + erfx);
+       double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
+       double g = yinv*beta;
+       std::cout << v << std::setw(15) << g << "\n";
+    }
 
-    rng.seed(0);
-    std::cout << "Seed = 0: \n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << "\n";
-
-    rng.seed(1);
-    std::cout << "Seed = 1: \n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << "\n";
-
-    rng.seed(0);
-    std::cout << "Seed = 0: \n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << "\n";
-
-    rng.seed(1);
-    std::cout << "Seed = 1: \n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << phi_(rng) << "\n";
-    std::cout << "\n";
     /*double mean = 0.0;
     double stan = 1.0;
     boost::random::normal_distribution<> w(mean,stan);
