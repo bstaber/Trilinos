@@ -61,6 +61,9 @@ void shinozuka_layeredcomp_2d::generator_gauss_points(Epetra_SerialDenseVector &
 
                     psi = psi_(rng);
                     phi = phi_(rng);
+
+                    std::cout << psi << std::setw(10) << phi << "\n";
+
                     w = std::sqrt(-std::log(psi));
                     k1    = (M_PI/l1)*ti*c + (M_PI/l2)*tj*s;
                     k2    = (M_PI/l2)*tj*c - (M_PI/l1)*ti*s;
