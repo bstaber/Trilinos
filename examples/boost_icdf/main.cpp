@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
        double erfx = boost::math::erf<double>(v/std::sqrt(2.0));
        double y = (1.0/2.0)*(1.0 + erfx);
        double yinv = boost::math::gamma_p_inv<double,double>(alpha,y);
-       double g = yinv;
+       double g = yinv*beta;
 
        std::cout << v << std::setw(15) << g << "\n";
     }
