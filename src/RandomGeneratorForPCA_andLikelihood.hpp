@@ -113,6 +113,11 @@ public:
                 for (unsigned int j=0; j<nrldata->local_id_faces.size(); ++j){
                     RandomVariableX[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
+                if (printRandomVariableY){
+                  std::string pathToRandomVariableX = fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
+                  int error = printIndicatorY(pathToRandomVariableX, RandomVariableX);
+                  return error;
+                }
             }
             else{
                 if (comm->MyPID()==0){
@@ -122,14 +127,7 @@ public:
             }
 
         }
-        if (printRandomVariableY){
-          std::string pathToRandomVariableX = fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
-          int error = printIndicatorY(pathToRandomVariableX, RandomVariableX);
-          return error;
-        }
-        else{
-          return 0;
-        }
+        return error;
     }
 
     int printIndicatorY(std::string filename, Epetra_Vector & X){
