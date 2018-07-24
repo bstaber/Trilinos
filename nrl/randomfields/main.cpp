@@ -81,7 +81,7 @@ int main(int argc, char *argv[]){
     omega(4) = correlation_lengths(0);
     omega(5) = correlation_lengths(1);
 
-    double plyagl = plyagls(2)*2.0*M_PI/360.0;
+    double plyagl = plyagls(0)*2.0*M_PI/360.0;
     interface->setParameters(mean_parameters,exponents,omega);
     interface->set_plyagl(plyagl);
 
