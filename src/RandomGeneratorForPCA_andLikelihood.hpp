@@ -72,6 +72,7 @@ public:
         Epetra_Vector RandomVariableX(*MapExpPoints);
         RandomVariableX.PutScalar(0.0);
 
+        int error;
         newton->Initialization();
         for (unsigned int i=0; i<nrldata->boundaryconditions.Length(); ++i){
             newton->setParameters(_paramList);
@@ -82,7 +83,7 @@ public:
                 newton->bc_disp=nrldata->boundaryconditions(i)-nrldata->boundaryconditions(i-1);
             }
 
-            int error = newton->Solve_with_Aztec(printNewtonIterations);
+            error = newton->Solve_with_Aztec(printNewtonIterations);
 
             if (!error){
 
@@ -113,21 +114,24 @@ public:
                 for (unsigned int j=0; j<nrldata->local_id_faces.size(); ++j){
                     RandomVariableX[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);
                 }
-                if (printRandomVariableY){
-                  std::string pathToRandomVariableX = fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
-                  int error = printIndicatorY(pathToRandomVariableX, RandomVariableX);
-                  return error;
-                }
             }
             else{
                 if (comm->MyPID()==0){
                     std::cout << "Newton failed at loading " << i << ".\n";
                     std::cout << "GIndicator(" << i << ") set to 0.0.\n";
                 }
+                error = 1;
+                break;
             }
-
         }
-        return error;
+        if (printRandomVariableY && !error){
+          std::string pathToRandomVariableX = fullOutputPath + "RandomVariableY_angle=" + std::to_string(int(plyagl_deg)) + "_nmc=" + std::to_string(nmc) + ".mtx";
+          int error = printIndicatorY(pathToRandomVariableX, RandomVariableX);
+          return error;
+        }
+        else{
+          return error;
+        }
     }
 
     int printIndicatorY(std::string filename, Epetra_Vector & X){
