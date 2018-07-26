@@ -5,8 +5,8 @@ close all
 modelParameters.mu   = 1e3*[1.7710, 0.0658, 0.0680, 1.4152, 0.0718];
 modelParameters.beta = [25.4185, 0.0432];
 
-optimParameters.station = 44;
-optimParameters.np      = 28;
+optimParameters.station = 16;
+optimParameters.np      = 8;
 
 load('eij.mat');
 
@@ -27,7 +27,7 @@ fd = fopen(strcat('/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_
 ln = ln(:);
 lt = lt(:);
 
-for k = 1:length(ln)
+for k = 6:10
     modelParameters.lc    = [ln(k), lt(k)];
     modelParameters.delta = repmat(0.1,1,4);
 
@@ -40,5 +40,5 @@ for k = 1:length(ln)
     output{k}.lt = lt(k);
     output{k}.delta = 0.1;
     output{k}.nmc = 100;
-    save(strcat('result_station',num2str(optimParameters.station),'_11_07_2018.mat'),'output','-v7.3');
+    save(strcat('result_station',num2str(optimParameters.station),'_26_07_2018.mat'),'output','-v7.3');
 end
