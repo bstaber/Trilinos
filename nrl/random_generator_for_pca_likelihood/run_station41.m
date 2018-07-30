@@ -6,7 +6,7 @@ modelParameters.mu   = 1e3*[1.7710, 0.0658, 0.0680, 1.4152, 0.0718];
 modelParameters.beta = [25.4185, 0.0432];
 
 optimParameters.station = 41;
-optimParameters.np      = 28;
+optimParameters.np      = 48;
 
 load('eij.mat');
 
@@ -40,5 +40,5 @@ for k = 1:length(ln)
     output{k}.lt = lt(k);
     output{k}.delta = 0.1;
     output{k}.nmc = 100;
-    save(strcat('result_station',num2str(optimParameters.station),'_11_07_2018.mat'),'output','-v7.3');
+    save(strcat('result_station',num2str(optimParameters.station),'_30_07_2018.mat'),'output','-v7.3');
 end
