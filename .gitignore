@@ -11,3 +11,4 @@ src/femesh/
 *.m~
 nrl/old_tests
 nrl/hide
+uqnonlinhom/
