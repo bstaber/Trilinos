@@ -5,6 +5,7 @@ deprec/
 xml/
 .DS_Store
 html/
+doc/html/
 src/shape/
 src/femesh/
 *.m~
