@@ -8,7 +8,7 @@ modelParameters.beta = [25.4185, 0.0432];
 optimParameters.station = 15;
 optimParameters.np      = 8;
 
-load('eij.mat');
+load('/home/s/staber/Trilinos_results/nrl/data/eij.mat');
 
 angle_to_id = [5,6; 1,4; 2,3; 7,8];
 Yexpi = cell(4,1);
