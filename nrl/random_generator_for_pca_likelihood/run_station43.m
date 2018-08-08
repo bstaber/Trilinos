@@ -40,5 +40,5 @@ for k = 1:length(ln)
     output{k}.lt = lt(k);
     output{k}.delta = 0.1;
     output{k}.nmc = 100;
-    save(strcat('result_station',num2str(optimParameters.station),'_11_07_2018.mat'),'output','-v7.3');
+    save(strcat('result_station',num2str(optimParameters.station),'_8_87_2018.mat'),'output','-v7.3');
 end
