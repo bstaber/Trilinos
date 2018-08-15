@@ -291,9 +291,9 @@
 <!-- Node19 -->
 <g id="node20" class="node">
 <title>Node19</title>
-<g id="a_node20"><a xlink:href="../../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html" target="_top" xlink:title="NeumannInnerSurface\l_PolyconvexHGO">
-<polygon fill="#ffffff" stroke="#000000" points="669,-49.5 669,-79.5 783,-79.5 783,-49.5 669,-49.5"/>
-<text text-anchor="start" x="677" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">NeumannInnerSurface</text>
+<g id="a_node20"><a xlink:href="../../d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html" target="_top" xlink:title="neumannInnerSurface\l_PolyconvexHGO">
+<polygon fill="#ffffff" stroke="#000000" points="670,-49.5 670,-79.5 782,-79.5 782,-49.5 670,-49.5"/>
+<text text-anchor="start" x="678" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">neumannInnerSurface</text>
 <text text-anchor="middle" x="726" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_PolyconvexHGO</text>
 </a>
 </g>
@@ -301,15 +301,15 @@
 <!-- Node16&#45;&gt;Node19 -->
 <g id="edge19" class="edge">
 <title>Node16&#45;&gt;Node19</title>
-<path fill="none" stroke="#191970" d="M579.8086,-101.4246C606.6947,-94.6338 640.4376,-86.1111 668.7294,-78.9653"/>
+<path fill="none" stroke="#191970" d="M579.5706,-101.4848C606.8515,-94.5942 641.2511,-85.9057 669.8526,-78.6816"/>
 <polygon fill="#191970" stroke="#191970" points="578.7041,-98.0936 569.8657,-103.936 580.4183,-104.8805 578.7041,-98.0936"/>
 </g>
 <!-- Node20 -->
 <g id="node21" class="node">
 <title>Node20</title>
-<g id="a_node21"><a xlink:href="../../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html" target="_top" xlink:title="NeumannInnerSurface\l_StochasticPolyconvexHGO">
+<g id="a_node21"><a xlink:href="../../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html" target="_top" xlink:title="neumannInnerSurface\l_StochasticPolyconvexHGO">
 <polygon fill="#ffffff" stroke="#000000" points="655,-.5 655,-30.5 797,-30.5 797,-.5 655,-.5"/>
-<text text-anchor="start" x="663" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">NeumannInnerSurface</text>
+<text text-anchor="start" x="663" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">neumannInnerSurface</text>
 <text text-anchor="middle" x="726" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO</text>
 </a>
 </g>

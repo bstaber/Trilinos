@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 1929;
+var viewWidth = 1812;
 var viewHeight = 307;
 var sectionId = 'dynsection-1';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-1';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>src/hyperelasticity.hpp</title>
-<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-303 1925,-303 1925,4 -4,4"/>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-303 1808,-303 1808,4 -4,4"/>
 <!-- Node35 -->
 <g id="node1" class="node">
 <title>Node35</title>
@@ -92,18 +92,18 @@ var sectionId = 'dynsection-1';
 <path fill="none" stroke="#191970" d="M1229,-269.3693C1229,-260.681 1229,-250.6241 1229,-242.5446"/>
 <polygon fill="#191970" stroke="#191970" points="1225.5001,-269.3906 1229,-279.3906 1232.5001,-269.3907 1225.5001,-269.3906"/>
 </g>
-<!-- Node63 -->
-<g id="node29" class="node">
-<title>Node63</title>
-<g id="a_node29"><a xlink:href="../../d1/dc9/hyperelasticity_8cpp.html" target="_top" xlink:title="src/hyperelasticity.cpp">
+<!-- Node62 -->
+<g id="node28" class="node">
+<title>Node62</title>
+<g id="a_node28"><a xlink:href="../../d1/dc9/hyperelasticity_8cpp.html" target="_top" xlink:title="src/hyperelasticity.cpp">
 <polygon fill="#ffffff" stroke="#000000" points="1309.5,-218 1309.5,-237 1424.5,-237 1424.5,-218 1309.5,-218"/>
 <text text-anchor="middle" x="1367" y="-225" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/hyperelasticity.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node35&#45;&gt;Node63 -->
-<g id="edge28" class="edge">
-<title>Node35&#45;&gt;Node63</title>
+<!-- Node35&#45;&gt;Node62 -->
+<g id="edge27" class="edge">
+<title>Node35&#45;&gt;Node62</title>
 <path fill="none" stroke="#191970" d="M1259.9894,-275.1895C1286.0622,-263.5701 1322.6602,-247.2601 1345.5889,-237.0419"/>
 <polygon fill="#191970" stroke="#191970" points="1258.2718,-272.1231 1250.5625,-279.3906 1261.1213,-278.5169 1258.2718,-272.1231"/>
 </g>
@@ -366,34 +366,34 @@ var sectionId = 'dynsection-1';
 <!-- Node56 -->
 <g id="node22" class="node">
 <title>Node56</title>
-<g id="a_node22"><a xlink:href="../../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/NeumannInnerSurface\l_PolyconvexHGO.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1390.5,-140 1390.5,-170 1521.5,-170 1521.5,-140 1390.5,-140"/>
-<text text-anchor="start" x="1398.5" y="-158" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/NeumannInnerSurface</text>
-<text text-anchor="middle" x="1456" y="-147" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_PolyconvexHGO.hpp</text>
+<g id="a_node22"><a xlink:href="../../d6/d14/neumann_inner_surface___polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/neumannInnerSurface\l_PolyconvexHGO.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="1391,-140 1391,-170 1519,-170 1519,-140 1391,-140"/>
+<text text-anchor="start" x="1399" y="-158" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/neumannInnerSurface</text>
+<text text-anchor="middle" x="1455" y="-147" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_PolyconvexHGO.hpp</text>
 </a>
 </g>
 </g>
 <!-- Node50&#45;&gt;Node56 -->
 <g id="edge21" class="edge">
 <title>Node50&#45;&gt;Node56</title>
-<path fill="none" stroke="#191970" d="M1285.9299,-209.3175C1323.9229,-197.1832 1373.278,-181.42 1409.0257,-170.0028"/>
-<polygon fill="#191970" stroke="#191970" points="1284.4956,-206.1014 1276.0345,-212.478 1286.6254,-212.7695 1284.4956,-206.1014"/>
+<path fill="none" stroke="#191970" d="M1285.6791,-209.3175C1323.5048,-197.1832 1372.6424,-181.42 1408.2326,-170.0028"/>
+<polygon fill="#191970" stroke="#191970" points="1284.2802,-206.0905 1275.8273,-212.478 1286.4185,-212.756 1284.2802,-206.0905"/>
 </g>
 <!-- Node59 -->
 <g id="node25" class="node">
 <title>Node59</title>
-<g id="a_node25"><a xlink:href="../../da/d42/_neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/NeumannInnerSurface\l_StochasticPolyconvexHGO.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1594.5,-140 1594.5,-170 1755.5,-170 1755.5,-140 1594.5,-140"/>
-<text text-anchor="start" x="1602.5" y="-158" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/NeumannInnerSurface</text>
-<text text-anchor="middle" x="1675" y="-147" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO.hpp</text>
+<g id="a_node25"><a xlink:href="../../dc/da1/neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="src/neumannInnerSurface\l_StochasticPolyconvexHGO.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="1537.5,-140 1537.5,-170 1698.5,-170 1698.5,-140 1537.5,-140"/>
+<text text-anchor="start" x="1545.5" y="-158" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/neumannInnerSurface</text>
+<text text-anchor="middle" x="1618" y="-147" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO.hpp</text>
 </a>
 </g>
 </g>
 <!-- Node50&#45;&gt;Node59 -->
 <g id="edge24" class="edge">
 <title>Node50&#45;&gt;Node59</title>
-<path fill="none" stroke="#191970" d="M1301.5146,-211.8003C1369.0672,-199.7504 1506.0134,-179.4931 1594.2879,-166.6487"/>
-<polygon fill="#191970" stroke="#191970" points="1300.8884,-208.3567 1291.6758,-213.5891 1302.1406,-215.2438 1300.8884,-208.3567"/>
+<path fill="none" stroke="#191970" d="M1301.6744,-211.748C1402.5517,-193.1933 1430.4608,-195.0539 1528,-176 1537.1333,-174.2158 1546.7478,-172.1622 1556.1567,-170.0527"/>
+<polygon fill="#191970" stroke="#191970" points="1300.8699,-208.3376 1291.6795,-213.6088 1302.1512,-215.2193 1300.8699,-208.3376"/>
 </g>
 <!-- Node52 -->
 <g id="node18" class="node">
@@ -431,80 +431,64 @@ var sectionId = 'dynsection-1';
 <g id="node23" class="node">
 <title>Node57</title>
 <g id="a_node23"><a xlink:href="../../d9/d81/arteries_2deterministic__neumann_2main_8cpp.html" target="_top" xlink:title="arteries/deterministic\l_neumann/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1262.5,-67.5 1262.5,-97.5 1369.5,-97.5 1369.5,-67.5 1262.5,-67.5"/>
-<text text-anchor="start" x="1270.5" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/deterministic</text>
-<text text-anchor="middle" x="1316" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_neumann/main.cpp</text>
+<polygon fill="#ffffff" stroke="#000000" points="1266.5,-67.5 1266.5,-97.5 1373.5,-97.5 1373.5,-67.5 1266.5,-67.5"/>
+<text text-anchor="start" x="1274.5" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/deterministic</text>
+<text text-anchor="middle" x="1320" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_neumann/main.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node57 -->
 <g id="edge22" class="edge">
 <title>Node56&#45;&gt;Node57</title>
-<path fill="none" stroke="#191970" d="M1417.8609,-135.2494C1394.8818,-123.3495 1366.0798,-108.4342 1344.9709,-97.5028"/>
-<polygon fill="#191970" stroke="#191970" points="1416.5024,-138.4873 1426.9919,-139.978 1419.7215,-132.2714 1416.5024,-138.4873"/>
+<path fill="none" stroke="#191970" d="M1417.9272,-135.0905C1395.8179,-123.217 1368.2008,-108.3856 1347.9363,-97.5028"/>
+<polygon fill="#191970" stroke="#191970" points="1416.562,-138.3301 1427.0279,-139.978 1419.8739,-132.1632 1416.562,-138.3301"/>
 </g>
 <!-- Node58 -->
 <g id="node24" class="node">
 <title>Node58</title>
 <g id="a_node24"><a xlink:href="../../db/db7/arteries_2vonmises_2main_8cpp.html" target="_top" xlink:title="arteries/vonmises/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1387.5,-73 1387.5,-92 1524.5,-92 1524.5,-73 1387.5,-73"/>
-<text text-anchor="middle" x="1456" y="-80" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/vonmises/main.cpp</text>
+<polygon fill="#ffffff" stroke="#000000" points="1391.5,-73 1391.5,-92 1528.5,-92 1528.5,-73 1391.5,-73"/>
+<text text-anchor="middle" x="1460" y="-80" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/vonmises/main.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node58 -->
 <g id="edge23" class="edge">
 <title>Node56&#45;&gt;Node58</title>
-<path fill="none" stroke="#191970" d="M1456,-129.805C1456,-116.924 1456,-101.9836 1456,-92.3957"/>
-<polygon fill="#191970" stroke="#191970" points="1452.5001,-129.9779 1456,-139.978 1459.5001,-129.978 1452.5001,-129.9779"/>
+<path fill="none" stroke="#191970" d="M1456.7376,-129.805C1457.6259,-116.924 1458.6563,-101.9836 1459.3175,-92.3957"/>
+<polygon fill="#191970" stroke="#191970" points="1453.2324,-129.7608 1456.036,-139.978 1460.2158,-130.2425 1453.2324,-129.7608"/>
 </g>
 <!-- Node60 -->
 <g id="node26" class="node">
 <title>Node60</title>
 <g id="a_node26"><a xlink:href="../../d5/da5/arteries_2boost__gmrf_2gmrf__gauss_2main_8cpp.html" target="_top" xlink:title="arteries/boost_gmrf\l/gmrf_gauss/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1542.5,-67.5 1542.5,-97.5 1655.5,-97.5 1655.5,-67.5 1542.5,-67.5"/>
-<text text-anchor="start" x="1550.5" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/boost_gmrf</text>
-<text text-anchor="middle" x="1599" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/gmrf_gauss/main.cpp</text>
+<polygon fill="#ffffff" stroke="#000000" points="1556.5,-67.5 1556.5,-97.5 1669.5,-97.5 1669.5,-67.5 1556.5,-67.5"/>
+<text text-anchor="start" x="1564.5" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/boost_gmrf</text>
+<text text-anchor="middle" x="1613" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/gmrf_gauss/main.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node59&#45;&gt;Node60 -->
 <g id="edge25" class="edge">
 <title>Node59&#45;&gt;Node60</title>
-<path fill="none" stroke="#191970" d="M1651.7611,-132.8313C1639.7554,-121.3785 1625.4222,-107.7054 1614.7271,-97.5028"/>
-<polygon fill="#191970" stroke="#191970" points="1649.6011,-135.6079 1659.2528,-139.978 1654.4329,-130.5429 1649.6011,-135.6079"/>
+<path fill="none" stroke="#191970" d="M1616.2649,-129.8409C1615.5214,-119.0601 1614.678,-106.8309 1614.0347,-97.5028"/>
+<polygon fill="#191970" stroke="#191970" points="1612.7842,-130.2425 1616.964,-139.978 1619.7676,-129.7608 1612.7842,-130.2425"/>
 </g>
 <!-- Node61 -->
 <g id="node27" class="node">
 <title>Node61</title>
-<g id="a_node27"><a xlink:href="../../d2/dbe/arteries_2boost__gmrf_2gmrf__nodes_2main_8cpp.html" target="_top" xlink:title="arteries/boost_gmrf\l/gmrf_nodes/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1673.5,-67.5 1673.5,-97.5 1786.5,-97.5 1786.5,-67.5 1673.5,-67.5"/>
-<text text-anchor="start" x="1681.5" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/boost_gmrf</text>
-<text text-anchor="middle" x="1730" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/gmrf_nodes/main.cpp</text>
+<g id="a_node27"><a xlink:href="../../da/df3/arteries_2gmrf__neumann_2main_8cpp.html" target="_top" xlink:title="arteries/gmrf_neumann\l/main.cpp">
+<polygon fill="#ffffff" stroke="#000000" points="1688,-67.5 1688,-97.5 1804,-97.5 1804,-67.5 1688,-67.5"/>
+<text text-anchor="start" x="1696" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/gmrf_neumann</text>
+<text text-anchor="middle" x="1746" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node59&#45;&gt;Node61 -->
 <g id="edge26" class="edge">
 <title>Node59&#45;&gt;Node61</title>
-<path fill="none" stroke="#191970" d="M1692.5664,-131.8443C1701.0965,-120.6 1711.0998,-107.4139 1718.6186,-97.5028"/>
-<polygon fill="#191970" stroke="#191970" points="1689.6515,-129.8957 1686.396,-139.978 1695.2284,-134.1264 1689.6515,-129.8957"/>
-</g>
-<!-- Node62 -->
-<g id="node28" class="node">
-<title>Node62</title>
-<g id="a_node28"><a xlink:href="../../da/df3/arteries_2gmrf__neumann_2main_8cpp.html" target="_top" xlink:title="arteries/gmrf_neumann\l/main.cpp">
-<polygon fill="#ffffff" stroke="#000000" points="1805,-67.5 1805,-97.5 1921,-97.5 1921,-67.5 1805,-67.5"/>
-<text text-anchor="start" x="1813" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">arteries/gmrf_neumann</text>
-<text text-anchor="middle" x="1863" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/main.cpp</text>
-</a>
-</g>
-</g>
-<!-- Node59&#45;&gt;Node62 -->
-<g id="edge27" class="edge">
-<title>Node59&#45;&gt;Node62</title>
-<path fill="none" stroke="#191970" d="M1723.3586,-136.3511C1754.6564,-124.2814 1794.8681,-108.7743 1824.0962,-97.5028"/>
-<polygon fill="#191970" stroke="#191970" points="1722.0246,-133.1142 1713.9537,-139.978 1724.5433,-139.6454 1722.0246,-133.1142"/>
+<path fill="none" stroke="#191970" d="M1653.4316,-134.9313C1674.347,-123.0847 1700.3843,-108.337 1719.5123,-97.5028"/>
+<polygon fill="#191970" stroke="#191970" points="1651.4979,-132.0041 1644.5217,-139.978 1654.9479,-138.0949 1651.4979,-132.0041"/>
 </g>
 </g>
 </svg>

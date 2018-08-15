@@ -22,8 +22,8 @@ var hierarchy =
           [ "nearlyIncompressibleHyperelasticity", "d0/d85/classnearly_incompressible_hyperelasticity.html", [
             [ "dirichletInletOutlet_PolyconvexHGO", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html", null ],
             [ "dirichletStripElongation_StochasticPolyconvexHGO", "d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", null ],
-            [ "NeumannInnerSurface_PolyconvexHGO", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html", null ],
-            [ "NeumannInnerSurface_StochasticPolyconvexHGO", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html", null ]
+            [ "neumannInnerSurface_PolyconvexHGO", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html", null ],
+            [ "neumannInnerSurface_StochasticPolyconvexHGO", "db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html", null ]
           ] ]
         ] ]
       ] ]

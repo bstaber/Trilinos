@@ -2,6 +2,7 @@ var searchData=
 [
   ['_7easmesbvp',['~asmeSBVP',['../dd/d60/classasme_s_b_v_p.html#a97607637c97f8533d9e9035e88678fd0',1,'asmeSBVP']]],
   ['_7ebaseclassfem',['~baseClassFEM',['../d2/d31/classbase_class_f_e_m.html#a63c556af3273dce5aeb2a7a160d73df2',1,'baseClassFEM']]],
+  ['_7ebeumanninnersurface_5fpolyconvexhgo',['~beumannInnerSurface_PolyconvexHGO',['../d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#ab0ed389c332afbd108c0041c91e520ab',1,'neumannInnerSurface_PolyconvexHGO']]],
   ['_7eceesbvp',['~ceeSBVP',['../d2/d17/classcee_s_b_v_p.html#aa303a883d12149c6c9bce930a91924e1',1,'ceeSBVP']]],
   ['_7ecompressiblehyperelasticity',['~compressibleHyperelasticity',['../d1/d5c/classcompressible_hyperelasticity.html#abf0fcea06733054b5c0233d23eeda221',1,'compressibleHyperelasticity']]],
   ['_7ecompressiblehyperelasticity_5flinearpatchtest',['~compressibleHyperelasticity_linearPatchTest',['../df/d4f/classcompressible_hyperelasticity__linear_patch_test.html#aa67713d6417bb7da06f025cdcd405ac2',1,'compressibleHyperelasticity_linearPatchTest']]],
@@ -17,8 +18,7 @@ var searchData=
   ['_7emanufacturedsolution',['~manufacturedSolution',['../d1/dbe/classmanufactured_solution.html#a39cab08f07c4f839cab34b135474f28e',1,'manufacturedSolution']]],
   ['_7emesh',['~mesh',['../d6/d6b/classmesh.html#a56c82806c9eeb4a50972ac55f2e7abb7',1,'mesh']]],
   ['_7enearlyincompressiblehyperelasticity',['~nearlyIncompressibleHyperelasticity',['../d0/d85/classnearly_incompressible_hyperelasticity.html#ae7953ce32909be97e94325b7dbd3aa40',1,'nearlyIncompressibleHyperelasticity']]],
-  ['_7eneumanninnersurface_5fpolyconvexhgo',['~NeumannInnerSurface_PolyconvexHGO',['../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#ab0ade40203b3dd5c1e0b33e40e081ae3',1,'NeumannInnerSurface_PolyconvexHGO']]],
-  ['_7eneumanninnersurface_5fstochasticpolyconvexhgo',['~NeumannInnerSurface_StochasticPolyconvexHGO',['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a175505e124c6fcdd65b8f1391ea28b03',1,'NeumannInnerSurface_StochasticPolyconvexHGO']]],
+  ['_7eneumanninnersurface_5fstochasticpolyconvexhgo',['~neumannInnerSurface_StochasticPolyconvexHGO',['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#ae230a6f642836a6df3e2a2edc501a2ad',1,'neumannInnerSurface_StochasticPolyconvexHGO']]],
   ['_7enewton_5fraphson',['~Newton_Raphson',['../d0/d9d/class_newton___raphson.html#ab50e2374a3cf2d6ce3a4a4893774165e',1,'Newton_Raphson']]],
   ['_7enonlinearfiniteelementproblem',['~nonLinearFiniteElementProblem',['../d3/d5b/classnon_linear_finite_element_problem.html#a7646cc9413ad8e0ec09b5a9102fe046a',1,'nonLinearFiniteElementProblem']]],
   ['_7ereadnrldata',['~readnrldata',['../dd/de7/classreadnrldata.html#ab4dd568e800050bbf29479d67a9bdb9e',1,'readnrldata']]],

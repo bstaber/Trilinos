@@ -15,13 +15,12 @@
 <area shape="rect" id="node15" href="$dd/d3d/dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html" title="src/dirichletInletOutlet\l_PolyconvexHGO.hpp" alt="" coords="1361,155,1513,196"/>
 <area shape="rect" id="node17" href="$d5/d0d/dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" title="src/dirichletStripElongation\l_StochasticPolyconvexHGO.hpp" alt="" coords="1537,155,1752,196"/>
 <area shape="rect" id="node19" href="$dc/d31/laplacepp_8cpp.html" title="src/laplacepp.cpp" alt="" coords="1776,162,1900,189"/>
-<area shape="rect" id="node20" href="$da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp.html" title="src/NeumannInnerSurface\l_PolyconvexHGO.hpp" alt="" coords="1924,155,2099,196"/>
-<area shape="rect" id="node23" href="$da/d42/_neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" title="src/NeumannInnerSurface\l_StochasticPolyconvexHGO.hpp" alt="" coords="2196,155,2411,196"/>
+<area shape="rect" id="node20" href="$d6/d14/neumann_inner_surface___polyconvex_h_g_o_8hpp.html" title="src/neumannInnerSurface\l_PolyconvexHGO.hpp" alt="" coords="1925,155,2095,196"/>
+<area shape="rect" id="node23" href="$dc/da1/neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" title="src/neumannInnerSurface\l_StochasticPolyconvexHGO.hpp" alt="" coords="2120,155,2335,196"/>
 <area shape="rect" id="node16" href="$de/da1/arteries_2deterministic__dirichlet_2main_8cpp.html" title="arteries/deterministic\l_dirichlet/main.cpp" alt="" coords="1365,244,1508,285"/>
 <area shape="rect" id="node18" href="$dc/dba/arteries_2strip__dirichlet_2main_8cpp.html" title="arteries/strip_dirichlet\l/main.cpp" alt="" coords="1571,244,1718,285"/>
-<area shape="rect" id="node21" href="$d9/d81/arteries_2deterministic__neumann_2main_8cpp.html" title="arteries/deterministic\l_neumann/main.cpp" alt="" coords="1753,244,1896,285"/>
-<area shape="rect" id="node22" href="$db/db7/arteries_2vonmises_2main_8cpp.html" title="arteries/vonmises/main.cpp" alt="" coords="1920,251,2103,278"/>
-<area shape="rect" id="node24" href="$d5/da5/arteries_2boost__gmrf_2gmrf__gauss_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_gauss/main.cpp" alt="" coords="2127,244,2277,285"/>
-<area shape="rect" id="node25" href="$d2/dbe/arteries_2boost__gmrf_2gmrf__nodes_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_nodes/main.cpp" alt="" coords="2301,244,2452,285"/>
-<area shape="rect" id="node26" href="$da/df3/arteries_2gmrf__neumann_2main_8cpp.html" title="arteries/gmrf_neumann\l/main.cpp" alt="" coords="2477,244,2631,285"/>
+<area shape="rect" id="node21" href="$d9/d81/arteries_2deterministic__neumann_2main_8cpp.html" title="arteries/deterministic\l_neumann/main.cpp" alt="" coords="1759,244,1901,285"/>
+<area shape="rect" id="node22" href="$db/db7/arteries_2vonmises_2main_8cpp.html" title="arteries/vonmises/main.cpp" alt="" coords="1925,251,2108,278"/>
+<area shape="rect" id="node24" href="$d5/da5/arteries_2boost__gmrf_2gmrf__gauss_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_gauss/main.cpp" alt="" coords="2145,244,2296,285"/>
+<area shape="rect" id="node25" href="$da/df3/arteries_2gmrf__neumann_2main_8cpp.html" title="arteries/gmrf_neumann\l/main.cpp" alt="" coords="2321,244,2475,285"/>
 </map>
