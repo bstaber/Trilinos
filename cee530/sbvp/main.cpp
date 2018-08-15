@@ -11,7 +11,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "CEESBVP.hpp"
+#include "ceeSBVP.hpp"
 
 int main(int argc, char *argv[]){
     
@@ -43,7 +43,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<CEESBVP> interface = Teuchos::rcp(new CEESBVP(Comm,*paramList));
+    Teuchos::RCP<ceeSBVP> interface = Teuchos::rcp(new ceeSBVP(Comm,*paramList));
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path");
     
     int * seed = new int [5];

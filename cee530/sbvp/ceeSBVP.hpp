@@ -5,7 +5,7 @@
 #include "tensor_calculus.hpp"
 #include "linearizedElasticity.hpp"
 
-class CEESBVP : public linearizedElasticity
+class ceeSBVP : public linearizedElasticity
 {
 public:
 
@@ -18,7 +18,7 @@ public:
 
     double _deltaN, _deltaM4, _deltaM5;
 
-    CEESBVP(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    ceeSBVP(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
         Krylov = &Parameters.sublist("Krylov");
 
@@ -50,7 +50,7 @@ public:
         solution = new Epetra_Vector(*StandardMap);
     }
 
-    ~CEESBVP(){
+    ~ceeSBVP(){
     }
 
     Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
