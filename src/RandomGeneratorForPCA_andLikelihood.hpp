@@ -2,7 +2,7 @@
 #define RANDOMGENERATORFORPCA_ANDLIKELIHOOD
 
 #include  <math.h>
-#include "Compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
+#include "compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include "distributenrldata.hpp"
 #include <boost/random/mersenne_twister.hpp>
