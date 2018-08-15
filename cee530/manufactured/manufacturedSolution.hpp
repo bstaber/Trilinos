@@ -2,7 +2,7 @@
 #define manufactured_HPP
 
 #include "tensor_calculus.hpp"
-#include "linearelasticity_setup_pp.hpp"
+#include "linearizedElasticity.hpp"
 
 class manufactured : public LinearizedElasticity
 {

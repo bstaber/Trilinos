@@ -3,7 +3,7 @@
 
 #include "shinozukapp_layeredcomp.hpp"
 #include "tensor_calculus.hpp"
-#include "linearelasticity_setup_pp.hpp"
+#include "linearizedElasticity.hpp"
 
 class ASMESBVP : public LinearizedElasticity
 {

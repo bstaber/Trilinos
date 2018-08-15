@@ -3,7 +3,7 @@
 
 #include "shinozukapp_layeredcomp_2d.hpp"
 #include "tensor_calculus.hpp"
-#include "linearelasticity_setup_pp.hpp"
+#include "linearizedElasticity.hpp"
 
 class CEESBVP : public LinearizedElasticity
 {

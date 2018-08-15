@@ -1,4 +1,4 @@
-#include "linearelasticity_setup_pp.hpp"
+#include "linearizedElasticity.hpp"
 #include "fepp.hpp"
 
 LinearizedElasticity::LinearizedElasticity(){
