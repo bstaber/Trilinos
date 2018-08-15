@@ -1,7 +1,7 @@
 var annotated_dup =
 [
     [ "ASMESBVP", "da/d18/class_a_s_m_e_s_b_v_p.html", "da/d18/class_a_s_m_e_s_b_v_p" ],
-    [ "BaseClassFEM", "d2/d97/class_base_class_f_e_m.html", "d2/d97/class_base_class_f_e_m" ],
+    [ "baseClassFEM", "d2/d31/classbase_class_f_e_m.html", "d2/d31/classbase_class_f_e_m" ],
     [ "CEESBVP", "de/dcc/class_c_e_e_s_b_v_p.html", "de/dcc/class_c_e_e_s_b_v_p" ],
     [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", "d1/d5c/classcompressible_hyperelasticity" ],
     [ "compressibleHyperelasticity_linearPatchTest", "df/d4f/classcompressible_hyperelasticity__linear_patch_test.html", "df/d4f/classcompressible_hyperelasticity__linear_patch_test" ],
