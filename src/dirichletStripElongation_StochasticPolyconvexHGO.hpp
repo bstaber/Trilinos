@@ -12,7 +12,7 @@
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/beta.hpp>
 
-class DirichletStripElongation_StochasticPolyconvexHGO : public nearlyIncompressibleHyperelasticity
+class dirichletStripElongation_StochasticPolyconvexHGO : public nearlyIncompressibleHyperelasticity
 {
 public:
 
@@ -37,7 +37,7 @@ public:
     Epetra_SerialDenseVector a, b;
     Epetra_SerialDenseVector E1,E2,E3;
 
-    DirichletStripElongation_StochasticPolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    dirichletStripElongation_StochasticPolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         //std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
@@ -93,7 +93,7 @@ public:
         setup_dirichlet_conditions();
     }
 
-    ~DirichletStripElongation_StochasticPolyconvexHGO(){
+    ~dirichletStripElongation_StochasticPolyconvexHGO(){
     }
 
     void get_media(unsigned int & n_cells, unsigned int & n_nodes, std::string & path){

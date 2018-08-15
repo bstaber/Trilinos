@@ -10,7 +10,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "DirichletStripElongation_StochasticPolyconvexHGO.hpp"
+#include "dirichletStripElongation_StochasticPolyconvexHGO.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    Teuchos::RCP<DirichletStripElongation_StochasticPolyconvexHGO> my_interface = Teuchos::rcp(new DirichletStripElongation_StochasticPolyconvexHGO(Comm,*paramList));
+    Teuchos::RCP<dirichletStripElongation_StochasticPolyconvexHGO> my_interface = Teuchos::rcp(new dirichletStripElongation_StochasticPolyconvexHGO(Comm,*paramList));
 
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_gmrf");
