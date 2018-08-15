@@ -11,7 +11,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 
-#include "beumannInnerSurface_StochasticPolyconvexHGO.hpp"
+#include "neumannInnerSurface_StochasticPolyconvexHGO.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
 #include "shinozukapp.hpp"

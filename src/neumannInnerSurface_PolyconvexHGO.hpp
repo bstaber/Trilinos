@@ -66,7 +66,7 @@ public:
         setup_dirichlet_conditions();
     }
 
-    ~beumannInnerSurface_PolyconvexHGO(){
+    ~neumannInnerSurface_PolyconvexHGO(){
     }
 
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){

@@ -49,8 +49,8 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<beumannInnerSurface_StochasticPolyconvexHGO> interface
-    = Teuchos::rcp(new beumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
+    Teuchos::RCP<neumannInnerSurface_StochasticPolyconvexHGO> interface
+    = Teuchos::rcp(new neumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
     
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     
