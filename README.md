@@ -6,9 +6,13 @@
 [Documentation](http://trilinos.org/about/documentation/) |
 [Mailing List](https://trilinos.org/mailman/listinfo/trilinos-users) |
 [Packages](http://trilinos.org/packages/) |
-[GitHub](https://github.com/trilinos/Trilinos) ]
+[GitHub](https://github.com/trilinos/Trilinos) ] and uses, for instance, the packages:
+	* [Epetra](https://trilinos.org/packages/epetra/) for linear algebra,
+	* [Amesos](https://trilinos.org/packages/amesos/), [AztecOO](https://trilinos.org/packages/aztecoo/), [Stratimikos](https://trilinos.org/packages/stratimikos/) for direct and iterative linear solvers,
+	* [Teuchos](https://trilinos.org/packages/teuchos/) for XML files,
+	* [ML](https://trilinos.org/packages/ml/), [IfPack](https://trilinos.org/packages/ifpack/) for preconditioners.
 
-* Uses: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/), [Epetra](https://trilinos.org/packages/epetra/), [Amesos](https://trilinos.org/packages/amesos/), [AztecOO](https://trilinos.org/packages/aztecoo/), [Stratimikos](https://trilinos.org/packages/stratimikos/), [Teuchos](https://trilinos.org/packages/teuchos/), [ML](https://trilinos.org/packages/ml/), amongst others.
+* Additional libraries: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/).
 * Handles **linear and quadratic interpolations** (tetra, hexas, triangle, quads) and various Gauss quadratures
 * Most of the problems (arteries, asme, cee530, nrl) are **stochastic boundary value problems** where the elasticity tensor or strain energy function are **modeled as random fields**
 * Deterministic problems are also considered in some subfolders
