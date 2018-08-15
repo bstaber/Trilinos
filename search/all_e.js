@@ -19,7 +19,7 @@ var searchData=
   ['neumanninnersurface_5fpolyconvexhgo_2ehpp',['NeumannInnerSurface_PolyconvexHGO.hpp',['../da/ddf/_neumann_inner_surface___polyconvex_h_g_o_8hpp.html',1,'']]],
   ['neumanninnersurface_5fstochasticpolyconvexhgo',['NeumannInnerSurface_StochasticPolyconvexHGO',['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html',1,'NeumannInnerSurface_StochasticPolyconvexHGO'],['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a3a65b28e5d813bffe7706d401b9a6a13',1,'NeumannInnerSurface_StochasticPolyconvexHGO::NeumannInnerSurface_StochasticPolyconvexHGO()']]],
   ['neumanninnersurface_5fstochasticpolyconvexhgo_2ehpp',['NeumannInnerSurface_StochasticPolyconvexHGO.hpp',['../da/d42/_neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html',1,'']]],
-  ['newton_5fraphson',['Newton_Raphson',['../d0/d9d/class_newton___raphson.html',1,'Newton_Raphson'],['../d0/d9d/class_newton___raphson.html#a59363408fe95498cb48be21eeaf5e1a7',1,'Newton_Raphson::Newton_Raphson()']]],
+  ['newton_5fraphson',['Newton_Raphson',['../d0/d9d/class_newton___raphson.html',1,'Newton_Raphson'],['../d0/d9d/class_newton___raphson.html#a6623cb1b47031418534d92f067eb3c9a',1,'Newton_Raphson::Newton_Raphson()']]],
   ['newton_5fraphsonpp_2ecpp',['Newton_Raphsonpp.cpp',['../d5/dc7/_newton___raphsonpp_8cpp.html',1,'']]],
   ['newton_5fraphsonpp_2ehpp',['Newton_Raphsonpp.hpp',['../d7/d17/_newton___raphsonpp_8hpp.html',1,'']]],
   ['nloads',['nloads',['../d1/d14/classdistributenrldata.html#aeeaf0e57ae4a5f99ca510be30da663bd',1,'distributenrldata::nloads()'],['../dd/de7/classreadnrldata.html#a729c7de2c4f6ec3407996996d567c4c5',1,'readnrldata::nloads()']]],

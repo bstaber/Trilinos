@@ -10,7 +10,7 @@ var annotated_dup =
     [ "distributenrldata", "d1/d14/classdistributenrldata.html", "d1/d14/classdistributenrldata" ],
     [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", "dc/d5a/classhyperelasticity" ],
     [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ],
-    [ "LinearFiniteElementProblem", "d8/de3/class_linear_finite_element_problem.html", "d8/de3/class_linear_finite_element_problem" ],
+    [ "linearFiniteElementProblem", "dc/d01/classlinear_finite_element_problem.html", "dc/d01/classlinear_finite_element_problem" ],
     [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", "d9/df7/class_linearized_elasticity" ],
     [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", "d2/d69/classlinear_patch_test" ],
     [ "manufactured", "d7/da3/classmanufactured.html", "d7/da3/classmanufactured" ],

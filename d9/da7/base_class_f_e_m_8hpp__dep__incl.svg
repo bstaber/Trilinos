@@ -64,9 +64,9 @@ var sectionId = 'dynsection-1';
 <!-- Node34 -->
 <g id="node2" class="node">
 <title>Node34</title>
-<g id="a_node2"><a xlink:href="../../dd/d1b/_linear_finite_element_problem_8hpp.html" target="_top" xlink:title="src/LinearFiniteElementProblem.hpp">
-<polygon fill="#ffffff" stroke="#000000" points="1092.5,-290.5 1092.5,-309.5 1266.5,-309.5 1266.5,-290.5 1092.5,-290.5"/>
-<text text-anchor="middle" x="1179.5" y="-297.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/LinearFiniteElementProblem.hpp</text>
+<g id="a_node2"><a xlink:href="../../d3/dd8/linear_finite_element_problem_8hpp.html" target="_top" xlink:title="src/linearFiniteElementProblem.hpp">
+<polygon fill="#ffffff" stroke="#000000" points="1094,-290.5 1094,-309.5 1265,-309.5 1265,-290.5 1094,-290.5"/>
+<text text-anchor="middle" x="1179.5" y="-297.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">src/linearFiniteElementProblem.hpp</text>
 </a>
 </g>
 </g>
@@ -120,8 +120,8 @@ var sectionId = 'dynsection-1';
 <!-- Node34&#45;&gt;Node35 -->
 <g id="edge2" class="edge">
 <title>Node34&#45;&gt;Node35</title>
-<path fill="none" stroke="#191970" d="M1082.1069,-292.035C919.098,-278.7038 596.9363,-252.3568 475.409,-242.4181"/>
-<polygon fill="#191970" stroke="#191970" points="1081.8811,-295.5281 1092.1332,-292.855 1082.4518,-288.5514 1081.8811,-295.5281"/>
+<path fill="none" stroke="#191970" d="M1083.9789,-292.1881C921.5,-278.9003 597.0966,-252.3699 475.2361,-242.4039"/>
+<polygon fill="#191970" stroke="#191970" points="1083.7161,-295.6782 1093.9682,-293.005 1084.2868,-288.7015 1083.7161,-295.6782"/>
 </g>
 <!-- Node45 -->
 <g id="node13" class="node">

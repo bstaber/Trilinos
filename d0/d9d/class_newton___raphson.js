@@ -1,6 +1,6 @@
 var class_newton___raphson =
 [
-    [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html#a59363408fe95498cb48be21eeaf5e1a7", null ],
+    [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html#a6623cb1b47031418534d92f067eb3c9a", null ],
     [ "~Newton_Raphson", "d0/d9d/class_newton___raphson.html#ab50e2374a3cf2d6ce3a4a4893774165e", null ],
     [ "Initialization", "d0/d9d/class_newton___raphson.html#ad539d48c7118ead7770bdfed2abc3d6a", null ],
     [ "print_newton_solution", "d0/d9d/class_newton___raphson.html#a10edd235498eef3bfe83d59f3ba310ed", null ],

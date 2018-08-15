@@ -1,7 +1,7 @@
 var hierarchy =
 [
     [ "baseClassFEM", "d2/d31/classbase_class_f_e_m.html", [
-      [ "LinearFiniteElementProblem", "d8/de3/class_linear_finite_element_problem.html", [
+      [ "linearFiniteElementProblem", "dc/d01/classlinear_finite_element_problem.html", [
         [ "laplace", "d7/d76/classlaplace.html", null ],
         [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", [
           [ "ASMESBVP", "da/d18/class_a_s_m_e_s_b_v_p.html", null ],
