@@ -4,7 +4,7 @@
 #include "tensor_calculus.hpp"
 #include "linearizedElasticity.hpp"
 
-class manufactured : public LinearizedElasticity
+class manufactured : public linearizedElasticity
 {
 public:
 

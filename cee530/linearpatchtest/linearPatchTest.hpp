@@ -3,7 +3,7 @@
 
 #include "linearizedElasticity.hpp"
 
-class linearPatchTest : public LinearizedElasticity
+class linearPatchTest : public linearizedElasticity
 {
 public:
 

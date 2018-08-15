@@ -1,14 +1,14 @@
 #include "linearizedElasticity.hpp"
 #include "fepp.hpp"
 
-LinearizedElasticity::LinearizedElasticity(){
+linearizedElasticity::linearizedElasticity(){
 }
 
-LinearizedElasticity::~LinearizedElasticity(){
+linearizedElasticity::~linearizedElasticity(){
     delete[] dof_on_boundary;
 }
 
-void LinearizedElasticity::create_FECrsGraph(){
+void linearizedElasticity::create_FECrsGraph(){
     
     FEGraph = new Epetra_FECrsGraph(Copy,*StandardMap,100);
     int eglob, node;
@@ -35,7 +35,7 @@ void LinearizedElasticity::create_FECrsGraph(){
     delete[] index;
 }
 
-void LinearizedElasticity::aztecSolver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & u, Teuchos::ParameterList & paramList){
+void linearizedElasticity::aztecSolver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & u, Teuchos::ParameterList & paramList){
     u.PutScalar(0.0);
     Epetra_LinearProblem problem;
     AztecOO solver;
@@ -49,7 +49,7 @@ void LinearizedElasticity::aztecSolver(Epetra_FECrsMatrix & A, Epetra_FEVector &
     solver.Iterate(maxIter,tol);
 }
 
-void LinearizedElasticity::assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K){
+void linearizedElasticity::assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K){
 
     int error;
     
@@ -63,7 +63,7 @@ void LinearizedElasticity::assemblePureDirichlet_homogeneousForcing(Epetra_FECrs
     error=K.FillComplete();
 }
 
-void LinearizedElasticity::assembleMixedDirichletNeumann_homogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void linearizedElasticity::assembleMixedDirichletNeumann_homogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
     
     F.PutScalar(0.0);
     K.PutScalar(0.0);
@@ -78,7 +78,7 @@ void LinearizedElasticity::assembleMixedDirichletNeumann_homogeneousForcing(Epet
     F.GlobalAssemble();
 }
 
-void LinearizedElasticity::assembleMixedDirichletNeumann_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void linearizedElasticity::assembleMixedDirichletNeumann_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
     
     F.PutScalar(0.0);
     K.PutScalar(0.0);
@@ -93,7 +93,7 @@ void LinearizedElasticity::assembleMixedDirichletNeumann_inhomogeneousForcing(Ep
     F.GlobalAssemble();
 }
 
-void LinearizedElasticity::stiffness_homogeneousForcing(Epetra_FECrsMatrix & K){
+void linearizedElasticity::stiffness_homogeneousForcing(Epetra_FECrsMatrix & K){
 
     int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
@@ -148,7 +148,7 @@ void LinearizedElasticity::stiffness_homogeneousForcing(Epetra_FECrsMatrix & K){
     delete[] Indices_cells;
 }
 
-void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void linearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K, Epetra_FEVector & F){
     
     int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
@@ -211,7 +211,7 @@ void LinearizedElasticity::stiffness_inhomogeneousForcing(Epetra_FECrsMatrix & K
     delete[] Indices_cells;
 }
 
-void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
+void linearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
 
     int node;
     int* Indexes;
@@ -259,7 +259,7 @@ void LinearizedElasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
     delete[] Indexes;
 }
 
-void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B){
+void linearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B){
     double factor = 1.0/std::sqrt(2.0);
     for (unsigned inode=0; inode<Mesh->el_type; ++inode){
         B(0,3*inode) = dx_shape_functions(inode,0);
@@ -288,7 +288,7 @@ void LinearizedElasticity::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shap
     }
 }
 
-int LinearizedElasticity::print_solution(Epetra_Vector & solution, std::string fileName){
+int linearizedElasticity::print_solution(Epetra_Vector & solution, std::string fileName){
     
     int NumTargetElements = 0;
     if (Comm->MyPID()==0){
@@ -305,7 +305,7 @@ int LinearizedElasticity::print_solution(Epetra_Vector & solution, std::string f
     
 }
 
-void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
+void linearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
     
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
@@ -426,7 +426,7 @@ void LinearizedElasticity::compute_deformation(Epetra_Vector & x, std::string & 
     
 }
 
-void LinearizedElasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
+void linearizedElasticity::compute_center_cauchy_stress(Epetra_Vector & x, std::string & filename, bool printCauchy, bool printVM){
     
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);

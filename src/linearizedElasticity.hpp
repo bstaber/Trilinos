@@ -3,11 +3,11 @@
 
 #include "linearFiniteElementProblem.hpp"
 
-class LinearizedElasticity : public linearFiniteElementProblem
+class linearizedElasticity : public linearFiniteElementProblem
 {
 public:
-    LinearizedElasticity();
-    ~LinearizedElasticity();
+    linearizedElasticity();
+    ~linearizedElasticity();
     
     void create_FECrsGraph();
     

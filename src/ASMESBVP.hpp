@@ -5,7 +5,7 @@
 #include "tensor_calculus.hpp"
 #include "linearizedElasticity.hpp"
 
-class ASMESBVP : public LinearizedElasticity
+class ASMESBVP : public linearizedElasticity
 {
 public:
 

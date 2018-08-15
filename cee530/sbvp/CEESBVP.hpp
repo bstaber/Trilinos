@@ -5,7 +5,7 @@
 #include "tensor_calculus.hpp"
 #include "linearizedElasticity.hpp"
 
-class CEESBVP : public LinearizedElasticity
+class CEESBVP : public linearizedElasticity
 {
 public:
 
