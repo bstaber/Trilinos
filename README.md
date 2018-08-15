@@ -13,6 +13,6 @@
 * Simulation of arterial walls with uncertainties (generation of Gaussian fields not included)
 
 # Doxygen documentation:
-https://bstaber.github.io/Trilinos/inherits.html
+* https://bstaber.github.io/Trilinos/inherits.html
 
 
