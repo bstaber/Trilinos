@@ -5,7 +5,7 @@ var hierarchy =
         [ "laplace", "d7/d76/classlaplace.html", null ],
         [ "linearizedElasticity", "d4/dfd/classlinearized_elasticity.html", [
           [ "asmeSBVP", "dd/d60/classasme_s_b_v_p.html", null ],
-          [ "CEESBVP", "de/dcc/class_c_e_e_s_b_v_p.html", null ],
+          [ "ceeSBVP", "d2/d17/classcee_s_b_v_p.html", null ],
           [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],
           [ "manufactured", "d7/da3/classmanufactured.html", null ]
         ] ]

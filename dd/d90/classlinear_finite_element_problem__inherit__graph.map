@@ -1,9 +1,9 @@
 <map id="linearFiniteElementProblem" name="linearFiniteElementProblem">
-<area shape="rect" id="node3" href="$d7/d76/classlaplace.html" title="laplace" alt="" coords="73,155,135,181"/>
-<area shape="rect" id="node4" href="$d4/dfd/classlinearized_elasticity.html" title="linearizedElasticity" alt="" coords="160,155,291,181"/>
-<area shape="rect" id="node2" href="$d2/d31/classbase_class_f_e_m.html" title="baseClassFEM" alt="" coords="108,5,220,32"/>
+<area shape="rect" id="node3" href="$d7/d76/classlaplace.html" title="laplace" alt="" coords="67,155,130,181"/>
+<area shape="rect" id="node4" href="$d4/dfd/classlinearized_elasticity.html" title="linearizedElasticity" alt="" coords="155,155,285,181"/>
+<area shape="rect" id="node2" href="$d2/d31/classbase_class_f_e_m.html" title="baseClassFEM" alt="" coords="103,5,215,32"/>
 <area shape="rect" id="node5" href="$dd/d60/classasme_s_b_v_p.html" title="asmeSBVP" alt="" coords="5,229,96,256"/>
-<area shape="rect" id="node6" href="$de/dcc/class_c_e_e_s_b_v_p.html" title="CEESBVP" alt="" coords="121,229,207,256"/>
-<area shape="rect" id="node7" href="$d2/d69/classlinear_patch_test.html" title="linearPatchTest" alt="" coords="231,229,345,256"/>
-<area shape="rect" id="node8" href="$d7/da3/classmanufactured.html" title="manufactured" alt="" coords="369,229,471,256"/>
+<area shape="rect" id="node6" href="$d2/d17/classcee_s_b_v_p.html" title="ceeSBVP" alt="" coords="121,229,199,256"/>
+<area shape="rect" id="node7" href="$d2/d69/classlinear_patch_test.html" title="linearPatchTest" alt="" coords="223,229,337,256"/>
+<area shape="rect" id="node8" href="$d7/da3/classmanufactured.html" title="manufactured" alt="" coords="361,229,463,256"/>
 </map>
