@@ -6,7 +6,7 @@ var annotated_dup =
     [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", "d1/d5c/classcompressible_hyperelasticity" ],
     [ "compressibleHyperelasticity_linearPatchTest", "df/d4f/classcompressible_hyperelasticity__linear_patch_test.html", "df/d4f/classcompressible_hyperelasticity__linear_patch_test" ],
     [ "dirichletInletOutlet_PolyconvexHGO", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o" ],
-    [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ],
+    [ "dirichletStripElongation_StochasticPolyconvexHGO", "d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ],
     [ "distributenrldata", "d1/d14/classdistributenrldata.html", "d1/d14/classdistributenrldata" ],
     [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", "dc/d5a/classhyperelasticity" ],
     [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ],

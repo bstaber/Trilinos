@@ -20,8 +20,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "dirichletInletOutlet_PolyconvexHGO.hpp", "dd/d3d/dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html", [
       [ "dirichletInletOutlet_PolyconvexHGO", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o" ]
     ] ],
-    [ "DirichletStripElongation_StochasticPolyconvexHGO.hpp", "d5/d6a/_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html", [
-      [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ]
+    [ "dirichletStripElongation_StochasticPolyconvexHGO.hpp", "d5/d0d/dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html", [
+      [ "dirichletStripElongation_StochasticPolyconvexHGO", "d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ]
     ] ],
     [ "distributenrldata.cpp", "d0/da3/distributenrldata_8cpp.html", null ],
     [ "distributenrldata.hpp", "d5/d75/distributenrldata_8hpp.html", [

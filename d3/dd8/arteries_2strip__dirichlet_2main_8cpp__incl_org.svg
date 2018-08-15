@@ -92,9 +92,9 @@
 <!-- Node7 -->
 <g id="node8" class="node">
 <title>Node7</title>
-<g id="a_node8"><a xlink:href="../../d5/d6a/_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="DirichletStripElongation\l_StochasticPolyconvexHGO.hpp">
+<g id="a_node8"><a xlink:href="../../d5/d0d/dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" target="_top" xlink:title="dirichletStripElongation\l_StochasticPolyconvexHGO.hpp">
 <polygon fill="#ffffff" stroke="#000000" points="792,-347.5 792,-377.5 953,-377.5 953,-347.5 792,-347.5"/>
-<text text-anchor="start" x="800" y="-365.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">DirichletStripElongation</text>
+<text text-anchor="start" x="800" y="-365.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">dirichletStripElongation</text>
 <text text-anchor="middle" x="872.5" y="-354.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_StochasticPolyconvexHGO.hpp</text>
 </a>
 </g>
