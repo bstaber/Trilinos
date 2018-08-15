@@ -10,7 +10,7 @@
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "NeumannInnerSurface_PolyconvexHGO.hpp"
+#include "neumannInnerSurface_PolyconvexHGO.hpp"
 #include "Newton_Raphsonpp.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    Teuchos::RCP<NeumannInnerSurface_PolyconvexHGO> interface = Teuchos::rcp(new NeumannInnerSurface_PolyconvexHGO(Comm,*paramList));
+    Teuchos::RCP<neumannInnerSurface_PolyconvexHGO> interface = Teuchos::rcp(new neumannInnerSurface_PolyconvexHGO(Comm,*paramList));
 
     /*std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     std::string path = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "path_to_gmrf");

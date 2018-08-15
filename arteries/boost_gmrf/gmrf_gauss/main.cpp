@@ -11,7 +11,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 
-#include "NeumannInnerSurface_StochasticPolyconvexHGO.hpp"
+#include "neumannInnerSurface_StochasticPolyconvexHGO.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
 #include "shinozukapp.hpp"
@@ -49,8 +49,8 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<NeumannInnerSurface_StochasticPolyconvexHGO> interface
-    = Teuchos::rcp(new NeumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
+    Teuchos::RCP<beumannInnerSurface_StochasticPolyconvexHGO> interface
+    = Teuchos::rcp(new beumannInnerSurface_StochasticPolyconvexHGO(Comm,*paramList));
     
     std::ifstream parameters_file_1, parameters_file_2, parameters_file_3, parameters_file_4;
     
