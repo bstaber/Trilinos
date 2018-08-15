@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
         paramList->print(std::cout,2,true,true);
     }
 
-    Teuchos::RCP<TIMooney_RandomField> interface  = Teuchos::rcp(new TIMooney_RandomField(Comm,*paramList));
+    Teuchos::RCP<tiMooneyRandomField> interface  = Teuchos::rcp(new tiMooneyRandomField(Comm,*paramList));
 
     Epetra_SerialDenseVector mean_parameters(5);
     mean_parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");

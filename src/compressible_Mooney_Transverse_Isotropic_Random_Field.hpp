@@ -5,7 +5,7 @@
 #include "shinozukapp_layeredcomp_2d.hpp"
 #include "compressibleHyperelasticity.hpp"
 
-class TIMooney_RandomField : public compressibleHyperelasticity
+class tiMooneyRandomField : public compressibleHyperelasticity
 {
 public:
 
@@ -21,7 +21,7 @@ public:
     double topcoord;
     std::vector<int> phase;
 
-    TIMooney_RandomField(Epetra_Comm            & comm,
+    tiMooneyRandomField(Epetra_Comm            & comm,
                          Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
@@ -48,7 +48,7 @@ public:
         GRF_Generator = Teuchos::rcp(new shinozuka_layeredcomp_2d(order));
     }
 
-    ~TIMooney_RandomField(){
+    ~tiMooneyRandomField(){
     }
 
     void findtop(){

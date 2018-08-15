@@ -24,7 +24,7 @@ private:
 
 public:
 
-    Teuchos::RCP<TIMooney_RandomField> interface;
+    Teuchos::RCP<tiMooneyRandomField> interface;
     Teuchos::RCP<distributenrldata>    nrldata;
 
     RandomGeneratorForPCA_andLikelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
@@ -33,7 +33,7 @@ public:
         std::string pathnrl    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         std::string station    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"station");
         fullOutputPath         = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/" + station + "/";
-        interface              = Teuchos::rcp(new TIMooney_RandomField(Comm,paramList));
+        interface              = Teuchos::rcp(new tiMooneyRandomField(Comm,paramList));
         newton                 = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
         nrldata                = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
