@@ -1,4 +1,4 @@
-# Three-dimensional Finite element method 
+# Three-dimensional Finite Element Method  
 
 * Build on top of the Trilinos project: https://github.com/trilinos/Trilinos
 
