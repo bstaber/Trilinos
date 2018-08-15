@@ -20,7 +20,7 @@ var searchData=
   ['_7eneumanninnersurface_5fpolyconvexhgo',['~NeumannInnerSurface_PolyconvexHGO',['../de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html#ab0ade40203b3dd5c1e0b33e40e081ae3',1,'NeumannInnerSurface_PolyconvexHGO']]],
   ['_7eneumanninnersurface_5fstochasticpolyconvexhgo',['~NeumannInnerSurface_StochasticPolyconvexHGO',['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#a175505e124c6fcdd65b8f1391ea28b03',1,'NeumannInnerSurface_StochasticPolyconvexHGO']]],
   ['_7enewton_5fraphson',['~Newton_Raphson',['../d0/d9d/class_newton___raphson.html#ab50e2374a3cf2d6ce3a4a4893774165e',1,'Newton_Raphson']]],
-  ['_7enonlinearfiniteelementproblem',['~NonLinearFiniteElementProblem',['../da/d1c/class_non_linear_finite_element_problem.html#a797bce85db611f1b7aff244284b83a97',1,'NonLinearFiniteElementProblem']]],
+  ['_7enonlinearfiniteelementproblem',['~nonLinearFiniteElementProblem',['../d3/d5b/classnon_linear_finite_element_problem.html#a7646cc9413ad8e0ec09b5a9102fe046a',1,'nonLinearFiniteElementProblem']]],
   ['_7ereadnrldata',['~readnrldata',['../dd/de7/classreadnrldata.html#ab4dd568e800050bbf29479d67a9bdb9e',1,'readnrldata']]],
   ['_7erubberblock',['~rubberblock',['../dd/d20/classrubberblock.html#aa37d1bde5448923d61e610749f431082',1,'rubberblock']]],
   ['_7eshinozuka',['~shinozuka',['../da/d5b/classshinozuka.html#a2b908e958961141ba0a6d5c02685b25a',1,'shinozuka']]],

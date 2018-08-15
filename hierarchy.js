@@ -10,7 +10,7 @@ var hierarchy =
           [ "manufactured", "d7/da3/classmanufactured.html", null ]
         ] ]
       ] ],
-      [ "NonLinearFiniteElementProblem", "da/d1c/class_non_linear_finite_element_problem.html", [
+      [ "nonLinearFiniteElementProblem", "d3/d5b/classnon_linear_finite_element_problem.html", [
         [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", [
           [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", [
             [ "compressibleHyperelasticity_linearPatchTest", "df/d4f/classcompressible_hyperelasticity__linear_patch_test.html", null ],

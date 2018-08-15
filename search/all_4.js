@@ -13,7 +13,7 @@ var searchData=
   ['dirichletinletoutlet_5fpolyconvexhgo_2ehpp',['DirichletInletOutlet_PolyconvexHGO.hpp',['../de/db1/_dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html',1,'']]],
   ['dirichletstripelongation_5fstochasticpolyconvexhgo',['DirichletStripElongation_StochasticPolyconvexHGO',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html',1,'DirichletStripElongation_StochasticPolyconvexHGO'],['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a9f335e0deba75e16bacdb28a23b9262e',1,'DirichletStripElongation_StochasticPolyconvexHGO::DirichletStripElongation_StochasticPolyconvexHGO()']]],
   ['dirichletstripelongation_5fstochasticpolyconvexhgo_2ehpp',['DirichletStripElongation_StochasticPolyconvexHGO.hpp',['../d5/d6a/_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html',1,'']]],
-  ['display_5famesos_5fsolvers',['display_amesos_solvers',['../da/d1c/class_non_linear_finite_element_problem.html#a8e52d4920baa0d4e6560bc180a461e13',1,'NonLinearFiniteElementProblem']]],
+  ['display_5famesos_5fsolvers',['display_amesos_solvers',['../d3/d5b/classnon_linear_finite_element_problem.html#a0312b17704827f36887fa85687595638',1,'nonLinearFiniteElementProblem']]],
   ['distributenrldata',['distributenrldata',['../d1/d14/classdistributenrldata.html',1,'distributenrldata'],['../d1/d14/classdistributenrldata.html#a418431556e260a4a783623076e55fc3f',1,'distributenrldata::distributenrldata()']]],
   ['distributenrldata_2ecpp',['distributenrldata.cpp',['../d0/da3/distributenrldata_8cpp.html',1,'']]],
   ['distributenrldata_2ehpp',['distributenrldata.hpp',['../d5/d75/distributenrldata_8hpp.html',1,'']]],

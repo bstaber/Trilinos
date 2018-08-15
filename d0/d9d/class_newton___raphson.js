@@ -1,6 +1,6 @@
 var class_newton___raphson =
 [
-    [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html#a3a5dfc3aa2692391dae31c29c4bf8318", null ],
+    [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html#a59363408fe95498cb48be21eeaf5e1a7", null ],
     [ "~Newton_Raphson", "d0/d9d/class_newton___raphson.html#ab50e2374a3cf2d6ce3a4a4893774165e", null ],
     [ "Initialization", "d0/d9d/class_newton___raphson.html#ad539d48c7118ead7770bdfed2abc3d6a", null ],
     [ "print_newton_solution", "d0/d9d/class_newton___raphson.html#a10edd235498eef3bfe83d59f3ba310ed", null ],
@@ -13,7 +13,7 @@ var class_newton___raphson =
     [ "delta", "d0/d9d/class_newton___raphson.html#a6a42b747679adb745cf8476336e10238", null ],
     [ "eps", "d0/d9d/class_newton___raphson.html#ac4d8377ea44241ad177ec1fa09b8d726", null ],
     [ "failure", "d0/d9d/class_newton___raphson.html#afa12789c5d8add146be4670832114bc8", null ],
-    [ "interface", "d0/d9d/class_newton___raphson.html#a7aa0e3c2b9634174571fdb21626279fd", null ],
+    [ "interface", "d0/d9d/class_newton___raphson.html#a02a4949e9d61b388ea2fe1f1a3f50a6a", null ],
     [ "iter_max", "d0/d9d/class_newton___raphson.html#a03c9a46f527e633aa1fc3fb742bfb999", null ],
     [ "iter_min", "d0/d9d/class_newton___raphson.html#ae66469f83c59c016cf56b511ab6f5970", null ],
     [ "Krylov", "d0/d9d/class_newton___raphson.html#ada0c76665296a051e9b0cbbb5cbad6b6", null ],

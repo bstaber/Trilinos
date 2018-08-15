@@ -49,9 +49,9 @@
 <!-- Node8 -->
 <g id="node4" class="node">
 <title>Node8</title>
-<g id="a_node4"><a xlink:href="../../da/d1c/class_non_linear_finite_element_problem.html" target="_top" xlink:title="NonLinearFiniteElementProblem">
-<polygon fill="#ffffff" stroke="#000000" points="8.5,-182.5 8.5,-201.5 165.5,-201.5 165.5,-182.5 8.5,-182.5"/>
-<text text-anchor="middle" x="87" y="-189.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">NonLinearFiniteElementProblem</text>
+<g id="a_node4"><a xlink:href="../../d3/d5b/classnon_linear_finite_element_problem.html" target="_top" xlink:title="nonLinearFiniteElementProblem">
+<polygon fill="#ffffff" stroke="#000000" points="9.5,-182.5 9.5,-201.5 164.5,-201.5 164.5,-182.5 9.5,-182.5"/>
+<text text-anchor="middle" x="87" y="-189.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">nonLinearFiniteElementProblem</text>
 </a>
 </g>
 </g>

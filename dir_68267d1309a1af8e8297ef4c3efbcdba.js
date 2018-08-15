@@ -62,8 +62,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "Newton_Raphsonpp.hpp", "d7/d17/_newton___raphsonpp_8hpp.html", [
       [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", "d0/d9d/class_newton___raphson" ]
     ] ],
-    [ "NonLinearFiniteElementProblem.hpp", "d4/d16/_non_linear_finite_element_problem_8hpp.html", [
-      [ "NonLinearFiniteElementProblem", "da/d1c/class_non_linear_finite_element_problem.html", "da/d1c/class_non_linear_finite_element_problem" ]
+    [ "nonLinearFiniteElementProblem.hpp", "da/da3/non_linear_finite_element_problem_8hpp.html", [
+      [ "nonLinearFiniteElementProblem", "d3/d5b/classnon_linear_finite_element_problem.html", "d3/d5b/classnon_linear_finite_element_problem" ]
     ] ],
     [ "RandomGeneratorForPCA_andLikelihood.hpp", "d9/dc1/_random_generator_for_p_c_a__and_likelihood_8hpp.html", [
       [ "RandomGeneratorForPCA_andLikelihood", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood.html", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood" ]
