@@ -1,6 +1,6 @@
-### Description
+## Three-dimensional finite element method in the context of mechanics of materials
 
-* Three-dimensional finite element method in the context of mechanics of materials
+### Packages and libraries
 
 * Built on top of Sandia's Trilinos Project [ [Website](http://trilinos.org/) |
 [Documentation](http://trilinos.org/about/documentation/) |
@@ -13,7 +13,11 @@
 	* [ML](https://trilinos.org/packages/ml/), [IfPack](https://trilinos.org/packages/ifpack/) for preconditioners.
 
 * Additional libraries: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/).
+
+### Description:
+
 * Handles **linear and quadratic interpolations** (tetras, hexas, triangles, quads) and various Gauss quadratures
+* Handles essential and natural boundary conditions, deformation dependent natural conditions, with or without forcing terms.
 * Most of the problems (arteries, asme, cee530, nrl) are **stochastic boundary value problems** where the elasticity tensor or strain energy function are **modeled as random fields**
 * Deterministic problems are also considered in some subfolders
 * The c++ classes defining the boundary value problems (i.e., **linearizedElasticity**, **compressibleHyperelasticity** and **nearlyIncompressibleHyperelasticity**) are pure virtual classes, **independent of the constitutive equations** (random or deterministic elasticity tensor, random or deterministic strain energy function), boundary conditions, etc.
@@ -24,7 +28,6 @@
 	* __nearlyIncompressibleHyperelasticity__ (three-field formulation with static condensation): see folder arteries
 		* used in dirichletInletOutlet_PolyconvexHGO, dirichletStripElongation_StochasticPolyconvexHGO, neumannInnerSurface_PolyconvexHGO, neumannInnerSurface_StochasticPolyconvexHGO
 * Also solves Laplace's equation for the generation of fibers directions in the folder arteries
-* Handles essential and natural boundary conditions, deformation dependent natural conditions, with or without forcing terms.
 
 ### Documentation
 
