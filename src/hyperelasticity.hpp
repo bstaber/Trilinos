@@ -1,9 +1,9 @@
 #ifndef HYPERELASTICITY_HPP
 #define HYPERELASTICITY_HPP
 
-#include "NonLinearFiniteElementProblem.hpp"
+#include "nonLinearFiniteElementProblem.hpp"
 
-class hyperelasticity : public NonLinearFiniteElementProblem
+class hyperelasticity : public nonLinearFiniteElementProblem
 {
 public:
     hyperelasticity();

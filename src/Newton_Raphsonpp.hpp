@@ -1,7 +1,7 @@
 #ifndef NEWTON_RAPHSONPP_HPP
 #define NEWTON_RAPHSONPP_HPP
 
-#include "NonLinearFiniteElementProblem.hpp"
+#include "nonLinearFiniteElementProblem.hpp"
 #include "Teuchos_RCP.hpp"
 #include "Ifpack.h"
 #include "Ifpack_AdditiveSchwarz.h"
@@ -22,13 +22,13 @@ public:
     Epetra_Comm   * Comm;
     Epetra_Vector * x;
 
-    NonLinearFiniteElementProblem * interface;
+    nonLinearFiniteElementProblem * interface;
     Teuchos::ParameterList * Krylov;
 
     int MyPID, iter_max, iter_min, nb_bis_max;
     double time, delta, norm_inf_tol, norm_inf_max, eps, success, failure, umax, bc_disp, pressure_load, tol;
 
-    Newton_Raphson(NonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters);
+    Newton_Raphson(bonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters);
     ~Newton_Raphson();
 
     int Solve_with_Aztec(bool print);

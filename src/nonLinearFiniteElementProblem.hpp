@@ -4,13 +4,13 @@
 #include "meshpp.hpp"
 #include "baseClassFEM.hpp"
 
-class NonLinearFiniteElementProblem : public baseClassFEM
+class nonLinearFiniteElementProblem : public baseClassFEM
 {
     
 public:
-    NonLinearFiniteElementProblem(){
+    nonLinearFiniteElementProblem(){
     };
-    ~NonLinearFiniteElementProblem(){
+    ~nonLinearFiniteElementProblem(){
     };
     
     double pressure_load;
