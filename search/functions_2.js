@@ -9,7 +9,7 @@ var searchData=
   ['compute_5fcenter_5flocal_5fdirections',['compute_center_local_directions',['../d7/d76/classlaplace.html#ade65b68ab1b94dbade5f00805b35cfa9',1,'laplace']]],
   ['compute_5fdeformation',['compute_deformation',['../d4/dfd/classlinearized_elasticity.html#a400f02c32939d4597dfa670d9d66db70',1,'linearizedElasticity']]],
   ['compute_5fgauss_5fvonmises',['compute_gauss_vonmises',['../dc/d5a/classhyperelasticity.html#a907c89f74407b3943266ade5f2634f0e',1,'hyperelasticity']]],
-  ['compute_5fgreen_5flagrange',['compute_green_lagrange',['../dc/d5a/classhyperelasticity.html#adf40b10fec0d4db32b64793e59fca535',1,'hyperelasticity::compute_green_lagrange()'],['../d8/d0d/class_random_generator_for_p_c_a__and_likelihood.html#a3a5b530d7f8bdd33208661261f541863',1,'RandomGeneratorForPCA_andLikelihood::compute_green_lagrange()']]],
+  ['compute_5fgreen_5flagrange',['compute_green_lagrange',['../dc/d5a/classhyperelasticity.html#adf40b10fec0d4db32b64793e59fca535',1,'hyperelasticity::compute_green_lagrange()'],['../d4/d22/classnrl___p_c_a___likelihood.html#a0463987f5eb95a7b995ca89ec499660d',1,'nrl_PCA_Likelihood::compute_green_lagrange()']]],
   ['compute_5flocal_5fdirections',['compute_local_directions',['../d7/d76/classlaplace.html#a77a372ce2968181cba111d99f75cb0d8',1,'laplace']]],
   ['create_5ffecrsgraph',['create_FECrsGraph',['../dc/d5a/classhyperelasticity.html#adb91ba0572df36e862efcd21d8b83299',1,'hyperelasticity::create_FECrsGraph()'],['../d7/d76/classlaplace.html#a2b27c28c4f7c39936d6a328663f14595',1,'laplace::create_FECrsGraph()'],['../d4/dfd/classlinearized_elasticity.html#a4eff42449d96ca90f301c7eddf613f73',1,'linearizedElasticity::create_FECrsGraph()']]]
 ];

@@ -21,7 +21,7 @@ var annotated_dup =
     [ "neumannInnerSurface_StochasticPolyconvexHGO", "db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html", "db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o" ],
     [ "newtonRaphson", "d8/dcc/classnewton_raphson.html", "d8/dcc/classnewton_raphson" ],
     [ "nonLinearFiniteElementProblem", "d3/d5b/classnon_linear_finite_element_problem.html", "d3/d5b/classnon_linear_finite_element_problem" ],
-    [ "RandomGeneratorForPCA_andLikelihood", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood.html", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood" ],
+    [ "nrl_PCA_Likelihood", "d4/d22/classnrl___p_c_a___likelihood.html", "d4/d22/classnrl___p_c_a___likelihood" ],
     [ "readnrldata", "dd/de7/classreadnrldata.html", "dd/de7/classreadnrldata" ],
     [ "rubberblock", "dd/d20/classrubberblock.html", "dd/d20/classrubberblock" ],
     [ "shinozuka", "da/d5b/classshinozuka.html", "da/d5b/classshinozuka" ],

@@ -10,7 +10,7 @@ var searchData=
   ['import_5fexpenergy',['import_expenergy',['../dd/de7/classreadnrldata.html#a2d3668f6ee98a7424af995944f14bde4',1,'readnrldata']]],
   ['importtooverlapmap',['ImportToOverlapMap',['../d2/d31/classbase_class_f_e_m.html#a31b3363dbc672760e60b48202b78fa83',1,'baseClassFEM']]],
   ['initialization',['Initialization',['../d8/dcc/classnewton_raphson.html#a9dda6854e256472e90ee5385a3fd5b63',1,'newtonRaphson']]],
-  ['interface',['interface',['../d8/dcc/classnewton_raphson.html#a2fdbfff55d4cea1058ce7286b6f6b6ce',1,'newtonRaphson::interface()'],['../d8/d0d/class_random_generator_for_p_c_a__and_likelihood.html#a209a0fe1fe1a91ad43da946682ec7b30',1,'RandomGeneratorForPCA_andLikelihood::interface()']]],
+  ['interface',['interface',['../d8/dcc/classnewton_raphson.html#a2fdbfff55d4cea1058ce7286b6f6b6ce',1,'newtonRaphson::interface()'],['../d4/d22/classnrl___p_c_a___likelihood.html#ab1512e2e624b2faf9b3bfa4839a0a700',1,'nrl_PCA_Likelihood::interface()']]],
   ['inverse_5fisoparametric_5fmapping',['inverse_isoparametric_mapping',['../d1/d14/classdistributenrldata.html#a85ed5c2390f02027f87529572afaaed4',1,'distributenrldata']]],
   ['iter_5fmax',['iter_max',['../d8/dcc/classnewton_raphson.html#acbd4f9f9ae3e797aedacdcf29b720538',1,'newtonRaphson']]],
   ['iter_5fmin',['iter_min',['../d8/dcc/classnewton_raphson.html#aaa111bae1d36ecd24226f56ef03a3a99',1,'newtonRaphson']]]

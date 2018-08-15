@@ -31,7 +31,7 @@ var hierarchy =
     [ "distributenrldata", "d1/d14/classdistributenrldata.html", null ],
     [ "mesh", "d6/d6b/classmesh.html", null ],
     [ "newtonRaphson", "d8/dcc/classnewton_raphson.html", null ],
-    [ "RandomGeneratorForPCA_andLikelihood", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood.html", null ],
+    [ "nrl_PCA_Likelihood", "d4/d22/classnrl___p_c_a___likelihood.html", null ],
     [ "readnrldata", "dd/de7/classreadnrldata.html", null ],
     [ "shinozuka", "da/d5b/classshinozuka.html", null ],
     [ "shinozuka_2d", "d0/d91/classshinozuka__2d.html", null ],
