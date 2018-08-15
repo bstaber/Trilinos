@@ -13,7 +13,7 @@
 	* [ML](https://trilinos.org/packages/ml/), [IfPack](https://trilinos.org/packages/ifpack/) for preconditioners.
 
 * Additional libraries: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/).
-* Handles **linear and quadratic interpolations** (tetra, hexas, triangle, quads) and various Gauss quadratures
+* Handles **linear and quadratic interpolations** (tetras, hexas, triangles, quads) and various Gauss quadratures
 * Most of the problems (arteries, asme, cee530, nrl) are **stochastic boundary value problems** where the elasticity tensor or strain energy function are **modeled as random fields**
 * Deterministic problems are also considered in some subfolders
 * The c++ classes defining the boundary value problems (i.e., **linearizedElasticity**, **compressibleHyperelasticity** and **nearlyIncompressibleHyperelasticity**) are pure virtual classes, **independent of the constitutive equations** (random or deterministic elasticity tensor, random or deterministic strain energy function), boundary conditions, etc.
