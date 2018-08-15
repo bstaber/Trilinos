@@ -1,5 +1,5 @@
-#ifndef RANDOMGENERATORFORPCA_ANDLIKELIHOOD
-#define RANDOMGENERATORFORPCA_ANDLIKELIHOOD
+#ifndef NRL_PCA_LIKELIHOOD
+#define NRL_PCA_LIKELIHOOD
 
 #include  <math.h>
 #include "compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
@@ -10,7 +10,7 @@
 #include <boost/random/uniform_real_distribution.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 
-class RandomGeneratorForPCA_andLikelihood
+class nrl_PCA_Likelihood
 {
 private:
 
@@ -27,7 +27,7 @@ public:
     Teuchos::RCP<tiMooneyRandomField> interface;
     Teuchos::RCP<distributenrldata>    nrldata;
 
-    RandomGeneratorForPCA_andLikelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
+    nrl_PCA_Likelihood(Epetra_Comm & Comm, Teuchos::ParameterList & paramList){
         comm                   = &Comm;
         _paramList             = paramList;
         std::string pathnrl    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
@@ -41,7 +41,7 @@ public:
 
     }
 
-    RandomGeneratorForPCA_andLikelihood(){
+    nrl_PCA_Likelihood(){
     }
 
     int rnd(unsigned int                & nmc                  ,

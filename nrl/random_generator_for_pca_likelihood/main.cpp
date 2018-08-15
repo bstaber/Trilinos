@@ -6,7 +6,7 @@
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "RandomGeneratorForPCA_andLikelihood.hpp"
+#include "nrl_PCA_Likelihood.hpp"
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/normal_distribution.hpp>
 #include <boost/random/uniform_real_distribution.hpp>
@@ -48,8 +48,8 @@ int main(int argc, char *argv[]){
         std::cout << "****************\n";
     }*/
 
-      Teuchos::RCP<RandomGeneratorForPCA_andLikelihood> RG =
-      Teuchos::rcp(new RandomGeneratorForPCA_andLikelihood(Comm,*paramList));
+      Teuchos::RCP<nrl_PCA_Likelihood> RG =
+      Teuchos::rcp(new nrl_PCA_Likelihood(Comm,*paramList));
 
       Epetra_IntSerialDenseVector seeds(5);
       Epetra_SerialDenseVector    mean_parameters(5);
