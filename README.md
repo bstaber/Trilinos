@@ -1,4 +1,6 @@
-# Three-dimensional Finite Element Method  
+### Description
+
+* Three-dimensional finite element method in the context of mechanics of materials
 
 * Built on top of Sandia's Trilinos Project [ [Website](http://trilinos.org/) |
 [Documentation](http://trilinos.org/about/documentation/) |
@@ -19,6 +21,9 @@
 		* used in dirichletInletOutlet_PolyconvexHGO, dirichletStripElongation_StochasticPolyconvexHGO, neumannInnerSurface_PolyconvexHGO, neumannInnerSurface_StochasticPolyconvexHGO
 * Also solves Laplace's equation for the generation of fibers directions in the folder arteries
 * Handles essential and natural boundary conditions, deformation dependent natural conditions, with or without forcing terms.
+
+### Documentation
+
 * Have a look at the [class diagram](https://bstaber.github.io/Trilinos/inherits.html).
 
 
