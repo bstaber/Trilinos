@@ -37,12 +37,12 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "laplacepp.hpp", "d5/d3f/laplacepp_8hpp.html", [
       [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ]
     ] ],
-    [ "linearelasticity_setup_pp.cpp", "d4/d89/linearelasticity__setup__pp_8cpp.html", null ],
-    [ "linearelasticity_setup_pp.hpp", "d4/d4c/linearelasticity__setup__pp_8hpp.html", [
-      [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", "d9/df7/class_linearized_elasticity" ]
-    ] ],
     [ "linearFiniteElementProblem.hpp", "d3/dd8/linear_finite_element_problem_8hpp.html", [
       [ "linearFiniteElementProblem", "dc/d01/classlinear_finite_element_problem.html", "dc/d01/classlinear_finite_element_problem" ]
+    ] ],
+    [ "linearizedElasticity.cpp", "df/d96/linearized_elasticity_8cpp.html", null ],
+    [ "linearizedElasticity.hpp", "d5/dfe/linearized_elasticity_8hpp.html", [
+      [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", "d9/df7/class_linearized_elasticity" ]
     ] ],
     [ "meshpp.cpp", "d5/d5e/meshpp_8cpp.html", null ],
     [ "meshpp.hpp", "d0/d02/meshpp_8hpp.html", [
