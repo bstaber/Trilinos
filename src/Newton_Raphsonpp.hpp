@@ -28,7 +28,7 @@ public:
     int MyPID, iter_max, iter_min, nb_bis_max;
     double time, delta, norm_inf_tol, norm_inf_max, eps, success, failure, umax, bc_disp, pressure_load, tol;
 
-    Newton_Raphson(bonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters);
+    Newton_Raphson(nonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters);
     ~Newton_Raphson();
 
     int Solve_with_Aztec(bool print);

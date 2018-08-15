@@ -1,12 +1,12 @@
 #ifndef LINEARFINITEELEMENTPROBLEM_HPP
 #define LINEARFINITEELEMENTPROBLEM_HPP
 #include "baseClassFEM.hpp"
-class LinearFiniteElementProblem : public baseClassFEM
+class linearFiniteElementProblem : public baseClassFEM
 {
 public:
-    LinearFiniteElementProblem(){
+    linearFiniteElementProblem(){
     };
-    ~LinearFiniteElementProblem(){
+    ~linearFiniteElementProblem(){
     };
     virtual void setup_dirichlet_conditions(){
     };

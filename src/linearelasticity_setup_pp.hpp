@@ -1,9 +1,9 @@
 #ifndef LINEARELASTICITY_SETUP_PP_HPP
 #define LINEARELASTICITY_SETUP_PP_HPP
 
-#include "LinearFiniteElementProblem.hpp"
+#include "linearFiniteElementProblem.hpp"
 
-class LinearizedElasticity : public LinearFiniteElementProblem
+class LinearizedElasticity : public linearFiniteElementProblem
 {
 public:
     LinearizedElasticity();
