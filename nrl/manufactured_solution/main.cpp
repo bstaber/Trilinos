@@ -59,7 +59,7 @@ MPI_Init(&argc, &argv);
     std::string meshname = "manufactured" + std::to_string(meshIndex) + ".msh";
     std::string fullpath = path + meshname;
     Teuchos::RCP<manufacturedSolution> manufactured = Teuchos::rcp(new manufacturedSolution(Comm,*paramList,fullpath));
-    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*manufactured,*paramList));
+    Teuchos::RCP<newtonRaphson> Newton = Teuchos::rcp(new newtonRaphson(*manufactured,*paramList));
     manufactured->set_parameters(parameters,plyagl);
     Comm.Barrier();
         

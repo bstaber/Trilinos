@@ -11,7 +11,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "neumannInnerSurface_PolyconvexHGO.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 
 int main(int argc, char *argv[]){
 
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
     }
 
     Teuchos::RCP<neumannInnerSurface_PolyconvexHGO> my_interface = Teuchos::rcp(new neumannInnerSurface_PolyconvexHGO(Comm,*paramList));
-    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
+    Teuchos::RCP<newtonRaphson> Newton = Teuchos::rcp(new newtonRaphson(*my_interface,*paramList));
 
     Newton->Initialization();
     Newton->setParameters(*paramList);

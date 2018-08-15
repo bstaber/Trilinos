@@ -2,7 +2,7 @@
 #define MANUFACTUREDSOLUTION_HPP
 
 #include "tensor_calculus.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 #include "distributenrldata.hpp"
 #include "compressibleHyperelasticity.hpp"
 

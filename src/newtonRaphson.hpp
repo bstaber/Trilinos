@@ -1,5 +1,5 @@
-#ifndef NEWTON_RAPHSONPP_HPP
-#define NEWTON_RAPHSONPP_HPP
+#ifndef NEWTONRAPHSON_HPP
+#define NEWTONRAPHSON_HPP
 
 #include "nonLinearFiniteElementProblem.hpp"
 #include "Teuchos_RCP.hpp"
@@ -15,7 +15,7 @@
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "Stratimikos_DefaultLinearSolverBuilder.hpp"
 
-class Newton_Raphson
+class newtonRaphson
 {
 public:
 
@@ -28,8 +28,8 @@ public:
     int MyPID, iter_max, iter_min, nb_bis_max;
     double time, delta, norm_inf_tol, norm_inf_max, eps, success, failure, umax, bc_disp, pressure_load, tol;
 
-    Newton_Raphson(nonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters);
-    ~Newton_Raphson();
+    newtonRaphson(nonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters);
+    ~newtonRaphson();
 
     int Solve_with_Aztec(bool print);
     int Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL);

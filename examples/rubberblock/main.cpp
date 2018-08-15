@@ -7,7 +7,7 @@
 #endif
 
 #include "rubberblock.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 
 int main(int argc, char *argv[]){
 
@@ -46,7 +46,7 @@ MPI_Init(&argc, &argv);
     parameters(0)    = Teuchos::getParameter<double>(paramList->sublist("rubberblock"),"lambda");
     parameters(1)    = Teuchos::getParameter<double>(paramList->sublist("rubberblock"),"mu");
     interface->set_parameters(parameters);
-    Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
+    Teuchos::RCP<newtonRaphson> Newton = Teuchos::rcp(new newtonRaphson(*interface,*paramList));
 
     double xi = 0.0;
     double g  = -interface->topcoord*0.3;

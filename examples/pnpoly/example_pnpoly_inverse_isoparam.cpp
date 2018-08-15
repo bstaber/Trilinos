@@ -7,7 +7,7 @@
 #endif
 
 #include "NRL_ModelF.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 #include "objectiveFunction.hpp"
 #include <random>
 

@@ -3,7 +3,7 @@
 
 #include  <math.h>
 #include "compressible_Mooney_Transverse_Isotropic_Random_Field.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 #include "distributenrldata.hpp"
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/normal_distribution.hpp>
@@ -15,7 +15,7 @@ class RandomGeneratorForPCA_andLikelihood
 private:
 
     Teuchos::ParameterList       _paramList;
-    Teuchos::RCP<Newton_Raphson> newton;
+    Teuchos::RCP<newtonRaphson> newton;
     std::string                  fullOutputPath;
 
     Epetra_Comm              * comm;
@@ -34,7 +34,7 @@ public:
         std::string station    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"station");
         fullOutputPath         = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/" + station + "/";
         interface              = Teuchos::rcp(new tiMooneyRandomField(Comm,paramList));
-        newton                 = Teuchos::rcp(new Newton_Raphson(*interface,paramList));
+        newton                 = Teuchos::rcp(new newtonRaphson(*interface,paramList));
         nrldata                = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
         MapExpPoints           = new Epetra_Map(-1,nrldata->global_id_faces.size(),&nrldata->global_id_faces[0],0,Comm);

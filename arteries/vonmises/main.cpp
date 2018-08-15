@@ -11,7 +11,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "neumannInnerSurface_PolyconvexHGO.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
 int load_solution(std::string & filesolution, Epetra_Vector * x);
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
                 parameters_file_3 >> interface->w3_gmrf(i);
                 parameters_file_4 >> interface->w4_gmrf(i);
             }*/
-            Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*interface,*paramList));
+            Teuchos::RCP<newtonRaphson> Newton = Teuchos::rcp(new newtonRaphson(*interface,*paramList));
             Newton->setParameters(*paramList);
 
             std::string filesolution = "/Users/Brian/Documents/Thesis/Trilinos_results/arteries/gmrf_neumann/disp_mean_model.mtx";

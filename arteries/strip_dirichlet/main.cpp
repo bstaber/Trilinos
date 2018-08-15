@@ -11,7 +11,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "dirichletStripElongation_StochasticPolyconvexHGO.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 #include <boost/math/special_functions/gamma.hpp>
 
 int main(int argc, char *argv[]){
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
                 parameters_file_3 >> my_interface->w3_gmrf(i);
                 parameters_file_4 >> my_interface->w4_gmrf(i);
             }
-            Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,*paramList));
+            Teuchos::RCP<newtonRaphson> Newton = Teuchos::rcp(new newtonRaphson(*my_interface,*paramList));
             Newton->setParameters(*paramList);
             Newton->Initialization();
             error = Newton->Solve_with_Aztec(true);

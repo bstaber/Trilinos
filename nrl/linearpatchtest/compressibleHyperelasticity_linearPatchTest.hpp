@@ -3,7 +3,7 @@
 
 #include "tensor_calculus.hpp"
 #include "compressibleHyperelasticity.hpp"
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 
 class compressibleHyperelasticity_linearPatchTest : public compressibleHyperelasticity
 {

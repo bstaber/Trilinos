@@ -1,6 +1,6 @@
-#include "Newton_Raphsonpp.hpp"
+#include "newtonRaphson.hpp"
 
-Newton_Raphson::Newton_Raphson(nonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters){
+newtonRaphson::newtonRaphson(nonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters){
     
     interface = &Interface;
     Comm = interface->Comm;
@@ -12,7 +12,7 @@ Newton_Raphson::Newton_Raphson(nonLinearFiniteElementProblem & Interface, Teucho
     x = new Epetra_Vector(*interface->StandardMap);
 }
 
-void Newton_Raphson::setParameters(Teuchos::ParameterList & Parameters){
+void newtonRaphson::setParameters(Teuchos::ParameterList & Parameters){
 
     delta         = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "delta");
     iter_min      = Teuchos::getParameter<int>(Parameters.sublist("Newton"), "iterMin");
@@ -28,7 +28,7 @@ void Newton_Raphson::setParameters(Teuchos::ParameterList & Parameters){
     tol           = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "tol");
 }
 
-int Newton_Raphson::Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL){
+int newtonRaphson::Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL){
     
     double assemble_time,displacement, norm_inf_rhs, time_init, time_max, krylov_res;
     int FLAG1, FLAG2, FLAG3, nb_bis, iter, krylov_its;
@@ -186,7 +186,7 @@ int Newton_Raphson::Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> 
     return 0;
 }
 
-int Newton_Raphson::Solve_with_Aztec(bool print){
+int newtonRaphson::Solve_with_Aztec(bool print){
     
     Epetra_Time Time(*Comm);
     
@@ -334,7 +334,7 @@ int Newton_Raphson::Solve_with_Aztec(bool print){
 }
 
 
-int Newton_Raphson::print_newton_solution(std::string fileName){
+int newtonRaphson::print_newton_solution(std::string fileName){
     
     int NumTargetElements = 0;
     if (MyPID==0){
@@ -350,13 +350,13 @@ int Newton_Raphson::print_newton_solution(std::string fileName){
     return error;
 }
 
-void Newton_Raphson::Initialization(){
+void newtonRaphson::Initialization(){
     x->PutScalar(0.0);
 }
 
-void Newton_Raphson::setInitialization(Epetra_Vector & init){
+void newtonRaphson::setInitialization(Epetra_Vector & init){
     *x = init;
 }
 
-Newton_Raphson::~Newton_Raphson(){
+newtonRaphson::~newtonRaphson(){
 }

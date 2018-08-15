@@ -61,8 +61,8 @@ MPI_Init(&argc, &argv);
     Teuchos::rcp(new compressibleHyperelasticity_linearPatchTest(Comm,*paramList));
     obj->set_parameters(x,angle);
 
-    Teuchos::RCP<Newton_Raphson> newton =
-    Teuchos::rcp(new Newton_Raphson(*obj,*paramList));
+    Teuchos::RCP<newtonRaphson> newton =
+    Teuchos::rcp(new newtonRaphson(*obj,*paramList));
 
     newton->Initialization();
     int flagNewton = newton->Solve_with_Aztec(true);
