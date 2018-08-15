@@ -4,7 +4,7 @@
 #include "tensor_calculus.hpp"
 #include "compressibleHyperelasticity.hpp"
 
-class TIMooney : public compressibleHyperelasticity
+class tiMooney : public compressibleHyperelasticity
 {
 public:
 
@@ -15,7 +15,7 @@ public:
     double plyagl, cos_plyagl, sin_plyagl;
     std::vector<int> phase;
 
-    TIMooney(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    tiMooney(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         Mesh                  = new mesh(comm, mesh_file, 1.0);
@@ -36,7 +36,7 @@ public:
         }
     }
 
-    ~TIMooney(){
+    ~tiMooney(){
     }
 
     void set_parameters(Epetra_SerialDenseVector & x){
