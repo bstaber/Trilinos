@@ -1,7 +1,16 @@
 var hierarchy =
 [
     [ "BaseClassFEM", "d2/d97/class_base_class_f_e_m.html", [
-      [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", [
+      [ "LinearFiniteElementProblem", "d8/de3/class_linear_finite_element_problem.html", [
+        [ "laplace", "d7/d76/classlaplace.html", null ],
+        [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", [
+          [ "ASMESBVP", "da/d18/class_a_s_m_e_s_b_v_p.html", null ],
+          [ "CEESBVP", "de/dcc/class_c_e_e_s_b_v_p.html", null ],
+          [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],
+          [ "manufactured", "d7/da3/classmanufactured.html", null ]
+        ] ]
+      ] ],
+      [ "NonLinearFiniteElementProblem", "da/d1c/class_non_linear_finite_element_problem.html", [
         [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", [
           [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", [
             [ "compressibleHyperelasticity_linearPatchTest", "df/d4f/classcompressible_hyperelasticity__linear_patch_test.html", null ],
@@ -16,15 +25,6 @@ var hierarchy =
             [ "NeumannInnerSurface_PolyconvexHGO", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html", null ],
             [ "NeumannInnerSurface_StochasticPolyconvexHGO", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html", null ]
           ] ]
-        ] ]
-      ] ],
-      [ "Linear_Finite_Element_Problem", "d3/d9f/class_linear___finite___element___problem.html", [
-        [ "laplace", "d7/d76/classlaplace.html", null ],
-        [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", [
-          [ "ASMESBVP", "da/d18/class_a_s_m_e_s_b_v_p.html", null ],
-          [ "CEESBVP", "de/dcc/class_c_e_e_s_b_v_p.html", null ],
-          [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],
-          [ "manufactured", "d7/da3/classmanufactured.html", null ]
         ] ]
       ] ]
     ] ],

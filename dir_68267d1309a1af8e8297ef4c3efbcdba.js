@@ -29,9 +29,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     ] ],
     [ "fepp.cpp", "db/d4e/fepp_8cpp.html", "db/d4e/fepp_8cpp" ],
     [ "fepp.hpp", "d4/dbc/fepp_8hpp.html", "d4/dbc/fepp_8hpp" ],
-    [ "Finite_Element_Problem.hpp", "d2/d8b/_finite___element___problem_8hpp.html", [
-      [ "Finite_Element_Problem", "d8/dc2/class_finite___element___problem.html", "d8/dc2/class_finite___element___problem" ]
-    ] ],
     [ "hyperelasticity.cpp", "d1/dc9/hyperelasticity_8cpp.html", null ],
     [ "hyperelasticity.hpp", "d2/d34/hyperelasticity_8hpp.html", [
       [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", "dc/d5a/classhyperelasticity" ]
@@ -40,12 +37,12 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "laplacepp.hpp", "d5/d3f/laplacepp_8hpp.html", [
       [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ]
     ] ],
-    [ "Linear_Finite_Element_Problem.hpp", "d9/dea/_linear___finite___element___problem_8hpp.html", [
-      [ "Linear_Finite_Element_Problem", "d3/d9f/class_linear___finite___element___problem.html", "d3/d9f/class_linear___finite___element___problem" ]
-    ] ],
     [ "linearelasticity_setup_pp.cpp", "d4/d89/linearelasticity__setup__pp_8cpp.html", null ],
     [ "linearelasticity_setup_pp.hpp", "d4/d4c/linearelasticity__setup__pp_8hpp.html", [
       [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", "d9/df7/class_linearized_elasticity" ]
+    ] ],
+    [ "LinearFiniteElementProblem.hpp", "dd/d1b/_linear_finite_element_problem_8hpp.html", [
+      [ "LinearFiniteElementProblem", "d8/de3/class_linear_finite_element_problem.html", "d8/de3/class_linear_finite_element_problem" ]
     ] ],
     [ "meshpp.cpp", "d5/d5e/meshpp_8cpp.html", null ],
     [ "meshpp.hpp", "d0/d02/meshpp_8hpp.html", [
@@ -64,6 +61,9 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "Newton_Raphsonpp.cpp", "d5/dc7/_newton___raphsonpp_8cpp.html", null ],
     [ "Newton_Raphsonpp.hpp", "d7/d17/_newton___raphsonpp_8hpp.html", [
       [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", "d0/d9d/class_newton___raphson" ]
+    ] ],
+    [ "NonLinearFiniteElementProblem.hpp", "d4/d16/_non_linear_finite_element_problem_8hpp.html", [
+      [ "NonLinearFiniteElementProblem", "da/d1c/class_non_linear_finite_element_problem.html", "da/d1c/class_non_linear_finite_element_problem" ]
     ] ],
     [ "RandomGeneratorForPCA_andLikelihood.hpp", "d9/dc1/_random_generator_for_p_c_a__and_likelihood_8hpp.html", [
       [ "RandomGeneratorForPCA_andLikelihood", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood.html", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood" ]

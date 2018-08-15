@@ -1,9 +1,9 @@
 <map id="DirichletInletOutlet_PolyconvexHGO" name="DirichletInletOutlet_PolyconvexHGO">
-<area shape="rect" id="node2" href="$d0/d85/classnearly_incompressible_hyperelasticity.html" title="nearlyIncompressibleHyperelasticity" alt="" coords="5,363,237,389"/>
-<area shape="rect" id="node3" href="$dc/d5a/classhyperelasticity.html" title="hyperelasticity" alt="" coords="64,261,171,288"/>
-<area shape="rect" id="node4" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="23,178,187,205"/>
-<area shape="rect" id="node5" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="137,95,252,121"/>
-<area shape="rect" id="node8" href="$d3/d9f/class_linear___finite___element___problem.html" title="Linear_Finite_Element\l_Problem" alt="" coords="211,171,362,212"/>
-<area shape="rect" id="node6" href="$d6/d6b/classmesh.html" title="mesh" alt="" coords="167,5,222,32"/>
-<area shape="rect" id="node7" href="$d7/d76/classlaplace.html" title="laplace" alt="" coords="254,312,317,339"/>
+<area shape="rect" id="node2" href="$d0/d85/classnearly_incompressible_hyperelasticity.html" title="nearlyIncompressibleHyperelasticity" alt="" coords="47,348,279,375"/>
+<area shape="rect" id="node3" href="$dc/d5a/classhyperelasticity.html" title="hyperelasticity" alt="" coords="99,247,206,273"/>
+<area shape="rect" id="node4" href="$da/d1c/class_non_linear_finite_element_problem.html" title="NonLinearFiniteElementProblem" alt="" coords="5,171,215,197"/>
+<area shape="rect" id="node5" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="162,95,277,121"/>
+<area shape="rect" id="node8" href="$d8/de3/class_linear_finite_element_problem.html" title="LinearFiniteElementProblem" alt="" coords="239,171,424,197"/>
+<area shape="rect" id="node6" href="$d6/d6b/classmesh.html" title="mesh" alt="" coords="192,5,247,32"/>
+<area shape="rect" id="node7" href="$d7/d76/classlaplace.html" title="laplace" alt="" coords="297,297,360,324"/>
 </map>

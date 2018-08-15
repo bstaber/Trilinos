@@ -1,6 +1,6 @@
 <map id="compressibleHyperelasticity_linearPatchTest" name="compressibleHyperelasticity_linearPatchTest">
-<area shape="rect" id="node2" href="$d1/d5c/classcompressible_hyperelasticity.html" title="compressibleHyperelasticity" alt="" coords="5,229,192,256"/>
-<area shape="rect" id="node3" href="$dc/d5a/classhyperelasticity.html" title="hyperelasticity" alt="" coords="45,155,152,181"/>
-<area shape="rect" id="node4" href="$d8/dc2/class_finite___element___problem.html" title="Finite_Element_Problem" alt="" coords="17,80,181,107"/>
-<area shape="rect" id="node5" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="41,5,156,32"/>
+<area shape="rect" id="node2" href="$d1/d5c/classcompressible_hyperelasticity.html" title="compressibleHyperelasticity" alt="" coords="17,229,203,256"/>
+<area shape="rect" id="node3" href="$dc/d5a/classhyperelasticity.html" title="hyperelasticity" alt="" coords="57,155,163,181"/>
+<area shape="rect" id="node4" href="$da/d1c/class_non_linear_finite_element_problem.html" title="NonLinearFiniteElementProblem" alt="" coords="5,80,215,107"/>
+<area shape="rect" id="node5" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="53,5,167,32"/>
 </map>

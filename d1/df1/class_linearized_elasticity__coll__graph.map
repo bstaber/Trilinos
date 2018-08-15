@@ -1,5 +1,5 @@
 <map id="LinearizedElasticity" name="LinearizedElasticity">
-<area shape="rect" id="node2" href="$d3/d9f/class_linear___finite___element___problem.html" title="Linear_Finite_Element\l_Problem" alt="" coords="5,171,156,212"/>
-<area shape="rect" id="node3" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="23,95,138,121"/>
-<area shape="rect" id="node4" href="$d6/d6b/classmesh.html" title="mesh" alt="" coords="53,5,108,32"/>
+<area shape="rect" id="node2" href="$d8/de3/class_linear_finite_element_problem.html" title="LinearFiniteElementProblem" alt="" coords="5,171,191,197"/>
+<area shape="rect" id="node3" href="$d2/d97/class_base_class_f_e_m.html" title="BaseClassFEM" alt="" coords="41,95,155,121"/>
+<area shape="rect" id="node4" href="$d6/d6b/classmesh.html" title="mesh" alt="" coords="71,5,125,32"/>
 </map>
