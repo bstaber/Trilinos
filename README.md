@@ -1,6 +1,6 @@
 # Three-dimensional Finite Element Method  
 
-* Build on top of the Trilinos project: https://github.com/trilinos/Trilinos
+* Build on top of the [Trilinos project](https://github.com/trilinos/Trilinos)
 
 * Uses: Gmsh, Metis, Boost, Epetra, Amesos, AztecOO, Stratimikos, Teuchos, ML, amongst others.
 * Handles linear and quadratic interpolations (tetra, hexas)
