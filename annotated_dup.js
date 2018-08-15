@@ -5,7 +5,7 @@ var annotated_dup =
     [ "ceeSBVP", "d2/d17/classcee_s_b_v_p.html", "d2/d17/classcee_s_b_v_p" ],
     [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", "d1/d5c/classcompressible_hyperelasticity" ],
     [ "compressibleHyperelasticity_linearPatchTest", "df/d4f/classcompressible_hyperelasticity__linear_patch_test.html", "df/d4f/classcompressible_hyperelasticity__linear_patch_test" ],
-    [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o" ],
+    [ "dirichletInletOutlet_PolyconvexHGO", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o" ],
     [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o" ],
     [ "distributenrldata", "d1/d14/classdistributenrldata.html", "d1/d14/classdistributenrldata" ],
     [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", "dc/d5a/classhyperelasticity" ],

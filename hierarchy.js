@@ -20,7 +20,7 @@ var hierarchy =
             [ "tiMooneyRandomField", "d1/d2a/classti_mooney_random_field.html", null ]
           ] ],
           [ "nearlyIncompressibleHyperelasticity", "d0/d85/classnearly_incompressible_hyperelasticity.html", [
-            [ "DirichletInletOutlet_PolyconvexHGO", "da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html", null ],
+            [ "dirichletInletOutlet_PolyconvexHGO", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html", null ],
             [ "DirichletStripElongation_StochasticPolyconvexHGO", "d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html", null ],
             [ "NeumannInnerSurface_PolyconvexHGO", "de/d4c/class_neumann_inner_surface___polyconvex_h_g_o.html", null ],
             [ "NeumannInnerSurface_StochasticPolyconvexHGO", "dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html", null ]

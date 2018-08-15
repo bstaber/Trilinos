@@ -5,7 +5,7 @@ var searchData=
   ['_7eceesbvp',['~ceeSBVP',['../d2/d17/classcee_s_b_v_p.html#aa303a883d12149c6c9bce930a91924e1',1,'ceeSBVP']]],
   ['_7ecompressiblehyperelasticity',['~compressibleHyperelasticity',['../d1/d5c/classcompressible_hyperelasticity.html#abf0fcea06733054b5c0233d23eeda221',1,'compressibleHyperelasticity']]],
   ['_7ecompressiblehyperelasticity_5flinearpatchtest',['~compressibleHyperelasticity_linearPatchTest',['../df/d4f/classcompressible_hyperelasticity__linear_patch_test.html#aa67713d6417bb7da06f025cdcd405ac2',1,'compressibleHyperelasticity_linearPatchTest']]],
-  ['_7edirichletinletoutlet_5fpolyconvexhgo',['~DirichletInletOutlet_PolyconvexHGO',['../da/d5f/class_dirichlet_inlet_outlet___polyconvex_h_g_o.html#a03b54f6a1592f1e795738a649d649b34',1,'DirichletInletOutlet_PolyconvexHGO']]],
+  ['_7edirichletinletoutlet_5fpolyconvexhgo',['~dirichletInletOutlet_PolyconvexHGO',['../d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html#a0708f49def77990334cecdef1ce91277',1,'dirichletInletOutlet_PolyconvexHGO']]],
   ['_7edirichletstripelongation_5fstochasticpolyconvexhgo',['~DirichletStripElongation_StochasticPolyconvexHGO',['../d0/de4/class_dirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a3d8810b6a7483c376a9eaca0a50bf4b1',1,'DirichletStripElongation_StochasticPolyconvexHGO']]],
   ['_7edistributenrldata',['~distributenrldata',['../d1/d14/classdistributenrldata.html#af80f134c5fb3b285cece3f5eb5c08cb2',1,'distributenrldata']]],
   ['_7ehyperelasticity',['~hyperelasticity',['../dc/d5a/classhyperelasticity.html#ae1ab018d9249e7078cddb8cb2873f9ac',1,'hyperelasticity']]],
