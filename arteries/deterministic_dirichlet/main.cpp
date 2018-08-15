@@ -6,7 +6,7 @@
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "DirichletInletOutlet_PolyconvexHGO.hpp"
+#include "dirichletInletOutlet_PolyconvexHGO.hpp"
 #include "Newton_Raphsonpp.hpp"
 
 int main(int argc, char *argv[]){
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
     laplace.set("AZ_diagnostics", 0);
     laplace.set("AZ_reorder", 1);
     
-    Teuchos::RCP<DirichletInletOutlet_PolyconvexHGO> my_interface = Teuchos::rcp(new DirichletInletOutlet_PolyconvexHGO(Comm,Parameters));
+    Teuchos::RCP<dirichletInletOutlet_PolyconvexHGO> my_interface = Teuchos::rcp(new dirichletInletOutlet_PolyconvexHGO(Comm,Parameters));
     Teuchos::RCP<Newton_Raphson> Newton = Teuchos::rcp(new Newton_Raphson(*my_interface,Parameters));
     
     my_interface->fixed = 2;

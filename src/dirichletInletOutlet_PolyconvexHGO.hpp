@@ -5,7 +5,7 @@
 #include "laplacepp.hpp"
 #include "nearlyIncompressibleHyperelasticity.hpp"
 
-class DirichletInletOutlet_PolyconvexHGO : public nearlyIncompressibleHyperelasticity
+class dirichletInletOutlet_PolyconvexHGO : public nearlyIncompressibleHyperelasticity
 {
 public:
 
@@ -17,7 +17,7 @@ public:
 
     Epetra_SerialDenseVector a, b;
 
-    DirichletInletOutlet_PolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    dirichletInletOutlet_PolyconvexHGO(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
         std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
@@ -60,7 +60,7 @@ public:
 
     }
 
-    ~DirichletInletOutlet_PolyconvexHGO(){
+    ~dirichletInletOutlet_PolyconvexHGO(){
     }
 
     void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
