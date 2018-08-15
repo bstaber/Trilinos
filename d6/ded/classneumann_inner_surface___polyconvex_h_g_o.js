@@ -1,7 +1,7 @@
 var classneumann_inner_surface___polyconvex_h_g_o =
 [
     [ "neumannInnerSurface_PolyconvexHGO", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#a5812af027ec222f1ef428a10b226e325", null ],
-    [ "~beumannInnerSurface_PolyconvexHGO", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#ab0ed389c332afbd108c0041c91e520ab", null ],
+    [ "~neumannInnerSurface_PolyconvexHGO", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#aee5bb4caf0edecfa8111f0230f12dbd7", null ],
     [ "apply_clamp", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#adc446149616719ca6d01b2597830a351", null ],
     [ "apply_dirichlet_conditions", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#a5995c6358afb51795f194ad88723c402", null ],
     [ "apply_semiselipbc", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#aef3a5069ac82280716e3dbc3ed551c8f", null ],
