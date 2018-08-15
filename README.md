@@ -8,6 +8,7 @@
 * Deterministic problems are also considered in some subfolders
 * The c++ classes defining the boundary value problems (i.e., **linearizedElasticity**, **compressibleHyperelasticity** and **nearlyIncompressibleHyperelasticity**) are pure virtual classes, **independent of the constitutive equations** (random or deterministic elasticity tensor, random or deterministic strain energy function), boundary conditions, etc.
 	* __linearizedElasticity__: see folders asme, cee530
+		* used in asmeSBVP, ceeSBVP, linearPatchTest and manufacturedSolution
 	* __compressibleHyperelasticity__: see folder nrl
 	* __nearlyIncompressibleHyperelasticity__ (three-field formulation with static condensation): see folder arteries
 * Also solves Laplace's equation for the generation of fibers directions in the folder arteries
