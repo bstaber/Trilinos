@@ -1,11 +1,11 @@
 #ifndef BASECLASSFEM_HPP
 #define BASECLASSFEM_HPP
 #include "meshpp.hpp"
-class BaseClassFEM
+class baseClassFEM
 {
 public:
-    BaseClassFEM();
-    ~BaseClassFEM();
+    baseClassFEM();
+    ~baseClassFEM();
     
     mesh * Mesh;
     Epetra_Comm * Comm;

@@ -1,7 +1,7 @@
 #ifndef LINEARFINITEELEMENTPROBLEM_HPP
 #define LINEARFINITEELEMENTPROBLEM_HPP
-#include "BaseClassFEM.hpp"
-class LinearFiniteElementProblem : public BaseClassFEM
+#include "baseClassFEM.hpp"
+class LinearFiniteElementProblem : public baseClassFEM
 {
 public:
     LinearFiniteElementProblem(){

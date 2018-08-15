@@ -2,9 +2,9 @@
 #define NONLINEARFINITEELEMENTPROBLEM_HPP
 
 #include "meshpp.hpp"
-#include "BaseClassFEM.hpp"
+#include "baseClassFEM.hpp"
 
-class NonLinearFiniteElementProblem : public BaseClassFEM
+class NonLinearFiniteElementProblem : public baseClassFEM
 {
     
 public:
