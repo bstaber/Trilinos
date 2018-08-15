@@ -2,11 +2,11 @@
 
 ### Packages and libraries
 
-* Built on top of Sandia's Trilinos Project [ [Website](http://trilinos.org/) |
+* Built on top of Sandia's Trilinos Project [[Website](http://trilinos.org/) |
 [Documentation](http://trilinos.org/about/documentation/) |
 [Mailing List](https://trilinos.org/mailman/listinfo/trilinos-users) |
 [Packages](http://trilinos.org/packages/) |
-[GitHub](https://github.com/trilinos/Trilinos) ] and uses, for instance, the packages:
+[GitHub](https://github.com/trilinos/Trilinos)] and uses, for instance, the packages:
 	* [Epetra](https://trilinos.org/packages/epetra/) for linear algebra,
 	* [Amesos](https://trilinos.org/packages/amesos/), [AztecOO](https://trilinos.org/packages/aztecoo/), [Stratimikos](https://trilinos.org/packages/stratimikos/) for direct and iterative linear solvers,
 	* [Teuchos](https://trilinos.org/packages/teuchos/) for XML files,
