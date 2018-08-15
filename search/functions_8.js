@@ -7,6 +7,6 @@ var searchData=
   ['import_5fexp_5fdef',['import_exp_def',['../dd/de7/classreadnrldata.html#a428f181e5292049504ad6d4dc8be4af6',1,'readnrldata']]],
   ['import_5fexp_5fpoints',['import_exp_points',['../dd/de7/classreadnrldata.html#a4ea9236a9252175e97817144ba456351',1,'readnrldata']]],
   ['import_5fexpenergy',['import_expenergy',['../dd/de7/classreadnrldata.html#a2d3668f6ee98a7424af995944f14bde4',1,'readnrldata']]],
-  ['initialization',['Initialization',['../d0/d9d/class_newton___raphson.html#ad539d48c7118ead7770bdfed2abc3d6a',1,'Newton_Raphson']]],
+  ['initialization',['Initialization',['../d8/dcc/classnewton_raphson.html#a9dda6854e256472e90ee5385a3fd5b63',1,'newtonRaphson']]],
   ['inverse_5fisoparametric_5fmapping',['inverse_isoparametric_mapping',['../d1/d14/classdistributenrldata.html#a85ed5c2390f02027f87529572afaaed4',1,'distributenrldata']]]
 ];

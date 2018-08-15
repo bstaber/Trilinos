@@ -7,7 +7,7 @@ var searchData=
   ['el_5ftype',['el_type',['../d6/d6b/classmesh.html#a42962aa7adaec45d69c1dc212cd89bd0',1,'mesh']]],
   ['energy',['energy',['../d1/d14/classdistributenrldata.html#a3e5d43b25c6ec0bf14918daedc677819',1,'distributenrldata::energy()'],['../dd/de7/classreadnrldata.html#a773e4ba0195dfd7544753fb1b32e2720',1,'readnrldata::energy()']]],
   ['epart',['epart',['../d6/d6b/classmesh.html#affe34969c2212d1db294154c01d6ce0e',1,'mesh']]],
-  ['eps',['eps',['../d0/d9d/class_newton___raphson.html#ac4d8377ea44241ad177ec1fa09b8d726',1,'Newton_Raphson']]],
+  ['eps',['eps',['../d8/dcc/classnewton_raphson.html#ae98b6bc32d72bb10aaa31e2f5e4c6cab',1,'newtonRaphson']]],
   ['epsilon',['epsilon',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a8491faac21a0990e533d30ad403c2e0d',1,'dirichletStripElongation_StochasticPolyconvexHGO::epsilon()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#a8c4587c53f678a71811957f17d248e09',1,'neumannInnerSurface_StochasticPolyconvexHGO::epsilon()']]],
   ['err',['err',['../d9/d49/cost_function_8m.html#a52482fdd3721e7db69dc740aefee8ad4',1,'costFunction.m']]],
   ['errorl2',['errorL2',['../d2/d69/classlinear_patch_test.html#a9603affc0b054dfc7f4b5ed1cd9e845c',1,'linearPatchTest::errorL2()'],['../d7/da3/classmanufactured.html#a822b3f27e2f229f0b1e8e6a8afab5298',1,'manufactured::errorL2()'],['../df/d4f/classcompressible_hyperelasticity__linear_patch_test.html#a5af43215bd290081aaaea1907a41cd00',1,'compressibleHyperelasticity_linearPatchTest::errorL2()'],['../d1/dbe/classmanufactured_solution.html#a10118d1eb7b904ec03546c43d9e596af',1,'manufacturedSolution::errorL2()']]],

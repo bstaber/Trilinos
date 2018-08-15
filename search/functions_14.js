@@ -19,7 +19,7 @@ var searchData=
   ['_7enearlyincompressiblehyperelasticity',['~nearlyIncompressibleHyperelasticity',['../d0/d85/classnearly_incompressible_hyperelasticity.html#ae7953ce32909be97e94325b7dbd3aa40',1,'nearlyIncompressibleHyperelasticity']]],
   ['_7eneumanninnersurface_5fpolyconvexhgo',['~neumannInnerSurface_PolyconvexHGO',['../d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html#aee5bb4caf0edecfa8111f0230f12dbd7',1,'neumannInnerSurface_PolyconvexHGO']]],
   ['_7eneumanninnersurface_5fstochasticpolyconvexhgo',['~neumannInnerSurface_StochasticPolyconvexHGO',['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#ae230a6f642836a6df3e2a2edc501a2ad',1,'neumannInnerSurface_StochasticPolyconvexHGO']]],
-  ['_7enewton_5fraphson',['~Newton_Raphson',['../d0/d9d/class_newton___raphson.html#ab50e2374a3cf2d6ce3a4a4893774165e',1,'Newton_Raphson']]],
+  ['_7enewtonraphson',['~newtonRaphson',['../d8/dcc/classnewton_raphson.html#af1076cf6bb4a819e9af7b320da08f1f2',1,'newtonRaphson']]],
   ['_7enonlinearfiniteelementproblem',['~nonLinearFiniteElementProblem',['../d3/d5b/classnon_linear_finite_element_problem.html#a7646cc9413ad8e0ec09b5a9102fe046a',1,'nonLinearFiniteElementProblem']]],
   ['_7ereadnrldata',['~readnrldata',['../dd/de7/classreadnrldata.html#ab4dd568e800050bbf29479d67a9bdb9e',1,'readnrldata']]],
   ['_7erubberblock',['~rubberblock',['../dd/d20/classrubberblock.html#aa37d1bde5448923d61e610749f431082',1,'rubberblock']]],

@@ -1,22 +1,22 @@
 <map id="src/nonLinearFiniteElementProblem.hpp" name="src/nonLinearFiniteElementProblem.hpp">
 <area shape="rect" id="node2" href="$d2/d34/hyperelasticity_8hpp.html" title="src/hyperelasticity.hpp" alt="" coords="1212,95,1365,121"/>
-<area shape="rect" id="node31" href="$d7/d17/_newton___raphsonpp_8hpp.html" title="src/Newton_Raphsonpp.hpp" alt="" coords="1310,273,1497,300"/>
-<area shape="rect" id="node3" href="$da/d5c/compressible_hyperelasticity_8hpp.html" title="src/compressibleHyperelasticity.hpp" alt="" coords="1884,177,2117,203"/>
+<area shape="rect" id="node31" href="$d1/d11/newton_raphson_8hpp.html" title="src/newtonRaphson.hpp" alt="" coords="1322,273,1485,300"/>
+<area shape="rect" id="node3" href="$da/d5c/compressible_hyperelasticity_8hpp.html" title="src/compressibleHyperelasticity.hpp" alt="" coords="1860,177,2093,203"/>
 <area shape="rect" id="node17" href="$dc/de0/nearly_incompressible_hyperelasticity_8hpp.html" title="src/nearlyIncompressible\lHyperelasticity.hpp" alt="" coords="695,169,861,211"/>
 <area shape="rect" id="node30" href="$d1/dc9/hyperelasticity_8cpp.html" title="src/hyperelasticity.cpp" alt="" coords="1212,177,1365,203"/>
-<area shape="rect" id="node4" href="$de/d4a/rubberblock_8hpp.html" title="examples/rubberblock\l/rubberblock.hpp" alt="" coords="1614,266,1763,307"/>
-<area shape="rect" id="node6" href="$dd/dc1/compressible_hyperelasticity__linear_patch_test_8hpp.html" title="nrl/linearpatchtest\l/compressibleHyperelasticity\l_linearPatchTest.hpp" alt="" coords="1913,363,2104,419"/>
-<area shape="rect" id="node8" href="$da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp.html" title="nrl/manufactured_solution\l/manufacturedSolution.hpp" alt="" coords="2128,370,2305,411"/>
-<area shape="rect" id="node10" href="$dd/d2e/compressible___mooney___transverse___isotropic_8hpp.html" title="src/compressible_Mooney\l_Transverse_Isotropic.hpp" alt="" coords="1787,266,1963,307"/>
-<area shape="rect" id="node11" href="$d4/df3/compressible___mooney___transverse___isotropic___random___field_8hpp.html" title="src/compressible_Mooney\l_Transverse_Isotropic\l_Random_Field.hpp" alt="" coords="2348,259,2523,315"/>
-<area shape="rect" id="node16" href="$d8/db8/compressible_hyperelasticity_8cpp.html" title="src/compressibleHyperelasticity.cpp" alt="" coords="2039,273,2272,300"/>
-<area shape="rect" id="node5" href="$d4/d7f/examples_2rubberblock_2main_8cpp.html" title="examples/rubberblock\l/main.cpp" alt="" coords="1739,370,1889,411"/>
-<area shape="rect" id="node7" href="$da/dce/nrl_2linearpatchtest_2main_8cpp.html" title="nrl/linearpatchtest\l/main.cpp" alt="" coords="1946,467,2071,508"/>
-<area shape="rect" id="node9" href="$d4/db6/nrl_2manufactured__solution_2main_8cpp.html" title="nrl/manufactured_solution\l/main.cpp" alt="" coords="2131,467,2302,508"/>
-<area shape="rect" id="node12" href="$d2/d16/nrl_2randomfields_2main_8cpp.html" title="nrl/randomfields/main.cpp" alt="" coords="2551,377,2722,404"/>
-<area shape="rect" id="node13" href="$d9/dc1/_random_generator_for_p_c_a__and_likelihood_8hpp.html" title="src/RandomGeneratorForPCA\l_andLikelihood.hpp" alt="" coords="2330,370,2527,411"/>
-<area shape="rect" id="node14" href="$d5/daf/nrl_2random__generator__for__pca__likelihood_2main_8cpp.html" title="nrl/random_generator\l_for_pca_likelihood/main.cpp" alt="" coords="2329,467,2520,508"/>
-<area shape="rect" id="node15" href="$db/d7d/nrl_2testing__solutions_2main_8cpp.html" title="nrl/testing_solutions\l/main.cpp" alt="" coords="2545,467,2683,508"/>
+<area shape="rect" id="node4" href="$de/d4a/rubberblock_8hpp.html" title="examples/rubberblock\l/rubberblock.hpp" alt="" coords="1590,266,1739,307"/>
+<area shape="rect" id="node6" href="$dd/dc1/compressible_hyperelasticity__linear_patch_test_8hpp.html" title="nrl/linearpatchtest\l/compressibleHyperelasticity\l_linearPatchTest.hpp" alt="" coords="1889,363,2080,419"/>
+<area shape="rect" id="node8" href="$da/dcd/nrl_2manufactured__solution_2manufactured_solution_8hpp.html" title="nrl/manufactured_solution\l/manufacturedSolution.hpp" alt="" coords="2104,370,2281,411"/>
+<area shape="rect" id="node10" href="$dd/d2e/compressible___mooney___transverse___isotropic_8hpp.html" title="src/compressible_Mooney\l_Transverse_Isotropic.hpp" alt="" coords="1763,266,1939,307"/>
+<area shape="rect" id="node11" href="$d4/df3/compressible___mooney___transverse___isotropic___random___field_8hpp.html" title="src/compressible_Mooney\l_Transverse_Isotropic\l_Random_Field.hpp" alt="" coords="2324,259,2499,315"/>
+<area shape="rect" id="node16" href="$d8/db8/compressible_hyperelasticity_8cpp.html" title="src/compressibleHyperelasticity.cpp" alt="" coords="2015,273,2248,300"/>
+<area shape="rect" id="node5" href="$d4/d7f/examples_2rubberblock_2main_8cpp.html" title="examples/rubberblock\l/main.cpp" alt="" coords="1715,370,1865,411"/>
+<area shape="rect" id="node7" href="$da/dce/nrl_2linearpatchtest_2main_8cpp.html" title="nrl/linearpatchtest\l/main.cpp" alt="" coords="1922,467,2047,508"/>
+<area shape="rect" id="node9" href="$d4/db6/nrl_2manufactured__solution_2main_8cpp.html" title="nrl/manufactured_solution\l/main.cpp" alt="" coords="2107,467,2278,508"/>
+<area shape="rect" id="node12" href="$d2/d16/nrl_2randomfields_2main_8cpp.html" title="nrl/randomfields/main.cpp" alt="" coords="2527,377,2698,404"/>
+<area shape="rect" id="node13" href="$d9/dc1/_random_generator_for_p_c_a__and_likelihood_8hpp.html" title="src/RandomGeneratorForPCA\l_andLikelihood.hpp" alt="" coords="2306,370,2503,411"/>
+<area shape="rect" id="node14" href="$d5/daf/nrl_2random__generator__for__pca__likelihood_2main_8cpp.html" title="nrl/random_generator\l_for_pca_likelihood/main.cpp" alt="" coords="2305,467,2496,508"/>
+<area shape="rect" id="node15" href="$db/d7d/nrl_2testing__solutions_2main_8cpp.html" title="nrl/testing_solutions\l/main.cpp" alt="" coords="2521,467,2659,508"/>
 <area shape="rect" id="node18" href="$dd/d3d/dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html" title="src/dirichletInletOutlet\l_PolyconvexHGO.hpp" alt="" coords="806,266,958,307"/>
 <area shape="rect" id="node20" href="$d5/d0d/dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" title="src/dirichletStripElongation\l_StochasticPolyconvexHGO.hpp" alt="" coords="567,266,781,307"/>
 <area shape="rect" id="node22" href="$d8/d7d/nearly_incompressible_hyperelasticity_8cpp.html" title="src/nearlyIncompressible\lHyperelasticity.cpp" alt="" coords="376,266,543,307"/>
@@ -30,5 +30,5 @@
 <area shape="rect" id="node28" href="$d2/dbe/arteries_2boost__gmrf_2gmrf__nodes_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_nodes/main.cpp" alt="" coords="180,370,331,411"/>
 <area shape="rect" id="node29" href="$da/df3/arteries_2gmrf__neumann_2main_8cpp.html" title="arteries/gmrf_neumann\l/main.cpp" alt="" coords="394,370,549,411"/>
 <area shape="rect" id="node32" href="$de/de8/example__pnpoly__inverse__isoparam_8cpp.html" title="examples/pnpoly/example\l_pnpoly_inverse_isoparam.cpp" alt="" coords="1303,370,1504,411"/>
-<area shape="rect" id="node33" href="$d5/dc7/_newton___raphsonpp_8cpp.html" title="src/Newton_Raphsonpp.cpp" alt="" coords="1529,377,1715,404"/>
+<area shape="rect" id="node33" href="$d6/d90/newton_raphson_8cpp.html" title="src/newtonRaphson.cpp" alt="" coords="1529,377,1691,404"/>
 </map>

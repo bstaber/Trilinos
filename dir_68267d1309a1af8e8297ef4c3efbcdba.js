@@ -58,9 +58,9 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "neumannInnerSurface_StochasticPolyconvexHGO.hpp", "dc/da1/neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html", [
       [ "neumannInnerSurface_StochasticPolyconvexHGO", "db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html", "db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o" ]
     ] ],
-    [ "Newton_Raphsonpp.cpp", "d5/dc7/_newton___raphsonpp_8cpp.html", null ],
-    [ "Newton_Raphsonpp.hpp", "d7/d17/_newton___raphsonpp_8hpp.html", [
-      [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", "d0/d9d/class_newton___raphson" ]
+    [ "newtonRaphson.cpp", "d6/d90/newton_raphson_8cpp.html", null ],
+    [ "newtonRaphson.hpp", "d1/d11/newton_raphson_8hpp.html", [
+      [ "newtonRaphson", "d8/dcc/classnewton_raphson.html", "d8/dcc/classnewton_raphson" ]
     ] ],
     [ "nonLinearFiniteElementProblem.hpp", "da/da3/non_linear_finite_element_problem_8hpp.html", [
       [ "nonLinearFiniteElementProblem", "d3/d5b/classnon_linear_finite_element_problem.html", "d3/d5b/classnon_linear_finite_element_problem" ]

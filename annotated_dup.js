@@ -19,7 +19,7 @@ var annotated_dup =
     [ "nearlyIncompressibleHyperelasticity", "d0/d85/classnearly_incompressible_hyperelasticity.html", "d0/d85/classnearly_incompressible_hyperelasticity" ],
     [ "neumannInnerSurface_PolyconvexHGO", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html", "d6/ded/classneumann_inner_surface___polyconvex_h_g_o" ],
     [ "neumannInnerSurface_StochasticPolyconvexHGO", "db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html", "db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o" ],
-    [ "Newton_Raphson", "d0/d9d/class_newton___raphson.html", "d0/d9d/class_newton___raphson" ],
+    [ "newtonRaphson", "d8/dcc/classnewton_raphson.html", "d8/dcc/classnewton_raphson" ],
     [ "nonLinearFiniteElementProblem", "d3/d5b/classnon_linear_finite_element_problem.html", "d3/d5b/classnon_linear_finite_element_problem" ],
     [ "RandomGeneratorForPCA_andLikelihood", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood.html", "d8/d0d/class_random_generator_for_p_c_a__and_likelihood" ],
     [ "readnrldata", "dd/de7/classreadnrldata.html", "dd/de7/classreadnrldata" ],
