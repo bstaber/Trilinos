@@ -42,7 +42,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     ] ],
     [ "linearizedElasticity.cpp", "df/d96/linearized_elasticity_8cpp.html", null ],
     [ "linearizedElasticity.hpp", "d5/dfe/linearized_elasticity_8hpp.html", [
-      [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", "d9/df7/class_linearized_elasticity" ]
+      [ "linearizedElasticity", "d4/dfd/classlinearized_elasticity.html", "d4/dfd/classlinearized_elasticity" ]
     ] ],
     [ "meshpp.cpp", "d5/d5e/meshpp_8cpp.html", null ],
     [ "meshpp.hpp", "d0/d02/meshpp_8hpp.html", [

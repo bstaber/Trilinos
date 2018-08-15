@@ -3,7 +3,7 @@ var hierarchy =
     [ "baseClassFEM", "d2/d31/classbase_class_f_e_m.html", [
       [ "linearFiniteElementProblem", "dc/d01/classlinear_finite_element_problem.html", [
         [ "laplace", "d7/d76/classlaplace.html", null ],
-        [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", [
+        [ "linearizedElasticity", "d4/dfd/classlinearized_elasticity.html", [
           [ "ASMESBVP", "da/d18/class_a_s_m_e_s_b_v_p.html", null ],
           [ "CEESBVP", "de/dcc/class_c_e_e_s_b_v_p.html", null ],
           [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],

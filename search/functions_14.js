@@ -11,7 +11,7 @@ var searchData=
   ['_7ehyperelasticity',['~hyperelasticity',['../dc/d5a/classhyperelasticity.html#ae1ab018d9249e7078cddb8cb2873f9ac',1,'hyperelasticity']]],
   ['_7elaplace',['~laplace',['../d7/d76/classlaplace.html#a5a11b5bc8dfc1a2cf1bb3eeec282692a',1,'laplace']]],
   ['_7elinearfiniteelementproblem',['~linearFiniteElementProblem',['../dc/d01/classlinear_finite_element_problem.html#a2ff1d2c68eba1be07e0b13b70aeee7a3',1,'linearFiniteElementProblem']]],
-  ['_7elinearizedelasticity',['~LinearizedElasticity',['../d9/df7/class_linearized_elasticity.html#a8f311bf8f0be19cf851dd7a044b432c2',1,'LinearizedElasticity']]],
+  ['_7elinearizedelasticity',['~linearizedElasticity',['../d4/dfd/classlinearized_elasticity.html#a87b379804e829d7319498132a9e63d8d',1,'linearizedElasticity']]],
   ['_7elinearpatchtest',['~linearPatchTest',['../d2/d69/classlinear_patch_test.html#ada20d4de6b9e74c0f70e4522a5353aa2',1,'linearPatchTest']]],
   ['_7emanufactured',['~manufactured',['../d7/da3/classmanufactured.html#aa990498c6e4829a612978aa6223fe3fc',1,'manufactured']]],
   ['_7emanufacturedsolution',['~manufacturedSolution',['../d1/dbe/classmanufactured_solution.html#a39cab08f07c4f839cab34b135474f28e',1,'manufacturedSolution']]],

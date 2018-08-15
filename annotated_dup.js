@@ -11,7 +11,7 @@ var annotated_dup =
     [ "hyperelasticity", "dc/d5a/classhyperelasticity.html", "dc/d5a/classhyperelasticity" ],
     [ "laplace", "d7/d76/classlaplace.html", "d7/d76/classlaplace" ],
     [ "linearFiniteElementProblem", "dc/d01/classlinear_finite_element_problem.html", "dc/d01/classlinear_finite_element_problem" ],
-    [ "LinearizedElasticity", "d9/df7/class_linearized_elasticity.html", "d9/df7/class_linearized_elasticity" ],
+    [ "linearizedElasticity", "d4/dfd/classlinearized_elasticity.html", "d4/dfd/classlinearized_elasticity" ],
     [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", "d2/d69/classlinear_patch_test" ],
     [ "manufactured", "d7/da3/classmanufactured.html", "d7/da3/classmanufactured" ],
     [ "manufacturedSolution", "d1/dbe/classmanufactured_solution.html", "d1/dbe/classmanufactured_solution" ],

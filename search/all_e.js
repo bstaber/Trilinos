@@ -1,7 +1,7 @@
 var searchData=
 [
   ['n',['N',['../dd/d43/class_neumann_inner_surface___stochastic_polyconvex_h_g_o.html#afb62ac7efa4c9f710ddf03f1f1ca3476',1,'NeumannInnerSurface_StochasticPolyconvexHGO']]],
-  ['n_5fbc_5fdof',['n_bc_dof',['../dc/d5a/classhyperelasticity.html#adc13af493511b96adce81c8a36953333',1,'hyperelasticity::n_bc_dof()'],['../d9/df7/class_linearized_elasticity.html#a87087f0191a67c4ddde58cd936c9980b',1,'LinearizedElasticity::n_bc_dof()']]],
+  ['n_5fbc_5fdof',['n_bc_dof',['../dc/d5a/classhyperelasticity.html#adc13af493511b96adce81c8a36953333',1,'hyperelasticity::n_bc_dof()'],['../d4/dfd/classlinearized_elasticity.html#aa4540c5c03df4c32f2b1290dc163c39c',1,'linearizedElasticity::n_bc_dof()']]],
   ['n_5fcells',['n_cells',['../d6/d6b/classmesh.html#aa6de71610c82f4a4b565d7eb2f1a61d1',1,'mesh::n_cells()'],['../d6/d6b/classmesh.html#a7b045dd5de59397c355985f6c09cb27e',1,'mesh::N_cells()']]],
   ['n_5ffaces',['n_faces',['../d6/d6b/classmesh.html#acc073247dcf27de46689af730c9d29f9',1,'mesh::n_faces()'],['../d6/d6b/classmesh.html#aeda6a6b27f41c760f6a5797a9df7ab94',1,'mesh::N_faces()']]],
   ['n_5fgauss_5fcells',['n_gauss_cells',['../d6/d6b/classmesh.html#af63529da96edf92d0077a4e91082fddf',1,'mesh']]],
