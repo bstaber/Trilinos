@@ -18,7 +18,7 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "Stratimikos_DefaultLinearSolverBuilder.hpp"
-#include "ASMESBVP.hpp"
+#include "asmeSBVP.hpp"
 
 int main(int argc, char *argv[]){
     
@@ -51,7 +51,7 @@ MPI_Init(&argc, &argv);
         paramList->print(std::cout,2,true,true);
     }
     
-    Teuchos::RCP<ASMESBVP> interface = Teuchos::rcp(new ASMESBVP(Comm,*paramList));
+    Teuchos::RCP<asmeSBVP> interface = Teuchos::rcp(new asmeSBVP(Comm,*paramList));
     
     double deltaN  = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "deltaN");
     double deltaM4 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "deltaM4");

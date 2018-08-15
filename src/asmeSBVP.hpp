@@ -5,11 +5,11 @@
 #include "tensor_calculus.hpp"
 #include "linearizedElasticity.hpp"
 
-class ASMESBVP : public linearizedElasticity
+class asmeSBVP : public linearizedElasticity
 {
 public:
 
-    ASMESBVP(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    asmeSBVP(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
         Krylov = &Parameters.sublist("Krylov");
 
@@ -39,7 +39,7 @@ public:
         solution = new Epetra_Vector(*StandardMap);
     }
 
-    ~ASMESBVP(){
+    ~asmeSBVP(){
     }
 
     Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp){
