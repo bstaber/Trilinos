@@ -14,7 +14,7 @@
 
 * Additional libraries: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/).
 
-### Description:
+### Description
 
 * Handles **linear and quadratic interpolations** (tetras, hexas, triangles, quads) and various Gauss quadratures
 * Handles essential and natural boundary conditions, deformation dependent natural conditions, with or without forcing terms.
