@@ -45,6 +45,6 @@
 
 * You need to construct your own class object inheriting from **linearizedElasticity** and which contains at least the six virtual methods
 
-* Examples can be found in e.g. **asmeSBVP.hpp**, **ceeSBVP**, **linearPatchTest.hpp** and **manufactured**
+* Examples can be found in e.g. **asmeSBVP.hpp**, **ceeSBVP.hpp**, **linearPatchTest.hpp** and **manufactured.hpp**
 
 
