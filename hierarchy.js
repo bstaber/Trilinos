@@ -16,7 +16,7 @@ var hierarchy =
             [ "compressibleHyperelasticity_linearPatchTest", "df/d4f/classcompressible_hyperelasticity__linear_patch_test.html", null ],
             [ "manufacturedSolution", "d1/dbe/classmanufactured_solution.html", null ],
             [ "rubberblock", "dd/d20/classrubberblock.html", null ],
-            [ "TIMooney", "de/dd1/class_t_i_mooney.html", null ],
+            [ "tiMooney", "d8/d82/classti_mooney.html", null ],
             [ "TIMooney_RandomField", "d1/dd7/class_t_i_mooney___random_field.html", null ]
           ] ],
           [ "nearlyIncompressibleHyperelasticity", "d0/d85/classnearly_incompressible_hyperelasticity.html", [
