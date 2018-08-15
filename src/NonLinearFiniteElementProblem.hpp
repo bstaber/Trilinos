@@ -1,16 +1,16 @@
-#ifndef FINITE_ELEMENT_PROBLEM_HPP
-#define FINITE_ELEMENT_PROBLEM_HPP
+#ifndef NONLINEARFINITEELEMENTPROBLEM_HPP
+#define NONLINEARFINITEELEMENTPROBLEM_HPP
 
 #include "meshpp.hpp"
 #include "BaseClassFEM.hpp"
 
-class Finite_Element_Problem : public BaseClassFEM
+class NonLinearFiniteElementProblem : public BaseClassFEM
 {
     
 public:
-    Finite_Element_Problem(){
+    NonLinearFiniteElementProblem(){
     };
-    ~Finite_Element_Problem(){
+    ~NonLinearFiniteElementProblem(){
     };
     
     double pressure_load;

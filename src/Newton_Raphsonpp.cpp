@@ -1,6 +1,6 @@
 #include "Newton_Raphsonpp.hpp"
 
-Newton_Raphson::Newton_Raphson(Finite_Element_Problem & Interface, Teuchos::ParameterList & Parameters){
+Newton_Raphson::Newton_Raphson(NonLinearFiniteElementProblem & Interface, Teuchos::ParameterList & Parameters){
     
     interface = &Interface;
     Comm = interface->Comm;

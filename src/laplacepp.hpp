@@ -1,9 +1,9 @@
 #ifndef LAPLACEPP_HPP
 #define LAPLACEPP_HPP
 
-#include "Linear_Finite_Element_Problem.hpp"
+#include "LinearFiniteElementProblem.hpp"
 
-class laplace : public Linear_Finite_Element_Problem
+class laplace : public LinearFiniteElementProblem
 {
 public:
     laplace();
