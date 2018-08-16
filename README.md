@@ -39,7 +39,7 @@
 	* **get_neumannBc**: returns your natural boundary condition while assembling the force vector
 	* **get_forcing**: returns your forcing vector while assembling
 	* **get_elasticity_tensor**: returns your elasticity tensor
-	* **get_elasticity_for_recovery**: returns the elasticity tensor for post-processing the solution, useful for stochastic boundary value problems
+	* **get_elasticity_tensor_for_recovery**: returns the elasticity tensor for post-processing the solution, useful for stochastic boundary value problems
 	* **setup_dirichlet_conditions**: builds the essential boundary conditions that you want to apply
 	* **apply_dirichlet_conditions**: apply your essential boundary conditions
 
