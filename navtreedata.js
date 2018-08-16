@@ -1,7 +1,7 @@
 var NAVTREE =
 [
   [ "Trilinos based (stochastic) FEM solvers", "index.html", [
-    [ "Trilinos", "d3/dcc/md__r_e_a_d_m_e.html", null ],
+    [ "Parallel three-dimensional finite element method in the context of mechanics of materials", "d3/dcc/md__r_e_a_d_m_e.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [

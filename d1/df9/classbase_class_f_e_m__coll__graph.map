@@ -1,3 +1,3 @@
 <map id="baseClassFEM" name="baseClassFEM">
-<area shape="rect" id="node2" href="$d6/d6b/classmesh.html" title="mesh" alt="" coords="34,5,89,32"/>
+<area shape="rect" id="node2" href="$d6/d6b/classmesh.html" title="{mesh\n|+ Comm\l+ N_faces\l+ D1_N_faces\l+ D2_N_faces\l+ local_rows\l+ vol_cells\l+ N_cells\l+ detJac_cells\l+ DX_N_cells\l+ DY_N_cells\land 32 more...\l|+ mesh()\l+ mesh()\l+ mesh()\l+ ~mesh()\l+ read_gmsh()\l+ read_boundary_file()\l+ metis_part_mesh()\l+ get_local_nodes()\l+ get_cells_and_ghosts()\l+ get_cartesian_coordinate()\l+ store_feinterp_faces()\l+ store_feinterp_cells()\l}" alt="" coords="5,5,192,391"/>
 </map>

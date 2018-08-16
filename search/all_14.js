@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['trilinos',['Trilinos',['../d3/dcc/md__r_e_a_d_m_e.html',1,'']]],
   ['t',['t',['../d0/d53/run_8m.html#aaccc9105df5383111407fd5b41255e23',1,'run.m']]],
   ['tau1',['tau1',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#ac687d8bb293af80a08a3158aad124c03',1,'dirichletStripElongation_StochasticPolyconvexHGO::tau1()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#a95b4dbe8fb3c8f22ce38861073d57ca6',1,'neumannInnerSurface_StochasticPolyconvexHGO::tau1()']]],
   ['tau2',['tau2',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a736e1d22162a355b0efd15c29e6c69aa',1,'dirichletStripElongation_StochasticPolyconvexHGO::tau2()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#a6b8811b26443b5c61219779cb0f7a2d0',1,'neumannInnerSurface_StochasticPolyconvexHGO::tau2()']]],
