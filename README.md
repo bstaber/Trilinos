@@ -16,10 +16,10 @@
 
 ### Description
 
-* Handles **linear and quadratic interpolations** (tetras, hexas, triangles, quads) and various Gauss quadratures
+* Handles **linear and quadratic interpolations** (tetras, hexas, triangles, quads) and various Gauss quadratures.
 * Handles essential and natural boundary conditions, deformation dependent natural conditions, with or without forcing terms.
-* Most of the problems (arteries, asme, cee530, nrl) are **stochastic boundary value problems** where the elasticity tensor or strain energy function are **modeled as random fields**
-* Deterministic problems are also considered in some subfolders
+* Most of the problems (arteries, asme, cee530, nrl) are **stochastic boundary value problems** where the elasticity tensor or strain energy function are **modeled as random fields**.
+* Deterministic problems are also considered in some subfolders.
 * The c++ classes defining the boundary value problems (i.e., **linearizedElasticity**, **compressibleHyperelasticity** and **nearlyIncompressibleHyperelasticity**) are pure virtual classes, **independent of the constitutive equations** (random or deterministic elasticity tensor, random or deterministic strain energy function), boundary conditions, etc.
 	* __linearizedElasticity__: see folders asme, cee530
 		* used in asmeSBVP, ceeSBVP, linearPatchTest and manufactured
@@ -27,7 +27,7 @@
 		* used in compressibleHyperelasticity_linearPatchTest, manufacturedSolution, rubberblock, tiMooney, tiMooneyRandomField
 	* __nearlyIncompressibleHyperelasticity__ (three-field formulation with static condensation): see folder arteries
 		* used in dirichletInletOutlet_PolyconvexHGO, dirichletStripElongation_StochasticPolyconvexHGO, neumannInnerSurface_PolyconvexHGO, neumannInnerSurface_StochasticPolyconvexHGO
-* Also solves Laplace's equation for the generation of fibers directions in the folder arteries
+* Also solves Laplace's equation for the generation of fibers directions in the folder arteries.
 
 ### Documentation
 
@@ -43,7 +43,7 @@
 	* **setup_dirichlet_conditions**: builds the essential boundary conditions that you want to apply
 	* **apply_dirichlet_conditions**: apply your essential boundary conditions
 
-* You need to construct your own class object inheriting from **linearizedElasticity** and which contains at least the six virtual methods
+* You need to construct your own class object inheriting from **linearizedElasticity** and which contains at least the six virtual methods.
 
 * Examples can be found in e.g. **src/asmeSBVP.hpp**, **cee530/sbvp/ceeSBVP.hpp**, **cee530/linearPatchTest/linearPatchTest.hpp** and **cee530/manufactured/manufactured.hpp**
 
