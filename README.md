@@ -33,7 +33,7 @@
 
 * Have a look at the [class diagram](https://bstaber.github.io/Trilinos/inherits.html).
 
-### Solving a boundary value problem in linearized elasticity
+### Example: solving a boundary value problem in linearized elasticity
 
 * The pure virtual class **linearizedElasticity** has six virtual methods, namely:
 	* **get_neumannBc**: returns your natural boundary condition while assembling the force vector
