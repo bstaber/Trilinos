@@ -1,4 +1,4 @@
-## Three-dimensional finite element method in the context of mechanics of materials
+## Parallel three-dimensional finite element method in the context of mechanics of materials
 
 ### Packages and libraries
 
@@ -12,7 +12,7 @@
 	* [Teuchos](https://trilinos.org/packages/teuchos/) for XML files,
 	* [ML](https://trilinos.org/packages/ml/), [IfPack](https://trilinos.org/packages/ifpack/) for preconditioners.
 
-* Additional libraries: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/).
+* Additional required libraries: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/).
 
 ### Description
 
