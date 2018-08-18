@@ -47,4 +47,6 @@
 
 * Examples can be found in e.g. **src/asmeSBVP.hpp**, **cee530/sbvp/ceeSBVP.hpp**, **cee530/linearPatchTest/linearPatchTest.hpp** and **cee530/manufactured/manufactured.hpp**
 
+### Warning
 
+* Line 167 of meshpp.cpp needs to be removed/changed.
