@@ -77,7 +77,6 @@ int main(int argc, char *argv[]){
     lhs_root.Export(V,ExportOnRoot,Insert);
     std::string filename = path + "gaussian_fields_for_eng_constants.mtx";
     int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
-    }
 
 #ifdef HAVE_MPI
     MPI_Finalize();
