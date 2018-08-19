@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('d3/dcc/md__r_e_a_d_m_e.html','../../')
 <li>Built on top of Sandia's Trilinos Project [<a href="http://trilinos.org/">Website</a> | <a href="http://trilinos.org/about/documentation/">Documentation</a> | <a href="https://trilinos.org/mailman/listinfo/trilinos-users">Mailing List</a> | <a href="http://trilinos.org/packages/">Packages</a> | <a href="https://github.com/trilinos/Trilinos">GitHub</a>] and uses, for instance, the packages:<ul>
 <li><a href="https://trilinos.org/packages/epetra/">Epetra</a> for linear algebra,</li>
 <li><a href="https://trilinos.org/packages/amesos/">Amesos</a>, <a href="https://trilinos.org/packages/aztecoo/">AztecOO</a>, <a href="https://trilinos.org/packages/stratimikos/">Stratimikos</a> for direct and iterative linear solvers,</li>
-<li><a href="https://trilinos.org/packages/teuchos/">Teuchos</a> for XML files,</li>
+<li><a href="https://trilinos.org/packages/teuchos/">Teuchos</a> for XML lists of parameters</li>
 <li><a href="https://trilinos.org/packages/ml/">ML</a>, <a href="https://trilinos.org/packages/ifpack/">IfPack</a> for preconditioners.</li>
 </ul>
 </li>
@@ -142,7 +142,11 @@ $(document).ready(function(){initNavTree('d3/dcc/md__r_e_a_d_m_e.html','../../')
 </ul>
 </li>
 <li>You need to construct your own class object inheriting from <b><a class="el" href="../../d4/dfd/classlinearized_elasticity.html">linearizedElasticity</a></b> and which contains at least the six virtual methods.</li>
-<li>Examples can be found in e.g. <b><a class="el" href="../../dc/d64/asme_s_b_v_p_8hpp.html">src/asmeSBVP.hpp</a></b>, <b><a class="el" href="../../d4/d57/cee_s_b_v_p_8hpp.html">cee530/sbvp/ceeSBVP.hpp</a></b>, <b>cee530/linearPatchTest/linearPatchTest.hpp</b> and <b>cee530/manufactured/manufactured.hpp</b> </li>
+<li>Examples can be found in e.g. <b><a class="el" href="../../dc/d64/asme_s_b_v_p_8hpp.html">src/asmeSBVP.hpp</a></b>, <b><a class="el" href="../../d4/d57/cee_s_b_v_p_8hpp.html">cee530/sbvp/ceeSBVP.hpp</a></b>, <b>cee530/linearPatchTest/linearPatchTest.hpp</b> and <b>cee530/manufactured/manufactured.hpp</b></li>
+</ul>
+<h3>Warning</h3>
+<ul>
+<li>Line 167 of <a class="el" href="../../d5/d5e/meshpp_8cpp.html">meshpp.cpp</a> needs to be removed/changed. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
