@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
 
     Epetra_MultiVector V(StandardMap,5,"true");
 
-    for (int i=0; real<5; ++i){
+    for (int i=0; i<5; ++i){
       Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,l1,l2));
       RandomField->rotation = pa;
       //Epetra_MultiVector V(StandardMap,1,"true");
