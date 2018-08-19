@@ -48,39 +48,35 @@ int main(int argc, char *argv[]){
     mesh Mesh(Comm,mesh_file,1.0);
     Epetra_Map StandardMap(-1,Mesh.n_local_nodes_without_ghosts,&Mesh.local_nodes_without_ghosts[0],0,Comm);
 
-    //int order = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
-    double L1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
-    double L2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
+    int order = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"), "order");
+    double l1 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "lx");
+    double l2 = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"), "ly");
     double pa = 2.0*M_PI*60.0/360.0;
 
-    int nmc = 3;
+    Epetra_MultiVector V(StandardMap,5,"true");
 
-    Epetra_MultiVector V(StandardMap,nmc);
+    for (int i=0; real<5; ++i){
+      Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,l1,l2));
+      RandomField->rotation = pa;
+      //Epetra_MultiVector V(StandardMap,1,"true");
 
-    for (int order=100; order<=100; ++order){
-
-      for (int real=0; real<nmc; ++real){
-        Teuchos::RCP<shinozuka_2d> RandomField = Teuchos::rcp(new shinozuka_2d(order,L1,L2));
-        RandomField->rotation = pa;
-        //Epetra_MultiVector V(StandardMap,1,"true");
-
-        RandomField->rng.seed(real);
-        RandomField->generator(*V(real),Mesh);
+      RandomField->rng.seed(i);
+      RandomField->generator(*V(i),Mesh);
     }
 
-      std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
-      int NumTargetElements = 0;
-      if (Comm.MyPID()==0){
-          NumTargetElements = Mesh.n_nodes;
-      }
-      Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
-      Epetra_Export ExportOnRoot(StandardMap,MapOnRoot);
-      Epetra_MultiVector lhs_root(MapOnRoot,nmc,true);
+    std::string path = "/home/s/staber/Trilinos_results/nrl/shinozuka_2d/";
+    int NumTargetElements = 0;
+    if (Comm.MyPID()==0){
+        NumTargetElements = Mesh.n_nodes;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,Comm);
+    Epetra_Export ExportOnRoot(StandardMap,MapOnRoot);
+    Epetra_MultiVector lhs_root(MapOnRoot,5,true);
 
-      lhs_root.PutScalar(0.0);
-      lhs_root.Export(V,ExportOnRoot,Insert);
-      std::string filename = path + "shinozuka_2d_" + std::to_string(order) + "_" + std::to_string(int(L1)) + "_" + std::to_string(int(L2)) + "_" + std::to_string(nmc) + "_Johann.mtx";
-      int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+    lhs_root.PutScalar(0.0);
+    lhs_root.Export(V,ExportOnRoot,Insert);
+    std::string filename = path + "gaussian_fields_for_eng_constants.mtx";
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
     }
 
 #ifdef HAVE_MPI
