@@ -1,0 +1,28 @@
+var lm__polynomial__values_8m =
+[
+    [ "if", "d6/d3d/lm__polynomial__values_8m.html#a4df575038ee724140282f73508838280", null ],
+    [ "Book", "d6/d3d/lm__polynomial__values_8m.html#adf837c97c7bc05799f986322fd58f6e9", null ],
+    [ "by", "d6/d3d/lm__polynomial__values_8m.html#a145a13892bdd6bcad9422ce13e22b9e4", null ],
+    [ "call", "d6/d3d/lm__polynomial__values_8m.html#aea246366a8e307dafe80dac0f78da71f", null ],
+    [ "data", "d6/d3d/lm__polynomial__values_8m.html#aa3bcb793ac2b8465e1f2d31e872f9f0d", null ],
+    [ "Edition", "d6/d3d/lm__polynomial__values_8m.html#a04a761dfc16ef60d94045cdf3dc53b19", null ],
+    [ "equation", "d6/d3d/lm__polynomial__values_8m.html#a7befd011da0f276c57a17f45e41a1cbd", null ],
+    [ "function", "d6/d3d/lm__polynomial__values_8m.html#a39d2fcd36b8a729afddd68327cca0d5c", null ],
+    [ "FX", "d6/d3d/lm__polynomial__values_8m.html#aee54948eb361880fd97514d65321a47b", null ],
+    [ "fx", "d6/d3d/lm__polynomial__values_8m.html#a6a891e907fcb9e482a0c3e6edcdae360", null ],
+    [ "fx_vec", "d6/d3d/lm__polynomial__values_8m.html#a5d2dad43aa06be814d818da1bed39e3a", null ],
+    [ "m", "d6/d3d/lm__polynomial__values_8m.html#ab3cd915d758008bd19d0f2428fbb354a", null ],
+    [ "M", "d6/d3d/lm__polynomial__values_8m.html#a7f7b4752ef46cf7116672754c42b80e4", null ],
+    [ "m_vec", "d6/d3d/lm__polynomial__values_8m.html#a17ec0a9c2dc84e5204f41e0810eb33c3", null ],
+    [ "N", "d6/d3d/lm__polynomial__values_8m.html#a7111d06ad34eb43c08ff4ae20827c1ef", null ],
+    [ "n", "d6/d3d/lm__polynomial__values_8m.html#a09447bed0e5d01307a808c57ff987664", null ],
+    [ "n_data", "d6/d3d/lm__polynomial__values_8m.html#a32d3ddf690acfc01dcfb793b70b9f6d2", null ],
+    [ "n_max", "d6/d3d/lm__polynomial__values_8m.html#a0e9f44f67aa986a6a5f02378211f4395", null ],
+    [ "n_vec", "d6/d3d/lm__polynomial__values_8m.html#aee04478221c72abc035d68a581c75a15", null ],
+    [ "Output", "d6/d3d/lm__polynomial__values_8m.html#aadf7d7dfa3f650fc3340cc1cc12f3493", null ],
+    [ "Parameters", "d6/d3d/lm__polynomial__values_8m.html#ad48edeb73d4f1c6cdf10b7a72b563780", null ],
+    [ "Press", "d6/d3d/lm__polynomial__values_8m.html#a257e8ee9a56340dc70b355d58c3efad0", null ],
+    [ "X", "d6/d3d/lm__polynomial__values_8m.html#a55653f3653e4280bfc3d7e64ab4b303e", null ],
+    [ "x", "d6/d3d/lm__polynomial__values_8m.html#a9336ebf25087d91c818ee6e9ec29f8c1", null ],
+    [ "x_vec", "d6/d3d/lm__polynomial__values_8m.html#a18e18d033307b14f1712c907351b2592", null ]
+];

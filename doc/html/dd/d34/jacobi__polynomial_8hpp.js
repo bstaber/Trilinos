@@ -1,0 +1,26 @@
+var jacobi__polynomial_8hpp =
+[
+    [ "i4_max", "dd/d34/jacobi__polynomial_8hpp.html#a36f800e4593bdd258feaeb43cf42adf7", null ],
+    [ "i4_min", "dd/d34/jacobi__polynomial_8hpp.html#ae73c30e1658d722ce9ff2e671db331ca", null ],
+    [ "i4_to_string", "dd/d34/jacobi__polynomial_8hpp.html#ab0c829b0299cbc4fdc99c20fd5eb0db4", null ],
+    [ "imtqlx", "dd/d34/jacobi__polynomial_8hpp.html#a7e6b7cc0285eddb61c737f7e9b66f9e3", null ],
+    [ "j_double_product_integral", "dd/d34/jacobi__polynomial_8hpp.html#a6181872c9b706702eb8462f89786ca5e", null ],
+    [ "j_integral", "dd/d34/jacobi__polynomial_8hpp.html#a7c5fbae0e72e72951f4405ab7552a7ec", null ],
+    [ "j_polynomial", "dd/d34/jacobi__polynomial_8hpp.html#ada0dd3fd3912ebd7c45ff2598b1eee48", null ],
+    [ "j_polynomial_values", "dd/d34/jacobi__polynomial_8hpp.html#a24ac6a1f0719c281e2cfa07523843cb2", null ],
+    [ "j_polynomial_zeros", "dd/d34/jacobi__polynomial_8hpp.html#aafe4e59a79234b1b2872a3c7831ca1c6", null ],
+    [ "j_quadrature_rule", "dd/d34/jacobi__polynomial_8hpp.html#abf21fed822996966a0d5727cbb7ff3cc", null ],
+    [ "r8_choose", "dd/d34/jacobi__polynomial_8hpp.html#af1ae4b58e61c661b65734cfa1c7a98ac", null ],
+    [ "r8_epsilon", "dd/d34/jacobi__polynomial_8hpp.html#a61698c70227f179c1e5546d7d30f7d05", null ],
+    [ "r8_factorial", "dd/d34/jacobi__polynomial_8hpp.html#a3a0f06f55c8d1b94209ab390a72b9ba9", null ],
+    [ "r8_max", "dd/d34/jacobi__polynomial_8hpp.html#add31fc483ea093dc4ed605b9a6b095ba", null ],
+    [ "r8_sign", "dd/d34/jacobi__polynomial_8hpp.html#a1420dbaa964dd7d85f6f6536680c252e", null ],
+    [ "r8_to_string", "dd/d34/jacobi__polynomial_8hpp.html#a0f1ca6737e74518e94ba4c7c94f8b1c4", null ],
+    [ "r8mat_print", "dd/d34/jacobi__polynomial_8hpp.html#a40adf3fe9339d9173b4d7e9cad179622", null ],
+    [ "r8mat_print_some", "dd/d34/jacobi__polynomial_8hpp.html#ad1cf18ec00aea8e4cce9a8c04d0f8f6d", null ],
+    [ "r8vec2_print", "dd/d34/jacobi__polynomial_8hpp.html#a6ec0a6e59c7273a559c67ff3939428db", null ],
+    [ "r8vec_dot_product", "dd/d34/jacobi__polynomial_8hpp.html#aa7467f7f2ed194de3d0f1cc6ba21aafd", null ],
+    [ "r8vec_linspace_new", "dd/d34/jacobi__polynomial_8hpp.html#aa96bdb5c8fb879512fce5181ff652534", null ],
+    [ "r8vec_print", "dd/d34/jacobi__polynomial_8hpp.html#ae395d66252e7725f05fce8dd5e9c70af", null ],
+    [ "timestamp", "dd/d34/jacobi__polynomial_8hpp.html#a2219d86aef2195ff323e8349d92abe86", null ]
+];
