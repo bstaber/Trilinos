@@ -97,56 +97,19 @@ $(document).ready(function(){initNavTree('d3/dcc/md__r_e_a_d_m_e.html','../../')
 <li>Built on top of Sandia's Trilinos Project [<a href="http://trilinos.org/">Website</a> | <a href="http://trilinos.org/about/documentation/">Documentation</a> | <a href="https://trilinos.org/mailman/listinfo/trilinos-users">Mailing List</a> | <a href="http://trilinos.org/packages/">Packages</a> | <a href="https://github.com/trilinos/Trilinos">GitHub</a>] and uses, for instance, the packages:<ul>
 <li><a href="https://trilinos.org/packages/epetra/">Epetra</a> for linear algebra,</li>
 <li><a href="https://trilinos.org/packages/amesos/">Amesos</a>, <a href="https://trilinos.org/packages/aztecoo/">AztecOO</a>, <a href="https://trilinos.org/packages/stratimikos/">Stratimikos</a> for direct and iterative linear solvers,</li>
-<li><a href="https://trilinos.org/packages/teuchos/">Teuchos</a> for XML lists of parameters</li>
+<li><a href="https://trilinos.org/packages/teuchos/">Teuchos</a> for parsing XML lists of parameters,</li>
 <li><a href="https://trilinos.org/packages/ml/">ML</a>, <a href="https://trilinos.org/packages/ifpack/">IfPack</a> for preconditioners.</li>
 </ul>
 </li>
 <li>Additional required libraries: <a href="http://gmsh.info/">GMSH</a>, <a href="http://glaros.dtc.umn.edu/gkhome/metis/metis/overview">METIS</a>, <a href="https://www.boost.org/">Boost</a>.</li>
 </ul>
-<h3>Description</h3>
-<ul>
-<li>Handles <b>linear and quadratic interpolations</b> (tetras, hexas, triangles, quads) and various Gauss quadratures.</li>
-<li>Handles essential and natural boundary conditions, deformation dependent natural conditions, with or without forcing terms.</li>
-<li>Most of the problems (arteries, asme, cee530, nrl) are <b>stochastic boundary value problems</b> where the elasticity tensor or strain energy function are <b>modeled as random fields</b>.</li>
-<li>Deterministic problems are also considered in some subfolders.</li>
-<li>The c++ classes defining the boundary value problems (i.e., <b><a class="el" href="../../d4/dfd/classlinearized_elasticity.html">linearizedElasticity</a></b>, <b><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html">compressibleHyperelasticity</a></b> and <b><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html">nearlyIncompressibleHyperelasticity</a></b>) are pure virtual classes, <b>independent of the constitutive equations</b> (random or deterministic elasticity tensor, random or deterministic strain energy function), boundary conditions, etc.<ul>
-<li><b><a class="el" href="../../d4/dfd/classlinearized_elasticity.html">linearizedElasticity</a></b>: see folders asme, cee530<ul>
-<li>used in <a class="el" href="../../dd/d60/classasme_s_b_v_p.html">asmeSBVP</a>, <a class="el" href="../../d2/d17/classcee_s_b_v_p.html">ceeSBVP</a>, <a class="el" href="../../d2/d69/classlinear_patch_test.html">linearPatchTest</a> and manufactured</li>
-</ul>
-</li>
-<li><b><a class="el" href="../../d1/d5c/classcompressible_hyperelasticity.html">compressibleHyperelasticity</a></b>: see folder nrl<ul>
-<li>used in <a class="el" href="../../df/d4f/classcompressible_hyperelasticity__linear_patch_test.html">compressibleHyperelasticity_linearPatchTest</a>, <a class="el" href="../../d1/dbe/classmanufactured_solution.html">manufacturedSolution</a>, rubberblock, <a class="el" href="../../d8/d82/classti_mooney.html">tiMooney</a>, <a class="el" href="../../d1/d2a/classti_mooney_random_field.html">tiMooneyRandomField</a></li>
-</ul>
-</li>
-<li><b><a class="el" href="../../d0/d85/classnearly_incompressible_hyperelasticity.html">nearlyIncompressibleHyperelasticity</a></b> (three-field formulation with static condensation): see folder arteries<ul>
-<li>used in <a class="el" href="../../d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html">dirichletInletOutlet_PolyconvexHGO</a>, <a class="el" href="../../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html">dirichletStripElongation_StochasticPolyconvexHGO</a>, <a class="el" href="../../d6/ded/classneumann_inner_surface___polyconvex_h_g_o.html">neumannInnerSurface_PolyconvexHGO</a>, <a class="el" href="../../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html">neumannInnerSurface_StochasticPolyconvexHGO</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Also solves Laplace's equation for the generation of fibers directions in the folder arteries.</li>
-</ul>
 <h3>Documentation</h3>
 <ul>
 <li>Have a look at the <a href="https://bstaber.github.io/Trilinos/inherits.html">class diagram</a>.</li>
 </ul>
-<h3>Example: solving a boundary value problem in linearized elasticity</h3>
-<ul>
-<li>The pure virtual class <b><a class="el" href="../../d4/dfd/classlinearized_elasticity.html">linearizedElasticity</a></b> has six virtual methods, namely:<ul>
-<li><b>get_neumannBc</b>: returns your natural boundary condition while assembling the force vector</li>
-<li><b>get_forcing</b>: returns your forcing vector while assembling</li>
-<li><b>get_elasticity_tensor</b>: returns your elasticity tensor</li>
-<li><b>get_elasticity_tensor_for_recovery</b>: returns the elasticity tensor for post-processing the solution, useful for stochastic boundary value problems</li>
-<li><b>setup_dirichlet_conditions</b>: builds the essential boundary conditions that you want to apply</li>
-<li><b>apply_dirichlet_conditions</b>: apply your essential boundary conditions</li>
-</ul>
-</li>
-<li>You need to construct your own class object inheriting from <b><a class="el" href="../../d4/dfd/classlinearized_elasticity.html">linearizedElasticity</a></b> and which contains at least the six virtual methods.</li>
-<li>Examples can be found in e.g. <b><a class="el" href="../../dc/d64/asme_s_b_v_p_8hpp.html">src/asmeSBVP.hpp</a></b>, <b><a class="el" href="../../d4/d57/cee_s_b_v_p_8hpp.html">cee530/sbvp/ceeSBVP.hpp</a></b>, <b>cee530/linearPatchTest/linearPatchTest.hpp</b> and <b>cee530/manufactured/manufactured.hpp</b></li>
-</ul>
 <h3>Warning</h3>
 <ul>
-<li>Line 167 of <a class="el" href="../../d5/d5e/meshpp_8cpp.html">meshpp.cpp</a> needs to be removed/changed. </li>
+<li>Line 167 in <a class="el" href="../../d5/d5e/meshpp_8cpp.html">meshpp.cpp</a> needs to be removed/changed. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
