@@ -14,6 +14,11 @@
 
 * Additional required libraries: [GMSH](http://gmsh.info/), [METIS](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview), [Boost](https://www.boost.org/).
 
+### Documentation
+
+* Have a look at the [class diagram](https://bstaber.github.io/Trilinos/inherits.html).
+
+<!--
 ### Description
 
 * Handles **linear and quadratic interpolations** (tetras, hexas, triangles, quads) and various Gauss quadratures.
@@ -29,10 +34,6 @@
 		* used in dirichletInletOutlet_PolyconvexHGO, dirichletStripElongation_StochasticPolyconvexHGO, neumannInnerSurface_PolyconvexHGO, neumannInnerSurface_StochasticPolyconvexHGO
 * Also solves Laplace's equation for the generation of fibers directions in the folder arteries.
 
-### Documentation
-
-* Have a look at the [class diagram](https://bstaber.github.io/Trilinos/inherits.html).
-
 ### Example: solving a boundary value problem in linearized elasticity
 
 * The pure virtual class **linearizedElasticity** has six virtual methods, namely:
@@ -46,7 +47,7 @@
 * You need to construct your own class object inheriting from **linearizedElasticity** and which contains at least the six virtual methods.
 
 * Examples can be found in e.g. **src/asmeSBVP.hpp**, **cee530/sbvp/ceeSBVP.hpp**, **cee530/linearPatchTest/linearPatchTest.hpp** and **cee530/manufactured/manufactured.hpp**
-
+-->
 ### Warning
 
-* Line 167 of meshpp.cpp needs to be removed/changed.
+* Line 167 in meshpp.cpp needs to be removed/changed.
