@@ -1,0 +1,25 @@
+var j__polynomial__zeros_8m =
+[
+    [ "bj", "d3/de2/j__polynomial__zeros_8m.html#a3d962f6f2bfb699e534375f7a3153b1a", null ],
+    [ "bj", "d3/de2/j__polynomial__zeros_8m.html#a600247e7c82127417ea3bb81fe8d8861", null ],
+    [ "bj", "d3/de2/j__polynomial__zeros_8m.html#a34075fafa68085bba281938ee9c594cc", null ],
+    [ "gamma", "d3/de2/j__polynomial__zeros_8m.html#a56720494331474d742fe6023d4ff5a56", null ],
+    [ "Parameters:", "d3/de2/j__polynomial__zeros_8m.html#af715c9c4b8d24b2cbe7aef8b44b0581f", null ],
+    [ "w", "d3/de2/j__polynomial__zeros_8m.html#a46ad936b31f4a26e5fc29fa4c8fd70e0", null ],
+    [ "x", "d3/de2/j__polynomial__zeros_8m.html#a7fe6bc70e52971515c699da7a36c1d87", null ],
+    [ "x", "d3/de2/j__polynomial__zeros_8m.html#a6052fef5f411dfe4fe6b79fa241cd9de", null ],
+    [ "a2b2", "d3/de2/j__polynomial__zeros_8m.html#a4e6f92909b4792f375462c34c08c6676", null ],
+    [ "abi", "d3/de2/j__polynomial__zeros_8m.html#a4ffbe35a28505921bd64d4d21a944861", null ],
+    [ "Algorithm", "d3/de2/j__polynomial__zeros_8m.html#aac278cbe838476022904a5df5acc6e98", null ],
+    [ "bj", "d3/de2/j__polynomial__zeros_8m.html#a918f726dedeeca4296b3150c988925d8", null ],
+    [ "December", "d3/de2/j__polynomial__zeros_8m.html#a4b3abcaa3b872f2532f330485b812bab", null ],
+    [ "i", "d3/de2/j__polynomial__zeros_8m.html#a6f6ccfcf58b31cb6412107d9d5281426", null ],
+    [ "Kautsky", "d3/de2/j__polynomial__zeros_8m.html#a00a64ccf3536eeb9919ae68f1ed703c3", null ],
+    [ "matrix", "d3/de2/j__polynomial__zeros_8m.html#a0d6048e288ee9c2d12a0dd040b8d53ad", null ],
+    [ "Number", "d3/de2/j__polynomial__zeros_8m.html#a6d8f5598ab652f809e183456a197648c", null ],
+    [ "Quadrature", "d3/de2/j__polynomial__zeros_8m.html#ab6d7a447135f2d65c85acc7bf104e977", null ],
+    [ "Software", "d3/de2/j__polynomial__zeros_8m.html#ac6d3ea7f6cd9c91fe6bf9c6326bd2ee4", null ],
+    [ "Volume", "d3/de2/j__polynomial__zeros_8m.html#ab365730b204889686758a9e43c3eb8eb", null ],
+    [ "w", "d3/de2/j__polynomial__zeros_8m.html#aad57484016654da87125db86f4227ea3", null ],
+    [ "x", "d3/de2/j__polynomial__zeros_8m.html#a4c71da892c6f416d9a1c379f21abdbdd", null ]
+];

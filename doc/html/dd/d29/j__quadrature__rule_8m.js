@@ -1,0 +1,27 @@
+var j__quadrature__rule_8m =
+[
+    [ "bj", "dd/d29/j__quadrature__rule_8m.html#a3d962f6f2bfb699e534375f7a3153b1a", null ],
+    [ "bj", "dd/d29/j__quadrature__rule_8m.html#a600247e7c82127417ea3bb81fe8d8861", null ],
+    [ "bj", "dd/d29/j__quadrature__rule_8m.html#a34075fafa68085bba281938ee9c594cc", null ],
+    [ "gamma", "dd/d29/j__quadrature__rule_8m.html#a56720494331474d742fe6023d4ff5a56", null ],
+    [ "Parameters:", "dd/d29/j__quadrature__rule_8m.html#af715c9c4b8d24b2cbe7aef8b44b0581f", null ],
+    [ "w", "dd/d29/j__quadrature__rule_8m.html#a46ad936b31f4a26e5fc29fa4c8fd70e0", null ],
+    [ "w", "dd/d29/j__quadrature__rule_8m.html#a20e13a9fc8b78beeb3d4028549e4d7f3", null ],
+    [ "x", "dd/d29/j__quadrature__rule_8m.html#a7fe6bc70e52971515c699da7a36c1d87", null ],
+    [ "x", "dd/d29/j__quadrature__rule_8m.html#a6052fef5f411dfe4fe6b79fa241cd9de", null ],
+    [ "a2b2", "dd/d29/j__quadrature__rule_8m.html#a4e6f92909b4792f375462c34c08c6676", null ],
+    [ "abi", "dd/d29/j__quadrature__rule_8m.html#a4ffbe35a28505921bd64d4d21a944861", null ],
+    [ "Algorithm", "dd/d29/j__quadrature__rule_8m.html#af4128bccb3384c56e0e60630ccbfc383", null ],
+    [ "bj", "dd/d29/j__quadrature__rule_8m.html#a918f726dedeeca4296b3150c988925d8", null ],
+    [ "December", "dd/d29/j__quadrature__rule_8m.html#adc1ddc85404efe71eab4ebe0a67cd78b", null ],
+    [ "function", "dd/d29/j__quadrature__rule_8m.html#ac53b2fb6cdf462adf7665a526bde46a1", null ],
+    [ "i", "dd/d29/j__quadrature__rule_8m.html#a6f6ccfcf58b31cb6412107d9d5281426", null ],
+    [ "Kautsky", "dd/d29/j__quadrature__rule_8m.html#a7f18c64f04002c895eaca5d64788eb07", null ],
+    [ "matrix", "dd/d29/j__quadrature__rule_8m.html#a0d6048e288ee9c2d12a0dd040b8d53ad", null ],
+    [ "Number", "dd/d29/j__quadrature__rule_8m.html#ad9722964bdbca992e6995096ecab0329", null ],
+    [ "Quadrature", "dd/d29/j__quadrature__rule_8m.html#aad943f6493b38c732f911d439b2a148d", null ],
+    [ "Software", "dd/d29/j__quadrature__rule_8m.html#a49eb106b705375d814db8b55fc2fa798", null ],
+    [ "Volume", "dd/d29/j__quadrature__rule_8m.html#a39cf3c147d0b6f51b4fe466e404ab27e", null ],
+    [ "w", "dd/d29/j__quadrature__rule_8m.html#aad57484016654da87125db86f4227ea3", null ],
+    [ "x", "dd/d29/j__quadrature__rule_8m.html#a4c71da892c6f416d9a1c379f21abdbdd", null ]
+];
