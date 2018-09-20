@@ -14,9 +14,9 @@ class nrl_PCA_Likelihood
 {
 private:
 
-    Teuchos::ParameterList       _paramList;
+    Teuchos::ParameterList      _paramList;
     Teuchos::RCP<newtonRaphson> newton;
-    std::string                  fullOutputPath;
+    std::string                 fullOutputPath;
 
     Epetra_Comm              * comm;
     Epetra_Map               * MapExpPoints;

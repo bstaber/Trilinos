@@ -1,16 +1,82 @@
 #include "damageField.hpp"
 #include "fepp.hpp"
 
-damageField::damageField(mesh & mesh){
-  Mesh = &mesh;
-  Comm = Mesh->Comm;
+damageField::damageField(mesh & mesh, double & gc_, double & lc_): gc(gc_), lc(lc_){
+
+  Mesh               = &mesh;
+  Comm               = Mesh->Comm;
   StandardMap        = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
   OverlapMap         = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
   ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
+
   create_FECrsGraph();
 }
 
 damageField::~damageField(){
+}
+
+void damageField::assemble(Epetra_Vector & Hn, Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs){
+
+  //Hn to do
+  
+  matrix.PutScalar(0.0);
+  rhs.PutScalar(0.0);
+
+  Epetra_SerialDenseVector shape_functions(Mesh->el_type);
+  Epetra_SerialDenseVector fe(Mesh->el_type);
+
+  Epetra_SerialDenseMatrix dx_shape_functions(3,Mesh->el_type);
+  Epetra_SerialDenseMatrix ke(Mesh->el_type, Mesh->el_type);
+  Epetra_SerialDenseMatrix me(Mesh->el_type, Mesh->el_type);
+  Epetra_SerialDenseMatrix hn(Mesh->el_type);
+
+  double gauss_weight;
+  unsigned int eglob;
+  int n_gauss_points = Mesh->n_gauss_cells;
+  int * index = new int [Mesh->el_type];
+
+  for (unsigned int eloc=0; eloc<Mesh->n_local_cells; ++eloc){
+    eglob = Mesh->local_cells[eloc];
+    for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+      index[inode] = Mesh->cells_nodes[Mesh->el_type*eglob+inode];
+      hn(inode) = Hn[OverlapMap->LID(inode)];
+      fe(inode) = 0.0;
+      for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
+        ke(inode,jnode) = 0.0;
+        me(inode,jnode) = 0.0;
+      }
+    }
+
+    for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+      gauss_weight = Mesh->gauss_weight_cells(gp);
+      double hn = 0.0; //todo
+      double an = 0.0; //todo
+      double bn = 0.0; //todo
+      for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+          dx_shape_functions(0,inode) = Mesh->DX_N_cells(gp+n_gauss_points*inode,eloc);
+          dx_shape_functions(1,inode) = Mesh->DY_N_cells(gp+n_gauss_points*inode,eloc);
+          dx_shape_functions(2,inode) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,eloc);
+          shape_functions(inode) = Mesh->N_cells(inode,gp);
+          fe(inode) += gauss_weight*2.0*hn*shape_functions(inode)*Mesh->detJac_cells(e_lid,gp);
+      }
+      me.Multiply('N','T',an*gauss_weight*Mesh->detJac_cells(e_lid,gp),shape_functions,shape_functions,1.0);
+      ke.Multiply('T','N',bn*gauss_weight*Mesh->detJac_cells(e_lid,gp),dx_shape_functions,dx_shape_functions,1.0)
+    }
+    ke += me;
+
+    for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+      rhs.SumIntoGlobalValues(1, &index[inode], &fe(inode));
+      for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
+        matrix.SumIntoGlobalValues(1, &index[inode], 1, &index[jnode], &ke(inode,jnode));
+      }
+    }
+  }
+
+  delete [] index;
+}
+
+void damageField::solve(){
+
 }
 
 void damageField::create_FECrsGraph(){
@@ -31,9 +97,16 @@ void damageField::create_FECrsGraph(){
               FEGraph->InsertGlobalIndices(1, &index[i], 1, &index[j]);
           }
       }
-
   }
   Comm->Barrier();
   FEGraph->GlobalAssemble();
   delete[] index;
+}
+
+void setup_dirichlet_conditions(){
+
+}
+
+void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
+
 }
