@@ -14,7 +14,7 @@ var searchData=
   ['laplace_5fdirection_5ftwo_5fcross_5fone_5fcenter',['laplace_direction_two_cross_one_center',['../d7/d76/classlaplace.html#a0a127f03e09b2caa7850b5aea2a4fdbe',1,'laplace']]],
   ['laplacepp_2ecpp',['laplacepp.cpp',['../dc/d31/laplacepp_8cpp.html',1,'']]],
   ['laplacepp_2ehpp',['laplacepp.hpp',['../d5/d3f/laplacepp_8hpp.html',1,'']]],
-  ['lc',['lc',['../d3/d8c/run__mean_models_8m.html#ac0fc738e2f5bb152099430475217fbcb',1,'run_meanModels.m']]],
+  ['lc',['lc',['../dd/dc8/classdamage_field.html#a31ff2f95c851c128e88b7378422da2aa',1,'damageField::lc()'],['../d3/d8c/run__mean_models_8m.html#ac0fc738e2f5bb152099430475217fbcb',1,'lc():&#160;run_meanModels.m']]],
   ['linearfiniteelementproblem',['linearFiniteElementProblem',['../dc/d01/classlinear_finite_element_problem.html',1,'linearFiniteElementProblem'],['../dc/d01/classlinear_finite_element_problem.html#ac8656017f0be24f40aebfbc1b38df99d',1,'linearFiniteElementProblem::linearFiniteElementProblem()']]],
   ['linearfiniteelementproblem_2ehpp',['linearFiniteElementProblem.hpp',['../d3/dd8/linear_finite_element_problem_8hpp.html',1,'']]],
   ['linearizedelasticity',['linearizedElasticity',['../d4/dfd/classlinearized_elasticity.html',1,'linearizedElasticity'],['../d4/dfd/classlinearized_elasticity.html#aeb9997066ce4b23df39a6130a65877df',1,'linearizedElasticity::linearizedElasticity()']]],

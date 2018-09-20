@@ -2,12 +2,14 @@ var hierarchy =
 [
     [ "baseClassFEM", "d2/d31/classbase_class_f_e_m.html", [
       [ "linearFiniteElementProblem", "dc/d01/classlinear_finite_element_problem.html", [
+        [ "damageField", "dd/dc8/classdamage_field.html", null ],
         [ "laplace", "d7/d76/classlaplace.html", null ],
         [ "linearizedElasticity", "d4/dfd/classlinearized_elasticity.html", [
           [ "asmeSBVP", "dd/d60/classasme_s_b_v_p.html", null ],
           [ "ceeSBVP", "d2/d17/classcee_s_b_v_p.html", null ],
           [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],
-          [ "manufactured", "d7/da3/classmanufactured.html", null ]
+          [ "manufactured", "d7/da3/classmanufactured.html", null ],
+          [ "phaseFieldLinearizedElasticity", "d3/d02/classphase_field_linearized_elasticity.html", null ]
         ] ]
       ] ],
       [ "nonLinearFiniteElementProblem", "d3/d5b/classnon_linear_finite_element_problem.html", [

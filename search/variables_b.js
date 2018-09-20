@@ -12,7 +12,7 @@ var searchData=
   ['laplace_5fdirection_5ftwo_5fcenter',['laplace_direction_two_center',['../d7/d76/classlaplace.html#a69282a527e7837e21cae8ce3f682d207',1,'laplace']]],
   ['laplace_5fdirection_5ftwo_5fcross_5fone',['laplace_direction_two_cross_one',['../d7/d76/classlaplace.html#a668a6ac16e9109e0770bb0e05ab9d29a',1,'laplace']]],
   ['laplace_5fdirection_5ftwo_5fcross_5fone_5fcenter',['laplace_direction_two_cross_one_center',['../d7/d76/classlaplace.html#a0a127f03e09b2caa7850b5aea2a4fdbe',1,'laplace']]],
-  ['lc',['lc',['../d3/d8c/run__mean_models_8m.html#ac0fc738e2f5bb152099430475217fbcb',1,'run_meanModels.m']]],
+  ['lc',['lc',['../dd/dc8/classdamage_field.html#a31ff2f95c851c128e88b7378422da2aa',1,'damageField::lc()'],['../d3/d8c/run__mean_models_8m.html#ac0fc738e2f5bb152099430475217fbcb',1,'lc():&#160;run_meanModels.m']]],
   ['local_5fcells',['local_cells',['../d6/d6b/classmesh.html#a6bc4fb195dff05ce76d8f3b1fdb01208',1,'mesh']]],
   ['local_5fdof',['local_dof',['../d6/d6b/classmesh.html#a15a8a0d266c4f4ec9cef4ea720f16e81',1,'mesh']]],
   ['local_5fdof_5fwithout_5fghosts',['local_dof_without_ghosts',['../d6/d6b/classmesh.html#a689dd602c903baf56a440e244f51e64f',1,'mesh']]],

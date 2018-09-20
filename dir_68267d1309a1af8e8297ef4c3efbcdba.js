@@ -17,6 +17,10 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "compressibleHyperelasticity.hpp", "da/d5c/compressible_hyperelasticity_8hpp.html", [
       [ "compressibleHyperelasticity", "d1/d5c/classcompressible_hyperelasticity.html", "d1/d5c/classcompressible_hyperelasticity" ]
     ] ],
+    [ "damageField.cpp", "dd/ddf/damage_field_8cpp.html", "dd/ddf/damage_field_8cpp" ],
+    [ "damageField.hpp", "d9/de5/damage_field_8hpp.html", [
+      [ "damageField", "dd/dc8/classdamage_field.html", "dd/dc8/classdamage_field" ]
+    ] ],
     [ "dirichletInletOutlet_PolyconvexHGO.hpp", "dd/d3d/dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html", [
       [ "dirichletInletOutlet_PolyconvexHGO", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o.html", "d4/dd9/classdirichlet_inlet_outlet___polyconvex_h_g_o" ]
     ] ],
@@ -67,6 +71,10 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     ] ],
     [ "nrl_PCA_Likelihood.hpp", "d6/d6e/nrl___p_c_a___likelihood_8hpp.html", [
       [ "nrl_PCA_Likelihood", "d4/d22/classnrl___p_c_a___likelihood.html", "d4/d22/classnrl___p_c_a___likelihood" ]
+    ] ],
+    [ "phaseFieldLinearizedElasticity.cpp", "d4/d66/phase_field_linearized_elasticity_8cpp.html", null ],
+    [ "phaseFieldLinearizedElasticity.hpp", "d1/dee/phase_field_linearized_elasticity_8hpp.html", [
+      [ "phaseFieldLinearizedElasticity", "d3/d02/classphase_field_linearized_elasticity.html", null ]
     ] ],
     [ "readnrldata.cpp", "de/d89/readnrldata_8cpp.html", null ],
     [ "readnrldata.hpp", "d2/d81/readnrldata_8hpp.html", [
