@@ -51,7 +51,13 @@ MPI_Init(&argc, &argv);
       paramList->print(std::cout,2,true,true);
   }
 
-  // code here
+  std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "mesh_file");
+  Mesh = mesh(Comm, mesh_file, 1.0);
+
+  double gc = 2.0;
+  double lc = 1.0;
+
+  Teuchos::RCP<damageField> damageInterface = Teuchos::rcp(new damageField(Comm, Mesh, gc, lc));
 
   #ifdef HAVE_MPI
       MPI_Finalize();
