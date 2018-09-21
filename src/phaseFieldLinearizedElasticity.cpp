@@ -7,7 +7,7 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & com
   Mesh = new mesh(comm, mesh_file, 1.0);
   Comm = Mesh->Comm;
 
-  damageInterface = Teuchos::rcp(new damageField(comm, Mesh, gc, lc));
+  damageInterface = Teuchos::rcp(new damageField(comm, *Mesh, gc, lc));
 
   StandardMap = new Epetra_Map(-1, 3*Mesh->n_local_nodes_without_ghosts, &Mesh->local_dof_without_ghosts[0], 0, *Comm);
   OverlapMap  = new Epetra_Map(-1, 3*Mesh->n_local_nodes,&Mesh->local_dof[0], 0, *Comm);
