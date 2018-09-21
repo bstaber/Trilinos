@@ -1,7 +1,8 @@
 #include "damageField.hpp"
 #include "fepp.hpp"
 
-damageField::damageField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, double & gc_, double & lc_): gc(gc_), lc(lc_){
+damageField::damageField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, double & gc_, double & lc_):
+gc(gc_), lc(lc_){
 
   std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
   Mesh = new mesh(comm, mesh_file, 1.0);
