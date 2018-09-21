@@ -10,9 +10,11 @@ public:
     double gc;
     double lc;
 
-    Epetra_Vector damageSolution;
+    Epetra_Vector      * damageSolution;
+    Epetra_FECrsMatrix * matrix;
+    Epetra_FEVector    * rhs;
 
-    damageField(mesh & Mesh, double & gc_, double & lc_);
+    damageField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, double & gc_, double & lc_);
     ~damageField();
 
     void solve();

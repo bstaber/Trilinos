@@ -7,12 +7,18 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
 
   Epetra_SerialDenseMatrix elasticity_tensor;
   Teuchos::RCP<damageField> damageInterface;
+
   double gc;
   double lc;
+  double bc_disp;
 
   Epetra_Vector * damageHistory;
+  Epetra_Vector * displacement;
 
-  phaseFieldLinearizedElasticity(mesh & mesh, double & gc_, double & lc_);
+  Epetra_FECrsMatrix * matrix;
+  Epetra_FECrsMatrix * rhs;
+
+  phaseFieldLinearizedElasticity(Teuchos::ParametersList & , double & gc_, double & lc_);
   ~phaseFieldLinearizedElasticity();
 
   void computeDisplacement();

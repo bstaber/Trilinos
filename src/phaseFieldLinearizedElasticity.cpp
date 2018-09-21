@@ -1,6 +1,10 @@
 #include "phaseFieldLinearizedElasticity.hpp"
 
-phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(mesh & mesh, double & gc_, double & lc_): gc(gc_), lc(lc_){
+phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & comm, Teuchos::ParameterList & Parameters,
+                                                               double & gc_, double & lc_): gc(gc_), lc(lc_){
+
+  std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
+  Mesh = new mesh(comm, mesh_file, 1.0);
 
   Mesh = &mesh;
   Comm = Mesh->Comm;
@@ -9,8 +13,17 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(mesh & mesh, doub
 
   StandardMap = new Epetra_Map(-1, 3*Mesh->n_local_nodes_without_ghosts, &Mesh->local_dof_without_ghosts[0], 0, *Comm);
   OverlapMap  = new Epetra_Map(-1, 3*Mesh->n_local_nodes,&Mesh->local_dof[0], 0, *Comm);
-  ImportToOverlapMap = new Epetra_Import(*OverlapMap,*StandardMap);
+  ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
   create_FECrsGraph();
+
+  damageHistory = new Epetra_Vector(*damageInterface->StandardMap);
+  displacement  = new Epetra_Vector(*StandardMap);
+
+  matrix        = new Epetra_FECrsMatrix(Copy,*FEGraph);
+  rhs           = new Epetra_Vector(*StandardMap);
+
+  damageHistory->PutScalar(0.0);
+  displacement->PutScalar(0.0);
 
   elasticity.Reshape(6,6);
   double c11 = E*(1.0-nu)/((1.0+nu)*(1.0-2.0*nu));
@@ -31,10 +44,28 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(mesh & mesh, doub
 
 void phaseFieldLinearizedElasticity::computeDisplacement(){
 
+  matrix->PutScalar(0.0);
+  rhs->PutScalar(0.0);
+
+  assemblePureDirichlet_homogeneousForcing(*matrix);
+  apply_dirichlet_conditions(*matrix, *rhs, bc_disp);
+
+  displacement->PutScalar(0.0);
+
+  Epetra_LinearProblem problem;
+  AztecOO solver;
+
+  problem.SetOperator(matrix);
+  problem.SetLHS(displacement);
+  problem.SetRHS(rhs);
+
+  solver.SetProblem(problem);
+  solver.SetParameters(*Krylov);
+
+  solver.Iterate(2000, 1.0e-6);
 }
 
-void phaseFieldLinearizedElasticity::computeDamageHistory(){
-
+void phaseFieldLinearizedElasticity::updateDamageHistory(){
 }
 
 void phaseFieldLinearizedElasticity::get_elasticity_tensor(unsigned int & e_lid,

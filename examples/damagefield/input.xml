@@ -1,0 +1,20 @@
+<ParameterList>
+
+    <ParameterList name="Mesh">
+        <Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh"/>
+    </ParameterList>
+
+    <ParameterList name="Aztec">
+        <Parameter name="solver"          type="string" value="cg"/>
+        <Parameter name="precond"         type="string" value="dom_decomp"/>
+        <Parameter name="subdomain_solve" type="string" value="icc"/>
+        <Parameter name="overlap"         type="int"    value="0"/>
+        <Parameter name="graph_fill"      type="int"    value="0"/>
+        <Parameter name="AZ_tol"          type="double" value="1e-6"/>
+        <Parameter name="AZ_output"       type="int"    value="0"/>
+        <Parameter name="AZ_diagnostics"  type="string" value="all"/>
+        <Parameter name="AZ_reorder"      type="int"    value="1"/>
+        <Parameter name="AZ_conv"         type="string" value="noscaled"/>
+    </ParameterList>
+
+</ParameterList>

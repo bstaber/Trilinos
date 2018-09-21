@@ -1,7 +1,10 @@
 #include "damageField.hpp"
 #include "fepp.hpp"
 
-damageField::damageField(mesh & mesh, double & gc_, double & lc_): gc(gc_), lc(lc_){
+damageField::damageField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, double & gc_, double & lc_): gc(gc_), lc(lc_){
+
+  std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
+  Mesh = new mesh(comm, mesh_file, 1.0);
 
   Mesh               = &mesh;
   Comm               = Mesh->Comm;
@@ -9,18 +12,19 @@ damageField::damageField(mesh & mesh, double & gc_, double & lc_): gc(gc_), lc(l
   OverlapMap         = new Epetra_Map(-1, Mesh->n_local_nodes, &Mesh->local_nodes[0], 0, *Comm);
   ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
 
+  damageSolution     = new Epetra_Vector(*StandardMap);
+  matrix             = new Epetra_FECrsMatrix(Copy,*FEGraph);
+  rhs                = new Epetra_FEVector(*StandardMap);
+
   create_FECrsGraph();
 }
 
 damageField::~damageField(){
 }
 
-void damageField::assemble(Epetra_Vector & Hn, Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs){
+void damageField::assemble(Epetra_Vector & Hn){
 
   //Hn to do
-
-  matrix.PutScalar(0.0);
-  rhs.PutScalar(0.0);
 
   Epetra_SerialDenseVector shape_functions(Mesh->el_type);
   Epetra_SerialDenseVector fe(Mesh->el_type);
@@ -65,9 +69,9 @@ void damageField::assemble(Epetra_Vector & Hn, Epetra_FECrsMatrix & matrix, Epet
     ke += me;
 
     for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-      rhs.SumIntoGlobalValues(1, &index[inode], &fe(inode));
+      rhs->SumIntoGlobalValues(1, &index[inode], &fe(inode));
       for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
-        matrix.SumIntoGlobalValues(1, &index[inode], 1, &index[jnode], &ke(inode,jnode));
+        matrix->SumIntoGlobalValues(1, &index[inode], 1, &index[jnode], &ke(inode,jnode));
       }
     }
   }
@@ -76,22 +80,22 @@ void damageField::assemble(Epetra_Vector & Hn, Epetra_FECrsMatrix & matrix, Epet
 }
 
 void damageField::solve(Teuchos::ParameterList & Parameters,
-                        Epetra_Vector & Hn,
-                        Epetra_FECrsMatrix & matrix, Epetra_FEVector & lhs, Epetra_Vector & rhs){
+                        Epetra_Vector & Hn){
 
-  lhs.PutScalar(0.0);
-  rhs.PutScalar(0.0);
-  matrix.PutScalar(0.0);
+  damageSolution->PutScalar(0.0);
+  rhs->PutScalar(0.0);
+  matrix->PutScalar(0.0);
 
-  assemble(Hn, matrix, rhs);
+  assemble(Hn, *matrix, *rhs);
 
-  Epetra_LinearProblem problem(&matrix, &lhs, &rhs);
+  Epetra_LinearProblem problem(matrix, damageSolution, rhs);
   AztecOO solver(problem);
 
-  double tol = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "tol");
-  solver.SetParameters(Parameters);
-  solver.Iterate(2000,tol);
+  double AZ_tol      = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
+  double AZ_max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
 
+  solver.SetParameters(Parameters);
+  solver.Iterate(AZ_max_iter, AZ_tol);
 }
 
 void damageField::create_FECrsGraph(){
