@@ -36,7 +36,7 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & com
   elasticity(5,0) = 0.0; elasticity(5,1) = 0.0; elasticity(5,2) = 0.0; elasticity(5,3) = 0.0; elasticity(5,4) = 0.0; elasticity(5,5) = c44;
 }
 
-~phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(){
+phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
 
 }
 
@@ -58,7 +58,7 @@ void phaseFieldLinearizedElasticity::computeDisplacement(){
   problem.SetRHS(rhs);
 
   solver.SetProblem(problem);
-  solver.SetParameters(*Krylov);
+  //solver.SetParameters(*Krylov);
 
   solver.Iterate(2000, 1.0e-6);
 }

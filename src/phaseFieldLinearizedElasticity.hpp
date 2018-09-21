@@ -6,11 +6,11 @@
 
 class phaseFieldLinearizedElasticity : public linearizedElasticity{
 
-  Epetra_SerialDenseMatrix elasticity_tensor;
+  Epetra_SerialDenseMatrix elasticity;
   Teuchos::RCP<damageField> damageInterface;
 
-  double gc;
-  double lc;
+  double gc, lc;
+  double E, nu;
   double bc_disp;
 
   Epetra_Vector * damageHistory;
