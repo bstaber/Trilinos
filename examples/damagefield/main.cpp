@@ -52,7 +52,7 @@ MPI_Init(&argc, &argv);
   }
 
   std::string mesh_file = Teuchos::getParameter<std::string>(paramList->sublist("Mesh"), "mesh_file");
-  Mesh = mesh(Comm, mesh_file, 1.0);
+  mesh Mesh(Comm, mesh_file, 1.0);
 
   double gc = 2.0;
   double lc = 1.0;
