@@ -18,7 +18,7 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & com
   displacement  = new Epetra_Vector(*StandardMap);
 
   matrix        = new Epetra_FECrsMatrix(Copy,*FEGraph);
-  rhs           = new Epetra_Vector(*StandardMap);
+  rhs           = new Epetra_FEVector(*StandardMap);
 
   damageHistory->PutScalar(0.0);
   displacement->PutScalar(0.0);
