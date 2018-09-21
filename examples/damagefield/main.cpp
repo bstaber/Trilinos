@@ -9,7 +9,7 @@
 #include "damageField.hpp"
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
-#include "Teuchos_XMLParameterListCoreHelp.hpp"
+#include "Teuchos_XMLParameterListCoreHelpers.hpp"
 
 int main(int argc, char *argv[]){
 
