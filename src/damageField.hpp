@@ -6,7 +6,6 @@ include "linearFiniteElementProblem.hpp"
 class damageField : public linearFiniteElementProblem
 {
 public:
-    mesh * Mesh;
     double gc;
     double lc;
 
@@ -23,7 +22,6 @@ public:
     void create_FECrsGraph();
     void setup_dirichlet_conditions();
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement);
-
 };
 
 #endif
