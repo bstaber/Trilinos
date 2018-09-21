@@ -6,15 +6,16 @@ gc(gc_), lc(lc_){
 
   Mesh               = &mesh;
   Comm               = Mesh->Comm;
+
   StandardMap        = new Epetra_Map(-1, Mesh->n_local_nodes_without_ghosts, &Mesh->local_nodes_without_ghosts[0], 0, *Comm);
   OverlapMap         = new Epetra_Map(-1, Mesh->n_local_nodes, &Mesh->local_nodes[0], 0, *Comm);
   ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
 
-  damageSolution     = new Epetra_Vector(*StandardMap);
-  matrix             = new Epetra_FECrsMatrix(Copy,*FEGraph);
-  rhs                = new Epetra_FEVector(*StandardMap);
-
   create_FECrsGraph();
+
+  damageSolution     = new Epetra_Vector(*StandardMap);
+  matrix             = new Epetra_FECrsMatrix(Copy, *FEGraph);
+  rhs                = new Epetra_FEVector(*StandardMap);
 }
 
 damageField::~damageField(){
