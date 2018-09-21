@@ -28,11 +28,11 @@ void damageField::assemble(Epetra_Vector & Hn){
 
   Epetra_SerialDenseVector shape_functions(Mesh->el_type);
   Epetra_SerialDenseVector fe(Mesh->el_type);
-
+  Epetra_SerialDenseVector hn(Mesh->el_type);
+  
   Epetra_SerialDenseMatrix dx_shape_functions(3,Mesh->el_type);
   Epetra_SerialDenseMatrix ke(Mesh->el_type, Mesh->el_type);
   Epetra_SerialDenseMatrix me(Mesh->el_type, Mesh->el_type);
-  Epetra_SerialDenseMatrix hn(Mesh->el_type);
 
   double gauss_weight;
   unsigned int eglob;
