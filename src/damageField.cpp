@@ -42,11 +42,11 @@ void damageField::assemble(Epetra_Vector & Hn){
 
   for (unsigned int eloc=0; eloc<Mesh->n_local_cells; ++eloc){
     eglob = Mesh->local_cells[eloc];
-    for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+    for (int inode=0; inode<Mesh->el_type; ++inode){
       index[inode] = Mesh->cells_nodes[Mesh->el_type*eglob+inode];
       hn(inode) = Hn[OverlapMap->LID(inode)];
       fe(inode) = 0.0;
-      for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
+      for (int jnode=0; jnode<Mesh->el_type; ++jnode){
         ke(inode,jnode) = 0.0;
         me(inode,jnode) = 0.0;
       }
