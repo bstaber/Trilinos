@@ -7,9 +7,18 @@
 #endif
 
 #include "damageField.hpp"
+#include "Teuchos_RCP.hpp"
+#include "Ifpack.h"
+#include "Ifpack_AdditiveSchwarz.h"
+#include "BelosLinearProblem.hpp"
+#include "BelosBlockGmresSolMgr.hpp"
+#include "BelosEpetraAdapter.hpp"
+#include <BelosSolverFactory.hpp>
+#include "BelosBlockGmresSolMgr.hpp"
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
+#include "Stratimikos_DefaultLinearSolverBuilder.hpp"
 
 int main(int argc, char *argv[]){
 
