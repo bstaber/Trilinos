@@ -1,3 +1,7 @@
+%
+%Brian Staber (brian.staber@gmail.com)
+%
+
 clc
 clearvars
 close all

@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef MESHPP_HPP
 #define MESHPP_HPP
 

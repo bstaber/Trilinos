@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #include "linearizedElasticity.hpp"
 #include "fepp.hpp"
 

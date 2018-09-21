@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef LAPLACEPP_HPP
 #define LAPLACEPP_HPP
 

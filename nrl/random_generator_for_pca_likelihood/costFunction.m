@@ -1,3 +1,7 @@
+%
+%Brian Staber (brian.staber@gmail.com)
+%
+
 function output = costFunction(modelParameters,optimParameters, Yexpi)
 
     if (length(modelParameters.mu)~=5 || length(modelParameters.beta)~=2 || length(modelParameters.lc)~=2 || length(modelParameters.delta)~=4)

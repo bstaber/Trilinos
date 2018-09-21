@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef NEUMANNINNERSURFACE_POLYCONVEXHGO_HPP
 #define NEUMANNINNERSURFACE_POLYCONVEXHGO_HPP
 

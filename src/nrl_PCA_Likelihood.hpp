@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef NRL_PCA_LIKELIHOOD
 #define NRL_PCA_LIKELIHOOD
 

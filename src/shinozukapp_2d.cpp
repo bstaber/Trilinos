@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #include "shinozukapp_2d.hpp"
 #include <math.h>
 

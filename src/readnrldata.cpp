@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #include "readnrldata.hpp"
 #include <math.h>
 

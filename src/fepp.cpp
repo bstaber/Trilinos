@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #include "fepp.hpp"
 
 void tri3::shape_functions(Epetra_SerialDenseVector & N, double & xi, double & eta){
@@ -11,13 +15,13 @@ void tri3::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double &
     D(2,0) = 0.0;  D(2,1) = 1.0;
 }
 void tri3::dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix & DX, double & jac, Epetra_SerialDenseMatrix & JacobianMatrix){
-    
+
     Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
     InverseJacobianMatrix(0,0) = (1.0/jac)*JacobianMatrix(1,1);
     InverseJacobianMatrix(1,1) = (1.0/jac)*JacobianMatrix(0,0);
     InverseJacobianMatrix(0,1) = -(1.0/jac)*JacobianMatrix(0,1);
     InverseJacobianMatrix(1,0) = -(1.0/jac)*JacobianMatrix(1,0);
-    
+
     DX.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
 }
 
@@ -34,13 +38,13 @@ void quad4::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double 
     D(3,0) = -(1.0/4.0)*(1.0+eta); D(3,1) = (1.0/4.0)*(1.0-xi);
 }
 void quad4::dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix & DX, double & jac, Epetra_SerialDenseMatrix & JacobianMatrix){
-    
+
     Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
     InverseJacobianMatrix(0,0) = (1.0/jac)*JacobianMatrix(1,1);
     InverseJacobianMatrix(1,1) = (1.0/jac)*JacobianMatrix(0,0);
     InverseJacobianMatrix(0,1) = -(1.0/jac)*JacobianMatrix(0,1);
     InverseJacobianMatrix(1,0) = -(1.0/jac)*JacobianMatrix(1,0);
-    
+
     DX.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
 }
 
@@ -61,7 +65,7 @@ void tri6::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double &
     D(3,0) = 4.0 - 8.0*xi - 4.0*eta;
     D(4,0) = 4.0*eta;
     D(5,0) = -4.0*eta;
-    
+
     D(0,1) = 4.0*eta + 4.0*xi - 3.0;
     D(1,1) = 0.0;
     D(2,1) = 4.0*eta - 1.0;
@@ -71,13 +75,13 @@ void tri6::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double &
 }
 
 void tri6::dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix & DX, double & jac, Epetra_SerialDenseMatrix & JacobianMatrix){
-    
+
     Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
     InverseJacobianMatrix(0,0) = (1.0/jac)*JacobianMatrix(1,1);
     InverseJacobianMatrix(1,1) = (1.0/jac)*JacobianMatrix(0,0);
     InverseJacobianMatrix(0,1) = -(1.0/jac)*JacobianMatrix(0,1);
     InverseJacobianMatrix(1,0) = -(1.0/jac)*JacobianMatrix(1,0);
-    
+
     DX.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
 }
 
@@ -148,19 +152,19 @@ void tetra10::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, doubl
 void dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix JacobianMatrix, double & jac, Epetra_SerialDenseMatrix & DX)
 {
     Epetra_SerialDenseMatrix InverseJacobianMatrix(3,3);
-    
+
     InverseJacobianMatrix(0,0) = (1.0/jac)*(JacobianMatrix(1,1)*JacobianMatrix(2,2)-JacobianMatrix(1,2)*JacobianMatrix(2,1));
     InverseJacobianMatrix(0,1) = (1.0/jac)*(JacobianMatrix(0,2)*JacobianMatrix(2,1)-JacobianMatrix(0,1)*JacobianMatrix(2,2));
     InverseJacobianMatrix(0,2) = (1.0/jac)*(JacobianMatrix(0,1)*JacobianMatrix(1,2)-JacobianMatrix(0,2)*JacobianMatrix(1,1));
-    
+
     InverseJacobianMatrix(1,0) = (1.0/jac)*(JacobianMatrix(1,2)*JacobianMatrix(2,0)-JacobianMatrix(1,0)*JacobianMatrix(2,2));
     InverseJacobianMatrix(1,1) = (1.0/jac)*(JacobianMatrix(0,0)*JacobianMatrix(2,2)-JacobianMatrix(0,2)*JacobianMatrix(2,0));
     InverseJacobianMatrix(1,2) = (1.0/jac)*(JacobianMatrix(0,2)*JacobianMatrix(1,0)-JacobianMatrix(0,0)*JacobianMatrix(1,2));
-    
+
     InverseJacobianMatrix(2,0) = (1.0/jac)*(JacobianMatrix(1,0)*JacobianMatrix(2,1)-JacobianMatrix(1,1)*JacobianMatrix(2,0));
     InverseJacobianMatrix(2,1) = (1.0/jac)*(JacobianMatrix(0,1)*JacobianMatrix(2,0)-JacobianMatrix(0,0)*JacobianMatrix(2,1));
     InverseJacobianMatrix(2,2) = (1.0/jac)*(JacobianMatrix(0,0)*JacobianMatrix(1,1)-JacobianMatrix(0,1)*JacobianMatrix(1,0));
-    
+
     DX.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
 }
 
@@ -229,7 +233,7 @@ void gauss_points_hexa4(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVec
 
 void gauss_points_hexa8(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(8); xi.Resize(8); eta.Resize(8); zeta.Resize(8);
-    
+
     double a = 1.0/std::sqrt(3.0);
     xi(0)=-a;  eta(0)=-a;  zeta(0)=-a;   weight(0)=1.0;
     xi(1)=-a;  eta(1)=-a;  zeta(1)=a;    weight(1)=1.0;
@@ -243,7 +247,7 @@ void gauss_points_hexa8(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVec
 
 void gauss_points_hexa27(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(27); xi.Resize(27); eta.Resize(27); zeta.Resize(27);
-    
+
     double a = std::sqrt(3.0/5.0); double c1 = 5.0/9.0; double c2 = 8.0/9.0;
     xi(0) =   -a;  eta(0) =  -a;  zeta(0) =  -a;  weight(0) = c1*c1*c1;
     xi(1) =   -a;  eta(1) =  -a;  zeta(1) = 0.0;  weight(1) = c1*c1*c2;
@@ -298,7 +302,7 @@ void gauss_points_tetra5(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVe
     eta(0) = 0.25; eta(1) = 0.1666666666666667; eta(2) = 0.1666666666666667; eta(3) = 0.1666666666666667; eta(4) = 0.50;
     zeta(0) = 0.25; zeta(1) = 0.1666666666666667; zeta(2) = 0.1666666666666667; zeta(3) = 0.50; zeta(4) = 0.1666666666666667;
     weight(0) = -0.8000000000000000/6.0; weight(1) = 0.45/6.0; weight(2) = 0.45/6.0; weight(3) = 0.45/6.0; weight(4) =0.45/6.0;
-    
+
 }
 void gauss_points_tetra11(Epetra_SerialDenseVector & weight, Epetra_SerialDenseVector & xi, Epetra_SerialDenseVector & eta, Epetra_SerialDenseVector & zeta){
     weight.Resize(11); xi.Resize(11); eta.Resize(11); zeta.Resize(11);
@@ -321,7 +325,7 @@ int pnpoly(int & nvert, Epetra_SerialDenseVector & vertx, Epetra_SerialDenseVect
             (testx < (vertx[j]-vertx[i]) * (testy-verty[i]) / (verty[j]-verty[i]) + vertx[i]) ){
             c = !c;
         }
-        
+
     }
     return c;
 }

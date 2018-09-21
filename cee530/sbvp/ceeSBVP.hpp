@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef CEESBVP_HPP
 #define CEESBVP_HPP
 

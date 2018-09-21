@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef MANUFACTUREDSOLUTION_HPP
 #define MANUFACTUREDSOLUTION_HPP
 

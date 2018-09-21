@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #include "compressibleHyperelasticity.hpp"
 
 compressibleHyperelasticity::compressibleHyperelasticity(){
@@ -10,12 +14,12 @@ void compressibleHyperelasticity::assemblePureDirichlet_homogeneousForcing(Epetr
     int error;
     F.PutScalar(0.0);
     K.PutScalar(0.0);
-    
+
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
-    
+
     stiffnessRhs_homogeneousForcing(u,K,F);
-    
+
     Comm->Barrier();
     error = K.GlobalAssemble();
     error = K.FillComplete();
@@ -25,12 +29,12 @@ void compressibleHyperelasticity::assemblePureDirichlet_inhomogeneousForcing(Epe
     int error;
     F.PutScalar(0.0);
     K.PutScalar(0.0);
-    
+
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
-    
+
     stiffnessRhs_inhomogeneousForcing(u,K,F);
-    
+
     Comm->Barrier();
     error = K.GlobalAssemble();
     error = K.FillComplete();
@@ -40,13 +44,13 @@ void compressibleHyperelasticity::assembleMixedDirichletNeumann_homogeneousForci
     int error;
     F.PutScalar(0.0);
     K.PutScalar(0.0);
-    
+
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
-    
+
     stiffnessRhs_homogeneousForcing(u,K,F);
     rhs_NeumannBoundaryCondition(F);
-    
+
     Comm->Barrier();
     error = K.GlobalAssemble();
     error = K.FillComplete();
@@ -56,13 +60,13 @@ void compressibleHyperelasticity::assembleMixedDirichletNeumann_inhomogeneousFor
     int error;
     F.PutScalar(0.0);
     K.PutScalar(0.0);
-    
+
     Epetra_Vector u(*OverlapMap);
     u.Import(x, *ImportToOverlapMap, Insert);
-    
+
     stiffnessRhs_inhomogeneousForcing(u,K,F);
     rhs_NeumannBoundaryCondition(F);
-    
+
     Comm->Barrier();
     error = K.GlobalAssemble();
     error = K.FillComplete();
@@ -73,28 +77,28 @@ void compressibleHyperelasticity::stiffnessRhs_homogeneousForcing(Epetra_Vector 
     int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
     double gauss_weight;
-    
+
     int *Indexes;
     Indexes = new int [3*Mesh->el_type];
-    
+
     Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
     Epetra_SerialDenseVector Re(3*Mesh->el_type);
-    
+
     Epetra_SerialDenseMatrix deformation_gradient(3,3);
     Epetra_SerialDenseMatrix tangent_matrix(6,6);
     Epetra_SerialDenseVector scd_piola_stress(6);
     Epetra_SerialDenseMatrix block_scd_piola_stress(9,9);
     Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
-    
+
     Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
     Epetra_SerialDenseMatrix B_times_TM(3*Mesh->el_type,6);
     Epetra_SerialDenseMatrix matrix_BG(9,3*Mesh->el_type);
     Epetra_SerialDenseMatrix BG_times_BSPS(3*Mesh->el_type,9);
-    
+
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
-        
+
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
             matrix_x(0,inode) = u[OverlapMap->LID(3*node+0)] + Mesh->nodes_coord[3*node+0];
@@ -110,7 +114,7 @@ void compressibleHyperelasticity::stiffnessRhs_homogeneousForcing(Epetra_Vector 
                 }
             }
         }
-        
+
         for (unsigned int gp=0; gp<n_gauss_points; ++gp){
             gauss_weight = Mesh->gauss_weight_cells(gp);
             for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
@@ -118,13 +122,13 @@ void compressibleHyperelasticity::stiffnessRhs_homogeneousForcing(Epetra_Vector 
                 dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
                 dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
             }
-            
+
             error=deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
             compute_B_matrices(deformation_gradient,dx_shape_functions,matrix_B,matrix_BG);
-            
+
             get_material_parameters(e_lid, gp);
             get_constitutive_tensors(deformation_gradient, scd_piola_stress, tangent_matrix);
-            
+
             for (unsigned int i=0; i<3; ++i){
                 block_scd_piola_stress(3*i+0,3*i+0) = scd_piola_stress(0);
                 block_scd_piola_stress(3*i+0,3*i+1) = scd_piola_stress(5);
@@ -136,16 +140,16 @@ void compressibleHyperelasticity::stiffnessRhs_homogeneousForcing(Epetra_Vector 
                 block_scd_piola_stress(3*i+2,3*i+1) = scd_piola_stress(3);
                 block_scd_piola_stress(3*i+2,3*i+2) = scd_piola_stress(2);
             }
-            
+
             error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,scd_piola_stress,1.0);
-            
+
             error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
-            
+
             error = BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
             error = Ke.Multiply('N','N',1.0,BG_times_BSPS,matrix_BG,1.0);
         }
-        
+
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
             error = F.SumIntoGlobalValues(1, &Indexes[i], &Re(i));
             for (unsigned int j=0; j<3*Mesh->el_type; ++j){
@@ -160,13 +164,13 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
     int node, e_gid, error;
     int n_gauss_points = Mesh->n_gauss_cells;
     double gauss_weight;
-    
+
     int *Indexes;
     Indexes = new int [3*Mesh->el_type];
-    
+
     Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
     Epetra_SerialDenseVector Re(3*Mesh->el_type);
-    
+
     Epetra_SerialDenseMatrix deformation_gradient(3,3);
     Epetra_SerialDenseMatrix tangent_matrix(6,6);
     Epetra_SerialDenseVector scd_piola_stress(6);
@@ -174,19 +178,19 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
     Epetra_SerialDenseMatrix matrix_x(3,Mesh->el_type);
     Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
     Epetra_SerialDenseMatrix xg(3,n_gauss_points);
-    
+
     Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
     Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
     Epetra_SerialDenseMatrix B_times_TM(3*Mesh->el_type,6);
     Epetra_SerialDenseMatrix matrix_BG(9,3*Mesh->el_type);
     Epetra_SerialDenseMatrix BG_times_BSPS(3*Mesh->el_type,9);
-    
+
     Epetra_SerialDenseVector fevol(3*Mesh->el_type);
     Epetra_SerialDenseVector fvol(3);
-    
+
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
         e_gid = Mesh->local_cells[e_lid];
-        
+
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
             node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
             matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
@@ -218,13 +222,13 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
                     fevol(3*inode+iddl) += gauss_weight*pressure_load*fvol(iddl)*Mesh->N_cells(inode,gp)*Mesh->detJac_cells(e_lid,gp);
                 }
             }
-            
+
             error = deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
             compute_B_matrices(deformation_gradient,dx_shape_functions,matrix_B,matrix_BG);
-            
+
             get_material_parameters(e_lid, gp);
             get_constitutive_tensors(deformation_gradient, scd_piola_stress, tangent_matrix);
-            
+
             for (unsigned int i=0; i<3; ++i){
                 block_scd_piola_stress(3*i+0,3*i+0) = scd_piola_stress(0);
                 block_scd_piola_stress(3*i+0,3*i+1) = scd_piola_stress(5);
@@ -236,16 +240,16 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
                 block_scd_piola_stress(3*i+2,3*i+1) = scd_piola_stress(3);
                 block_scd_piola_stress(3*i+2,3*i+2) = scd_piola_stress(2);
             }
-            
+
             error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,scd_piola_stress,1.0);
-            
+
             error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,tangent_matrix,0.0);
             error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
-            
+
             error = BG_times_BSPS.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_BG,block_scd_piola_stress,0.0);
             error = Ke.Multiply('N','N',1.0,BG_times_BSPS,matrix_BG,1.0);
         }
-        
+
         for (unsigned int i=0; i<3*Mesh->el_type; ++i){
             error = F.SumIntoGlobalValues(1, &Indexes[i], &Re(i));
             error = F.SumIntoGlobalValues(1, &Indexes[i], &fevol(i));
@@ -258,19 +262,19 @@ void compressibleHyperelasticity::stiffnessRhs_inhomogeneousForcing(Epetra_Vecto
 }
 
 void compressibleHyperelasticity::rhs_NeumannBoundaryCondition(Epetra_FEVector & F){
-    
+
     int node;
     int* Indexes;
     unsigned int e_gid;
     Indexes = new int [3*Mesh->face_type];
-    
+
     int n_gauss_points = Mesh->n_gauss_faces;
     double gauss_weight;
-    
+
     Epetra_SerialDenseMatrix xg(3,n_gauss_points), matrix_X(3,Mesh->face_type);
     Epetra_SerialDenseVector force(3*Mesh->face_type);
     Epetra_SerialDenseVector dead_pressure(3);
-    
+
     for (unsigned int e_lid=0; e_lid<Mesh->n_local_faces; ++e_lid){
         e_gid  = Mesh->local_faces[e_lid];
         for (unsigned int inode=0; inode<Mesh->face_type; ++inode){

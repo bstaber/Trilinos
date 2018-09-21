@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef ASMESBVP_HPP
 #define ASMESBVP_HPP
 

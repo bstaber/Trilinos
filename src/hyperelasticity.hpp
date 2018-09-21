@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef HYPERELASTICITY_HPP
 #define HYPERELASTICITY_HPP
 

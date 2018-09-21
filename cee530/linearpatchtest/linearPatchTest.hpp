@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef LINEARPATCHTEST_HPP
 #define LINEARPATCHTEST_HPP
 

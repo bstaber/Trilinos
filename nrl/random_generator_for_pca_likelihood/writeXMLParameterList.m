@@ -1,3 +1,7 @@
+%
+%Brian Staber (brian.staber@gmail.com)
+%
+
 function writeXMLParameterList(filename,mu,beta,lc,delta,nmc,station)
 
 fp = fopen(filename,'w');

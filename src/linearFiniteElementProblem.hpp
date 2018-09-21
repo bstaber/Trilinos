@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef LINEARFINITEELEMENTPROBLEM_HPP
 #define LINEARFINITEELEMENTPROBLEM_HPP
 #include "baseClassFEM.hpp"

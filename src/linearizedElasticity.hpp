@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef LINEARIZEDELASTICITY_HPP
 #define LINEARIZEDELASTICITY_HPP
 
@@ -10,7 +14,7 @@ public:
     ~linearizedElasticity();
 
     void create_FECrsGraph();
-    
+
     void aztecSolver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & u, Teuchos::ParameterList & paramList);
 
     void assemblePureDirichlet_homogeneousForcing(Epetra_FECrsMatrix & K);

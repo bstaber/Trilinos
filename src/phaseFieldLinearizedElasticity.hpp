@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef PHASEFIELDLINEARIZEDELASTICITY_HPP
 #define PHASEFIELDLINEARIZEDELASTICITY_HPP
 

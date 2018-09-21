@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef DISTRIBUTENRLDATA_HPP
 #define DISTRIBUTENRLDATA_HPP
 

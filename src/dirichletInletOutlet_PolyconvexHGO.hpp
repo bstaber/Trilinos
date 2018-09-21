@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef DIRICHLETINLETOUTLET_POLYCONVEXHGO_HPP
 #define DIRICHLETINLETOUTLET_POLYCONVEXHGO_HPP
 

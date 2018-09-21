@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #include "shinozukapp_layeredcomp.hpp"
 #include <math.h>
 

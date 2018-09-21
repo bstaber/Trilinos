@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef SHINOZUKAPP_LAYEREDCOMP_2D_HPP
 #define SHINOZUKAPP_LAYEREDCOMP_2D_HPP
 

@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef NEWTONRAPHSON_HPP
 #define NEWTONRAPHSON_HPP
 

@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef DAMAGEFIELD_HPP
 #define DAMAGEFIELD_HPP
 

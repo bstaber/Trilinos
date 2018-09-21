@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #ifndef NONLINEARFINITEELEMENTPROBLEM_HPP
 #define NONLINEARFINITEELEMENTPROBLEM_HPP
 
@@ -6,19 +10,19 @@
 
 class nonLinearFiniteElementProblem : public baseClassFEM
 {
-    
+
 public:
     nonLinearFiniteElementProblem(){
     };
     ~nonLinearFiniteElementProblem(){
     };
-    
+
     double pressure_load;
-    
+
     virtual void get_matrix_and_rhs(Epetra_Vector & x, Epetra_FECrsMatrix & K, Epetra_FEVector & F) = 0;
     virtual void setup_dirichlet_conditions() = 0;
     virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement) = 0;
-    
+
     void display_amesos_solvers(){
         Amesos Factory;
         std::cout << "Available Amesos solvers: \n";
@@ -33,7 +37,7 @@ public:
         isAvailable = Factory.Query("Mumps"); if(isAvailable){ std::cout << "Mumps: yes.\n"; } else{ std::cout << "Mumps: no.\n"; }
         isAvailable = Factory.Query("Dscpack"); if(isAvailable){ std::cout << "Dscpack: yes.\n"; } else{ std::cout << "Dscpack: no.\n"; }
     }
-    
+
 };
 
 #endif

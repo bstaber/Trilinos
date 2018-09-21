@@ -1,3 +1,7 @@
+/*
+Brian Staber (brian.staber@gmail.com)
+*/
+
 #include "Epetra_ConfigDefs.h"
 #ifdef HAVE_MPI
 #include "mpi.h"
