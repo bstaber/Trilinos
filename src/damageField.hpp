@@ -1,7 +1,7 @@
 #ifndef DAMAGEFIELD_HPP
 #define DAMAGEFIELD_HPP
 
-include "linearFiniteElementProblem.hpp"
+#include "linearFiniteElementProblem.hpp"
 
 class damageField : public linearFiniteElementProblem
 {
