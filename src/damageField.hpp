@@ -10,6 +10,8 @@ public:
     double gc;
     double lc;
 
+    Epetra_Vector damageSolution;
+
     damageField(mesh & Mesh, double & gc_, double & lc_);
     ~damageField();
 

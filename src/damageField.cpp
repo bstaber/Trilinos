@@ -5,8 +5,8 @@ damageField::damageField(mesh & mesh, double & gc_, double & lc_): gc(gc_), lc(l
 
   Mesh               = &mesh;
   Comm               = Mesh->Comm;
-  StandardMap        = new Epetra_Map(-1,Mesh->n_local_nodes_without_ghosts,&Mesh->local_nodes_without_ghosts[0],0,*Comm);
-  OverlapMap         = new Epetra_Map(-1,Mesh->n_local_nodes,&Mesh->local_nodes[0],0,*Comm);
+  StandardMap        = new Epetra_Map(-1, Mesh->n_local_nodes_without_ghosts, &Mesh->local_nodes_without_ghosts[0], 0, *Comm);
+  OverlapMap         = new Epetra_Map(-1, Mesh->n_local_nodes, &Mesh->local_nodes[0], 0, *Comm);
   ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
 
   create_FECrsGraph();
@@ -18,7 +18,7 @@ damageField::~damageField(){
 void damageField::assemble(Epetra_Vector & Hn, Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs){
 
   //Hn to do
-  
+
   matrix.PutScalar(0.0);
   rhs.PutScalar(0.0);
 
@@ -75,7 +75,22 @@ void damageField::assemble(Epetra_Vector & Hn, Epetra_FECrsMatrix & matrix, Epet
   delete [] index;
 }
 
-void damageField::solve(){
+void damageField::solve(Teuchos::ParameterList & Parameters,
+                        Epetra_Vector & Hn,
+                        Epetra_FECrsMatrix & matrix, Epetra_FEVector & lhs, Epetra_Vector & rhs){
+
+  lhs.PutScalar(0.0);
+  rhs.PutScalar(0.0);
+  matrix.PutScalar(0.0);
+
+  assemble(Hn, matrix, rhs);
+
+  Epetra_LinearProblem problem(&matrix, &lhs, &rhs);
+  AztecOO solver(problem);
+
+  double tol = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "tol");
+  solver.SetParameters(Parameters);
+  solver.Iterate(2000,tol);
 
 }
 
@@ -104,9 +119,9 @@ void damageField::create_FECrsGraph(){
 }
 
 void setup_dirichlet_conditions(){
-
+  std::cout << "No essential boundary conditions.\n";
 }
 
 void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-
+  std::cout << "No essential boundary conditions.\n";
 }
