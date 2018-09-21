@@ -120,10 +120,10 @@ void damageField::create_FECrsGraph(){
   delete[] index;
 }
 
-void setup_dirichlet_conditions(){
+void damageField::setup_dirichlet_conditions(){
   std::cout << "No essential boundary conditions.\n";
 }
 
-void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
+void damageField::apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
   std::cout << "No essential boundary conditions.\n";
 }
