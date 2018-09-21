@@ -91,11 +91,11 @@ void damageField::solve(Teuchos::ParameterList & Parameters,
   Epetra_LinearProblem problem(matrix, damageSolution, rhs);
   AztecOO solver(problem);
 
-  double AZ_tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
-  int AZ_max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
+  double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
+  int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
 
   solver.SetParameters(Parameters);
-  solver.Iterate(AZ_max_iter, AZ_tol);
+  solver.Iterate(max_iter, tol);
 }
 
 void damageField::create_FECrsGraph(){
