@@ -13,7 +13,7 @@ public:
     Epetra_FECrsMatrix * matrix;
     Epetra_FEVector    * rhs;
 
-    damageField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, double & gc_, double & lc_);
+    damageField(Epetra_Comm & comm, mesh & mesh, double & gc_, double & lc_);
     ~damageField();
 
     void solve(Teuchos::ParameterList & Parameters, Epetra_Vector & Hn);

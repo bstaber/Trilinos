@@ -1,12 +1,10 @@
 #include "damageField.hpp"
 #include "fepp.hpp"
 
-damageField::damageField(Epetra_Comm & comm, Teuchos::ParameterList & Parameters, double & gc_, double & lc_):
+damageField::damageField(Epetra_Comm & comm, mesh & mesh, double & gc_, double & lc_):
 gc(gc_), lc(lc_){
 
-  std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-  Mesh = new mesh(comm, mesh_file, 1.0);
-
+  Mesh               = &mesh;
   Comm               = Mesh->Comm;
   StandardMap        = new Epetra_Map(-1, Mesh->n_local_nodes_without_ghosts, &Mesh->local_nodes_without_ghosts[0], 0, *Comm);
   OverlapMap         = new Epetra_Map(-1, Mesh->n_local_nodes, &Mesh->local_nodes[0], 0, *Comm);
