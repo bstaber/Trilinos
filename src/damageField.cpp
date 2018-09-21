@@ -29,7 +29,7 @@ void damageField::assemble(Epetra_Vector & Hn){
   Epetra_SerialDenseVector shape_functions(Mesh->el_type);
   Epetra_SerialDenseVector fe(Mesh->el_type);
   Epetra_SerialDenseVector hn(Mesh->el_type);
-  
+
   Epetra_SerialDenseMatrix dx_shape_functions(3,Mesh->el_type);
   Epetra_SerialDenseMatrix ke(Mesh->el_type, Mesh->el_type);
   Epetra_SerialDenseMatrix me(Mesh->el_type, Mesh->el_type);
@@ -61,10 +61,10 @@ void damageField::assemble(Epetra_Vector & Hn){
           dx_shape_functions(1,inode) = Mesh->DY_N_cells(gp+n_gauss_points*inode,eloc);
           dx_shape_functions(2,inode) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,eloc);
           shape_functions(inode) = Mesh->N_cells(inode,gp);
-          fe(inode) += gauss_weight*2.0*hn*shape_functions(inode)*Mesh->detJac_cells(e_lid,gp);
+          fe(inode) += gauss_weight*2.0*hn*shape_functions(inode)*Mesh->detJac_cells(eloc,gp);
       }
-      me.Multiply('N','T',an*gauss_weight*Mesh->detJac_cells(e_lid,gp),shape_functions,shape_functions,1.0);
-      ke.Multiply('T','N',bn*gauss_weight*Mesh->detJac_cells(e_lid,gp),dx_shape_functions,dx_shape_functions,1.0)
+      me.Multiply('N','T',an*gauss_weight*Mesh->detJac_cells(eloc,gp),shape_functions,shape_functions,1.0);
+      ke.Multiply('T','N',bn*gauss_weight*Mesh->detJac_cells(eloc,gp),dx_shape_functions,dx_shape_functions,1.0);
     }
     ke += me;
 
@@ -86,13 +86,13 @@ void damageField::solve(Teuchos::ParameterList & Parameters,
   rhs->PutScalar(0.0);
   matrix->PutScalar(0.0);
 
-  assemble(Hn, *matrix, *rhs);
+  assemble(Hn);
 
   Epetra_LinearProblem problem(matrix, damageSolution, rhs);
   AztecOO solver(problem);
 
-  double AZ_tol      = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
-  double AZ_max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
+  double AZ_tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
+  int AZ_max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
 
   solver.SetParameters(Parameters);
   solver.Iterate(AZ_max_iter, AZ_tol);
