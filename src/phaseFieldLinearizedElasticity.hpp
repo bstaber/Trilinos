@@ -2,6 +2,7 @@
 #define PHASEFIELDLINEARIZEDELASTICITY_HPP
 
 #include "linearizedElasticity.hpp"
+#include "damageField.hpp"
 
 class phaseFieldLinearizedElasticity : public linearizedElasticity{
 
