@@ -71,7 +71,7 @@ void phaseFieldLinearizedElasticity::computeDisplacement(){
 void phaseFieldLinearizedElasticity::updateDamageHistory(){
 
   Epetra_Vector u(*OverlapMap);
-  u.Import(x, *ImportToOverlapMap, Insert);
+  u.Import(*displacement, *ImportToOverlapMap, Insert);
 
   int n_gauss_points = Mesh->n_gauss_cells;
 
@@ -83,17 +83,17 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(){
   Epetra_SerialDenseVector epsilon(6);
 
   int egid;
-  for (unsigned int eloc=0; eloc<Mesh->n_local_cells; ++eloc){
-    egid = interface->Mesh->local_cells[e_lid];
+  for (unsigned int elid=0; elid<Mesh->n_local_cells; ++elid){
+    egid = Mesh->local_cells[elid];
     node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
     for (unsigned int ddl=0; ddl<3; ++ddl){
       cells_u(3*inode+dll) = u[OverlapMap->LID(3*node+ddl)];
     }
     for (unsigned int gp=0; gp<n_gauss_points; ++gp){
         for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-            dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
-            dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
-            dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
+            dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,elid);
+            dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,elid);
+            dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,elid);
         }
         compute_B_matrices(dx_shape_functions,matrix_B);
         epsilon.Multiply('N','N',1.0,matrix_B,cells_u,0.0);
