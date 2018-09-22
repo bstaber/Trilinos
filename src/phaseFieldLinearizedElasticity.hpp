@@ -23,10 +23,10 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
   Epetra_FECrsMatrix * matrix;
   Epetra_FEVector * rhs;
 
-  phaseFieldLinearizedElasticity(Epetra_Comm & comm, Teuchos::ParameterList & Parameters,
-                                 double & gc_, double & lc_);
+  phaseFieldLinearizedElasticity();
   ~phaseFieldLinearizedElasticity();
 
+  void initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters);
   void constructGaussMap();
   void computeDisplacement(Teuchos::ParameterList & ParameterList, double & bc_disp);
   void updateDamageHistory();

@@ -4,8 +4,14 @@ Brian Staber (brian.staber@gmail.com)
 
 #include "phaseFieldLinearizedElasticity.hpp"
 
-phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & comm, Teuchos::ParameterList & Parameters,
-                                                               double & gc_, double & lc_): gc(gc_), lc(lc_){
+phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(){
+}
+
+phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
+
+}
+
+void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
   std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
   Mesh = new mesh(comm, mesh_file, 1.0);
@@ -25,6 +31,14 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & com
   matrix        = new Epetra_FECrsMatrix(Copy,*FEGraph);
   rhs           = new Epetra_FEVector(*StandardMap);
 
+  gc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "gc");
+  lc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "lc");
+  E  = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "young");
+  nu = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "poisson");
+
+  lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
+  mu     = E/(2.0*(1.0+nu));
+
   elasticity.Reshape(6,6);
   double c11 = E*(1.0-nu)/((1.0+nu)*(1.0-2.0*nu));
   double c12 = E*nu/((1.0+nu)*(1.0-2.0*nu));
@@ -36,10 +50,6 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & com
   elasticity(3,0) = 0.0; elasticity(3,1) = 0.0; elasticity(3,2) = 0.0; elasticity(3,3) = c44; elasticity(3,4) = 0.0; elasticity(3,5) = 0.0;
   elasticity(4,0) = 0.0; elasticity(4,1) = 0.0; elasticity(4,2) = 0.0; elasticity(4,3) = 0.0; elasticity(4,4) = c44; elasticity(4,5) = 0.0;
   elasticity(5,0) = 0.0; elasticity(5,1) = 0.0; elasticity(5,2) = 0.0; elasticity(5,3) = 0.0; elasticity(5,4) = 0.0; elasticity(5,5) = c44;
-}
-
-phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
-
 }
 
 void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList){
