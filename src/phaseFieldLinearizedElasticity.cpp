@@ -45,6 +45,12 @@ phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
 
 }
 
+void phaseFieldLinearizedElasticity::staggeredAlgorithm(){
+  
+}
+
+
+
 void phaseFieldLinearizedElasticity::computeDisplacement(){
 
   matrix->PutScalar(0.0);
