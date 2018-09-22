@@ -10,7 +10,7 @@ Brian Staber (brian.staber@gmail.com)
 class phaseFieldProblem : public phaseFieldLinearizedElasticity{
 
 public:
-  phaseFieldProblem();
+  phaseFieldProblem(Epetra_Comm & comm, Teuchos::ParameterList & Parameters);
   ~phaseFieldProblem();
 
   Epetra_SerialDenseVector get_neumannBc(Epetra_SerialDenseMatrix & matrix_X, Epetra_SerialDenseMatrix & xg, unsigned int & gp);
