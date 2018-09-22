@@ -52,7 +52,7 @@ void damageField::assemble(Epetra_Vector & damageHistory){
       }
     }
 
-    for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+    for (int gp=0; gp<n_gauss_points; ++gp){
       gauss_weight = Mesh->gauss_weight_cells(gp);
       double hn = damageHistory[0][damageHistory.Map().LID(n_gauss_points*eglob+gp)]; //todo
       double an = 2.0*hn + gc/double(lc); //todo
