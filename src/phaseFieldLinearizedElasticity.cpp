@@ -58,7 +58,7 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
     damageInterface->solve(ParametersList.sublist("Damage"), *damageHistory, *GaussMap);
 
-    computeDisplacement(bc_disp, ParametersList.sublist("Elasticity"));
+    computeDisplacement(ParametersList.sublist("Elasticity"), bc_disp);
 
     updateDamageHistory();
 
