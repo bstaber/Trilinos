@@ -105,8 +105,8 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(){
                      0.5*epsilon(3)*epsilon(3) + 0.5*epsilon(4)*epsilon(4) + 0.5*epsilon(5)*epsilon(5);
         potential = (lambda/2.0)*trepsilon*trepsilon + mu*trepsilon2;
         id = n_gauss_points*egid+gp;
-        if (potential>damageHistory[GaussMap->LID(id)]){
-          damageHistory[GaussMap->LID(id)] = potential;
+        if (potential>damageHistory[0][GaussMap->LID(id)]){
+          damageHistory[0][GaussMap->LID(id)] = potential;
         }
     }
   }
