@@ -11,6 +11,8 @@ class phaseFieldProblem : public phaseFieldLinearizedElasticity{
 
 public:
   phaseFieldProblem(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    n_bc_dof = 10;
+    dof_on_boundary = new int [n_bc_dof];
   }
   ~phaseFieldProblem(){
   }
@@ -27,8 +29,6 @@ public:
   }
 
   void setup_dirichlet_conditions(){
-    n_bc_dof = 10;
-    dof_on_boundary = new int [n_bc_dof];
   }
 
   void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
