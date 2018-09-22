@@ -31,7 +31,6 @@ void damageField::assemble(Epetra_Vector & damageHistory){
 
   Epetra_SerialDenseVector shape_functions(Mesh->el_type);
   Epetra_SerialDenseVector fe(Mesh->el_type);
-  Epetra_SerialDenseVector hn(Mesh->el_type);
 
   Epetra_SerialDenseMatrix dx_shape_functions(3,Mesh->el_type);
   Epetra_SerialDenseMatrix ke(Mesh->el_type, Mesh->el_type);
@@ -46,7 +45,6 @@ void damageField::assemble(Epetra_Vector & damageHistory){
     eglob = Mesh->local_cells[eloc];
     for (int inode=0; inode<Mesh->el_type; ++inode){
       index[inode] = Mesh->cells_nodes[Mesh->el_type*eglob+inode];
-      hn(inode) = Hn[OverlapMap->LID(inode)];
       fe(inode) = 0.0;
       for (int jnode=0; jnode<Mesh->el_type; ++jnode){
         ke(inode,jnode) = 0.0;
@@ -56,7 +54,7 @@ void damageField::assemble(Epetra_Vector & damageHistory){
 
     for (unsigned int gp=0; gp<n_gauss_points; ++gp){
       gauss_weight = Mesh->gauss_weight_cells(gp);
-      double hn = damageHistory[0][GaussMap->LID(n_gauss_points*eglob+gp)]; //todo
+      double hn = damageHistory[0][damageHistory->Map.LID(n_gauss_points*eglob+gp)]; //todo
       double an = 2.0*hn + gc/double(lc); //todo
       double bn = gc*lc;
       for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
