@@ -10,6 +10,7 @@ Brian Staber (brian.staber@gmail.com)
 
 class phaseFieldLinearizedElasticity : public linearizedElasticity{
 
+public:
   Epetra_SerialDenseMatrix elasticity;
   Teuchos::RCP<damageField> damageInterface;
 
