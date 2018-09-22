@@ -25,9 +25,6 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(Epetra_Comm & com
   matrix        = new Epetra_FECrsMatrix(Copy,*FEGraph);
   rhs           = new Epetra_FEVector(*StandardMap);
 
-  damageHistory->PutScalar(0.0);
-  displacement->PutScalar(0.0);
-
   elasticity.Reshape(6,6);
   double c11 = E*(1.0-nu)/((1.0+nu)*(1.0-2.0*nu));
   double c12 = E*nu/((1.0+nu)*(1.0-2.0*nu));
@@ -45,13 +42,25 @@ phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
 
 }
 
-void phaseFieldLinearizedElasticity::staggeredAlgorithm(){
-  
+void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList){
+
+  damageHistory->PutScalar(0.0);
+  displacement->PutScalar(0.0);
+
+  double target_disp  = Teuchos::getParameter<double>(ParametersList.sublist("Elasticity"), target_disp);
+  int n_loading_steps = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), n_loading_steps);
+  double delta_step   = 1.0/double(n_loading_steps);
+
+  for (int n=0; n<n_loading_steps; ++n){
+    bc_disp = (double(n)+1.0)*delta_step*target_disp;
+    damageInterface->solve(ParametersList.sublist("Damage"), *damageHistory, *GaussMap);
+    computeDisplacement(ParametersList.sublist("Elasticity"));
+    updateDamageHistory();
+  }
+
 }
 
-
-
-void phaseFieldLinearizedElasticity::computeDisplacement(){
+void phaseFieldLinearizedElasticity::computeDisplacement(Teuchos::ParameterList & Parameters){
 
   matrix->PutScalar(0.0);
   rhs->PutScalar(0.0);
@@ -69,9 +78,9 @@ void phaseFieldLinearizedElasticity::computeDisplacement(){
   problem.SetRHS(rhs);
 
   solver.SetProblem(problem);
-  //solver.SetParameters(*Krylov);
+  solver.SetParameters(Parameters);
 
-  solver.Iterate(2000, 1.0e-6);
+  solver.Iterate(max_iter, tol);
 }
 
 void phaseFieldLinearizedElasticity::updateDamageHistory(){
@@ -119,6 +128,21 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(){
 
 }
 
+void phaseFieldLinearizedElasticity::constructGaussMap(){
+  int e_gid;
+  int n_local_cells = Mesh->n_local_cells;
+  int n_gauss_cells = Mesh->n_gauss_cells;
+  std::vector<int> local_gauss_points(n_local_cells*n_gauss_cells);
+  for (unsigned int e_lid=0; e_lid<n_local_cells; ++e_lid){
+      e_gid = Mesh->local_cells[e_lid];
+      for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+          local_gauss_points[e_lid*n_gauss_cells+gp] = e_gid*n_gauss_cells+gp;
+      }
+
+  }
+  GaussMap = new Epetra_Map(-1, n_local_cells*n_gauss_cells, &local_gauss_points[0], 0, *Comm);
+}
+
 void phaseFieldLinearizedElasticity::get_elasticity_tensor(unsigned int & e_lid,
                                                            unsigned int & gp,
                                                            Epetra_SerialDenseMatrix & tangent_matrix){
@@ -154,19 +178,4 @@ void phaseFieldLinearizedElasticity::get_elasticity_tensor(unsigned int & e_lid,
 void phaseFieldLinearizedElasticity::get_elasticity_tensor_for_recovery(unsigned int & e_lid,
                                                                         Epetra_SerialDenseMatrix & tangent_matrix){
   std::cout << "Not using this method yet.\n";
-}
-
-void phaseFieldLinearizedElasticity::constructGaussMap(){
-  int e_gid;
-  int n_local_cells = Mesh->n_local_cells;
-  int n_gauss_cells = Mesh->n_gauss_cells;
-  std::vector<int> local_gauss_points(n_local_cells*n_gauss_cells);
-  for (unsigned int e_lid=0; e_lid<n_local_cells; ++e_lid){
-      e_gid = Mesh->local_cells[e_lid];
-      for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
-          local_gauss_points[e_lid*n_gauss_cells+gp] = e_gid*n_gauss_cells+gp;
-      }
-
-  }
-  GaussMap = new Epetra_Map(-1, n_local_cells*n_gauss_cells, &local_gauss_points[0], 0, *Comm);
 }

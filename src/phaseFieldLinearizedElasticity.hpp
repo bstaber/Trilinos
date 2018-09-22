@@ -15,7 +15,6 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
 
   double gc, lc;
   double E, nu, lambda, mu;
-  double bc_disp;
 
   Epetra_Map    * GaussMap;
   Epetra_Vector * damageHistory;
@@ -29,9 +28,9 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
   ~phaseFieldLinearizedElasticity();
 
   void constructGaussMap();
-  void computeDisplacement();
+  void computeDisplacement(Teuchos::ParameterList & ParameterList);
   void updateDamageHistory();
-  void staggeredAlgorithm();
+  void staggeredAlgorithmDirichletBC();
 
   void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix);
   void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix);
