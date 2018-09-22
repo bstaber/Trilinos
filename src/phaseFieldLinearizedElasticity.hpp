@@ -22,7 +22,7 @@ public:
   Epetra_Vector * displacement;
 
   Epetra_FECrsMatrix * matrix;
-  Epetra_FEVector * rhs;
+  Epetra_FEVector    * rhs;
 
   phaseFieldLinearizedElasticity();
   ~phaseFieldLinearizedElasticity();

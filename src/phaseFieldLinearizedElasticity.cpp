@@ -13,16 +13,12 @@ phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
 
 void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
-  std::cout << "Here";
-
   std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
 
   gc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "gc");
   lc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "lc");
   E  = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "young");
   nu = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "poisson");
-
-  std::cout << "Done";
 
   Mesh = new mesh(comm, mesh_file, 1.0);
   Comm = Mesh->Comm;

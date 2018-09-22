@@ -27,7 +27,8 @@ public:
   }
 
   void setup_dirichlet_conditions(){
-
+    int n_bc_dof = 1;
+    dof_on_boundary = new int [n_bc_dof];
   }
 
   void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
