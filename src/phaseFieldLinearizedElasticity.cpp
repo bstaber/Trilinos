@@ -104,8 +104,9 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(){
         trepsilon2 = epsilon(0)*epsilon(0) + epsilon(1)*epsilon(1) + epsilon(2)*epsilon(2) +
                      0.5*epsilon(3)*epsilon(3) + 0.5*epsilon(4)*epsilon(4) + 0.5*epsilon(5)*epsilon(5);
         potential = (lambda/2.0)*trepsilon*trepsilon + mu*trepsilon2;
-        if (potential>damageHistory[GaussMap->LID(n_gauss_points*egid+gp)]){
-          damageHistory[GaussMap->LID(n_gauss_points*egid+gp)] = potential;
+        id = n_gauss_points*egid+gp;
+        if (potential>damageHistory[GaussMap->LID(id)]){
+          damageHistory[GaussMap->LID(id)] = potential;
         }
     }
   }
@@ -151,11 +152,11 @@ void phaseFieldLinearizedElasticity::get_elasticity_tensor_for_recovery(unsigned
 
 void phaseFieldLinearizedElasticity::constructGaussMap(){
   int e_gid;
-  int n_local_cells = interface->Mesh->n_local_cells;
-  int n_gauss_cells = interface->Mesh->n_gauss_cells;
+  int n_local_cells = Mesh->n_local_cells;
+  int n_gauss_cells = Mesh->n_gauss_cells;
   std::vector<int> local_gauss_points(n_local_cells*n_gauss_cells);
   for (unsigned int e_lid=0; e_lid<n_local_cells; ++e_lid){
-      e_gid = interface->Mesh->local_cells[e_lid];
+      e_gid = Mesh->local_cells[e_lid];
       for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
           local_gauss_points[e_lid*n_gauss_cells+gp] = e_gid*n_gauss_cells+gp;
       }
