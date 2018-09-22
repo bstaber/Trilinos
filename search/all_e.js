@@ -23,7 +23,7 @@ var searchData=
   ['newtonraphson_2ecpp',['newtonRaphson.cpp',['../d6/d90/newton_raphson_8cpp.html',1,'']]],
   ['newtonraphson_2ehpp',['newtonRaphson.hpp',['../d1/d11/newton_raphson_8hpp.html',1,'']]],
   ['nloads',['nloads',['../d1/d14/classdistributenrldata.html#aeeaf0e57ae4a5f99ca510be30da663bd',1,'distributenrldata::nloads()'],['../dd/de7/classreadnrldata.html#a729c7de2c4f6ec3407996996d567c4c5',1,'readnrldata::nloads()']]],
-  ['nmc',['nmc',['../d3/d8c/run__mean_models_8m.html#a4e98725d7a455c88ad9baa94bff4f3e2',1,'run_meanModels.m']]],
+  ['nmc',['nmc',['../d3/d8c/run__mean_models_8m.html#a4e98725d7a455c88ad9baa94bff4f3e2',1,'nmc():&#160;run_meanModels.m'],['../d0/dd4/write_x_m_l_parameter_list_8m.html#a34c5b5f8846734e856b4158ebabbd346',1,'nmc():&#160;writeXMLParameterList.m']]],
   ['nodes_5fcoord',['nodes_coord',['../d6/d6b/classmesh.html#aaa6c571e53131c072dbbbb7bf650cc33',1,'mesh']]],
   ['nodes_5fto_5fboundaries',['nodes_to_boundaries',['../d6/d6b/classmesh.html#ad3c9ec63c3580de9923cfa759c308c99',1,'mesh']]],
   ['nonlinearfiniteelementproblem',['nonLinearFiniteElementProblem',['../d3/d5b/classnon_linear_finite_element_problem.html',1,'nonLinearFiniteElementProblem'],['../d3/d5b/classnon_linear_finite_element_problem.html#a321aa6b4bb9321ae0ea678c76a612fe3',1,'nonLinearFiniteElementProblem::nonLinearFiniteElementProblem()']]],

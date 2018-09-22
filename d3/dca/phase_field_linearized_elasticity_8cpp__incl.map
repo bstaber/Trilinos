@@ -1,6 +1,7 @@
 <map id="src/phaseFieldLinearizedElasticity.cpp" name="src/phaseFieldLinearizedElasticity.cpp">
 <area shape="rect" id="node2" href="$d1/dee/phase_field_linearized_elasticity_8hpp.html" title="phaseFieldLinearizedElasticity.hpp" alt="" coords="2143,95,2366,121"/>
-<area shape="rect" id="node3" href="$d5/dfe/linearized_elasticity_8hpp.html" title="linearizedElasticity.hpp" alt="" coords="2177,169,2333,196"/>
+<area shape="rect" id="node3" href="$d5/dfe/linearized_elasticity_8hpp.html" title="linearizedElasticity.hpp" alt="" coords="2095,169,2251,196"/>
+<area shape="rect" id="node38" href="$d9/de5/damage_field_8hpp.html" title="damageField.hpp" alt="" coords="2275,169,2397,196"/>
 <area shape="rect" id="node4" href="$d3/dd8/linear_finite_element_problem_8hpp.html" title="linearFiniteElementProblem.hpp" alt="" coords="2151,244,2358,271"/>
 <area shape="rect" id="node5" href="$dd/d80/base_class_f_e_m_8hpp.html" title="baseClassFEM.hpp" alt="" coords="2186,319,2323,345"/>
 <area shape="rect" id="node6" href="$d0/d02/meshpp_8hpp.html" title="meshpp.hpp" alt="" coords="2208,393,2301,420"/>

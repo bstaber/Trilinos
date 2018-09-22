@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['l',['l',['../d9/d49/cost_function_8m.html#abefa2be7688c37629d024a146e8a3b5e',1,'l():&#160;costFunction.m'],['../d9/d49/cost_function_8m.html#a67824ecf84f5816f07b74fa956bdbcd2',1,'L():&#160;costFunction.m']]],
+  ['l',['L',['../d9/d49/cost_function_8m.html#a67824ecf84f5816f07b74fa956bdbcd2',1,'L():&#160;costFunction.m'],['../d9/d49/cost_function_8m.html#abefa2be7688c37629d024a146e8a3b5e',1,'l():&#160;costFunction.m']]],
   ['l1',['l1',['../da/d5b/classshinozuka.html#abb5015735447f7a4da78e94ddd82039c',1,'shinozuka::l1()'],['../d0/d91/classshinozuka__2d.html#ab470adcf4fd3e75432a419e1e13dffb4',1,'shinozuka_2d::l1()'],['../da/dd9/classshinozuka__layeredcomp.html#a556db19868649e65a6b69728eb9f6753',1,'shinozuka_layeredcomp::l1()'],['../d6/db3/classshinozuka__layeredcomp__2d.html#ac6de6035241266e1890a29c077fe619e',1,'shinozuka_layeredcomp_2d::l1()']]],
   ['l2',['l2',['../da/d5b/classshinozuka.html#ad12830ad6271a5820d935f97bd5b30b7',1,'shinozuka::l2()'],['../d0/d91/classshinozuka__2d.html#a232141b2bce70ca06075d296fa2631ed',1,'shinozuka_2d::l2()'],['../da/dd9/classshinozuka__layeredcomp.html#aaf7f4aba3f8c41d6253ac427183f1bac',1,'shinozuka_layeredcomp::l2()'],['../d6/db3/classshinozuka__layeredcomp__2d.html#a1d92a3994dcb0c7cabd1f175ede1e2e3',1,'shinozuka_layeredcomp_2d::l2()']]],
   ['l3',['l3',['../da/d5b/classshinozuka.html#a1f1a39cedf26a2dd6fc5f2776f6db648',1,'shinozuka::l3()'],['../da/dd9/classshinozuka__layeredcomp.html#af890b6eebb8a2df2f2bb883110909cc3',1,'shinozuka_layeredcomp::l3()']]],
@@ -14,7 +14,7 @@ var searchData=
   ['laplace_5fdirection_5ftwo_5fcross_5fone_5fcenter',['laplace_direction_two_cross_one_center',['../d7/d76/classlaplace.html#a0a127f03e09b2caa7850b5aea2a4fdbe',1,'laplace']]],
   ['laplacepp_2ecpp',['laplacepp.cpp',['../dc/d31/laplacepp_8cpp.html',1,'']]],
   ['laplacepp_2ehpp',['laplacepp.hpp',['../d5/d3f/laplacepp_8hpp.html',1,'']]],
-  ['lc',['lc',['../dd/dc8/classdamage_field.html#a31ff2f95c851c128e88b7378422da2aa',1,'damageField::lc()'],['../d3/d8c/run__mean_models_8m.html#ac0fc738e2f5bb152099430475217fbcb',1,'lc():&#160;run_meanModels.m']]],
+  ['lc',['lc',['../dd/dc8/classdamage_field.html#a31ff2f95c851c128e88b7378422da2aa',1,'damageField::lc()'],['../d3/d8c/run__mean_models_8m.html#ac0fc738e2f5bb152099430475217fbcb',1,'lc():&#160;run_meanModels.m'],['../d0/dd4/write_x_m_l_parameter_list_8m.html#ae89962b8a83b212db71e0b67c57793ca',1,'lc():&#160;writeXMLParameterList.m']]],
   ['linearfiniteelementproblem',['linearFiniteElementProblem',['../dc/d01/classlinear_finite_element_problem.html',1,'linearFiniteElementProblem'],['../dc/d01/classlinear_finite_element_problem.html#ac8656017f0be24f40aebfbc1b38df99d',1,'linearFiniteElementProblem::linearFiniteElementProblem()']]],
   ['linearfiniteelementproblem_2ehpp',['linearFiniteElementProblem.hpp',['../d3/dd8/linear_finite_element_problem_8hpp.html',1,'']]],
   ['linearizedelasticity',['linearizedElasticity',['../d4/dfd/classlinearized_elasticity.html',1,'linearizedElasticity'],['../d4/dfd/classlinearized_elasticity.html#aeb9997066ce4b23df39a6130a65877df',1,'linearizedElasticity::linearizedElasticity()']]],

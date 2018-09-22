@@ -10,6 +10,7 @@ var searchData=
   ['recover_5fcauchy_5fstress',['recover_cauchy_stress',['../d2/d17/classcee_s_b_v_p.html#a1bc8c89c1234b07c3c15897040dab8a4',1,'ceeSBVP::recover_cauchy_stress()'],['../dd/d60/classasme_s_b_v_p.html#a4f92bf7a434574521e62dd3fccbe27f6',1,'asmeSBVP::recover_cauchy_stress()']]],
   ['retrieve_5fdata',['retrieve_data',['../d1/d14/classdistributenrldata.html#a96375dc835a2e5f04984b188dcc87107',1,'distributenrldata']]],
   ['return',['return',['../d9/d49/cost_function_8m.html#a9717e7bbecb906637e86cef6da3d83c2',1,'costFunction.m']]],
+  ['rhs',['rhs',['../dd/dc8/classdamage_field.html#a3e04077321490ff4da8c71d6561a48d1',1,'damageField']]],
   ['rhs_5fneumannboundarycondition',['rhs_NeumannBoundaryCondition',['../d1/d5c/classcompressible_hyperelasticity.html#a70aedd5824177764fb3d1d8eb9d1b59e',1,'compressibleHyperelasticity::rhs_NeumannBoundaryCondition()'],['../d4/dfd/classlinearized_elasticity.html#a8546025e1d71777eb88bd69b5865cf69',1,'linearizedElasticity::rhs_NeumannBoundaryCondition()']]],
   ['rnd',['rnd',['../d4/d22/classnrl___p_c_a___likelihood.html#a89f0d7f6dd825ab4a14a66cb992e67ed',1,'nrl_PCA_Likelihood']]],
   ['rng',['rng',['../da/d5b/classshinozuka.html#aba9046df70759747139bdbc5020655c9',1,'shinozuka::rng()'],['../d0/d91/classshinozuka__2d.html#aad68f55b852451d246242d8f68d12989',1,'shinozuka_2d::rng()'],['../da/dd9/classshinozuka__layeredcomp.html#a4ad7124ca95495a0ff2f1cae778dbea7',1,'shinozuka_layeredcomp::rng()'],['../d6/db3/classshinozuka__layeredcomp__2d.html#a3acb7e6a30e9d7d5861203947d796503',1,'shinozuka_layeredcomp_2d::rng()']]],

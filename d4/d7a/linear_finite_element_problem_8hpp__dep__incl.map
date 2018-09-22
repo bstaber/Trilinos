@@ -1,6 +1,7 @@
 <map id="src/linearFiniteElementProblem.hpp" name="src/linearFiniteElementProblem.hpp">
 <area shape="rect" id="node2" href="$d5/dfe/linearized_elasticity_8hpp.html" title="src/linearizedElasticity.hpp" alt="" coords="570,80,749,107"/>
-<area shape="rect" id="node14" href="$d5/d3f/laplacepp_8hpp.html" title="src/laplacepp.hpp" alt="" coords="1671,80,1795,107"/>
+<area shape="rect" id="node14" href="$d9/de5/damage_field_8hpp.html" title="src/damageField.hpp" alt="" coords="1152,80,1295,107"/>
+<area shape="rect" id="node17" href="$d5/d3f/laplacepp_8hpp.html" title="src/laplacepp.hpp" alt="" coords="2015,80,2139,107"/>
 <area shape="rect" id="node3" href="$de/d5d/linear_patch_test_8hpp.html" title="cee530/linearpatchtest\l/linearPatchTest.hpp" alt="" coords="5,155,159,196"/>
 <area shape="rect" id="node5" href="$d4/d56/cee530_2manufactured_2manufactured_solution_8hpp.html" title="cee530/manufactured\l/manufacturedSolution.hpp" alt="" coords="183,155,360,196"/>
 <area shape="rect" id="node7" href="$d4/d57/cee_s_b_v_p_8hpp.html" title="cee530/sbvp/ceeSBVP.hpp" alt="" coords="384,162,567,189"/>
@@ -12,18 +13,20 @@
 <area shape="rect" id="node8" href="$dc/d51/cee530_2sbvp_2main_8cpp.html" title="cee530/sbvp/main.cpp" alt="" coords="399,251,552,278"/>
 <area shape="rect" id="node10" href="$d2/ded/asme_2linearelaslam_2main_8cpp.html" title="asme/linearelaslam\l/main.cpp" alt="" coords="592,244,727,285"/>
 <area shape="rect" id="node13" href="$d4/d66/phase_field_linearized_elasticity_8cpp.html" title="src/phaseFieldLinearized\lElasticity.cpp" alt="" coords="956,244,1123,285"/>
-<area shape="rect" id="node15" href="$d4/d0f/examples_2laplace__aztec_2main_8cpp.html" title="examples/laplace_aztec\l/main.cpp" alt="" coords="1147,155,1310,196"/>
-<area shape="rect" id="node16" href="$d8/d16/examples_2laplace__stratimikos_2main_8cpp.html" title="examples/laplace_stratimikos\l/main.cpp" alt="" coords="1334,155,1529,196"/>
-<area shape="rect" id="node17" href="$dd/d3d/dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html" title="src/dirichletInletOutlet\l_PolyconvexHGO.hpp" alt="" coords="1553,155,1705,196"/>
-<area shape="rect" id="node19" href="$d5/d0d/dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" title="src/dirichletStripElongation\l_StochasticPolyconvexHGO.hpp" alt="" coords="1729,155,1944,196"/>
-<area shape="rect" id="node21" href="$dc/d31/laplacepp_8cpp.html" title="src/laplacepp.cpp" alt="" coords="1968,162,2092,189"/>
-<area shape="rect" id="node22" href="$d6/d14/neumann_inner_surface___polyconvex_h_g_o_8hpp.html" title="src/neumannInnerSurface\l_PolyconvexHGO.hpp" alt="" coords="2117,155,2287,196"/>
-<area shape="rect" id="node25" href="$dc/da1/neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" title="src/neumannInnerSurface\l_StochasticPolyconvexHGO.hpp" alt="" coords="2387,155,2601,196"/>
-<area shape="rect" id="node18" href="$de/da1/arteries_2deterministic__dirichlet_2main_8cpp.html" title="arteries/deterministic\l_dirichlet/main.cpp" alt="" coords="1557,244,1700,285"/>
-<area shape="rect" id="node20" href="$dc/dba/arteries_2strip__dirichlet_2main_8cpp.html" title="arteries/strip_dirichlet\l/main.cpp" alt="" coords="1763,244,1910,285"/>
-<area shape="rect" id="node23" href="$d9/d81/arteries_2deterministic__neumann_2main_8cpp.html" title="arteries/deterministic\l_neumann/main.cpp" alt="" coords="1944,244,2087,285"/>
-<area shape="rect" id="node24" href="$db/db7/arteries_2vonmises_2main_8cpp.html" title="arteries/vonmises/main.cpp" alt="" coords="2111,251,2293,278"/>
-<area shape="rect" id="node26" href="$d5/da5/arteries_2boost__gmrf_2gmrf__gauss_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_gauss/main.cpp" alt="" coords="2317,244,2468,285"/>
-<area shape="rect" id="node27" href="$d2/dbe/arteries_2boost__gmrf_2gmrf__nodes_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_nodes/main.cpp" alt="" coords="2492,244,2643,285"/>
-<area shape="rect" id="node28" href="$da/df3/arteries_2gmrf__neumann_2main_8cpp.html" title="arteries/gmrf_neumann\l/main.cpp" alt="" coords="2667,244,2822,285"/>
+<area shape="rect" id="node15" href="$d9/d28/examples_2damagefield_2main_8cpp.html" title="examples/damagefield\l/main.cpp" alt="" coords="1147,155,1299,196"/>
+<area shape="rect" id="node16" href="$dd/ddf/damage_field_8cpp.html" title="src/damageField.cpp" alt="" coords="1324,162,1467,189"/>
+<area shape="rect" id="node18" href="$d4/d0f/examples_2laplace__aztec_2main_8cpp.html" title="examples/laplace_aztec\l/main.cpp" alt="" coords="1491,155,1654,196"/>
+<area shape="rect" id="node19" href="$d8/d16/examples_2laplace__stratimikos_2main_8cpp.html" title="examples/laplace_stratimikos\l/main.cpp" alt="" coords="1678,155,1873,196"/>
+<area shape="rect" id="node20" href="$dd/d3d/dirichlet_inlet_outlet___polyconvex_h_g_o_8hpp.html" title="src/dirichletInletOutlet\l_PolyconvexHGO.hpp" alt="" coords="1897,155,2049,196"/>
+<area shape="rect" id="node22" href="$d5/d0d/dirichlet_strip_elongation___stochastic_polyconvex_h_g_o_8hpp.html" title="src/dirichletStripElongation\l_StochasticPolyconvexHGO.hpp" alt="" coords="2073,155,2288,196"/>
+<area shape="rect" id="node24" href="$dc/d31/laplacepp_8cpp.html" title="src/laplacepp.cpp" alt="" coords="2312,162,2436,189"/>
+<area shape="rect" id="node25" href="$d6/d14/neumann_inner_surface___polyconvex_h_g_o_8hpp.html" title="src/neumannInnerSurface\l_PolyconvexHGO.hpp" alt="" coords="2461,155,2631,196"/>
+<area shape="rect" id="node28" href="$dc/da1/neumann_inner_surface___stochastic_polyconvex_h_g_o_8hpp.html" title="src/neumannInnerSurface\l_StochasticPolyconvexHGO.hpp" alt="" coords="2731,155,2945,196"/>
+<area shape="rect" id="node21" href="$de/da1/arteries_2deterministic__dirichlet_2main_8cpp.html" title="arteries/deterministic\l_dirichlet/main.cpp" alt="" coords="1901,244,2044,285"/>
+<area shape="rect" id="node23" href="$dc/dba/arteries_2strip__dirichlet_2main_8cpp.html" title="arteries/strip_dirichlet\l/main.cpp" alt="" coords="2107,244,2254,285"/>
+<area shape="rect" id="node26" href="$d9/d81/arteries_2deterministic__neumann_2main_8cpp.html" title="arteries/deterministic\l_neumann/main.cpp" alt="" coords="2288,244,2431,285"/>
+<area shape="rect" id="node27" href="$db/db7/arteries_2vonmises_2main_8cpp.html" title="arteries/vonmises/main.cpp" alt="" coords="2455,251,2637,278"/>
+<area shape="rect" id="node29" href="$d5/da5/arteries_2boost__gmrf_2gmrf__gauss_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_gauss/main.cpp" alt="" coords="2661,244,2812,285"/>
+<area shape="rect" id="node30" href="$d2/dbe/arteries_2boost__gmrf_2gmrf__nodes_2main_8cpp.html" title="arteries/boost_gmrf\l/gmrf_nodes/main.cpp" alt="" coords="2836,244,2987,285"/>
+<area shape="rect" id="node31" href="$da/df3/arteries_2gmrf__neumann_2main_8cpp.html" title="arteries/gmrf_neumann\l/main.cpp" alt="" coords="3011,244,3166,285"/>
 </map>

@@ -1,5 +1,6 @@
 var run__mean_models_8m =
 [
+    [ "Staber", "d3/d8c/run__mean_models_8m.html#acb94370a8906835f34d58373d081568b", null ],
     [ "delta", "d3/d8c/run__mean_models_8m.html#aa87e21ecf59b5fde8b4314d7d70e19c9", null ],
     [ "lc", "d3/d8c/run__mean_models_8m.html#ac0fc738e2f5bb152099430475217fbcb", null ],
     [ "nmc", "d3/d8c/run__mean_models_8m.html#a4e98725d7a455c88ad9baa94bff4f3e2", null ],

@@ -13,7 +13,7 @@ var searchData=
   ['n_5fnodes',['n_nodes',['../d6/d6b/classmesh.html#ae3002711afb6b04e232073ef942c4a39',1,'mesh']]],
   ['nb_5fbis_5fmax',['nb_bis_max',['../d8/dcc/classnewton_raphson.html#a7c016bb5586d829217ad56c773dc1878',1,'newtonRaphson']]],
   ['nloads',['nloads',['../d1/d14/classdistributenrldata.html#aeeaf0e57ae4a5f99ca510be30da663bd',1,'distributenrldata::nloads()'],['../dd/de7/classreadnrldata.html#a729c7de2c4f6ec3407996996d567c4c5',1,'readnrldata::nloads()']]],
-  ['nmc',['nmc',['../d3/d8c/run__mean_models_8m.html#a4e98725d7a455c88ad9baa94bff4f3e2',1,'run_meanModels.m']]],
+  ['nmc',['nmc',['../d3/d8c/run__mean_models_8m.html#a4e98725d7a455c88ad9baa94bff4f3e2',1,'nmc():&#160;run_meanModels.m'],['../d0/dd4/write_x_m_l_parameter_list_8m.html#a34c5b5f8846734e856b4158ebabbd346',1,'nmc():&#160;writeXMLParameterList.m']]],
   ['nodes_5fcoord',['nodes_coord',['../d6/d6b/classmesh.html#aaa6c571e53131c072dbbbb7bf650cc33',1,'mesh']]],
   ['nodes_5fto_5fboundaries',['nodes_to_boundaries',['../d6/d6b/classmesh.html#ad3c9ec63c3580de9923cfa759c308c99',1,'mesh']]],
   ['norm_5finf_5fmax',['norm_inf_max',['../d8/dcc/classnewton_raphson.html#a2102b120e0cd6b1d6b09939942c1ee6a',1,'newtonRaphson']]],

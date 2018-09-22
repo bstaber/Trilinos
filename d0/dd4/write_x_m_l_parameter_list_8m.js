@@ -54,5 +54,11 @@ var write_x_m_l_parameter_list_8m =
     [ "fprintf", "d0/dd4/write_x_m_l_parameter_list_8m.html#a403ee110fc22f464bec6daf1b37bad04", null ],
     [ "fprintf", "d0/dd4/write_x_m_l_parameter_list_8m.html#a5b6dba1e6dc490a5a6122041f97b6954", null ],
     [ "fprintf", "d0/dd4/write_x_m_l_parameter_list_8m.html#aee31d456b9bb19b2f77f68e5f7400059", null ],
-    [ "writeXMLParameterList", "d0/dd4/write_x_m_l_parameter_list_8m.html#a80b3f0c6f6e50ce2c1eac5cac3a93bd4", null ]
+    [ "Staber", "d0/dd4/write_x_m_l_parameter_list_8m.html#a602abbb1e91f5d239d557264e0b5990b", null ],
+    [ "beta", "d0/dd4/write_x_m_l_parameter_list_8m.html#aa0a064b27b5c7abb03b2568a11b7a572", null ],
+    [ "delta", "d0/dd4/write_x_m_l_parameter_list_8m.html#a28a64632350ba846cfb7cacc73dc611c", null ],
+    [ "fp", "d0/dd4/write_x_m_l_parameter_list_8m.html#a0fd8063944406a2a6602ab9a1b939f67", null ],
+    [ "lc", "d0/dd4/write_x_m_l_parameter_list_8m.html#ae89962b8a83b212db71e0b67c57793ca", null ],
+    [ "mu", "d0/dd4/write_x_m_l_parameter_list_8m.html#ae9222956d1f1a5bb90a425614269527d", null ],
+    [ "nmc", "d0/dd4/write_x_m_l_parameter_list_8m.html#a34c5b5f8846734e856b4158ebabbd346", null ]
 ];
