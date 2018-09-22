@@ -14,9 +14,10 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
   Teuchos::RCP<damageField> damageInterface;
 
   double gc, lc;
-  double E, nu;
+  double E, nu, lambda, mu;
   double bc_disp;
 
+  Epetra_Map    * GaussMap;
   Epetra_Vector * damageHistory;
   Epetra_Vector * displacement;
 
@@ -27,6 +28,7 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
                                  double & gc_, double & lc_);
   ~phaseFieldLinearizedElasticity();
 
+  void constructGaussMap();
   void computeDisplacement();
   void updateDamageHistory();
 
