@@ -30,7 +30,7 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
   void constructGaussMap();
   void computeDisplacement(Teuchos::ParameterList & ParameterList, double & bc_disp);
   void updateDamageHistory();
-  void staggeredAlgorithmDirichletBC();
+  void staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList);
 
   void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix);
   void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix);
