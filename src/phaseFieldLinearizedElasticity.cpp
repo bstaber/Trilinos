@@ -20,16 +20,24 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
   E  = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "young");
   nu = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "poisson");
 
+  std::cout << "Done";
+
   Mesh = new mesh(comm, mesh_file, 1.0);
   Comm = Mesh->Comm;
 
+  std::cout << "Done";
+
   damageInterface = Teuchos::rcp(new damageField(comm, *Mesh, gc, lc));
+
+  std::cout << "Done";
 
   StandardMap = new Epetra_Map(-1, 3*Mesh->n_local_nodes_without_ghosts, &Mesh->local_dof_without_ghosts[0], 0, *Comm);
   OverlapMap  = new Epetra_Map(-1, 3*Mesh->n_local_nodes,&Mesh->local_dof[0], 0, *Comm);
   ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
   create_FECrsGraph();
   constructGaussMap();
+
+  std::cout << "Done";
 
   damageHistory = new Epetra_Vector(*GaussMap);
   displacement  = new Epetra_Vector(*StandardMap);
