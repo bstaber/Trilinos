@@ -21,7 +21,7 @@ public:
     ~damageField();
 
     void solve(Teuchos::ParameterList & Parameters, Epetra_Vector & Hn);
-    void assemble(Epetra_Vector & Hn);
+    void assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
 
     void create_FECrsGraph();
     void setup_dirichlet_conditions();

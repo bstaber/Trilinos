@@ -75,7 +75,7 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(){
 
   int n_gauss_points = Mesh->n_gauss_cells;
 
-  double trepsilon, trepsilon2;
+  double trepsilon, trepsilon2, potential;
 
   Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
   Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
@@ -100,7 +100,10 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(){
         trepsilon  = epsilon(0) + epsilon(1) + epsilon(2);
         trepsilon2 = epsilon(0)*epsilon(0) + epsilon(1)*epsilon(1) + epsilon(2)*epsilon(2) +
                      0.5*epsilon(3)*epsilon(3) + 0.5*epsilon(4)*epsilon(4) + 0.5*epsilon(5)*epsilon(5);
-        damageHistory[GaussMap->LID(n_gauss_points*egid+gp)] = (lambda/2.0)*trepsilon*trepsilon + mu*trepsilon2;
+        potential = (lambda/2.0)*trepsilon*trepsilon + mu*trepsilon2;
+        if (potential>damageHistory[GaussMap->LID(n_gauss_points*egid+gp)]){
+          damageHistory[GaussMap->LID(n_gauss_points*egid+gp)] = potential;
+        }
     }
   }
 

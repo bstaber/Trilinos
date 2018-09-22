@@ -25,7 +25,7 @@ gc(gc_), lc(lc_){
 damageField::~damageField(){
 }
 
-void damageField::assemble(Epetra_Vector & damageHistory){
+void damageField::assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap){
 
   //Hn to do
 
@@ -54,7 +54,7 @@ void damageField::assemble(Epetra_Vector & damageHistory){
 
     for (int gp=0; gp<n_gauss_points; ++gp){
       gauss_weight = Mesh->gauss_weight_cells(gp);
-      double hn = damageHistory[0][damageHistory.Map().LID(int(n_gauss_points*eglob+gp))]; //todo
+      double hn = damageHistory[0][GaussMap.LID(n_gauss_points*eglob+gp)]; //todo
       double an = 2.0*hn + gc/double(lc); //todo
       double bn = gc*lc;
       for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
