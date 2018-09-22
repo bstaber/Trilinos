@@ -82,13 +82,14 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(){
   Epetra_SerialDenseVector cells_u(3*Mesh->el_type);
   Epetra_SerialDenseVector epsilon(6);
 
-  int egid, node;
+  int egid, node, id;
   for (unsigned int elid=0; elid<Mesh->n_local_cells; ++elid){
     egid = Mesh->local_cells[elid];
     for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
       node = Mesh->cells_nodes[Mesh->el_type*egid+inode];
       for (unsigned int ddl=0; ddl<3; ++ddl){
-        cells_u(3*inode+ddl) = u[OverlapMap->LID(3*node+ddl)];
+        id = 3*node+ddl;
+        cells_u(3*inode+ddl) = u[OverlapMap->LID(id)];
       }
     }
     for (unsigned int gp=0; gp<n_gauss_points; ++gp){
