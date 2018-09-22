@@ -51,14 +51,14 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
   int n_loading_steps = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), n_loading_steps);
   double delta_step   = 1.0/double(n_loading_steps);
 
-  double bc_disp;
+  double bc_disp = 0.0;
   for (int n=0; n<n_loading_steps; ++n){
 
     bc_disp = (double(n)+1.0)*delta_step*target_disp;
 
     damageInterface->solve(ParametersList.sublist("Damage"), *damageHistory, *GaussMap);
 
-    computeDisplacement(ParametersList.sublist("Elasticity"));
+    computeDisplacement(bc_disp, ParametersList.sublist("Elasticity"));
 
     updateDamageHistory();
 
@@ -66,7 +66,7 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
 }
 
-void phaseFieldLinearizedElasticity::computeDisplacement(Teuchos::ParameterList & Parameters){
+void phaseFieldLinearizedElasticity::computeDisplacement(Teuchos::ParameterList & Parameters, double & bc_disp){
 
   matrix->PutScalar(0.0);
   rhs->PutScalar(0.0);
@@ -86,8 +86,8 @@ void phaseFieldLinearizedElasticity::computeDisplacement(Teuchos::ParameterList 
   solver.SetProblem(problem);
   solver.SetParameters(Parameters);
 
-  int max_iter = Teuchos::getParameter<int>(ParameterList.sublist("Aztec"), "AZ_max_iter");
-  double tol   = Teuchos::getParameter<double>(ParameterList.sublist("Aztec"), "AZ_tol");
+  int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
+  double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
 
   solver.Iterate(max_iter, tol);
 }

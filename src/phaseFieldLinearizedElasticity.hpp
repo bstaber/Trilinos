@@ -28,7 +28,7 @@ class phaseFieldLinearizedElasticity : public linearizedElasticity{
   ~phaseFieldLinearizedElasticity();
 
   void constructGaussMap();
-  void computeDisplacement(Teuchos::ParameterList & ParameterList);
+  void computeDisplacement(Teuchos::ParameterList & ParameterList, double & bc_disp);
   void updateDamageHistory();
   void staggeredAlgorithmDirichletBC();
 
