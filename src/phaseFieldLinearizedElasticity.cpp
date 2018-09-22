@@ -14,6 +14,12 @@ phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
 void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
   std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
+
+  gc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "gc");
+  lc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "lc");
+  E  = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "young");
+  nu = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "poisson");
+
   Mesh = new mesh(comm, mesh_file, 1.0);
   Comm = Mesh->Comm;
 
@@ -30,11 +36,6 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
 
   matrix        = new Epetra_FECrsMatrix(Copy,*FEGraph);
   rhs           = new Epetra_FEVector(*StandardMap);
-
-  gc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "gc");
-  lc = Teuchos::getParameter<double>(Parameters.sublist("Damage"), "lc");
-  E  = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "young");
-  nu = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "poisson");
 
   lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
   mu     = E/(2.0*(1.0+nu));
