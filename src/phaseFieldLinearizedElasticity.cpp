@@ -47,8 +47,8 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
   damageHistory->PutScalar(0.0);
   displacement->PutScalar(0.0);
 
-  double target_disp  = Teuchos::getParameter<double>(ParametersList.sublist("Elasticity"), target_disp);
-  int n_loading_steps = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), n_loading_steps);
+  double target_disp  = Teuchos::getParameter<double>(ParametersList.sublist("Elasticity"), "target_disp");
+  int n_loading_steps = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), "n_loading_steps");
   double delta_step   = 1.0/double(n_loading_steps);
 
   double bc_disp = 0.0;
