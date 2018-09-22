@@ -27,7 +27,7 @@ public:
   }
 
   void setup_dirichlet_conditions(){
-    int n_bc_dof = 1;
+    n_bc_dof = 10;
     dof_on_boundary = new int [n_bc_dof];
   }
 
