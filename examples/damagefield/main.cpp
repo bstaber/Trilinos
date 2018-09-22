@@ -10,7 +10,6 @@ Brian Staber (brian.staber@gmail.com)
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "damageField.hpp"
 #include "Teuchos_RCP.hpp"
 #include "Ifpack.h"
 #include "Ifpack_AdditiveSchwarz.h"
@@ -23,6 +22,9 @@ Brian Staber (brian.staber@gmail.com)
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
 #include "Stratimikos_DefaultLinearSolverBuilder.hpp"
+
+#include "damageField.hpp"
+#include "phaseFieldLinearizedElasticity.hpp"
 
 int main(int argc, char *argv[]){
 
