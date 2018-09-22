@@ -36,7 +36,7 @@ void damageField::assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap)
   Epetra_SerialDenseMatrix ke(Mesh->el_type, Mesh->el_type);
   Epetra_SerialDenseMatrix me(Mesh->el_type, Mesh->el_type);
 
-  double gauss_weight;
+  double gauss_weight, hn, an, bn;
   int eglob, id;
   int n_gauss_points = Mesh->n_gauss_cells;
   int * index = new int [Mesh->el_type];
