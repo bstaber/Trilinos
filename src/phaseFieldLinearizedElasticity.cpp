@@ -162,5 +162,5 @@ void phaseFieldLinearizedElasticity::constructGaussMap(){
       }
 
   }
-  GaussMap = new Epetra_Map(-1, n_local_cells*n_gauss_cells, &local_gauss_points[0], 0, Comm);
+  GaussMap = new Epetra_Map(-1, n_local_cells*n_gauss_cells, &local_gauss_points[0], 0, *Comm);
 }
