@@ -20,7 +20,7 @@ public:
     damageField(Epetra_Comm & comm, mesh & mesh, double & gc_, double & lc_);
     ~damageField();
 
-    void solve(Teuchos::ParameterList & Parameters, Epetra_Vector & Hn);
+    void solve(Teuchos::ParameterList & Parameters, Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
     void assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
 
     void create_FECrsGraph();

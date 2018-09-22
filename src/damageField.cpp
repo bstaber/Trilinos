@@ -81,13 +81,14 @@ void damageField::assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap)
 }
 
 void damageField::solve(Teuchos::ParameterList & Parameters,
-                        Epetra_Vector & Hn){
+                        Epetra_Vector & damageHistory,
+                        Epetra_Map & GaussMap){
 
   damageSolution->PutScalar(0.0);
   rhs->PutScalar(0.0);
   matrix->PutScalar(0.0);
 
-  assemble(Hn);
+  assemble(damageHistory, GaussMap);
 
   Epetra_LinearProblem problem(matrix, damageSolution, rhs);
   AztecOO solver(problem);
