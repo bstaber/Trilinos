@@ -11,6 +11,7 @@ class phaseFieldProblem : public phaseFieldLinearizedElasticity{
 
 public:
   phaseFieldProblem(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    std::cout << "Here too.\n";
     initialize(comm, Parameters);
   }
   ~phaseFieldProblem(){

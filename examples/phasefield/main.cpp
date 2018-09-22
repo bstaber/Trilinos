@@ -56,6 +56,7 @@ MPI_Init(&argc, &argv);
       paramList->print(std::cout,2,true,true);
   }
 
+  std::cout << "Here";
   Teuchos::RCP<phaseFieldProblem> phaseFieldModel = Teuchos::rcp(new phaseFieldProblem(Comm, *paramList));
 
   #ifdef HAVE_MPI
