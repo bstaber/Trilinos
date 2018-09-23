@@ -78,6 +78,12 @@ void damageField::assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap)
     }
   }
 
+  Comm->Barrier();
+
+  matrix->GlobalAssemble();
+  matrix->FillComplete();
+  rhs->GlobalAssemble();
+
   delete [] index;
 }
 
