@@ -24,6 +24,8 @@ public:
   Epetra_FECrsMatrix * matrix;
   Epetra_FEVector    * rhs;
 
+  Epetra_Vector  * damageSolution;
+
   phaseFieldLinearizedElasticity();
   ~phaseFieldLinearizedElasticity();
 

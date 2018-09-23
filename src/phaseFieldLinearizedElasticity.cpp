@@ -37,6 +37,8 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
   matrix        = new Epetra_FECrsMatrix(Copy,*FEGraph);
   rhs           = new Epetra_FEVector(*StandardMap);
 
+  damageSolution = new Epetra_Vector(*damageInterface->StandardMap);
+
   lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
   mu     = E/(2.0*(1.0+nu));
 
@@ -83,12 +85,16 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
     if (Comm->MyPID()==0){
       std::cout << n << std::setw(15) << Time.ElapsedTime() << "\n";
     }
+
     if (print){
       std::string dispfile = "/home/s/staber/Trilinos_results/examples/phasefield/displacement" + std::to_string(int(n)) + ".mtx";
       std::string damgfile = "/home/s/staber/Trilinos_results/examples/phasefield/damage"       + std::to_string(int(n)) + ".mtx";
       print_solution(*displacement, dispfile);
-      print_solution(*damageInterface->damageSolution, damgfile);
+      print_solution(lhs_damage, damgfile);
     }
+
+    *damageSolution = lhs_damage;
+
   }
 
 }
@@ -202,7 +208,7 @@ void phaseFieldLinearizedElasticity::get_elasticity_tensor(unsigned int & e_lid,
   double d = 0.0;
   for (unsigned int j=0; j<Mesh->el_type; ++j){
       node = Mesh->cells_nodes[Mesh->el_type*e_gid+j];
-      d += shape_functions(j)*damageInterface->damageSolution[0][damageInterface->OverlapMap->LID(node)];
+      d += shape_functions(j)*damageSolution[damageInterface->OverlapMap->LID(node)];
   }
 
   double g = (1.0-d)*(1.0-d) + 1.0e-6;
