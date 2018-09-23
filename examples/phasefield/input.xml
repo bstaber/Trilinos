@@ -8,7 +8,7 @@
 
         <Parameter name="young"               type="double" value="20.8"/>
         <Parameter name="poisson"             type="double" value="0.3"/>
-        <Parameter name="delta_u"             type="double" value="1.0"/>
+        <Parameter name="delta_u"             type="double" value="1.0e-4"/>
         <Parameter name="n_steps"             type="int"    value="1"/>
 
         <ParameterList name="Aztec">
