@@ -50,7 +50,7 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
 
 void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList,
                                                                    bool print){
-                                                                     
+
   double delta_u  = Teuchos::getParameter<double>(ParametersList.sublist("Elasticity"), "delta_u");
   int n_steps     = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), "n_steps");
 
@@ -83,7 +83,7 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
     computeDisplacement(ParametersList.sublist("Elasticity"), matrix_u, lhs_u, rhs_u, delta_u);
 
-    updateDamageHistory(damageHistory, lhs_u);
+    updateDamageHistory(damageHistory, lhs_u, GaussMap);
 
     if (Comm->MyPID()==0){
       std::cout << n << std::setw(15) << Time.ElapsedTime() << "\n";
