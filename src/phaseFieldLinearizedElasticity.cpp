@@ -208,7 +208,7 @@ void phaseFieldLinearizedElasticity::get_elasticity_tensor(unsigned int & e_lid,
   double d = 0.0;
   for (unsigned int j=0; j<Mesh->el_type; ++j){
       node = Mesh->cells_nodes[Mesh->el_type*e_gid+j];
-      d += shape_functions(j)*damageSolution[damageInterface->OverlapMap->LID(node)];
+      d += shape_functions(j) * damageSolution[0][damageInterface->OverlapMap->LID(node)];
   }
 
   double g = (1.0-d)*(1.0-d) + 1.0e-6;
