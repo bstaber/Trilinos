@@ -22,7 +22,7 @@
             <Parameter name="AZ_output"       type="int"    value="1"/>
             <Parameter name="AZ_diagnostics"  type="string" value="all"/>
             <Parameter name="AZ_reorder"      type="int"    value="1"/>
-            <Parameter name="AZ_conv"         type="string" value="noscaled"/>
+            <Parameter name="AZ_conv"         type="string" value="AZ_r0"/>
         </ParameterList>
     </ParameterList>
 
@@ -42,7 +42,7 @@
             <Parameter name="AZ_output"       type="int"    value="1"/>
             <Parameter name="AZ_diagnostics"  type="string" value="all"/>
             <Parameter name="AZ_reorder"      type="int"    value="1"/>
-            <Parameter name="AZ_conv"         type="string" value="noscaled"/>
+            <Parameter name="AZ_conv"         type="string" value="AZ_r0"/>
         </ParameterList>
     </ParameterList>
 
