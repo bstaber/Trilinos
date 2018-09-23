@@ -64,6 +64,10 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
   Epetra_Time Time(*Comm);
 
+  Epetra_FECrsMatrix matrix_damage(Copy,*damageInterface->FEGraph);
+  Epetra_FEVector    rhs_damage(*damagaInterface->StandardMap);
+  Epetra_Vector      lhs_damage(*damageInterface->StandardMap);
+
   if (Comm->MyPID()==0){
     std::cout << "step" << std::setw(15) << "cpu_time (s)" << "\n";
   }
@@ -72,7 +76,7 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
     Time.ResetStartTime();
 
-    damageInterface->solve(ParametersList.sublist("Damage"), *damageHistory, *GaussMap);
+    damageInterface->solve(ParametersList.sublist("Damage"), matrix_damage, lhs_damage, rhs_damage, *damageHistory, *GaussMap);
     computeDisplacement(ParametersList.sublist("Elasticity"), delta_u);
     updateDamageHistory();
 
