@@ -27,8 +27,6 @@ damageField::~damageField(){
 
 void damageField::assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap){
 
-  //Hn to do
-
   Epetra_SerialDenseVector shape_functions(Mesh->el_type);
   Epetra_SerialDenseVector fe(Mesh->el_type);
 
