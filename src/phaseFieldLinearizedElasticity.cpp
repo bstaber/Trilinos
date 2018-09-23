@@ -63,17 +63,21 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
   Epetra_Time Time(*Comm);
 
-  std::cout << "step" << std::setw(10) << "cpu_time" << "\n";
-  
+  if (Comm->MyPID()==0){
+    std::cout << "step" << std::setw(10) << "cpu_time" << "\n";
+  }
+
   for (int n=0; n<n_steps; ++n){
+
     Time.ResetStartTime();
 
     damageInterface->solve(ParametersList.sublist("Damage"), *damageHistory, *GaussMap);
     computeDisplacement(ParametersList.sublist("Elasticity"), delta_u);
     updateDamageHistory();
 
-    Time.ResetStartTime();
-    std::cout << n << std::setw(10) << Time << "\n";
+    if (Comm->MyPID()==0){
+      std::cout << n << std::setw(10) << Time.ElapsedTime() << "\n";
+    }
   }
 
 }
