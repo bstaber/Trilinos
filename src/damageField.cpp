@@ -68,8 +68,6 @@ void damageField::assemble(Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs,
     }
     ke += me;
 
-    std::cout << fe << "\n";
-
     for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
       rhs.SumIntoGlobalValues(1, &index[inode], &fe(inode));
       for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
