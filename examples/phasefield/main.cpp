@@ -58,6 +58,8 @@ MPI_Init(&argc, &argv);
 
   Teuchos::RCP<phaseFieldProblem> phaseFieldModel = Teuchos::rcp(new phaseFieldProblem(Comm, *paramList));
 
+  phaseFieldModel->staggeredAlgorithmDirichletBC(*paramList);
+
   #ifdef HAVE_MPI
       MPI_Finalize();
   #endif
