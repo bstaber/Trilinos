@@ -32,11 +32,6 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
   constructGaussMap();
 
   damageHistory = new Epetra_Vector(*GaussMap);
-  displacement  = new Epetra_Vector(*StandardMap);
-
-  matrix        = new Epetra_FECrsMatrix(Copy,*FEGraph);
-  rhs           = new Epetra_FEVector(*StandardMap);
-
   damageSolution = new Epetra_Vector(*damageInterface->StandardMap);
 
   lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
@@ -66,9 +61,14 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
   Epetra_Time Time(*Comm);
 
-  Epetra_FECrsMatrix matrix_damage(Copy,*damageInterface->FEGraph);
-  Epetra_FEVector    rhs_damage(*damageInterface->StandardMap);
-  Epetra_Vector      lhs_damage(*damageInterface->StandardMap);
+  Epetra_FECrsMatrix matrix_d(Copy,*damageInterface->FEGraph);
+  Epetra_FECrsMatrix matrix_u(Copy,*FEGraph);
+
+  Epetra_FEVector    rhs_d(*damageInterface->StandardMap);
+  Epetra_FEVector    rhs_u(*StandardMap);
+
+  Epetra_Vector      lhs_d(*damageInterface->StandardMap);
+  Epetra_Vector      lhs_u(*StandardMap);
 
   if (Comm->MyPID()==0){
     std::cout << "step" << std::setw(15) << "cpu_time (s)" << "\n";
@@ -78,9 +78,11 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
     Time.ResetStartTime();
 
-    damageInterface->solve(ParametersList.sublist("Damage"), matrix_damage, lhs_damage, rhs_damage, *damageHistory, *GaussMap);
-    computeDisplacement(ParametersList.sublist("Elasticity"), delta_u);
-    updateDamageHistory();
+    damageInterface->solve(ParametersList.sublist("Damage"), matrix_d, lhs_d, rhs_d, *damageHistory, *GaussMap);
+
+    computeDisplacement(ParametersList.sublist("Elasticity"), matrix_u, lhs_u, rhs_u, delta_u);
+
+    updateDamageHistory(lhs_u);
 
     if (Comm->MyPID()==0){
       std::cout << n << std::setw(15) << Time.ElapsedTime() << "\n";
@@ -89,45 +91,39 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
     if (print){
       std::string dispfile = "/home/s/staber/Trilinos_results/examples/phasefield/displacement" + std::to_string(int(n)) + ".mtx";
       std::string damgfile = "/home/s/staber/Trilinos_results/examples/phasefield/damage"       + std::to_string(int(n)) + ".mtx";
-      print_solution(*displacement, dispfile);
-      print_solution(lhs_damage, damgfile);
+      int error_u = print_solution(lhs_u, dispfile);
+      int error_d = damageInterface->print_solution(lhs_d, damgfile);
     }
 
-    *damageSolution = lhs_damage;
+    *damageSolution = lhs_d;
 
   }
 
 }
 
-void phaseFieldLinearizedElasticity::computeDisplacement(Teuchos::ParameterList & Parameters, double & bc_disp){
+void phaseFieldLinearizedElasticity::computeDisplacement(Teuchos::ParameterList & Parameters,
+                                                         Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
+                                                         double & bc_disp){
 
-  matrix->PutScalar(0.0);
-  rhs->PutScalar(0.0);
+  assemblePureDirichlet_homogeneousForcing(matrix);
+  apply_dirichlet_conditions(matrix, rhs, bc_disp);
 
-  assemblePureDirichlet_homogeneousForcing(*matrix);
-  apply_dirichlet_conditions(*matrix, *rhs, bc_disp);
-
-  displacement->PutScalar(0.0);
-
-  Epetra_LinearProblem problem;
-  AztecOO solver;
-
-  problem.SetOperator(matrix);
-  problem.SetLHS(displacement);
-  problem.SetRHS(rhs);
+  lhs.PutScalar(0.0);
 
   int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
   double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
 
-  solver.SetProblem(problem);
+  Epetra_LinearProblem problem(&matrix, &lhs, &rhs);
+
+  AztecOO solver(problem);
   solver.SetParameters(Parameters.sublist("Aztec"));
   solver.Iterate(max_iter, tol);
 }
 
-void phaseFieldLinearizedElasticity::updateDamageHistory(){
+void phaseFieldLinearizedElasticity::updateDamageHistory(Epetra_Vector & displacement){
 
   Epetra_Vector u(*OverlapMap);
-  u.Import(*displacement, *ImportToOverlapMap, Insert);
+  u.Import(displacement, *ImportToOverlapMap, Insert);
 
   int n_gauss_points = Mesh->n_gauss_cells;
 

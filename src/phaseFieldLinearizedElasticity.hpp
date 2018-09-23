@@ -19,20 +19,17 @@ public:
 
   Epetra_Map    * GaussMap;
   Epetra_Vector * damageHistory;
-  Epetra_Vector * displacement;
-
-  Epetra_FECrsMatrix * matrix;
-  Epetra_FEVector    * rhs;
-
-  Epetra_Vector  * damageSolution;
+  Epetra_Vector * damageSolution;
 
   phaseFieldLinearizedElasticity();
   ~phaseFieldLinearizedElasticity();
 
   void initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters);
   void constructGaussMap();
-  void computeDisplacement(Teuchos::ParameterList & ParameterList, double & bc_disp);
-  void updateDamageHistory();
+  void computeDisplacement(Teuchos::ParameterList & ParameterList,
+                           Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
+                           double & bc_disp);
+  void updateDamageHistory(Epetra_Vector & displacement);
   void staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList, bool print);
 
   void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix);

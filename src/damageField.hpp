@@ -24,6 +24,7 @@ public:
                   Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
 
     void create_FECrsGraph();
+    int laplace::print_solution(Epetra_Vector & lhs, std::string fileName);
     void setup_dirichlet_conditions();
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement);
 };

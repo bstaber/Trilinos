@@ -93,10 +93,10 @@ void damageField::solve(Teuchos::ParameterList & Parameters,
 
   assemble(matrix, lhs, rhs, damageHistory, GaussMap);
 
-  Epetra_LinearProblem problem(&matrix, &lhs, &rhs);
-
   double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
   int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
+
+  Epetra_LinearProblem problem(&matrix, &lhs, &rhs);
 
   AztecOO solver(problem);
   solver.SetParameters(Parameters.sublist("Aztec"));
@@ -133,4 +133,17 @@ void damageField::setup_dirichlet_conditions(){
 
 void damageField::apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
   std::cout << "No essential boundary conditions.\n";
+}
+
+int laplace::print_solution(Epetra_Vector & lhs, std::string fileName){
+    int NumTargetElements = 0;
+    if (Comm->MyPID()==0){
+        NumTargetElements = Mesh->n_nodes;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+    Epetra_Export ExportOnRoot(*StandardMap,MapOnRoot);
+    Epetra_MultiVector lhs_root(MapOnRoot,true);
+    lhs_root.Export(lhs,ExportOnRoot,Insert);
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(fileName.c_str(),lhs_root,0,0,false);
+    return error;
 }
