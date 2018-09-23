@@ -11,7 +11,7 @@ class phaseFieldProblem : public phaseFieldLinearizedElasticity{
 
 public:
   phaseFieldProblem(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
-    initialize();
+    initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters);
   }
   ~phaseFieldProblem(){
   }
@@ -63,7 +63,7 @@ public:
   }
 
   void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-    
+
     Epetra_MultiVector v(*StandardMap,true);
     v.PutScalar(0.0);
 
