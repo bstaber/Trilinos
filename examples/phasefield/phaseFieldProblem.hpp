@@ -11,8 +11,7 @@ class phaseFieldProblem : public phaseFieldLinearizedElasticity{
 
 public:
   phaseFieldProblem(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
-    n_bc_dof = 10;
-    dof_on_boundary = new int [n_bc_dof];
+    initialize();
   }
   ~phaseFieldProblem(){
   }
@@ -29,10 +28,73 @@ public:
   }
 
   void setup_dirichlet_conditions(){
+
+    n_bc_dof = 0;
+    double y;
+    int node;
+    for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
+        node = Mesh->local_nodes[i];
+        y    = Mesh->nodes_coord[3*node+1];
+        if(y==0.0){
+            n_bc_dof+=3;
+        }
+        if(y==1.0){
+            n_bc_dof+=1;
+        }
+    }
+
+    int indbc = 0;
+    dof_on_boundary = new int [n_bc_dof];
+    for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+        node = Mesh->local_nodes[inode];
+        y    = Mesh->nodes_coord[3*node+dof];
+        if (y==0.0){
+            dof_on_boundary[indbc+0] = 3*inode+0;
+            dof_on_boundary[indbc+1] = 3*inode+1;
+            dof_on_boundary[indbc+2] = 3*inode+2;
+            indbc+=3;
+        }
+        if (coord==1.0){
+            dof_on_boundary[indbc+0] = 3*inode+1;
+            indbc+=1;
+        }
+    }
+
   }
 
   void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
+    
+    Epetra_MultiVector v(*StandardMap,true);
+    v.PutScalar(0.0);
 
+    int node;
+    double y;
+    for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+        node = Mesh->local_nodes[inode];
+        y    = Mesh->nodes_coord[3*node+1];
+        if (coord==1.0){
+            v[0][StandardMap->LID(3*node+1)] = displacement;
+        }
+    }
+
+    Epetra_MultiVector rhs_dir(*StandardMap,true);
+    K.Apply(v,rhs_dir);
+    F.Update(-1.0,rhs_dir,1.0);
+
+    for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+        node = Mesh->local_nodes[inode];
+        y    = Mesh->nodes_coord[3*node+1];
+        if (coord==0.0){
+            F[0][StandardMap->LID(3*node+0)] = 0.0;
+            F[0][StandardMap->LID(3*node+1)] = 0.0;
+            F[0][StandardMap->LID(3*node+2)] = 0.0;
+        }
+        if (coord==1.0){
+            F[0][StandardMap->LID(3*node+1)] = displacement;
+        }
+    }
+    //}
+    ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
   }
 
 };
