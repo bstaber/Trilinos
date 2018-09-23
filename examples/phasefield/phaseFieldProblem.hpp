@@ -38,10 +38,10 @@ public:
     for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
         node = Mesh->local_nodes[i];
         z    = Mesh->nodes_coord[3*node+2];
-        if(z==0.0){
+        if(z<=1.0e-6 && z>=-1.0e-6){
             n_bc_dof+=3;
         }
-        if(z==10.0){
+        if(z<=10+1.0e-6 && z>=10-1.0e-6){
             n_bc_dof+=1;
         }
     }
@@ -51,14 +51,13 @@ public:
     for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
         node = Mesh->local_nodes[inode];
         z    = Mesh->nodes_coord[3*node+2];
-        if (z==0.0){
+        if (z<=1.0e-6 && z>=-1.0e-6){
             dof_on_boundary[indbc+0] = 3*inode+0;
             dof_on_boundary[indbc+1] = 3*inode+1;
             dof_on_boundary[indbc+2] = 3*inode+2;
             indbc+=3;
         }
-        if (z==10.0){
-            std::cout << "I'm on it!\n";
+        if (z<=10+1.0e-6 && z>=10-1.0e-6){
             dof_on_boundary[indbc+0] = 3*inode+2;
             indbc+=1;
         }
@@ -76,8 +75,7 @@ public:
     for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
         node = Mesh->local_nodes[inode];
         z    = Mesh->nodes_coord[3*node+2];
-        if (z==10.0){
-            std::cout << "I'm on it!\n";
+        if (z<=10+1.0e-6 && z>=10-1.0e-6){
             v[0][StandardMap->LID(3*node+2)] = displacement;
         }
     }
@@ -89,13 +87,12 @@ public:
     for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
         node = Mesh->local_nodes[inode];
         z    = Mesh->nodes_coord[3*node+2];
-        if (z==0.0){
+        if (z<=1.0e-6 && z>=-1.0e-6){
             F[0][StandardMap->LID(3*node+0)] = 0.0;
             F[0][StandardMap->LID(3*node+1)] = 0.0;
             F[0][StandardMap->LID(3*node+2)] = 0.0;
         }
-        if (z==10.0){
-            std::cout << "I'm on it!\n";
+        if (z<=10+1.0e-6 && z>=10-1.0e-6){
             F[0][StandardMap->LID(3*node+2)] = displacement;
         }
     }

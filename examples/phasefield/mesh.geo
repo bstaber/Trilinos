@@ -6,25 +6,32 @@ lc2 = 0.05;
 
 H = 0.001;
 
-Point(1) = {0.0, 0.0, 0.0, lc1};
-Point(2) = {5.0, 0.0, 0.0, lc1};
-Point(3) = {0.0, 2.0, 0.0, lc1};
-Point(4) = {5.0, 2.0, 0.0, lc1};
+a = 2;
+b = 5;
+c = 10;
+d = 3;
 
-Point(5) = {0.0, 0.0, 10.0, lc1};
-Point(6) = {5.0, 0.0, 10.0, lc1};
-Point(7) = {0.0, 2.0, 10.0, lc1};
-Point(8) = {5.0, 2.0, 10.0, lc1};
+Point(1) = {0, 0, 0, lc1};
+Point(2) = {b, 0, 0, lc1};
+Point(3) = {0, a, 0, lc1};
+Point(4) = {b, a, 0, lc1};
 
-Point(9)  = {3.0, 0.0, 5.0-H, lc2};
-Point(10) = {5.0, 0.0, 5.0-H, lc2};
-Point(11) = {3.0, 2.0, 5.0-H, lc2};
-Point(12) = {5.0, 2.0, 5.0-H, lc2};
+Point(5) = {0, 0, c, lc1};
+Point(6) = {b, 0, c, lc1};
+Point(7) = {0, a, c, lc1};
+Point(8) = {b, a, c, lc1};
 
-Point(13) = {3.0, 0.0, 5.0+H, lc2};
-Point(14) = {5.0, 0.0, 5.0+H, lc2};
-Point(15) = {3.0, 2.0, 5.0+H, lc2};
-Point(16) = {5.0, 2.0, 5.0+H, lc2};//+
+Point(9)  = {d, 0, b-H, lc2};
+Point(10) = {b, 0, b-H, lc2};
+Point(11) = {d, a, b-H, lc2};
+Point(12) = {b, a, b-H, lc2};
+
+Point(13) = {d, 0, b+H, lc2};
+Point(14) = {b, 0, b+H, lc2};
+Point(15) = {d, a, b+H, lc2};
+Point(16) = {b, a, b+H, lc2};
+
+//+
 Line(1) = {2, 4};
 //+
 Line(2) = {2, 1};
