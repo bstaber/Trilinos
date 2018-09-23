@@ -22,8 +22,9 @@ public:
   phaseFieldLinearizedElasticity();
   ~phaseFieldLinearizedElasticity();
 
+  Epera_Map constructGaussMap();
+  
   void initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters);
-  void constructGaussMap();
   void computeDisplacement(Teuchos::ParameterList & ParameterList,
                            Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
                            double & bc_disp);

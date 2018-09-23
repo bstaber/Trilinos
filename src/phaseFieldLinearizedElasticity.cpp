@@ -50,9 +50,7 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
 
 void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList,
                                                                    bool print){
-
-  damageHistory->PutScalar(0.0);
-
+                                                                     
   double delta_u  = Teuchos::getParameter<double>(ParametersList.sublist("Elasticity"), "delta_u");
   int n_steps     = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), "n_steps");
 
