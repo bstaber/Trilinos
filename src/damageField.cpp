@@ -21,11 +21,10 @@ gc(gc_), lc(lc_){
 damageField::~damageField(){
 }
 
-void damageField::assemble(Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
+void damageField::assemble(Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs,
                            Epetra_Vector & damageHistory, Epetra_Map & GaussMap){
 
   matrix.PutScalar(0.0);
-  lhs.PutScalar(0.0);
   rhs.PutScalar(0.0);
 
   Epetra_SerialDenseVector shape_functions(Mesh->el_type);
@@ -69,6 +68,8 @@ void damageField::assemble(Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epe
     }
     ke += me;
 
+    std::cout << ke << "\n";
+
     for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
       rhs.SumIntoGlobalValues(1, &index[inode], &fe(inode));
       for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
@@ -91,10 +92,12 @@ void damageField::solve(Teuchos::ParameterList & Parameters,
                         Epetra_Vector & damageHistory,
                         Epetra_Map & GaussMap){
 
-  assemble(matrix, lhs, rhs, damageHistory, GaussMap);
+  assemble(matrix, rhs, damageHistory, GaussMap);
 
   double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
   int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
+
+  lhs.PutScalar(0.0);
 
   Epetra_LinearProblem problem(&matrix, &lhs, &rhs);
 

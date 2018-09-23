@@ -20,7 +20,7 @@ public:
                Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
                Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
 
-    void assemble(Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
+    void assemble(Epetra_FECrsMatrix & matrix, Epetra_FEVector & rhs,
                   Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
 
     void create_FECrsGraph();
