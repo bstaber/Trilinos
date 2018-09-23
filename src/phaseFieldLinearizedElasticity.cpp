@@ -65,7 +65,7 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
   Epetra_Time Time(*Comm);
 
   if (Comm->MyPID()==0){
-    std::cout << "step" << std::setw(10) << "cpu_time (s)" << "\n";
+    std::cout << "step" << std::setw(15) << "cpu_time (s)" << "\n";
   }
 
   for (int n=0; n<n_steps; ++n){
