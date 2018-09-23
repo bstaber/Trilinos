@@ -195,7 +195,7 @@ public:
         int node;
         double coord;
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
-            node = Mesh->local_nodes[inode];
+            node  = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+1];
             if (coord==topcoord){
                 v[0][StandardMap->LID(3*node+1)] = displacement;
@@ -207,7 +207,7 @@ public:
         F.Update(-1.0,rhs_dir,1.0);
 
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
-            node = Mesh->local_nodes[inode];
+            node  = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+1];
             if (coord==0.0){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
