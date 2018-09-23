@@ -65,7 +65,7 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
   Epetra_Time Time(*Comm);
 
   Epetra_FECrsMatrix matrix_damage(Copy,*damageInterface->FEGraph);
-  Epetra_FEVector    rhs_damage(*damagaInterface->StandardMap);
+  Epetra_FEVector    rhs_damage(*damageInterface->StandardMap);
   Epetra_Vector      lhs_damage(*damageInterface->StandardMap);
 
   if (Comm->MyPID()==0){
