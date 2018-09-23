@@ -53,7 +53,8 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
   elasticity(5,0) = 0.0; elasticity(5,1) = 0.0; elasticity(5,2) = 0.0; elasticity(5,3) = 0.0; elasticity(5,4) = 0.0; elasticity(5,5) = c44;
 }
 
-void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList){
+void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList,
+                                                                   bool print){
 
   damageHistory->PutScalar(0.0);
   displacement->PutScalar(0.0);
@@ -77,6 +78,12 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
     if (Comm->MyPID()==0){
       std::cout << n << std::setw(15) << Time.ElapsedTime() << "\n";
+    }
+    if (print){
+      std::string dispfile = "displacement" + std::to_string(int(n)) + ".mtx";
+      std::string damgfile = "damage"       + std::to_string(int(n)) + ".mtx";
+      print_solution(*displacement, dispfile);
+      print_solution(*damageInterface->damageSolution, damgfile);
     }
   }
 

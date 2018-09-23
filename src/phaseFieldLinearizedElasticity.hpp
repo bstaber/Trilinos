@@ -31,7 +31,7 @@ public:
   void constructGaussMap();
   void computeDisplacement(Teuchos::ParameterList & ParameterList, double & bc_disp);
   void updateDamageHistory();
-  void staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList);
+  void staggeredAlgorithmDirichletBC(Teuchos::ParameterList & ParametersList, bool print);
 
   void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix);
   void get_elasticity_tensor_for_recovery(unsigned int & e_lid, Epetra_SerialDenseMatrix & tangent_matrix);
