@@ -58,6 +58,7 @@ public:
             indbc+=3;
         }
         if (z==10.0){
+            std::cout << "I'm on it!\n";
             dof_on_boundary[indbc+0] = 3*inode+2;
             indbc+=1;
         }
@@ -76,6 +77,7 @@ public:
         node = Mesh->local_nodes[inode];
         z    = Mesh->nodes_coord[3*node+2];
         if (z==10.0){
+            std::cout << "I'm on it!\n";
             v[0][StandardMap->LID(3*node+2)] = displacement;
         }
     }
@@ -93,6 +95,7 @@ public:
             F[0][StandardMap->LID(3*node+2)] = 0.0;
         }
         if (z==10.0){
+            std::cout << "I'm on it!\n";
             F[0][StandardMap->LID(3*node+2)] = displacement;
         }
     }

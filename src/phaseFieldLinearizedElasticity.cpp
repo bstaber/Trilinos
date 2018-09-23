@@ -8,7 +8,6 @@ phaseFieldLinearizedElasticity::phaseFieldLinearizedElasticity(){
 }
 
 phaseFieldLinearizedElasticity::~phaseFieldLinearizedElasticity(){
-
 }
 
 void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
