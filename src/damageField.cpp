@@ -135,7 +135,7 @@ void damageField::apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVe
   std::cout << "No essential boundary conditions.\n";
 }
 
-int laplace::print_solution(Epetra_Vector & lhs, std::string fileName){
+int damageField::print_solution(Epetra_Vector & lhs, std::string fileName){
     int NumTargetElements = 0;
     if (Comm->MyPID()==0){
         NumTargetElements = Mesh->n_nodes;
