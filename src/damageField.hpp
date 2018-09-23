@@ -13,15 +13,15 @@ public:
     double gc;
     double lc;
 
-    Epetra_Vector      * damageSolution;
-    Epetra_FECrsMatrix * matrix;
-    Epetra_FEVector    * rhs;
-
     damageField(Epetra_Comm & comm, mesh & mesh, double & gc_, double & lc_);
     ~damageField();
 
-    void solve(Teuchos::ParameterList & Parameters, Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
-    void assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
+    void solve(Teuchos::ParameterList & Parameters,
+               Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
+               Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
+
+    void assemble(Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
+                  Epetra_Vector & damageHistory, Epetra_Map & GaussMap);
 
     void create_FECrsGraph();
     void setup_dirichlet_conditions();

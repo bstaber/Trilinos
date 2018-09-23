@@ -16,16 +16,17 @@ gc(gc_), lc(lc_){
   ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
 
   create_FECrsGraph();
-
-  damageSolution     = new Epetra_Vector(*StandardMap);
-  matrix             = new Epetra_FECrsMatrix(Copy, *FEGraph);
-  rhs                = new Epetra_FEVector(*StandardMap);
 }
 
 damageField::~damageField(){
 }
 
-void damageField::assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap){
+void damageField::assemble(Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
+                           Epetra_Vector & damageHistory, Epetra_Map & GaussMap){
+
+  matrix.PutScalar(0.0);
+  lhs.PutScalar(0.0);
+  rhs.PutScalar(0.0);
 
   Epetra_SerialDenseVector shape_functions(Mesh->el_type);
   Epetra_SerialDenseVector fe(Mesh->el_type);
@@ -69,33 +70,30 @@ void damageField::assemble(Epetra_Vector & damageHistory, Epetra_Map & GaussMap)
     ke += me;
 
     for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
-      rhs->SumIntoGlobalValues(1, &index[inode], &fe(inode));
+      rhs.SumIntoGlobalValues(1, &index[inode], &fe(inode));
       for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
-        matrix->SumIntoGlobalValues(1, &index[inode], 1, &index[jnode], &ke(inode,jnode));
+        matrix.SumIntoGlobalValues(1, &index[inode], 1, &index[jnode], &ke(inode,jnode));
       }
     }
   }
 
   Comm->Barrier();
 
-  matrix->GlobalAssemble();
-  matrix->FillComplete();
-  rhs->GlobalAssemble();
+  matrix.GlobalAssemble();
+  matrix.FillComplete();
+  rhs.GlobalAssemble();
 
   delete [] index;
 }
 
 void damageField::solve(Teuchos::ParameterList & Parameters,
+                        Epetra_FECrsMatrix & matrix, Epetra_Vector & lhs, Epetra_FEVector & rhs,
                         Epetra_Vector & damageHistory,
                         Epetra_Map & GaussMap){
 
-  damageSolution->PutScalar(0.0);
-  rhs->PutScalar(0.0);
-  matrix->PutScalar(0.0);
+  assemble(matrix, lhs, rhs, damageHistory, GaussMap);
 
-  assemble(damageHistory, GaussMap);
-
-  Epetra_LinearProblem problem(matrix, damageSolution, rhs);
+  Epetra_LinearProblem problem(&matrix, &lhs, &rhs);
 
   double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
   int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
