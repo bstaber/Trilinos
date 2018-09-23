@@ -58,21 +58,22 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
   damageHistory->PutScalar(0.0);
   displacement->PutScalar(0.0);
 
-  double target_disp  = Teuchos::getParameter<double>(ParametersList.sublist("Elasticity"), "target_disp");
-  int n_loading_steps = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), "n_loading_steps");
-  double delta_step   = 1.0/double(n_loading_steps);
+  double delta_u  = Teuchos::getParameter<double>(ParametersList.sublist("Elasticity"), "delta_u");
+  int n_steps     = Teuchos::getParameter<int>(ParametersList.sublist("Elasticity"), "n_steps");
 
-  double bc_disp = 0.0;
-  for (int n=0; n<n_loading_steps; ++n){
+  Epetra_Time Time(*Comm);
 
-    bc_disp = (double(n)+1.0)*delta_step*target_disp;
+  std::cout << "step" << std::setw(10) << "cpu_time" << "\n";
+  
+  for (int n=0; n<n_steps; ++n){
+    Time.ResetStartTime();
 
     damageInterface->solve(ParametersList.sublist("Damage"), *damageHistory, *GaussMap);
-
-    computeDisplacement(ParametersList.sublist("Elasticity"), bc_disp);
-
+    computeDisplacement(ParametersList.sublist("Elasticity"), delta_u);
     updateDamageHistory();
 
+    Time.ResetStartTime();
+    std::cout << n << std::setw(10) << Time << "\n";
   }
 
 }
