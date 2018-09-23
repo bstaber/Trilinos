@@ -6,8 +6,10 @@
 
     <ParameterList name="Elasticity">
 
-        <Parameter name ="young"              type="double" value="1.0"/>
-        <Parameter name ="poisson"            type="double" value="1.0"/>
+        <Parameter name="young"               type="double" value="1.0"/>
+        <Parameter name="poisson"             type="double" value="1.0"/>
+        <Parameter name="target_disp"         type="double" value="1.0"/>
+        <Parameter name="n_loading_steps"     type="int"    value="10"/>
 
         <ParameterList name="Aztec">
             <Parameter name="solver"          type="string" value="cg"/>
@@ -25,9 +27,9 @@
 
     <ParameterList name="Damage">
 
-        <Parameter name ="gc"                   type="double" value="1.0"/>
-        <Parameter name ="lc"                   type="double" value="1.0"/>
-        
+        <Parameter name="gc"                  type="double" value="1.0"/>
+        <Parameter name="lc"                  type="double" value="1.0"/>
+
         <ParameterList name="Aztec">
             <Parameter name="solver"          type="string" value="cg"/>
             <Parameter name="precond"         type="string" value="dom_decomp"/>

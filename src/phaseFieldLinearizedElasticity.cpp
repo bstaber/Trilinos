@@ -26,7 +26,7 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
   damageInterface = Teuchos::rcp(new damageField(comm, *Mesh, gc, lc));
 
   StandardMap = new Epetra_Map(-1, 3*Mesh->n_local_nodes_without_ghosts, &Mesh->local_dof_without_ghosts[0], 0, *Comm);
-  OverlapMap  = new Epetra_Map(-1, 3*Mesh->n_local_nodes,&Mesh->local_dof[0], 0, *Comm);
+  OverlapMap  = new Epetra_Map(-1, 3*Mesh->n_local_nodes, &Mesh->local_dof[0], 0, *Comm);
   ImportToOverlapMap = new Epetra_Import(*OverlapMap, *StandardMap);
   create_FECrsGraph();
   constructGaussMap();
@@ -94,12 +94,11 @@ void phaseFieldLinearizedElasticity::computeDisplacement(Teuchos::ParameterList 
   problem.SetLHS(displacement);
   problem.SetRHS(rhs);
 
-  solver.SetProblem(problem);
-  solver.SetParameters(Parameters);
-
   int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
   double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
 
+  solver.SetProblem(problem);
+  solver.SetParameters(Parameters.sublist("Aztec"));
   solver.Iterate(max_iter, tol);
 }
 

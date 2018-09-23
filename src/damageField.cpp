@@ -92,12 +92,12 @@ void damageField::solve(Teuchos::ParameterList & Parameters,
   assemble(damageHistory, GaussMap);
 
   Epetra_LinearProblem problem(matrix, damageSolution, rhs);
-  AztecOO solver(problem);
 
   double tol   = Teuchos::getParameter<double>(Parameters.sublist("Aztec"), "AZ_tol");
   int max_iter = Teuchos::getParameter<int>(Parameters.sublist("Aztec"), "AZ_max_iter");
 
-  solver.SetParameters(Parameters);
+  AztecOO solver(problem);
+  solver.SetParameters(Parameters.sublist("Aztec"));
   solver.Iterate(max_iter, tol);
 }
 
