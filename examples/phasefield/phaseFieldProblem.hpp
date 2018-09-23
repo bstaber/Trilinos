@@ -10,10 +10,12 @@ Brian Staber (brian.staber@gmail.com)
 class phaseFieldProblem : public phaseFieldLinearizedElasticity{
 
 public:
+
   phaseFieldProblem(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
     initialize(comm, Parameters);
     setup_dirichlet_conditions();
   }
+  
   ~phaseFieldProblem(){
   }
 
