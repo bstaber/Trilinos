@@ -126,6 +126,8 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(Epetra_Vector & damageH
   Epetra_Vector u(*OverlapMap);
   u.Import(displacement, *ImportToOverlapMap, Insert);
 
+  Mesh->update_store_feinterp_cells(u, *OverlapMap);
+
   int n_gauss_points = Mesh->n_gauss_cells;
 
   double trepsilon, trepsilon2, potential, history;

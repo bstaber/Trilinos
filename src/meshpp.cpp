@@ -671,9 +671,9 @@ void mesh::update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMa
         eglob = local_cells[eloc];
         for (unsigned int inode=0; inode<el_type; ++inode){
             node = cells_nodes[el_type*eglob+inode];
-            X(0,inode) = nodes_coord[3*node+0] + u[OverlapMap[3*node+0]];
-            X(1,inode) = nodes_coord[3*node+1] + u[OverlapMap[3*node+1]];
-            X(2,inode) = nodes_coord[3*node+2] + u[OverlapMap[3*node+2]];
+            X(0,inode) = nodes_coord[3*node+0] + u[OverlapMap->LID(3*node+0)];
+            X(1,inode) = nodes_coord[3*node+1] + u[OverlapMap->LID(3*node+1)];
+            X(2,inode) = nodes_coord[3*node+2] + u[OverlapMap->LID(3*node+2)];
             local_rows(3*el_type*eloc+3*inode) = 3*node;
             local_rows(3*el_type*eloc+3*inode+1) = 3*node+1;
             local_rows(3*el_type*eloc+3*inode+2) = 3*node+2;
