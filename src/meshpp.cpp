@@ -632,14 +632,6 @@ void mesh::update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMa
     Epetra_SerialDenseVector N(el_type);
     Epetra_SerialDenseMatrix JacobianMatrix(3,3), InverseJacobianMatrix(3,3), X(3,el_type), D(el_type,3), DX(el_type,3);
 
-    local_rows.Resize(3*el_type*n_local_cells);
-    vol_cells.Resize(n_local_cells);
-    N_cells.Reshape(el_type,n_gauss_cells);
-    detJac_cells.Reshape(n_local_cells,n_gauss_cells);
-    DX_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
-    DY_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
-    DZ_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
-
     switch (el_type){
         case 4:
             for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
