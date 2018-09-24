@@ -71,6 +71,7 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
     std::cout << "step" << std::setw(15) << "cpu_time (s)" << "\n";
   }
 
+  double bc_disp = 0.0;
   damageHistory.PutScalar(0.0);
   for (int n=0; n<n_steps; ++n){
 
@@ -80,7 +81,8 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
 
     damageSolutionOverlaped->Import(lhs_d, *damageInterface->ImportToOverlapMap, Insert);
 
-    computeDisplacement(ParametersList.sublist("Elasticity"), matrix_u, lhs_u, rhs_u, delta_u);
+    bc_disp = (double(n)+1.0)*delta_u;
+    computeDisplacement(ParametersList.sublist("Elasticity"), matrix_u, lhs_u, rhs_u, bc_disp);
 
     updateDamageHistory(damageHistory, lhs_u, GaussMap);
 
@@ -126,7 +128,7 @@ void phaseFieldLinearizedElasticity::updateDamageHistory(Epetra_Vector & damageH
   Epetra_Vector u(*OverlapMap);
   u.Import(displacement, *ImportToOverlapMap, Insert);
 
-  Mesh->update_store_feinterp_cells(u, *OverlapMap);
+  //Mesh->update_store_feinterp_cells(u, *OverlapMap);
 
   int n_gauss_points = Mesh->n_gauss_cells;
 
