@@ -36,5 +36,6 @@ var searchData=
   ['nrl_5fpca_5flikelihood',['nrl_PCA_Likelihood',['../d4/d22/classnrl___p_c_a___likelihood.html',1,'nrl_PCA_Likelihood'],['../d4/d22/classnrl___p_c_a___likelihood.html#a4e838638c6bb2307bf7f128ce0d51ddb',1,'nrl_PCA_Likelihood::nrl_PCA_Likelihood(Epetra_Comm &amp;Comm, Teuchos::ParameterList &amp;paramList)'],['../d4/d22/classnrl___p_c_a___likelihood.html#a4cd6f7b6c85e938320b274ca7eb34a3b',1,'nrl_PCA_Likelihood::nrl_PCA_Likelihood()']]],
   ['nrl_5fpca_5flikelihood_2ehpp',['nrl_PCA_Likelihood.hpp',['../d6/d6e/nrl___p_c_a___likelihood_8hpp.html',1,'']]],
   ['nrldata',['nrldata',['../d4/d22/classnrl___p_c_a___likelihood.html#a74948bfc92eda9b5f25ef6d9e9c96d2c',1,'nrl_PCA_Likelihood']]],
+  ['nu',['nu',['../d3/d02/classphase_field_linearized_elasticity.html#a3f69702f09883416ea8486817aad5386',1,'phaseFieldLinearizedElasticity']]],
   ['numindicesperrow',['NumIndicesPerRow',['../d6/d6b/classmesh.html#a19e3669fa6e42a7982800c92643f6c9f',1,'mesh']]]
 ];

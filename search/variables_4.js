@@ -2,7 +2,8 @@ var searchData=
 [
   ['d1_5fn_5ffaces',['D1_N_faces',['../d6/d6b/classmesh.html#a9bd197e804470c89460721680a03a931',1,'mesh']]],
   ['d2_5fn_5ffaces',['D2_N_faces',['../d6/d6b/classmesh.html#ae967ef2505306a8100509aa5686a7dce',1,'mesh']]],
-  ['damagesolution',['damageSolution',['../dd/dc8/classdamage_field.html#aac01a2ca9fba1eeddddd9596061e5f1f',1,'damageField']]],
+  ['damageinterface',['damageInterface',['../d3/d02/classphase_field_linearized_elasticity.html#a5fcea4634ae9f5da6ed81c956d2f1aad',1,'phaseFieldLinearizedElasticity']]],
+  ['damagesolutionoverlaped',['damageSolutionOverlaped',['../d3/d02/classphase_field_linearized_elasticity.html#a9e5c0fa6580846f21552c8a264fe36d0',1,'phaseFieldLinearizedElasticity']]],
   ['delta',['delta',['../d8/dcc/classnewton_raphson.html#aca798ed076d14211f6cd1c20ed9f44d7',1,'newtonRaphson::delta()'],['../d3/d8c/run__mean_models_8m.html#aa87e21ecf59b5fde8b4314d7d70e19c9',1,'delta():&#160;run_meanModels.m'],['../d0/dd4/write_x_m_l_parameter_list_8m.html#a28a64632350ba846cfb7cacc73dc611c',1,'delta():&#160;writeXMLParameterList.m']]],
   ['deltac1',['deltaC1',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a49e42b4b7797ab16f06abb8357cf4788',1,'dirichletStripElongation_StochasticPolyconvexHGO::deltaC1()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#a5f2420986d728d4a38d1925feca36b43',1,'neumannInnerSurface_StochasticPolyconvexHGO::deltaC1()']]],
   ['deltac2',['deltaC2',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#a5c7ce9ecf9f45ddbe434aba66c309d7f',1,'dirichletStripElongation_StochasticPolyconvexHGO::deltaC2()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#a8e8fd1385f58294eddc28ad3e7a60091',1,'neumannInnerSurface_StochasticPolyconvexHGO::deltaC2()']]],

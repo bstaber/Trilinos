@@ -22,6 +22,8 @@ var searchData=
   ['_7eneumanninnersurface_5fstochasticpolyconvexhgo',['~neumannInnerSurface_StochasticPolyconvexHGO',['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#ae230a6f642836a6df3e2a2edc501a2ad',1,'neumannInnerSurface_StochasticPolyconvexHGO']]],
   ['_7enewtonraphson',['~newtonRaphson',['../d8/dcc/classnewton_raphson.html#af1076cf6bb4a819e9af7b320da08f1f2',1,'newtonRaphson']]],
   ['_7enonlinearfiniteelementproblem',['~nonLinearFiniteElementProblem',['../d3/d5b/classnon_linear_finite_element_problem.html#a7646cc9413ad8e0ec09b5a9102fe046a',1,'nonLinearFiniteElementProblem']]],
+  ['_7ephasefieldlinearizedelasticity',['~phaseFieldLinearizedElasticity',['../d3/d02/classphase_field_linearized_elasticity.html#a419f99dcaf8a7bc3a1d9988938d8e448',1,'phaseFieldLinearizedElasticity']]],
+  ['_7ephasefieldproblem',['~phaseFieldProblem',['../df/dad/classphase_field_problem.html#a0faa1272b4f13d82367535feafd4f7d8',1,'phaseFieldProblem']]],
   ['_7ereadnrldata',['~readnrldata',['../dd/de7/classreadnrldata.html#ab4dd568e800050bbf29479d67a9bdb9e',1,'readnrldata']]],
   ['_7erubberblock',['~rubberblock',['../dd/d20/classrubberblock.html#aa37d1bde5448923d61e610749f431082',1,'rubberblock']]],
   ['_7eshinozuka',['~shinozuka',['../da/d5b/classshinozuka.html#a2b908e958961141ba0a6d5c02685b25a',1,'shinozuka']]],

@@ -11,5 +11,7 @@ var searchData=
   ['compute_5fgauss_5fvonmises',['compute_gauss_vonmises',['../dc/d5a/classhyperelasticity.html#a907c89f74407b3943266ade5f2634f0e',1,'hyperelasticity']]],
   ['compute_5fgreen_5flagrange',['compute_green_lagrange',['../dc/d5a/classhyperelasticity.html#adf40b10fec0d4db32b64793e59fca535',1,'hyperelasticity::compute_green_lagrange()'],['../d4/d22/classnrl___p_c_a___likelihood.html#a0463987f5eb95a7b995ca89ec499660d',1,'nrl_PCA_Likelihood::compute_green_lagrange()']]],
   ['compute_5flocal_5fdirections',['compute_local_directions',['../d7/d76/classlaplace.html#a77a372ce2968181cba111d99f75cb0d8',1,'laplace']]],
+  ['computedisplacement',['computeDisplacement',['../d3/d02/classphase_field_linearized_elasticity.html#a1347b5fb745050cceaa7ad40ce98c82b',1,'phaseFieldLinearizedElasticity']]],
+  ['constructgaussmap',['constructGaussMap',['../d3/d02/classphase_field_linearized_elasticity.html#a5e9083e72b2175205384f81f1bb3a3a1',1,'phaseFieldLinearizedElasticity']]],
   ['create_5ffecrsgraph',['create_FECrsGraph',['../dd/dc8/classdamage_field.html#a7d392da7a2c3a2373f57db7da9e409af',1,'damageField::create_FECrsGraph()'],['../dc/d5a/classhyperelasticity.html#adb91ba0572df36e862efcd21d8b83299',1,'hyperelasticity::create_FECrsGraph()'],['../d7/d76/classlaplace.html#a2b27c28c4f7c39936d6a328663f14595',1,'laplace::create_FECrsGraph()'],['../d4/dfd/classlinearized_elasticity.html#a4eff42449d96ca90f301c7eddf613f73',1,'linearizedElasticity::create_FECrsGraph()']]]
 ];

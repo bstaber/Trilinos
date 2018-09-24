@@ -74,7 +74,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     ] ],
     [ "phaseFieldLinearizedElasticity.cpp", "d4/d66/phase_field_linearized_elasticity_8cpp.html", null ],
     [ "phaseFieldLinearizedElasticity.hpp", "d1/dee/phase_field_linearized_elasticity_8hpp.html", [
-      [ "phaseFieldLinearizedElasticity", "d3/d02/classphase_field_linearized_elasticity.html", null ]
+      [ "phaseFieldLinearizedElasticity", "d3/d02/classphase_field_linearized_elasticity.html", "d3/d02/classphase_field_linearized_elasticity" ]
     ] ],
     [ "readnrldata.cpp", "de/d89/readnrldata_8cpp.html", null ],
     [ "readnrldata.hpp", "d2/d81/readnrldata_8hpp.html", [

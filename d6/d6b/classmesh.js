@@ -12,6 +12,7 @@ var classmesh =
     [ "read_gmsh", "d6/d6b/classmesh.html#a73cf292009eccb85bcbdf4704746378a", null ],
     [ "store_feinterp_cells", "d6/d6b/classmesh.html#ac0eb4915f7fd5aed6f48546308f8f7a2", null ],
     [ "store_feinterp_faces", "d6/d6b/classmesh.html#a1bc93b5ae13e978efe1b14e3c44c7dab", null ],
+    [ "update_store_feinterp_cells", "d6/d6b/classmesh.html#a87237bd8c06aed10ce8678419bf6de3d", null ],
     [ "cells_nodes", "d6/d6b/classmesh.html#afcd4e342035ab14af53066c8f289ff10", null ],
     [ "Comm", "d6/d6b/classmesh.html#a0fd0a38e416a36cce4d4958d88e11edb", null ],
     [ "D1_N_faces", "d6/d6b/classmesh.html#a9bd197e804470c89460721680a03a931", null ],

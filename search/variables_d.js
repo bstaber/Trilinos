@@ -22,5 +22,6 @@ var searchData=
   ['npart',['npart',['../d6/d6b/classmesh.html#ae77d70c3363a1791b93d9cf467a9810a',1,'mesh']]],
   ['npoints',['npoints',['../d1/d14/classdistributenrldata.html#a7f36a7fc469c27b703870b2dc6344e83',1,'distributenrldata::npoints()'],['../dd/de7/classreadnrldata.html#ab87b4e270727ec2b7a63068a24a03457',1,'readnrldata::npoints()']]],
   ['nrldata',['nrldata',['../d4/d22/classnrl___p_c_a___likelihood.html#a74948bfc92eda9b5f25ef6d9e9c96d2c',1,'nrl_PCA_Likelihood']]],
+  ['nu',['nu',['../d3/d02/classphase_field_linearized_elasticity.html#a3f69702f09883416ea8486817aad5386',1,'phaseFieldLinearizedElasticity']]],
   ['numindicesperrow',['NumIndicesPerRow',['../d6/d6b/classmesh.html#a19e3669fa6e42a7982800c92643f6c9f',1,'mesh']]]
 ];

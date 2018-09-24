@@ -9,7 +9,9 @@ var hierarchy =
           [ "ceeSBVP", "d2/d17/classcee_s_b_v_p.html", null ],
           [ "linearPatchTest", "d2/d69/classlinear_patch_test.html", null ],
           [ "manufactured", "d7/da3/classmanufactured.html", null ],
-          [ "phaseFieldLinearizedElasticity", "d3/d02/classphase_field_linearized_elasticity.html", null ]
+          [ "phaseFieldLinearizedElasticity", "d3/d02/classphase_field_linearized_elasticity.html", [
+            [ "phaseFieldProblem", "df/dad/classphase_field_problem.html", null ]
+          ] ]
         ] ]
       ] ],
       [ "nonLinearFiniteElementProblem", "d3/d5b/classnon_linear_finite_element_problem.html", [

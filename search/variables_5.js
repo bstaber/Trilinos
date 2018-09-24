@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['e',['e',['../d0/d53/run_8m.html#a08a4415e9d594ff960030b921d42b91e',1,'run.m']]],
+  ['e',['E',['../d3/d02/classphase_field_linearized_elasticity.html#aca478f31ca60eadcbe70d2a2eebb20cf',1,'phaseFieldLinearizedElasticity::E()'],['../d0/d53/run_8m.html#a08a4415e9d594ff960030b921d42b91e',1,'e():&#160;run.m']]],
   ['e1',['E1',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#abbed652a771ebf34a2909ac9072304d6',1,'dirichletStripElongation_StochasticPolyconvexHGO::E1()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#a02d2bc450e72d7616387d263ddebf1a6',1,'neumannInnerSurface_StochasticPolyconvexHGO::E1()']]],
   ['e2',['E2',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#acd7a49f12ff2ac78cd8294e844a5cdfe',1,'dirichletStripElongation_StochasticPolyconvexHGO::E2()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#aef9e8fd6fcaf247277ee837eaa172b99',1,'neumannInnerSurface_StochasticPolyconvexHGO::E2()']]],
   ['e3',['E3',['../d4/d4c/classdirichlet_strip_elongation___stochastic_polyconvex_h_g_o.html#aae25e4b4cea873caf79a1c74a728575b',1,'dirichletStripElongation_StochasticPolyconvexHGO::E3()'],['../db/d41/classneumann_inner_surface___stochastic_polyconvex_h_g_o.html#a380ab6e6b0b9588290976ab15cab085d',1,'neumannInnerSurface_StochasticPolyconvexHGO::E3()']]],
   ['el_5ftype',['el_type',['../d6/d6b/classmesh.html#a42962aa7adaec45d69c1dc212cd89bd0',1,'mesh']]],
+  ['elasticity',['elasticity',['../d3/d02/classphase_field_linearized_elasticity.html#ac15a9ff1d8332f560550989282d1663a',1,'phaseFieldLinearizedElasticity']]],
   ['energy',['energy',['../d1/d14/classdistributenrldata.html#a3e5d43b25c6ec0bf14918daedc677819',1,'distributenrldata::energy()'],['../dd/de7/classreadnrldata.html#a773e4ba0195dfd7544753fb1b32e2720',1,'readnrldata::energy()']]],
   ['epart',['epart',['../d6/d6b/classmesh.html#affe34969c2212d1db294154c01d6ce0e',1,'mesh']]],
   ['eps',['eps',['../d8/dcc/classnewton_raphson.html#ae98b6bc32d72bb10aaa31e2f5e4c6cab',1,'newtonRaphson']]],

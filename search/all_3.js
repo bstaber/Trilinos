@@ -23,6 +23,8 @@ var searchData=
   ['compute_5fgauss_5fvonmises',['compute_gauss_vonmises',['../dc/d5a/classhyperelasticity.html#a907c89f74407b3943266ade5f2634f0e',1,'hyperelasticity']]],
   ['compute_5fgreen_5flagrange',['compute_green_lagrange',['../dc/d5a/classhyperelasticity.html#adf40b10fec0d4db32b64793e59fca535',1,'hyperelasticity::compute_green_lagrange()'],['../d4/d22/classnrl___p_c_a___likelihood.html#a0463987f5eb95a7b995ca89ec499660d',1,'nrl_PCA_Likelihood::compute_green_lagrange()']]],
   ['compute_5flocal_5fdirections',['compute_local_directions',['../d7/d76/classlaplace.html#a77a372ce2968181cba111d99f75cb0d8',1,'laplace']]],
+  ['computedisplacement',['computeDisplacement',['../d3/d02/classphase_field_linearized_elasticity.html#a1347b5fb745050cceaa7ad40ce98c82b',1,'phaseFieldLinearizedElasticity']]],
+  ['constructgaussmap',['constructGaussMap',['../d3/d02/classphase_field_linearized_elasticity.html#a5e9083e72b2175205384f81f1bb3a3a1',1,'phaseFieldLinearizedElasticity']]],
   ['cos_5fplyagl',['cos_plyagl',['../df/d4f/classcompressible_hyperelasticity__linear_patch_test.html#a887222d26d88f27f8d008dee90218594',1,'compressibleHyperelasticity_linearPatchTest::cos_plyagl()'],['../d1/dbe/classmanufactured_solution.html#af75aa8adca0c1c5ca7ac7da264a0be3b',1,'manufacturedSolution::cos_plyagl()'],['../d8/d82/classti_mooney.html#a59dc7046612d5c52386febff5c374463',1,'tiMooney::cos_plyagl()'],['../d1/d2a/classti_mooney_random_field.html#a8ccdc09996c49a5d596173fc9ecc4e79',1,'tiMooneyRandomField::cos_plyagl()']]],
   ['costfunction_2em',['costFunction.m',['../d9/d49/cost_function_8m.html',1,'']]],
   ['covariancematrix',['CovarianceMatrix',['../d9/d49/cost_function_8m.html#a43be0469387a1ab5f1fb2dff9ca335b5',1,'costFunction.m']]],
