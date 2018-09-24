@@ -51,7 +51,6 @@ MPI_Init(&argc, &argv);
   if(xmlInFileName.length()) {
       Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
   }
-
   if (Comm.MyPID()==0){
       paramList->print(std::cout,2,true,true);
   }
