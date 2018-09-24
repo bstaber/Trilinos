@@ -624,3 +624,85 @@ void mesh::store_feinterp_cells(){
     }
     //std::cout << "VOLUME = " << volume << "\n";
 }
+
+void mesh::update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMap){
+
+    int node, eglob;
+    double alpha, beta;
+    Epetra_SerialDenseVector N(el_type);
+    Epetra_SerialDenseMatrix JacobianMatrix(3,3), InverseJacobianMatrix(3,3), X(3,el_type), D(el_type,3), DX(el_type,3);
+
+    local_rows.Resize(3*el_type*n_local_cells);
+    vol_cells.Resize(n_local_cells);
+    N_cells.Reshape(el_type,n_gauss_cells);
+    detJac_cells.Reshape(n_local_cells,n_gauss_cells);
+    DX_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
+    DY_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
+    DZ_N_cells.Reshape(n_gauss_cells*el_type,n_local_cells);
+
+    switch (el_type){
+        case 4:
+            for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+                tetra4::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                for (int inode=0; inode<el_type; ++inode){
+                    N_cells(inode,gp) = N(inode);
+                }
+            }
+            break;
+        case 8:
+            for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+                hexa8::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                for (int inode=0; inode<el_type; ++inode){
+                    N_cells(inode,gp) = N(inode);
+                }
+            }
+            break;
+        case 10:
+            for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+                tetra10::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                for (int inode=0; inode<el_type; ++inode){
+                    N_cells(inode,gp) = N(inode);
+                }
+            }
+            break;
+    };
+    //double volume = 0.0;
+    for (unsigned int eloc=0; eloc<n_local_cells; ++eloc){
+        eglob = local_cells[eloc];
+        for (unsigned int inode=0; inode<el_type; ++inode){
+            node = cells_nodes[el_type*eglob+inode];
+            X(0,inode) = nodes_coord[3*node+0] + u[OverlapMap[3*node+0]];
+            X(1,inode) = nodes_coord[3*node+1] + u[OverlapMap[3*node+1]];
+            X(2,inode) = nodes_coord[3*node+2] + u[OverlapMap[3*node+2]];
+            local_rows(3*el_type*eloc+3*inode) = 3*node;
+            local_rows(3*el_type*eloc+3*inode+1) = 3*node+1;
+            local_rows(3*el_type*eloc+3*inode+2) = 3*node+2;
+        }
+
+        vol_cells(eloc) = 0.0;
+        for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+            switch (el_type){
+                case 4:
+                    tetra4::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                    break;
+                case 8:
+                    hexa8::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                    break;
+                case 10:
+                    tetra10::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                    break;
+            }
+            jacobian_matrix(X,D,JacobianMatrix);
+            jacobian_det(JacobianMatrix,detJac_cells(eloc,gp));
+            dX_shape_functions(D,JacobianMatrix,detJac_cells(eloc,gp),DX);
+            vol_cells(eloc) += gauss_weight_cells(gp)*detJac_cells(eloc,gp);
+            for (int inode=0; inode<el_type; ++inode){
+                DX_N_cells(gp+n_gauss_cells*inode,eloc) = DX(inode,0);
+                DY_N_cells(gp+n_gauss_cells*inode,eloc) = DX(inode,1);
+                DZ_N_cells(gp+n_gauss_cells*inode,eloc) = DX(inode,2);
+            }
+        }
+        //volume += vol_cells(eloc);
+    }
+    //std::cout << "VOLUME = " << volume << "\n";
+}

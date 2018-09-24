@@ -64,6 +64,7 @@ public:
 
     void store_feinterp_faces();
     void store_feinterp_cells();
+    void update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMap);
 
     Epetra_Comm* Comm;
 
