@@ -1,4 +1,5 @@
-## Parallel three-dimensional finite element method in the context of mechanics of materials
+
+## TrilinosUQComp: Uncertainty quantification in computational mechanics
 
 ### Packages and libraries
 
