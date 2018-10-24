@@ -17,7 +17,7 @@
 
 ### Documentation
 
-* Have a look at the [class diagram](https://bstaber.github.io/Trilinos/inherits.html).
+* Have a look at the [class diagram](https://bstaber.github.io/TrilinosUQComp/inherits.html).
 
 <!--
 ### Description
