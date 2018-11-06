@@ -1,5 +1,6 @@
 # Get Trilinos as one entity
-MYAPP_TRILINOS_DIR = /Users/brian/Documents/GitHub/Trilinos/build_MPI/usr/local/include/trilinos
+# MYAPP_TRILINOS_DIR = /Users/brian/Documents/GitHub/Trilinos/build_MPI/usr/local
+MYAPP_TRILINOS_DIR = /usr/local/include/trilinos
 include $(MYAPP_TRILINOS_DIR)/include/Makefile.export.Trilinos
 
 # Make sure to use same compilers and flags as Trilinos
@@ -11,25 +12,24 @@ CXX_FLAGS=$(Trilinos_CXX_COMPILER_FLAGS) $(USER_CXX_FLAGS)
 C_FLAGS=$(Trilinos_C_COMPILER_FLAGS) $(USERC_FLAGS)
 FORT_FLAGS=$(Trilinos_Fortran_COMPILER_FLAGS) $(USER_FORT_FLAGS)
 
-MY_DIRS=-I/Users/brian/Documents
+MY_DIRS=-I/Users/Brian/Documents
 INCLUDE_DIRS=$(Trilinos_INCLUDE_DIRS) $(Trilinos_TPL_INCLUDE_DIRS)
 LIBRARY_DIRS=$(Trilinos_LIBRARY_DIRS) $(Trilinos_TPL_LIBRARY_DIRS)
-
 #LIBRARIES=$(Trilinos_LIBRARIES) $(Trilinos_TPL_LIBRARIES)
 
-LIBRARIES=-lpike-blackbox -lpike-blackbox -ltrilinoscouplings -lpanzer-disc-fe -lpanzer-dof-mgr -lpanzer-core -lpanzer-disc-fe -lpanzer-dof-mgr -lpanzer-core -lpiro -lrol -lrythmos -lmuelu-adapters -lmuelu-interface -lmuelu -lmoertel -llocathyra -llocaepetra -llocalapack -lloca -lnoxepetra -lnoxlapack -lnox -lphalanx -lintrepid2 -lintrepid -lteko -lfei_trilinos -lfei_base -lstratimikos -lstratimikosbelos -lstratimikosaztecoo -lstratimikosamesos -lstratimikosml -lstratimikosifpack -lifpack2-adapters -lifpack2 -lanasazitpetra -lModeLaplace -lanasaziepetra -lanasazi -lkomplex -lamesos2 -lshylu -lshylu -lbelostpetra -lbelosepetra -lbelos -lml -lifpack -lpamgen_extras -lpamgen -lamesos -lgaleri-xpetra -lgaleri-epetra -laztecoo -ldpliris -lisorropia -loptipack -lxpetra-sup -lxpetra -lthyratpetra -lthyraepetraext -lthyraepetra -lthyracore -lthyratpetra -lthyraepetraext -lthyraepetra -lthyracore -lepetraext -ltpetraext -ltpetrainout -ltpetra -lkokkostsqr -ltpetrakernels -ltpetraclassiclinalg -ltpetraclassicnodeapi -ltpetraclassic -ltpetraext -ltpetrainout -ltpetra -lkokkostsqr -ltpetrakernels -ltpetraclassiclinalg -ltpetraclassicnodeapi -ltpetraclassic -ltriutils -lglobipack -lshards -lzoltan -lepetra -lsacado -lrtop -lteuchoskokkoscomm -lteuchoskokkoscompat -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchoscore -lteuchoskokkoscomm -lteuchoskokkoscompat -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchoscore -lkokkosalgorithms -lkokkoscontainers -lkokkoscore -lkokkosalgorithms -lkokkoscontainers -lkokkoscore -ltpi -lgtest
+LIBRARIES=-lml -lifpack -lamesos -lgaleri-xpetra -lgaleri-epetra -laztecoo -lisorropia -lxpetra-sup -lxpetra -lthyratpetra -lthyraepetraext -lthyraepetra -lthyracore -lthyratpetra -lthyraepetraext -lthyraepetra -lthyracore -lepetraext -ltrilinosss -ltpetraext -ltpetrainout -ltpetra -lkokkostsqr -ltpetraclassiclinalg -ltpetraclassicnodeapi -ltpetraclassic -ltpetraext -ltpetrainout -ltpetra -lkokkostsqr -ltpetraclassiclinalg -ltpetraclassicnodeapi -ltpetraclassic -ltriutils -lzoltan -lepetra -lrtop -lkokkoskernels -lteuchoskokkoscomm -lteuchoskokkoscompat -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchosparser -lteuchoscore -lteuchoskokkoscomm -lteuchoskokkoscompat -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchosparser -lteuchoscore -lkokkosalgorithms -lkokkoscontainers -lkokkoscore -lkokkosalgorithms -lkokkoscontainers -lkokkoscore -lmetis -lparmetis /usr/lib/libdl.dylib /usr/lib/liblapack.dylib /usr/lib/libblas.dylib
 
 LINK_FLAGS=$(Trilinos_EXTRA_LD_FLAGS)
 
 #just assuming that epetra is turned on.
 DEFINES=-DMYAPP_EPETRA
 
-#SRC_DIR = /Users/brian/Documents/GitHub/TrilinosUQComp/src/
-#CFLAG = -I$(SRC_DIR)
-#SRC = $(wildcard $(SRC_DIR)*.cpp)
-#OBJ = $(SRC:.cpp=.o)
-#HDR = $(wildcard $(SRC_DIR)*.hpp)
-#MAIN_HDR = $(wildcard *.hpp)
+SRC_DIR = /Users/brian/Documents/GitHub/TrilinosUQComp/src/
+CFLAG = -I$(SRC_DIR)
+SRC = $(wildcard $(SRC_DIR)*.cpp)
+OBJ = $(SRC:.cpp=.o)
+HDR = $(wildcard $(SRC_DIR)*.hpp)
+MAIN_HDR = $(wildcard *.hpp)
 
 default: print_info
 
@@ -66,4 +66,3 @@ main.o: $(MAIN_HDR) $(HDR)
 .PHONY: clean
 clean:
 	rm -f *.o *.a *.exe
-	

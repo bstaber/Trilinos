@@ -9,15 +9,9 @@ Brian Staber (brian.staber@gmail.com)
 #include "Teuchos_RCP.hpp"
 #include "Ifpack.h"
 #include "Ifpack_AdditiveSchwarz.h"
-#include "BelosLinearProblem.hpp"
-#include "BelosBlockGmresSolMgr.hpp"
-#include "BelosEpetraAdapter.hpp"
-#include <BelosSolverFactory.hpp>
-#include "BelosBlockGmresSolMgr.hpp"
 #include "Teuchos_StandardCatchMacros.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_XMLParameterListCoreHelpers.hpp"
-#include "Stratimikos_DefaultLinearSolverBuilder.hpp"
 
 class newtonRaphson
 {
@@ -36,7 +30,7 @@ public:
     ~newtonRaphson();
 
     int Solve_with_Aztec(bool print);
-    int Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL);
+    //int Solve_with_Stratimikos(Teuchos::RCP<Teuchos::ParameterList> solverBuilderSL);
     int print_newton_solution(std::string fileName);
     void Initialization();
     void setInitialization(Epetra_Vector & init);
