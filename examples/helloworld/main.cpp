@@ -21,6 +21,10 @@ int main(int argc, char *argv[]){
 #endif
     
     std::cout << "Hello from " << Comm.MyPID() << " out of " << Comm.NumProc() << "\n";
+    Comm.Barrier();
+    if (Comm.MyPID()==0){
+	std::cout << "EXIT_SUCCESS\n";
+    }
     
 #ifdef HAVE_MPI
     MPI_Finalize();
