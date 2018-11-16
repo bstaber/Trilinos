@@ -18,10 +18,21 @@ Epetra_SerialComm Comm;
 #endif
 
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/manufactured1.msh";
-    std::string mesh_file = "/home/s/staber/Trilinos/arteries/mesh/media_flatboundaries.msh";
+    //std::string mesh_file = "/home/s/staber/Trilinos/arteries/mesh/media_flatboundaries.msh";
+    std::string mesh_file = "/Users/brian/Documents/Github/TrilinosPhaseField/meshes/beam.msh";
     //std::string mesh_file = "/Users/brian/Documents/GitHub/Trilinos/nrl/mesh/composite_hexa_32.msh";
     mesh Mesh(Comm, mesh_file, 1.0);
 
+    if (Comm.MyPID()==0){
+      std::cout << "n_cells = " << Mesh.n_cells << "\n";
+      std::cout << "n_nodes = " << Mesh.n_nodes << "\n";
+    }
+
+    std::cout << Comm.MyPID() << std::setw(15) << Mesh.n_local_cells << "\n";
+    Comm.Barrier();
+    std::cout << Comm.MyPID() << std::setw(15) << Mesh.n_local_nodes_without_ghosts << "\n";
+
+    /*
     Comm.Barrier();
     if (Comm.MyPID()==0){
         std::cout << "EPART:\n";
@@ -33,7 +44,7 @@ Epetra_SerialComm Comm;
             std::cout << Mesh.local_faces[i] << "\n";
         }
     }
-
+    */
     /*std::vector<int> phase;
     for (unsigned int e=0; e<Mesh.n_cells/32; ++e){
         for (unsigned int j=0; j<32; ++j){

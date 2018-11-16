@@ -89,14 +89,13 @@ void phaseFieldLinearizedElasticity::staggeredAlgorithmDirichletBC(Teuchos::Para
     if (Comm->MyPID()==0){
       std::cout << n << std::setw(15) << Time.ElapsedTime() << "\n";
     }
+  }
 
-    if (print){
-      std::string dispfile = "/home/s/staber/Trilinos_results/examples/phasefield/displacement" + std::to_string(int(n)) + ".mtx";
-      std::string damgfile = "/home/s/staber/Trilinos_results/examples/phasefield/damage"       + std::to_string(int(n)) + ".mtx";
-      int error_u = print_solution(lhs_u, dispfile);
-      int error_d = damageInterface->print_solution(lhs_d, damgfile);
-    }
-
+  if (print){
+    std::string dispfile = "/Users/brian/Documents/GitHub/TrilinosPhaseField/applications/block_single_notch/results/displacement" + std::to_string(int(n_steps)) + ".mtx";
+    std::string damgfile = "/Users/brian/Documents/GitHub/TrilinosPhaseField/applications/block_single_notch/results/damage"       + std::to_string(int(n_steps)) + ".mtx";
+    int error_u = print_solution(lhs_u, dispfile);
+    int error_d = damageInterface->print_solution(lhs_d, damgfile);
   }
 
 }
