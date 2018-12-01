@@ -1,15 +1,16 @@
 <ParameterList>
 
 	<ParameterList name="Mesh">
-		<Parameter name="mesh_file" type="string" value="/home/s/staber/Trilinos/nrl/mesh/composite_hexa_32.msh"/>
+		<Parameter name="mesh_file" type="string" value="/home/brian/Documents/GitHub/TrilinosUQComp/nrl/mesh/composite_hexa_32.msh"/>
 	</ParameterList>
 	<ParameterList name="nrldata">
-		<Parameter name="pathnrl" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>
+		<Parameter name="pathnrl" type="string" value="/home/brian/Documents/GitHub/TrilinosUQComp/results/nrl/data/"/>
 		<Parameter name="station" type="string" value="solution1"/>
+		<Parameter name="outputpath" type="string" value="/home/brian/Documents/GitHub/TrilinosUQComp/results/nrl/"/>
 	</ParameterList>
 	<ParameterList name="Data">
-		<Parameter name="path_to_pts" type="string" value="/home/s/staber/Trilinos_results/nrl/data/xyz.txt"/>
-		<Parameter name="path_to_def" type="string" value="/home/s/staber/Trilinos_results/nrl/data/"/>
+		<Parameter name="path_to_pts" type="string" value="/home/brian/Documents/GitHub/TrilinosUQComp/results/data/xyz.txt"/>
+		<Parameter name="path_to_def" type="string" value="/home/brian/Documents/GitHub/TrilinosUQComp/results/data/"/>
 	</ParameterList>
 	<ParameterList name="Newton">
 		<Parameter name="delta"             type="double" value="1.0"/>

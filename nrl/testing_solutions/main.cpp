@@ -16,6 +16,8 @@ Brian Staber (brian.staber@gmail.com)
 #include <boost/random/uniform_real_distribution.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 
+#include "Teuchos_CommandLineProcessor.hpp"
+
 int main(int argc, char *argv[]){
 
     std::string xmlInFileName = "";
@@ -44,62 +46,68 @@ int main(int argc, char *argv[]){
         Teuchos::updateParametersFromXmlFile(xmlInFileName, inoutArg(*paramList));
     }
 
-      Teuchos::RCP<nrl_PCA_Likelihood> RG =
-      Teuchos::rcp(new nrl_PCA_Likelihood(Comm,*paramList));
+    Teuchos::RCP<nrl_PCA_Likelihood> RG = Teuchos::rcp(new nrl_PCA_Likelihood(Comm,*paramList));
+    Comm.Barrier();
+    if (Comm.MyPID()==0){
+      std::cout << "Initialization of NRL object done.\n";
+    }
 
-      Epetra_IntSerialDenseVector seeds(5);
-      Epetra_SerialDenseVector    mean_parameters(5);
-      Epetra_SerialDenseVector    exponents(2);
-      Epetra_SerialDenseVector    correlation_lengths(2);
-      Epetra_SerialDenseVector    coeff_of_variation(4);
-      Epetra_SerialDenseVector    plyagls(4);
+    Epetra_IntSerialDenseVector seeds(5);
+    Epetra_SerialDenseVector    mean_parameters(5);
+    Epetra_SerialDenseVector    exponents(2);
+    Epetra_SerialDenseVector    correlation_lengths(2);
+    Epetra_SerialDenseVector    coeff_of_variation(4);
+    Epetra_SerialDenseVector    plyagls(4);
 
       //mean values of the random parameters G_1(x),...,G_5(x)
-      mean_parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
-      mean_parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
-      mean_parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
-      mean_parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
-      mean_parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
+    mean_parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
+    mean_parameters(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu2");
+    mean_parameters(2) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu3");
+    mean_parameters(3) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu4");
+    mean_parameters(4) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu5");
       //mean_parameters.Scale(1.0e3);
       //deterministic exponents beta_4 and beta_5
-      exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
-      exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
+    exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
+    exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
       //correlation lengths of the Gaussian random field
-      correlation_lengths(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
-      correlation_lengths(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
+    correlation_lengths(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
+    correlation_lengths(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
       //coefficients of variation of the random parameters G_1(x),...,G_4(x)
-      coeff_of_variation(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
-      coeff_of_variation(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
-      coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
-      coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
+    coeff_of_variation(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
+    coeff_of_variation(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
+    coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
+    coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
       //ply angle
-      plyagls(0) = 15.0;
-      plyagls(1) = 30.0;
-      plyagls(2) = 60.0;
-      plyagls(3) = 75.0;
+    plyagls(0) = 15.0;
+    plyagls(1) = 30.0;
+    plyagls(2) = 60.0;
+    plyagls(3) = 75.0;
 
-      int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
+    int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
 
-      for (unsigned int i=0; i<4; ++i){
-        for (unsigned int j=0; j<nmc; ++j){
-          seeds(0) = 5*(j+i*nmc)+0;
-          seeds(1) = 5*(j+i*nmc)+1;
-          seeds(2) = 5*(j+i*nmc)+2;
-          seeds(3) = 5*(j+i*nmc)+3;
-          seeds(4) = 5*(j+i*nmc)+4;
-          int flag = RG->rnd(j                  ,
-                             seeds              ,
-                             mean_parameters    ,
-                             exponents          ,
-                             correlation_lengths,
-                             coeff_of_variation ,
-                             plyagls(i)         ,
-                             false              ,
-                             true               ,
-                             true               ,
-                             false              );
+    for (unsigned int i=0; i<4; ++i){
+      for (unsigned int j=0; j<nmc; ++j){
+        seeds(0) = 5*(j+i*nmc)+0;
+        seeds(1) = 5*(j+i*nmc)+1;
+        seeds(2) = 5*(j+i*nmc)+2;
+        seeds(3) = 5*(j+i*nmc)+3;
+        seeds(4) = 5*(j+i*nmc)+4;
+        if (Comm.MyPID()==0){
+          std::cout << "Angle #" << i << "\t Monte Carlo simulation #" << j << "\n";
         }
+        int flag = RG->rnd(j                  ,
+                           seeds              ,
+                           mean_parameters    ,
+                           exponents          ,
+                           correlation_lengths,
+                           coeff_of_variation ,
+                           plyagls(i)         ,
+                           true               ,
+                           true               ,
+                           true               ,
+                           false              );
       }
+    }
 
 #ifdef HAVE_MPI
     MPI_Finalize();

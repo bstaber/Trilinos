@@ -15,14 +15,14 @@ FORT_FLAGS=$(Trilinos_Fortran_COMPILER_FLAGS) $(USER_FORT_FLAGS)
 MY_DIRS=-I/Users/Brian/Documents
 INCLUDE_DIRS=$(Trilinos_INCLUDE_DIRS) $(Trilinos_TPL_INCLUDE_DIRS)
 LIBRARY_DIRS=$(Trilinos_LIBRARY_DIRS) $(Trilinos_TPL_LIBRARY_DIRS)
-LIBRARIES=$(Trilinos_LIBRARIES) $(Trilinos_TPL_LIBRARIES)
+LIBRARIES=$(Trilinos_LIBRARIES) $(Trilinos_TPL_LIBRARIES) -lmetis
 
 LINK_FLAGS=$(Trilinos_EXTRA_LD_FLAGS)
 
 #just assuming that epetra is turned on.
 DEFINES=-DMYAPP_EPETRA
 
-SRC_DIR = /home/s/staber/Trilinos/src/
+SRC_DIR = /home/brian/Documents/GitHub/TrilinosUQComp/src/
 CFLAG = -I$(SRC_DIR)
 SRC = $(wildcard $(SRC_DIR)*.cpp)
 OBJ = $(SRC:.cpp=.o)
