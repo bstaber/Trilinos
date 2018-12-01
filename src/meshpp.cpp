@@ -42,13 +42,13 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling){
     get_local_nodes(MyPID);
     get_cells_and_ghosts(MyPID);
 
-    /*if (MyPID==0){
+    if (MyPID==0){
         std::cout << std::setw(5) << "MyPID" << std::setw(20) << "n_cells" << std::setw(20) << "el_type" << std::setw(20) << "face_type" << std::setw(20) << "n_nodes" << std::setw(20) << "n_faces" << std::setw(20) << "processors\n";
         std::cout << std::setw(5) << MyPID << std::setw(20) << n_cells << std::setw(20) << el_type << std::setw(20) << face_type << std::setw(20) << n_nodes << std::setw(20) << n_faces << std::setw(20) << Comm->NumProc() << "\n";
         std::cout << std::setw(5) << "MyPID" << std::setw(20) << "n_local_cells" << std::setw(20) << "n_local_nodes" << std::setw(20) << "n_local_faces" << "\n";
     }
     Comm->Barrier();
-    std::cout << std::setw(5) << MyPID << std::setw(20) << n_local_cells << std::setw(20) << n_local_nodes_without_ghosts << std::setw(20) << n_local_faces << "\n";*/
+    std::cout << std::setw(5) << MyPID << std::setw(20) << n_local_cells << std::setw(20) << n_local_nodes_without_ghosts << std::setw(20) << n_local_faces << "\n";
 
     if (n_local_faces>0 && (face_type==3 || face_type==4 || face_type==6)){
         store_feinterp_faces();
@@ -148,7 +148,7 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
             case 3:
                 for (unsigned int inode=0; inode<4; ++inode){
                     meshfile >> nodes_quad4[inode];
-                    if (tag1==92 || tag1==93){
+                    if (tag1==90){
                         quad4_nodes.push_back(nodes_quad4[inode]-1);
                     }
                 }

@@ -36,13 +36,13 @@ public:
         _paramList             = paramList;
         std::string pathnrl    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"pathnrl");
         std::string station    = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"station");
-        fullOutputPath         = "/home/s/staber/Trilinos_results/nrl/random_generator_for_pca_likelihood/" + station + "/";
+        std::string outputpath = Teuchos::getParameter<std::string>(paramList.sublist("nrldata"),"outputpath");
+        fullOutputPath         = outputpath + station + "/";
         interface              = Teuchos::rcp(new tiMooneyRandomField(Comm,paramList));
         newton                 = Teuchos::rcp(new newtonRaphson(*interface,paramList));
         nrldata                = Teuchos::rcp(new distributenrldata(*interface->Mesh,pathnrl));
 
         MapExpPoints           = new Epetra_Map(-1,nrldata->global_id_faces.size(),&nrldata->global_id_faces[0],0,Comm);
-
     }
 
     nrl_PCA_Likelihood(){
@@ -71,8 +71,14 @@ public:
         double plyagl = plyagl_deg*2.0*M_PI/360.0;
         interface->setParameters(mean_parameters,exponents,omega);
         interface->set_plyagl(plyagl);
-        interface->RandomFieldGenerator(seeds);
 
+        if (comm->MyPID()==0){
+          std::cout << "Generation of the Gaussian fields...";
+        }
+        interface->RandomFieldGenerator(seeds);
+        if (comm->MyPID()==0){
+          std::cout << "done.\n";
+        }
         Epetra_Vector RandomVariableX(*MapExpPoints);
         RandomVariableX.PutScalar(0.0);
 
@@ -202,6 +208,10 @@ public:
             eij(e,1) = (1.0/2.0)*(right_cauchy(1,1)-1.0);
             eij(e,2) = (1.0/2.0)*right_cauchy(0,1);
         }
+    }
+
+    void compute_force_reaction(){
+
     }
 
 };
