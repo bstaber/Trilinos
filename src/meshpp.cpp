@@ -95,7 +95,7 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
     unsigned int nodes_cells10[10];
 
     std::vector<int> tri3_nodes;
-    std::vector<int> quad4_nodes;
+    std::vector<int> quad4_nodes, quad4_phases;
     std::vector<int> tri6_nodes;
     std::vector<int> tetra4_nodes;
     std::vector<int> hexa8_nodes;
@@ -148,10 +148,9 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
             case 3:
                 for (unsigned int inode=0; inode<4; ++inode){
                     meshfile >> nodes_quad4[inode];
-                    if (tag1==90){
-                        quad4_nodes.push_back(nodes_quad4[inode]-1);
-                    }
+                    quad4_nodes.push_back(nodes_quad4[inode]-1);
                 }
+                quad4_phases.push_back(tag1);
                 break;
             case 4:
                 for (unsigned int inode=0; inode<4; ++inode){
@@ -233,6 +232,7 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         n_faces = n_quad4;
         faces_nodes.reserve(quad4_nodes.size());
         faces_nodes = quad4_nodes;
+        faces_phases = quad4_phases;
 
         gauss_points_quad4(gauss_weight_faces,xi_faces,eta_faces);
         n_gauss_faces = gauss_weight_faces.Length();

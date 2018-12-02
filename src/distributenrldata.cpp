@@ -37,22 +37,24 @@ void distributenrldata::retrieve_data(mesh & Mesh, std::string & path){
         testz = nrldata->points(p,2);
         for (unsigned int e_lid=0; e_lid<n_local_faces; ++e_lid){
             e_gid = Mesh.local_faces[e_lid];
-            result = -1;
-            for (unsigned int inode=0; inode<nvert; ++inode){
-                node = Mesh.faces_nodes[nvert*e_gid+inode];
-                x(inode) = Mesh.nodes_coord[3*node+0];
-                y(inode) = Mesh.nodes_coord[3*node+1];
-                z(inode) = Mesh.nodes_coord[3*node+2];
-            }
-            if (z(0)==testz && testx>=0.0 && testx<=50.0 && testy>=0.0 && testy<=25.0){
-                result = pnpoly(nvert,x,y,testx,testy);
-            }
-            if (result==1){
-                local_id_faces.push_back(e_lid);
-                global_id_faces.push_back(p);
-                residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
-                local_xi.push_back(xi);
-                local_eta.push_back(eta);
+            if (Mesh.faces_phases[e_gid]==92 || Mesh.faces_phases[e_gid]==93){
+              result = -1;
+              for (unsigned int inode=0; inode<nvert; ++inode){
+                  node = Mesh.faces_nodes[nvert*e_gid+inode];
+                  x(inode) = Mesh.nodes_coord[3*node+0];
+                  y(inode) = Mesh.nodes_coord[3*node+1];
+                  z(inode) = Mesh.nodes_coord[3*node+2];
+              }
+              if (z(0)==testz && testx>=0.0 && testx<=50.0 && testy>=0.0 && testy<=25.0){
+                  result = pnpoly(nvert,x,y,testx,testy);
+              }
+              if (result==1){
+                  local_id_faces.push_back(e_lid);
+                  global_id_faces.push_back(p);
+                  residual = inverse_isoparametric_mapping(testx,testy,x,y,xi,eta);
+                  local_xi.push_back(xi);
+                  local_eta.push_back(eta);
+              }
             }
         }
     }

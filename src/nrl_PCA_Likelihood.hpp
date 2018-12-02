@@ -175,44 +175,91 @@ public:
 
         for (unsigned int e=0; e<nrldata->local_id_faces.size(); ++e){
             e_gid = interface->Mesh->local_faces[nrldata->local_id_faces[e]];
+            //if (interface->Mesh->faces_phases[e_gid]==92 || interface->Mesh->faces_phases[e_gid]==93){
+              for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
+                  node = interface->Mesh->faces_nodes[interface->Mesh->face_type*e_gid+inode];
+                  matrix_X(0,inode) = interface->Mesh->nodes_coord[3*node+0];
+                  matrix_X(1,inode) = interface->Mesh->nodes_coord[3*node+1];
+                  matrix_x(0,inode) = u[interface->OverlapMap->LID(3*node+0)] + interface->Mesh->nodes_coord[3*node+0];
+                  matrix_x(1,inode) = u[interface->OverlapMap->LID(3*node+1)] + interface->Mesh->nodes_coord[3*node+1];
+              }
+              switch (interface->Mesh->face_type){
+                  case 3:
+                      tri3::d_shape_functions(D, nrldata->local_xi[e], nrldata->local_eta[e]);
+                      break;
+                  case 4:
+                      quad4::d_shape_functions(D, nrldata->local_xi[e], nrldata->local_eta[e]);
+                      break;
+                  case 6:
+                      tri6::d_shape_functions(D, nrldata->local_xi[e], nrldata->local_eta[e]);
+                      break;
+              }
+              jacobian_matrix(matrix_X,D,JacobianMatrix);
+              det_jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
+              InverseJacobianMatrix(0,0) =  (1.0/det_jac)*JacobianMatrix(1,1);
+              InverseJacobianMatrix(1,1) =  (1.0/det_jac)*JacobianMatrix(0,0);
+              InverseJacobianMatrix(0,1) = -(1.0/det_jac)*JacobianMatrix(0,1);
+              InverseJacobianMatrix(1,0) = -(1.0/det_jac)*JacobianMatrix(1,0);
+              dx_shape_functions.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
+
+              deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
+              right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
+
+              eij(e,0) = (1.0/2.0)*(right_cauchy(0,0)-1.0);
+              eij(e,1) = (1.0/2.0)*(right_cauchy(1,1)-1.0);
+              eij(e,2) = (1.0/2.0)*right_cauchy(0,1);
+          }
+        //}
+    }
+
+    /*void compute_force_reaction(Epetra_Vector & x){
+      Epetra_Vector u(*(interface->OverlapMap));
+      u.Import(x, *(interface->ImportToOverlapMap), Insert);
+
+      int e_gid, node;
+      double det_jac;
+
+      Epetra_SerialDenseMatrix matrix_X(2,interface->Mesh->face_type);
+      Epetra_SerialDenseMatrix matrix_x(2,interface->Mesh->face_type);
+
+      Epetra_SerialDenseMatrix D(interface->Mesh->face_type,2);
+      Epetra_SerialDenseMatrix dx_shape_functions(interface->Mesh->face_type,2);
+      Epetra_SerialDenseMatrix deformation_gradient(2,2);
+      Epetra_SerialDenseMatrix JacobianMatrix(2,2);
+      Epetra_SerialDenseMatrix InverseJacobianMatrix(2,2);
+
+      Epetra_SerialDenseVector TResult(2);
+      Epetra_SerialDenseMatrix PiolaS(2,2);
+      Epetra_SerialDenseVector TStress(2);
+      Epetra_SerianDenseVector Normal(2);
+
+      for (unsigned int e=0; e<interface->Mesh->local_faces.size(); ++e){
+          e_gid = interface->Mesh->local_faces[e];
+          if (interface->Mesh->faces_phases[e_gid]==90){
             for (unsigned int inode=0; inode<interface->Mesh->face_type; ++inode){
                 node = interface->Mesh->faces_nodes[interface->Mesh->face_type*e_gid+inode];
                 matrix_X(0,inode) = interface->Mesh->nodes_coord[3*node+0];
-                matrix_X(1,inode) = interface->Mesh->nodes_coord[3*node+1];
+                matrix_X(1,inode) = interface->Mesh->nodes_coord[3*node+2];
                 matrix_x(0,inode) = u[interface->OverlapMap->LID(3*node+0)] + interface->Mesh->nodes_coord[3*node+0];
-                matrix_x(1,inode) = u[interface->OverlapMap->LID(3*node+1)] + interface->Mesh->nodes_coord[3*node+1];
+                matrix_x(1,inode) = u[interface->OverlapMap->LID(3*node+2)] + interface->Mesh->nodes_coord[3*node+2];
             }
-            switch (interface->Mesh->face_type){
-                case 3:
-                    tri3::d_shape_functions(D, nrldata->local_xi[e], nrldata->local_eta[e]);
-                    break;
-                case 4:
-                    quad4::d_shape_functions(D, nrldata->local_xi[e], nrldata->local_eta[e]);
-                    break;
-                case 6:
-                    tri6::d_shape_functions(D, nrldata->local_xi[e], nrldata->local_eta[e]);
-                    break;
+            for (unsigned int gp=0; gp<interface->Mesh->n_gauss_faces; ++gp){
+              jacobian_matrix(matrix_X,D,JacobianMatrix);
+              det_jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
+              InverseJacobianMatrix(0,0) =  (1.0/det_jac)*JacobianMatrix(1,1);
+              InverseJacobianMatrix(1,1) =  (1.0/det_jac)*JacobianMatrix(0,0);
+              InverseJacobianMatrix(0,1) = -(1.0/det_jac)*JacobianMatrix(0,1);
+              InverseJacobianMatrix(1,0) = -(1.0/det_jac)*JacobianMatrix(1,0);
+              dx_shape_functions.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
+              deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
+
+              TStress.Multiplt('N','N',1.0,PiolaS,Normal,0.0);
+              TResult.Multiply('N','N',interface->Mesh->gauss_weight_faces[gp],deformation_gradient,TStress,1.0);
             }
-            jacobian_matrix(matrix_X,D,JacobianMatrix);
-            det_jac = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
-            InverseJacobianMatrix(0,0) =  (1.0/det_jac)*JacobianMatrix(1,1);
-            InverseJacobianMatrix(1,1) =  (1.0/det_jac)*JacobianMatrix(0,0);
-            InverseJacobianMatrix(0,1) = -(1.0/det_jac)*JacobianMatrix(0,1);
-            InverseJacobianMatrix(1,0) = -(1.0/det_jac)*JacobianMatrix(1,0);
-            dx_shape_functions.Multiply('N','N',1.0,D,InverseJacobianMatrix,0.0);
-
-            deformation_gradient.Multiply('N','N',1.0,matrix_x,dx_shape_functions,0.0);
-            right_cauchy.Multiply('T','N',1.0,deformation_gradient,deformation_gradient,0.0);
-
-            eij(e,0) = (1.0/2.0)*(right_cauchy(0,0)-1.0);
-            eij(e,1) = (1.0/2.0)*(right_cauchy(1,1)-1.0);
-            eij(e,2) = (1.0/2.0)*right_cauchy(0,1);
-        }
+          }
+      }
     }
-
-    void compute_force_reaction(){
-
-    }
+    */
 
 };
 #endif

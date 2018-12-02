@@ -79,6 +79,7 @@ public:
     std::vector<int> local_nodes_without_ghosts, local_dof_without_ghosts;
     std::vector<int> local_nodes, local_dof;
     std::vector<int> local_cells, local_faces;
+    std::vector<int> faces_phases;
 
     idx_t * epart;
     idx_t * npart;
