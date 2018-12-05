@@ -48,7 +48,7 @@ public:
     nrl_PCA_Likelihood(){
     }
 
-    int rnd(unsigned int                & nmc                  ,
+    int rnd(unsigned int                  nmc                  ,
             Epetra_IntSerialDenseVector & seeds                ,
             Epetra_SerialDenseVector    & mean_parameters      ,
             Epetra_SerialDenseVector    & exponents            ,
@@ -98,7 +98,7 @@ public:
             if (!error){
 
                 if (printDisplacements){
-                  std::string path = fullOutputPath + "u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_k=" + std::to_string(i) + ".mtx";
+                  std::string path = fullOutputPath + "u_nmc=" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_load=" + std::to_string(i) + "_delta=" + std::to_string(omega(0)) + "_l1" + std::to_string(omega(4)) + "_l2" + std::to_string(omega(5)) + ".mtx";
                   int flag = newton->print_newton_solution(path);
                   if (flag){
                     if (comm->MyPID()==0){
@@ -108,7 +108,7 @@ public:
                 }
 
                 if (printDeformations){
-                  std::string path = fullOutputPath + "e_nmc" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_k=" + std::to_string(i) + ".mtx";
+                  std::string path = fullOutputPath + "e_nmc" + std::to_string(nmc) + "_angle=" + std::to_string(int(plyagl_deg)) + "_load=" + std::to_string(i) + "_delta=" + std::to_string(omega(0)) + "_l1" + std::to_string(omega(4)) + "_l2" + std::to_string(omega(5)) + ".mtx";
                   double xi = 0.0;
                   int flag = interface->compute_green_lagrange(*newton->x,xi,xi,xi,path);
                   if (flag){
