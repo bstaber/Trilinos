@@ -96,9 +96,9 @@ int main(int argc, char *argv[]){
     lx(0) = 2.0; lx(1) = 2.0; lx(2) = 2.0;
     ly(0) = 2.0; ly(1) = 2.0; ly(2) = 2.0;
 
+    delta(3) = 0.1; delta(4) = 0.2; delta(5) = 0.3;
     lx(3) = 2.0;  lx(4) = 2.0;  lx(5) = 2.0;
     ly(3) = 10.0; ly(4) = 10.0; ly(5) = 10.0;
-    delta(3) = 0.1; delta(4) = 0.2; delta(5) = 0.3;
 
     seeds(0) = 0; seeds(1) = 1; seeds(2) = 2; seeds(3) = 3; seeds(4) = 4;
 
