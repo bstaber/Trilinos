@@ -105,10 +105,10 @@ int main(int argc, char *argv[]){
     for (unsigned int i=0; i<6; ++i){
       correlation_lengths(0) = lx(i);
       correlation_lengths(1) = ly(i);
-      coeff_of_variation(0) = delta(i);
-      coeff_of_variation(1) = delta(i);
-      coeff_of_variation(2) = delta(i);
-      coeff_of_variation(3) = delta(i);
+      coeff_of_variation(0)  = delta(i);
+      coeff_of_variation(1)  = delta(i);
+      coeff_of_variation(2)  = delta(i);
+      coeff_of_variation(3)  = delta(i);
       int flag = RG->rnd(0                  ,
                          seeds              ,
                          mean_parameters    ,
@@ -148,6 +148,7 @@ int main(int argc, char *argv[]){
       }
     }
     */
+    
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
