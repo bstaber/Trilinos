@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
     Epetra_SerialDenseVector    exponents(2);
     Epetra_SerialDenseVector    correlation_lengths(2);
     Epetra_SerialDenseVector    coeff_of_variation(4);
-    Epetra_SerialDenseVector    plyagls(4);
+    //Epetra_SerialDenseVector    plyagls(4);
 
       //mean values of the random parameters G_1(x),...,G_5(x)
     mean_parameters(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"mu1");
@@ -70,20 +70,59 @@ int main(int argc, char *argv[]){
     exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
       //correlation lengths of the Gaussian random field
+    /*
     correlation_lengths(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
     correlation_lengths(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
+    */
       //coefficients of variation of the random parameters G_1(x),...,G_4(x)
+    /*
     coeff_of_variation(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
     coeff_of_variation(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
     coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
     coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
+    */
       //ply angle
+    /*
     plyagls(0) = 15.0;
     plyagls(1) = 30.0;
     plyagls(2) = 60.0;
     plyagls(3) = 75.0;
+    */
 
-    int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
+    double plyagl = 30.0;
+    Epetra_SerialDenseVector lx(6), ly(6), delta(6);
+
+    delta(0) = 0.1; delta(1) = 0.2; delta(2) = 0.3;
+    lx(0) = 2.0; lx(1) = 2.0; lx(2) = 2.0;
+    ly(0) = 2.0; ly(1) = 2.0; ly(2) = 2.0;
+
+    lx(3) = 2.0;  lx(4) = 2.0;  lx(5) = 2.0;
+    ly(3) = 10.0; ly(4) = 10.0; ly(5) = 10.0;
+    delta(3) = 0.1; delta(4) = 0.2; delta(5) = 0.3;
+
+    seeds(0) = 0; seeds(1) = 1; seeds(2) = 2; seeds(3) = 3; seeds(4) = 4;
+
+    for (unsigned int i=0; i<6; ++i){
+      correlation_lengths(0) = lx(i);
+      correlation_lengths(1) = ly(i);
+      coeff_of_variation(0) = delta(i);
+      coeff_of_variation(1) = delta(i);
+      coeff_of_variation(2) = delta(i);
+      coeff_of_variation(3) = delta(i);
+      int flag = RG->rnd(0                  ,
+                         seeds              ,
+                         mean_parameters    ,
+                         exponents          ,
+                         correlation_lengths,
+                         coeff_of_variation ,
+                         plyagl             ,
+                         true               ,
+                         true               ,
+                         true               ,
+                         false              );
+    }
+
+    /*int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
 
     for (unsigned int i=0; i<4; ++i){
       for (unsigned int j=0; j<nmc; ++j){
@@ -108,7 +147,7 @@ int main(int argc, char *argv[]){
                            false              );
       }
     }
-
+    */
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
