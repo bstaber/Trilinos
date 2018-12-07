@@ -58,7 +58,8 @@ public:
             bool                          printNewtonIterations,
             bool                          printDisplacements   ,
             bool                          printDeformations    ,
-            bool                          printRandomVariableY)
+            bool                          printRandomVariableY ,
+            bool                          printDeformationsOnFaces)
     {
         Epetra_SerialDenseVector omega(6);
         omega(0) = coeff_of_variation(0);
@@ -81,6 +82,13 @@ public:
         }
         Epetra_Vector RandomVariableX(*MapExpPoints);
         RandomVariableX.PutScalar(0.0);
+
+        Epetra_Vector DeformationsOnFaces_xx(*MapExpPoints);
+        Epetra_Vector DeformationsOnFaces_yy(*MapExpPoints);
+        Epetra_Vector DeformationsOnFaces_xy(*MapExpPoints);
+        DeformationsOnFaces_xx.PutScalar(0.0);
+        DeformationsOnFaces_yy.PutScalar(0.0);
+        DeformationsOnFaces_xy.PutScalar(0.0);
 
         int error;
         newton->Initialization();
@@ -120,6 +128,21 @@ public:
 
                 Epetra_SerialDenseMatrix eij(nrldata->local_id_faces.size(),3);
                 compute_green_lagrange(*newton->x,eij);
+
+                if (printDeformationsOnFaces){
+                  for (unsigned int i=0; i<nrldata->global_id_faces.size(); ++i){
+                    DeformationsOnFaces_xx[MapExpPoints->LID(nrldata->global_id_faces[i])] = eij(i,0);
+                    DeformationsOnFaces_yy[MapExpPoints->LID(nrldata->global_id_faces[i])] = eij(i,1);
+                    DeformationsOnFaces_xy[MapExpPoints->LID(nrldata->global_id_faces[i])] = eij(i,2);
+                  }
+                  std::string pathDeformationsOnFaces_xx = fullOutputPath + "exx_nmc=" + std::to_string(nmc) + "_plyagl=" + std::to_string(int(plyagl_deg)) + "_s=" + std::to_string(i) + ".mtx";
+                  std::string pathDeformationsOnFaces_yy = fullOutputPath + "eyy_nmc=" + std::to_string(nmc) + "_plyagl=" + std::to_string(int(plyagl_deg)) + "_s=" + std::to_string(i) + ".mtx";
+                  std::string pathDeformationsOnFaces_xy = fullOutputPath + "exy_nmc=" + std::to_string(nmc) + "_plyagl=" + std::to_string(int(plyagl_deg)) + "_s=" + std::to_string(i) + ".mtx";
+                  comm->Barrier();
+                  int error1 = printIndicatorY(pathDeformationsOnFaces_xx, DeformationsOnFaces_xx);
+                  int error2 = printIndicatorY(pathDeformationsOnFaces_yy, DeformationsOnFaces_yy);
+                  int error3 = printIndicatorY(pathDeformationsOnFaces_xy, DeformationsOnFaces_xy);
+                }
 
                 for (unsigned int j=0; j<nrldata->local_id_faces.size(); ++j){
                     RandomVariableX[j] += eij(j,0)*eij(j,0)+eij(j,1)*eij(j,1)+2.0*eij(j,2)*eij(j,2);

@@ -70,17 +70,17 @@ int main(int argc, char *argv[]){
     exponents(0) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta4");
     exponents(1) = Teuchos::getParameter<double>(paramList->sublist("TIMooney"),"beta5");
       //correlation lengths of the Gaussian random field
-    /*
+
     correlation_lengths(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"lx");
     correlation_lengths(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"ly");
-    */
+
       //coefficients of variation of the random parameters G_1(x),...,G_4(x)
-    /*
+
     coeff_of_variation(0) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta1");
     coeff_of_variation(1) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta2");
     coeff_of_variation(2) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta3");
     coeff_of_variation(3) = Teuchos::getParameter<double>(paramList->sublist("Shinozuka"),"delta4");
-    */
+
       //ply angle
     /*
     plyagls(0) = 15.0;
@@ -88,8 +88,7 @@ int main(int argc, char *argv[]){
     plyagls(2) = 60.0;
     plyagls(3) = 75.0;
     */
-
-    double plyagl = 30.0;
+    /*
     Epetra_SerialDenseVector lx(6), ly(6), delta(6);
 
     delta(0) = 0.1; delta(1) = 0.2; delta(2) = 0.3;
@@ -117,37 +116,40 @@ int main(int argc, char *argv[]){
                          coeff_of_variation ,
                          plyagl             ,
                          true               ,
-                         true               ,
-                         true               ,
-                         false              );
-    }
-
-    /*int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
-
-    for (unsigned int i=0; i<4; ++i){
-      for (unsigned int j=0; j<nmc; ++j){
-        seeds(0) = 5*(j+i*nmc)+0;
-        seeds(1) = 5*(j+i*nmc)+1;
-        seeds(2) = 5*(j+i*nmc)+2;
-        seeds(3) = 5*(j+i*nmc)+3;
-        seeds(4) = 5*(j+i*nmc)+4;
-        if (Comm.MyPID()==0){
-          std::cout << "Angle #" << i << "\t Monte Carlo simulation #" << j << "\n";
-        }
-        int flag = RG->rnd(j                  ,
-                           seeds              ,
-                           mean_parameters    ,
-                           exponents          ,
-                           correlation_lengths,
-                           coeff_of_variation ,
-                           plyagls(i)         ,
-                           true               ,
-                           true               ,
-                           true               ,
-                           false              );
-      }
+                         false              ,
+                         false             ,
+                         false              ,
+                         true               );
     }
     */
+    int nmc = Teuchos::getParameter<int>(paramList->sublist("Shinozuka"),"nmc");
+
+    //for (unsigned int i=0; i<4; ++i){
+    double plyagl = 30.0;
+    int i = 0;
+    for (unsigned int j=0; j<nmc; ++j){
+      seeds(0) = 5*(j+i*nmc)+0;
+      seeds(1) = 5*(j+i*nmc)+1;
+      seeds(2) = 5*(j+i*nmc)+2;
+      seeds(3) = 5*(j+i*nmc)+3;
+      seeds(4) = 5*(j+i*nmc)+4;
+      if (Comm.MyPID()==0){
+        std::cout << "\t Monte Carlo simulation #" << j << "\n";
+      }
+      int flag = RG->rnd(j                  ,
+                         seeds              ,
+                         mean_parameters    ,
+                         exponents          ,
+                         correlation_lengths,
+                         coeff_of_variation ,
+                         plyagl             ,
+                         true               ,
+                         false              ,
+                         false              ,
+                         false              ,
+                         true               );
+    }
+    //}
 
 #ifdef HAVE_MPI
     MPI_Finalize();
