@@ -166,10 +166,12 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 Krylov_res = solver.TrueResidual();
                 x.Update(1.0,lhs,1.0);
 
+                // compute eto here ?
+
                 FLAG3=1;
             }
         }
-    // compute eto and ep here ?
+    // compute ep here ?
     }
     return 0;
 }
