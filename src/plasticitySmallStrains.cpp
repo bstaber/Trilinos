@@ -169,6 +169,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 FLAG3=1;
             }
         }
+    // compute eto and ep here ?
     }
     return 0;
 }
