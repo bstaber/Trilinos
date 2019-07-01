@@ -69,6 +69,8 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     std::string solver_its = "GMRES_its";
     std::string solver_res = "GMRES_res";
 
+    // need to add a first elastic prediction
+
     FLAG1=1;
     while (FLAG1==1){
 
