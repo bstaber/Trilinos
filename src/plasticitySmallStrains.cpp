@@ -93,7 +93,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                     break;
                 }
             }
-            interface->pressure_load = time*pressure_load;
+            //interface->pressure_load = time*pressure_load;
 
             iter = 0;
             while (FLAG3==1){
@@ -120,11 +120,11 @@ int plasticitySmallStrains::incremental_bvp(bool print){
 
                     if (MyPID==0 && print){
                         if(iter>2){
-                            std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << time*pressure_load << "\n";
+                            std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\n"; /* << "\t\t\t" << time*pressure_load << "\n"; */
                         }
                         else{
-                            std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "aztec_time" << "\t\t" << "pressure_load [kPa]" << "\n";
-                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << time*pressure_load << "\n";
+                            std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "aztec_time" << "\t\t" << "\n"; /*"pressure_load [kPa]" << "\n";*/
+                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << "\n"; /*time*pressure_load << "\n";*/
                         }
                     }
 
