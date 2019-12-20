@@ -17,7 +17,11 @@ public:
     //void initialize(Teuchos::ParameterList & parameterlist);
     int incremental_bvp(bool print);
 
-    void get_matrix_and_rhs(Epetra_Vector & eto, Epetra_Vector & ep_old, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void assembleMixedDirichletNeumann_homogeneousForcing(const Epetra_Vector & eto, const Epetra_Vector & ep_old, Epetra_Vector & ep_new, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void stiffness_rhs_homogeneousForcing(const Epetra_Vector & eto, const Epetra_Vector & ep_old, Epetra_Vector & ep_new, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void constitutive_problem(const unsigned int & elid, const unsigned int & igp, Epetra_SerialDenseVector & sig, Epetra_SerialDenseMatrix & tgm);
+    void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
+
     virtual void setup_dirichlet_conditions() = 0;
     virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement) = 0;
 

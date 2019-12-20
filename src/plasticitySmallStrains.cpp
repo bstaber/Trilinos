@@ -54,6 +54,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     Epetra_Vector      x(*StandardMap);
     Epetra_Vector      y(*StandardMap);
     Epetra_Vector      eto(*GaussMap);
+    Epetra_Vector      ep_new(*GaussMap);
     Epetra_Vector      ep_old(*GaussMap);
 
     double delta = Delta;
@@ -109,7 +110,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 }
 
                 Time.ResetStartTime();
-                get_matrix_and_rhs(eto, ep_old, stiffness, rhs);
+                assembleMixedDirichletNeumann_homogeneousForcing(eto, ep_old, ep_new, stiffness, rhs);
                 Assemble_time = Time.ElapsedTime();
 
                 displacement = (iter==1) ? (delta*bc_disp) : (0.0);
@@ -180,9 +181,117 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     return 0;
 }
 
-void plasticitySmallStrains::get_matrix_and_rhs(Epetra_Vector & eto, Epetra_Vector & ep_old, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
-  
+void plasticitySmallStrains::assembleMixedDirichletNeumann_homogeneousForcing(const Epetra_Vector & eto, const Epetra_Vector & ep_old, Epetra_Vector & ep_new,
+                                                                              Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+
+    F.PutScalar(0.0);
+    K.PutScalar(0.0);
+
+    stiffness_rhs_homogeneousForcing(eto, ep_old, ep_new, K, F);
+
+    Comm->Barrier();
+
+    K.GlobalAssemble();
+    K.FillComplete();
+    F.GlobalAssemble();
 }
+
+
+void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vector & eto, const Epetra_Vector & ep_old, Epetra_Vector & ep_new,
+                                                              Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+
+  int node, e_gid, error;
+  int n_gauss_points = Mesh->n_gauss_cells;
+  double gauss_weight;
+
+  int *Indices_cells;
+  Indices_cells = new int [3*Mesh->el_type];
+
+  Epetra_SerialDenseVector Re(3*Mesh->el_type);
+  Epetra_SerialDenseMatrix Ke(3*Mesh->el_type,3*Mesh->el_type);
+
+  Epetra_SerialDenseVector sig(6);
+  Epetra_SerialDenseMatrix tangent_matrix(6,6);
+  Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
+  Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+  Epetra_SerialDenseMatrix B_times_TM(3*Mesh->el_type,6);
+
+  for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+      e_gid = Mesh->local_cells[e_lid];
+
+      for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+          node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+          for (int iddl=0; iddl<3; ++iddl){
+              Indices_cells[3*inode+iddl] = 3*node+iddl;
+              Re(3*inode+iddl) = 0.0;
+              for (unsigned int jnode=0; jnode<Mesh->el_type; ++jnode){
+                  for (int jddl=0; jddl<3; ++jddl){
+                      Ke(3*inode+iddl,3*jnode+jddl) = 0.0;
+                  }
+              }
+          }
+      }
+
+      for (unsigned int gp=0; gp<n_gauss_points; ++gp){
+          gauss_weight = Mesh->gauss_weight_cells(gp);
+          for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+              dx_shape_functions(inode,0) = Mesh->DX_N_cells(gp+n_gauss_points*inode,e_lid);
+              dx_shape_functions(inode,1) = Mesh->DY_N_cells(gp+n_gauss_points*inode,e_lid);
+              dx_shape_functions(inode,2) = Mesh->DZ_N_cells(gp+n_gauss_points*inode,e_lid);
+          }
+
+          compute_B_matrices(dx_shape_functions,matrix_B);
+          constitutive_problem(e_lid, gp, sig, tangent_matrix);
+
+          error = Re.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,sig,1.0);
+          error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,tangent_matrix,0.0);
+          error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
+      }
+
+      for (unsigned int i=0; i<3*Mesh->el_type; ++i){
+          F.SumIntoGlobalValues(1, &Indices_cells[i], &Re(i));
+          for (unsigned int j=0; j<3*Mesh->el_type; ++j){
+              error = K.SumIntoGlobalValues(1, &Indices_cells[i], 1, &Indices_cells[j], &Ke(i,j));
+          }
+      }
+  }
+  delete[] Indices_cells;
+}
+
+void plasticitySmallStrains::constitutive_problem(const unsigned int & elid, const unsigned int & igp,
+                                                  Epetra_SerialDenseVector & sig, Epetra_SerialDenseMatrix & tgm){
+
+}
+
+void plasticitySmallStrains::compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B){
+    double factor = 1.0/std::sqrt(2.0);
+    for (unsigned inode=0; inode<Mesh->el_type; ++inode){
+        B(0,3*inode) = dx_shape_functions(inode,0);
+        B(0,3*inode+1) = 0.0;
+        B(0,3*inode+2) = 0.0;
+
+        B(1,3*inode) = 0.0;
+        B(1,3*inode+1) = dx_shape_functions(inode,1);
+        B(1,3*inode+2) = 0.0;
+
+        B(2,3*inode) = 0.0;
+        B(2,3*inode+1) = 0.0;
+        B(2,3*inode+2) = dx_shape_functions(inode,2);
+
+        B(3,3*inode) = 0.0;
+        B(3,3*inode+1) = factor*dx_shape_functions(inode,2);
+        B(3,3*inode+2) = factor*dx_shape_functions(inode,1);
+
+        B(4,3*inode) = factor*dx_shape_functions(inode,2);
+        B(4,3*inode+1) = 0.0;
+        B(4,3*inode+2) = factor*dx_shape_functions(inode,0);
+
+        B(5,3*inode) = factor*dx_shape_functions(inode,1);
+        B(5,3*inode+1) = factor*dx_shape_functions(inode,0);
+        B(5,3*inode+2) = 0.0;
+    }
+}
+
 
 void plasticitySmallStrains::constructGaussMap(Epetra_Map & GaussMap){
   int e_gid;
