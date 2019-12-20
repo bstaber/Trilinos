@@ -4,30 +4,32 @@ Brian Staber (brian.staber@gmail.com)
 
 #include "plasticitySmallStrains.hpp"
 
-plasticitySmallStrains::plasticitySmallStrains(){
+/*plasticitySmallStrains::plasticitySmallStrains(){
 
-}
+}*/
 
 plasticitySmallStrains::~plasticitySmallStrains(){
 
 }
 
-void plasticitySmallStrains::initialize(Teuchos::ParameterList & parameterlist){
+plasticitySmallStrains::plasticitySmallStrains(Epetra_Comm & comm, Teuchos::ParameterList & parameterlist){
 
-  Delta         = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "delta");
-  iter_min      = Teuchos::getParameter<int>(Parameters.sublist("Newton"),    "iterMin");
-  iter_max      = Teuchos::getParameter<int>(Parameters.sublist("Newton"),    "iterMax");
-  nb_bis_max    = Teuchos::getParameter<int>(Parameters.sublist("Newton"),    "nbBisMax");
-  norm_inf_tol  = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "NormFTol");
-  norm_inf_max  = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "NormFMax");
-  eps           = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "eps");
-  success       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "success_parameter");
-  failure       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "failure_parameter");
-  bc_disp       = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "bc_disp");
-  pressure_load = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "pressure_load");
-  tol           = Teuchos::getParameter<double>(Parameters.sublist("Newton"), "tol");
+  Delta         = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "delta");
+  iter_min      = Teuchos::getParameter<int>(parameterlist.sublist("Newton"),    "iterMin");
+  iter_max      = Teuchos::getParameter<int>(parameterlist.sublist("Newton"),    "iterMax");
+  nb_bis_max    = Teuchos::getParameter<int>(parameterlist.sublist("Newton"),    "nbBisMax");
+  norm_inf_tol  = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "NormFTol");
+  norm_inf_max  = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "NormFMax");
+  eps           = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "eps");
+  success       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "success_parameter");
+  failure       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "failure_parameter");
+  bc_disp       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "bc_disp");
+  pressure_load = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "pressure_load");
+  tol           = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "tol");
 
-  std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
+  Krylov = &parameterlist.sublist("Krylov");
+
+  std::string mesh_file = Teuchos::getParameter<std::string>(parameterlist.sublist("Mesh"), "mesh_file");
   Mesh                  = new mesh(comm, mesh_file, 1.0);
   Comm                  = Mesh->Comm;
 
@@ -52,7 +54,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     Epetra_Vector      x(*StandardMap);
     Epetra_Vector      y(*StandardMap);
     Epetra_Vector      eto(*GaussMap);
-    Epetra_Vector      ep(*GaussMap);
+    Epetra_Vector      ep_old(*GaussMap);
 
     double delta = Delta;
     double Assemble_time;
@@ -79,7 +81,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
         FLAG3=1;
         nb_bis = 0;
         time += delta;
-        y = *x;
+        y = x;
 
         while (FLAG2==1){
             FLAG2=0;
@@ -107,12 +109,12 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 }
 
                 Time.ResetStartTime();
-                interface->get_matrix_and_rhs(eto, ep_old, stiffness, rhs);
+                get_matrix_and_rhs(eto, ep_old, stiffness, rhs);
                 Assemble_time = Time.ElapsedTime();
 
                 displacement = (iter==1) ? (delta*bc_disp) : (0.0);
 
-                interface->apply_dirichlet_conditions(stiffness, rhs, displacement);
+                apply_dirichlet_conditions(stiffness, rhs, displacement);
 
                 if(iter>1){
 
@@ -140,7 +142,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                         if (nb_bis<nb_bis_max){
                             delta /= failure;
                             time -= delta;
-                            *x = y;
+                            x = y;
                             if (MyPID==0) std::cout << "Bisecting increment: " << nb_bis << "\n";
                         }
                         else{
@@ -176,6 +178,10 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     // compute ep here ?
     }
     return 0;
+}
+
+void plasticitySmallStrains::get_matrix_and_rhs(Epetra_Vector & eto, Epetra_Vector & ep_old, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+  
 }
 
 void plasticitySmallStrains::constructGaussMap(Epetra_Map & GaussMap){
