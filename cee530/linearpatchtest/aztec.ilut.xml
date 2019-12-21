@@ -1,10 +1,10 @@
 <ParameterList>
-    
+
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/Trilinos/cee530/mesh/block.msh"/>
-        <Parameter name="path" type="string" value="/Users/brian/Documents/GitHub/Trilinos_results/cee530/linearpatchtest/linearpatchtest_x.mtx"/>
+        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/cee530/mesh/block.msh"/>
+        <Parameter name="path" type="string" value="linearpatchtest_2019.mtx"/>
     </ParameterList>
-        
+
     <ParameterList name="Krylov">
         <Parameter name="solver" type="string" value="cg"/>
         <!--Parameter name="kspace" type="int" value="100"/-->
@@ -25,5 +25,5 @@
         <Parameter name="AZ_diagnostics" type="string" value="all"/>
         <Parameter name="AZ_reorder" type="int" value="1"/>
     </ParameterList>
-    
+
 </ParameterList>

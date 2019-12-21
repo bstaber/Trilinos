@@ -25,15 +25,17 @@ public:
     void stiffness_homogeneousForcing_LinearElasticity(Epetra_FECrsMatrix & K);
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
     virtual void constitutive_problem(const unsigned int & elid, const unsigned int & igp,
-                              Epetra_SerialDenseVector & deto, Epetra_SerialDenseVector & sig,
-                              Epetra_SerialDenseMatrix & tgm) = 0;
-    virtual void get_elasticity_tensor(unsigned int & elid, unsigned int & igp, Epetra_SerialDenseMatrix & tgm) = 0;
+                                      Epetra_SerialDenseVector & EEL, Epetra_SerialDenseVector & SIG,
+                                      Epetra_SerialDenseMatrix & TGM) = 0;
+    virtual void get_elasticity_tensor(unsigned int & elid, unsigned int & igp, Epetra_SerialDenseMatrix & TGM) = 0;
 
     virtual void setup_dirichlet_conditions() = 0;
     virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement) = 0;
 
     void create_FECrsGraph();
-    void constructGaussMap(Epetra_Map & Gauss_Map);
+    void constructScalarGaussMap();
+
+    int print_solution(Epetra_Vector & solution, std::string fileName);
 
     Teuchos::ParameterList * Krylov;
 
@@ -44,9 +46,10 @@ public:
     int * dof_on_boundary;
 
     Epetra_Map * GaussMap;
-    Epetra_Vector * eto;
-    Epetra_Vector * eel;
-    Epetra_Vector * epi;
+    Epetra_MultiVector * sig;
+    Epetra_MultiVector * eto;
+    Epetra_MultiVector * eel;
+    Epetra_MultiVector * epi;
 
     Epetra_SerialDenseMatrix ELASTICITY;
 };

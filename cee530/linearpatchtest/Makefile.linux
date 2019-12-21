@@ -1,6 +1,7 @@
 # Get Trilinos as one entity
-MYAPP_TRILINOS_DIR = /usr/local/apps/petsc-3.7.3/gnu
-include $(MYAPP_TRILINOS_DIR)/include/Makefile.export.Trilinos
+# MYAPP_TRILINOS_DIR = /usr/local/apps/petsc-3.7.3/gnu
+MYAPP_TRILINOS_DIR = /usr
+include $(MYAPP_TRILINOS_DIR)/include/trilinos/Makefile.export.Trilinos
 
 # Make sure to use same compilers and flags as Trilinos
 CXX=$(Trilinos_CXX_COMPILER)
@@ -63,4 +64,3 @@ main.o: $(MAIN_HDR) $(HDR)
 .PHONY: clean
 clean:
 	rm -f *.o *.a *.exe
-	

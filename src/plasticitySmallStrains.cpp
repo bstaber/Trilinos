@@ -30,18 +30,22 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
   Krylov = &parameterlist.sublist("Krylov");
 
   std::string mesh_file = Teuchos::getParameter<std::string>(parameterlist.sublist("Mesh"), "mesh_file");
-  Mesh                  = new mesh(comm, mesh_file, 1.0);
+  double scaling = Teuchos::getParameter<double>(parameterlist.sublist("Mesh"), "scaling");
+  Mesh                  = new mesh(comm, mesh_file, scaling);
   Comm                  = Mesh->Comm;
 
   StandardMap           = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
   OverlapMap            = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
   ImportToOverlapMap    = new Epetra_Import(*OverlapMap,*StandardMap);
 
-  constructGaussMap(*GaussMap);
+  create_FECrsGraph();
+  constructScalarGaussMap();
+  setup_dirichlet_conditions();
 
-  eel = new Epetra_Vector(*GaussMap);
-  eto = new Epetra_Vector(*GaussMap);
-  epi = new Epetra_Vector(*GaussMap);
+  sig = new Epetra_MultiVector(*GaussMap,6,true);
+  eel = new Epetra_MultiVector(*GaussMap,6,true);
+  eto = new Epetra_MultiVector(*GaussMap,6,true);
+  epi = new Epetra_MultiVector(*GaussMap,6,true);
 
   ELASTICITY.Reshape(6,6);
 }
@@ -77,16 +81,12 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     std::string solver_its = "GMRES_its";
     std::string solver_res = "GMRES_res";
 
-    eel->PutScalar(0.0);
-    eto->PutScalar(0.0);
-    epi->PutScalar(0.0);
+    std::cout << "FIRST ELASTIC STEP" << std::endl;
 
-    //FIRST ELASTIC STEP
     time += delta;
     rhs.PutScalar(0.0);
     assemblePureDirichlet_homogeneousForcing_LinearElasticity(stiffness);
-    displacement = delta*bc_disp;
-    apply_dirichlet_conditions(stiffness, rhs, displacement);
+    apply_dirichlet_conditions(stiffness, rhs, time);
 
     lhs.PutScalar(0.0);
     problem.SetOperator(&stiffness);
@@ -103,7 +103,36 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     x.Update(1.0,lhs,1.0);
 
     du.Import(lhs, *ImportToOverlapMap, Insert);
-    //END FIRST ELASTIC STEP
+
+    Epetra_SerialDenseVector u_el(3*Mesh->el_type);
+    Epetra_SerialDenseMatrix dx_shape_functions(Mesh->el_type,3);
+    Epetra_SerialDenseMatrix matrix_B(6,3*Mesh->el_type);
+    Epetra_SerialDenseVector eel_el(6);
+    Epetra_SerialDenseVector sig_el(6);
+
+    for (unsigned int e_lid=0; e_lid<Mesh->n_local_cells; ++e_lid){
+        int e_gid = Mesh->local_cells[e_lid];
+        for (unsigned int inode=0; inode<Mesh->el_type; ++inode){
+            int node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+            for (int iddl=0; iddl<3; ++iddl){
+                u_el(3*inode+iddl) = du[OverlapMap->LID(3*node+iddl)];
+            }
+        }
+        for (unsigned int gp=0; gp<Mesh->n_gauss_cells; ++gp){
+          compute_B_matrices(dx_shape_functions,matrix_B);
+          get_elasticity_tensor(e_lid, gp, ELASTICITY);
+          eel_el.Multiply('N','N',1.0,matrix_B,u_el,0.0);
+          sig_el.Multiply('N','N',1.0,ELASTICITY,eel_el,0.0);
+          for (unsigned int k=0; k<6; ++k) {
+            (*sig)[k][GaussMap->LID(int(e_gid*Mesh->n_gauss_cells+gp))] = sig_el(k);
+            (*eto)[k][GaussMap->LID(int(e_gid*Mesh->n_gauss_cells+gp))] = eel_el(k);
+            (*eel)[k][GaussMap->LID(int(e_gid*Mesh->n_gauss_cells+gp))] = eel_el(k);
+          }
+        }
+    }
+
+    std::cout << "END FIRST ELASTIC STEP" << std::endl;
+
 
     FLAG1=1;
     while (FLAG1==1){
@@ -127,7 +156,6 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                     break;
                 }
             }
-            //interface->pressure_load = time*pressure_load;
 
             iter = 0;
             while (FLAG3==1){
@@ -144,7 +172,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 assemblePureDirichlet_homogeneousForcing(du, stiffness, rhs);
                 Assemble_time = Time.ElapsedTime();
 
-                displacement = (iter==1) ? (delta*bc_disp) : (0.0);
+                displacement = (iter==1) ? delta : (0.0);
                 apply_dirichlet_conditions(stiffness, rhs, displacement);
 
                 if(iter>1){
@@ -153,11 +181,11 @@ int plasticitySmallStrains::incremental_bvp(bool print){
 
                     if (MyPID==0 && print){
                         if(iter>2){
-                            std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\n"; /* << "\t\t\t" << time*pressure_load << "\n"; */
+                            std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\n";
                         }
                         else{
-                            std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "aztec_time" << "\t\t" << "\n"; /*"pressure_load [kPa]" << "\n";*/
-                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << "\n"; /*time*pressure_load << "\n";*/
+                            std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "aztec_time" << "\t\t" << "\n";
+                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << "\n";
                         }
                     }
 
@@ -207,6 +235,9 @@ int plasticitySmallStrains::incremental_bvp(bool print){
             }
         }
     }
+
+    //std::cout << "PRINTING SOLUTION" << std::endl;
+    print_solution(x,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/linearpatchtest/test.mtx");
     return 0;
 }
 
@@ -237,6 +268,8 @@ void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vecto
 
   Epetra_SerialDenseVector du_el(3*Mesh->el_type);
   Epetra_SerialDenseVector sig_el(6);
+  Epetra_SerialDenseVector eel_el(6);
+  Epetra_SerialDenseVector epi_el(6);
   Epetra_SerialDenseVector deto_el(6);
   Epetra_SerialDenseMatrix m_tg_matrix(6,6);
 
@@ -274,7 +307,19 @@ void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vecto
 
           compute_B_matrices(dx_shape_functions,matrix_B);
           deto_el.Multiply('N','N',1.0,matrix_B,du_el,0.0);
-          constitutive_problem(e_lid, gp, deto_el, sig_el, m_tg_matrix);
+
+          for (unsigned int k=0; k<6; ++k) eel_el(k) = (*eel)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))];
+
+          eel_el += deto_el;
+
+          constitutive_problem(e_lid, gp, eel_el, sig_el, m_tg_matrix);
+
+          for (unsigned int k=0; k<6; ++k) {
+            (*sig)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] = sig_el(k);
+            (*eto)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] += deto_el(k);
+            (*eel)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] = eel_el(k);
+            (*epi)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] = (*eto)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] - eel_el(k);
+          }
 
           error = Re.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,sig_el,1.0);
           error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,m_tg_matrix,0.0);
@@ -387,7 +432,7 @@ void plasticitySmallStrains::compute_B_matrices(Epetra_SerialDenseMatrix & dx_sh
 }
 
 
-void plasticitySmallStrains::constructGaussMap(Epetra_Map & GaussMap){
+void plasticitySmallStrains::constructScalarGaussMap(){
   int e_gid;
   int n_local_cells = Mesh->n_local_cells;
   int n_gauss_cells = Mesh->n_gauss_cells;
@@ -398,7 +443,8 @@ void plasticitySmallStrains::constructGaussMap(Epetra_Map & GaussMap){
           local_gauss_points[e_lid*n_gauss_cells+gp] = e_gid*n_gauss_cells+gp;
       }
   }
-  GaussMap = Epetra_Map(-1, n_local_cells*n_gauss_cells, &local_gauss_points[0], 0, *Comm);
+  Comm->Barrier();
+  GaussMap = new Epetra_Map(-1, n_local_cells*n_gauss_cells, &local_gauss_points[0], 0, *Comm);
 }
 
 void plasticitySmallStrains::create_FECrsGraph(){
@@ -424,4 +470,21 @@ void plasticitySmallStrains::create_FECrsGraph(){
     Comm->Barrier();
     FEGraph->GlobalAssemble();
     delete[] index;
+}
+
+int plasticitySmallStrains::print_solution(Epetra_Vector & solution, std::string fileName){
+
+    int NumTargetElements = 0;
+    if (Comm->MyPID()==0){
+        NumTargetElements = 3*Mesh->n_nodes;
+    }
+    Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+    Epetra_Export ExportOnRoot(*StandardMap,MapOnRoot);
+    Epetra_MultiVector lhs_root(MapOnRoot,true);
+    lhs_root.Export(solution,ExportOnRoot,Insert);
+
+    int error = EpetraExt::MultiVectorToMatrixMarketFile(fileName.c_str(),lhs_root,0,0,false);
+
+    return error;
+
 }

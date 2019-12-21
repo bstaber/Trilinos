@@ -47,7 +47,10 @@ MPI_Init(&argc, &argv);
     if (Comm.MyPID()==0){
         paramList->print(std::cout,2,true,true);
     }
-    Teuchos::RCP<linearPatchTest> interface = Teuchos::rcp(new linearPatchTest(Comm,*paramList));
+    Teuchos::RCP<linearPatchTest> problem = Teuchos::rcp(new linearPatchTest(Comm,*paramList));
+
+    problem->incremental_bvp(true);
+    //double errorL2 = problem->errorL2();
     /*double errorL2 = interface->solve(true);
     if(Comm.MyPID()==0){
         std::cout << "-----------------------------\n";

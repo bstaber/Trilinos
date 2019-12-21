@@ -18,7 +18,7 @@ public:
         Krylov = &Parameters.sublist("Krylov");
 
         std::string mesh_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "mesh_file");
-        Mesh = new mesh(comm, mesh_file, 1.0);
+        Mesh = new mesh(comm, mesh_file, 1000.0);
         Comm = Mesh->Comm;
 
         StandardMap = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
@@ -53,7 +53,7 @@ public:
         apply_dirichlet_conditions(linearOperator,rhs,dummy);
         aztecSolver(linearOperator,rhs,lhs,*Krylov);
         if (doprint){
-            print_solution(lhs,"/Users/brian/Documents/GitHub/Trilinos_results/cee530/linearpatchtest/linearPatchTest.mtx");
+            print_solution(lhs,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/cee530/linearpatchtest/linearPatchTest2019.mtx");
         }
         double error = errorL2(lhs);
         return error;
@@ -113,9 +113,9 @@ public:
 
     Epetra_SerialDenseVector exactSolution(double & x1, double & x2, double & x3){
         Epetra_SerialDenseVector u(3);
-        u(0) = 0.1*x1+0.2*x2+0.4*x3;
-        u(1) = 0.4*x1+0.5*x2+0.1*x3;
-        u(2) = 0.05*x1+0.25*x2+0.65*x3;
+        u(0) = x1; //0.1*x1+0.2*x2+0.4*x3;
+        u(1) = 0.0; //0.4*x1+0.5*x2+0.1*x3;
+        u(2) = 0.0; //0.05*x1+0.25*x2+0.65*x3;
         return u;
     }
 
@@ -128,7 +128,7 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if(x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
+            if(x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
                 n_bc_dof+=3;
             }
         }
@@ -140,7 +140,7 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if(x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
+            if(x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
@@ -160,7 +160,7 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if (x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
+            if (x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
                 Epetra_SerialDenseVector u(3);
                 u = exactSolution(x,y,z);
                 v[0][StandardMap->LID(3*node+0)] = u(0); //0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
@@ -178,7 +178,7 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if (x==0||y==0||z==0||x==1.0||y==1.0||z==1.0){
+            if (x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
                 F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
                 F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
