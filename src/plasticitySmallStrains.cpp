@@ -4,15 +4,15 @@ Brian Staber (brian.staber@gmail.com)
 
 #include "plasticitySmallStrains.hpp"
 
-/*plasticitySmallStrains::plasticitySmallStrains(){
+plasticitySmallStrains::plasticitySmallStrains(){
 
-}*/
+}
 
 plasticitySmallStrains::~plasticitySmallStrains(){
 
 }
 
-plasticitySmallStrains::plasticitySmallStrains(Epetra_Comm & comm, Teuchos::ParameterList & parameterlist){
+void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterList & parameterlist){
 
   Delta         = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "delta");
   iter_min      = Teuchos::getParameter<int>(parameterlist.sublist("Newton"),    "iterMin");

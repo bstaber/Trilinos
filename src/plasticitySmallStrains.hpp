@@ -11,10 +11,12 @@ Brian Staber (brian.staber@gmail.com)
 class plasticitySmallStrains : public baseClassFEM
 {
 public:
-    plasticitySmallStrains(Epetra_Comm & comm, Teuchos::ParameterList & parameterlist);
+
+    plasticitySmallStrains();
     ~plasticitySmallStrains();
 
-    //void initialize(Teuchos::ParameterList & parameterlist);
+    void initialize(Epetra_Comm & comm, Teuchos::ParameterList & parameterlist);
+
     int incremental_bvp(bool print);
 
     void assemblePureDirichlet_homogeneousForcing(const Epetra_Vector & du, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
