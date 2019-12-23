@@ -135,8 +135,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 }
 
                 if(iter>1){
-                    //assemble K^k
-                    //dirichlet conditions
+
                     Time.ResetStartTime();
                     assemblePureDirichlet_homogeneousForcing(Du, stiffness, rhs);
                     Assemble_time = Time.ElapsedTime();
@@ -200,11 +199,6 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                     Du.Update(1.0,du,1.0);
 
                     integrate_constitutive_problem(Du);
-
-                    //solve K^k du = R^k
-                    //update
-                    //constitutive problem
-                    //compute Rk
                 }
 
                 FLAG3=1;
@@ -288,6 +282,7 @@ void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vecto
           }
           //epcum_el = (*epcum_converged)[GaussMap->LID(int(e_gid*n_gauss_points+gp))];
           //constitutive_problem(e_lid, gp, deto_el, sig_el, epcum_el, m_tg_matrix);
+          m_tg_matrix = ELASTICITY;
           error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,sig_el,1.0);
           error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,m_tg_matrix,0.0);
           error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
