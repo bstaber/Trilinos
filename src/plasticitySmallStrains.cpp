@@ -199,6 +199,8 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                     du.Import(lhs, *ImportToOverlapMap, Insert);
                     Du.Update(1.0,du,1.0);
 
+                    integrate_constitutive_problem(Du);
+
                     //solve K^k du = R^k
                     //update
                     //constitutive problem
