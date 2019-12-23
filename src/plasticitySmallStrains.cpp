@@ -31,8 +31,9 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
 
   std::string mesh_file = Teuchos::getParameter<std::string>(parameterlist.sublist("Mesh"), "mesh_file");
   double scaling = Teuchos::getParameter<double>(parameterlist.sublist("Mesh"), "scaling");
-  Mesh                  = new mesh(comm, mesh_file, scaling);
-  Comm                  = Mesh->Comm;
+  Mesh  = new mesh(comm, mesh_file, scaling);
+  Comm  = Mesh->Comm;
+  MyPID = Comm->MyPID();
 
   StandardMap           = new Epetra_Map(-1,3*Mesh->n_local_nodes_without_ghosts,&Mesh->local_dof_without_ghosts[0],0,*Comm);
   OverlapMap            = new Epetra_Map(-1,3*Mesh->n_local_nodes,&Mesh->local_dof[0],0,*Comm);
@@ -86,7 +87,8 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     time += delta;
     rhs.PutScalar(0.0);
     assemblePureDirichlet_homogeneousForcing_LinearElasticity(stiffness);
-    apply_dirichlet_conditions(stiffness, rhs, time);
+    displacement = bc_disp*time;
+    apply_dirichlet_conditions(stiffness, rhs, displacement);
 
     lhs.PutScalar(0.0);
     problem.SetOperator(&stiffness);
@@ -133,7 +135,6 @@ int plasticitySmallStrains::incremental_bvp(bool print){
 
     std::cout << "END FIRST ELASTIC STEP" << std::endl;
 
-
     FLAG1=1;
     while (FLAG1==1){
 
@@ -172,11 +173,10 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 assemblePureDirichlet_homogeneousForcing(du, stiffness, rhs);
                 Assemble_time = Time.ElapsedTime();
 
-                displacement = (iter==1) ? delta : (0.0);
+                displacement = (iter==1) ? bc_disp*delta : (0.0);
                 apply_dirichlet_conditions(stiffness, rhs, displacement);
 
                 if(iter>1){
-
                     rhs.NormInf(&norm_inf_rhs);
 
                     if (MyPID==0 && print){
@@ -264,7 +264,6 @@ void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vecto
 
   int *Indices_cells;
   Indices_cells = new int [3*Mesh->el_type];
-
 
   Epetra_SerialDenseVector du_el(3*Mesh->el_type);
   Epetra_SerialDenseVector sig_el(6);

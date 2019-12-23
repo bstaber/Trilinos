@@ -11,6 +11,15 @@ class linearPatchTest : public plasticitySmallStrains
 {
 public:
 
+    double E = 210000.0;
+    double nu = 0.3;
+    double lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
+    double mu = E/(2.0*(1.0+nu));
+    double kappa = lambda + 2.0*mu/3.0;
+
+    double R0 = 1000.0;
+    double H  = 10000.0;
+
     Teuchos::ParameterList * Krylov;
 
     linearPatchTest(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
@@ -31,17 +40,45 @@ public:
       // implement the elastic response just for the first test
       TGM = ELASTICITY;
       SIG.Multiply('N','N',1.0,ELASTICITY,EEL,0.0);
+
+      Epetra_SerialDenseVector DEV(6);
+      Epetra_SerialDenseVector EYE(6);
+      EYE(0) = 1.0; EYE(1) = 1.0; EYE(2) = 1.0; EYE(3) = 0.0; EYE(4) = 0.0; EYE(5) = 0.0;
+      double pressure = (1.0/3.0)*(SIG(0)+SIG(1)+SIG(2));
+      DEV = SIG;
+      DEV(0) -= pressure;
+      DEV(1) -= pressure;
+      DEV(2) -= pressure;
+
+      double qtrial = std::sqrt((3.0/2.0)*(DEV(0)*DEV(0) + DEV(1)*DEV(1) + DEV(2)*DEV(2) + DEV(3)*DEV(3)
+                                         + DEV(4)*DEV(4) + DEV(5)*DEV(5)));
+
+      double yield = qtrial - R0;
+      if (yield>1.0e-10) {
+        //std::cout << "yield = " << yield << std::endl;
+        double gamma = yield/(3.0*mu+H);
+        double alpha = (1.0 - (3.0*mu*gamma/qtrial));
+        for (unsigned int k=0; k<6; ++k) {
+          DEV(k) *= alpha;
+          SIG(k) = DEV(k) + pressure*EYE(k);
+          EEL(k) = (1.0/(2.0*mu))*DEV(k) + (1.0/(3.0*kappa))*pressure*EYE(k);
+        }
+      }
     }
 
-    void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tangent_matrix){
+    void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tgm){
         int e_gid = Mesh->local_cells[e_lid];
         int n_gauss_cells = Mesh->n_gauss_cells;
-        double c1 = 144.8969*1.0e3;
-        double c2 = 14.2500*1.0e3;
-        double c3 = 5.8442*1.0e3;
-        double c4 = 7.5462*1.0e3;
-        double c5 = 12.5580*1.0e3;
-        transverse_isotropic_matrix(tangent_matrix,c1,c2,c3,c4,c5);
+
+        double c1 = lambda+2.0*mu;
+
+        tgm(0,0) = c1;     tgm(0,1) = lambda; tgm(0,2) = lambda; tgm(0,3) = 0.0;     tgm(0,4) = 0.0;    tgm(0,5) = 0.0;
+        tgm(1,0) = lambda; tgm(1,1) = c1;     tgm(1,2) = lambda; tgm(1,3) = 0.0;     tgm(1,4) = 0.0;    tgm(1,5) = 0.0;
+        tgm(2,0) = lambda; tgm(2,1) = lambda; tgm(2,2) = c1;     tgm(2,3) = 0.0;     tgm(2,4) = 0.0;    tgm(2,5) = 0.0;
+        tgm(3,0) = 0.0;    tgm(3,1) = 0.0;    tgm(3,2) = 0.0;    tgm(3,3) = 2.0*mu;  tgm(3,4) = 0.0;    tgm(3,5) = 0.0;
+        tgm(4,0) = 0.0;    tgm(4,1) = 0.0;    tgm(4,2) = 0.0;    tgm(4,3) = 0.0;     tgm(4,4) = 2.0*mu; tgm(4,5) = 0.0;
+        tgm(5,0) = 0.0;    tgm(5,1) = 0.0;    tgm(5,2) = 0.0;    tgm(5,3) = 0.0;     tgm(5,4) = 0.0;    tgm(5,5) = 2.0*mu;
+
     }
 
     void setup_dirichlet_conditions(){
@@ -53,7 +90,8 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if(x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            //if(x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            if(x==0.0||x==1.0){
                 n_bc_dof+=3;
             }
         }
@@ -65,7 +103,8 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if(x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            //if(x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            if(x==0.0||x==1.0){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
@@ -85,7 +124,8 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if (x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            //if (x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            if(x==0.0||x==1.0){
                 Epetra_SerialDenseVector u(3);
                 u = exactSolution(x,y,z);
                 v[0][StandardMap->LID(3*node+0)] = TIME*u(0); //0.1*(0.1*x + 0.08*y + 0.05*z + 0.04*x*y + 0.03*y*z + 0.08*z*x);
@@ -103,7 +143,8 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if (x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            //if (x==0.0||y==0.0||z==0.0||x==1.0||y==1.0||z==1.0){
+            if(x==0.0||x==1.0){
                 F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
                 F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
                 F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
@@ -171,51 +212,6 @@ public:
         u(2) = 0.0; //0.05*x1+0.25*x2+0.65*x3;
         return u;
     }
-
-    void transverse_isotropic_matrix(Epetra_SerialDenseMatrix & C, double & c1, double & c2, double & c3, double & c4, double & c5){
-        C(0,0) = c1/16.0 + (9.0*c2)/32.0 + (9.0*c4)/32.0 + (3.0*c5)/8.0 + (3.0*std::sqrt(2.0)*c3)/16.0;
-        C(0,1) = (3.0*c1)/16.0 + (3.0*c2)/32.0 + (3.0*c4)/32.0 - (3.0*c5)/8.0 + (5.0*std::sqrt(2.0)*c3)/16.0;
-        C(0,2) = (3.0*c2)/8.0 - (3.0*c4)/8.0 + (std::sqrt(2.0)*c3)/8.0;
-        C(0,3) = 0.0;
-        C(0,4) = 0.0;
-        C(0,5) = std::sqrt(6)*(c1/16.0 - (3.0*c2)/32.0 - (3.0*c4)/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
-
-        C(1,0) = (3.0*c1)/16.0 + (3.0*c2)/32.0 + (3.0*c4)/32.0 - (3.0*c5)/8.0 + (5*std::sqrt(2.0)*c3)/16.0;
-        C(1,1) = (9.0*c1)/16.0 + c2/32.0 + c4/32.0 + (3.0*c5)/8.0 + (3.0*std::sqrt(2.0)*c3)/16.0;
-        C(1,2) = c2/8.0 - c4/8.0 + (3.0*std::sqrt(2.0)*c3)/8.0;
-        C(1,3) = 0.0;
-        C(1,4) = 0.0;
-        C(1,5) = -std::sqrt(6.0)*(c2/32.0 - (3.0*c1)/16.0 + c4/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
-
-        C(2,0) = (3.0*c2)/8.0 - (3.0*c4)/8.0 + std::sqrt(2.0)*c3/8.0;
-        C(2,1) = c2/8.0 - c4/8.0 + (3.0*std::sqrt(2.0)*c3)/8.0;
-        C(2,2) = c2/2.0 + c4/2.0;
-        C(2,3) = 0.0;
-        C(2,4) = 0.0;
-        C(2,5) = (std::sqrt(3.0)*(2.0*c3 - std::sqrt(2.0)*c2 + std::sqrt(2.0)*c4))/8.0;
-
-        C(3,0) = 0.0;
-        C(3,1) = 0.0;
-        C(3,2) = 0.0;
-        C(3,3) = c4/4.0 + (3.0*c5)/4.0;
-        C(3,4) = -(std::sqrt(3.0)*(c4 - c5))/4.0;
-        C(3,5) = 0.0;
-
-        C(4,0) = 0.0;
-        C(4,1) = 0.0;
-        C(4,2) = 0.0;
-        C(4,3) = -(std::sqrt(3.0)*(c4 - c5))/4.0;
-        C(4,4) = (3.0*c4)/4.0 + c5/4.0;
-        C(4,5) = 0.0;
-
-        C(5,0) = std::sqrt(6.0)*(c1/16.0 - (3.0*c2)/32.0 - (3.0*c4)/32.0 + c5/8.0 + std::sqrt(2.0)*c3/16.0);
-        C(5,1) = -std::sqrt(6.0)*(c2/32.0 - (3.0*c1)/16.0 + c4/32.0 + c5/8.0 + (std::sqrt(2.0)*c3)/16.0);
-        C(5,2) = (std::sqrt(3.0)*(2.0*c3 - std::sqrt(2.0)*c2 + std::sqrt(2.0)*c4))/8.0;
-        C(5,3) = 0.0;
-        C(5,4) = 0.0;
-        C(5,5) = (3.0*c1)/8.0 + (3.0*c2)/16.0 + (3.0*c4)/16.0 + c5/4.0 - (3.0*std::sqrt(2.0)*c3)/8.0;
-    }
-
 };
 
 
