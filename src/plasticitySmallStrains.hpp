@@ -19,14 +19,23 @@ public:
 
     int incremental_bvp(bool print);
 
-    void assemblePureDirichlet_homogeneousForcing(const Epetra_Vector & du, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void assemblePureDirichlet_homogeneousForcing(const Epetra_Vector & du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void assemblePureDirichlet_homogeneousForcing_LinearElasticity(Epetra_FECrsMatrix & K);
-    void stiffness_rhs_homogeneousForcing(const Epetra_Vector & du, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void stiffness_rhs_homogeneousForcing(const Epetra_Vector & du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void stiffness_homogeneousForcing_LinearElasticity(Epetra_FECrsMatrix & K);
+
+    void elastic_predictor(Epetra_LinearProblem & problem_, AztecOO & solver_, Epetra_FECrsMatrix & K, Epetra_FEVector & rhs_,
+                           Epetra_Vector & lhs_, double & displacement_);
+    void updateIntVariablesElasticStep(Epetra_Vector & Du_);
+
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
+
+    void integrate_constitutive_problem(Epetra_Vector & Du_);
+    void compute_residual();
+
     virtual void constitutive_problem(const unsigned int & elid, const unsigned int & igp,
-                                      Epetra_SerialDenseVector & EEL, Epetra_SerialDenseVector & SIG,
-                                      Epetra_SerialDenseMatrix & TGM) = 0;
+                                      const Epetra_SerialDenseVector & DETO, Epetra_SerialDenseVector & SIG,
+                                      double & EPCUM, Epetra_SerialDenseMatrix & TGM) = 0;
     virtual void get_elasticity_tensor(unsigned int & elid, unsigned int & igp, Epetra_SerialDenseMatrix & TGM) = 0;
 
     virtual void setup_dirichlet_conditions() = 0;
@@ -45,11 +54,12 @@ public:
     unsigned int n_bc_dof;
     int * dof_on_boundary;
 
-    Epetra_Map * GaussMap;
-    Epetra_MultiVector * sig;
-    Epetra_MultiVector * eto;
-    Epetra_MultiVector * eel;
-    Epetra_MultiVector * epi;
+    Epetra_Map         * GaussMap;
+    Epetra_Vector      * epcum, * epcum_converged;
+    Epetra_MultiVector * sig, * sig_converged;
+    Epetra_MultiVector * eto, * eto_converged;
+    //Epetra_MultiVector * eel, * eel_converged;
+    //Epetra_MultiVector * epi, * epi_converged;
 
     Epetra_SerialDenseMatrix ELASTICITY;
 };

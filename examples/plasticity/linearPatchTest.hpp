@@ -20,11 +20,34 @@ public:
     double R0 = 1000.0;
     double H  = 10000.0;
 
+    Epetra_SerialDenseMatrix K4;
+    Epetra_SerialDenseMatrix J4;
+
     Teuchos::ParameterList * Krylov;
 
     linearPatchTest(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
-    plasticitySmallStrains::initialize(comm, Parameters);
+      plasticitySmallStrains::initialize(comm, Parameters);
+
+      K4.Reshape(6,6);
+      J4.Reshape(6,6);
+
+      double c = 1.0/3.0;
+      double d = 2.0/3.0;
+
+      J4(0,0) = c;   J4(0,1) = c;   J4(0,2) = c;   J4(0,3) = 0.0; J4(0,4) = 0.0; J4(0,5) = 0.0;
+      J4(1,0) = c;   J4(1,1) = c;   J4(1,2) = c;   J4(1,3) = 0.0; J4(1,4) = 0.0; J4(1,5) = 0.0;
+      J4(2,0) = c;   J4(2,1) = c;   J4(2,2) = c;   J4(2,3) = 0.0; J4(2,4) = 0.0; J4(2,5) = 0.0;
+      J4(3,0) = 0.0; J4(3,1) = 0.0; J4(3,2) = 0.0; J4(3,3) = 0.0; J4(3,4) = 0.0; J4(3,5) = 0.0;
+      J4(4,0) = 0.0; J4(4,1) = 0.0; J4(4,2) = 0.0; J4(4,3) = 0.0; J4(4,4) = 0.0; J4(4,5) = 0.0;
+      J4(5,0) = 0.0; J4(5,1) = 0.0; J4(5,2) = 0.0; J4(5,3) = 0.0; J4(5,4) = 0.0; J4(5,5) = 0.0;
+
+      K4(0,0) = d;    K4(0,1) = -c;   K4(0,2) = -c;  K4(0,3) = 0.0; K4(0,4) = 0.0; K4(0,5) = 0.0;
+      K4(1,0) = -c;   K4(1,1) = d;    K4(1,2) = -c;  K4(1,3) = 0.0; K4(1,4) = 0.0; K4(1,5) = 0.0;
+      K4(2,0) = -c;   K4(2,1) = -c;   K4(2,2) = d;   K4(2,3) = 0.0; K4(2,4) = 0.0; K4(2,5) = 0.0;
+      K4(3,0) = 0.0;  K4(3,1) = 0.0;  K4(3,2) = 0.0; K4(3,3) = 1.0; K4(3,4) = 0.0; K4(3,5) = 0.0;
+      K4(4,0) = 0.0;  K4(4,1) = 0.0;  K4(4,2) = 0.0; K4(4,3) = 0.0; K4(4,4) = 1.0; K4(4,5) = 0.0;
+      K4(5,0) = 0.0;  K4(5,1) = 0.0;  K4(5,2) = 0.0; K4(5,3) = 0.0; K4(5,4) = 0.0; K4(5,5) = 1.0;
 
     }
 
@@ -33,11 +56,8 @@ public:
 
     void constitutive_problem(const unsigned int & elid, const unsigned int & igp,
                               Epetra_SerialDenseVector & EEL, Epetra_SerialDenseVector & SIG,
-                              Epetra_SerialDenseMatrix & TGM){
-      //int gid = Mesh->local_cells[elid];
-      //int idx = int(gid*Mesh->n_gauss_cells+igp)
-      //GaussMap.LID(id)
-      // implement the elastic response just for the first test
+                              double & EPCUM, Epetra_SerialDenseMatrix & TGM){
+
       TGM = ELASTICITY;
       SIG.Multiply('N','N',1.0,ELASTICITY,EEL,0.0);
 
@@ -50,10 +70,17 @@ public:
       DEV(1) -= pressure;
       DEV(2) -= pressure;
 
-      double qtrial = std::sqrt((3.0/2.0)*(DEV(0)*DEV(0) + DEV(1)*DEV(1) + DEV(2)*DEV(2) + DEV(3)*DEV(3)
-                                         + DEV(4)*DEV(4) + DEV(5)*DEV(5)));
+      double devdev = std::sqrt(DEV(0)*DEV(0) + DEV(1)*DEV(1) + DEV(2)*DEV(2) + DEV(3)*DEV(3) + DEV(4)*DEV(4) + DEV(5)*DEV(5));
+      double qtrial = std::sqrt(1.5)*devdev;
+      double yield = qtrial - R0 - H*EPCUM;
 
-      double yield = qtrial - R0;
+      Epetra_SerialDenseMatrix NN(6,6);
+      for (unsigned int i=0; i<6; ++i) {
+        for (unsigned int j=0; j<6; ++j) {
+          NN(i,j) = DEV(i)*DEV(j)/devdev;
+        }
+      }
+
       if (yield>1.0e-10) {
         //std::cout << "yield = " << yield << std::endl;
         double gamma = yield/(3.0*mu+H);
@@ -63,6 +90,14 @@ public:
           SIG(k) = DEV(k) + pressure*EYE(k);
           EEL(k) = (1.0/(2.0*mu))*DEV(k) + (1.0/(3.0*kappa))*pressure*EYE(k);
         }
+        EPCUM += gamma;
+
+        for (unsigned int i=0; i<6; ++i) {
+          for (unsigned int j=0; j<6; ++j) {
+            TGM(i,j) = 3.0*kappa+J4(i,j) + 2.0*mu*alpha*K4(i,j) + 6.0*mu*mu*(gamma/qtrial - (1.0/(3.0*mu+H)))*NN(i,j);
+          }
+        }
+        //if (MyPID==0) std::cout << "m_tg_matrix = " << TGM << std::endl;
       }
     }
 
