@@ -50,13 +50,6 @@ MPI_Init(&argc, &argv);
     Teuchos::RCP<plate> problem = Teuchos::rcp(new plate(Comm,*paramList));
 
     problem->incremental_bvp(true);
-    //double errorL2 = problem->errorL2();
-    /*double errorL2 = interface->solve(true);
-    if(Comm.MyPID()==0){
-        std::cout << "-----------------------------\n";
-        std::cout << "||u||_L^2 = " << errorL2 << "\n";
-        std::cout << "-----------------------------\n";
-    }*/
 
 #ifdef HAVE_MPI
     MPI_Finalize();

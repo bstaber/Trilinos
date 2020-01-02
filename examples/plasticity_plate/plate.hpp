@@ -11,7 +11,7 @@ class plate : public plasticitySmallStrains
 {
 public:
 
-    double E = 210000.0;
+    double E = 210.0;
     double nu = 0.3;
     double lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
     double mu = E/(2.0*(1.0+nu));
@@ -58,9 +58,6 @@ public:
                               const Epetra_SerialDenseVector & DETO, Epetra_SerialDenseVector & SIG,
                               double & EPCUM, Epetra_SerialDenseMatrix & TGM){
 
-      TGM = ELASTICITY;
-      //SIG.Multiply('N','N',1.0,ELASTICITY,EEL,0.0);
-
       Epetra_SerialDenseVector SIGTR(6);
       Epetra_SerialDenseVector DSIG(6);
       Epetra_SerialDenseVector DEVTR(6);
@@ -79,9 +76,7 @@ public:
 
       double devdev = DEVTR(0)*DEVTR(0) + DEVTR(1)*DEVTR(1) + DEVTR(2)*DEVTR(2)
                     + DEVTR(3)*DEVTR(3) + DEVTR(4)*DEVTR(4) + DEVTR(5)*DEVTR(5);
-
       double qtrial = std::sqrt(1.5*devdev);
-
       double yield = qtrial - R0 - H*EPCUM;
 
       Epetra_SerialDenseMatrix NN(6,6);
@@ -91,25 +86,27 @@ public:
         }
       }
 
+      SIG = SIGTR;
+      get_elasticity_tensor(elid, igp, TGM);
       if (yield>1.0e-10) {
         double gamma = yield/(3.0*mu+H);
         double beta  = 3.0*mu*gamma/qtrial;
         double alpha = 1.0-beta;
-        for (unsigned int k=0; k<6; ++k) {
-          SIG(k) = SIGTR(k) - beta*DEVTR(k);
-        }
+
+        for (unsigned int k=0; k<6; ++k) SIG(k) -= beta*DEVTR(k);
 
         EPCUM += gamma;
+
         for (unsigned int i=0; i<6; ++i) {
           for (unsigned int j=0; j<6; ++j) {
             TGM(i,j) =  + 3.0*kappa+J4(i,j) + 2.0*mu*alpha*K4(i,j) + 6.0*mu*mu*(gamma/qtrial - (1.0/(3.0*mu+H)))*NN(i,j);
           }
         }
-
       }
+
     }
 
-    void get_elasticity_tensor(unsigned int & e_lid, unsigned int & gp, Epetra_SerialDenseMatrix & tgm){
+    void get_elasticity_tensor(const unsigned int & e_lid, const unsigned int & gp, Epetra_SerialDenseMatrix & tgm){
         double c1 = lambda+2.0*mu;
         tgm(0,0) = c1;     tgm(0,1) = lambda; tgm(0,2) = lambda; tgm(0,3) = 0.0;     tgm(0,4) = 0.0;    tgm(0,5) = 0.0;
         tgm(1,0) = lambda; tgm(1,1) = c1;     tgm(1,2) = lambda; tgm(1,3) = 0.0;     tgm(1,4) = 0.0;    tgm(1,5) = 0.0;
@@ -117,7 +114,6 @@ public:
         tgm(3,0) = 0.0;    tgm(3,1) = 0.0;    tgm(3,2) = 0.0;    tgm(3,3) = 2.0*mu;  tgm(3,4) = 0.0;    tgm(3,5) = 0.0;
         tgm(4,0) = 0.0;    tgm(4,1) = 0.0;    tgm(4,2) = 0.0;    tgm(4,3) = 0.0;     tgm(4,4) = 2.0*mu; tgm(4,5) = 0.0;
         tgm(5,0) = 0.0;    tgm(5,1) = 0.0;    tgm(5,2) = 0.0;    tgm(5,3) = 0.0;     tgm(5,4) = 0.0;    tgm(5,5) = 2.0*mu;
-
     }
 
     void setup_dirichlet_conditions(){
@@ -128,11 +124,11 @@ public:
         for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
             node = Mesh->local_nodes[i];
             coord = Mesh->nodes_coord[3*node+dof];
-            if(coord==0.0){
+            if(coord>=0.0-1.0e-6 & coord<=0.0+1.0e-6){
                 n_bc_dof+=3;
             }
-            if(coord==10.0){
-                n_bc_dof+=3;
+            if(coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
+                n_bc_dof+=1;
             }
         }
 
@@ -141,17 +137,17 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==0.0){
+            if (coord>=0.0-1.0e-6 & coord<=0.0+1.0e-6){
                 dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+1] = 3*inode+1;
                 dof_on_boundary[indbc+2] = 3*inode+2;
                 indbc+=3;
             }
-            if (coord==10.0){
-                dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc+1] = 3*inode+1;
-                dof_on_boundary[indbc+2] = 3*inode+2;
-                indbc+=3;
+            if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
+                //dof_on_boundary[indbc+0] = 3*inode+0;
+                dof_on_boundary[indbc+0] = 3*inode+1;
+                //dof_on_boundary[indbc+2] = 3*inode+2;
+                indbc+=1;
             }
         }
     }
@@ -178,15 +174,15 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==0.0){
+            if (coord>=0.0-1.0e-6 & coord<=0.0+1.0e-6){
                 F[0][StandardMap->LID(3*node+0)] = 0.0;
                 F[0][StandardMap->LID(3*node+1)] = 0.0;
                 F[0][StandardMap->LID(3*node+2)] = 0.0;
             }
-            if (coord==10.0){
-                F[0][StandardMap->LID(3*node+0)]   = 0.0;
+            if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
+                //F[0][StandardMap->LID(3*node+0)]   = 0.0;
                 F[0][StandardMap->LID(3*node+dof)] = displacement;
-                F[0][StandardMap->LID(3*node+2)]   = 0.0;
+                //F[0][StandardMap->LID(3*node+2)]   = 0.0;
             }
         }
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
