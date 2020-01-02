@@ -1,5 +1,6 @@
 # Get Trilinos as one entity
-MYAPP_TRILINOS_DIR = /usr/local/apps/petsc-3.7.6/gnu-mpich
+# MYAPP_TRILINOS_DIR = /Users/brian/Documents/GitHub/Trilinos/build_MPI/usr/local
+MYAPP_TRILINOS_DIR = /usr/local/include/trilinos
 include $(MYAPP_TRILINOS_DIR)/include/Makefile.export.Trilinos
 
 # Make sure to use same compilers and flags as Trilinos
@@ -14,14 +15,16 @@ FORT_FLAGS=$(Trilinos_Fortran_COMPILER_FLAGS) $(USER_FORT_FLAGS)
 MY_DIRS=-I/Users/Brian/Documents
 INCLUDE_DIRS=$(Trilinos_INCLUDE_DIRS) $(Trilinos_TPL_INCLUDE_DIRS)
 LIBRARY_DIRS=$(Trilinos_LIBRARY_DIRS) $(Trilinos_TPL_LIBRARY_DIRS)
-LIBRARIES=$(Trilinos_LIBRARIES) $(Trilinos_TPL_LIBRARIES)
+#LIBRARIES=$(Trilinos_LIBRARIES) $(Trilinos_TPL_LIBRARIES)
+
+LIBRARIES=-lml -lifpack -lamesos -lgaleri-xpetra -lgaleri-epetra -laztecoo -lisorropia -lxpetra-sup -lxpetra -lthyratpetra -lthyraepetraext -lthyraepetra -lthyracore -lthyratpetra -lthyraepetraext -lthyraepetra -lthyracore -lepetraext -ltrilinosss -ltpetraext -ltpetrainout -ltpetra -lkokkostsqr -ltpetraclassiclinalg -ltpetraclassicnodeapi -ltpetraclassic -ltpetraext -ltpetrainout -ltpetra -lkokkostsqr -ltpetraclassiclinalg -ltpetraclassicnodeapi -ltpetraclassic -ltriutils -lzoltan -lepetra -lrtop -lkokkoskernels -lteuchoskokkoscomm -lteuchoskokkoscompat -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchosparser -lteuchoscore -lteuchoskokkoscomm -lteuchoskokkoscompat -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchosparser -lteuchoscore -lkokkosalgorithms -lkokkoscontainers -lkokkoscore -lkokkosalgorithms -lkokkoscontainers -lkokkoscore -lmetis -lparmetis /usr/lib/libdl.dylib /usr/lib/liblapack.dylib /usr/lib/libblas.dylib
 
 LINK_FLAGS=$(Trilinos_EXTRA_LD_FLAGS)
 
 #just assuming that epetra is turned on.
 DEFINES=-DMYAPP_EPETRA
 
-SRC_DIR = 
+SRC_DIR = /Users/brian/Documents/GitHub/TrilinosUQComp/src/
 CFLAG = -I$(SRC_DIR)
 SRC = $(wildcard $(SRC_DIR)*.cpp)
 OBJ = $(SRC:.cpp=.o)
@@ -52,7 +55,7 @@ print_info:
 
 #build
 build: $(OBJ) main.o
-	$(CXX) $(CXX_FLAGS) $^ -o hellompi $(CFLAG) $(LINK_FLAGS) $(INCLUDE_DIRS) $(DEFINES) $(LIBRARY_DIRS) $(LIBRARIES)
+	$(CXX) $(CXX_FLAGS) $^ -o trilinos_mpi $(CFLAG) $(LINK_FLAGS) $(INCLUDE_DIRS) $(DEFINES) $(LIBRARY_DIRS) $(LIBRARIES)
 
 $(OBJ): $(HDR)
 main.o: $(MAIN_HDR) $(HDR)

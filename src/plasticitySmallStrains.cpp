@@ -4,6 +4,12 @@ Brian Staber (brian.staber@gmail.com)
 
 #include "plasticitySmallStrains.hpp"
 
+template <typename T>
+std::vector<T> linspace(T a, T b, size_t N);
+
+template<typename T>
+std::ostream &operator <<(std::ostream &os, const std::vector<T> &v);
+
 plasticitySmallStrains::plasticitySmallStrains(){
 
 }
@@ -28,6 +34,7 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
   tol           = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "tol");
 
   Krylov = &parameterlist.sublist("Krylov");
+  Newton = &parameterlist.sublist("Newton");
 
   CpuTime = new Epetra_Time(*Comm);
 
@@ -56,6 +63,65 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
   tgm = new Epetra_MultiVector(*GaussMap,21,true);
 
   ELASTICITY.Reshape(6,6);
+}
+
+int plasticitySmallStrains::sequence_bvp(bool print){
+  double delta = Delta;
+  double displacement;
+  double norm_inf_rhs;
+  double time_max = 1.0;
+  double Krylov_res = 0;
+  int iter, Krylov_its;
+  std::string solver_its = "GMRES_its";
+  std::string solver_res = "GMRES_res";
+
+  double nRes, nRes0;
+
+  int Nincr = Teuchos::getParameter<int>(*Newton,"Nincr");
+  double norm_l2_tol = Teuchos::getParameter<double>(*Newton,"norm_l2_tol");
+
+  Epetra_LinearProblem problem;
+  AztecOO solver;
+
+  Epetra_FECrsMatrix A(Copy,*FEGraph);
+  Epetra_FEVector Res(*StandardMap,true);
+
+  Epetra_Vector u(*StandardMap,true);
+  Epetra_Vector du(*StandardMap,true);
+  Epetra_Vector Du(*StandardMap,true);
+  Epetra_Vector DuOverlaped(*OverlapMap,true);
+
+  std::vector<double> uload = linspace<double>(0.0,bc_disp,Nincr);
+  uload.erase(uload.begin());
+  integrate_constitutive_problem(DuOverlaped);
+
+  for (unsigned int i=0; i<uload.size(); ++i){
+    assemble_system(DuOverlaped,A,Res);
+    if (i==0) apply_dirichlet_conditions(A,Res,uload[i]);
+    else apply_dirichlet_conditions(A,Res,uload[i]-uload[i-1]);
+    Res.Norm2(&nRes0);
+    nRes = nRes0;
+    Du.PutScalar(0.0);
+    if (MyPID==0) std::cout << "Increment:" << i+1 << std::setw(16) << "Residual" << std::endl;
+    if (MyPID==0) std::cout << std::setw(24) << nRes0 << std::endl;
+    iter = 0;
+    while ((nRes/nRes0>norm_l2_tol) & (iter<iter_max)) {
+      solve(problem, solver, A, Res, du);
+      Du.Update(1.0,du,1.0);
+      DuOverlaped.Import(Du,*ImportToOverlapMap,Insert);
+      integrate_constitutive_problem(DuOverlaped);
+      assemble_system(DuOverlaped,A,Res);
+      apply_dirichlet_conditions(A,Res,0.0);
+      Res.Norm2(&nRes);
+      if (MyPID==0) std::cout << std::setw(24) << nRes << std::endl;
+      iter++;
+    }
+    u.Update(1.0,Du,1.0);
+    (*sig_converged)   = (*sig);
+    (*epcum_converged) = (*epcum);
+  }
+  print_solution(u,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/plate_u.mtx");
+  return 0;
 }
 
 int plasticitySmallStrains::incremental_bvp(bool print){
@@ -134,6 +200,8 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                   du.Import(lhs, *ImportToOverlapMap, Insert);
                   Du.Update(1.0,du,1.0);
 
+                  print_solution(lhs,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/plate_u_elastic.mtx");
+
                   integrate_constitutive_problem(Du);
 
                   Krylov_its = solver.NumIters();
@@ -143,7 +211,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 if(iter>1){
 
                     CpuTime->ResetStartTime();
-                    assemblePureDirichlet_homogeneousForcing(Du, stiffness, rhs);
+                    assemble_system(Du, stiffness, rhs);
                     Assemble_time = CpuTime->ElapsedTime();
                     apply_dirichlet_conditions(stiffness, rhs, displacement);
 
@@ -219,7 +287,7 @@ void plasticitySmallStrains::solve(Epetra_LinearProblem & problem_, AztecOO & so
   Aztec_time = CpuTime->ElapsedTime();
 }
 
-void plasticitySmallStrains::assemblePureDirichlet_homogeneousForcing(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
+void plasticitySmallStrains::assemble_system(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
 
     F.PutScalar(0.0);
     K.PutScalar(0.0);
@@ -232,7 +300,6 @@ void plasticitySmallStrains::assemblePureDirichlet_homogeneousForcing(const Epet
     K.FillComplete();
     F.GlobalAssemble();
 }
-
 
 void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
 
@@ -343,10 +410,14 @@ void plasticitySmallStrains::integrate_constitutive_problem(Epetra_Vector & Du_)
 
       constitutive_problem(e_lid, gp, deto_el, sig_el, epcum_el, m_tg_matrix);
 
+      /*std::cout << "deto_el " << deto_el << std::endl;
+      std::cout << "sig_el " << sig_el << std::endl;
+      std::cout << "m_tg_matrix " << m_tg_matrix << std::endl;
+      std::cout << "epcum_el = " << epcum_el << std::endl;*/
+
       for (unsigned int k=0; k<6; ++k) {
         (*sig)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] = sig_el(k);
         (*eto)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] += deto_el(k);
-        // NEED TO STORE M_TG_MATRIX AS WELL ?!
         for (unsigned int l=k; l<6; ++l) {
           (*tgm)[15-(6-k)*(6-k-1)/2+l][GaussMap->LID(int(e_gid*n_gauss_points+gp))] = m_tg_matrix(k,l);
         }
@@ -361,7 +432,7 @@ void plasticitySmallStrains::elastic_predictor(Epetra_LinearProblem & problem_, 
 
   rhs_.PutScalar(0.0);
   CpuTime->ResetStartTime();
-  assemblePureDirichlet_homogeneousForcing_LinearElasticity(K);
+  assemble_system_LinearElasticity(K);
   Assemble_time = CpuTime->ElapsedTime();
   apply_dirichlet_conditions(K, rhs_, displacement_);
 
@@ -377,7 +448,7 @@ void plasticitySmallStrains::elastic_predictor(Epetra_LinearProblem & problem_, 
   Aztec_time = CpuTime->ElapsedTime();
 }
 
-void plasticitySmallStrains::assemblePureDirichlet_homogeneousForcing_LinearElasticity(Epetra_FECrsMatrix & K){
+void plasticitySmallStrains::assemble_system_LinearElasticity(Epetra_FECrsMatrix & K){
 
   K.PutScalar(0.0);
   stiffness_homogeneousForcing_LinearElasticity(K);
@@ -526,4 +597,22 @@ int plasticitySmallStrains::print_solution(Epetra_Vector & solution, std::string
     int error = EpetraExt::MultiVectorToMatrixMarketFile(fileName.c_str(),lhs_root,0,0,false);
 
     return error;
+}
+
+template <typename T>
+std::vector<T> linspace(T a, T b, size_t N) {
+    T h = (b - a) / static_cast<T>(N-1);
+    std::vector<T> xs(N);
+    typename std::vector<T>::iterator x;
+    T val;
+    for (x = xs.begin(), val = a; x != xs.end(); ++x, val += h)
+        *x = val;
+    return xs;
+}
+
+template<typename T>
+std::ostream &operator <<(std::ostream &os, const std::vector<T> &v) {
+   using namespace std;
+   copy(v.begin(), v.end(), ostream_iterator<T>(os, "\t"));
+   return os;
 }

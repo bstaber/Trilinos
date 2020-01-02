@@ -18,13 +18,14 @@ public:
     void initialize(Epetra_Comm & comm, Teuchos::ParameterList & parameterlist);
 
     int incremental_bvp(bool print);
+    int sequence_bvp(bool print);
 
-    void assemblePureDirichlet_homogeneousForcing(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
+    void assemble_system(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
     void stiffness_rhs_homogeneousForcing(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F);
 
     void elastic_predictor(Epetra_LinearProblem & problem_, AztecOO & solver_, Epetra_FECrsMatrix & K, Epetra_FEVector & rhs_,
                            Epetra_Vector & lhs_, double & displacement_);
-    void assemblePureDirichlet_homogeneousForcing_LinearElasticity(Epetra_FECrsMatrix & K);
+    void assemble_system_LinearElasticity(Epetra_FECrsMatrix & K);
     void stiffness_homogeneousForcing_LinearElasticity(Epetra_FECrsMatrix & K);
 
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
@@ -39,7 +40,7 @@ public:
     virtual void get_elasticity_tensor(const unsigned int & elid, const unsigned int & igp, Epetra_SerialDenseMatrix & TGM) = 0;
 
     virtual void setup_dirichlet_conditions() = 0;
-    virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement) = 0;
+    virtual void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double bc) = 0;
 
     void create_FECrsGraph();
     void constructScalarGaussMap();
@@ -47,6 +48,7 @@ public:
     int print_solution(Epetra_Vector & solution, std::string fileName);
 
     Teuchos::ParameterList * Krylov;
+    Teuchos::ParameterList * Newton;
 
     Epetra_Time * CpuTime;
 

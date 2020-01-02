@@ -11,14 +11,14 @@ class plate : public plasticitySmallStrains
 {
 public:
 
-    double E = 210.0;
-    double nu = 0.3;
-    double lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
-    double mu = E/(2.0*(1.0+nu));
-    double kappa = lambda + 2.0*mu/3.0;
+    double E; // = 210000.0;
+    double nu; // = 0.3;
+    double lambda; // = E*nu/((1.0+nu)*(1.0-2.0*nu));
+    double mu; // = E/(2.0*(1.0+nu));
+    double kappa; // = lambda + 2.0*mu/3.0;
 
-    double R0 = 1000.0;
-    double H  = 10000.0;
+    double R0; // = 1000.0;
+    double H; //  = 10000.0;
 
     Epetra_SerialDenseMatrix K4;
     Epetra_SerialDenseMatrix J4;
@@ -28,6 +28,15 @@ public:
     plate(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
       plasticitySmallStrains::initialize(comm, Parameters);
+
+      E  = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "young");
+      nu = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "poisson");
+      R0 = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "yield");
+      H  = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "hardening");
+
+      lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
+      mu = E/(2.0*(1.0+nu));
+      kappa = lambda + 2.0*mu/3.0;
 
       K4.Reshape(6,6);
       J4.Reshape(6,6);
@@ -64,6 +73,7 @@ public:
       Epetra_SerialDenseVector EYE(6);
       EYE(0) = 1.0; EYE(1) = 1.0; EYE(2) = 1.0; EYE(3) = 0.0; EYE(4) = 0.0; EYE(5) = 0.0;
 
+      get_elasticity_tensor(elid, igp, ELASTICITY);
       DSIG.Multiply('N','N',1.0,ELASTICITY,DETO,0.0);
       for (unsigned int k=0; k<6; ++k) SIGTR(k) = SIG(k) + DSIG(k);
 
@@ -80,26 +90,22 @@ public:
       double yield = qtrial - R0 - H*EPCUM;
 
       Epetra_SerialDenseMatrix NN(6,6);
-      for (unsigned int i=0; i<6; ++i) {
-        for (unsigned int j=0; j<6; ++j) {
+      for (unsigned int i=0; i<6; ++i){
+        for (unsigned int j=0; j<6; ++j){
           NN(i,j) = DEVTR(i)*DEVTR(j)/devdev;
         }
       }
 
       SIG = SIGTR;
-      get_elasticity_tensor(elid, igp, TGM);
+      TGM = ELASTICITY;
       if (yield>1.0e-10) {
         double gamma = yield/(3.0*mu+H);
         double beta  = 3.0*mu*gamma/qtrial;
-        double alpha = 1.0-beta;
-
         for (unsigned int k=0; k<6; ++k) SIG(k) -= beta*DEVTR(k);
-
         EPCUM += gamma;
-
-        for (unsigned int i=0; i<6; ++i) {
-          for (unsigned int j=0; j<6; ++j) {
-            TGM(i,j) =  + 3.0*kappa+J4(i,j) + 2.0*mu*alpha*K4(i,j) + 6.0*mu*mu*(gamma/qtrial - (1.0/(3.0*mu+H)))*NN(i,j);
+        for (unsigned int i=0; i<6; ++i){
+          for (unsigned int j=0; j<6; ++j){
+            TGM(i,j) += 6.0*mu*mu*(gamma/qtrial - (1.0/(3.0*mu+H)))*NN(i,j) - 2.0*mu*beta*K4(i,j);
           }
         }
       }
@@ -118,6 +124,72 @@ public:
 
     void setup_dirichlet_conditions(){
         n_bc_dof = 0;
+        double x,y,z;
+        unsigned int node;
+        for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
+            node = Mesh->local_nodes[i];
+            x = Mesh->nodes_coord[3*node+0];
+            y = Mesh->nodes_coord[3*node+1];
+            z = Mesh->nodes_coord[3*node+2];
+            if(y==0.0||y==10.0){
+                n_bc_dof+=3;
+            }
+        }
+
+        int indbc = 0;
+        dof_on_boundary = new int [n_bc_dof];
+        for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+            node = Mesh->local_nodes[inode];
+            x = Mesh->nodes_coord[3*node+0];
+            y = Mesh->nodes_coord[3*node+1];
+            z = Mesh->nodes_coord[3*node+2];
+            if(y==0.0||y==10.0){
+                dof_on_boundary[indbc+0] = 3*inode+0;
+                dof_on_boundary[indbc+1] = 3*inode+1;
+                dof_on_boundary[indbc+2] = 3*inode+2;
+                indbc+=3;
+            }
+        }
+    }
+
+    void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
+        Epetra_MultiVector v(*StandardMap,true);
+        v.PutScalar(0.0);
+
+        int node;
+        double x,y,z;
+        for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+            node = Mesh->local_nodes[inode];
+            x = Mesh->nodes_coord[3*node+0];
+            y = Mesh->nodes_coord[3*node+1];
+            z = Mesh->nodes_coord[3*node+2];
+            if (y==0.0||y==10.0){
+                v[0][StandardMap->LID(3*node+0)] = 0.0;
+                v[0][StandardMap->LID(3*node+1)] = factor*y;
+                v[0][StandardMap->LID(3*node+2)] = 0.0;
+            }
+        }
+
+        Epetra_MultiVector rhs_dir(*StandardMap,true);
+        K.Apply(v,rhs_dir);
+        F.Update(-1.0,rhs_dir,1.0);
+
+        for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+            node = Mesh->local_nodes[inode];
+            x = Mesh->nodes_coord[3*node+0];
+            y = Mesh->nodes_coord[3*node+1];
+            z = Mesh->nodes_coord[3*node+2];
+            if (y==0.0||y==10.0){
+                F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+                F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+                F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
+            }
+        }
+        ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
+    }
+
+    /*void setup_dirichlet_conditions(){
+        n_bc_dof = 0;
         int dof = 1;
         double coord;
         unsigned int node;
@@ -128,10 +200,11 @@ public:
                 n_bc_dof+=3;
             }
             if(coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
-                n_bc_dof+=1;
+                n_bc_dof+=3;
             }
         }
 
+        //if (MyPID==0) std::cout << "n_bc_dof = " << n_bc_dof << std::endl;
         int indbc = 0;
         dof_on_boundary = new int [n_bc_dof];
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
@@ -144,10 +217,10 @@ public:
                 indbc+=3;
             }
             if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
-                //dof_on_boundary[indbc+0] = 3*inode+0;
+                dof_on_boundary[indbc+0] = 3*inode+0;
                 dof_on_boundary[indbc+0] = 3*inode+1;
-                //dof_on_boundary[indbc+2] = 3*inode+2;
-                indbc+=1;
+                dof_on_boundary[indbc+2] = 3*inode+2;
+                indbc+=3;
             }
         }
     }
@@ -162,7 +235,7 @@ public:
         for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
             node = Mesh->local_nodes[inode];
             coord = Mesh->nodes_coord[3*node+dof];
-            if (coord==10.0){
+            if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
                 v[0][StandardMap->LID(3*node+dof)] = displacement;
             }
         }
@@ -180,12 +253,13 @@ public:
                 F[0][StandardMap->LID(3*node+2)] = 0.0;
             }
             if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
-                //F[0][StandardMap->LID(3*node+0)]   = 0.0;
+                F[0][StandardMap->LID(3*node+0)]   = 0.0;
                 F[0][StandardMap->LID(3*node+dof)] = displacement;
-                //F[0][StandardMap->LID(3*node+2)]   = 0.0;
+                F[0][StandardMap->LID(3*node+2)]   = 0.0;
             }
         }
+        //std::cout << " K = " << K << std::endl;
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
-    }
+    }*/
 };
 #endif
