@@ -15,9 +15,9 @@
 
     <ParameterList name="Newton">
         <Parameter name="timestep"          type="string" value="automatic"/>
-        <Parameter name="delta"             type="double" value="0.1"/>
-        <Parameter name="iterMin"           type="int"    value="3"/>
-        <Parameter name="iterMax"           type="int"    value="20"/>
+        <Parameter name="delta"             type="double" value="0.001"/>
+        <Parameter name="iterMin"           type="int"    value="2"/>
+        <Parameter name="iterMax"           type="int"    value="10"/>
         <Parameter name="nbBisMax"          type="int"    value="10"/>
         <Parameter name="NormFTol"          type="double" value="1e-6"/>
         <Parameter name="NormFMax"          type="double" value="1e7"/>
@@ -25,7 +25,7 @@
         <Parameter name="success_parameter" type="double" value="2.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="number_of_loads"   type="int"    value="1"/>
-        <Parameter name="bc_disp"           type="double" value="1.0"/>
+        <Parameter name="bc_disp"           type="double" value="0.1"/>
         <Parameter name="pressure_load"     type="double" value="12000.0"/>
         <Parameter name="tol"               type="double" value="1e-10"/>
         <Parameter name="Nincr"             type="int"    value="1000"/>
