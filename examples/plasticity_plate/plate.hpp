@@ -1,5 +1,9 @@
 /*
 Brian Staber (brian.staber@gmail.com)
+
+1) von Mises plate under tension
+2) Fenics and Zset give same results
+
 */
 
 #ifndef plate_HPP
@@ -187,79 +191,5 @@ public:
         }
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
-
-    /*void setup_dirichlet_conditions(){
-        n_bc_dof = 0;
-        int dof = 1;
-        double coord;
-        unsigned int node;
-        for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
-            node = Mesh->local_nodes[i];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if(coord>=0.0-1.0e-6 & coord<=0.0+1.0e-6){
-                n_bc_dof+=3;
-            }
-            if(coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
-                n_bc_dof+=3;
-            }
-        }
-
-        //if (MyPID==0) std::cout << "n_bc_dof = " << n_bc_dof << std::endl;
-        int indbc = 0;
-        dof_on_boundary = new int [n_bc_dof];
-        for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
-            node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord>=0.0-1.0e-6 & coord<=0.0+1.0e-6){
-                dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc+1] = 3*inode+1;
-                dof_on_boundary[indbc+2] = 3*inode+2;
-                indbc+=3;
-            }
-            if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
-                dof_on_boundary[indbc+0] = 3*inode+0;
-                dof_on_boundary[indbc+0] = 3*inode+1;
-                dof_on_boundary[indbc+2] = 3*inode+2;
-                indbc+=3;
-            }
-        }
-    }
-
-    void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double & displacement){
-        Epetra_MultiVector v(*StandardMap,true);
-        v.PutScalar(0.0);
-
-        int node;
-        int dof = 1;
-        double coord;
-        for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
-            node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
-                v[0][StandardMap->LID(3*node+dof)] = displacement;
-            }
-        }
-
-        Epetra_MultiVector rhs_dir(*StandardMap,true);
-        K.Apply(v,rhs_dir);
-        F.Update(-1.0,rhs_dir,1.0);
-
-        for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
-            node = Mesh->local_nodes[inode];
-            coord = Mesh->nodes_coord[3*node+dof];
-            if (coord>=0.0-1.0e-6 & coord<=0.0+1.0e-6){
-                F[0][StandardMap->LID(3*node+0)] = 0.0;
-                F[0][StandardMap->LID(3*node+1)] = 0.0;
-                F[0][StandardMap->LID(3*node+2)] = 0.0;
-            }
-            if (coord>=10.0-1.0e-6 & coord<=10.0+1.0e-6){
-                F[0][StandardMap->LID(3*node+0)]   = 0.0;
-                F[0][StandardMap->LID(3*node+dof)] = displacement;
-                F[0][StandardMap->LID(3*node+2)]   = 0.0;
-            }
-        }
-        //std::cout << " K = " << K << std::endl;
-        ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
-    }*/
 };
 #endif
