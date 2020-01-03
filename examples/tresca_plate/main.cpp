@@ -10,7 +10,7 @@ Brian Staber (brian.staber@gmail.com)
 #include "Epetra_SerialComm.h"
 #endif
 
-#include "plate.hpp"
+#include "tresca_plate.hpp"
 #include "Teuchos_RCP.hpp"
 #include "Teuchos_ParameterList.hpp"
 #include "Teuchos_StandardCatchMacros.hpp"
@@ -47,7 +47,7 @@ MPI_Init(&argc, &argv);
     if (Comm.MyPID()==0){
         paramList->print(std::cout,2,true,true);
     }
-    Teuchos::RCP<plate> problem = Teuchos::rcp(new plate(Comm,*paramList));
+    Teuchos::RCP<tresca_plate> problem = Teuchos::rcp(new tresca_plate(Comm,*paramList));
 
     problem->sequence_bvp(true);
 
