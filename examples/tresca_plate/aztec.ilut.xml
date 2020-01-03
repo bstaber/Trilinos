@@ -1,7 +1,7 @@
 <ParameterList>
 
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate.msh"/>
+        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/tresca_plate/plate.msh"/>
         <Parameter name="path"      type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/linearpatchtest/linearpatchtest.mtx"/>
         <Parameter name="scaling"   type="double" value="1.0"/>
     </ParameterList>
