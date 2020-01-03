@@ -129,25 +129,26 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     Epetra_LinearProblem problem;
     AztecOO solver;
 
-    Epetra_FECrsMatrix stiffness(Copy,*FEGraph);
-    Epetra_FEVector    rhs(*StandardMap,true);
-    Epetra_Vector      lhs(*StandardMap,true);
-    Epetra_Vector      du(*OverlapMap,true);
-    Epetra_Vector      Du(*OverlapMap,true);
-    Epetra_Vector      total_u(*StandardMap,true);
-    Epetra_Vector      total_u_converged(*StandardMap,true);
+    Epetra_FECrsMatrix A(Copy,*FEGraph);
+    Epetra_FEVector Res(*StandardMap,true);
+
+    Epetra_Vector u(*StandardMap,true);
+    Epetra_Vector u_converged(*StandardMap,true);
+    Epetra_Vector du(*StandardMap,true);
+    Epetra_Vector Du(*StandardMap,true);
+    Epetra_Vector DuOverlaped(*OverlapMap,true);
 
     double delta = Delta;
-    double displacement;
     double norm_inf_rhs;
     double time_max = 1.0;
-    double Krylov_res = 0;
     int FLAG1, FLAG2, FLAG3, nb_bis, iter;
+    double Krylov_res = 0;
     int Krylov_its = 0;
     std::string solver_its = "GMRES_its";
     std::string solver_res = "GMRES_res";
 
     time = 0.0;
+    integrate_constitutive_problem(DuOverlaped);
 
     FLAG1=1;
     while (FLAG1==1){
@@ -157,15 +158,11 @@ int plasticitySmallStrains::incremental_bvp(bool print){
         FLAG3=1;
         nb_bis = 0;
         time += delta;
-        total_u_converged  = total_u;
+        
+        u.Update(1.0,Du,1.0);
+        u_converged = u;
         (*sig_converged)   = (*sig);
         (*epcum_converged) = (*epcum);
-
-        Epetra_Vector * sig22 = (*sig_converged)(1);
-
-        print_solution(total_u_converged,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/plate_u.mtx");
-        print_solution(*epcum_converged,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/plate_epcum.mtx");
-        print_solution(*sig22,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/plate_sig22.mtx");
 
         while (FLAG2==1){
             FLAG2=0;
@@ -180,94 +177,63 @@ int plasticitySmallStrains::incremental_bvp(bool print){
                 }
             }
 
-            iter = 0;
+            assemble_system(DuOverlaped,A,Res);
+            apply_dirichlet_conditions(A,Res,bc_disp*delta);
             Du.PutScalar(0.0);
+            iter = 0;
+            norm_inf_rhs = 1.0;
+            if (MyPID==0) std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << std::endl;
+            if (MyPID==0) std::cout << " " << time << "\t" << delta << "\t\t" << iter << std::endl;
+
             while (FLAG3==1){
+
+                solve(problem, solver, A, Res, du);
+                Du.Update(1.0,du,1.0);
+                DuOverlaped.Import(Du,*ImportToOverlapMap,Insert);
+                integrate_constitutive_problem(DuOverlaped);
+                assemble_system(DuOverlaped,A,Res);
+                apply_dirichlet_conditions(A,Res,0.0);
 
                 FLAG3=0;
                 iter++;
-
                 if(iter>iter_max){
                     if (MyPID==0) std::cout << "Iteration limit exceeds.\n";
                     return 1;
                 }
 
-                displacement = (iter==1) ? bc_disp*delta : (0.0);
+                Res.NormInf(&norm_inf_rhs);
+                if (MyPID==0) std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << std::endl;
 
-                if (iter==1) {
-                  elastic_predictor(problem,solver,stiffness,rhs,lhs,displacement);
-                  total_u.Update(1.0,lhs,1.0);
-                  du.Import(lhs, *ImportToOverlapMap, Insert);
-                  Du.Update(1.0,du,1.0);
-
-                  print_solution(lhs,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/plate_u_elastic.mtx");
-
-                  integrate_constitutive_problem(Du);
-
-                  Krylov_its = solver.NumIters();
-                  Krylov_res = solver.TrueResidual();
+                if (norm_inf_rhs<norm_inf_tol){
+                    if (iter<=iter_min) delta = success*delta;
+                    if (iter>=iter_max) delta = delta/failure;
+                    FLAG1=1;
+                    break;
                 }
 
-                if(iter>1){
-
-                    CpuTime->ResetStartTime();
-                    assemble_system(Du, stiffness, rhs);
-                    Assemble_time = CpuTime->ElapsedTime();
-                    apply_dirichlet_conditions(stiffness, rhs, displacement);
-
-                    rhs.NormInf(&norm_inf_rhs);
-
-                    if (MyPID==0 && print){
-                        if(iter>2) std::cout << "\t\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\n";
-                        else{
-                            std::cout << "\n Time" << "\t" << "Timestep" << "\t" << "Iter" << "\t" << "NormInf" << "\t\t" << solver_its << "\t" << solver_res << "\t\t" << "assemble_time" << "\t\t" << "aztec_time" << "\t\t" << "\n";
-                            std::cout << " " << time << "\t" << delta << "\t\t" << iter << "\t" << norm_inf_rhs << "\t" << Krylov_its << "\t\t" << Krylov_res << "\t\t" << Assemble_time << "\t\t\t" << Aztec_time << "\t\t\t" << "\n";
-                        }
+                if (norm_inf_rhs>norm_inf_max||iter==iter_max){
+                    nb_bis++;
+                    if (nb_bis<nb_bis_max){
+                        delta /= failure;
+                        time -= delta;
+                        u  = u_converged;
+                        (*sig)   = (*sig_converged);
+                        (*epcum) = (*epcum_converged);
+                        if (MyPID==0) std::cout << "Bisecting increment: " << nb_bis << "\n";
                     }
-
-                    if (norm_inf_rhs<norm_inf_tol){
-                        if (iter<=iter_min) delta = success*delta;
-                        if (iter>=iter_max) delta = delta/failure;
-                        FLAG1=1;
-                        break;
+                    else{
+                        if (MyPID==0) std::cout << "Bisection number exceeds.\n";
+                        return 2;
                     }
-
-                    if (norm_inf_rhs>norm_inf_max||iter==iter_max){
-                        nb_bis++;
-                        if (nb_bis<nb_bis_max){
-                            delta /= failure;
-                            time -= delta;
-                            total_u  = total_u_converged;
-                            (*sig)   = (*sig_converged);
-                            (*epcum) = (*epcum_converged);
-                            if (MyPID==0) std::cout << "Bisecting increment: " << nb_bis << "\n";
-                        }
-                        else{
-                            if (MyPID==0) std::cout << "Bisection number exceeds.\n";
-                            return 2;
-                        }
-                        FLAG2=1;
-                        FLAG3=1;
-                        break;
-                    }
-
-                    solve(problem, solver, stiffness, rhs, lhs);
-
-                    Krylov_its = solver.NumIters();
-                    Krylov_res = solver.TrueResidual();
-
-                    total_u.Update(1.0,lhs,1.0);
-
-                    du.PutScalar(0.0);
-                    du.Import(lhs, *ImportToOverlapMap, Insert);
-                    Du.Update(1.0,du,1.0);
-
-                    integrate_constitutive_problem(Du);
+                    FLAG2=1;
+                    FLAG3=1;
+                    break;
                 }
                 FLAG3=1;
             }
         }
     }
+    print_solution(u,"/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/plate_u.mtx");
     return 0;
 }
 
@@ -289,16 +255,16 @@ void plasticitySmallStrains::solve(Epetra_LinearProblem & problem_, AztecOO & so
 
 void plasticitySmallStrains::assemble_system(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
 
-    F.PutScalar(0.0);
-    K.PutScalar(0.0);
+  F.PutScalar(0.0);
+  K.PutScalar(0.0);
 
-    stiffness_rhs_homogeneousForcing(Du_, K, F);
+  stiffness_rhs_homogeneousForcing(Du_, K, F);
 
-    Comm->Barrier();
+  Comm->Barrier();
 
-    K.GlobalAssemble();
-    K.FillComplete();
-    F.GlobalAssemble();
+  K.GlobalAssemble();
+  K.FillComplete();
+  F.GlobalAssemble();
 }
 
 void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F){

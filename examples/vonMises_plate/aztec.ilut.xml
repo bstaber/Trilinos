@@ -1,7 +1,7 @@
 <ParameterList>
 
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate.msh"/>
+        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate_extruded.msh"/>
         <Parameter name="path"      type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/linearpatchtest/linearpatchtest.mtx"/>
         <Parameter name="scaling"   type="double" value="1.0"/>
     </ParameterList>
@@ -14,9 +14,10 @@
     </ParameterList>
 
     <ParameterList name="Newton">
+        <Parameter name="timestep"          type="string" value="sequence"/>
         <Parameter name="delta"             type="double" value="0.1"/>
-        <Parameter name="iterMin"           type="int"    value="3"/>
-        <Parameter name="iterMax"           type="int"    value="20"/>
+        <Parameter name="iterMin"           type="int"    value="4"/>
+        <Parameter name="iterMax"           type="int"    value="10"/>
         <Parameter name="nbBisMax"          type="int"    value="10"/>
         <Parameter name="NormFTol"          type="double" value="1e-6"/>
         <Parameter name="NormFMax"          type="double" value="1e7"/>

@@ -49,7 +49,10 @@ MPI_Init(&argc, &argv);
     }
     Teuchos::RCP<vonMises_plate> problem = Teuchos::rcp(new vonMises_plate(Comm,*paramList));
 
-    problem->sequence_bvp(true);
+    std::string timestep = Teuchos::getParameter<std::string>((*paramList).sublist("Newton"), "timestep");
+    if (timestep=="sequence") problem->sequence_bvp(true);
+    else if (timestep=="automatic") problem->incremental_bvp(true);
+    else std::cout << "Unknown timestep method (sequence, automatic)." << std::endl;
 
 #ifdef HAVE_MPI
     MPI_Finalize();
