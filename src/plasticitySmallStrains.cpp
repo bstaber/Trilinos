@@ -355,6 +355,8 @@ void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vecto
             }
           }
 
+          //if (MyPID==0) std::cout << "m_tg_matrix = " << m_tg_matrix << std::endl;
+
           error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,sig_el,1.0);
           error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,m_tg_matrix,0.0);
           error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);

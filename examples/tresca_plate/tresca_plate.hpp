@@ -70,18 +70,13 @@ public:
                               const Epetra_SerialDenseVector & DETO, Epetra_SerialDenseVector & SIG,
                               double & EPCUM, Epetra_SerialDenseMatrix & TGM){
 
-      Epetra_SerialDenseVector SIGTR(6), DSIG(6), DEVTR(6), EYE(6);
+      Epetra_SerialDenseVector SIGTR(6), DSIG(6), EYE(6);
       EYE(0) = 1.0; EYE(1) = 1.0; EYE(2) = 1.0; EYE(3) = 0.0; EYE(4) = 0.0; EYE(5) = 0.0;
 
       get_elasticity_tensor(elid, igp, ELASTICITY);
       get_compliance_tensor(elid, igp, COMPLIANCE);
       DSIG.Multiply('N','N',1.0,ELASTICITY,DETO,0.0);
       for (unsigned int k=0; k<6; ++k) SIGTR(k) = SIG(k) + DSIG(k);
-      double pressure = (1.0/3.0)*(SIGTR(0)+SIGTR(1)+SIGTR(2));
-      DEVTR = SIGTR;
-      DEVTR(0) -= pressure;
-      DEVTR(1) -= pressure;
-      DEVTR(2) -= pressure;
 
       Epetra_SerialDenseVector EELTR(6), xtr(3), ytr(3), y(3);
       EELTR.Multiply('N','N',1.0,COMPLIANCE,SIGTR,0.0);
@@ -120,6 +115,7 @@ public:
 
           tgm_smooth(EELTR,xtr,y,E1,E2,E3,TGM);
         }
+
         if ((qlsl>=1.0e-10) & (qlla<1.0e-10)) {
           LEFT = true;
           if (SMOOTH==true) std::cout << "Can't be SMOOTH and LEFT at the same time" << std::endl;
@@ -138,6 +134,7 @@ public:
 
           tgm_left(EELTR,xtr,y,E12,E3,TGM);
         }
+
         if ((qrsr>=1.0e-10) & (qrra<1.0e-10)) {
           RIGHT = true;
           if ((SMOOTH==true) || (LEFT==true)) std::cout << "Can't be RIGHT and SMOOTH/LEFT at the same time: " << SMOOTH << "," << LEFT << "," << RIGHT << std::endl;
@@ -157,6 +154,8 @@ public:
           tgm_right(EELTR,xtr,y,E1,E23,TGM);
         }
       }
+
+      //std::cout << "States: " << LEFT << "\t" << SMOOTH << "\t" << RIGHT << std::endl;
 
     }
 
@@ -198,7 +197,9 @@ public:
       qrra = v(0)-0.5*(v(1)+v(2))-rad-3.0*mu*gara;
     }
 
-    void tgm_smooth(Epetra_SerialDenseVector & X, Epetra_SerialDenseVector & x, Epetra_SerialDenseVector & y, Epetra_SerialDenseVector & E1, Epetra_SerialDenseVector & E2, Epetra_SerialDenseVector & E3, Epetra_SerialDenseMatrix & TGM) {
+    void tgm_smooth(const Epetra_SerialDenseVector & X, const Epetra_SerialDenseVector & x, const Epetra_SerialDenseVector & y,
+                    const Epetra_SerialDenseVector & E1, const Epetra_SerialDenseVector & E2, const Epetra_SerialDenseVector & E3,
+                    Epetra_SerialDenseMatrix & TGM) {
       Epetra_SerialDenseVector EYE(6);
       EYE(0) = 1.0; EYE(1) = 1.0; EYE(2) = 1.0; EYE(3) = 0.0; EYE(4) = 0.0; EYE(5) = 0.0;
       Epetra_SerialDenseMatrix DXX(6,6), ikjl_EYEX(6,6), iljk_EYEX(6,6), ikjl_XEYE(6,6), iljk_XEYE(6,6);
@@ -211,7 +212,7 @@ public:
       DXX = ikjl_EYEX;
       DXX += iljk_EYEX;
       DXX += ikjl_XEYE;
-      DXX += iljk_EYEX;
+      DXX += iljk_XEYE;
       DXX.Scale(0.5);
 
       Epetra_SerialDenseMatrix E1E1(6,6), E2E2(6,6), E3E3(6,6);
@@ -251,7 +252,9 @@ public:
       }
     }
 
-    void tgm_left(Epetra_SerialDenseVector & X, Epetra_SerialDenseVector & x, Epetra_SerialDenseVector & y, Epetra_SerialDenseVector & E12, Epetra_SerialDenseVector & E3, Epetra_SerialDenseMatrix & TGM) {
+    void tgm_left(const Epetra_SerialDenseVector & X, const Epetra_SerialDenseVector & x, const Epetra_SerialDenseVector & y,
+                  const Epetra_SerialDenseVector & E12, const Epetra_SerialDenseVector & E3,
+                  Epetra_SerialDenseMatrix & TGM) {
       Epetra_SerialDenseVector EYE(6);
       EYE(0) = 1.0; EYE(1) = 1.0; EYE(2) = 1.0; EYE(3) = 0.0; EYE(4) = 0.0; EYE(5) = 0.0;
       Epetra_SerialDenseMatrix DXX(6,6), ikjl_EYEX(6,6), iljk_EYEX(6,6), ikjl_XEYE(6,6), iljk_XEYE(6,6);
@@ -264,7 +267,7 @@ public:
       DXX = ikjl_EYEX;
       DXX += iljk_EYEX;
       DXX += ikjl_XEYE;
-      DXX += iljk_EYEX;
+      DXX += iljk_XEYE;
       DXX.Scale(0.5);
 
       Epetra_SerialDenseMatrix E12E12(6,6), E3E3(6,6), E3E12(6,6), E12E3(6,6);
@@ -305,7 +308,9 @@ public:
       }
     }
 
-    void tgm_right(Epetra_SerialDenseVector & X, Epetra_SerialDenseVector & x, Epetra_SerialDenseVector & y, Epetra_SerialDenseVector & E1, Epetra_SerialDenseVector & E23, Epetra_SerialDenseMatrix & TGM) {
+    void tgm_right(const Epetra_SerialDenseVector & X, const Epetra_SerialDenseVector & x, const Epetra_SerialDenseVector & y,
+                   const Epetra_SerialDenseVector & E1, const Epetra_SerialDenseVector & E23,
+                   Epetra_SerialDenseMatrix & TGM) {
       Epetra_SerialDenseVector EYE(6);
       EYE(0) = 1.0; EYE(1) = 1.0; EYE(2) = 1.0; EYE(3) = 0.0; EYE(4) = 0.0; EYE(5) = 0.0;
       Epetra_SerialDenseMatrix DXX(6,6), ikjl_EYEX(6,6), iljk_EYEX(6,6), ikjl_XEYE(6,6), iljk_XEYE(6,6);
@@ -318,7 +323,7 @@ public:
       DXX = ikjl_EYEX;
       DXX += iljk_EYEX;
       DXX += ikjl_XEYE;
-      DXX += iljk_EYEX;
+      DXX += iljk_XEYE;
       DXX.Scale(0.5);
 
       Epetra_SerialDenseMatrix E23E23(6,6), E1E1(6,6), E1E23(6,6), E23E1(6,6);
@@ -372,7 +377,7 @@ public:
     void get_compliance_tensor(const unsigned int & e_id, const unsigned int & gp, Epetra_SerialDenseMatrix & itgm){
       double c1 = 1.0/E;
       double c2 = -nu*c1;
-      double c3 = 4.0*(1.0+nu)*c1;
+      double c3 = (1.0+nu)*c1;
       itgm(0,0) = c1;     itgm(0,1) = c2;     itgm(0,2) = c2;     itgm(0,3) = 0.0;     itgm(0,4) = 0.0;    itgm(0,5) = 0.0;
       itgm(1,0) = c2;     itgm(1,1) = c1;     itgm(1,2) = c2;     itgm(1,3) = 0.0;     itgm(1,4) = 0.0;    itgm(1,5) = 0.0;
       itgm(2,0) = c2;     itgm(2,1) = c2;     itgm(2,2) = c1;     itgm(2,3) = 0.0;     itgm(2,4) = 0.0;    itgm(2,5) = 0.0;

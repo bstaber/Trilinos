@@ -27,7 +27,7 @@
         <Parameter name="bc_disp"           type="double" value="0.1"/>
         <Parameter name="pressure_load"     type="double" value="12000.0"/>
         <Parameter name="tol"               type="double" value="1e-10"/>
-        <Parameter name="Nincr"             type="int"    value="10"/>
+        <Parameter name="Nincr"             type="int"    value="1000"/>
         <Parameter name="norm_l2_tol"       type="double" value="1.0e-8"/>
     </ParameterList>
 
