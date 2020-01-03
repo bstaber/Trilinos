@@ -6,12 +6,12 @@ Brian Staber (brian.staber@gmail.com)
 
 */
 
-#ifndef plate_HPP
-#define plate_HPP
+#ifndef VONMISES_PLATE_HPP
+#define VONMISES_PLATE_HPP
 
 #include "plasticitySmallStrains.hpp"
 
-class plate : public plasticitySmallStrains
+class vonMises_plate : public plasticitySmallStrains
 {
 public:
 
@@ -29,7 +29,7 @@ public:
 
     Teuchos::ParameterList * Krylov;
 
-    plate(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
+    vonMises_plate(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
       plasticitySmallStrains::initialize(comm, Parameters);
 
@@ -64,7 +64,7 @@ public:
 
     }
 
-    ~plate(){
+    ~vonMises_plate(){
     }
 
     void constitutive_problem(const unsigned int & elid, const unsigned int & igp,
