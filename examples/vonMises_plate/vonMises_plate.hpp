@@ -15,14 +15,8 @@ class vonMises_plate : public plasticitySmallStrains
 {
 public:
 
-    double E; // = 210000.0;
-    double nu; // = 0.3;
-    double lambda; // = E*nu/((1.0+nu)*(1.0-2.0*nu));
-    double mu; // = E/(2.0*(1.0+nu));
-    double kappa; // = lambda + 2.0*mu/3.0;
-
-    double R0; // = 1000.0;
-    double H; //  = 10000.0;
+    double E, nu, lambda, mu, kappa;
+    double R0, H;
 
     Epetra_SerialDenseMatrix K4;
     Epetra_SerialDenseMatrix J4;
