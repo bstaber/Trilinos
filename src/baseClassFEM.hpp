@@ -5,6 +5,7 @@ Brian Staber (brian.staber@gmail.com)
 #ifndef BASECLASSFEM_HPP
 #define BASECLASSFEM_HPP
 #include "meshpp.hpp"
+#include "error_messager.hpp"
 class baseClassFEM
 {
 public:
