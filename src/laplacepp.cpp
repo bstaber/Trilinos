@@ -35,7 +35,7 @@ laplace::laplace(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
     std::string boundary_file = Teuchos::getParameter<std::string>(Parameters, "boundary_file");
     unsigned int number_physical_groups = Teuchos::getParameter<unsigned int>(Parameters, "nb_phys_groups");
 
-    Mesh = new mesh(comm, mesh_file, 1.0);
+    Mesh = new mesh(comm, Parameters);
     Mesh->read_boundary_file(boundary_file,number_physical_groups);
     Comm = Mesh->Comm;
 

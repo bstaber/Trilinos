@@ -37,9 +37,9 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
 
   CpuTime = new Epetra_Time(*Comm);
 
-  std::string mesh_file = Teuchos::getParameter<std::string>(parameterlist.sublist("Mesh"), "mesh_file");
-  double scaling = Teuchos::getParameter<double>(parameterlist.sublist("Mesh"), "scaling");
-  Mesh  = new mesh(comm, mesh_file, scaling);
+  //std::string mesh_file = Teuchos::getParameter<std::string>(parameterlist.sublist("Mesh"), "mesh_file");
+  //double scaling = Teuchos::getParameter<double>(parameterlist.sublist("Mesh"), "scaling");
+  Mesh  = new mesh(comm, parameterlist);
   Comm  = Mesh->Comm;
   MyPID = Comm->MyPID();
 
@@ -564,6 +564,142 @@ int plasticitySmallStrains::print_solution(Epetra_Vector & solution, std::string
     int error = EpetraExt::MultiVectorToMatrixMarketFile(fileName.c_str(),lhs_root,0,0,false);
 
     return error;
+}
+
+int plasticitySmallStrains::print_at_gauss_points(std::string filename){
+
+  /*Epetra_Vector x_coord(*GaussMap);
+  Epetra_Vector y_coord(*GaussMap);
+  Epetra_Vector z_coord(*GaussMap);*/
+  Epetra_MultiVector output(*GaussMap,4,true);
+
+  int node;
+  double xi, eta, zeta;
+  Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
+  Epetra_SerialDenseVector vector_X(3);
+  Epetra_SerialDenseVector N(Mesh->el_type);
+
+  int e_gid;
+  int n_local_cells = Mesh->n_local_cells;
+  int n_gauss_cells = Mesh->n_gauss_cells;
+
+  for (unsigned int e_lid=0; e_lid<n_local_cells; ++e_lid){
+      e_gid = Mesh->local_cells[e_lid];
+      for (int inode=0; inode<Mesh->el_type; ++inode){
+          node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+          matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+          matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+          matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
+      }
+      for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+          xi   = Mesh->xi_cells[gp];
+          eta  = Mesh->eta_cells[gp];
+          zeta = Mesh->zeta_cells[gp];
+
+          switch (Mesh->el_type){
+              case 4:
+                  tetra4::shape_functions(N, xi, eta, zeta);
+                  break;
+              case 8:
+                  hexa8::shape_functions(N, xi, eta, zeta);
+                  break;
+              case 10:
+                  tetra10::shape_functions(N, xi, eta, zeta);
+                  break;
+              case 20:
+                  hexa20::shape_functions(N, xi, eta, zeta);
+                  break;
+              default:
+                  std::cout << "Non supported element type encountered" << std::endl;
+                  //NotImplementedException();
+          }
+
+          vector_X.Multiply('N','N',1.0,matrix_X,N,0.0);
+          output[0][GaussMap->LID(int(e_gid*n_gauss_cells+gp))] = vector_X(0);
+          output[1][GaussMap->LID(int(e_gid*n_gauss_cells+gp))] = vector_X(1);
+          output[2][GaussMap->LID(int(e_gid*n_gauss_cells+gp))] = vector_X(2);
+          output[3][GaussMap->LID(int(e_gid*n_gauss_cells+gp))] = (*epcum)[GaussMap->LID(int(e_gid*n_gauss_cells+gp))];
+       }
+  }
+
+  int error;
+  int NumTargetElements = 0;
+  if (Comm->MyPID()==0){
+      NumTargetElements = Mesh->n_cells*n_gauss_cells;
+  }
+  Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+  Epetra_Export ExportOnRoot(*GaussMap,MapOnRoot);
+  Epetra_MultiVector lhs_root(MapOnRoot,4,true);
+
+  lhs_root.Export(output,ExportOnRoot,Insert);
+  error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+  return 0;
+}
+
+int plasticitySmallStrains::print_mean_at_center(std::string filename){
+
+  Epetra_Map CellsMap(-1,Mesh->n_local_cells,&Mesh->local_cells[0],0,*Comm);
+  Epetra_MultiVector output(CellsMap,4,true);
+
+  int node;
+  double xi   = 0.0;
+  double eta  = 0.0;
+  double zeta = 0.0;
+  Epetra_SerialDenseMatrix matrix_X(3,Mesh->el_type);
+  Epetra_SerialDenseVector vector_X(3);
+  Epetra_SerialDenseVector N(Mesh->el_type);
+
+  int e_gid;
+  int n_local_cells = Mesh->n_local_cells;
+  int n_gauss_cells = Mesh->n_gauss_cells;
+  double vol_cell;
+
+  switch (Mesh->el_type){
+      case 8:
+          hexa8::shape_functions(N, xi, eta, zeta);
+          break;
+      case 20:
+          hexa20::shape_functions(N, xi, eta, zeta);
+          break;
+      default:
+          std::cout << "Non supported element type encountered in plasticitySmallStrains::print_mean_at_center" << std::endl;
+          //NotImplementedException();
+  }
+
+  for (unsigned int e_lid=0; e_lid<n_local_cells; ++e_lid){
+      e_gid = Mesh->local_cells[e_lid];
+      vol_cell = Mesh->vol_cells(e_lid);
+      for (int inode=0; inode<Mesh->el_type; ++inode){
+          node = Mesh->cells_nodes[Mesh->el_type*e_gid+inode];
+          matrix_X(0,inode) = Mesh->nodes_coord[3*node+0];
+          matrix_X(1,inode) = Mesh->nodes_coord[3*node+1];
+          matrix_X(2,inode) = Mesh->nodes_coord[3*node+2];
+      }
+
+      vector_X.Multiply('N','N',1.0,matrix_X,N,0.0);
+      output[0][CellsMap.LID(e_gid)] = vector_X(0);
+      output[1][CellsMap.LID(e_gid)] = vector_X(1);
+      output[2][CellsMap.LID(e_gid)] = vector_X(2);
+
+      for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+          output[3][CellsMap.LID(e_gid)] += (*epcum)[GaussMap->LID(int(e_gid*n_gauss_cells+gp))]*Mesh->gauss_weight_cells(gp)*Mesh->detJac_cells(e_lid,gp);
+      }
+      output[3][CellsMap.LID(e_gid)] /= vol_cell;
+
+  }
+
+  int error;
+  int NumTargetElements = 0;
+  if (Comm->MyPID()==0){
+      NumTargetElements = Mesh->n_cells;
+  }
+  Epetra_Map MapOnRoot(-1,NumTargetElements,0,*Comm);
+  Epetra_Export ExportOnRoot(CellsMap,MapOnRoot);
+  Epetra_MultiVector lhs_root(MapOnRoot,4,true);
+
+  lhs_root.Export(output,ExportOnRoot,Insert);
+  error = EpetraExt::MultiVectorToMatrixMarketFile(filename.c_str(),lhs_root,0,0,false);
+  return 0;
 }
 
 template <typename T>

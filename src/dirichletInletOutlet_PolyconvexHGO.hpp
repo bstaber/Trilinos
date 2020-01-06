@@ -27,7 +27,7 @@ public:
         std::string boundary_file = Teuchos::getParameter<std::string>(Parameters.sublist("Mesh"), "boundary_file");
         unsigned int number_physical_groups = Teuchos::getParameter<unsigned int>(Parameters.sublist("Mesh"), "nb_phys_groups");
 
-        Mesh = new mesh(comm, mesh_file, 1);
+        Mesh = new mesh(comm, Parameters); //mesh_file, 1);
         Mesh->read_boundary_file(boundary_file,number_physical_groups);
         Comm = Mesh->Comm;
 

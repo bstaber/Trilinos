@@ -19,7 +19,7 @@ void phaseFieldLinearizedElasticity::initialize(Epetra_Comm & comm, Teuchos::Par
   E  = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "young");
   nu = Teuchos::getParameter<double>(Parameters.sublist("Elasticity"), "poisson");
 
-  Mesh = new mesh(comm, mesh_file, 1.0);
+  Mesh = new mesh(comm, Parameters); //mesh_file, 1.0);
   Comm = Mesh->Comm;
 
   damageInterface = Teuchos::rcp(new damageField(comm, *Mesh, gc, lc));
