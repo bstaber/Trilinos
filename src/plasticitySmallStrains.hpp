@@ -30,8 +30,10 @@ public:
 
     void compute_B_matrices(Epetra_SerialDenseMatrix & dx_shape_functions, Epetra_SerialDenseMatrix & B);
 
-    void solve(Epetra_LinearProblem & problem_, AztecOO & solver_,
-               Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & lhs_);
+    void solve(Epetra_LinearProblem & problem_, AztecOO & solver_, Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & lhs_);
+    void AztecOO_solver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & xx);
+    void Amesos_solver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & xx);
+
     void integrate_constitutive_problem(Epetra_Vector & Du_);
 
     virtual void constitutive_problem(const unsigned int & elid, const unsigned int & igp,
@@ -49,6 +51,7 @@ public:
     int print_at_gauss_points(std::string filename);
     int print_mean_at_center(std::string filename);
 
+    Teuchos::ParameterList * Direct;
     Teuchos::ParameterList * Krylov;
     Teuchos::ParameterList * Newton;
 

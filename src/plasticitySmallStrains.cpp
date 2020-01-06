@@ -32,6 +32,7 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
   bc_disp       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "bc_disp");
   tol           = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "tol");
 
+  Direct = &parameterlist.sublist("Direct");
   Krylov = &parameterlist.sublist("Krylov");
   Newton = &parameterlist.sublist("Newton");
 
@@ -80,7 +81,14 @@ int plasticitySmallStrains::sequence_bvp(bool print){
   double norm_l2_tol = Teuchos::getParameter<double>(*Newton,"norm_l2_tol");
 
   Epetra_LinearProblem problem;
+
+  //this part is not useful yet, always using AztecOO
+  std::string linear_solver;
+  if (Newton->isParameter("linear_solver")) linear_solver = Teuchos::getParameter<std::string>(*Newton,"linear_solver");
+  else linear_solver = "sparse_iterative";
+
   AztecOO solver;
+  Amesos  solver_amesos;
 
   Epetra_FECrsMatrix A(Copy,*FEGraph);
   Epetra_FEVector Res(*StandardMap,true);
@@ -106,6 +114,8 @@ int plasticitySmallStrains::sequence_bvp(bool print){
     iter = 0;
     while ((nRes/nRes0>norm_l2_tol) & (iter<iter_max)) {
       solve(problem, solver, A, Res, du);
+      //AztecOO_solver(A, Res, du);
+      //Amesos_solver(A, Res, du);
       Du.Update(1.0,du,1.0);
       DuOverlaped.Import(Du,*ImportToOverlapMap,Insert);
       integrate_constitutive_problem(DuOverlaped);
@@ -186,7 +196,9 @@ int plasticitySmallStrains::incremental_bvp(bool print){
 
             while (FLAG3==1){
 
-                solve(problem, solver, A, Res, du);
+                //solve(problem, solver, A, Res, du);
+                //AztecOO_solver(A, Res, du);
+                Amesos_solver(A, Res, du);
                 Du.Update(1.0,du,1.0);
                 DuOverlaped.Import(Du,*ImportToOverlapMap,Insert);
                 integrate_constitutive_problem(DuOverlaped);
@@ -250,6 +262,58 @@ void plasticitySmallStrains::solve(Epetra_LinearProblem & problem_, AztecOO & so
   CpuTime->ResetStartTime();
   solver_.Iterate(2000,tol);
   Aztec_time = CpuTime->ElapsedTime();
+}
+
+void plasticitySmallStrains::AztecOO_solver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & xx) {
+
+  Epetra_LinearProblem problem;
+  AztecOO solver;
+
+  xx.PutScalar(0.0);
+
+  problem.SetOperator(&A);
+  problem.SetLHS(&xx);
+  problem.SetRHS(&b);
+  solver.SetProblem(problem);
+  solver.SetParameters(*Krylov);
+
+  CpuTime->ResetStartTime();
+  solver.Iterate(2000,tol);
+  Aztec_time = CpuTime->ElapsedTime();
+}
+
+void plasticitySmallStrains::Amesos_solver(Epetra_FECrsMatrix & A, Epetra_FEVector & b, Epetra_Vector & xx) {
+
+  std::string amesos_type = Teuchos::getParameter<std::string>(*Direct, "solver_type");
+  bool isAvailable;
+
+  Amesos_BaseSolver * Solver;
+  Amesos Factory;
+  /*isAvailable = Factory.Query("Lapack"); if(isAvailable){ std::cout << "Lapack: yes.\n"; } else{ std::cout << "Lapack: no.\n"; }
+  isAvailable = Factory.Query("Klu"); if(isAvailable){ std::cout << "Klu: yes.\n"; } else{ std::cout << "Klu: no.\n"; }
+  isAvailable = Factory.Query("Umfpack"); if(isAvailable){ std::cout << "Umfpack: yes.\n"; } else{ std::cout << "Umfpack: no.\n"; }
+  isAvailable = Factory.Query("Pardiso"); if(isAvailable){ std::cout << "Pardiso: yes.\n"; } else{ std::cout << "Pardiso: no.\n"; }
+  isAvailable = Factory.Query("Taucs"); if(isAvailable){ std::cout << "Taucs: yes.\n"; } else{ std::cout << "Taucs: no.\n"; }
+  isAvailable = Factory.Query("Superlu"); if(isAvailable){ std::cout << "Superlu: yes.\n"; } else{ std::cout << "Superlu: no.\n"; }
+  isAvailable = Factory.Query("Superludist"); if(isAvailable){ std::cout << "Superludist: yes.\n"; } else{ std::cout << "Superludist: no.\n"; }
+  isAvailable = Factory.Query("Mumps"); if(isAvailable){ std::cout << "Mumps: yes.\n"; } else{ std::cout << "Mumps: no.\n"; }
+  isAvailable = Factory.Query("Dscpack"); if(isAvailable){ std::cout << "Dscpack: yes.\n"; } else{ std::cout << "Dscpack: no.\n"; }*/
+  isAvailable = Factory.Query(amesos_type);
+  if (!isAvailable) std::cout << "Amesos solver type not avaiable" << std::endl;
+
+  xx.PutScalar(0.0);
+
+  Epetra_LinearProblem problem;
+  problem.SetOperator(&A);
+  problem.SetLHS(&xx);
+  problem.SetRHS(&b);
+
+  Solver = Factory.Create(amesos_type, problem);
+  Solver->SymbolicFactorization();
+  Solver->NumericFactorization();
+  Solver->Solve();
+
+  delete Solver;
 }
 
 void plasticitySmallStrains::assemble_system(const Epetra_Vector & Du_, Epetra_FECrsMatrix & K, Epetra_FEVector & F){
