@@ -31,7 +31,7 @@ Plane Surface(1) = {1};
 //+
 out[] = Extrude {0, 0, 0.2} {
     Surface{1};
-    Layers{1};
+    Layers{2};
     Using Index[0];
     Recombine;
   };
