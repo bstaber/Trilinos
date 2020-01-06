@@ -4,19 +4,19 @@
         <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate_extruded_order2.msh"/>
         <Parameter name="scaling"            type="double" value="1.0"/>
         <Parameter name="n_int_points_faces" type="int"    value="4"/>
-        <Parameter name="n_int_points_cells" type="int"    value="27"/>
+        <Parameter name="n_int_points_cells" type="int"    value="8"/>
     </ParameterList>
 
     <ParameterList name="Behavior">
         <Parameter name="young"             type="double" value="70000.0"/>
         <Parameter name="poisson"           type="double" value="0.3"/>
         <Parameter name="yield"             type="double" value="250.0"/>
-        <Parameter name="hardening"         type="double" value="100000.0"/>
+        <Parameter name="hardening"         type="double" value="0.0"/>
     </ParameterList>
 
     <ParameterList name="Newton">
         <Parameter name="timestep"          type="string" value="automatic"/>
-        <Parameter name="delta"             type="double" value="0.1"/>
+        <Parameter name="delta"             type="double" value="0.01"/>
         <Parameter name="iterMin"           type="int"    value="4"/>
         <Parameter name="iterMax"           type="int"    value="10"/>
         <Parameter name="nbBisMax"          type="int"    value="10"/>
@@ -25,15 +25,16 @@
         <Parameter name="eps"               type="double" value="1e-8"/>
         <Parameter name="success_parameter" type="double" value="2.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
-        <Parameter name="bc_disp"           type="double" value="1.0"/>
+        <Parameter name="bc_disp"           type="double" value="0.1"/>
         <Parameter name="tol"               type="double" value="1e-10"/>
         <Parameter name="Nincr"             type="int"    value="10"/>
         <Parameter name="norm_l2_tol"       type="double" value="1.0e-8"/>
+        <Parameter name="linear_solver"     type="string" value="sparse_iterative"/>
     </ParameterList>
 
     <ParameterList name="Krylov">
         <Parameter name="solver"          type="string" value="gmres"/>
-        <Parameter name="kspace"          type="int"    value="500"/>
+        <Parameter name="kspace"          type="int"    value="30"/>
         <Parameter name="orthog"          type="string" value="classical"/>
         <Parameter name="precond"         type="string" value="dom_decomp"/>
         <Parameter name="subdomain_solve" type="string" value="ilut"/>
@@ -46,10 +47,14 @@
         <Parameter name="drop"            type="double" value="0.0"/>
         <Parameter name="AZ_conv"         type="string" value="noscaled"/>
         <Parameter name="AZ_tol"          type="double" value="1e-6"/>
-        <Parameter name="AZ_output"       type="int"    value="0"/>
-        <!--Parameter name="AZ_output"       type="string" value="summary"/-->
+        <!--Parameter name="AZ_output"       type="int"    value="0"/-->
+        <Parameter name="AZ_output"       type="string" value="none"/>
         <Parameter name="AZ_diagnostics"  type="string" value="all"/>
         <Parameter name="AZ_reorder"      type="int"    value="1"/>
+    </ParameterList>
+
+    <ParameterList name="Direct">
+        <Parameter name="solver_type"     type="string" value="Lapack"/>
     </ParameterList>
 
 </ParameterList>
