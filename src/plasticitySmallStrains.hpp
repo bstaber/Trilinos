@@ -46,6 +46,8 @@ public:
     void constructScalarGaussMap();
 
     int print_solution(Epetra_Vector & solution, std::string fileName);
+    int print_at_gauss_points(std::string filename);
+    int print_mean_at_center(std::string filename);
 
     Teuchos::ParameterList * Krylov;
     Teuchos::ParameterList * Newton;
