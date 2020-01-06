@@ -52,7 +52,7 @@ class mesh
 public:
     mesh();
     mesh(std::string & fileName_mesh, double scaling);
-    mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling);
+    mesh(Epetra_Comm & comm, Teuchos::ParameterList & paramList); //std::string & fileName_mesh, double scaling);
     ~mesh();
 
     int read_gmsh(std::string & fileName_mesh, double scaling);
@@ -67,6 +67,7 @@ public:
     void update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMap);
 
     Epetra_Comm* Comm;
+    Teuchos::ParameterList * MeshParameters;
 
     Epetra_SerialDenseMatrix N_faces, D1_N_faces, D2_N_faces;
 
@@ -94,9 +95,13 @@ public:
     int n_local_nodes = 0;
     int n_local_cells = 0;
     int n_local_faces = 0;
+    int n_int_points_tri   = 3;
+    int n_int_points_quad  = 4;
+    int n_int_points_tetra = 4;
+    int n_int_points_hexa  = 8;
 
-    unsigned int n_gauss_faces;
-    unsigned int n_gauss_cells;
+    unsigned int n_gauss_faces = 0;
+    unsigned int n_gauss_cells = 0;
     Epetra_SerialDenseVector gauss_weight_cells, gauss_weight_faces;
     Epetra_SerialDenseVector xi_cells, eta_cells, zeta_cells;
     Epetra_SerialDenseVector xi_faces, eta_faces;

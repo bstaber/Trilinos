@@ -12,10 +12,15 @@ mesh::mesh(std::string & fileName_mesh, double scaling){
     read_gmsh(fileName_mesh, scaling);
 }
 
-mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling){
+mesh::mesh(Epetra_Comm & comm, Teuchos::ParameterList & paramList) {
+    //std::string & fileName_mesh, double scaling){
     Comm = &comm;
     int MyPID = Comm->MyPID();
     int NumProc = Comm->NumProc();
+
+    std::string fileName_mesh = Teuchos::getParameter<std::string>(paramList.sublist("Mesh"), "mesh_file");
+    double scaling = Teuchos::getParameter<double>(paramList.sublist("Mesh"), "scaling");
+    MeshParameters = &(paramList.sublist("Mesh"));
 
     read_gmsh(fileName_mesh, scaling);
 
@@ -42,8 +47,8 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling){
 
     Comm->Barrier();
     if (MyPID==0){
-        std::cout << std::setw(5) << "MyPID" << std::setw(20) << "n_cells" << std::setw(20) << "el_type" << std::setw(20) << "face_type" << std::setw(20) << "n_nodes" << std::setw(20) << "n_faces" << std::setw(20) << "processors\n";
-        std::cout << std::setw(5) << MyPID << std::setw(20) << n_cells << std::setw(20) << el_type << std::setw(20) << face_type << std::setw(20) << n_nodes << std::setw(20) << n_faces << std::setw(20) << Comm->NumProc() << "\n";
+        std::cout << std::setw(5) << "MyPID" << std::setw(20) << "n_cells" << std::setw(20) << "el_type" << std::setw(20) << "face_type" << std::setw(20) << "n_nodes" << std::setw(20) << "n_faces" << std::setw(20) << "n_gauss_cells" << std::setw(20) << "n_gauss_faces" << std::setw(20) << "processors\n";
+        std::cout << std::setw(5) << MyPID << std::setw(20) << n_cells << std::setw(20) << el_type << std::setw(20) << face_type << std::setw(20) << n_nodes << std::setw(20) << n_faces << std::setw(20) << n_gauss_cells << std::setw(20) << n_gauss_faces << std::setw(20) << Comm->NumProc() << "\n";
         std::cout << std::setw(5) << "MyPID" << std::setw(20) << "n_local_cells" << std::setw(20) << "n_local_nodes" << std::setw(20) << "n_local_faces" << "\n";
     }
     Comm->Barrier();
@@ -248,8 +253,25 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         n_faces = n_faces3;
         faces_nodes.reserve(tri3_nodes.size());
         faces_nodes = tri3_nodes;
-
-        gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
+        if (MeshParameters->isParameter("n_int_points_faces")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_faces");
+          switch (n_int_points) {
+            case 1:
+              gauss_points_tri1(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            case 3:
+              gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            case 4:
+              gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            default:
+              gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
+          }
+        }
+        else{
+          gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
+        }
         n_gauss_faces = gauss_weight_faces.Length();
     }
     if (n_faces6>0){
@@ -257,8 +279,25 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         n_faces = n_faces6;
         faces_nodes.reserve(tri6_nodes.size());
         faces_nodes = tri6_nodes;
-
-        gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
+        if (MeshParameters->isParameter("n_int_points_faces")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_faces");
+          switch (n_int_points) {
+            case 1:
+              gauss_points_tri1(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            case 3:
+              gauss_points_tri3(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            case 4:
+              gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            default:
+              gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
+          }
+        }
+        else{
+          gauss_points_tri4(gauss_weight_faces,xi_faces,eta_faces);
+        }
         n_gauss_faces = gauss_weight_faces.Length();
     }
     if (n_quad4>0){
@@ -268,7 +307,25 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         faces_nodes = quad4_nodes;
         faces_phases = quad4_phases;
 
-        gauss_points_quad4(gauss_weight_faces,xi_faces,eta_faces);
+        if (MeshParameters->isParameter("n_int_points_faces")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_faces");
+          switch (n_int_points) {
+            case 1:
+              gauss_points_quad1(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            case 4:
+              gauss_points_quad4(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            case 9:
+              gauss_points_quad9(gauss_weight_faces,xi_faces,eta_faces);
+              break;
+            default:
+              gauss_points_quad4(gauss_weight_faces,xi_faces,eta_faces);
+          }
+        }
+        else{
+          gauss_points_quad4(gauss_weight_faces,xi_faces,eta_faces);
+        }
         n_gauss_faces = gauss_weight_faces.Length();
     }
     if (n_cells4>0){
@@ -277,7 +334,28 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         cells_nodes.reserve(tetra4_nodes.size());
         cells_nodes = tetra4_nodes;
 
-        gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        if (MeshParameters->isParameter("n_int_points_cells")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_cells");
+          switch (n_int_points) {
+            case 1:
+              gauss_points_tetra1(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 4:
+              gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 5:
+              gauss_points_tetra5(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 11:
+              gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            default:
+              gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+          }
+        }
+        else{
+          gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        }
         n_gauss_cells = gauss_weight_cells.Length();
     }
     if (n_cells8>0){
@@ -286,7 +364,25 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         cells_nodes.reserve(hexa8_nodes.size());
         cells_nodes = hexa8_nodes;
 
-        gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        if (MeshParameters->isParameter("n_int_points_cells")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_cells");
+          switch (n_int_points) {
+            case 4:
+              gauss_points_hexa4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 8:
+              gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 27:
+              gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            default:
+              gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+          }
+        }
+        else{
+          gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        }
         n_gauss_cells = gauss_weight_cells.Length();
     }
     if (n_cells10>0){
@@ -295,7 +391,28 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         cells_nodes.reserve(tetra10_nodes.size());
         cells_nodes = tetra10_nodes;
 
-        gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        if (MeshParameters->isParameter("n_int_points_cells")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_cells");
+          switch (n_int_points) {
+            case 1:
+              gauss_points_tetra1(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 4:
+              gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 5:
+              gauss_points_tetra5(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 11:
+              gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            default:
+              gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+          }
+        }
+        else{
+          gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        }
         n_gauss_cells = gauss_weight_cells.Length();
     }
     if (n_cells20>0){
@@ -304,7 +421,25 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         cells_nodes.reserve(hexa20_nodes.size());
         cells_nodes = hexa20_nodes;
 
-        gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        if (MeshParameters->isParameter("n_int_points_cells")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_cells");
+          switch (n_int_points) {
+            case 4:
+              gauss_points_hexa4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 8:
+              gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 27:
+              gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            default:
+              gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+          }
+        }
+        else{
+          gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        }
         n_gauss_cells = gauss_weight_cells.Length();
         //std::cout << "HEXA20 SHAPE FUNCTIONS NOT IMPLEMENTED YET" << std::endl;
         //NotImplementedException();
@@ -315,7 +450,25 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         cells_nodes.reserve(hexa27_nodes.size());
         cells_nodes = hexa27_nodes;
 
-        gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        if (MeshParameters->isParameter("n_int_points_cells")) {
+          int n_int_points = Teuchos::getParameter<int>(*MeshParameters, "n_int_points_cells");
+          switch (n_int_points) {
+            case 4:
+              gauss_points_hexa4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 8:
+              gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            case 27:
+              gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+              break;
+            default:
+              gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+          }
+        }
+        else{
+          gauss_points_hexa8(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
+        }
         n_gauss_cells = gauss_weight_cells.Length();
         std::cout << "HEXA27 SHAPE FUNCTIONS NOT IMPLEMENTED YET" << std::endl;
         //NotImplementedException();
