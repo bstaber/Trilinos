@@ -3,6 +3,7 @@ Brian Staber (brian.staber@gmail.com)
 */
 
 #include "meshpp.hpp"
+#include "error_messager.hpp"
 
 mesh::mesh(){
 }
@@ -23,17 +24,11 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling){
 
     Comm->Barrier();
     if (Comm->NumProc()>1){
-        if (MyPID==0){
-            metis_part_mesh(NumProc);
-        }
+        if (MyPID==0) metis_part_mesh(NumProc);
     }
     else{
-        for (unsigned int e=0; e<n_cells; ++e){
-            epart[e] = 0;
-        }
-        for (unsigned int n=0; n<n_nodes; ++n){
-            npart[n] = 0;
-        }
+        for (unsigned int e=0; e<n_cells; ++e) epart[e] = 0;
+        for (unsigned int n=0; n<n_nodes; ++n) npart[n] = 0;
     }
 
     Comm->Broadcast(epart,n_cells,0);
@@ -42,9 +37,7 @@ mesh::mesh(Epetra_Comm & comm, std::string & fileName_mesh, double scaling){
     get_local_nodes(MyPID);
     get_cells_and_ghosts(MyPID);
 
-    if (n_local_faces>0 && (face_type==3 || face_type==4 || face_type==6)){
-        store_feinterp_faces();
-    }
+    if (n_local_faces>0 && (face_type==3 || face_type==4 || face_type==6)) store_feinterp_faces();
     store_feinterp_cells();
 
     Comm->Barrier();
@@ -85,16 +78,16 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
     unsigned int n_quad4 = 0;
     unsigned int n_faces6 = 0;
     unsigned int n_cells4 = 0;
-    unsigned int n_hexa8 = 0;
+    unsigned int n_cells8 = 0;
     unsigned int n_cells10 = 0;
-    unsigned int n_hexa20 = 0;
-    unsigned int n_hexa27 = 0;
+    unsigned int n_cells20 = 0;
+    unsigned int n_cells27 = 0;
     unsigned int node;
     unsigned int nodes_faces3[3];
     unsigned int nodes_quad4[4];
     unsigned int nodes_faces6[6];
     unsigned int nodes_cells4[4];
-    unsigned int nodes_hexa8[8];
+    unsigned int nodes_cells8[8];
     unsigned int nodes_cells10[10];
     unsigned int nodes_cells20[20];
     unsigned int nodes_cells27[27];
@@ -105,8 +98,8 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
     std::vector<int> tetra4_nodes;
     std::vector<int> hexa8_nodes;
     std::vector<int> tetra10_nodes;
-    std::vector<int> hexa27_nodes;
     std::vector<int> hexa20_nodes;
+    std::vector<int> hexa27_nodes;
 
     meshfile.getline(buf,100);
     meshfile.getline(buf,100);
@@ -145,7 +138,8 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
                 for (unsigned int inode=0; inode<2; ++inode){
                     meshfile >> node;
                 }
-                std::cout << "2-node line not supported" << std::endl;
+                //std::cout << "2-node line not supported" << std::endl;
+                //NotImplementedException();
                 break;
             case 2:
                 for (unsigned int inode=0; inode<3; ++inode){
@@ -168,8 +162,8 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
                 break;
             case 5:
                 for (unsigned int inode=0; inode<8; ++inode){
-                    meshfile >> nodes_hexa8[inode];
-                    hexa8_nodes.push_back(nodes_hexa8[inode]-1);
+                    meshfile >> nodes_cells8[inode];
+                    hexa8_nodes.push_back(nodes_cells8[inode]-1);
                 }
                 break;
             case 9:
@@ -182,7 +176,8 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
                 for (unsigned int inode=0; inode<9; ++inode){
                     meshfile >>node;
                 }
-                std::cout << "9-node second order quadrangle (4 nodes associated with the vertices, 4 with the edges and 1 with the face) not supported" << std::endl;
+                //std::cout << "9-node second order quadrangle (4 nodes associated with the vertices, 4 with the edges and 1 with the face) not supported" << std::endl;
+                //NotImplementedException();
                 break;
             case 11:
                 for (unsigned int inode=0; inode<10; ++inode){
@@ -200,13 +195,15 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
                 for (unsigned int inode=0; inode<1; ++inode){
                     meshfile >> node;
                 }
-                std::cout << "1-node point not supported" << std::endl;
+                //std::cout << "1-node point not supported" << std::endl;
+                //NotImplementedException();
                 break;
             case 16:
                 for (unsigned int inode=0; inode<8; ++inode){
                     meshfile >> node;
                 }
-                std::cout << "8-node second order quadrangle (4 nodes associated with the vertices and 4 with the edges) not supported" << std::endl;
+                //std::cout << "8-node second order quadrangle (4 nodes associated with the vertices and 4 with the edges) not supported" << std::endl;
+                //NotImplementedException();
                 break;
             case 17:
                 for (unsigned int inode=0; inode<20; ++inode){
@@ -216,6 +213,7 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
                 break;
             default:
                 std::cout << "Element not supported encountered: el_info = " << el_info << "\n";
+                //NotImplementedException();
                 break;
         };
     }
@@ -225,20 +223,23 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
     n_quad4 = quad4_nodes.size()/4;
     n_faces6 = tri6_nodes.size()/6;
     n_cells4 = tetra4_nodes.size()/4;
-    n_hexa8 = hexa8_nodes.size()/8;
+    n_cells8 = hexa8_nodes.size()/8;
     n_cells10 = tetra10_nodes.size()/10;
-    n_hexa20 = hexa20_nodes.size()/20;
-    n_hexa27 = hexa27_nodes.size()/27;
+    n_cells20 = hexa20_nodes.size()/20;
+    n_cells27 = hexa27_nodes.size()/27;
 
-    if (n_cells4==0 && n_cells10==0 && n_hexa8==0){
+    if (n_cells4==0 && n_cells10==0 && n_cells8==0 && n_cells20==0){
         std::cerr << "Your mesh is empty!\n";}
-    if ( (n_cells4>0 && n_cells10>0) || (n_cells4>0 && n_hexa8>0) || (n_cells10>0 && n_hexa8>0) ){
+        //NotImplementedException();
+    if ( (n_cells4>0 && n_cells10>0) || (n_cells4>0 && n_cells8>0) || (n_cells10>0 && n_cells8>0)){
         std::cerr << "We do not handle mixed meshes that contain tetra4's and/or tetra10's and/or hexa8's.\n";
+        //NotImplementedException();
         error = 1;
         return error;
     }
     if ( (n_faces3>0 && n_faces6>0) || (n_faces3>0 && n_quad4>0) || (n_faces6>0 && n_quad4>0) ){
         std::cerr << "We do not handle mixed meshes that contain tri3's and/or tri6's and/or quad4's.\n";
+        //NotImplementedException();
         error = 1;
         return error;
     }
@@ -279,8 +280,8 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         gauss_points_tetra4(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
-    if (n_hexa8>0){
-        n_cells = n_hexa8;
+    if (n_cells8>0){
+        n_cells = n_cells8;
         el_type = 8;
         cells_nodes.reserve(hexa8_nodes.size());
         cells_nodes = hexa8_nodes;
@@ -297,25 +298,27 @@ int mesh::read_gmsh(std::string & fileName_mesh, double scaling){
         gauss_points_tetra11(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
     }
-    if (n_hexa20>0){
-        n_cells = n_hexa20;
-        el_type= 20;
+    if (n_cells20>0){
+        n_cells = n_cells20;
+        el_type = 20;
         cells_nodes.reserve(hexa20_nodes.size());
         cells_nodes = hexa20_nodes;
 
         gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
-        std::cout << "HEXA20 SHAPE FUNCTIONS NOT IMPLEMENTED YET" << std::endl;
+        //std::cout << "HEXA20 SHAPE FUNCTIONS NOT IMPLEMENTED YET" << std::endl;
+        //NotImplementedException();
     }
-    if (n_hexa27>0){
-        n_cells = n_hexa27;
-        el_type= 27;
+    if (n_cells27>0){
+        n_cells = n_cells27;
+        el_type = 27;
         cells_nodes.reserve(hexa27_nodes.size());
         cells_nodes = hexa27_nodes;
 
         gauss_points_hexa27(gauss_weight_cells,xi_cells,eta_cells,zeta_cells);
         n_gauss_cells = gauss_weight_cells.Length();
         std::cout << "HEXA27 SHAPE FUNCTIONS NOT IMPLEMENTED YET" << std::endl;
+        //NotImplementedException();
     }
     Comm->Barrier();
     return error;
@@ -381,9 +384,8 @@ int mesh::metis_part_mesh(int & NumProc){
         case 20:
             common = 8;
             break;
-        case 27:
-            common = 10;
-            break;
+        default:
+            std::cout << "el_type " << el_type << "not supported yet" << std::endl;
     };
     idx_t nparts = NumProc;
     real_t *tpwgts=NULL;
@@ -469,6 +471,7 @@ void mesh::get_cells_and_ghosts(int & MyPID){
                 break;
             default:
                 std::cout << "Non supported face type encountered" << std::endl;
+                //NotImplementedException();
         }
     }
     n_local_faces = local_faces.size();
@@ -515,11 +518,11 @@ Epetra_SerialDenseVector mesh::get_cartesian_coordinate(unsigned int & e_gid, un
           tetra10::shape_functions(shape_functions, xi, eta, zeta);
           break;
       case 20:
-          //hexa20::shape_functions(shape_functions, xi, eta, zeta);
-          std::cout << "Hexa20 shape functions not implemented yet" << std::endl;
+          hexa20::shape_functions(shape_functions, xi, eta, zeta);
           break;
       default:
           std::cout << "Non supported element type encountered" << std::endl;
+          //NotImplementedException();
   }
   vector_x.Multiply('N','N',1.0,matrix_X,shape_functions,0.0);
   return vector_x;
@@ -562,6 +565,7 @@ void mesh::store_feinterp_faces(){
             break;
         default:
             std::cout << "Non supported face type encountered" << std::endl;
+            //NotImplementedException();
     };
 
     for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
@@ -583,36 +587,6 @@ void mesh::store_feinterp_faces(){
             D2_N_faces(gp,inode) = D(inode,1);
         }
     }
-
-    /*for (unsigned int eloc=0; eloc<n_local_faces; ++eloc){
-        eglob = local_faces[eloc];
-        for (unsigned int inode=0; inode<face_type; inode++){
-            node = faces_nodes[face_type*eglob+inode];
-            X(0,inode) = nodes_coord[3*node+0];
-            X(1,inode) = nodes_coord[3*node+1];
-        }
-
-        for (unsigned int gp=0; gp<n_gauss_faces; ++gp){
-            switch (face_type){
-                case 3:
-                    tri3::d_shape_functions(D, xi_faces[gp], eta_faces[gp]);
-                    break;
-                case 4:
-                    quad4::d_shape_functions(D, xi_faces[gp], eta_faces[gp]);
-                    break;
-                case 6:
-                    tri6::d_shape_functions(D, xi_faces[gp], eta_faces[gp]);
-                    break;
-            }
-            for (unsigned int inode=0; inode<face_type; ++inode){
-                D1_N_faces(gp,inode) = D(inode,0);
-                D2_N_faces(gp,inode) = D(inode,1);
-            }
-
-            JacobianMatrix.Multiply('N','N',1.0,X,D,0.0);
-            detJac_faces(eloc,gp) = fabs(JacobianMatrix(0,0)*JacobianMatrix(1,1) - JacobianMatrix(1,0)*JacobianMatrix(0,1));
-        }
-    }*/
 }
 
 void mesh::store_feinterp_cells(){
@@ -656,10 +630,16 @@ void mesh::store_feinterp_cells(){
             }
             break;
         case 20:
-            std::cout << "Hexa20 shape functions not implemented yet" << std::endl;
+            for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+                hexa20::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                for (int inode=0; inode<el_type; ++inode){
+                  N_cells(inode,gp) = N(inode);
+                }
+            }
             break;
         default:
             std::cout << "Non supported element type encountered" << std::endl;
+            //NotImplementedException();
     };
     //double volume = 0.0;
     for (unsigned int eloc=0; eloc<n_local_cells; ++eloc){
@@ -687,10 +667,11 @@ void mesh::store_feinterp_cells(){
                     tetra10::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                     break;
                 case 20:
-                    std::cout << "Hexa20 shape functions not implemented yet" << std::endl;
+                    hexa20::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                     break;
                 default:
                     std::cout << "Non supported element type encountered" << std::endl;
+                    //NotImplementedException();
             }
             jacobian_matrix(X,D,JacobianMatrix);
             jacobian_det(JacobianMatrix,detJac_cells(eloc,gp));
@@ -740,10 +721,16 @@ void mesh::update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMa
             }
             break;
         case 20:
-            std::cout << "Hexa20 shape functions not implemented yet" << std::endl;
+            for (unsigned int gp=0; gp<n_gauss_cells; ++gp){
+                hexa20::shape_functions(N, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
+                for (int inode=0; inode<el_type; ++inode){
+                    N_cells(inode,gp) = N(inode);
+                }
+            }
             break;
         default:
             std::cout << "Non supported element type encountered" << std::endl;
+            //NotImplementedException();
     };
     //double volume = 0.0;
     for (unsigned int eloc=0; eloc<n_local_cells; ++eloc){
@@ -771,10 +758,11 @@ void mesh::update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMa
                     tetra10::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                     break;
                 case 20:
-                    std::cout << "Hexa20 shape functions not implemented yet" << std::endl;
+                    hexa20::d_shape_functions(D, xi_cells[gp], eta_cells[gp], zeta_cells[gp]);
                     break;
                 default:
                     std::cout << "Non supported element type encountered" << std::endl;
+                    //NotImplementedException();
             }
             jacobian_matrix(X,D,JacobianMatrix);
             jacobian_det(JacobianMatrix,detJac_cells(eloc,gp));
@@ -788,5 +776,5 @@ void mesh::update_store_feinterp_cells(Epetra_Vector & u, Epetra_Map & OverlapMa
         }
         //volume += vol_cells(eloc);
     }
-    //std::cout << "VOLUME = " << volume << "\n";
+  //std::cout << "VOLUME = " << volume << std::endl;
 }

@@ -149,6 +149,54 @@ void tetra10::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, doubl
     D(9,0) = 4.0*zeta; D(9,1) = 0.0; D(9,2) = 4.0*xi;
 }
 
+void hexa20::shape_functions(Epetra_SerialDenseVector & N, double & xi, double & eta, double & zeta){
+    double c = 1.0/8.0;
+    double d = 1.0/4.0;
+    N(0)  = c*(1.0-xi)*(1.0-eta)*(1.0-zeta)*(-2.0-xi-eta-zeta);
+    N(1)  = c*(1.0+xi)*(1.0-eta)*(1.0-zeta)*(-2.0+xi-eta-zeta);
+    N(2)  = c*(1.0+xi)*(1.0+eta)*(1.0-zeta)*(-2.0+xi+eta-zeta);
+    N(3)  = c*(1.0-xi)*(1.0+eta)*(1.0-zeta)*(-2.0-xi+eta-zeta);
+    N(4)  = c*(1.0-xi)*(1.0-eta)*(1.0+zeta)*(-2.0-xi-eta+zeta);
+    N(5)  = c*(1.0+xi)*(1.0-eta)*(1.0+zeta)*(-2.0+xi-eta+zeta);
+    N(6)  = c*(1.0+xi)*(1.0+eta)*(1.0+zeta)*(-2.0+xi+eta+zeta);
+    N(7)  = c*(1.0-xi)*(1.0+eta)*(1.0+zeta)*(-2.0-xi+eta+zeta);
+    N(8)  = d*(1.0-xi*xi)*(1.0-eta)*(1.0-zeta);
+    N(9)  = d*(1.0-eta*eta)*(1.0-xi)*(1.0-zeta);
+    N(10) = d*(1.0-zeta*zeta)*(1.0-xi)*(1.0-eta);
+    N(11) = d*(1.0-eta*eta)*(1.0+xi)*(1.0-zeta);
+    N(12) = d*(1.0-zeta*zeta)*(1.0+xi)*(1.0-eta);
+    N(13) = d*(1.0-xi*xi)*(1.0+eta)*(1.0-zeta);
+    N(14) = d*(1.0-zeta*zeta)*(1.0+xi)*(1.0+eta);
+    N(15) = d*(1.0-zeta*zeta)*(1.0-xi)*(1.0+eta);
+    N(16) = d*(1.0-xi*xi)*(1.0-eta)*(1.0+zeta);
+    N(17) = d*(1.0-eta*eta)*(1.0-xi)*(1.0+zeta);
+    N(18) = d*(1.0-eta*eta)*(1.0+xi)*(1.0+zeta);
+    N(19) = d*(1.0-xi*xi)*(1.0+eta)*(1.0+zeta);
+}
+
+void hexa20::d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double & eta, double & zeta){
+    D(0,0)  = ((eta - 1.0)*(zeta - 1.0)*(eta + 2.0*xi + zeta + 1.0))/8.0;  D(0,1) = ((xi - 1.0)*(zeta - 1.0)*(2.0*eta + xi + zeta + 1.0))/8.0;  D(0,2) = ((eta - 1.0)*(xi - 1.0)*(eta + xi + 2.0*zeta + 1.0))/8.0;
+    D(1,0)  = -((eta - 1.0)*(zeta - 1.0)*(eta - 2.0*xi + zeta + 1.0))/8.0; D(1,1) = -((xi + 1.0)*(zeta - 1.0)*(2.0*eta - xi + zeta + 1.0))/8.0; D(1,2) = -((eta - 1.0)*(xi + 1.0)*(eta - xi + 2.0*zeta + 1.0))/8.0;
+    D(2,0)  = -((eta + 1.0)*(zeta - 1.0)*(eta + 2.0*xi - zeta - 1.0))/8.0; D(2,1) = -((xi + 1.0)*(zeta - 1.0)*(2.0*eta + xi - zeta - 1.0))/8.0; D(2,2) = -((eta + 1.0)*(xi + 1.0)*(eta + xi - 2.0*zeta - 1.0))/8.0;
+    D(3,0)  = -((eta + 1.0)*(zeta - 1.0)*(2.0*xi - eta + zeta + 1.0))/8.0; D(3,1) = -((xi - 1.0)*(zeta - 1.0)*(xi - 2.0*eta + zeta + 1.0))/8.0; D(3,2) = -((eta + 1.0)*(xi - 1.0)*(xi - eta + 2.0*zeta + 1.0))/8.0;
+    D(4,0)  = -((eta - 1.0)*(zeta + 1.0)*(eta + 2.0*xi - zeta + 1.0))/8.0; D(4,1) = -((xi - 1.0)*(zeta + 1.0)*(2.0*eta + xi - zeta + 1.0))/8.0; D(4,2) = -((eta - 1.0)*(xi - 1.0)*(eta + xi - 2.0*zeta + 1.0))/8.0;
+    D(5,0)  = ((eta - 1.0)*(zeta + 1.0)*(eta - 2.0*xi - zeta + 1.0))/8.0;  D(5,1) = ((xi + 1.0)*(zeta + 1.0)*(2.0*eta - xi - zeta + 1.0))/8.0;  D(5,2) = ((eta - 1.0)*(xi + 1.0)*(eta - xi - 2.0*zeta + 1.0))/8.0;
+    D(6,0)  = ((eta + 1.0)*(zeta + 1.0)*(eta + 2.0*xi + zeta - 1.0))/8.0;  D(6,1) = ((xi + 1.0)*(zeta + 1.0)*(2.0*eta + xi + zeta - 1.0))/8.0;  D(6,2) = ((eta + 1.0)*(xi + 1.0)*(eta + xi + 2.0*zeta - 1.0))/8.0;
+    D(7,0)  = -((eta + 1.0)*(zeta + 1.0)*(eta - 2.0*xi + zeta - 1.0))/8.0; D(7,1) = -((xi - 1.0)*(zeta + 1.0)*(2.0*eta - xi + zeta - 1.0))/8.0; D(7,2) = -((eta + 1.0)*(xi - 1.0)*(eta - xi + 2.0*zeta - 1.0))/8.0;
+    D(8,0)  = -(xi*(eta - 1.0)*(zeta - 1.0))/2.0;                          D(8,1) = -(xi*xi/4.0 - 1.0/4.0)*(zeta - 1.0);                        D(8,2) = -(xi*xi/4.0 - 1.0/4.0)*(eta - 1.0);
+    D(9,0)  = -(eta*eta/4.0 - 1.0/4.0)*(zeta - 1.0);                       D(9,1) = -(eta*(xi - 1.0)*(zeta - 1.0))/2.0;                         D(9,2) = -(eta*eta/4.0 - 1.0/4.0)*(xi - 1.0);
+    D(10,0) = -(zeta*zeta/4.0 - 1.0/4.0)*(eta - 1.0);                      D(10,1) = -(zeta*zeta/4.0 - 1.0/4.0)*(xi - 1.0);                     D(10,2) = -(zeta*(eta - 1.0)*(xi - 1.0))/2.0;
+    D(11,0) = (eta*eta/4.0 - 1.0/4.0)*(zeta - 1.0);                        D(11,1) = (eta*(xi + 1.0)*(zeta - 1.0))/2.0;                         D(11,2) = (eta*eta/4.0 - 1.0/4.0)*(xi + 1.0);
+    D(12,0) = (zeta*zeta/4.0 - 1.0/4.0)*(eta - 1.0);                       D(12,1) = (zeta*zeta/4.0 - 1.0/4.0)*(xi + 1.0);                      D(12,2) = (zeta*(eta - 1.0)*(xi + 1.0))/2.0;
+    D(13,0) = (xi*(eta + 1.0)*(zeta - 1.0))/2.0;                           D(13,1) = (xi*xi/4.0 - 1.0/4.0)*(zeta - 1.0);                        D(13,2) = (xi*xi/4.0 - 1.0/4.0)*(eta + 1.0);
+    D(14,0) = -(zeta*zeta/4.0 - 1.0/4.0)*(eta + 1.0);                      D(14,1) = -(zeta*zeta/4.0 - 1.0/4.0)*(xi + 1.0);                     D(14,2) = -(zeta*(eta + 1.0)*(xi + 1.0))/2.0;
+    D(15,0) = (zeta*zeta/4.0 - 1.0/4.0)*(eta + 1.0);                       D(15,1) = (zeta*zeta/4.0 - 1.0/4.0)*(xi - 1.0);                      D(15,2) = (zeta*(eta + 1.0)*(xi - 1.0))/2.0;
+    D(16,0) = (xi*(eta - 1.0)*(zeta + 1.0))/2.0;                           D(16,1) =  (xi*xi/4.0 - 1.0/4.0)*(zeta + 1.0);                       D(16,2) = (xi*xi/4.0 - 1.0/4.0)*(eta - 1.0);
+    D(17,0) = (eta*eta/4.0 - 1.0/4.0)*(zeta + 1.0);                        D(17,1) = (eta*(xi - 1.0)*(zeta + 1.0))/2.0;                         D(17,2) = (eta*eta/4.0 - 1.0/4.0)*(xi - 1.0);
+    D(18,0) = -(eta*eta/4.0 - 1.0/4.0)*(zeta + 1.0);                       D(18,1) = -(eta*(xi + 1.0)*(zeta + 1.0))/2.0;                        D(18,2) = -(eta*eta/4.0 - 1.0/4.0)*(xi + 1.0);
+    D(19,0) = -(xi*(eta + 1.0)*(zeta + 1.0))/2.0;                          D(19,1) = -(xi*xi/4.0 - 1.0/4.0)*(zeta + 1.0);                       D(19,2) = -(xi*xi/4.0 - 1.0/4.0)*(eta + 1.0);
+}
+
 void dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix JacobianMatrix, double & jac, Epetra_SerialDenseMatrix & DX)
 {
     Epetra_SerialDenseMatrix InverseJacobianMatrix(3,3);
@@ -169,7 +217,7 @@ void dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix J
 }
 
 void jacobian_matrix(Epetra_SerialDenseMatrix & X, Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix & JacobianMatrix){
-JacobianMatrix.Multiply('N','N',1.0,X,D,0.0);
+    JacobianMatrix.Multiply('N','N',1.0,X,D,0.0);
 }
 
 void jacobian_det(Epetra_SerialDenseMatrix & JacobianMatrix, double & jac){

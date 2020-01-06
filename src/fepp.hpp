@@ -40,6 +40,11 @@ namespace hexa8{
     void d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double & eta, double & zeta);
 }
 
+namespace hexa20{
+    void shape_functions(Epetra_SerialDenseVector & N, double & xi, double & eta, double & zeta);
+    void d_shape_functions(Epetra_SerialDenseMatrix & D, double & xi, double & eta, double & zeta);
+}
+
 void dX_shape_functions(Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix JacobianMatrix, double & jac, Epetra_SerialDenseMatrix & DX);
 
 void jacobian_matrix(Epetra_SerialDenseMatrix & X, Epetra_SerialDenseMatrix & D, Epetra_SerialDenseMatrix & JacobianMatrix);
