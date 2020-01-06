@@ -30,7 +30,6 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
   success       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "success_parameter");
   failure       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "failure_parameter");
   bc_disp       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "bc_disp");
-  pressure_load = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "pressure_load");
   tol           = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "tol");
 
   Krylov = &parameterlist.sublist("Krylov");
@@ -158,7 +157,7 @@ int plasticitySmallStrains::incremental_bvp(bool print){
         FLAG3=1;
         nb_bis = 0;
         time += delta;
-        
+
         u.Update(1.0,Du,1.0);
         u_converged = u;
         (*sig_converged)   = (*sig);
