@@ -1,9 +1,10 @@
 <ParameterList>
 
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file" type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate_extruded_order2.msh"/>
-        <Parameter name="path"      type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/linearpatchtest/linearpatchtest.mtx"/>
-        <Parameter name="scaling"   type="double" value="1.0"/>
+        <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate_extruded_order2.msh"/>
+        <Parameter name="scaling"            type="double" value="1.0"/>
+        <Parameter name="n_int_points_faces" type="int"    value="4"/>
+        <Parameter name="n_int_points_cells" type="int"    value="27"/>
     </ParameterList>
 
     <ParameterList name="Behavior">
@@ -24,7 +25,7 @@
         <Parameter name="eps"               type="double" value="1e-8"/>
         <Parameter name="success_parameter" type="double" value="2.0"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
-        <Parameter name="bc_disp"           type="double" value="0.1"/>
+        <Parameter name="bc_disp"           type="double" value="1.0"/>
         <Parameter name="tol"               type="double" value="1e-10"/>
         <Parameter name="Nincr"             type="int"    value="10"/>
         <Parameter name="norm_l2_tol"       type="double" value="1.0e-8"/>
