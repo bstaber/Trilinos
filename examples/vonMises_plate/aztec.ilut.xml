@@ -1,7 +1,12 @@
 <ParameterList>
 
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate_extruded_order2.msh"/>
+        <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/meshes/plate_extruded.msh"/>
+        <!--Parameter name="mesh_name"          type="string" value="platetest.msh"/>
+        <Parameter name="plate_dim_x"        type="double" value="4.0"/>
+        <Parameter name="plate_dim_y"        type="double" value="10.0"/>
+        <Parameter name="plate_dim_z"        type="double" value="0.2"/>
+        <Parameter name="layers"             type="int"    value="2"/-->
         <Parameter name="scaling"            type="double" value="1.0"/>
         <Parameter name="n_int_points_faces" type="int"    value="4"/>
         <Parameter name="n_int_points_cells" type="int"    value="8"/>
@@ -16,7 +21,6 @@
 
     <ParameterList name="BoundaryConditions">
         <Parameter name="bc_disp"           type="double" value="0.1"/>
-        <!--Parameter name="type"              type="string" value="tension_totally_clamped"/-->
         <Parameter name="type"              type="string" value="tension_with_slip"/>
     </ParameterList>
 
@@ -62,7 +66,7 @@
         <Parameter name="solver_type"     type="string" value="Klu"/>
         <Parameter name="PrintStatus"     type="bool"   value="false"/>
         <Parameter name="PrintTiming"     type="bool"   value="false"/>
-        <!--Parameter name="MaxProcs"        type="int"    value="2"/-->
+        <!--Parameter name="ShowAvailable"   type="bool"   value="true"/-->
     </ParameterList>
 
 </ParameterList>

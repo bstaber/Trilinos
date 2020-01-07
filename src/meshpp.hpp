@@ -7,6 +7,7 @@ Brian Staber (brian.staber@gmail.com)
 
 //Standard includes
 #include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 #include <istream>
 #include <fstream>
