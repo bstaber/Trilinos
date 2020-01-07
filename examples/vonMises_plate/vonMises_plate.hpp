@@ -203,14 +203,14 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if ((y==0.0 && node!=85)||(y==0.0 && node!=86)||y==10.0){
+            if (y==0.0||y==10.0){
+              if (x==0.0&&y==0.0&&z==0.0) {
+                n_bc_dof+=1;
+              }
               n_bc_dof+=1;
-            }
-            if (node==85){
-              n_bc_dof+=3;
-            }
-            if (node==86){
-              n_bc_dof+=2;
+              if ((x==0.0&&y==0.0&&z==0.0)||(x==4.0&&y==0.0&&z==0.0)) {
+                n_bc_dof+=1;
+              }
             }
         }
 
@@ -222,18 +222,22 @@ public:
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
             if (y==0.0||y==10.0){
-              if (node==85) {
-                dof_on_boundary[indbc] = 3*inode+1;
+              if (x==0.0&&y==0.0&&z==0.0) {
+                dof_on_boundary[indbc] = 3*inode+0;
                 indbc+=1;
               }
               dof_on_boundary[indbc] = 3*inode+1;
               indbc+=1;
-              if (node==85||node==86) {
+              if ((x==0.0&&y==0.0&&z==0.0)||(x==4.0&&y==0.0&&z==0.0)) {
                 dof_on_boundary[indbc] = 3*inode+2;
                 indbc+=1;
               }
             }
         }
+
+        /*for (unsigned int i=0; i<n_bc_dof; ++i) {
+          std::cout << dof_on_boundary[i] << std::endl;
+        }*/
     }
 
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
@@ -295,11 +299,11 @@ public:
           y = Mesh->nodes_coord[3*node+1];
           z = Mesh->nodes_coord[3*node+2];
           if (y==0.0||y==10.0){
-            if (node==85) {
+            if (x==0.0&&y==0.0&&z==0.0) {
               v[0][StandardMap->LID(3*node+0)] = 0.0;
             }
             v[0][StandardMap->LID(3*node+1)] = factor*y;
-            if (node==85||node==86) {
+            if ((x==0.0&&y==0.0&&z==0.0)||(x==4.0&&y==0.0&&z==0.0)) {
               v[0][StandardMap->LID(3*node+2)] = 0.0;
             }
           }
@@ -315,11 +319,11 @@ public:
           y = Mesh->nodes_coord[3*node+1];
           z = Mesh->nodes_coord[3*node+2];
           if (y==0.0||y==10.0){
-            if (node==85) {
+            if (x==0.0&&y==0.0&&z==0.0) {
               F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
             }
             F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
-            if (node==85||node==86){
+            if ((x==0.0&&y==0.0&&z==0.0)||(x==4.0&&y==0.0&&z==0.0)){
               F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
             }
           }

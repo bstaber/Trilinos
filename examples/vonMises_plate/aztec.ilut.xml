@@ -1,28 +1,28 @@
 <ParameterList>
 
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate_extruded.msh"/>
+        <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/examples/vonMises_plate/plate_extruded_order2.msh"/>
         <Parameter name="scaling"            type="double" value="1.0"/>
         <Parameter name="n_int_points_faces" type="int"    value="4"/>
         <Parameter name="n_int_points_cells" type="int"    value="8"/>
     </ParameterList>
 
     <ParameterList name="Behavior">
-        <Parameter name="young"             type="double" value="70.0"/>
+        <Parameter name="young"             type="double" value="210000.0"/>
         <Parameter name="poisson"           type="double" value="0.3"/>
-        <Parameter name="yield"             type="double" value="250.0"/>
-        <Parameter name="hardening"         type="double" value="1000.0"/>
+        <Parameter name="yield"             type="double" value="1000.0"/>
+        <Parameter name="hardening"         type="double" value="10000.0"/>
     </ParameterList>
 
     <ParameterList name="BoundaryConditions">
-        <Parameter name="bc_disp"           type="double" value="1.0"/>
+        <Parameter name="bc_disp"           type="double" value="0.1"/>
         <!--Parameter name="type"              type="string" value="tension_totally_clamped"/-->
         <Parameter name="type"              type="string" value="tension_with_slip"/>
     </ParameterList>
 
     <ParameterList name="Newton">
         <Parameter name="timestep"          type="string" value="automatic"/>
-        <Parameter name="delta"             type="double" value="0.1"/>
+        <Parameter name="delta"             type="double" value="0.01"/>
         <Parameter name="iterMin"           type="int"    value="4"/>
         <Parameter name="iterMax"           type="int"    value="10"/>
         <Parameter name="nbBisMax"          type="int"    value="10"/>
