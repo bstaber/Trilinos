@@ -25,8 +25,6 @@ public:
 
     vonMises_plate(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
-      plasticitySmallStrains::initialize(comm, Parameters);
-
       if (Parameters.sublist("Behavior").isParameter("young")) {
         E  = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "young");
       }
@@ -63,6 +61,8 @@ public:
         std::cout << "Boundary condition type not found, setting default value tension_totally_clamped" << std::endl;
         BCType = "tension_totally_clamepd";
       }
+
+      plasticitySmallStrains::initialize(comm, Parameters);
 
       lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
       mu = E/(2.0*(1.0+nu));
@@ -153,6 +153,11 @@ public:
     }
 
     void setup_dirichlet_conditions(){
+      if (BCType=="tension_totally_clamped") setup_tension_totally_clamped();
+      if (BCType=="tension_with_slip") setup_tension_with_slip();
+    }
+
+    void setup_tension_totally_clamped(){
         n_bc_dof = 0;
         double x,y,z;
         unsigned int node;
@@ -182,12 +187,56 @@ public:
         }
     }
 
-    void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
-      if (BCType=="tension_totally_clamped") tension_totally_clamped(K,F,factor);
-      if (BCType=="tension_with_slip") tension_with_slip(K,F,factor);
+    void setup_tension_with_slip(){
+        n_bc_dof = 0;
+        double x,y,z;
+        unsigned int node;
+        for (unsigned int i=0; i<Mesh->n_local_nodes_without_ghosts; ++i){
+            node = Mesh->local_nodes[i];
+            x = Mesh->nodes_coord[3*node+0];
+            y = Mesh->nodes_coord[3*node+1];
+            z = Mesh->nodes_coord[3*node+2];
+            if (y==0.0||y==10.0){
+              n_bc_dof+=1;
+            }
+            if (node==85){
+              n_bc_dof+=2;
+            }
+            if (node==86){
+              n_bc_dof+=1;
+            }
+        }
+
+        int indbc = 0;
+        dof_on_boundary = new int [n_bc_dof];
+        for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+            node = Mesh->local_nodes[inode];
+            x = Mesh->nodes_coord[3*node+0];
+            y = Mesh->nodes_coord[3*node+1];
+            z = Mesh->nodes_coord[3*node+2];
+            if (y==0.0||y==10.0){
+              dof_on_boundary[indbc] = 3*inode+1;
+              indbc+=1;
+            }
+            if (node==85){
+              dof_on_boundary[indbc+0] = 3*node+0;
+              //dof_on_boundary[indbc+1] = 3*node+1;
+              dof_on_boundary[indbc+1] = 3*node+2;
+              indbc+=2;
+            }
+            if (node==86){
+              dof_on_boundary[indbc] = 3*node+2;
+              indbc+=1;
+            }
+        }
     }
 
-    void tension_totally_clamped(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
+    void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
+      if (BCType=="tension_totally_clamped") apply_tension_totally_clamped(K,F,factor);
+      if (BCType=="tension_with_slip") apply_tension_with_slip(K,F,factor);
+    }
+
+    void apply_tension_totally_clamped(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
 
@@ -223,7 +272,7 @@ public:
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
 
-    void tension_with_slip(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
+    void apply_tension_with_slip(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
       Epetra_MultiVector v(*StandardMap,true);
       v.PutScalar(0.0);
 
@@ -235,7 +284,18 @@ public:
           y = Mesh->nodes_coord[3*node+1];
           z = Mesh->nodes_coord[3*node+2];
           if (y==0.0){
-              v[0][StandardMap->LID(3*node+1)] = 0.0;
+            v[0][StandardMap->LID(3*node+1)] = 0.0;
+          }
+          if (y==10.0){
+            v[0][StandardMap->LID(3*node+1)] = factor*y;
+          }
+          if (node==85){
+            v[0][StandardMap->LID(3*node+0)] = 0.0;
+            v[0][StandardMap->LID(3*node+1)] = 0.0;
+            v[0][StandardMap->LID(3*node+2)] = 0.0;
+          }
+          if (node==86){
+            v[0][StandardMap->LID(3*node+2)] = 0.0;
           }
       }
 
@@ -248,9 +308,18 @@ public:
           x = Mesh->nodes_coord[3*node+0];
           y = Mesh->nodes_coord[3*node+1];
           z = Mesh->nodes_coord[3*node+2];
-          if (y==0.0||y==10.0){
+          if (y==0.0){
+              F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+          }
+          if (y==10.0){
+              F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+          }
+          if (node==85){
               F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
               F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+              F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
+          }
+          if (node==86){
               F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
           }
       }
