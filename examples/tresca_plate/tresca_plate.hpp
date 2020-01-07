@@ -106,11 +106,13 @@ public:
     LEFT   = false;
     RIGHT  = false;
 
-    if (yield>1.0e-10){
+    double tolerance = 1.0e-12;
+
+    if (yield>tolerance){
       IFPLAS = true;
       critical_values(ytr,EPCUM);
 
-      if (qs<1.0e-10) {
+      if (qs<tolerance) {
         SMOOTH = true;
         double gamma_s = yield/(4.0*mu+H);
         y(0) = ytr(0) - 2.0*mu*gamma_s;
@@ -127,7 +129,7 @@ public:
         tgm_smooth(EELTR,xtr,y,E1,E2,E3,TGM);
       }
 
-      if ((qlsl>=1.0e-10) & (qlla<1.0e-10)) {
+      if ((qlsl>=tolerance) & (qlla<tolerance)) {
         LEFT = true;
         if (SMOOTH==true) std::cout << "Can't be SMOOTH and LEFT at the same time" << std::endl;
         double gamma_l = (0.5*(ytr(0)+ytr(1))-ytr(2)-R0-H*EPCUM)/(3.0*mu+H);
@@ -146,7 +148,7 @@ public:
         tgm_left(EELTR,xtr,y,E12,E3,TGM);
       }
 
-      if ((qrsr>=1.0e-10) & (qrra<1.0e-10)) {
+      if ((qrsr>=tolerance) & (qrra<tolerance)) {
         RIGHT = true;
         if ((SMOOTH==true) || (LEFT==true)) std::cout << "Can't be RIGHT and SMOOTH/LEFT at the same time: " << SMOOTH << "," << LEFT << "," << RIGHT << std::endl;
         double gamma_r = (ytr(0)-0.5*(ytr(1)+ytr(2))-R0-H*EPCUM)/(3.0*mu+H);

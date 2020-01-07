@@ -21,7 +21,7 @@
 
     <ParameterList name="BoundaryConditions">
         <Parameter name="bc_disp"           type="double" value="0.1"/>
-        <Parameter name="type"              type="string" value="tension_with_slip"/>
+        <Parameter name="type"              type="string" value="tension_totally_clamped"/>
     </ParameterList>
 
     <ParameterList name="Newton">

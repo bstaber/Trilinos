@@ -25,7 +25,7 @@ public:
 
     /*
     This will be used later to generate the msh automatically: create a .geo file, execute gmsh, and so on.
-    The user will be able to pick the type of elements and so on. 
+    The user will be able to pick the type of elements and so on.
     if (MyPID==0) {
       std::system("gmsh");
     }
