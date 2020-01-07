@@ -54,6 +54,9 @@ MPI_Init(&argc, &argv);
     else if (timestep=="automatic") problem->incremental_bvp(true);
     else std::cout << "Unknown timestep method (sequence, automatic)." << std::endl;
 
+    problem->print_at_gauss_points("/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/gausspoints.mtx");
+    problem->print_mean_at_center("/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/mean_center.mtx");
+
 #ifdef HAVE_MPI
     MPI_Finalize();
 #endif
