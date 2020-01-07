@@ -42,10 +42,10 @@ public:
       }
       if (Parameters.sublist("Behavior").isParameter("yield")) {
         R0 = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "yield");
-        R0 = 250.0;
       }
       else{
         std::cout << "Yield stress not found, setting default value 250.0" << std::endl;
+        R0 = 250.0;
       }
       if (Parameters.sublist("Behavior").isParameter("hardening")) {
         H = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "hardening");
@@ -203,14 +203,14 @@ public:
             x = Mesh->nodes_coord[3*node+0];
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
-            if (y==0.0||y==10.0){
+            if ((y==0.0 && node!=85)||(y==0.0 && node!=86)||y==10.0){
               n_bc_dof+=1;
             }
             if (node==85){
-              n_bc_dof+=2;
+              n_bc_dof+=3;
             }
             if (node==86){
-              n_bc_dof+=1;
+              n_bc_dof+=2;
             }
         }
 
@@ -222,18 +222,16 @@ public:
             y = Mesh->nodes_coord[3*node+1];
             z = Mesh->nodes_coord[3*node+2];
             if (y==0.0||y==10.0){
+              if (node==85) {
+                dof_on_boundary[indbc] = 3*inode+1;
+                indbc+=1;
+              }
               dof_on_boundary[indbc] = 3*inode+1;
               indbc+=1;
-            }
-            if (node==85){
-              dof_on_boundary[indbc+0] = 3*node+0;
-              //dof_on_boundary[indbc+1] = 3*node+1;
-              dof_on_boundary[indbc+1] = 3*node+2;
-              indbc+=2;
-            }
-            if (node==86){
-              dof_on_boundary[indbc] = 3*node+2;
-              indbc+=1;
+              if (node==85||node==86) {
+                dof_on_boundary[indbc] = 3*inode+2;
+                indbc+=1;
+              }
             }
         }
     }
@@ -260,9 +258,7 @@ public:
                 v[0][StandardMap->LID(3*node+2)] = 0.0;
             }
             if (y==10.0){
-                //v[0][StandardMap->LID(3*node+0)] = 0.0;
                 v[0][StandardMap->LID(3*node+1)] = factor*y;
-                //v[0][StandardMap->LID(3*node+2)] = 0.0;
             }
         }
 
@@ -299,15 +295,13 @@ public:
           y = Mesh->nodes_coord[3*node+1];
           z = Mesh->nodes_coord[3*node+2];
           if (y==0.0||y==10.0){
+            if (node==85) {
+              v[0][StandardMap->LID(3*node+0)] = 0.0;
+            }
             v[0][StandardMap->LID(3*node+1)] = factor*y;
-          }
-          if (node==85){
-            v[0][StandardMap->LID(3*node+0)] = 0.0;
-            v[0][StandardMap->LID(3*node+1)] = 0.0;
-            v[0][StandardMap->LID(3*node+2)] = 0.0;
-          }
-          if (node==86){
-            v[0][StandardMap->LID(3*node+2)] = 0.0;
+            if (node==85||node==86) {
+              v[0][StandardMap->LID(3*node+2)] = 0.0;
+            }
           }
       }
 
@@ -321,15 +315,13 @@ public:
           y = Mesh->nodes_coord[3*node+1];
           z = Mesh->nodes_coord[3*node+2];
           if (y==0.0||y==10.0){
-              F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
-          }
-          if (node==85){
+            if (node==85) {
               F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
-              F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+            }
+            F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+            if (node==85||node==86){
               F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
-          }
-          if (node==86){
-              F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
+            }
           }
       }
       ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
