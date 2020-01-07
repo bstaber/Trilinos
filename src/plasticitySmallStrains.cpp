@@ -183,13 +183,15 @@ int plasticitySmallStrains::incremental_bvp(bool print){
         FLAG2=1;
         FLAG3=1;
         nb_bis = 0;
-        time += delta;
-
         u.Update(1.0,Du,1.0);
+        std::string filename_time = "/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/gauss_points" + std::to_string(time) + ".mtx";
+        //print_solution(u,filename_time);
+        print_at_gauss_points(filename_time);
         u_converged = u;
         (*sig_converged)   = (*sig);
         (*epcum_converged) = (*epcum);
 
+        time += delta;
         while (FLAG2==1){
             FLAG2=0;
             if(time-time_max>eps){
