@@ -54,6 +54,7 @@ public:
     Teuchos::ParameterList * Direct;
     Teuchos::ParameterList * Krylov;
     Teuchos::ParameterList * Newton;
+    Teuchos::ParameterList * BCs;
 
     Epetra_Time * CpuTime;
 

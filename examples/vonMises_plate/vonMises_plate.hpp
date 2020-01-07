@@ -18,19 +18,51 @@ public:
     double E, nu, lambda, mu, kappa;
     double R0, H;
 
+    std::string BCType;
+
     Epetra_SerialDenseMatrix K4;
     Epetra_SerialDenseMatrix J4;
-
-    Teuchos::ParameterList * Krylov;
 
     vonMises_plate(Epetra_Comm & comm, Teuchos::ParameterList & Parameters){
 
       plasticitySmallStrains::initialize(comm, Parameters);
 
-      E  = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "young");
-      nu = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "poisson");
-      R0 = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "yield");
-      H  = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "hardening");
+      if (Parameters.sublist("Behavior").isParameter("young")) {
+        E  = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "young");
+      }
+      else{
+        std::cout << "Young modulus not found, setting default value 210MPa" << std::endl;
+        E = 210000.0;
+      }
+
+      if (Parameters.sublist("Behavior").isParameter("poisson")) {
+        nu = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "poisson");
+      }
+      else{
+        std::cout << "Poisson's coefficient not found, setting default value 0.3" << std::endl;
+        nu = 0.3;
+      }
+      if (Parameters.sublist("Behavior").isParameter("yield")) {
+        R0 = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "yield");
+        R0 = 250.0;
+      }
+      else{
+        std::cout << "Yield stress not found, setting default value 250.0" << std::endl;
+      }
+      if (Parameters.sublist("Behavior").isParameter("hardening")) {
+        H = Teuchos::getParameter<double>(Parameters.sublist("Behavior"), "hardening");
+      }
+      else{
+        std::cout << "Hardening modulus not found, setting default value 10000.0" << std::endl;
+        H = 10000.0;
+      }
+      if (Parameters.sublist("BoundaryConditions").isParameter("type")) {
+        BCType = Teuchos::getParameter<std::string>(Parameters.sublist("BoundaryConditions"), "type");
+      }
+      else {
+        std::cout << "Boundary condition type not found, setting default value tension_totally_clamped" << std::endl;
+        BCType = "tension_totally_clamepd";
+      }
 
       lambda = E*nu/((1.0+nu)*(1.0-2.0*nu));
       mu = E/(2.0*(1.0+nu));
@@ -151,6 +183,11 @@ public:
     }
 
     void apply_dirichlet_conditions(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
+      if (BCType=="tension_totally_clamped") tension_totally_clamped(K,F,factor);
+      if (BCType=="tension_with_slip") tension_with_slip(K,F,factor);
+    }
+
+    void tension_totally_clamped(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
         Epetra_MultiVector v(*StandardMap,true);
         v.PutScalar(0.0);
 
@@ -184,6 +221,40 @@ public:
             }
         }
         ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
+    }
+
+    void tension_with_slip(Epetra_FECrsMatrix & K, Epetra_FEVector & F, double factor){
+      Epetra_MultiVector v(*StandardMap,true);
+      v.PutScalar(0.0);
+
+      int node;
+      double x,y,z;
+      for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+          node = Mesh->local_nodes[inode];
+          x = Mesh->nodes_coord[3*node+0];
+          y = Mesh->nodes_coord[3*node+1];
+          z = Mesh->nodes_coord[3*node+2];
+          if (y==0.0){
+              v[0][StandardMap->LID(3*node+1)] = 0.0;
+          }
+      }
+
+      Epetra_MultiVector rhs_dir(*StandardMap,true);
+      K.Apply(v,rhs_dir);
+      F.Update(-1.0,rhs_dir,1.0);
+
+      for (unsigned int inode=0; inode<Mesh->n_local_nodes_without_ghosts; ++inode){
+          node = Mesh->local_nodes[inode];
+          x = Mesh->nodes_coord[3*node+0];
+          y = Mesh->nodes_coord[3*node+1];
+          z = Mesh->nodes_coord[3*node+2];
+          if (y==0.0||y==10.0){
+              F[0][StandardMap->LID(3*node+0)] = v[0][StandardMap->LID(3*node+0)];
+              F[0][StandardMap->LID(3*node+1)] = v[0][StandardMap->LID(3*node+1)];
+              F[0][StandardMap->LID(3*node+2)] = v[0][StandardMap->LID(3*node+2)];
+          }
+      }
+      ML_Epetra::Apply_OAZToMatrix(dof_on_boundary,n_bc_dof,K);
     }
 };
 #endif
