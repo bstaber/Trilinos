@@ -29,12 +29,16 @@ void plasticitySmallStrains::initialize(Epetra_Comm & comm, Teuchos::ParameterLi
   eps           = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "eps");
   success       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "success_parameter");
   failure       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "failure_parameter");
-  bc_disp       = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "bc_disp");
   tol           = Teuchos::getParameter<double>(parameterlist.sublist("Newton"), "tol");
+
+  bc_disp       = Teuchos::getParameter<double>(parameterlist.sublist("BoundaryConditions"), "bc_disp");
 
   Direct = &parameterlist.sublist("Direct");
   Krylov = &parameterlist.sublist("Krylov");
   Newton = &parameterlist.sublist("Newton");
+  BCs    = &parameterlist.sublist("BoundaryConditions");
+
+  //Direct->set("MaxProcs",Comm->NumProc());
 
   CpuTime = new Epetra_Time(*Comm);
 
@@ -113,9 +117,18 @@ int plasticitySmallStrains::sequence_bvp(bool print){
     if (MyPID==0) std::cout << std::setw(24) << nRes0 << std::endl;
     iter = 0;
     while ((nRes/nRes0>norm_l2_tol) & (iter<iter_max)) {
-      solve(problem, solver, A, Res, du);
+      //solve(problem, solver, A, Res, du);
       //AztecOO_solver(A, Res, du);
       //Amesos_solver(A, Res, du);
+      if (linear_solver=="sparse_iterative") {
+        AztecOO_solver(A, Res, du);
+      }
+      else if (linear_solver=="sparse_direct") {
+        Amesos_solver(A, Res, du);
+      }
+      else {
+        Amesos_solver(A, Res, du);
+      }
       Du.Update(1.0,du,1.0);
       DuOverlaped.Import(Du,*ImportToOverlapMap,Insert);
       integrate_constitutive_problem(DuOverlaped);
@@ -156,6 +169,10 @@ int plasticitySmallStrains::incremental_bvp(bool print){
     std::string solver_its = "GMRES_its";
     std::string solver_res = "GMRES_res";
 
+    std::string linear_solver;
+    if (Newton->isParameter("linear_solver")) linear_solver = Teuchos::getParameter<std::string>(*Newton,"linear_solver");
+    else linear_solver = "sparse_iterative";
+
     time = 0.0;
     integrate_constitutive_problem(DuOverlaped);
 
@@ -195,10 +212,18 @@ int plasticitySmallStrains::incremental_bvp(bool print){
             if (MyPID==0) std::cout << " " << time << "\t" << delta << "\t\t" << iter << std::endl;
 
             while (FLAG3==1){
-
                 //solve(problem, solver, A, Res, du);
                 //AztecOO_solver(A, Res, du);
-                Amesos_solver(A, Res, du);
+                //Amesos_solver(A, Res, du);
+                if (linear_solver=="sparse_iterative") {
+                  AztecOO_solver(A, Res, du);
+                }
+                else if (linear_solver=="sparse_direct") {
+                  Amesos_solver(A, Res, du);
+                }
+                else {
+                  Amesos_solver(A, Res, du);
+                }
                 Du.Update(1.0,du,1.0);
                 DuOverlaped.Import(Du,*ImportToOverlapMap,Insert);
                 integrate_constitutive_problem(DuOverlaped);
@@ -299,7 +324,12 @@ void plasticitySmallStrains::Amesos_solver(Epetra_FECrsMatrix & A, Epetra_FEVect
   isAvailable = Factory.Query("Mumps"); if(isAvailable){ std::cout << "Mumps: yes.\n"; } else{ std::cout << "Mumps: no.\n"; }
   isAvailable = Factory.Query("Dscpack"); if(isAvailable){ std::cout << "Dscpack: yes.\n"; } else{ std::cout << "Dscpack: no.\n"; }*/
   isAvailable = Factory.Query(amesos_type);
-  if (!isAvailable) std::cout << "Amesos solver type not avaiable" << std::endl;
+  if (!isAvailable) {
+    if (MyPID==0) std::cout << "Amesos solver type not avaiable" << std::endl;
+  }
+  /*else {
+    if (MyPID==0) std::cout << "Amesos " << amesos_type << " solver avaiable" << std::endl;
+  }*/
 
   xx.PutScalar(0.0);
 
@@ -309,6 +339,7 @@ void plasticitySmallStrains::Amesos_solver(Epetra_FECrsMatrix & A, Epetra_FEVect
   problem.SetRHS(&b);
 
   Solver = Factory.Create(amesos_type, problem);
+  Solver->SetParameters(*Direct);
   Solver->SymbolicFactorization();
   Solver->NumericFactorization();
   Solver->Solve();
