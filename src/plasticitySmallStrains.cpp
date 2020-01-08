@@ -184,9 +184,9 @@ int plasticitySmallStrains::incremental_bvp(bool print){
         FLAG3=1;
         nb_bis = 0;
         u.Update(1.0,Du,1.0);
-        std::string filename_time = "/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/gauss_points" + std::to_string(time) + ".mtx";
+        //std::string filename_time = "/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/plate/gauss_points" + std::to_string(time) + ".mtx";
         //print_solution(u,filename_time);
-        print_at_gauss_points(filename_time);
+        //print_at_gauss_points(filename_time);
         u_converged = u;
         (*sig_converged)   = (*sig);
         (*epcum_converged) = (*epcum);
@@ -417,8 +417,6 @@ void plasticitySmallStrains::stiffness_rhs_homogeneousForcing(const Epetra_Vecto
             }
           }
 
-          //if (MyPID==0) std::cout << "m_tg_matrix = " << m_tg_matrix << std::endl;
-
           error = Re.Multiply('T','N',-gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,sig_el,1.0);
           error = B_times_TM.Multiply('T','N',gauss_weight*Mesh->detJac_cells(e_lid,gp),matrix_B,m_tg_matrix,0.0);
           error = Ke.Multiply('N','N',1.0,B_times_TM,matrix_B,1.0);
@@ -474,10 +472,16 @@ void plasticitySmallStrains::integrate_constitutive_problem(Epetra_Vector & Du_)
 
       constitutive_problem(e_lid, gp, deto_el, sig_el, epcum_el, m_tg_matrix);
 
-      /*std::cout << "deto_el " << deto_el << std::endl;
-      std::cout << "sig_el " << sig_el << std::endl;
-      std::cout << "m_tg_matrix " << m_tg_matrix << std::endl;
-      std::cout << "epcum_el = " << epcum_el << std::endl;*/
+      /*Epetra_SerialDenseVector gp_coord(3);
+      unsigned int egid = e_gid;
+      gp_coord = Mesh->get_cartesian_coordinate(egid,gp);
+      std::cout << gp_coord(0) << "\t" << gp_coord(1) << "\t" << gp_coord(2) << std::endl;
+      for (unsigned int k=0; k<6; ++k) std::cout << sig_el(k) << "\t";
+      std::cout << "\n";*/
+      //std::cout << "deto_el " << deto_el << std::endl;
+      //std::cout << "sig_el " << sig_el << std::endl;
+      //std::cout << "m_tg_matrix " << m_tg_matrix << std::endl;
+      //std::cout << "epcum_el = " << epcum_el << std::endl;
 
       for (unsigned int k=0; k<6; ++k) {
         (*sig)[k][GaussMap->LID(int(e_gid*n_gauss_points+gp))] = sig_el(k);
