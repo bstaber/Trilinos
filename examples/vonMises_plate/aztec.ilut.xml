@@ -1,7 +1,7 @@
 <ParameterList>
 
     <ParameterList name="Mesh">
-        <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/meshes/plate_extruded.msh"/>
+        <Parameter name="mesh_file"          type="string" value="/Users/brian/Documents/GitHub/TrilinosUQComp/results/plasticity/meshes/plate_extruded_layer1.msh"/>
         <!--Parameter name="mesh_name"          type="string" value="platetest.msh"/>
         <Parameter name="plate_dim_x"        type="double" value="4.0"/>
         <Parameter name="plate_dim_y"        type="double" value="10.0"/>
@@ -26,14 +26,14 @@
 
     <ParameterList name="Newton">
         <Parameter name="timestep"          type="string" value="automatic"/>
-        <Parameter name="delta"             type="double" value="0.01"/>
-        <Parameter name="iterMin"           type="int"    value="4"/>
+        <Parameter name="delta"             type="double" value="0.1"/>
+        <Parameter name="iterMin"           type="int"    value="5"/>
         <Parameter name="iterMax"           type="int"    value="10"/>
         <Parameter name="nbBisMax"          type="int"    value="10"/>
         <Parameter name="NormFTol"          type="double" value="1e-6"/>
         <Parameter name="NormFMax"          type="double" value="1e7"/>
         <Parameter name="eps"               type="double" value="1e-8"/>
-        <Parameter name="success_parameter" type="double" value="2.0"/>
+        <Parameter name="success_parameter" type="double" value="1.1"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="tol"               type="double" value="1e-10"/>
         <Parameter name="Nincr"             type="int"    value="10"/>

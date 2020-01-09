@@ -98,6 +98,8 @@ public:
 
     double yield = ytr(0)-ytr(2)-R0-H*EPCUM;
 
+    //std::cout << "radius = " << R0+H*EPCUM << std::endl;
+
     SIG = SIGTR;
     TGM = ELASTICITY;
 
