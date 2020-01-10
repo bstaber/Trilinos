@@ -26,14 +26,14 @@
 
     <ParameterList name="Newton">
         <Parameter name="timestep"          type="string" value="automatic"/>
-        <Parameter name="delta"             type="double" value="0.1"/>
+        <Parameter name="delta"             type="double" value="0.01"/>
         <Parameter name="iterMin"           type="int"    value="4"/>
         <Parameter name="iterMax"           type="int"    value="8"/>
         <Parameter name="nbBisMax"          type="int"    value="10"/>
         <Parameter name="NormFTol"          type="double" value="1e-6"/>
         <Parameter name="NormFMax"          type="double" value="1e7"/>
         <Parameter name="eps"               type="double" value="1e-8"/>
-        <Parameter name="success_parameter" type="double" value="2.0"/>
+        <Parameter name="success_parameter" type="double" value="1.1"/>
         <Parameter name="failure_parameter" type="double" value="2.0"/>
         <Parameter name="tol"               type="double" value="1e-10"/>
         <Parameter name="Nincr"             type="int"    value="10"/>
